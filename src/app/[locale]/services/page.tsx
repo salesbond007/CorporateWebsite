@@ -15,7 +15,10 @@ export const metadata: Metadata = {
     "セールスボンド株式会社の3つのサービス。セールスボンド（紹介営業）、キーマンボンド（プロ人材紹介）、リードボンド（インサイドセールス代行）。",
 };
 
-const illustrationVariants = ["abstract", "grid", "blob"] as const;
+type ServiceWithImage = {
+  image?: string;
+  illustrationVariant: "abstract" | "grid" | "blob";
+};
 
 export default function ServicesPage({
   params,
@@ -36,7 +39,9 @@ export default function ServicesPage({
       <section className="py-24 md:py-32">
         <Container>
           <ul className="space-y-6">
-            {services.map((s, i) => (
+            {services.map((s) => {
+              const sx = s as typeof s & ServiceWithImage;
+              return (
               <li key={s.slug}>
                 <Link
                   href={localePath(s.href, locale)}
@@ -54,7 +59,9 @@ export default function ServicesPage({
                     <div className="md:col-span-3">
                       <div className="mx-auto aspect-square w-32 rounded-2xl bg-brand-50 p-4 md:w-full md:max-w-[180px]">
                         <Illustration
-                          variant={illustrationVariants[i % illustrationVariants.length]}
+                          src={sx.image}
+                          variant={sx.illustrationVariant}
+                          alt={`${s.title} のイラスト`}
                         />
                       </div>
                     </div>
@@ -98,7 +105,8 @@ export default function ServicesPage({
                   </div>
                 </Link>
               </li>
-            ))}
+              );
+            })}
           </ul>
         </Container>
       </section>

@@ -46,6 +46,8 @@ export const services = [
       "完全成果報酬制（成功報酬のみ）",
       "大手企業からベンチャー企業まで開拓可能",
     ],
+    // 画像を使う場合は `image: "/illustrations/sales-bond.png",` を追加
+    illustrationVariant: "abstract" as const,
     href: "/services/sales-bond",
   },
   {
@@ -60,6 +62,7 @@ export const services = [
       "マーケティング・海外展開・社内DX・人事強化",
       "事業フェーズに合わせて最適な人材を配置",
     ],
+    illustrationVariant: "grid" as const,
     href: "/services/keyman-bond",
   },
   {
@@ -74,11 +77,14 @@ export const services = [
       "戦略立案 + 現場入り + 再現性のあるノウハウ提供",
       "中小企業のリード獲得を加速",
     ],
+    illustrationVariant: "blob" as const,
     href: "/services/lead-bond",
   },
 ] as const;
 
-export type Service = (typeof services)[number];
+// Each service entry can optionally include an `image` path that
+// overrides the inline SVG. e.g. `image: "/illustrations/sales-bond.png"`
+export type Service = (typeof services)[number] & { image?: string };
 
 export function navLabel(dict: Dictionary, key: NavKey): string {
   return dict.nav[key];

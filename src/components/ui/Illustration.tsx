@@ -1,17 +1,42 @@
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 type Variant = "abstract" | "grid" | "blob";
 
 type Props = {
+  /** Inline SVG variant. Used when `src` is not provided. */
   variant?: Variant;
   className?: string;
+  /** Override the SVG with a local image (path under /public). */
+  src?: string;
+  alt?: string;
 };
 
 /**
- * Lightweight inline SVG illustrations used across the site as decorative
- * accents. Real artwork can replace these when assets are ready.
+ * Decorative illustration. Pass `src="/illustrations/foo.png"` to use a
+ * downloaded image (Loose Drawing / Storyset / etc.). Otherwise falls
+ * back to a generated SVG.
  */
-export function Illustration({ variant = "abstract", className }: Props) {
+export function Illustration({
+  variant = "abstract",
+  className,
+  src,
+  alt = "",
+}: Props) {
+  if (src) {
+    return (
+      <div className={cn("relative aspect-square w-full", className)}>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="(max-width: 768px) 50vw, 33vw"
+          className="object-contain"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       className={cn("relative aspect-square w-full text-brand-500", className)}
