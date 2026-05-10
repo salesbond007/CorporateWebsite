@@ -41,7 +41,7 @@ export function Hero({ locale, dict }: Props) {
                 {dict.buttons.viewServices}
               </Button>
               <Button
-                href={localePath("/contact/business", locale)}
+                href={localePath("/contact", locale)}
                 size="lg"
                 variant="secondary"
               >

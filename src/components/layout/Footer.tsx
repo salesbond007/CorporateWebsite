@@ -15,7 +15,7 @@ export function Footer({ locale, dict }: Props) {
   const year = new Date().getFullYear();
 
   const contactLinks = [
-    { href: "/contact/business", label: dict.nav.contactBusiness },
+    { href: "/contact", label: dict.nav.contact },
     { href: "/contact/professional", label: dict.nav.contactProfessional },
   ];
 

@@ -1,39 +1,62 @@
 import { test, expect } from "@playwright/test";
 
-test.describe("Contact form (business)", () => {
-  test("blocks submission with invalid data via HTML validation", async ({ page }) => {
-    await page.goto("/ja/contact/business");
-    await page.getByRole("button", { name: "送信する" }).click();
-    // Browser-side `required` should surface the first invalid field
-    const company = page.getByLabel("会社名", { exact: false });
-    await expect(company).toBeFocused();
+test.describe("Contact form (general)", () => {
+  test("renders the required fields", async ({ page }) => {
+    await page.goto("/ja/contact");
+    await expect(page.getByLabel("会社名", { exact: false })).toBeVisible();
+    await expect(page.getByLabel("お名前(姓)", { exact: false })).toBeVisible();
+    await expect(page.getByLabel("お名前(名)", { exact: false })).toBeVisible();
+    await expect(page.getByLabel("役職", { exact: false })).toBeVisible();
+    await expect(
+      page.getByLabel("メールアドレス", { exact: false }),
+    ).toBeVisible();
+    await expect(
+      page.getByLabel("携帯電話番号", { exact: false }),
+    ).toBeVisible();
   });
 
-  test("submits successfully (server is dry-run if RESEND_API_KEY is unset)", async ({
+  test("reveals service sub-options when サービスについて is selected", async ({
     page,
   }) => {
-    await page.goto("/ja/contact/business");
+    await page.goto("/ja/contact");
 
-    await page.getByLabel("会社名", { exact: false }).fill("テスト株式会社");
-    await page.getByLabel("お名前", { exact: false }).fill("山田 太郎");
-    await page.getByLabel("メールアドレス", { exact: false }).fill("test@example.com");
-    await page.locator("select[name='inquiryType']").selectOption("service");
-    await page
-      .getByLabel("お問い合わせ内容", { exact: false })
-      .fill("これはE2Eテストからの送信です。確認用のメッセージ。");
-    await page.locator("input[name='agreement']").check();
+    const serviceRadio = page.locator("input[name='inquiryType'][value='service']");
+    await serviceRadio.check();
 
-    await page.getByRole("button", { name: "送信する" }).click();
     await expect(
-      page.getByRole("heading", { name: "送信が完了しました" }),
-    ).toBeVisible({ timeout: 10_000 });
+      page.getByText("セールスボンド（紹介営業サービス）について"),
+    ).toBeVisible();
+    await expect(
+      page.getByText("リードボンド（営業代行サービス）について"),
+    ).toBeVisible();
+    await expect(
+      page.getByText("プロ人材サービスについて"),
+    ).toBeVisible();
+  });
+
+  test("hides service sub-options when 協業について is selected", async ({
+    page,
+  }) => {
+    await page.goto("/ja/contact");
+
+    await page.locator("input[name='inquiryType'][value='service']").check();
+    await expect(
+      page.getByText("セールスボンド（紹介営業サービス）について"),
+    ).toBeVisible();
+
+    await page.locator("input[name='inquiryType'][value='partnership']").check();
+    await expect(
+      page.getByText("セールスボンド（紹介営業サービス）について"),
+    ).toHaveCount(0);
   });
 });
 
 test.describe("Contact form (professional)", () => {
   test("renders professional-specific fields", async ({ page }) => {
     await page.goto("/ja/contact/professional");
-    await expect(page.getByLabel("専門分野・職種", { exact: false })).toBeVisible();
+    await expect(
+      page.getByLabel("専門分野・職種", { exact: false }),
+    ).toBeVisible();
     await expect(page.locator("select[name='workStyle']")).toBeVisible();
   });
 });

@@ -140,7 +140,7 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
               </div>
               <div className="md:text-right">
                 <Button
-                  href={localePath("/contact/business", locale)}
+                  href={localePath("/contact", locale)}
                   size="lg"
                   className="bg-white !text-brand-600 hover:!bg-brand-50"
                 >

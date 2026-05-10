@@ -50,16 +50,16 @@ export default function ProfessionalContactPage({
 
               <div className="mt-6 rounded-xl2 bg-cream p-8">
                 <h3 className="text-sm font-semibold text-ink-muted">
-                  企業様は
+                  サービス・協業などのお問い合わせ
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed">
-                  TODO: 企業様向けへの誘導文。
+                  サービスや協業、ご提案などについては、共通のお問い合わせフォームをご利用ください。
                 </p>
                 <Link
-                  href={localePath("/contact/business", locale)}
+                  href={localePath("/contact", locale)}
                   className="mt-4 inline-flex link-arrow"
                 >
-                  企業様の問い合わせ
+                  お問い合わせ
                 </Link>
               </div>
             </aside>

@@ -5,7 +5,7 @@ const PAGES = [
   { path: "/ja/services", title: /サービス/ },
   { path: "/ja/services/service-01", title: /サービス名 01/ },
   { path: "/ja/company", title: /会社概要/ },
-  { path: "/ja/contact/business", title: /企業様のお問い合わせ/ },
+  { path: "/ja/contact", title: /お問い合わせ/ },
   { path: "/ja/contact/professional", title: /プロ人材の方のお問い合わせ/ },
   { path: "/ja/blog", title: /記事|お知らせ/ },
   { path: "/ja/privacy", title: /プライバシーポリシー/ },

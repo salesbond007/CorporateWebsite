@@ -38,11 +38,11 @@ export function CTASection({ locale, dict }: Props) {
 
             <div className="flex flex-col gap-3 md:items-end">
               <Button
-                href={localePath("/contact/business", locale)}
+                href={localePath("/contact", locale)}
                 size="lg"
                 className="bg-white !text-brand-600 hover:!bg-brand-50"
               >
-                {dict.nav.contactBusiness}
+                {dict.nav.contact}
               </Button>
               <Button
                 href={localePath("/contact/professional", locale)}

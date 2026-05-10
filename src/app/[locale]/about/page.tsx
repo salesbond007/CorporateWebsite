@@ -126,8 +126,8 @@ export default function AboutPage({
               TODO: お問い合わせを促すリード文。
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button href={localePath("/contact/business", locale)} size="lg">
-                企業様のお問い合わせ
+              <Button href={localePath("/contact", locale)} size="lg">
+                お問い合わせ
               </Button>
               <Button
                 href={localePath("/services", locale)}
