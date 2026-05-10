@@ -10,6 +10,13 @@ type Props = {
   dict: Dictionary;
 };
 
+/**
+ * Hero の右側のメインビジュアル。
+ * /public/hero.png を置けばこちらが使われる。無ければ SVG にフォールバック。
+ * パスを変えたい場合はこの定数だけ書き換えれば OK。
+ */
+const HERO_IMAGE = "/hero.png";
+
 export function Hero({ locale, dict }: Props) {
   return (
     <section className="relative overflow-hidden bg-cream">
@@ -60,8 +67,8 @@ export function Hero({ locale, dict }: Props) {
                 className="absolute -inset-4 rounded-xl4 bg-brand-200/60 -rotate-3"
                 aria-hidden="true"
               />
-              <div className="relative rounded-xl4 bg-white p-8 shadow-soft">
-                <Illustration variant="abstract" />
+              <div className="relative rounded-xl4 bg-white p-6 md:p-8 shadow-soft overflow-hidden">
+                <Illustration src={HERO_IMAGE} variant="abstract" alt="" />
               </div>
               <div className="absolute -bottom-5 -left-5 rounded-full bg-brand-500 px-6 py-3 text-sm font-black text-white shadow-card">
                 Sales Bond
