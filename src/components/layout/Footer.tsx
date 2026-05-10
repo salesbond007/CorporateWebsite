@@ -31,11 +31,11 @@ export function Footer({ locale, dict }: Props) {
         ];
 
   return (
-    <footer className="mt-32 border-t border-ink-line bg-cream">
+    <footer className="mt-32 bg-brand-500 text-white">
       <Container className="py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Logo locale={locale} dict={dict} />
+            <Logo locale={locale} dict={dict} variant="white" />
           </div>
 
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-8">
@@ -74,14 +74,14 @@ export function Footer({ locale, dict }: Props) {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col-reverse gap-4 border-t border-ink-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-ink-muted">
+        <div className="mt-16 flex flex-col-reverse gap-4 border-t border-white/30 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-white/80">
             © {year} {dict.site.name}. {dict.footer.rights}
           </p>
-          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink-muted">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/80">
             {legalLinks.map((l) => (
               <li key={l.href}>
-                <Link href={localePath(l.href, locale)} className="hover:text-ink">
+                <Link href={localePath(l.href, locale)} className="hover:text-white">
                   {l.label}
                 </Link>
               </li>
@@ -102,7 +102,7 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h3 className="text-xs font-extrabold uppercase tracking-[0.2em] text-brand-500">
+      <h3 className="text-xs font-extrabold uppercase tracking-[0.2em] text-white/85">
         {title}
       </h3>
       <ul className="mt-4 space-y-2.5 text-sm font-bold">{children}</ul>
@@ -119,7 +119,7 @@ function FooterLink({
 }) {
   return (
     <li>
-      <Link href={href} className="text-ink-soft hover:text-ink">
+      <Link href={href} className="text-white/90 hover:text-white">
         {children}
       </Link>
     </li>
