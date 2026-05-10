@@ -29,10 +29,11 @@ export function CTASection({ locale, dict }: Props) {
                 Get in touch
               </span>
               <h2 className="mt-5 text-display-2 text-white">
-                TODO: 問い合わせ誘導の見出し
+                事業成長について、ご相談ください。
               </h2>
               <p className="mt-5 max-w-xl text-white/85 leading-relaxed">
-                TODO: コンバージョンを促すリード文を2〜3行で。
+                サービスの詳細・お見積もり・導入事例など、貴社の課題に合わせてご提案します。
+                プロ人材としてご活躍いただける方も歓迎しています。
               </p>
             </div>
 

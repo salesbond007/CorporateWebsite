@@ -11,6 +11,24 @@ type Props = {
   dict: Dictionary;
 };
 
+const strengths: { title: string; description: string }[] = [
+  {
+    title: "顧問紹介事業",
+    description:
+      "経営層の人脈を活用し、決裁者への最短アプローチを実現します。",
+  },
+  {
+    title: "営業BPO事業",
+    description:
+      "戦略立案から現場運用まで、再現性のある営業ノウハウを提供します。",
+  },
+  {
+    title: "プロ人材紹介",
+    description:
+      "経営課題に応じた即戦力のプロを、必要な期間だけアサインします。",
+  },
+];
+
 export function AboutSection({ locale, dict }: Props) {
   return (
     <section className="bg-ink text-white py-24 md:py-32">
@@ -27,22 +45,22 @@ export function AboutSection({ locale, dict }: Props) {
               About Us
             </span>
             <h2 className="mt-5 text-display-2">
-              TODO: 私たちが大切にしている価値観や思想を一言で。
+              営業の力で、事業の成長を支える。
             </h2>
             <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-white/75">
-              TODO: 会社のミッション、こだわり、強みなどを3〜5行で。
+              セールスボンド株式会社は、顧問紹介事業と営業BPO事業を軸に、企業の営業活動を多角的にサポートしています。経営層の人脈、即戦力のプロ人材、再現性のある営業ノウハウ——成長フェーズに合わせて最適な支援を提供します。
             </p>
 
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
-              {["TODO", "TODO", "TODO"].map((label, i) => (
-                <Reveal key={i} delay={i * 100}>
+              {strengths.map((s, i) => (
+                <Reveal key={s.title} delay={i * 100}>
                   <div className="rounded-xl2 border border-white/10 bg-white/5 p-5 h-full">
                     <p className="font-display text-sm font-bold text-brand-300">
                       0{i + 1}
                     </p>
-                    <p className="mt-3 text-sm font-semibold">{label}: 強み</p>
+                    <p className="mt-3 text-sm font-semibold">{s.title}</p>
                     <p className="mt-2 text-xs text-white/60 leading-relaxed">
-                      TODO: 補足説明を1〜2行で。
+                      {s.description}
                     </p>
                   </div>
                 </Reveal>

@@ -2,6 +2,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Illustration } from "@/components/ui/Illustration";
 import { localePath } from "@/i18n/path";
+import { services } from "@/lib/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 
@@ -49,20 +50,24 @@ export function Hero({ locale, dict }: Props) {
               </Button>
             </div>
 
-            <dl className="mt-14 grid grid-cols-3 gap-6 max-w-lg">
-              {[
-                { k: "TODO", v: "実績数" },
-                { k: "TODO", v: "支援企業" },
-                { k: "TODO", v: "継続率" },
-              ].map((m) => (
-                <div key={m.v}>
-                  <dt className="text-xs text-ink-muted">{m.v}</dt>
-                  <dd className="mt-1 font-display text-2xl font-bold text-ink">
-                    {m.k}
-                  </dd>
-                </div>
+            <ul className="mt-14 grid grid-cols-3 gap-4 max-w-xl">
+              {services.map((s) => (
+                <li
+                  key={s.slug}
+                  className="rounded-xl border border-ink-line bg-white/60 p-4 backdrop-blur-sm"
+                >
+                  <p className="font-display text-xs font-bold text-brand-500">
+                    {s.number}
+                  </p>
+                  <p className="mt-1 text-sm font-bold text-ink leading-tight">
+                    {s.title}
+                  </p>
+                  <p className="mt-1 text-[11px] text-ink-muted leading-tight">
+                    {s.subtitle}
+                  </p>
+                </li>
               ))}
-            </dl>
+            </ul>
           </div>
 
           <div className="lg:col-span-5 animate-fade-up [animation-delay:120ms]">
@@ -73,10 +78,10 @@ export function Hero({ locale, dict }: Props) {
               </div>
               <div className="absolute -bottom-6 -left-6 rounded-2xl bg-brand-500 p-4 text-white shadow-card hidden md:block">
                 <p className="text-xs font-semibold uppercase tracking-wider opacity-80">
-                  Featured
+                  Sales Bond
                 </p>
                 <p className="mt-1 font-display text-base font-bold">
-                  TODO: ハイライト
+                  営業を、支援する。
                 </p>
               </div>
             </div>

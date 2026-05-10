@@ -23,7 +23,7 @@ export async function BlogPreview({ locale, dict }: Props) {
           <SectionHeading
             eyebrow="Insights"
             title="記事・お知らせ"
-            description="TODO: ブログ・お知らせのリード文をここに。"
+            description="営業・人材活用に関する考察や、最新のお知らせをお届けします。"
           />
           <Link
             href={localePath("/blog", locale)}

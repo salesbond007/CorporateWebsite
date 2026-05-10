@@ -20,7 +20,7 @@ export function ServicesSection({ locale, dict }: Props) {
           <SectionHeading
             eyebrow="Services"
             title="提供する3つのサービス"
-            description="TODO: サービス全体のイントロを2〜3行で。"
+            description="紹介営業・プロ人材紹介・インサイドセールス代行で、企業の営業活動を多角的に支援します。"
           />
           <Link
             href={localePath("/services", locale)}
