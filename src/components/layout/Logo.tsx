@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { localePath } from "@/i18n/path";
+import { cn } from "@/lib/cn";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 
@@ -7,23 +9,38 @@ type Props = {
   locale: Locale;
   dict: Dictionary;
   className?: string;
+  /** Render the logo in white (e.g. on dark sections). */
+  variant?: "default" | "white";
+  /** Override the height. Defaults to "h-10". */
+  size?: string;
 };
 
-export function Logo({ locale, dict, className }: Props) {
+export function Logo({
+  locale,
+  dict,
+  className,
+  variant = "default",
+  size = "h-10 md:h-11",
+}: Props) {
   return (
     <Link
       href={localePath("/", locale)}
-      className={className}
+      className={cn("inline-flex items-center", className)}
       aria-label={dict.site.name}
     >
-      <span className="flex items-center gap-2">
-        <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-500 text-white font-bold">
-          S
-        </span>
-        <span className="font-display text-base font-bold tracking-tight">
-          {dict.site.name}
-        </span>
-      </span>
+      <Image
+        src="/logo.png"
+        alt={dict.site.name}
+        width={540}
+        height={540}
+        priority
+        sizes="(max-width: 768px) 40px, 44px"
+        className={cn(
+          "w-auto select-none",
+          size,
+          variant === "white" && "[filter:brightness(0)_invert(1)]",
+        )}
+      />
     </Link>
   );
 }
