@@ -6,7 +6,7 @@ import { isLocale } from "@/i18n/config";
 export const metadata: Metadata = {
   title: "会社概要",
   description:
-    "セールスボンド株式会社（Sales Bond Co., Ltd.）の会社概要。本社所在地、代表者、事業内容（決裁者紹介サービス・プロ人材マッチングサービス・営業BPO事業）など。",
+    "セールスボンド株式会社（Sales Bond Co., Ltd.）の会社概要。本社所在地、代表者、事業内容（大手決裁者紹介サービス・プロ人材マッチングサービス・営業BPO事業）など。",
 };
 
 type Office = {
@@ -54,7 +54,7 @@ const rows: { label: string; value: React.ReactNode }[] = [
     label: "事業内容",
     value: (
       <ul className="space-y-1.5">
-        <li>決裁者紹介サービス</li>
+        <li>大手決裁者紹介サービス</li>
         <li>プロ人材マッチングサービス</li>
         <li>営業BPO事業</li>
       </ul>
