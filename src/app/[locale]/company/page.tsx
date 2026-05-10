@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
-import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
 export const metadata: Metadata = {
@@ -62,7 +60,6 @@ export default function CompanyPage({
   params: { locale: string };
 }) {
   if (!isLocale(params.locale)) notFound();
-  const locale = params.locale;
 
   return (
     <>
@@ -93,12 +90,6 @@ export default function CompanyPage({
                   </div>
                 ))}
               </dl>
-
-              <div className="mt-10 flex flex-wrap gap-3">
-                <Button href={localePath("/contact", locale)} size="lg">
-                  問い合わせ
-                </Button>
-              </div>
             </div>
           </div>
         </Container>
