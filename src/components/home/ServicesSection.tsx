@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Reveal } from "@/components/ui/Reveal";
 import { services } from "@/lib/site";
 
 export function ServicesSection() {
@@ -19,8 +20,9 @@ export function ServicesSection() {
         </div>
 
         <ul className="mt-14 grid gap-6 md:grid-cols-3">
-          {services.map((s) => (
+          {services.map((s, i) => (
             <li key={s.slug}>
+              <Reveal delay={i * 100} className="h-full">
               <Link
                 href={s.href}
                 className="group block h-full rounded-xl2 border border-ink-line bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-card"
@@ -41,6 +43,7 @@ export function ServicesSection() {
                   {s.summary}
                 </p>
               </Link>
+              </Reveal>
             </li>
           ))}
         </ul>

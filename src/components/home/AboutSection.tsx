@@ -1,6 +1,7 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Illustration } from "@/components/ui/Illustration";
+import { Reveal } from "@/components/ui/Reveal";
 
 export function AboutSection() {
   return (
@@ -26,18 +27,17 @@ export function AboutSection() {
 
             <div className="mt-10 grid gap-6 sm:grid-cols-3">
               {["TODO", "TODO", "TODO"].map((label, i) => (
-                <div
-                  key={i}
-                  className="rounded-xl2 border border-white/10 bg-white/5 p-5"
-                >
-                  <p className="font-display text-sm font-bold text-brand-300">
-                    0{i + 1}
-                  </p>
-                  <p className="mt-3 text-sm font-semibold">{label}: 強み</p>
-                  <p className="mt-2 text-xs text-white/60 leading-relaxed">
-                    TODO: 補足説明を1〜2行で。
-                  </p>
-                </div>
+                <Reveal key={i} delay={i * 100}>
+                  <div className="rounded-xl2 border border-white/10 bg-white/5 p-5 h-full">
+                    <p className="font-display text-sm font-bold text-brand-300">
+                      0{i + 1}
+                    </p>
+                    <p className="mt-3 text-sm font-semibold">{label}: 強み</p>
+                    <p className="mt-2 text-xs text-white/60 leading-relaxed">
+                      TODO: 補足説明を1〜2行で。
+                    </p>
+                  </div>
+                </Reveal>
               ))}
             </div>
 

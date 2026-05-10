@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ArticleCard, ArticleCardSkeleton } from "@/components/blog/ArticleCard";
+import { Reveal } from "@/components/ui/Reveal";
 import { getArticles } from "@/lib/microcms";
 
 export async function BlogPreview() {
@@ -24,7 +25,9 @@ export async function BlogPreview() {
         <div className="mt-14 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {contents.length > 0
             ? contents.map((article, i) => (
-                <ArticleCard key={article.id} article={article} priority={i === 0} />
+                <Reveal key={article.id} delay={i * 100}>
+                  <ArticleCard article={article} priority={i === 0} />
+                </Reveal>
               ))
             : Array.from({ length: 3 }).map((_, i) => (
                 <ArticleCardSkeleton key={i} />
