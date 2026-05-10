@@ -1,9 +1,8 @@
 import { test, expect } from "@playwright/test";
 
 const PAGES = [
-  { path: "/ja/about", title: /私たちについて/ },
   { path: "/ja/services", title: /サービス/ },
-  { path: "/ja/services/service-01", title: /サービス名 01/ },
+  { path: "/ja/services/sales-bond", title: /セールスボンド/ },
   { path: "/ja/company", title: /会社概要/ },
   { path: "/ja/contact", title: /お問い合わせ/ },
   { path: "/ja/contact/professional", title: /プロ人材の方のお問い合わせ/ },
@@ -27,6 +26,6 @@ test("404 page on unknown route", async ({ page }) => {
 });
 
 test("invalid locale falls through middleware (redirected)", async ({ page }) => {
-  await page.goto("/about");
-  await expect(page).toHaveURL(/\/(ja|en)\/about\/?$/);
+  await page.goto("/services");
+  await expect(page).toHaveURL(/\/(ja|en)\/services\/?$/);
 });

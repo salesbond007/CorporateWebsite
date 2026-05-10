@@ -2,8 +2,8 @@ import { defaultLocale, isLocale, type Locale } from "./config";
 
 /**
  * Build a locale-prefixed path.
- *   localePath("/about", "ja") -> "/ja/about"
- *   localePath("/", "en")      -> "/en"
+ *   localePath("/services", "ja") -> "/ja/services"
+ *   localePath("/", "en")         -> "/en"
  */
 export function localePath(path: string, locale: Locale): string {
   const normalized = path === "/" ? "" : path.startsWith("/") ? path : `/${path}`;
@@ -12,8 +12,8 @@ export function localePath(path: string, locale: Locale): string {
 
 /**
  * Strip a locale prefix from a path.
- *   stripLocale("/ja/about") -> { locale: "ja", path: "/about" }
- *   stripLocale("/about")    -> { locale: defaultLocale, path: "/about" }
+ *   stripLocale("/ja/services") -> { locale: "ja", path: "/services" }
+ *   stripLocale("/services")    -> { locale: defaultLocale, path: "/services" }
  */
 export function stripLocale(path: string): { locale: Locale; path: string } {
   const segments = path.split("/").filter(Boolean);

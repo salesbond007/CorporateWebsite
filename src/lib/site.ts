@@ -21,13 +21,13 @@ export const site = {
 } as const;
 
 export type NavKey =
-  | "about"
+  | "top"
   | "services"
   | "blog"
   | "company";
 
 export const navigation: { key: NavKey; href: string }[] = [
-  { key: "about", href: "/about" },
+  { key: "top", href: "/" },
   { key: "services", href: "/services" },
   { key: "blog", href: "/blog" },
   { key: "company", href: "/company" },
