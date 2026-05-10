@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
+import { DotsDecoration } from "@/components/ui/Doodle";
 import { services } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
@@ -14,7 +15,9 @@ type Props = {
 
 export function ServicesSection({ locale, dict }: Props) {
   return (
-    <section className="py-24 md:py-32">
+    <section className="relative py-24 md:py-32 bg-cream">
+      <DotsDecoration className="absolute right-[6%] top-[8%] h-16 w-16 text-brand-400 opacity-60" />
+
       <Container>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <SectionHeading
@@ -36,24 +39,24 @@ export function ServicesSection({ locale, dict }: Props) {
               <Reveal delay={i * 100} className="h-full">
                 <Link
                   href={localePath(s.href, locale)}
-                  className="group block h-full rounded-xl2 border border-ink-line bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-card"
+                  className="group block h-full rounded-xl3 border-2 border-ink-line bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-400 hover:shadow-card"
                 >
                   <div className="flex items-start justify-between">
-                    <span className="font-display text-sm font-bold text-brand-500">
+                    <span className="font-handwritten text-xl font-bold text-brand-500">
                       {s.number}
                     </span>
                     <span
-                      className="grid h-10 w-10 place-items-center rounded-full border border-ink-line text-ink-muted transition-all group-hover:border-brand-500 group-hover:bg-brand-500 group-hover:text-white"
+                      className="grid h-10 w-10 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition-all group-hover:border-brand-500 group-hover:bg-brand-500 group-hover:text-white group-hover:rotate-[-12deg]"
                       aria-hidden="true"
                     >
                       →
                     </span>
                   </div>
                   <h3 className="mt-12 text-xl font-bold text-ink">{s.title}</h3>
-                  <p className="mt-1 text-xs font-semibold text-brand-600">
+                  <p className="mt-1 font-handwritten text-sm font-semibold text-brand-600">
                     {s.subtitle}
                   </p>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft">
+                  <p className="mt-4 text-sm leading-relaxed text-ink-soft">
                     {s.summary}
                   </p>
                 </Link>

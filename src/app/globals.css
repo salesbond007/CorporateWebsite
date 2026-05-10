@@ -5,8 +5,8 @@
 :root {
   --color-brand: #f58220;
   --color-brand-soft: #fff5ec;
-  --color-ink: #1a1a1a;
-  --color-cream: #faf7f2;
+  --color-ink: #2a2a2a;
+  --color-cream: #fdf8f1;
 }
 
 @layer base {
@@ -18,39 +18,43 @@
   }
 
   body {
-    @apply bg-white text-ink font-sans;
+    @apply bg-cream text-ink font-sans;
     font-feature-settings: "palt" 1;
+    letter-spacing: 0.01em;
   }
 
   ::selection {
-    background-color: rgba(245, 130, 32, 0.2);
-    color: #1a1a1a;
+    background-color: rgba(245, 130, 32, 0.25);
+    color: #2a2a2a;
   }
 
   h1, h2, h3, h4 {
     @apply font-display font-bold tracking-tight;
+    letter-spacing: -0.005em;
   }
 
   a {
     @apply transition-colors duration-200;
   }
 
-  /* Focus ring */
+  /* Friendly focus ring */
   :focus-visible {
-    outline: 2px solid var(--color-brand);
-    outline-offset: 2px;
-    border-radius: 4px;
+    outline: 3px solid var(--color-brand);
+    outline-offset: 3px;
+    border-radius: 8px;
   }
 }
 
 @layer components {
+  /* eyebrow: 手書き風の小見出し */
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-600;
+    @apply inline-flex items-center gap-2 font-handwritten text-sm font-semibold text-brand-600;
+    letter-spacing: 0.05em;
   }
 
   .eyebrow::before {
-    content: "";
-    @apply inline-block h-px w-8 bg-brand-500;
+    content: "✦";
+    @apply text-brand-500 text-base;
   }
 
   .link-arrow {
@@ -66,15 +70,40 @@
     transform: translateX(4px);
   }
 
-  .grid-bg {
-    background-image:
-      linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-    background-size: 64px 64px;
+  /* やわらかいドット背景 */
+  .dot-bg {
+    background-image: radial-gradient(
+      rgba(245, 130, 32, 0.18) 1.5px,
+      transparent 1.5px
+    );
+    background-size: 24px 24px;
+  }
+
+  .dot-bg-soft {
+    background-image: radial-gradient(
+      rgba(0, 0, 0, 0.06) 1px,
+      transparent 1px
+    );
+    background-size: 22px 22px;
+  }
+
+  /* 手書きアンダーライン */
+  .underline-doodle {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5 Q 25 2 50 4 T 98 4' stroke='%23F58220' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: 100% 8px;
+    padding-bottom: 8px;
+  }
+
+  /* 手書きハイライト（マーカー風） */
+  .marker {
+    background: linear-gradient(transparent 65%, rgba(245, 130, 32, 0.3) 65%);
+    padding: 0 2px;
   }
 
   .prose-article {
-    @apply max-w-prose text-ink-soft leading-[1.9];
+    @apply max-w-prose text-ink-soft leading-[1.95];
   }
 
   .prose-article h2 {
@@ -95,7 +124,7 @@
 
   .prose-article img,
   .prose-article video {
-    @apply my-8 rounded-xl2 w-full h-auto shadow-card;
+    @apply my-8 rounded-xl3 w-full h-auto shadow-card;
   }
 
   .prose-article ul {

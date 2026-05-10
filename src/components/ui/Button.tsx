@@ -9,17 +9,17 @@ const base =
 
 const variants: Record<Variant, string> = {
   primary:
-    "bg-brand-500 text-white hover:bg-brand-600 shadow-[0_8px_24px_-8px_rgba(245,130,32,0.6)] hover:shadow-[0_12px_28px_-8px_rgba(245,130,32,0.7)]",
+    "bg-brand-500 text-white hover:bg-brand-600 shadow-[0_10px_30px_-10px_rgba(245,130,32,0.7)] hover:shadow-[0_14px_36px_-10px_rgba(245,130,32,0.8)] hover:-translate-y-0.5 active:translate-y-0",
   secondary:
-    "bg-white text-ink border border-ink-line hover:border-ink hover:-translate-y-0.5",
+    "bg-white text-ink border-2 border-ink hover:bg-ink hover:text-white hover:-translate-y-0.5 active:translate-y-0",
   ghost:
     "bg-transparent text-ink hover:bg-cream",
 };
 
 const sizes: Record<Size, string> = {
-  sm: "h-9 px-4 text-sm",
-  md: "h-11 px-6 text-sm",
-  lg: "h-14 px-8 text-base",
+  sm: "h-10 px-5 text-sm",
+  md: "h-12 px-7 text-sm",
+  lg: "h-14 px-9 text-base",
 };
 
 type CommonProps = {

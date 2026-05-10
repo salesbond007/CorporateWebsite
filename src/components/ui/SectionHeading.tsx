@@ -23,8 +23,17 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
-      <h2 className="mt-4 text-display-2 text-ink">{title}</h2>
+      {eyebrow ? (
+        <span
+          className={cn(
+            "eyebrow",
+            align === "center" && "justify-center",
+          )}
+        >
+          {eyebrow}
+        </span>
+      ) : null}
+      <h2 className="mt-5 text-display-2 text-ink">{title}</h2>
       {description ? (
         <p className="mt-5 text-base md:text-lg text-ink-soft leading-relaxed">
           {description}

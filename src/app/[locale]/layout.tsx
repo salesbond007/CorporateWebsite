@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Noto_Sans_JP } from "next/font/google";
+import { Zen_Maru_Gothic, Klee_One } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -10,10 +10,17 @@ import { isLocale, locales, ogLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import "../globals.css";
 
-const notoSansJP = Noto_Sans_JP({
+const zenMaru = Zen_Maru_Gothic({
   subsets: ["latin"],
   weight: ["400", "500", "700", "900"],
-  variable: "--font-noto-sans-jp",
+  variable: "--font-zen-maru",
+  display: "swap",
+});
+
+const klee = Klee_One({
+  subsets: ["latin"],
+  weight: ["400", "600"],
+  variable: "--font-klee",
   display: "swap",
 });
 
@@ -79,7 +86,7 @@ export default function LocaleLayout({
   const dict = getDictionary(locale);
 
   return (
-    <html lang={locale} className={notoSansJP.variable}>
+    <html lang={locale} className={`${zenMaru.variable} ${klee.variable}`}>
       <body>
         <a
           href="#main"

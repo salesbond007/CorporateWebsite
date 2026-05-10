@@ -41,16 +41,22 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
-          "var(--font-noto-sans-jp)",
-          "Inter",
+          "var(--font-zen-maru)",
+          "Hiragino Maru Gothic ProN",
           "Hiragino Kaku Gothic ProN",
           "Meiryo",
           "system-ui",
           "sans-serif",
         ],
         display: [
-          "var(--font-noto-sans-jp)",
-          "Inter",
+          "var(--font-zen-maru)",
+          "Hiragino Maru Gothic ProN",
+          "system-ui",
+          "sans-serif",
+        ],
+        handwritten: [
+          "var(--font-klee)",
+          "var(--font-zen-maru)",
           "system-ui",
           "sans-serif",
         ],
@@ -69,7 +75,9 @@ const config: Config = {
         card: "0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(20,20,20,0.06)",
       },
       borderRadius: {
-        xl2: "1.25rem",
+        xl2: "1.5rem",
+        xl3: "2rem",
+        xl4: "2.5rem",
       },
       keyframes: {
         fadeUp: {
@@ -80,10 +88,20 @@ const config: Config = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        wiggle: {
+          "0%, 100%": { transform: "rotate(-3deg)" },
+          "50%": { transform: "rotate(3deg)" },
+        },
+        floatY: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
       },
       animation: {
         "fade-up": "fadeUp 0.7s ease-out both",
         marquee: "marquee 30s linear infinite",
+        wiggle: "wiggle 1.6s ease-in-out infinite",
+        "float-y": "floatY 3s ease-in-out infinite",
       },
     },
   },

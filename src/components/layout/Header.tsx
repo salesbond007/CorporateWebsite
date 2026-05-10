@@ -31,7 +31,7 @@ export function Header({ locale, dict }: Props) {
       className={cn(
         "sticky top-0 z-40 w-full transition-all duration-300",
         scrolled
-          ? "bg-white/85 backdrop-blur-md border-b border-ink-line"
+          ? "bg-cream/90 backdrop-blur-md border-b border-ink-line/60"
           : "bg-transparent border-b border-transparent",
       )}
     >

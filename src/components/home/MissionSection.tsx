@@ -1,24 +1,37 @@
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { Sparkle, Squiggle } from "@/components/ui/Doodle";
 
 export function MissionSection() {
   return (
-    <section className="py-24 md:py-32 bg-cream">
+    <section className="relative py-24 md:py-32 bg-white overflow-hidden">
+      <Sparkle
+        className="absolute left-[10%] top-[12%] h-6 w-6 text-brand-300 animate-wiggle"
+      />
+      <Sparkle
+        className="absolute right-[12%] bottom-[18%] h-5 w-5 text-brand-400"
+      />
+
       <Container>
         <div className="max-w-3xl mx-auto text-center">
-          <span className="eyebrow">Our Mission</span>
-          <h2 className="mt-6 text-display-2 text-ink">
-            企業を、<span className="text-brand-500">勝たせる</span>。
+          <span className="eyebrow justify-center">Our Mission</span>
+          <h2 className="mt-6 text-display-2 text-ink leading-tight">
+            企業を、
+            <span className="relative inline-block text-brand-500">
+              勝たせる
+              <Squiggle className="absolute -bottom-3 left-0 h-3 w-full" />
+            </span>
+            。
           </h2>
         </div>
 
         <Reveal>
-          <div className="mt-14 max-w-2xl mx-auto space-y-6 text-base md:text-lg text-ink-soft leading-[1.95]">
+          <div className="mt-16 max-w-2xl mx-auto space-y-6 text-base md:text-lg text-ink-soft leading-[2]">
             <p>
               明確な経営課題を抱えながらも、その遂行が思うように進まない事例は少なくありません。
             </p>
 
-            <p className="text-center text-xl md:text-2xl font-bold text-ink">
+            <p className="text-center text-xl md:text-2xl font-bold text-ink py-2">
               売上拡大、組織強化、DX推進——。
             </p>
 
@@ -36,7 +49,7 @@ export function MissionSection() {
 
             <p>
               セールスボンドは、企業が次なる成長フェーズへと移行するための、
-              <strong className="text-ink font-bold">確かな起点</strong>
+              <span className="marker font-bold text-ink">確かな起点</span>
               となることを使命としています。
             </p>
           </div>
