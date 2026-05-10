@@ -66,45 +66,6 @@ export default function CompanyPage() {
           </div>
         </Container>
       </section>
-
-      <section className="pb-24 md:pb-32">
-        <Container>
-          <div className="grid gap-8 lg:grid-cols-2">
-            <div className="rounded-xl2 border border-ink-line p-8 md:p-10">
-              <h3 className="text-xl font-bold">アクセス</h3>
-              <p className="mt-3 text-ink-soft leading-relaxed">
-                〒160-0023 東京都新宿区西新宿3-3-13 西新宿水間ビル2F
-              </p>
-              <p className="mt-2 text-sm text-ink-muted">
-                {/* TODO: 最寄り駅・所要時間を追記 */}
-              </p>
-              <div className="mt-6 aspect-[16/10] w-full overflow-hidden rounded-xl bg-cream">
-                <iframe
-                  title="セールスボンド株式会社 本社の地図"
-                  src="https://www.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF3-3-13&output=embed"
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="h-full w-full border-0"
-                />
-              </div>
-            </div>
-            <div className="rounded-xl2 border border-ink-line p-8 md:p-10">
-              <h3 className="text-xl font-bold">沿革</h3>
-              <ul className="mt-6 space-y-4 text-sm text-ink-soft">
-                <li className="grid grid-cols-[5rem_1fr] gap-4">
-                  <span className="font-display font-bold text-brand-600">
-                    2024.07
-                  </span>
-                  <span className="leading-relaxed">
-                    セールスボンド株式会社 設立
-                  </span>
-                </li>
-                {/* TODO: 追加の沿革項目 */}
-              </ul>
-            </div>
-          </div>
-        </Container>
-      </section>
     </>
   );
 }
