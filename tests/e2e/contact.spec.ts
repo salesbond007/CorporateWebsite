@@ -4,32 +4,29 @@ test.describe("Contact form (general)", () => {
   test("renders the required fields", async ({ page }) => {
     await page.goto("/ja/contact");
     await expect(page.getByLabel("会社名", { exact: false })).toBeVisible();
-    await expect(page.getByLabel("従業員数", { exact: false })).toBeVisible();
-    await expect(page.getByLabel("部署名", { exact: false })).toBeVisible();
-    await expect(page.getByLabel("お名前(姓)", { exact: false })).toBeVisible();
-    await expect(page.getByLabel("お名前(名)", { exact: false })).toBeVisible();
+    await expect(page.getByLabel("姓", { exact: true })).toBeVisible();
+    await expect(page.getByLabel("名", { exact: true })).toBeVisible();
+    await expect(
+      page.getByLabel("メールアドレス", { exact: false }),
+    ).toBeVisible();
+    await expect(page.getByLabel("電話番号", { exact: false })).toBeVisible();
+    await expect(page.getByLabel("部署", { exact: false })).toBeVisible();
     await expect(page.getByLabel("役職", { exact: false })).toBeVisible();
-    await expect(
-      page.getByLabel("勤務先メールアドレス", { exact: false }),
-    ).toBeVisible();
-    await expect(
-      page.getByLabel("携帯電話番号", { exact: false }),
-    ).toBeVisible();
+    await expect(page.getByLabel("従業員数", { exact: false })).toBeVisible();
   });
 
   test("rejects free email addresses", async ({ page }) => {
     await page.goto("/ja/contact");
 
     await page.getByLabel("会社名", { exact: false }).fill("テスト株式会社");
-    await page.locator("select[name='employeeCount']").selectOption("31-200");
-    await page.getByLabel("部署名", { exact: false }).fill("営業部");
-    await page.getByLabel("お名前(姓)", { exact: false }).fill("山田");
-    await page.getByLabel("お名前(名)", { exact: false }).fill("太郎");
-    await page.locator("select[name='position']").selectOption("manager");
+    await page.getByLabel("姓", { exact: true }).fill("山田");
+    await page.getByLabel("名", { exact: true }).fill("太郎");
     await page
-      .getByLabel("勤務先メールアドレス", { exact: false })
+      .getByLabel("メールアドレス", { exact: false })
       .fill("test@gmail.com");
-    await page.getByLabel("携帯電話番号", { exact: false }).fill("090-1234-5678");
+    await page.getByLabel("電話番号", { exact: false }).fill("090-1234-5678");
+    await page.locator("select[name='position']").selectOption("manager");
+    await page.locator("select[name='employeeCount']").selectOption("31-200");
     await page.locator("input[name='inquiryType'][value='other']").check();
     await page.locator("input[name='agreement']").check();
 
@@ -52,9 +49,7 @@ test.describe("Contact form (general)", () => {
     await expect(
       page.getByText("リードボンド（営業代行サービス）について"),
     ).toBeVisible();
-    await expect(
-      page.getByText("プロ人材サービスについて"),
-    ).toBeVisible();
+    await expect(page.getByText("プロ人材サービスについて")).toBeVisible();
   });
 
   test("hides service sub-options when 協業について is selected", async ({

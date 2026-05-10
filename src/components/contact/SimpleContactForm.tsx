@@ -110,22 +110,22 @@ export function SimpleContactForm({ locale }: Props) {
   function validate(): FieldErrors {
     const next: FieldErrors = {};
     if (!state.company.trim()) next.company = "会社名をご入力ください。";
-    if (!state.employeeCount) next.employeeCount = "従業員数をご選択ください。";
-    if (!state.department.trim()) next.department = "部署名をご入力ください。";
     if (!state.lastName.trim()) next.lastName = "姓をご入力ください。";
     if (!state.firstName.trim()) next.firstName = "名をご入力ください。";
-    if (!state.position) next.position = "役職をご選択ください。";
 
     if (!state.email.trim()) {
-      next.email = "勤務先メールアドレスをご入力ください。";
+      next.email = "メールアドレスをご入力ください。";
     } else if (!isEmailFormat(state.email)) {
       next.email = "メールアドレスの形式が正しくありません。";
     } else if (isFreeEmail(state.email)) {
       next.email = "フリーメール（Gmail / Yahoo 等）はご利用いただけません。勤務先のメールアドレスをご入力ください。";
     }
 
-    if (!state.phone.trim()) next.phone = "携帯電話番号をご入力ください。";
-    if (!state.inquiryType) next.inquiryType = "お問い合わせ種類をご選択ください。";
+    if (!state.phone.trim()) next.phone = "電話番号をご入力ください。";
+    // 部署は任意
+    if (!state.position) next.position = "役職をご選択ください。";
+    if (!state.employeeCount) next.employeeCount = "従業員数をご選択ください。";
+    if (!state.inquiryType) next.inquiryType = "お問い合わせ種別をご選択ください。";
     return next;
   }
 
@@ -164,29 +164,29 @@ export function SimpleContactForm({ locale }: Props) {
       "■ 会社名",
       state.company,
       "",
-      "■ 従業員数",
-      employeeLabel,
-      "",
-      "■ 部署名",
-      state.department,
-      "",
-      "■ お名前",
+      "■ 氏名",
       `${state.lastName} ${state.firstName}`,
+      "",
+      "■ メールアドレス",
+      state.email,
+      "",
+      "■ 電話番号",
+      state.phone,
+      "",
+      "■ 部署",
+      state.department || "（未入力）",
       "",
       "■ 役職",
       positionLabel,
       "",
-      "■ 勤務先メールアドレス",
-      state.email,
+      "■ 従業員数",
+      employeeLabel,
       "",
-      "■ 携帯電話番号",
-      state.phone,
-      "",
-      "■ お問い合わせ種類",
+      "■ お問い合わせ種別",
       inquiryLabel,
       ...(serviceLabels.length > 0 ? ["", ...serviceLabels] : []),
       "",
-      "■ お問い合わせ内容",
+      "■ 問い合わせ内容",
       state.message || "（未入力）",
     ].join("\n");
 
@@ -250,12 +250,7 @@ export function SimpleContactForm({ locale }: Props) {
       noValidate
       className="space-y-6 rounded-xl2 border border-ink-line bg-white p-8 md:p-10"
     >
-      <p className="text-xs text-ink-muted">
-        ※ 現在フロントのみ実装。送信ボタンを押すとメーラーが起動し、
-        <span className="font-semibold text-ink-soft">{site.email}</span>{" "}
-        宛のメール下書きが作成されます。
-      </p>
-
+      {/* 1. 会社名 */}
       <TextField
         label="会社名"
         name="company"
@@ -267,21 +262,70 @@ export function SimpleContactForm({ locale }: Props) {
         error={errors.company}
       />
 
-      <SelectField
-        label="従業員数"
-        name="employeeCount"
+      {/* 2. 氏名 */}
+      <div>
+        <p className="flex items-center gap-2 text-sm font-semibold text-ink">
+          氏名
+          <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">
+            必須
+          </span>
+        </p>
+        <div className="mt-2 grid gap-4 md:grid-cols-2">
+          <TextField
+            label="姓"
+            name="lastName"
+            required
+            autoComplete="family-name"
+            placeholder="山田"
+            value={state.lastName}
+            onChange={(e) => update("lastName", e.target.value)}
+            error={errors.lastName}
+          />
+          <TextField
+            label="名"
+            name="firstName"
+            required
+            autoComplete="given-name"
+            placeholder="太郎"
+            value={state.firstName}
+            onChange={(e) => update("firstName", e.target.value)}
+            error={errors.firstName}
+          />
+        </div>
+      </div>
+
+      {/* 3. メールアドレス */}
+      <TextField
+        label="メールアドレス"
+        name="email"
+        type="email"
         required
-        placeholder="従業員数を選択"
-        options={employeeCountOptions.map((o) => ({ value: o.value, label: o.label }))}
-        value={state.employeeCount}
-        onChange={(e) => update("employeeCount", e.target.value)}
-        error={errors.employeeCount}
+        autoComplete="email"
+        placeholder="example@company.co.jp"
+        hint="フリーメール（Gmail / Yahoo 等）はご利用いただけません。"
+        value={state.email}
+        onChange={(e) => update("email", e.target.value)}
+        error={errors.email}
       />
 
+      {/* 4. 電話番号 */}
       <TextField
-        label="部署名"
-        name="department"
+        label="電話番号"
+        name="phone"
+        type="tel"
         required
+        inputMode="tel"
+        autoComplete="tel"
+        placeholder="03-XXXX-XXXX または 090-XXXX-XXXX"
+        value={state.phone}
+        onChange={(e) => update("phone", e.target.value)}
+        error={errors.phone}
+      />
+
+      {/* 5. 部署（任意） */}
+      <TextField
+        label="部署"
+        name="department"
         autoComplete="organization-title"
         placeholder="営業部 / マーケティング部 など"
         value={state.department}
@@ -289,29 +333,7 @@ export function SimpleContactForm({ locale }: Props) {
         error={errors.department}
       />
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <TextField
-          label="お名前(姓)"
-          name="lastName"
-          required
-          autoComplete="family-name"
-          placeholder="山田"
-          value={state.lastName}
-          onChange={(e) => update("lastName", e.target.value)}
-          error={errors.lastName}
-        />
-        <TextField
-          label="お名前(名)"
-          name="firstName"
-          required
-          autoComplete="given-name"
-          placeholder="太郎"
-          value={state.firstName}
-          onChange={(e) => update("firstName", e.target.value)}
-          error={errors.firstName}
-        />
-      </div>
-
+      {/* 6. 役職 */}
       <SelectField
         label="役職"
         name="position"
@@ -323,36 +345,22 @@ export function SimpleContactForm({ locale }: Props) {
         error={errors.position}
       />
 
-      <div className="grid gap-6 md:grid-cols-2">
-        <TextField
-          label="勤務先メールアドレス"
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          placeholder="example@company.co.jp"
-          hint="フリーメール（Gmail / Yahoo 等）はご利用いただけません。"
-          value={state.email}
-          onChange={(e) => update("email", e.target.value)}
-          error={errors.email}
-        />
-        <TextField
-          label="携帯電話番号"
-          name="phone"
-          type="tel"
-          required
-          inputMode="tel"
-          autoComplete="tel"
-          placeholder="090-XXXX-XXXX"
-          value={state.phone}
-          onChange={(e) => update("phone", e.target.value)}
-          error={errors.phone}
-        />
-      </div>
+      {/* 7. 従業員数 */}
+      <SelectField
+        label="従業員数"
+        name="employeeCount"
+        required
+        placeholder="従業員数を選択"
+        options={employeeCountOptions.map((o) => ({ value: o.value, label: o.label }))}
+        value={state.employeeCount}
+        onChange={(e) => update("employeeCount", e.target.value)}
+        error={errors.employeeCount}
+      />
 
+      {/* 8. お問い合わせ種別 */}
       <fieldset>
         <legend className="flex items-center gap-2 text-sm font-semibold text-ink">
-          お問い合わせ種類をご選択ください
+          お問い合わせ種別
           <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">
             必須
           </span>
@@ -415,8 +423,9 @@ export function SimpleContactForm({ locale }: Props) {
         ) : null}
       </fieldset>
 
+      {/* 9. 問い合わせ内容 */}
       <TextareaField
-        label="お問い合わせ内容"
+        label="問い合わせ内容"
         name="message"
         hint="ご相談内容や検討中のサービスなど、お気軽にご記入ください。"
         value={state.message}
