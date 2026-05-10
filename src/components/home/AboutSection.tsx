@@ -23,7 +23,7 @@ const strengths: { title: string; description: string }[] = [
       "戦略立案から現場運用まで、再現性のある営業ノウハウを提供します。",
   },
   {
-    title: "プロ人材紹介",
+    title: "プロ人材マッチング",
     description:
       "経営課題に応じた即戦力のプロを、必要な期間だけアサインします。",
   },

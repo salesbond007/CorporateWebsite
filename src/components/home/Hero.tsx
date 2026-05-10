@@ -2,7 +2,6 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Illustration } from "@/components/ui/Illustration";
 import { localePath } from "@/i18n/path";
-import { services } from "@/lib/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 
@@ -49,25 +48,6 @@ export function Hero({ locale, dict }: Props) {
                 {dict.buttons.contact}
               </Button>
             </div>
-
-            <ul className="mt-14 grid grid-cols-3 gap-4 max-w-xl">
-              {services.map((s) => (
-                <li
-                  key={s.slug}
-                  className="rounded-xl border border-ink-line bg-white/60 p-4 backdrop-blur-sm"
-                >
-                  <p className="font-display text-xs font-bold text-brand-500">
-                    {s.number}
-                  </p>
-                  <p className="mt-1 text-sm font-bold text-ink leading-tight">
-                    {s.title}
-                  </p>
-                  <p className="mt-1 text-[11px] text-ink-muted leading-tight">
-                    {s.subtitle}
-                  </p>
-                </li>
-              ))}
-            </ul>
           </div>
 
           <div className="lg:col-span-5 animate-fade-up [animation-delay:120ms]">

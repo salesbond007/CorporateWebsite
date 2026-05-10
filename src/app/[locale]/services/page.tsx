@@ -12,7 +12,7 @@ import { isLocale } from "@/i18n/config";
 export const metadata: Metadata = {
   title: "サービス概要",
   description:
-    "セールスボンド株式会社の3つのサービス。セールスボンド（決裁者紹介）、キーマンボンド（プロ人材紹介）、リードボンド（インサイドセールス代行）。",
+    "セールスボンド株式会社の3つのサービス。セールスボンド（決裁者紹介）、キーマンボンド（プロ人材マッチング）、リードボンド（インサイドセールス代行）。",
 };
 
 type ServiceWithImage = {

@@ -54,7 +54,7 @@ export const services = [
     slug: "keyman-bond",
     number: "02",
     title: "キーマンボンド",
-    subtitle: "プロ人材紹介サービス",
+    subtitle: "プロ人材マッチングサービス",
     summary:
       "経営課題を解決するプロ人材をご紹介。マーケティング・海外展開・社内DX・人事強化など多彩な領域に対応。",
     features: [
