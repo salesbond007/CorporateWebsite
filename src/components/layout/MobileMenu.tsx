@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { navigation } from "@/lib/site";
 import { cn } from "@/lib/cn";
 import { localePath } from "@/i18n/path";
-import { LocaleSwitcher } from "./LocaleSwitcher";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 
@@ -34,8 +33,17 @@ export function MobileMenu({ locale, dict }: Props) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const contactLinks = [
-    { href: "/contact/professional", label: dict.nav.contactProfessional },
+  const ctaLinks = [
+    {
+      href: "/contact",
+      label: dict.nav.contact,
+      className: "bg-brand-500 text-white hover:bg-brand-600",
+    },
+    {
+      href: "/contact/professional",
+      label: `${dict.nav.contactProfessional}はこちら`,
+      className: "bg-ink text-white hover:bg-ink-soft",
+    },
   ];
 
   return (
@@ -102,21 +110,20 @@ export function MobileMenu({ locale, dict }: Props) {
             </ul>
 
             <div className="mt-8 pt-6 border-t border-ink-line space-y-3">
-              {contactLinks.map((item) => (
+              {ctaLinks.map((item) => (
                 <Link
                   key={item.href}
                   href={localePath(item.href, locale)}
                   onClick={() => setOpen(false)}
-                  className="flex items-center justify-between rounded-xl bg-cream px-4 py-3.5 text-sm font-semibold hover:bg-brand-50"
+                  className={cn(
+                    "flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-semibold transition",
+                    item.className,
+                  )}
                 >
                   {item.label}
                   <span aria-hidden="true">→</span>
                 </Link>
               ))}
-            </div>
-
-            <div className="mt-8 pt-6 border-t border-ink-line">
-              <LocaleSwitcher current={locale} />
             </div>
           </nav>
         </div>

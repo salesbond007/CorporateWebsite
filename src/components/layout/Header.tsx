@@ -7,7 +7,6 @@ import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
-import { LocaleSwitcher } from "./LocaleSwitcher";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
@@ -51,14 +50,20 @@ export function Header({ locale, dict }: Props) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
-          <LocaleSwitcher current={locale} className="hidden md:inline-flex" />
+        <div className="flex items-center gap-2 md:gap-3">
+          <Button
+            href={localePath("/contact", locale)}
+            size="md"
+            className="hidden md:inline-flex shadow-[0_8px_24px_-8px_rgba(245,130,32,0.6)]"
+          >
+            {dict.nav.contact}
+          </Button>
           <Button
             href={localePath("/contact/professional", locale)}
-            size="sm"
-            className="hidden md:inline-flex"
+            size="md"
+            className="hidden md:inline-flex !bg-ink !text-white hover:!bg-ink-soft shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)]"
           >
-            {dict.nav.contactProfessional}
+            {dict.nav.contactProfessional}はこちら
           </Button>
           <MobileMenu locale={locale} dict={dict} />
         </div>
