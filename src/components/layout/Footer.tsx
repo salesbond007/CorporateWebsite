@@ -36,9 +36,6 @@ export function Footer({ locale, dict }: Props) {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <Logo locale={locale} dict={dict} />
-            <p className="mt-5 max-w-sm text-sm text-ink-soft leading-relaxed">
-              {dict.footer.tagline}
-            </p>
           </div>
 
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-8">
