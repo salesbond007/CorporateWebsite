@@ -54,14 +54,6 @@ export function Header({ locale, dict }: Props) {
         <div className="flex items-center gap-2">
           <LocaleSwitcher current={locale} className="hidden md:inline-flex" />
           <Button
-            href={localePath("/contact/business", locale)}
-            size="sm"
-            variant="secondary"
-            className="hidden md:inline-flex"
-          >
-            {dict.nav.contactBusiness}
-          </Button>
-          <Button
             href={localePath("/contact/professional", locale)}
             size="sm"
             className="hidden md:inline-flex"

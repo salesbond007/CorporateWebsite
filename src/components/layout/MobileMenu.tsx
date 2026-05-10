@@ -35,7 +35,6 @@ export function MobileMenu({ locale, dict }: Props) {
   }, []);
 
   const contactLinks = [
-    { href: "/contact/business", label: dict.nav.contactBusiness },
     { href: "/contact/professional", label: dict.nav.contactProfessional },
   ];
 

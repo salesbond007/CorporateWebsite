@@ -59,18 +59,12 @@ export default function ContactPage({
 
               <div className="mt-6 rounded-xl2 bg-cream p-8">
                 <h3 className="text-sm font-semibold text-ink-muted">
-                  カテゴリ別のお問い合わせ
+                  プロ人材の方へ
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed">
-                  用途が決まっている場合は、専用フォームをご利用ください。
+                  プロ人材としてご活躍いただける方は、こちらの専用フォームよりご応募ください。
                 </p>
-                <div className="mt-4 flex flex-col gap-2 text-sm font-semibold">
-                  <Link
-                    href={localePath("/contact/business", locale)}
-                    className="link-arrow"
-                  >
-                    企業様のお問い合わせ
-                  </Link>
+                <div className="mt-4">
                   <Link
                     href={localePath("/contact/professional", locale)}
                     className="link-arrow"
