@@ -21,9 +21,6 @@ export function ServicesSection({ locale, dict }: Props) {
             <p className="mt-3 text-lg md:text-xl font-extrabold text-ink">
               提供する3つのサービス
             </p>
-            <p className="mt-4 max-w-xl text-ink font-medium leading-relaxed">
-              決裁者紹介・プロ人材マッチング・インサイドセールス代行で、企業の営業活動を多角的に支援します。
-            </p>
           </div>
           <Link
             href={localePath("/services", locale)}
