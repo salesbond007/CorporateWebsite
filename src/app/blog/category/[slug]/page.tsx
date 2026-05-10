@@ -5,6 +5,7 @@ import { PageHero } from "@/components/ui/PageHero";
 import { ArticleCard } from "@/components/blog/ArticleCard";
 import { Pagination } from "@/components/blog/Pagination";
 import { CategoryNav } from "@/components/blog/CategoryNav";
+import { SearchBox } from "@/components/blog/SearchBox";
 import {
   getArticles,
   getCategories,
@@ -78,7 +79,10 @@ export default async function CategoryPage({
 
       <section className="py-20 md:py-28">
         <Container>
-          <CategoryNav categories={categories} currentSlug={category.slug} />
+          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+            <CategoryNav categories={categories} currentSlug={category.slug} />
+            <SearchBox className="md:max-w-md w-full" size="sm" />
+          </div>
 
           {articles.contents.length === 0 ? (
             <div className="mt-12 rounded-xl2 border border-dashed border-ink-line p-12 text-center">
