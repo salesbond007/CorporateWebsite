@@ -9,7 +9,8 @@ import { isLocale } from "@/i18n/config";
 
 export const metadata: Metadata = {
   title: "サービス概要",
-  description: "TODO: サービス概要ページのメタディスクリプション",
+  description:
+    "セールスボンド株式会社の3つのサービス。セールスボンド（紹介営業）、キーマンボンド（プロ人材紹介）、リードボンド（インサイドセールス代行）。",
 };
 
 export default function ServicesPage({
@@ -24,7 +25,7 @@ export default function ServicesPage({
       <PageHero
         eyebrow="Services"
         title="サービス概要"
-        description="TODO: 提供する3つのサービスの全体像を1〜2行で。"
+        description="営業のあらゆるフェーズを支援する、セールスボンドの3つのサービス。"
       />
 
       <section className="py-24 md:py-32">
