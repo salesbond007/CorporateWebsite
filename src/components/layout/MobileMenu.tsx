@@ -1,0 +1,109 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { navigation, footerLinks } from "@/lib/site";
+import { cn } from "@/lib/cn";
+
+export function MobileMenu() {
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const original = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = original;
+    };
+  }, [open]);
+
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, []);
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="lg:hidden grid h-10 w-10 place-items-center rounded-full border border-ink-line text-ink hover:bg-cream"
+        aria-label="メニューを開く"
+        aria-expanded={open}
+      >
+        <span className="sr-only">メニュー</span>
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M2 5h14M2 9h14M2 13h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        </svg>
+      </button>
+
+      <div
+        className={cn(
+          "fixed inset-0 z-50 transition-opacity duration-300 lg:hidden",
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+        )}
+        aria-hidden={!open}
+      >
+        <div
+          className="absolute inset-0 bg-ink/40 backdrop-blur-sm"
+          onClick={() => setOpen(false)}
+        />
+        <div
+          className={cn(
+            "absolute right-0 top-0 h-full w-[88%] max-w-sm bg-white shadow-2xl flex flex-col transform transition-transform duration-300",
+            open ? "translate-x-0" : "translate-x-full",
+          )}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div className="flex h-16 items-center justify-between px-5 border-b border-ink-line">
+            <span className="font-display font-bold">メニュー</span>
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              aria-label="メニューを閉じる"
+              className="grid h-10 w-10 place-items-center rounded-full border border-ink-line"
+            >
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
+
+          <nav className="flex-1 overflow-y-auto px-5 py-6">
+            <ul className="space-y-1">
+              {navigation.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={() => setOpen(false)}
+                    className="block rounded-lg px-3 py-3 text-base font-medium hover:bg-cream"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 pt-6 border-t border-ink-line space-y-3">
+              {footerLinks.contact.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setOpen(false)}
+                  className="flex items-center justify-between rounded-xl bg-cream px-4 py-3.5 text-sm font-semibold hover:bg-brand-50"
+                >
+                  {item.label}
+                  <span aria-hidden="true">→</span>
+                </Link>
+              ))}
+            </div>
+          </nav>
+        </div>
+      </div>
+    </>
+  );
+}
