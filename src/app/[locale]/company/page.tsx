@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
+import { Button } from "@/components/ui/Button";
+import { localePath } from "@/i18n/path";
+import { isLocale } from "@/i18n/config";
+import { notFound } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "会社概要",
@@ -23,7 +27,14 @@ const rows: { label: string; value: string }[] = [
   { label: "取引銀行", value: "三井住友銀行 渋谷駅前支店" },
 ];
 
-export default function CompanyPage() {
+export default function CompanyPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
+
   return (
     <>
       <PageHero
@@ -37,9 +48,9 @@ export default function CompanyPage() {
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4">
               <span className="eyebrow">Profile</span>
-              <h2 className="mt-5 text-h1">基本情報</h2>
+              <h2 className="mt-5 text-h1">会社概要</h2>
               <p className="mt-5 text-ink-soft leading-relaxed">
-                顧問紹介と営業BPOで企業の事業成長を支援する、セールスボンド株式会社の基本情報です。
+                顧問紹介と営業BPOで企業の事業成長を支援する、セールスボンド株式会社の会社概要です。
               </p>
             </div>
 
@@ -62,6 +73,12 @@ export default function CompanyPage() {
                   </div>
                 ))}
               </dl>
+
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Button href={localePath("/contact", locale)} size="lg">
+                  問い合わせ
+                </Button>
+              </div>
             </div>
           </div>
         </Container>
