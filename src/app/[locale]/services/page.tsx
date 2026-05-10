@@ -43,15 +43,26 @@ export default function ServicesPage({
                       </span>
                     </div>
                     <div className="md:col-span-8">
-                      <h2 className="text-h1 text-ink group-hover:text-brand-600 transition-colors">
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-600">
+                        {s.subtitle}
+                      </p>
+                      <h2 className="mt-2 text-h1 text-ink group-hover:text-brand-600 transition-colors">
                         {s.title}
                       </h2>
-                      <p className="mt-3 text-ink-soft leading-relaxed">
+                      <p className="mt-4 text-ink-soft leading-relaxed">
                         {s.summary}
                       </p>
-                      <p className="mt-4 text-sm text-ink-muted">
-                        TODO: 解決できる課題や対象顧客を1〜2行で。
-                      </p>
+                      <ul className="mt-5 space-y-1.5 text-sm text-ink-muted">
+                        {s.features.map((f) => (
+                          <li key={f} className="flex gap-2">
+                            <span
+                              aria-hidden="true"
+                              className="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-brand-500"
+                            />
+                            <span>{f}</span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
                     <div className="md:col-span-2 md:text-right">
                       <span className="inline-flex items-center gap-2 text-sm font-semibold text-brand-600">

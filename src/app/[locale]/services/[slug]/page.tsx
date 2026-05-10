@@ -42,7 +42,7 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
   return (
     <>
       <PageHero
-        eyebrow={`Service ${service.number}`}
+        eyebrow={`Service ${service.number} / ${service.subtitle}`}
         title={service.title}
         description={service.summary}
       />

@@ -25,8 +25,8 @@ const inquiryTypeLabels: Record<InquiryType, string> = {
 
 const serviceOptions = [
   { id: "sales-bond", label: "セールスボンド（紹介営業サービス）について" },
-  { id: "lead-bond", label: "リードボンド（営業代行サービス）について" },
-  { id: "pro-talent", label: "プロ人材サービスについて" },
+  { id: "keyman-bond", label: "キーマンボンド（プロ人材紹介サービス）について" },
+  { id: "lead-bond", label: "リードボンド（インサイドセールス代行サービス）について" },
 ] as const;
 
 type ServiceId = (typeof serviceOptions)[number]["id"];

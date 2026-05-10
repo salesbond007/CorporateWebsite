@@ -35,25 +35,46 @@ export const navigation: { key: NavKey; href: string }[] = [
 
 export const services = [
   {
-    slug: "service-01",
+    slug: "sales-bond",
     number: "01",
-    title: "サービス名 01",
-    summary: "TODO: サービス01の概要を1〜2行で。",
-    href: "/services/service-01",
+    title: "セールスボンド",
+    subtitle: "紹介営業サービス",
+    summary:
+      "人脈紹介を活用したキーマン開拓。完全成果報酬で、大手企業からベンチャーまで幅広く開拓可能。",
+    features: [
+      "人脈紹介を活用したキーマン開拓",
+      "完全成果報酬制（成功報酬のみ）",
+      "大手企業からベンチャー企業まで開拓可能",
+    ],
+    href: "/services/sales-bond",
   },
   {
-    slug: "service-02",
+    slug: "keyman-bond",
     number: "02",
-    title: "サービス名 02",
-    summary: "TODO: サービス02の概要を1〜2行で。",
-    href: "/services/service-02",
+    title: "キーマンボンド",
+    subtitle: "プロ人材紹介サービス",
+    summary:
+      "経営課題を解決するプロ人材をご紹介。マーケティング・海外展開・社内DX・人事強化など多彩な領域に対応。",
+    features: [
+      "プロ人材が企業の経営課題を解決",
+      "マーケティング・海外展開・社内DX・人事強化",
+      "事業フェーズに合わせて最適な人材を配置",
+    ],
+    href: "/services/keyman-bond",
   },
   {
-    slug: "service-03",
+    slug: "lead-bond",
     number: "03",
-    title: "サービス名 03",
-    summary: "TODO: サービス03の概要を1〜2行で。",
-    href: "/services/service-03",
+    title: "リードボンド",
+    subtitle: "インサイドセールス代行サービス",
+    summary:
+      "戦略立案から現場運用まで、インサイドセールスを代行。再現性のあるノウハウを提供し、中小企業のリード獲得に最適。",
+    features: [
+      "インサイドセールスの代行",
+      "戦略立案 + 現場入り + 再現性のあるノウハウ提供",
+      "中小企業のリード獲得を加速",
+    ],
+    href: "/services/lead-bond",
   },
 ] as const;
 
