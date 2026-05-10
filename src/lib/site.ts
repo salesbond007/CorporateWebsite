@@ -24,13 +24,15 @@ export type NavKey =
   | "about"
   | "services"
   | "blog"
-  | "company";
+  | "company"
+  | "contact";
 
 export const navigation: { key: NavKey; href: string }[] = [
   { key: "about", href: "/about" },
   { key: "services", href: "/services" },
   { key: "blog", href: "/blog" },
   { key: "company", href: "/company" },
+  { key: "contact", href: "/contact" },
 ];
 
 export const services = [
