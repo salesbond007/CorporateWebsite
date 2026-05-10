@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { Hero } from "@/components/home/Hero";
+import { MissionSection } from "@/components/home/MissionSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { AboutSection } from "@/components/home/AboutSection";
 import { BlogPreview } from "@/components/home/BlogPreview";
@@ -19,6 +20,7 @@ export default function HomePage({
   return (
     <>
       <Hero locale={locale} dict={dict} />
+      <MissionSection />
       <ServicesSection locale={locale} dict={dict} />
       <AboutSection locale={locale} dict={dict} />
       <BlogPreview locale={locale} dict={dict} />
