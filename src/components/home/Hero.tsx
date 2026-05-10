@@ -33,9 +33,6 @@ export function Hero({ locale, dict }: Props) {
               </span>
               {dict.hero.titleSuffix}
             </h1>
-            <p className="mt-5 font-extrabold text-brand-500 tracking-[0.08em] uppercase text-sm md:text-base">
-              {dict.hero.eyebrow}
-            </p>
             <p className="mt-8 max-w-xl text-base md:text-lg text-ink-soft font-medium leading-[1.95]">
               {dict.hero.subtitlePrefix}
               <span className="font-black text-ink underline decoration-brand-500 decoration-[3px] underline-offset-4">
