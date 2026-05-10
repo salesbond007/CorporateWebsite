@@ -26,19 +26,22 @@ export function Hero({ locale, dict }: Props) {
       <Container className="relative pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-32 lg:pb-40">
         <div className="grid items-center gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7 animate-fade-up">
-            <h1 className="text-huge text-ink font-black leading-[0.95]">
+            <h1 className="text-display-2 text-ink font-extrabold leading-[1.1]">
               {dict.hero.titleLine1}
-              <br />
               <span className="text-brand-500">
                 {dict.hero.titleHighlight}
               </span>
               {dict.hero.titleSuffix}
             </h1>
-            <p className="mt-6 font-extrabold text-brand-500 tracking-[0.08em] uppercase text-sm md:text-base">
+            <p className="mt-5 font-extrabold text-brand-500 tracking-[0.08em] uppercase text-sm md:text-base">
               {dict.hero.eyebrow}
             </p>
-            <p className="mt-8 max-w-xl text-base md:text-lg text-ink font-medium leading-[1.95]">
-              {dict.hero.subtitle}
+            <p className="mt-8 max-w-xl text-base md:text-lg text-ink-soft font-medium leading-[1.95]">
+              {dict.hero.subtitlePrefix}
+              <span className="font-black text-ink underline decoration-brand-500 decoration-[3px] underline-offset-4">
+                {dict.hero.subtitleHighlight}
+              </span>
+              {dict.hero.subtitleSuffix}
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <Button href={localePath("/services", locale)} size="lg">

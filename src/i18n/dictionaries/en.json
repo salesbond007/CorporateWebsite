@@ -37,7 +37,9 @@
     "titleLine1": "The ",
     "titleHighlight": "key",
     "titleSuffix": " to corporate growth.",
-    "subtitle": "Sales Bond accelerates corporate growth through three services: introductory sales, expert talent placement, and inside-sales BPO."
+    "subtitlePrefix": "Sales Bond accelerates corporate growth through three services: ",
+    "subtitleHighlight": "decision-maker introductions, expert talent matching, and inside-sales BPO",
+    "subtitleSuffix": "."
   },
   "blog": {
     "search": "Search articles",

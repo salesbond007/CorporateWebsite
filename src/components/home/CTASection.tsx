@@ -29,9 +29,7 @@ export function CTASection({ locale, dict }: Props) {
                 Get in touch
               </p>
               <h2 className="mt-4 text-display-2 text-white leading-tight">
-                事業成長について、
-                <br />
-                ご相談ください。
+                ご相談はこちら
               </h2>
               <p className="mt-7 max-w-xl text-white/90 leading-relaxed font-medium">
                 サービスの詳細・お見積もり・導入事例など、貴社の課題に合わせてご提案します。
