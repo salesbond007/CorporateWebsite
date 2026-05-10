@@ -1,0 +1,97 @@
+import type { Metadata, Viewport } from "next";
+import { notFound } from "next/navigation";
+import { Noto_Sans_JP } from "next/font/google";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/jsonld";
+import { site } from "@/lib/site";
+import { isLocale, locales, ogLocale, type Locale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionary";
+import "../globals.css";
+
+const notoSansJP = Noto_Sans_JP({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "900"],
+  variable: "--font-noto-sans-jp",
+  display: "swap",
+});
+
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Promise<Metadata> {
+  if (!isLocale(params.locale)) return {};
+  const dict = getDictionary(params.locale);
+
+  return {
+    metadataBase: new URL(site.url),
+    title: {
+      default: dict.site.name,
+      template: `%s | ${dict.site.name}`,
+    },
+    description: dict.site.description,
+    alternates: {
+      canonical: `/${params.locale}`,
+      languages: {
+        ja: "/ja",
+        en: "/en",
+        "x-default": "/ja",
+      },
+    },
+    openGraph: {
+      type: "website",
+      locale: ogLocale(params.locale),
+      url: `${site.url}/${params.locale}`,
+      siteName: dict.site.name,
+      title: dict.site.name,
+      description: dict.site.description,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: dict.site.name,
+      description: dict.site.description,
+    },
+    robots: { index: true, follow: true },
+  };
+}
+
+export const viewport: Viewport = {
+  themeColor: "#F58220",
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function LocaleLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
+  if (!isLocale(params.locale)) notFound();
+  const locale = params.locale as Locale;
+  const dict = getDictionary(locale);
+
+  return (
+    <html lang={locale} className={notoSansJP.variable}>
+      <body>
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-brand-500 focus:px-4 focus:py-2 focus:text-white"
+        >
+          {dict.nav.skipToContent}
+        </a>
+        <Header locale={locale} dict={dict} />
+        <main id="main">{children}</main>
+        <Footer locale={locale} dict={dict} />
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
+      </body>
+    </html>
+  );
+}

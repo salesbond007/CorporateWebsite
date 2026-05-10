@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { ArticleCard } from "@/components/blog/ArticleCard";
@@ -10,6 +11,9 @@ import {
   getCategories,
   isMicroCmsConfigured,
 } from "@/lib/microcms";
+import { localePath } from "@/i18n/path";
+import { isLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionary";
 
 export const metadata: Metadata = {
   title: "記事・お知らせ",
@@ -29,10 +33,16 @@ function parsePage(value: string | undefined): number {
 }
 
 export default async function BlogPage({
+  params,
   searchParams,
 }: {
+  params: { locale: string };
   searchParams: SearchParams;
 }) {
+  if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
+  const dict = getDictionary(locale);
+
   const page = parsePage(searchParams.page);
   const offset = (page - 1) * PER_PAGE;
 
@@ -56,20 +66,29 @@ export default async function BlogPage({
         <Container>
           {!isMicroCmsConfigured() ? (
             <EmptyState
-              title="CMS未接続です"
+              title={dict.blog.cmsNotConnected}
               description="microCMSの環境変数（MICROCMS_SERVICE_DOMAIN / MICROCMS_API_KEY）を設定すると、記事一覧がここに表示されます。"
             />
           ) : (
             <>
               <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-                <CategoryNav categories={categories} />
-                <SearchBox className="md:max-w-md w-full" size="sm" />
+                <CategoryNav
+                  categories={categories}
+                  locale={locale}
+                  dict={dict}
+                />
+                <SearchBox
+                  locale={locale}
+                  dict={dict}
+                  className="md:max-w-md w-full"
+                  size="sm"
+                />
               </div>
 
               {contents.length === 0 ? (
                 <div className="mt-10">
                   <EmptyState
-                    title="まだ記事がありません"
+                    title={dict.blog.noArticles}
                     description="microCMS管理画面から記事を投稿してください。"
                   />
                 </div>
@@ -83,6 +102,7 @@ export default async function BlogPage({
                       <ArticleCard
                         key={article.id}
                         article={article}
+                        locale={locale}
                         priority={page === 1 && i < 3}
                       />
                     ))}
@@ -90,7 +110,7 @@ export default async function BlogPage({
                   <Pagination
                     currentPage={page}
                     totalPages={totalPages}
-                    basePath="/blog"
+                    basePath={localePath("/blog", locale)}
                   />
                 </>
               )}

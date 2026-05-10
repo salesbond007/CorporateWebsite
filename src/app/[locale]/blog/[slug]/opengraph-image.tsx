@@ -14,7 +14,7 @@ export const contentType = OG_CONTENT_TYPE;
 export default async function ArticleOgImage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string; locale: string };
 }) {
   const article = await getArticleBySlug(params.slug);
 

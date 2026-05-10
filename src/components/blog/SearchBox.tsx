@@ -3,14 +3,25 @@
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { cn } from "@/lib/cn";
+import { localePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
 
 type Props = {
+  locale: Locale;
+  dict: Dictionary;
   defaultValue?: string;
   className?: string;
   size?: "sm" | "md";
 };
 
-export function SearchBox({ defaultValue = "", className, size = "md" }: Props) {
+export function SearchBox({
+  locale,
+  dict,
+  defaultValue = "",
+  className,
+  size = "md",
+}: Props) {
   const router = useRouter();
   const [value, setValue] = useState(defaultValue);
 
@@ -18,10 +29,10 @@ export function SearchBox({ defaultValue = "", className, size = "md" }: Props) 
     e.preventDefault();
     const q = value.trim();
     if (!q) {
-      router.push("/blog");
+      router.push(localePath("/blog", locale));
       return;
     }
-    router.push(`/blog/search?q=${encodeURIComponent(q)}`);
+    router.push(`${localePath("/blog/search", locale)}?q=${encodeURIComponent(q)}`);
   }
 
   const heightClass = size === "sm" ? "h-10" : "h-12";
@@ -33,7 +44,7 @@ export function SearchBox({ defaultValue = "", className, size = "md" }: Props) 
       className={cn("relative", className)}
     >
       <label htmlFor="article-search" className="sr-only">
-        記事を検索
+        {dict.blog.search}
       </label>
       <span
         className="pointer-events-none absolute inset-y-0 left-0 grid w-12 place-items-center text-ink-muted"
@@ -50,7 +61,7 @@ export function SearchBox({ defaultValue = "", className, size = "md" }: Props) 
         name="q"
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        placeholder="キーワードで記事を検索"
+        placeholder={dict.blog.search}
         autoComplete="off"
         className={cn(
           "w-full rounded-full border border-ink-line bg-white pl-12 pr-28 text-sm text-ink placeholder:text-ink-muted focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200 transition",
@@ -59,11 +70,9 @@ export function SearchBox({ defaultValue = "", className, size = "md" }: Props) 
       />
       <button
         type="submit"
-        className={cn(
-          "absolute inset-y-1 right-1 inline-flex items-center justify-center rounded-full bg-ink px-5 text-xs font-semibold text-white hover:bg-brand-600",
-        )}
+        className="absolute inset-y-1 right-1 inline-flex items-center justify-center rounded-full bg-ink px-5 text-xs font-semibold text-white hover:bg-brand-600"
       >
-        検索
+        {dict.blog.searchAction}
       </button>
     </form>
   );

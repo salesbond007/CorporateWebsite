@@ -2,10 +2,19 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { navigation, footerLinks } from "@/lib/site";
+import { navigation } from "@/lib/site";
 import { cn } from "@/lib/cn";
+import { localePath } from "@/i18n/path";
+import { LocaleSwitcher } from "./LocaleSwitcher";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
 
-export function MobileMenu() {
+type Props = {
+  locale: Locale;
+  dict: Dictionary;
+};
+
+export function MobileMenu({ locale, dict }: Props) {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -25,16 +34,21 @@ export function MobileMenu() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  const contactLinks = [
+    { href: "/contact/business", label: dict.nav.contactBusiness },
+    { href: "/contact/professional", label: dict.nav.contactProfessional },
+  ];
+
   return (
     <>
       <button
         type="button"
         onClick={() => setOpen(true)}
         className="lg:hidden grid h-10 w-10 place-items-center rounded-full border border-ink-line text-ink hover:bg-cream"
-        aria-label="メニューを開く"
+        aria-label={dict.nav.openMenu}
         aria-expanded={open}
       >
-        <span className="sr-only">メニュー</span>
+        <span className="sr-only">{dict.nav.menu}</span>
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
           <path d="M2 5h14M2 9h14M2 13h14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
         </svg>
@@ -60,11 +74,11 @@ export function MobileMenu() {
           aria-modal="true"
         >
           <div className="flex h-16 items-center justify-between px-5 border-b border-ink-line">
-            <span className="font-display font-bold">メニュー</span>
+            <span className="font-display font-bold">{dict.nav.menu}</span>
             <button
               type="button"
               onClick={() => setOpen(false)}
-              aria-label="メニューを閉じる"
+              aria-label={dict.nav.closeMenu}
               className="grid h-10 w-10 place-items-center rounded-full border border-ink-line"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
@@ -78,21 +92,21 @@ export function MobileMenu() {
               {navigation.map((item) => (
                 <li key={item.href}>
                   <Link
-                    href={item.href}
+                    href={localePath(item.href, locale)}
                     onClick={() => setOpen(false)}
                     className="block rounded-lg px-3 py-3 text-base font-medium hover:bg-cream"
                   >
-                    {item.label}
+                    {dict.nav[item.key]}
                   </Link>
                 </li>
               ))}
             </ul>
 
             <div className="mt-8 pt-6 border-t border-ink-line space-y-3">
-              {footerLinks.contact.map((item) => (
+              {contactLinks.map((item) => (
                 <Link
                   key={item.href}
-                  href={item.href}
+                  href={localePath(item.href, locale)}
                   onClick={() => setOpen(false)}
                   className="flex items-center justify-between rounded-xl bg-cream px-4 py-3.5 text-sm font-semibold hover:bg-brand-50"
                 >
@@ -100,6 +114,10 @@ export function MobileMenu() {
                   <span aria-hidden="true">→</span>
                 </Link>
               ))}
+            </div>
+
+            <div className="mt-8 pt-6 border-t border-ink-line">
+              <LocaleSwitcher current={locale} />
             </div>
           </nav>
         </div>

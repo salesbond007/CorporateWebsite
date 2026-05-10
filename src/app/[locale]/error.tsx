@@ -35,7 +35,7 @@ export default function GlobalError({
             もう一度試す
           </Button>
           <Button href="/" size="lg" variant="secondary">
-            トップへ戻る
+            Home
           </Button>
         </div>
       </Container>

@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { ArticleCard } from "@/components/blog/ArticleCard";
 import { Pagination } from "@/components/blog/Pagination";
 import { SearchBox } from "@/components/blog/SearchBox";
 import { isMicroCmsConfigured, searchArticles } from "@/lib/microcms";
+import { localePath } from "@/i18n/path";
+import { isLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionary";
 
+type Params = { locale: string };
 type SearchParams = { q?: string; page?: string };
 
 const PER_PAGE = 12;
@@ -23,10 +28,16 @@ function parsePage(value: string | undefined): number {
 }
 
 export default async function SearchPage({
+  params,
   searchParams,
 }: {
+  params: Params;
   searchParams: SearchParams;
 }) {
+  if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
+  const dict = getDictionary(locale);
+
   const q = (searchParams.q ?? "").trim();
   const page = parsePage(searchParams.page);
   const offset = (page - 1) * PER_PAGE;
@@ -48,7 +59,7 @@ export default async function SearchPage({
       <section className="py-16 md:py-20">
         <Container>
           <div className="mx-auto max-w-2xl">
-            <SearchBox defaultValue={q} />
+            <SearchBox locale={locale} dict={dict} defaultValue={q} />
           </div>
 
           {!isMicroCmsConfigured() ? (
@@ -76,6 +87,7 @@ export default async function SearchPage({
                   <ArticleCard
                     key={article.id}
                     article={article}
+                    locale={locale}
                     priority={page === 1 && i < 3}
                   />
                 ))}
@@ -83,7 +95,7 @@ export default async function SearchPage({
               <Pagination
                 currentPage={page}
                 totalPages={totalPages}
-                basePath={`/blog/search?q=${encodeURIComponent(q)}`}
+                basePath={`${localePath("/blog/search", locale)}?q=${encodeURIComponent(q)}`}
               />
             </>
           )}

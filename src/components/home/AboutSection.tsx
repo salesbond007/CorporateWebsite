@@ -2,8 +2,16 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Illustration } from "@/components/ui/Illustration";
 import { Reveal } from "@/components/ui/Reveal";
+import { localePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
 
-export function AboutSection() {
+type Props = {
+  locale: Locale;
+  dict: Dictionary;
+};
+
+export function AboutSection({ locale, dict }: Props) {
   return (
     <section className="bg-ink text-white py-24 md:py-32">
       <Container>
@@ -42,8 +50,8 @@ export function AboutSection() {
             </div>
 
             <div className="mt-10">
-              <Button href="/about" variant="primary">
-                私たちについて
+              <Button href={localePath("/about", locale)} variant="primary">
+                {dict.nav.about}
               </Button>
             </div>
           </div>

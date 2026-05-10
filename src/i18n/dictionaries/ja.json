@@ -1,0 +1,66 @@
+{
+  "site": {
+    "name": "Corporate Website",
+    "tagline": "TODO: コーポレートタグライン",
+    "description": "TODO: メタディスクリプション（120〜140字）"
+  },
+  "nav": {
+    "about": "私たちについて",
+    "services": "サービス",
+    "blog": "記事",
+    "company": "会社概要",
+    "contactBusiness": "企業様へ",
+    "contactProfessional": "プロ人材の方",
+    "menu": "メニュー",
+    "openMenu": "メニューを開く",
+    "closeMenu": "メニューを閉じる",
+    "skipToContent": "メインコンテンツへスキップ"
+  },
+  "footer": {
+    "sitemap": "サイトマップ",
+    "services": "サービス",
+    "contact": "お問い合わせ",
+    "tagline": "TODO: フッター用のコーポレートメッセージ。",
+    "rights": "All rights reserved."
+  },
+  "buttons": {
+    "viewServices": "サービスを見る",
+    "contact": "お問い合わせ",
+    "back": "戻る",
+    "submit": "送信する",
+    "submitting": "送信中...",
+    "tryAgain": "もう一度試す",
+    "backToTop": "トップへ戻る"
+  },
+  "hero": {
+    "eyebrow": "B to B Solutions",
+    "titleLine1": "TODO: メインコピー",
+    "titleHighlight": "ここに最大の訴求",
+    "titleSuffix": "を。",
+    "subtitle": "TODO: サブコピー。提供価値を2〜3行で。"
+  },
+  "blog": {
+    "search": "キーワードで記事を検索",
+    "searchAction": "検索",
+    "all": "すべて",
+    "contents": "Contents",
+    "relatedTitle": "関連記事",
+    "noArticles": "まだ記事がありません",
+    "cmsNotConnected": "CMS未接続です"
+  },
+  "errors": {
+    "title": "問題が発生しました",
+    "description": "一時的な問題が発生した可能性があります。しばらくしてから再度お試しください。",
+    "notFoundTitle": "ページが見つかりません",
+    "notFoundDescription": "お探しのページは移動・削除された可能性があります。"
+  },
+  "contact": {
+    "businessTitle": "企業様のお問い合わせ",
+    "professionalTitle": "プロ人材の方のお問い合わせ",
+    "successTitle": "送信が完了しました",
+    "successBody": "お問い合わせありがとうございます。内容を確認のうえ、担当者よりご連絡いたします。",
+    "required": "必須",
+    "optional": "任意",
+    "agreement": "プライバシーポリシーに同意して送信します。"
+  }
+}

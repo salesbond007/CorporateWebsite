@@ -1,7 +1,15 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { localePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
 
-export function CTASection() {
+type Props = {
+  locale: Locale;
+  dict: Dictionary;
+};
+
+export function CTASection({ locale, dict }: Props) {
   return (
     <section className="py-24 md:py-32">
       <Container>
@@ -30,19 +38,19 @@ export function CTASection() {
 
             <div className="flex flex-col gap-3 md:items-end">
               <Button
-                href="/contact/business"
+                href={localePath("/contact/business", locale)}
                 size="lg"
                 className="bg-white !text-brand-600 hover:!bg-brand-50"
               >
-                企業様のお問い合わせ
+                {dict.nav.contactBusiness}
               </Button>
               <Button
-                href="/contact/professional"
+                href={localePath("/contact/professional", locale)}
                 size="lg"
                 variant="ghost"
                 className="!text-white border border-white/40 hover:!bg-white/10"
               >
-                プロ人材の方はこちら
+                {dict.nav.contactProfessional}
               </Button>
             </div>
           </div>

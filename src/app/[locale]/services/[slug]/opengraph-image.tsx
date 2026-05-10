@@ -14,7 +14,7 @@ export const contentType = OG_CONTENT_TYPE;
 export default async function ServiceOgImage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string; locale: string };
 }) {
   const service = services.find((s) => s.slug === params.slug);
 

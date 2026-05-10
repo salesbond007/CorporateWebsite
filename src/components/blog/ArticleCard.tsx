@@ -1,22 +1,24 @@
 import Link from "next/link";
 import Image from "next/image";
 import type { Article } from "@/lib/microcms";
+import { localePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
 
 type Props = {
   article: Article;
+  locale: Locale;
   priority?: boolean;
 };
 
-export function ArticleCard({ article, priority }: Props) {
-  const date = new Date(article.publishedAt).toLocaleDateString("ja-JP", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
+export function ArticleCard({ article, locale, priority }: Props) {
+  const date = new Date(article.publishedAt).toLocaleDateString(
+    locale === "en" ? "en-US" : "ja-JP",
+    { year: "numeric", month: "2-digit", day: "2-digit" },
+  );
 
   return (
     <article className="group">
-      <Link href={`/blog/${article.slug}`} className="block">
+      <Link href={localePath(`/blog/${article.slug}`, locale)} className="block">
         <div className="relative aspect-[16/10] overflow-hidden rounded-xl2 bg-cream">
           {article.thumbnail ? (
             <Image

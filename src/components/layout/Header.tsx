@@ -7,8 +7,17 @@ import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
+import { LocaleSwitcher } from "./LocaleSwitcher";
+import { localePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
 
-export function Header() {
+type Props = {
+  locale: Locale;
+  dict: Dictionary;
+};
+
+export function Header({ locale, dict }: Props) {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
@@ -28,37 +37,38 @@ export function Header() {
       )}
     >
       <div className="container flex h-16 md:h-20 items-center justify-between gap-6">
-        <Logo />
+        <Logo locale={locale} dict={dict} />
 
         <nav className="hidden lg:flex items-center gap-8" aria-label="メイン">
           {navigation.map((item) => (
             <Link
               key={item.href}
-              href={item.href}
+              href={localePath(item.href, locale)}
               className="text-sm font-medium text-ink-soft hover:text-ink"
             >
-              {item.label}
+              {dict.nav[item.key]}
             </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-2">
+          <LocaleSwitcher current={locale} className="hidden md:inline-flex" />
           <Button
-            href="/contact/business"
+            href={localePath("/contact/business", locale)}
             size="sm"
             variant="secondary"
             className="hidden md:inline-flex"
           >
-            企業様へ
+            {dict.nav.contactBusiness}
           </Button>
           <Button
-            href="/contact/professional"
+            href={localePath("/contact/professional", locale)}
             size="sm"
             className="hidden md:inline-flex"
           >
-            プロ人材の方
+            {dict.nav.contactProfessional}
           </Button>
-          <MobileMenu />
+          <MobileMenu locale={locale} dict={dict} />
         </div>
       </div>
     </header>

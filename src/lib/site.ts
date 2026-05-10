@@ -1,28 +1,24 @@
+import type { Dictionary } from "@/i18n/dictionary";
+
 export const site = {
-  name: "Corporate Website",
-  tagline: "TODO: コーポレートタグライン",
-  description: "TODO: メタディスクリプション（120〜140字）",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
-  locale: "ja_JP",
+  /** Used by site-wide JSON-LD; locale-specific copy comes from the dictionary. */
+  name: "Corporate Website",
+  description: "TODO: メタディスクリプション（120〜140字）",
 } as const;
 
-export const navigation = [
-  { label: "私たちについて", href: "/about" },
-  { label: "サービス", href: "/services" },
-  { label: "記事", href: "/blog" },
-  { label: "会社概要", href: "/company" },
-] as const;
+export type NavKey =
+  | "about"
+  | "services"
+  | "blog"
+  | "company";
 
-export const footerLinks = {
-  contact: [
-    { label: "お問い合わせ（企業様）", href: "/contact/business" },
-    { label: "お問い合わせ（プロ人材）", href: "/contact/professional" },
-  ],
-  legal: [
-    { label: "プライバシーポリシー", href: "/privacy" },
-    { label: "利用規約", href: "/terms" },
-  ],
-} as const;
+export const navigation: { key: NavKey; href: string }[] = [
+  { key: "about", href: "/about" },
+  { key: "services", href: "/services" },
+  { key: "blog", href: "/blog" },
+  { key: "company", href: "/company" },
+];
 
 export const services = [
   {
@@ -49,3 +45,12 @@ export const services = [
 ] as const;
 
 export type Service = (typeof services)[number];
+
+export function navLabel(dict: Dictionary, key: NavKey): string {
+  return dict.nav[key];
+}
+
+export const legalLinks = [
+  { href: "/privacy", labelKey: "privacy" as const },
+  { href: "/terms", labelKey: "terms" as const },
+];

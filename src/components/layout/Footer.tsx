@@ -1,42 +1,75 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "./Logo";
-import { navigation, footerLinks, services, site } from "@/lib/site";
+import { navigation, services } from "@/lib/site";
+import { localePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
 
-export function Footer() {
+type Props = {
+  locale: Locale;
+  dict: Dictionary;
+};
+
+export function Footer({ locale, dict }: Props) {
   const year = new Date().getFullYear();
+
+  const contactLinks = [
+    { href: "/contact/business", label: dict.nav.contactBusiness },
+    { href: "/contact/professional", label: dict.nav.contactProfessional },
+  ];
+
+  const legalLinks =
+    locale === "ja"
+      ? [
+          { href: "/privacy", label: "プライバシーポリシー" },
+          { href: "/terms", label: "利用規約" },
+        ]
+      : [
+          { href: "/privacy", label: "Privacy Policy" },
+          { href: "/terms", label: "Terms of Service" },
+        ];
 
   return (
     <footer className="mt-32 border-t border-ink-line bg-cream">
       <Container className="py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Logo />
+            <Logo locale={locale} dict={dict} />
             <p className="mt-5 max-w-sm text-sm text-ink-soft leading-relaxed">
-              TODO: フッター用のコーポレートメッセージをここに。会社のミッションやキャッチを1〜2行で。
+              {dict.footer.tagline}
             </p>
           </div>
 
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-8">
-            <FooterColumn title="サイトマップ">
+            <FooterColumn title={dict.footer.sitemap}>
               {navigation.map((n) => (
-                <FooterLink key={n.href} href={n.href}>
-                  {n.label}
+                <FooterLink
+                  key={n.href}
+                  href={localePath(n.href, locale)}
+                >
+                  {dict.nav[n.key]}
                 </FooterLink>
               ))}
             </FooterColumn>
 
-            <FooterColumn title="サービス">
+            <FooterColumn title={dict.footer.services}>
               {services.map((s) => (
-                <FooterLink key={s.slug} href={s.href}>
+                <FooterLink
+                  key={s.slug}
+                  href={localePath(s.href, locale)}
+                >
                   {s.title}
                 </FooterLink>
               ))}
             </FooterColumn>
 
-            <FooterColumn title="お問い合わせ">
-              {footerLinks.contact.map((c) => (
-                <FooterLink key={c.href} href={c.href}>
+            <FooterColumn title={dict.footer.contact}>
+              {contactLinks.map((c) => (
+                <FooterLink
+                  key={c.href}
+                  href={localePath(c.href, locale)}
+                >
                   {c.label}
                 </FooterLink>
               ))}
@@ -46,12 +79,12 @@ export function Footer() {
 
         <div className="mt-16 flex flex-col-reverse gap-4 border-t border-ink-line pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-ink-muted">
-            © {year} {site.name}. All rights reserved.
+            © {year} {dict.site.name}. {dict.footer.rights}
           </p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-ink-muted">
-            {footerLinks.legal.map((l) => (
+            {legalLinks.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="hover:text-ink">
+                <Link href={localePath(l.href, locale)} className="hover:text-ink">
                   {l.label}
                 </Link>
               </li>

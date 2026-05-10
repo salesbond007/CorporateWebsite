@@ -9,17 +9,15 @@ export default function NotFound() {
           404
         </p>
         <h1 className="mt-4 text-display-2">
-          ページが見つかりません
+          ページが見つかりません / Page not found
         </h1>
         <p className="mx-auto mt-5 max-w-md text-ink-soft leading-relaxed">
-          お探しのページは移動・削除された可能性があります。
+          お探しのページは移動・削除された可能性があります。<br />
+          The page may have moved or been removed.
         </p>
         <div className="mt-10 flex justify-center gap-3">
           <Button href="/" size="lg">
-            トップへ戻る
-          </Button>
-          <Button href="/contact/business" size="lg" variant="secondary">
-            お問い合わせ
+            Home
           </Button>
         </div>
       </Container>

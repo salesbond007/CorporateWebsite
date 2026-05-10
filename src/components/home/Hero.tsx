@@ -1,8 +1,16 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Illustration } from "@/components/ui/Illustration";
+import { localePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
 
-export function Hero() {
+type Props = {
+  locale: Locale;
+  dict: Dictionary;
+};
+
+export function Hero({ locale, dict }: Props) {
   return (
     <section className="relative overflow-hidden bg-cream">
       <div className="absolute inset-0 grid-bg opacity-50" aria-hidden="true" />
@@ -18,20 +26,26 @@ export function Hero() {
       <Container className="relative pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-32 lg:pb-40">
         <div className="grid items-center gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7 animate-fade-up">
-            <span className="eyebrow">B to B Solutions</span>
+            <span className="eyebrow">{dict.hero.eyebrow}</span>
             <h1 className="mt-6 text-display-1 text-ink">
-              TODO: メインコピー<br />
-              <span className="text-brand-500">ここに最大の訴求</span>を。
+              {dict.hero.titleLine1}
+              <br />
+              <span className="text-brand-500">{dict.hero.titleHighlight}</span>
+              {dict.hero.titleSuffix}
             </h1>
             <p className="mt-7 max-w-xl text-base md:text-lg text-ink-soft leading-relaxed">
-              TODO: サブコピー。提供価値を2〜3行で。誰の・どんな課題を・どう解決するか。
+              {dict.hero.subtitle}
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Button href="/services" size="lg">
-                サービスを見る
+              <Button href={localePath("/services", locale)} size="lg">
+                {dict.buttons.viewServices}
               </Button>
-              <Button href="/contact/business" size="lg" variant="secondary">
-                お問い合わせ
+              <Button
+                href={localePath("/contact/business", locale)}
+                size="lg"
+                variant="secondary"
+              >
+                {dict.buttons.contact}
               </Button>
             </div>
 

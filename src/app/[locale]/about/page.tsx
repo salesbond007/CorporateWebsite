@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { Illustration } from "@/components/ui/Illustration";
 import { Button } from "@/components/ui/Button";
+import { localePath } from "@/i18n/path";
+import { isLocale } from "@/i18n/config";
 
 export const metadata: Metadata = {
   title: "私たちについて",
   description: "TODO: Aboutページのメタディスクリプション",
 };
 
-export default function AboutPage() {
+export default function AboutPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
   return (
     <>
       <PageHero
@@ -117,10 +126,14 @@ export default function AboutPage() {
               TODO: お問い合わせを促すリード文。
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button href="/contact/business" size="lg">
+              <Button href={localePath("/contact/business", locale)} size="lg">
                 企業様のお問い合わせ
               </Button>
-              <Button href="/services" size="lg" variant="secondary">
+              <Button
+                href={localePath("/services", locale)}
+                size="lg"
+                variant="secondary"
+              >
                 サービスを見る
               </Button>
             </div>

@@ -1,15 +1,27 @@
 import Link from "next/link";
-import { site } from "@/lib/site";
+import { localePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
 
-export function Logo({ className }: { className?: string }) {
+type Props = {
+  locale: Locale;
+  dict: Dictionary;
+  className?: string;
+};
+
+export function Logo({ locale, dict, className }: Props) {
   return (
-    <Link href="/" className={className} aria-label={site.name}>
+    <Link
+      href={localePath("/", locale)}
+      className={className}
+      aria-label={dict.site.name}
+    >
       <span className="flex items-center gap-2">
         <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-500 text-white font-bold">
           C
         </span>
         <span className="font-display text-base font-bold tracking-tight">
-          {site.name}
+          {dict.site.name}
         </span>
       </span>
     </Link>

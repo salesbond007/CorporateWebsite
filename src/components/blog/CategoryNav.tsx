@@ -1,27 +1,38 @@
 import Link from "next/link";
 import type { ArticleCategory } from "@/lib/microcms";
 import { cn } from "@/lib/cn";
+import { localePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionary";
 
 type Props = {
   categories: ArticleCategory[];
   currentSlug?: string;
+  locale: Locale;
+  dict: Dictionary;
   className?: string;
 };
 
-export function CategoryNav({ categories, currentSlug, className }: Props) {
+export function CategoryNav({
+  categories,
+  currentSlug,
+  locale,
+  dict,
+  className,
+}: Props) {
   if (categories.length === 0) return null;
 
   return (
     <nav aria-label="カテゴリ" className={cn("flex flex-wrap gap-2", className)}>
       <CategoryChip
-        href="/blog"
+        href={localePath("/blog", locale)}
         active={!currentSlug}
-        label="すべて"
+        label={dict.blog.all}
       />
       {categories.map((c) => (
         <CategoryChip
           key={c.id}
-          href={`/blog/category/${c.slug}`}
+          href={localePath(`/blog/category/${c.slug}`, locale)}
           active={c.slug === currentSlug}
           label={c.name}
         />

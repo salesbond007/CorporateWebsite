@@ -12,14 +12,18 @@ import {
   getArticleSlugs,
   getArticles,
 } from "@/lib/microcms";
+import { localePath } from "@/i18n/path";
+import { isLocale, locales } from "@/i18n/config";
 
-type Params = { slug: string };
+type Params = { slug: string; locale: string };
 
 export const revalidate = 60;
 
-export async function generateStaticParams(): Promise<Params[]> {
+export async function generateStaticParams() {
   const slugs = await getArticleSlugs();
-  return slugs.map((slug) => ({ slug }));
+  return locales.flatMap((locale) =>
+    slugs.map((slug) => ({ locale, slug })),
+  );
 }
 
 export async function generateMetadata({
@@ -45,6 +49,8 @@ export async function generateMetadata({
 }
 
 export default async function ArticlePage({ params }: { params: Params }) {
+  if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
   const article = await getArticleBySlug(params.slug);
   if (!article) notFound();
 
@@ -55,11 +61,10 @@ export default async function ArticlePage({ params }: { params: Params }) {
 
   const { html: bodyHtml, toc } = buildToc(article.body);
 
-  const date = new Date(article.publishedAt).toLocaleDateString("ja-JP", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  });
+  const date = new Date(article.publishedAt).toLocaleDateString(
+    locale === "en" ? "en-US" : "ja-JP",
+    { year: "numeric", month: "2-digit", day: "2-digit" },
+  );
 
   return (
     <>
@@ -67,9 +72,12 @@ export default async function ArticlePage({ params }: { params: Params }) {
         data={[
           articleJsonLd(article),
           breadcrumbJsonLd([
-            { name: "ホーム", url: "/" },
-            { name: "記事一覧", url: "/blog" },
-            { name: article.title, url: `/blog/${article.slug}` },
+            { name: "ホーム", url: localePath("/", locale) },
+            { name: "記事一覧", url: localePath("/blog", locale) },
+            {
+              name: article.title,
+              url: localePath(`/blog/${article.slug}`, locale),
+            },
           ]),
         ]}
       />
@@ -77,7 +85,10 @@ export default async function ArticlePage({ params }: { params: Params }) {
         <header className="border-b border-ink-line bg-cream">
           <Container className="py-16 md:py-24">
             <p className="text-xs text-ink-muted">
-              <Link href="/blog" className="hover:text-ink">
+              <Link
+                href={localePath("/blog", locale)}
+                className="hover:text-ink"
+              >
                 記事一覧
               </Link>
               <span className="mx-2">/</span>
@@ -151,7 +162,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
             <h2 className="text-h2">関連記事</h2>
             <div className="mt-10 grid gap-8 md:grid-cols-3">
               {related.map((a) => (
-                <ArticleSummary key={a.id} article={a} />
+                <ArticleSummary key={a.id} article={a} locale={locale} />
               ))}
             </div>
           </Container>
@@ -163,12 +174,17 @@ export default async function ArticlePage({ params }: { params: Params }) {
 
 function ArticleSummary({
   article,
+  locale,
 }: {
   article: Awaited<ReturnType<typeof getArticleBySlug>>;
+  locale: import("@/i18n/config").Locale;
 }) {
   if (!article) return null;
   return (
-    <Link href={`/blog/${article.slug}`} className="group block">
+    <Link
+      href={localePath(`/blog/${article.slug}`, locale)}
+      className="group block"
+    >
       <div className="relative aspect-[16/10] overflow-hidden rounded-xl2 bg-white">
         {article.thumbnail ? (
           <Image

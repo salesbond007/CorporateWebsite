@@ -1,0 +1,66 @@
+{
+  "site": {
+    "name": "Corporate Website",
+    "tagline": "TODO: corporate tagline",
+    "description": "TODO: meta description (120-140 chars)"
+  },
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "blog": "Insights",
+    "company": "Company",
+    "contactBusiness": "For business",
+    "contactProfessional": "For professionals",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "skipToContent": "Skip to main content"
+  },
+  "footer": {
+    "sitemap": "Sitemap",
+    "services": "Services",
+    "contact": "Contact",
+    "tagline": "TODO: corporate message for the footer.",
+    "rights": "All rights reserved."
+  },
+  "buttons": {
+    "viewServices": "Explore services",
+    "contact": "Contact us",
+    "back": "Back",
+    "submit": "Submit",
+    "submitting": "Submitting…",
+    "tryAgain": "Try again",
+    "backToTop": "Back to home"
+  },
+  "hero": {
+    "eyebrow": "B to B Solutions",
+    "titleLine1": "TODO: main headline",
+    "titleHighlight": "your biggest message",
+    "titleSuffix": " here.",
+    "subtitle": "TODO: subheadline. Describe the value proposition in 2-3 lines."
+  },
+  "blog": {
+    "search": "Search articles",
+    "searchAction": "Search",
+    "all": "All",
+    "contents": "Contents",
+    "relatedTitle": "Related articles",
+    "noArticles": "No articles yet",
+    "cmsNotConnected": "CMS not connected"
+  },
+  "errors": {
+    "title": "Something went wrong",
+    "description": "Please try again in a moment.",
+    "notFoundTitle": "Page not found",
+    "notFoundDescription": "The page may have moved or been removed."
+  },
+  "contact": {
+    "businessTitle": "Contact (Business)",
+    "professionalTitle": "Contact (Professionals)",
+    "successTitle": "Thank you — your message has been sent",
+    "successBody": "We received your inquiry and will be in touch shortly.",
+    "required": "required",
+    "optional": "optional",
+    "agreement": "I agree to the Privacy Policy and submit my inquiry."
+  }
+}

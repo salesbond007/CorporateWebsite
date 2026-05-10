@@ -5,14 +5,17 @@ import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { TextField, TextareaField, SelectField } from "./Field";
 import type { ContactFormType } from "@/lib/contact";
+import { localePath } from "@/i18n/path";
+import type { Locale } from "@/i18n/config";
 
 type Props = {
   type: ContactFormType;
+  locale: Locale;
 };
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-export function ContactForm({ type }: Props) {
+export function ContactForm({ type, locale }: Props) {
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState<string>("");
   const [errors, setErrors] = useState<Record<string, string[]>>({});
@@ -64,7 +67,7 @@ export function ContactForm({ type }: Props) {
           内容を確認のうえ、担当者よりご連絡いたします。
         </p>
         <div className="mt-8">
-          <Link href="/" className="link-arrow">
+          <Link href={localePath("/", locale)} className="link-arrow">
             トップへ戻る
           </Link>
         </div>
@@ -105,7 +108,10 @@ export function ContactForm({ type }: Props) {
             className="mt-1 h-4 w-4 rounded border-ink-line text-brand-500 focus:ring-brand-500"
           />
           <span className="text-ink-soft leading-relaxed">
-            <Link href="/privacy" className="underline underline-offset-4 text-brand-600">
+            <Link
+              href={localePath("/privacy", locale)}
+              className="underline underline-offset-4 text-brand-600"
+            >
               プライバシーポリシー
             </Link>
             に同意して送信します。

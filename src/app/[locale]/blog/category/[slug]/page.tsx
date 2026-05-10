@@ -12,16 +12,21 @@ import {
   getCategoryBySlug,
   isMicroCmsConfigured,
 } from "@/lib/microcms";
+import { localePath } from "@/i18n/path";
+import { isLocale, locales } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionary";
 
-type Params = { slug: string };
+type Params = { slug: string; locale: string };
 type SearchParams = { page?: string };
 
 const PER_PAGE = 12;
 export const revalidate = 60;
 
-export async function generateStaticParams(): Promise<Params[]> {
+export async function generateStaticParams() {
   const categories = await getCategories();
-  return categories.map((c) => ({ slug: c.slug }));
+  return locales.flatMap((locale) =>
+    categories.map((c) => ({ locale, slug: c.slug })),
+  );
 }
 
 export async function generateMetadata({
@@ -50,6 +55,10 @@ export default async function CategoryPage({
   params: Params;
   searchParams: SearchParams;
 }) {
+  if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
+  const dict = getDictionary(locale);
+
   if (!isMicroCmsConfigured()) notFound();
 
   const category = await getCategoryBySlug(params.slug);
@@ -80,8 +89,18 @@ export default async function CategoryPage({
       <section className="py-20 md:py-28">
         <Container>
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-            <CategoryNav categories={categories} currentSlug={category.slug} />
-            <SearchBox className="md:max-w-md w-full" size="sm" />
+            <CategoryNav
+              categories={categories}
+              currentSlug={category.slug}
+              locale={locale}
+              dict={dict}
+            />
+            <SearchBox
+              locale={locale}
+              dict={dict}
+              className="md:max-w-md w-full"
+              size="sm"
+            />
           </div>
 
           {articles.contents.length === 0 ? (
@@ -98,6 +117,7 @@ export default async function CategoryPage({
                   <ArticleCard
                     key={article.id}
                     article={article}
+                    locale={locale}
                     priority={page === 1 && i < 3}
                   />
                 ))}
@@ -105,7 +125,7 @@ export default async function CategoryPage({
               <Pagination
                 currentPage={page}
                 totalPages={totalPages}
-                basePath={`/blog/category/${category.slug}`}
+                basePath={localePath(`/blog/category/${category.slug}`, locale)}
               />
             </>
           )}

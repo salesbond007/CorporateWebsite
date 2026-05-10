@@ -7,11 +7,15 @@ import { Button } from "@/components/ui/Button";
 import { Illustration } from "@/components/ui/Illustration";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { services } from "@/lib/site";
+import { localePath } from "@/i18n/path";
+import { isLocale, locales } from "@/i18n/config";
 
-type Params = { slug: string };
+type Params = { slug: string; locale: string };
 
-export function generateStaticParams(): Params[] {
-  return services.map((s) => ({ slug: s.slug }));
+export function generateStaticParams() {
+  return locales.flatMap((locale) =>
+    services.map((s) => ({ locale, slug: s.slug })),
+  );
 }
 
 export function generateMetadata({
@@ -28,6 +32,8 @@ export function generateMetadata({
 }
 
 export default function ServiceDetailPage({ params }: { params: Params }) {
+  if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
   const service = services.find((s) => s.slug === params.slug);
   if (!service) notFound();
 
@@ -134,7 +140,7 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
               </div>
               <div className="md:text-right">
                 <Button
-                  href="/contact/business"
+                  href={localePath("/contact/business", locale)}
                   size="lg"
                   className="bg-white !text-brand-600 hover:!bg-brand-50"
                 >
@@ -154,7 +160,7 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
             {others.map((s) => (
               <li key={s.slug}>
                 <Link
-                  href={s.href}
+                  href={localePath(s.href, locale)}
                   className="group flex items-center justify-between gap-6 rounded-xl2 border border-ink-line p-6 hover:border-brand-300 hover:shadow-soft transition-all"
                 >
                   <div>

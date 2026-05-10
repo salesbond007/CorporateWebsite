@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { services } from "@/lib/site";
+import { localePath } from "@/i18n/path";
+import { isLocale } from "@/i18n/config";
 
 export const metadata: Metadata = {
   title: "サービス概要",
   description: "TODO: サービス概要ページのメタディスクリプション",
 };
 
-export default function ServicesPage() {
+export default function ServicesPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
   return (
     <>
       <PageHero
@@ -24,7 +33,7 @@ export default function ServicesPage() {
             {services.map((s) => (
               <li key={s.slug}>
                 <Link
-                  href={s.href}
+                  href={localePath(s.href, locale)}
                   className="group block rounded-xl2 border border-ink-line bg-white p-8 md:p-10 transition-all hover:border-brand-300 hover:shadow-card"
                 >
                   <div className="grid gap-8 md:grid-cols-12 md:items-center">

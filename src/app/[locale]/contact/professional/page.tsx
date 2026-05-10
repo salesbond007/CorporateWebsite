@@ -1,15 +1,24 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { localePath } from "@/i18n/path";
+import { isLocale } from "@/i18n/config";
 
 export const metadata: Metadata = {
   title: "お問い合わせ（プロ人材）",
   description: "TODO: プロ人材向け問い合わせページのメタディスクリプション",
 };
 
-export default function ProfessionalContactPage() {
+export default function ProfessionalContactPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
+  if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
   return (
     <>
       <PageHero
@@ -47,7 +56,7 @@ export default function ProfessionalContactPage() {
                   TODO: 企業様向けへの誘導文。
                 </p>
                 <Link
-                  href="/contact/business"
+                  href={localePath("/contact/business", locale)}
                   className="mt-4 inline-flex link-arrow"
                 >
                   企業様の問い合わせ
@@ -56,7 +65,7 @@ export default function ProfessionalContactPage() {
             </aside>
 
             <div className="lg:col-span-8">
-              <ContactForm type="professional" />
+              <ContactForm type="professional" locale={locale} />
             </div>
           </div>
         </Container>
