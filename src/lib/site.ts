@@ -3,8 +3,21 @@ import type { Dictionary } from "@/i18n/dictionary";
 export const site = {
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
   /** Used by site-wide JSON-LD; locale-specific copy comes from the dictionary. */
-  name: "Corporate Website",
+  name: "セールスボンド株式会社",
+  legalName: "セールスボンド株式会社",
+  legalNameEn: "Sales Bond Co., Ltd.",
   description: "TODO: メタディスクリプション（120〜140字）",
+  email: "info@salesbond.jp",
+  address: {
+    postalCode: "160-0023",
+    addressJa: "東京都新宿区西新宿3-3-13 西新宿水間ビル2F",
+    region: "Tokyo",
+    locality: "Shinjuku-ku",
+    streetAddress: "Nishi-Shinjuku 3-3-13, Nishi-Shinjuku Mizuma Building 2F",
+    country: "JP",
+  },
+  founded: "2024-07",
+  corporateNumber: "8012801023311",
 } as const;
 
 export type NavKey =

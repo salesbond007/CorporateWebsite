@@ -18,7 +18,7 @@ export function Logo({ locale, dict, className }: Props) {
     >
       <span className="flex items-center gap-2">
         <span className="grid h-8 w-8 place-items-center rounded-lg bg-brand-500 text-white font-bold">
-          C
+          S
         </span>
         <span className="font-display text-base font-bold tracking-tight">
           {dict.site.name}

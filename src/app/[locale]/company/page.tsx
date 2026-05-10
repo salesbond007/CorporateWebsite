@@ -4,18 +4,23 @@ import { PageHero } from "@/components/ui/PageHero";
 
 export const metadata: Metadata = {
   title: "会社概要",
-  description: "TODO: 会社概要ページのメタディスクリプション",
+  description:
+    "セールスボンド株式会社（Sales Bond Co., Ltd.）の会社概要。本社所在地、代表者、事業内容（顧問紹介事業・営業BPO事業）など。",
 };
 
 const rows: { label: string; value: string }[] = [
-  { label: "会社名", value: "TODO: 株式会社○○" },
-  { label: "代表者", value: "TODO: 代表取締役 ○○ ○○" },
-  { label: "設立", value: "TODO: 20XX年X月" },
-  { label: "資本金", value: "TODO: ○○○○万円" },
-  { label: "所在地", value: "TODO: 〒XXX-XXXX 東京都..." },
-  { label: "電話番号", value: "TODO: 03-XXXX-XXXX" },
-  { label: "事業内容", value: "TODO: 主な事業内容を箇条書きで" },
-  { label: "取引銀行", value: "TODO: ○○銀行 ○○支店" },
+  { label: "会社名", value: "セールスボンド株式会社（Sales Bond Co., Ltd.）" },
+  { label: "代表取締役", value: "飯住 孝裕" },
+  { label: "設立", value: "2024年7月" },
+  { label: "資本金", value: "41,002,000円" },
+  { label: "法人番号", value: "8012801023311" },
+  {
+    label: "本社所在地",
+    value: "〒160-0023 東京都新宿区西新宿3-3-13 西新宿水間ビル2F",
+  },
+  { label: "メールアドレス", value: "info@salesbond.jp" },
+  { label: "事業内容", value: "顧問紹介事業 / 営業BPO事業" },
+  { label: "取引銀行", value: "三井住友銀行 渋谷駅前支店" },
 ];
 
 export default function CompanyPage() {
@@ -24,7 +29,7 @@ export default function CompanyPage() {
       <PageHero
         eyebrow="Company"
         title="会社概要"
-        description="TODO: 会社概要ページのリード文。"
+        description="セールスボンド株式会社の会社情報をご案内します。"
       />
 
       <section className="py-24 md:py-32">
@@ -34,7 +39,7 @@ export default function CompanyPage() {
               <span className="eyebrow">Profile</span>
               <h2 className="mt-5 text-h1">基本情報</h2>
               <p className="mt-5 text-ink-soft leading-relaxed">
-                TODO: 会社情報のリード文。
+                顧問紹介と営業BPOで企業の事業成長を支援する、セールスボンド株式会社の基本情報です。
               </p>
             </div>
 
@@ -68,25 +73,33 @@ export default function CompanyPage() {
             <div className="rounded-xl2 border border-ink-line p-8 md:p-10">
               <h3 className="text-xl font-bold">アクセス</h3>
               <p className="mt-3 text-ink-soft leading-relaxed">
-                TODO: 最寄り駅・所要時間・アクセス情報を記載。
+                〒160-0023 東京都新宿区西新宿3-3-13 西新宿水間ビル2F
               </p>
-              <div className="mt-6 aspect-[16/10] w-full rounded-xl bg-cream grid place-items-center text-ink-muted text-sm">
-                Map placeholder
+              <p className="mt-2 text-sm text-ink-muted">
+                {/* TODO: 最寄り駅・所要時間を追記 */}
+              </p>
+              <div className="mt-6 aspect-[16/10] w-full overflow-hidden rounded-xl bg-cream">
+                <iframe
+                  title="セールスボンド株式会社 本社の地図"
+                  src="https://www.google.com/maps?q=%E6%9D%B1%E4%BA%AC%E9%83%BD%E6%96%B0%E5%AE%BF%E5%8C%BA%E8%A5%BF%E6%96%B0%E5%AE%BF3-3-13&output=embed"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-full w-full border-0"
+                />
               </div>
             </div>
             <div className="rounded-xl2 border border-ink-line p-8 md:p-10">
               <h3 className="text-xl font-bold">沿革</h3>
               <ul className="mt-6 space-y-4 text-sm text-ink-soft">
-                {["20XX", "20XX", "20XX"].map((year, i) => (
-                  <li key={i} className="grid grid-cols-[5rem_1fr] gap-4">
-                    <span className="font-display font-bold text-brand-600">
-                      {year}
-                    </span>
-                    <span className="leading-relaxed">
-                      TODO: 沿革の項目をここに。
-                    </span>
-                  </li>
-                ))}
+                <li className="grid grid-cols-[5rem_1fr] gap-4">
+                  <span className="font-display font-bold text-brand-600">
+                    2024.07
+                  </span>
+                  <span className="leading-relaxed">
+                    セールスボンド株式会社 設立
+                  </span>
+                </li>
+                {/* TODO: 追加の沿革項目 */}
               </ul>
             </div>
           </div>

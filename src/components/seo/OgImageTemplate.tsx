@@ -64,7 +64,7 @@ export function OgImageTemplate({ eyebrow, title, subtitle }: Props) {
             fontWeight: 800,
           }}
         >
-          C
+          S
         </div>
         <div
           style={{

@@ -7,10 +7,31 @@ export function organizationJsonLd() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: site.name,
+    name: site.legalName,
+    legalName: site.legalName,
+    alternateName: site.legalNameEn,
     url: base,
     logo: `${base}/logo.png`,
     description: site.description,
+    email: site.email,
+    foundingDate: site.founded,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.streetAddress,
+      addressLocality: site.address.locality,
+      addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
+      addressCountry: site.address.country,
+    },
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        email: site.email,
+        contactType: "customer support",
+        areaServed: "JP",
+        availableLanguage: ["Japanese"],
+      },
+    ],
     // TODO: SNSアカウントが決まったら sameAs に列挙
     sameAs: [],
   };
