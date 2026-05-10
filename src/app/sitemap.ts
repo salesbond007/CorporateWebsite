@@ -14,11 +14,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     "/blog",
     "/contact/business",
     "/contact/professional",
+    "/privacy",
+    "/terms",
   ].map((path) => ({
     url: `${base}${path}`,
     lastModified: now,
     changeFrequency: "weekly",
-    priority: path === "" ? 1 : 0.8,
+    priority: path === "" ? 1 : path === "/privacy" || path === "/terms" ? 0.3 : 0.8,
   }));
 
   const serviceEntries: MetadataRoute.Sitemap = services.map((s) => ({

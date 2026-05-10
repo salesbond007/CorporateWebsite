@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { articleJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
 import {
   getArticleBySlug,
   getArticleSlugs,
@@ -57,6 +59,16 @@ export default async function ArticlePage({ params }: { params: Params }) {
 
   return (
     <>
+      <JsonLd
+        data={[
+          articleJsonLd(article),
+          breadcrumbJsonLd([
+            { name: "ホーム", url: "/" },
+            { name: "記事一覧", url: "/blog" },
+            { name: article.title, url: `/blog/${article.slug}` },
+          ]),
+        ]}
+      />
       <article>
         <header className="border-b border-ink-line bg-cream">
           <Container className="py-16 md:py-24">
