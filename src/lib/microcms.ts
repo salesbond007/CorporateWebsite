@@ -76,4 +76,42 @@ export async function getArticleSlugs(): Promise<string[]> {
   return res.contents.map((c) => c.slug);
 }
 
+export type CategoryListResponse = {
+  contents: ArticleCategory[];
+  totalCount: number;
+  offset: number;
+  limit: number;
+};
+
+export async function getCategories(): Promise<ArticleCategory[]> {
+  if (!client) return [];
+  const res = await client.get<CategoryListResponse>({
+    endpoint: "categories",
+    queries: { limit: 100 },
+  });
+  return res.contents;
+}
+
+export async function getCategoryBySlug(
+  slug: string,
+): Promise<ArticleCategory | null> {
+  if (!client) return null;
+  const res = await client.get<CategoryListResponse>({
+    endpoint: "categories",
+    queries: { filters: `slug[equals]${slug}`, limit: 1 },
+  });
+  return res.contents[0] ?? null;
+}
+
+export async function searchArticles(
+  q: string,
+  queries: MicroCMSQueries = {},
+): Promise<ArticleListResponse> {
+  if (!client || !q.trim()) return emptyList;
+  return client.get<ArticleListResponse>({
+    endpoint: "articles",
+    queries: { q, orders: "-publishedAt", ...queries },
+  });
+}
+
 export { isConfigured as isMicroCmsConfigured };

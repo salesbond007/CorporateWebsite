@@ -3,7 +3,12 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { ArticleCard } from "@/components/blog/ArticleCard";
 import { Pagination } from "@/components/blog/Pagination";
-import { getArticles, isMicroCmsConfigured } from "@/lib/microcms";
+import { CategoryNav } from "@/components/blog/CategoryNav";
+import {
+  getArticles,
+  getCategories,
+  isMicroCmsConfigured,
+} from "@/lib/microcms";
 
 export const metadata: Metadata = {
   title: "記事・お知らせ",
@@ -30,11 +35,12 @@ export default async function BlogPage({
   const page = parsePage(searchParams.page);
   const offset = (page - 1) * PER_PAGE;
 
-  const { contents, totalCount } = await getArticles({
-    limit: PER_PAGE,
-    offset,
-  });
+  const [articles, categories] = await Promise.all([
+    getArticles({ limit: PER_PAGE, offset }),
+    getCategories(),
+  ]);
 
+  const { contents, totalCount } = articles;
   const totalPages = Math.max(1, Math.ceil(totalCount / PER_PAGE));
 
   return (
@@ -52,30 +58,38 @@ export default async function BlogPage({
               title="CMS未接続です"
               description="microCMSの環境変数（MICROCMS_SERVICE_DOMAIN / MICROCMS_API_KEY）を設定すると、記事一覧がここに表示されます。"
             />
-          ) : contents.length === 0 ? (
-            <EmptyState
-              title="まだ記事がありません"
-              description="microCMS管理画面から記事を投稿してください。"
-            />
           ) : (
             <>
-              <p className="text-sm text-ink-muted">
-                全 {totalCount} 件 / {page} ページ目
-              </p>
-              <div className="mt-8 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
-                {contents.map((article, i) => (
-                  <ArticleCard
-                    key={article.id}
-                    article={article}
-                    priority={page === 1 && i < 3}
+              <CategoryNav categories={categories} />
+
+              {contents.length === 0 ? (
+                <div className="mt-10">
+                  <EmptyState
+                    title="まだ記事がありません"
+                    description="microCMS管理画面から記事を投稿してください。"
                   />
-                ))}
-              </div>
-              <Pagination
-                currentPage={page}
-                totalPages={totalPages}
-                basePath="/blog"
-              />
+                </div>
+              ) : (
+                <>
+                  <p className="mt-8 text-sm text-ink-muted">
+                    全 {totalCount} 件 / {page} ページ目
+                  </p>
+                  <div className="mt-6 grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+                    {contents.map((article, i) => (
+                      <ArticleCard
+                        key={article.id}
+                        article={article}
+                        priority={page === 1 && i < 3}
+                      />
+                    ))}
+                  </div>
+                  <Pagination
+                    currentPage={page}
+                    totalPages={totalPages}
+                    basePath="/blog"
+                  />
+                </>
+              )}
             </>
           )}
         </Container>
