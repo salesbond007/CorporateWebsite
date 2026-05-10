@@ -8,17 +8,21 @@ type Props = {
 
 export function PageHero({ eyebrow, title, description }: Props) {
   return (
-    <section className="relative overflow-hidden border-b border-ink-line bg-cream">
-      <div className="absolute inset-0 grid-bg opacity-60" aria-hidden="true" />
+    <section className="relative overflow-hidden border-b-2 border-ink-line bg-cream">
+      <div className="absolute inset-0 dot-bg opacity-60" aria-hidden="true" />
       <div
-        className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-brand-200/40 blur-3xl"
+        className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-brand-200/50 blur-3xl"
         aria-hidden="true"
       />
       <Container className="relative py-20 md:py-28">
-        {eyebrow ? <span className="eyebrow">{eyebrow}</span> : null}
-        <h1 className="mt-5 text-display-1 text-ink max-w-4xl">{title}</h1>
+        {eyebrow ? (
+          <p className="section-label !text-brand-500">{eyebrow}</p>
+        ) : null}
+        <h1 className="mt-4 text-display-2 text-ink max-w-4xl font-black">
+          {title}
+        </h1>
         {description ? (
-          <p className="mt-6 max-w-2xl text-base md:text-lg text-ink-soft leading-relaxed">
+          <p className="mt-6 max-w-2xl text-base md:text-lg text-ink font-medium leading-relaxed">
             {description}
           </p>
         ) : null}

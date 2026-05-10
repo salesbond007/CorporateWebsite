@@ -41,7 +41,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
-          "var(--font-zen-maru)",
+          "var(--font-mplus)",
           "Hiragino Maru Gothic ProN",
           "Hiragino Kaku Gothic ProN",
           "Meiryo",
@@ -49,23 +49,19 @@ const config: Config = {
           "sans-serif",
         ],
         display: [
-          "var(--font-zen-maru)",
+          "var(--font-mplus)",
           "Hiragino Maru Gothic ProN",
-          "system-ui",
-          "sans-serif",
-        ],
-        handwritten: [
-          "var(--font-klee)",
-          "var(--font-zen-maru)",
           "system-ui",
           "sans-serif",
         ],
       },
       fontSize: {
-        "display-1": ["clamp(2.5rem, 6vw, 4.5rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
-        "display-2": ["clamp(2rem, 4.5vw, 3.25rem)", { lineHeight: "1.15", letterSpacing: "-0.01em" }],
-        "h1": ["clamp(1.75rem, 3.5vw, 2.5rem)", { lineHeight: "1.2" }],
-        "h2": ["clamp(1.5rem, 2.5vw, 2rem)", { lineHeight: "1.3" }],
+        "display-1": ["clamp(3rem, 7vw, 5.5rem)", { lineHeight: "1.05", letterSpacing: "-0.03em" }],
+        "display-2": ["clamp(2.25rem, 5vw, 4rem)", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+        "display-3": ["clamp(1.75rem, 3.5vw, 2.75rem)", { lineHeight: "1.15", letterSpacing: "-0.015em" }],
+        "h1": ["clamp(1.875rem, 3.5vw, 2.75rem)", { lineHeight: "1.2", letterSpacing: "-0.01em" }],
+        "h2": ["clamp(1.625rem, 2.75vw, 2.25rem)", { lineHeight: "1.25", letterSpacing: "-0.005em" }],
+        "huge": ["clamp(3.5rem, 9vw, 7rem)", { lineHeight: "1", letterSpacing: "-0.04em" }],
       },
       maxWidth: {
         prose: "70ch",

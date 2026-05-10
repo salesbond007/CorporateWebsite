@@ -1,8 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/ui/Reveal";
-import { DotsDecoration } from "@/components/ui/Doodle";
 import { services } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
@@ -15,16 +13,18 @@ type Props = {
 
 export function ServicesSection({ locale, dict }: Props) {
   return (
-    <section className="relative py-24 md:py-32 bg-cream">
-      <DotsDecoration className="absolute right-[6%] top-[8%] h-16 w-16 text-brand-400 opacity-60" />
-
+    <section className="relative py-28 md:py-36 bg-cream">
       <Container>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionHeading
-            eyebrow="Services"
-            title="提供する3つのサービス"
-            description="決裁者紹介・プロ人材マッチング・インサイドセールス代行で、企業の営業活動を多角的に支援します。"
-          />
+          <div>
+            <p className="section-label">Services</p>
+            <p className="mt-3 text-lg md:text-xl font-extrabold text-ink">
+              提供する3つのサービス
+            </p>
+            <p className="mt-4 max-w-xl text-ink font-medium leading-relaxed">
+              決裁者紹介・プロ人材マッチング・インサイドセールス代行で、企業の営業活動を多角的に支援します。
+            </p>
+          </div>
           <Link
             href={localePath("/services", locale)}
             className="link-arrow shrink-0"
@@ -39,24 +39,27 @@ export function ServicesSection({ locale, dict }: Props) {
               <Reveal delay={i * 100} className="h-full">
                 <Link
                   href={localePath(s.href, locale)}
-                  className="group block h-full rounded-xl3 border-2 border-ink-line bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-400 hover:shadow-card"
+                  className="group block h-full rounded-xl3 border-2 border-ink-line bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-500 hover:shadow-card"
                 >
                   <div className="flex items-start justify-between">
-                    <span className="font-handwritten text-xl font-bold text-brand-500">
+                    <span className="text-3xl font-black text-brand-500 leading-none">
                       {s.number}
                     </span>
                     <span
-                      className="grid h-10 w-10 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition-all group-hover:border-brand-500 group-hover:bg-brand-500 group-hover:text-white group-hover:rotate-[-12deg]"
+                      className="grid h-10 w-10 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition-all group-hover:border-brand-500 group-hover:bg-brand-500 group-hover:text-white"
                       aria-hidden="true"
                     >
                       →
                     </span>
                   </div>
-                  <h3 className="mt-12 text-xl font-bold text-ink">{s.title}</h3>
-                  <p className="mt-1 font-handwritten text-sm font-semibold text-brand-600">
+                  <p className="mt-10 text-xs font-extrabold uppercase tracking-[0.15em] text-brand-500">
                     {s.subtitle}
                   </p>
-                  <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+                  <h3 className="mt-2 text-2xl font-black text-ink">
+                    {s.title}
+                  </h3>
+                  <div className="mt-3 h-1 w-12 rounded-full bg-brand-500" aria-hidden="true" />
+                  <p className="mt-5 text-sm leading-relaxed text-ink font-medium">
                     {s.summary}
                   </p>
                 </Link>

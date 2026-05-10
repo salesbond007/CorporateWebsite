@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ArticleCard, ArticleCardSkeleton } from "@/components/blog/ArticleCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { getArticles } from "@/lib/microcms";
@@ -17,14 +16,18 @@ export async function BlogPreview({ locale, dict }: Props) {
   const { contents } = await getArticles({ limit: 3 });
 
   return (
-    <section className="py-24 md:py-32 bg-cream">
+    <section className="py-28 md:py-36 bg-white">
       <Container>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionHeading
-            eyebrow="Insights"
-            title="記事・お知らせ"
-            description="営業・人材活用に関する考察や、最新のお知らせをお届けします。"
-          />
+          <div>
+            <p className="section-label">Insights</p>
+            <p className="mt-3 text-lg md:text-xl font-extrabold text-ink">
+              記事・お知らせ
+            </p>
+            <p className="mt-4 max-w-xl text-ink font-medium leading-relaxed">
+              営業・人材活用に関する考察や、最新のお知らせをお届けします。
+            </p>
+          </div>
           <Link
             href={localePath("/blog", locale)}
             className="link-arrow shrink-0"
@@ -50,7 +53,7 @@ export async function BlogPreview({ locale, dict }: Props) {
         </div>
 
         {contents.length === 0 ? (
-          <p className="mt-10 text-sm text-ink-muted">
+          <p className="mt-10 text-sm font-medium text-ink-muted">
             {dict.blog.noArticles}
           </p>
         ) : null}

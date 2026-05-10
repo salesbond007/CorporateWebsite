@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Zen_Maru_Gothic, Klee_One } from "next/font/google";
+import { M_PLUS_Rounded_1c } from "next/font/google";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -10,17 +10,10 @@ import { isLocale, locales, ogLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import "../globals.css";
 
-const zenMaru = Zen_Maru_Gothic({
+const mplus = M_PLUS_Rounded_1c({
   subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
-  variable: "--font-zen-maru",
-  display: "swap",
-});
-
-const klee = Klee_One({
-  subsets: ["latin"],
-  weight: ["400", "600"],
-  variable: "--font-klee",
+  weight: ["400", "500", "700", "800", "900"],
+  variable: "--font-mplus",
   display: "swap",
 });
 
@@ -86,7 +79,7 @@ export default function LocaleLayout({
   const dict = getDictionary(locale);
 
   return (
-    <html lang={locale} className={`${zenMaru.variable} ${klee.variable}`}>
+    <html lang={locale} className={mplus.variable}>
       <body>
         <a
           href="#main"

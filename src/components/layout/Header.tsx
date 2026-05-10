@@ -43,7 +43,7 @@ export function Header({ locale, dict }: Props) {
             <Link
               key={item.href}
               href={localePath(item.href, locale)}
-              className="text-sm font-medium text-ink-soft hover:text-ink"
+              className="text-sm font-bold text-ink hover:text-brand-600"
             >
               {dict.nav[item.key]}
             </Link>

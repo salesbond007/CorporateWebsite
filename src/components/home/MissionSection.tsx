@@ -1,37 +1,31 @@
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { Sparkle, Squiggle } from "@/components/ui/Doodle";
 
 export function MissionSection() {
   return (
-    <section className="relative py-24 md:py-32 bg-white overflow-hidden">
-      <Sparkle
-        className="absolute left-[10%] top-[12%] h-6 w-6 text-brand-300 animate-wiggle"
-      />
-      <Sparkle
-        className="absolute right-[12%] bottom-[18%] h-5 w-5 text-brand-400"
-      />
-
+    <section className="relative py-28 md:py-36 bg-white overflow-hidden">
       <Container>
-        <div className="max-w-3xl mx-auto text-center">
-          <span className="eyebrow justify-center">Our Mission</span>
-          <h2 className="mt-6 text-display-2 text-ink leading-tight">
+        <div className="text-center">
+          <p className="section-label">Mission</p>
+          <p className="mt-3 text-base md:text-lg font-extrabold text-ink">
+            企業を、勝たせる。
+          </p>
+        </div>
+
+        <div className="mt-16 max-w-3xl mx-auto">
+          <h2 className="text-display-2 text-ink text-center leading-tight">
             企業を、
-            <span className="relative inline-block text-brand-500">
-              勝たせる
-              <Squiggle className="absolute -bottom-3 left-0 h-3 w-full" />
-            </span>
-            。
+            <span className="text-brand-500">勝たせる</span>。
           </h2>
         </div>
 
         <Reveal>
-          <div className="mt-16 max-w-2xl mx-auto space-y-6 text-base md:text-lg text-ink-soft leading-[2]">
+          <div className="mt-16 max-w-2xl mx-auto space-y-7 text-base md:text-lg text-ink leading-[2] font-medium text-center">
             <p>
               明確な経営課題を抱えながらも、その遂行が思うように進まない事例は少なくありません。
             </p>
 
-            <p className="text-center text-xl md:text-2xl font-bold text-ink py-2">
+            <p className="text-2xl md:text-3xl font-black text-brand-500 py-2">
               売上拡大、組織強化、DX推進——。
             </p>
 
@@ -49,7 +43,7 @@ export function MissionSection() {
 
             <p>
               セールスボンドは、企業が次なる成長フェーズへと移行するための、
-              <span className="marker font-bold text-ink">確かな起点</span>
+              <span className="marker font-black">確かな起点</span>
               となることを使命としています。
             </p>
           </div>

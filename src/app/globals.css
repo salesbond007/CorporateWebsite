@@ -5,8 +5,8 @@
 :root {
   --color-brand: #f58220;
   --color-brand-soft: #fff5ec;
-  --color-ink: #2a2a2a;
-  --color-cream: #fdf8f1;
+  --color-ink: #1a1a1a;
+  --color-cream: #fef9f1;
 }
 
 @layer base {
@@ -20,24 +20,24 @@
   body {
     @apply bg-cream text-ink font-sans;
     font-feature-settings: "palt" 1;
-    letter-spacing: 0.01em;
+    font-weight: 500;
   }
 
   ::selection {
-    background-color: rgba(245, 130, 32, 0.25);
-    color: #2a2a2a;
+    background-color: rgba(245, 130, 32, 0.3);
+    color: #1a1a1a;
   }
 
   h1, h2, h3, h4 {
-    @apply font-display font-bold tracking-tight;
-    letter-spacing: -0.005em;
+    @apply font-display;
+    font-weight: 900;
+    letter-spacing: -0.01em;
   }
 
   a {
     @apply transition-colors duration-200;
   }
 
-  /* Friendly focus ring */
   :focus-visible {
     outline: 3px solid var(--color-brand);
     outline-offset: 3px;
@@ -46,19 +46,27 @@
 }
 
 @layer components {
-  /* eyebrow: 手書き風の小見出し */
+  /* eyebrow: Pollock風の英語ALL CAPS小見出し */
   .eyebrow {
-    @apply inline-flex items-center gap-2 font-handwritten text-sm font-semibold text-brand-600;
-    letter-spacing: 0.05em;
+    @apply inline-block text-xs md:text-sm font-extrabold uppercase tracking-[0.18em] text-brand-500;
   }
 
-  .eyebrow::before {
-    content: "✦";
-    @apply text-brand-500 text-base;
+  /* セクションの大きな英語ラベル（Pollockの "Data" など） */
+  .section-label {
+    @apply font-display font-black text-brand-500 leading-none;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.02em;
+  }
+
+  /* 数字の大表示（Pollockのスタッツ用） */
+  .stat-number {
+    @apply font-display font-black text-brand-500 leading-none;
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    letter-spacing: -0.03em;
   }
 
   .link-arrow {
-    @apply inline-flex items-center gap-1.5 font-semibold text-ink hover:text-brand-600;
+    @apply inline-flex items-center gap-1.5 font-bold text-ink hover:text-brand-600;
   }
 
   .link-arrow::after {
@@ -87,31 +95,30 @@
     background-size: 22px 22px;
   }
 
-  /* 手書きアンダーライン */
-  .underline-doodle {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 8' preserveAspectRatio='none'%3E%3Cpath d='M2 5 Q 25 2 50 4 T 98 4' stroke='%23F58220' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: bottom left;
-    background-size: 100% 8px;
-    padding-bottom: 8px;
+  /* オレンジの太いアンダーライン（数字の下など） */
+  .stat-underline {
+    @apply border-b-4 border-brand-500 pb-2;
   }
 
-  /* 手書きハイライト（マーカー風） */
+  /* マーカー風ハイライト */
   .marker {
-    background: linear-gradient(transparent 65%, rgba(245, 130, 32, 0.3) 65%);
-    padding: 0 2px;
+    background: linear-gradient(transparent 65%, rgba(245, 130, 32, 0.35) 65%);
+    padding: 0 4px;
   }
 
   .prose-article {
-    @apply max-w-prose text-ink-soft leading-[1.95];
+    @apply max-w-prose text-ink leading-[1.95];
+    font-weight: 500;
   }
 
   .prose-article h2 {
     @apply mt-12 mb-4 text-h2 text-ink scroll-mt-24;
+    font-weight: 900;
   }
 
   .prose-article h3 {
     @apply mt-8 mb-3 text-xl text-ink scroll-mt-24;
+    font-weight: 800;
   }
 
   .prose-article p {
@@ -119,7 +126,7 @@
   }
 
   .prose-article a {
-    @apply text-brand-600 underline underline-offset-4;
+    @apply text-brand-600 underline underline-offset-4 font-bold;
   }
 
   .prose-article img,
@@ -136,7 +143,7 @@
   }
 
   .prose-article blockquote {
-    @apply border-l-4 border-brand-500 pl-5 italic my-6 text-ink;
+    @apply border-l-4 border-brand-500 pl-5 italic my-6 text-ink font-bold;
   }
 
   .prose-article code {

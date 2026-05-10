@@ -1,7 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Illustration } from "@/components/ui/Illustration";
-import { DotsDecoration, Sparkle, Squiggle } from "@/components/ui/Doodle";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
@@ -24,30 +23,21 @@ export function Hero({ locale, dict }: Props) {
         aria-hidden="true"
       />
 
-      {/* 装飾 */}
-      <DotsDecoration
-        className="absolute left-[6%] top-[20%] h-12 w-12 hidden md:block animate-float-y"
-      />
-      <Sparkle
-        className="absolute right-[10%] top-[18%] h-6 w-6 hidden md:block text-brand-400 animate-wiggle"
-      />
-      <Sparkle
-        className="absolute left-[42%] bottom-[14%] h-4 w-4 hidden md:block text-brand-300"
-      />
-
       <Container className="relative pt-20 pb-24 md:pt-28 md:pb-32 lg:pt-32 lg:pb-40">
         <div className="grid items-center gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7 animate-fade-up">
-            <span className="eyebrow">{dict.hero.eyebrow}</span>
-            <h1 className="mt-6 text-display-1 text-ink leading-[1.15]">
+            <h1 className="text-huge text-ink font-black leading-[0.95]">
               {dict.hero.titleLine1}
-              <span className="relative inline-block text-brand-500">
+              <br />
+              <span className="text-brand-500">
                 {dict.hero.titleHighlight}
-                <Squiggle className="absolute -bottom-3 left-0 h-3 w-full" />
               </span>
               {dict.hero.titleSuffix}
             </h1>
-            <p className="mt-8 max-w-xl text-base md:text-lg text-ink-soft leading-[1.95]">
+            <p className="mt-6 font-extrabold text-brand-500 tracking-[0.08em] uppercase text-sm md:text-base">
+              {dict.hero.eyebrow}
+            </p>
+            <p className="mt-8 max-w-xl text-base md:text-lg text-ink font-medium leading-[1.95]">
               {dict.hero.subtitle}
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
@@ -67,16 +57,15 @@ export function Hero({ locale, dict }: Props) {
           <div className="lg:col-span-5 animate-fade-up [animation-delay:120ms]">
             <div className="relative mx-auto max-w-md">
               <div
-                className="absolute -inset-4 rounded-xl4 bg-brand-100/60 -rotate-2"
+                className="absolute -inset-4 rounded-xl4 bg-brand-200/60 -rotate-3"
                 aria-hidden="true"
               />
               <div className="relative rounded-xl4 bg-white p-8 shadow-soft">
                 <Illustration variant="abstract" />
               </div>
-              <div className="absolute -bottom-4 -left-4 rounded-full bg-brand-500 px-5 py-3 font-handwritten text-sm font-semibold text-white shadow-card hidden md:block">
+              <div className="absolute -bottom-5 -left-5 rounded-full bg-brand-500 px-6 py-3 text-sm font-black text-white shadow-card">
                 Sales Bond
               </div>
-              <Sparkle className="absolute -top-3 -right-2 h-8 w-8 animate-wiggle" />
             </div>
           </div>
         </div>

@@ -123,7 +123,7 @@ export function Bubble({
   return (
     <span
       className={cn(
-        "relative inline-block rounded-full bg-brand-500 px-4 py-2 font-handwritten text-sm font-semibold text-white",
+        "relative inline-block rounded-full bg-brand-500 px-4 py-2 text-sm font-extrabold text-white",
         className,
       )}
     >
