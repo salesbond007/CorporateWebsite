@@ -15,7 +15,7 @@ type Props = {
  * /public/hero.png を置けばこちらが使われる。無ければ SVG にフォールバック。
  * パスを変えたい場合はこの定数だけ書き換えれば OK。
  */
-const HERO_IMAGE = "/hero.png";
+const HERO_IMAGE = "/hero.jpg";
 
 export function Hero({ locale, dict }: Props) {
   return (
