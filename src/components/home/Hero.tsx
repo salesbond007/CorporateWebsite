@@ -29,7 +29,6 @@ export function Hero({ locale, dict }: Props) {
             <span className="eyebrow">{dict.hero.eyebrow}</span>
             <h1 className="mt-6 text-display-1 text-ink">
               {dict.hero.titleLine1}
-              <br />
               <span className="text-brand-500">{dict.hero.titleHighlight}</span>
               {dict.hero.titleSuffix}
             </h1>
