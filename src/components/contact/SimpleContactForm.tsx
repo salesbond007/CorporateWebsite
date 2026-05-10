@@ -3,10 +3,11 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
-import { TextField, TextareaField } from "./Field";
+import { TextField, TextareaField, SelectField } from "./Field";
 import { localePath } from "@/i18n/path";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/cn";
+import { isEmailFormat, isFreeEmail } from "@/lib/email";
 import type { Locale } from "@/i18n/config";
 
 type Props = {
@@ -30,8 +31,30 @@ const serviceOptions = [
 
 type ServiceId = (typeof serviceOptions)[number]["id"];
 
+const positionOptions = [
+  { value: "executive", label: "経営者・役員" },
+  { value: "general-manager", label: "部長" },
+  { value: "manager", label: "課長" },
+  { value: "section-chief", label: "係長・主任" },
+  { value: "staff", label: "一般社員" },
+  { value: "contract", label: "契約・嘱託・派遣等" },
+  { value: "other", label: "その他" },
+] as const;
+
+const employeeCountOptions = [
+  { value: "1", label: "1人、個人事業主" },
+  { value: "2-5", label: "2〜5人" },
+  { value: "6-30", label: "従業員数6〜30人" },
+  { value: "31-200", label: "従業員数31〜200人" },
+  { value: "201-600", label: "従業員数201〜600人" },
+  { value: "601-2000", label: "従業員数601〜2,000人" },
+  { value: "2001-plus", label: "従業員数2,001人以上" },
+] as const;
+
 type FormState = {
   company: string;
+  employeeCount: string;
+  department: string;
   lastName: string;
   firstName: string;
   position: string;
@@ -45,6 +68,8 @@ type FormState = {
 
 const initial: FormState = {
   company: "",
+  employeeCount: "",
+  department: "",
   lastName: "",
   firstName: "",
   position: "",
@@ -56,13 +81,21 @@ const initial: FormState = {
   agreement: false,
 };
 
+type FieldErrors = Partial<Record<keyof FormState | "form", string>>;
+
 export function SimpleContactForm({ locale }: Props) {
   const [state, setState] = useState<FormState>(initial);
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [errors, setErrors] = useState<FieldErrors>({});
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setState((s) => ({ ...s, [key]: value }));
+    // Clear error for this field on edit
+    setErrors((e) => {
+      if (!e[key]) return e;
+      const { [key]: _, ...rest } = e;
+      return rest;
+    });
   }
 
   function toggleService(id: ServiceId) {
@@ -74,37 +107,76 @@ export function SimpleContactForm({ locale }: Props) {
     }));
   }
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setError(null);
+  function validate(): FieldErrors {
+    const next: FieldErrors = {};
+    if (!state.company.trim()) next.company = "会社名をご入力ください。";
+    if (!state.employeeCount) next.employeeCount = "従業員数をご選択ください。";
+    if (!state.department.trim()) next.department = "部署名をご入力ください。";
+    if (!state.lastName.trim()) next.lastName = "姓をご入力ください。";
+    if (!state.firstName.trim()) next.firstName = "名をご入力ください。";
+    if (!state.position) next.position = "役職をご選択ください。";
 
-    if (!state.inquiryType) {
-      setError("お問い合わせ種類をご選択ください。");
-      return;
+    if (!state.email.trim()) {
+      next.email = "勤務先メールアドレスをご入力ください。";
+    } else if (!isEmailFormat(state.email)) {
+      next.email = "メールアドレスの形式が正しくありません。";
+    } else if (isFreeEmail(state.email)) {
+      next.email = "フリーメール（Gmail / Yahoo 等）はご利用いただけません。勤務先のメールアドレスをご入力ください。";
     }
 
-    const inquiryLabel = inquiryTypeLabels[state.inquiryType];
+    if (!state.phone.trim()) next.phone = "携帯電話番号をご入力ください。";
+    if (!state.inquiryType) next.inquiryType = "お問い合わせ種類をご選択ください。";
+    return next;
+  }
+
+  function onSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const next = validate();
+    if (Object.keys(next).length > 0) {
+      setErrors(next);
+      // Scroll to first error
+      const firstKey = Object.keys(next)[0];
+      requestAnimationFrame(() => {
+        const el = document.getElementById(firstKey);
+        el?.scrollIntoView({ behavior: "smooth", block: "center" });
+        el?.focus({ preventScroll: true });
+      });
+      return;
+    }
+    setErrors({});
+
+    const inquiryLabel = inquiryTypeLabels[state.inquiryType as InquiryType];
     const serviceLabels =
       state.inquiryType === "service"
         ? serviceOptions
             .filter((o) => state.serviceTypes.includes(o.id))
             .map((o) => `・${o.label}`)
         : [];
+    const positionLabel =
+      positionOptions.find((p) => p.value === state.position)?.label ?? state.position;
+    const employeeLabel =
+      employeeCountOptions.find((p) => p.value === state.employeeCount)?.label ??
+      state.employeeCount;
 
     // Frontend-only: compose a mailto: with the form contents.
-    // Replace with a server-side API call when ready.
-    const subject = `【お問い合わせ】${state.company} ${state.lastName} ${state.firstName} 様`;
+    const subject = `【お問い合わせ／企業】${state.company} ${state.lastName} ${state.firstName} 様`;
     const body = [
       "■ 会社名",
       state.company,
+      "",
+      "■ 従業員数",
+      employeeLabel,
+      "",
+      "■ 部署名",
+      state.department,
       "",
       "■ お名前",
       `${state.lastName} ${state.firstName}`,
       "",
       "■ 役職",
-      state.position,
+      positionLabel,
       "",
-      "■ メールアドレス",
+      "■ 勤務先メールアドレス",
       state.email,
       "",
       "■ 携帯電話番号",
@@ -192,6 +264,29 @@ export function SimpleContactForm({ locale }: Props) {
         placeholder="株式会社○○"
         value={state.company}
         onChange={(e) => update("company", e.target.value)}
+        error={errors.company}
+      />
+
+      <SelectField
+        label="従業員数"
+        name="employeeCount"
+        required
+        placeholder="従業員数を選択"
+        options={employeeCountOptions.map((o) => ({ value: o.value, label: o.label }))}
+        value={state.employeeCount}
+        onChange={(e) => update("employeeCount", e.target.value)}
+        error={errors.employeeCount}
+      />
+
+      <TextField
+        label="部署名"
+        name="department"
+        required
+        autoComplete="organization-title"
+        placeholder="営業部 / マーケティング部 など"
+        value={state.department}
+        onChange={(e) => update("department", e.target.value)}
+        error={errors.department}
       />
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -203,6 +298,7 @@ export function SimpleContactForm({ locale }: Props) {
           placeholder="山田"
           value={state.lastName}
           onChange={(e) => update("lastName", e.target.value)}
+          error={errors.lastName}
         />
         <TextField
           label="お名前(名)"
@@ -212,29 +308,33 @@ export function SimpleContactForm({ locale }: Props) {
           placeholder="太郎"
           value={state.firstName}
           onChange={(e) => update("firstName", e.target.value)}
+          error={errors.firstName}
         />
       </div>
 
-      <TextField
+      <SelectField
         label="役職"
         name="position"
         required
-        autoComplete="organization-title"
-        placeholder="部長 / 取締役 など"
+        placeholder="役職を選択"
+        options={positionOptions.map((o) => ({ value: o.value, label: o.label }))}
         value={state.position}
         onChange={(e) => update("position", e.target.value)}
+        error={errors.position}
       />
 
       <div className="grid gap-6 md:grid-cols-2">
         <TextField
-          label="メールアドレス"
+          label="勤務先メールアドレス"
           name="email"
           type="email"
           required
           autoComplete="email"
           placeholder="example@company.co.jp"
+          hint="フリーメール（Gmail / Yahoo 等）はご利用いただけません。"
           value={state.email}
           onChange={(e) => update("email", e.target.value)}
+          error={errors.email}
         />
         <TextField
           label="携帯電話番号"
@@ -246,6 +346,7 @@ export function SimpleContactForm({ locale }: Props) {
           placeholder="090-XXXX-XXXX"
           value={state.phone}
           onChange={(e) => update("phone", e.target.value)}
+          error={errors.phone}
         />
       </div>
 
@@ -309,6 +410,9 @@ export function SimpleContactForm({ locale }: Props) {
             );
           })}
         </div>
+        {errors.inquiryType ? (
+          <p className="mt-2 text-xs text-red-600">{errors.inquiryType}</p>
+        ) : null}
       </fieldset>
 
       <TextareaField
@@ -340,15 +444,6 @@ export function SimpleContactForm({ locale }: Props) {
           </span>
         </label>
       </div>
-
-      {error ? (
-        <p
-          role="alert"
-          className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
-        >
-          {error}
-        </p>
-      ) : null}
 
       <div>
         <Button type="submit" size="lg">

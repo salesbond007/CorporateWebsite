@@ -96,9 +96,21 @@ export function TextareaField(
 export function SelectField(
   props: BaseProps & {
     options: { value: string; label: string }[];
+    placeholder?: string;
   } & Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "name" | "className">,
 ) {
-  const { label, name, required, hint, error, className, options, ...rest } = props;
+  const {
+    label,
+    name,
+    required,
+    hint,
+    error,
+    className,
+    options,
+    placeholder,
+    value,
+    ...rest
+  } = props;
   return (
     <div className={className}>
       <FieldLabel label={label} required={required} htmlFor={name} />
@@ -107,11 +119,11 @@ export function SelectField(
         name={name}
         required={required}
         className={cn(inputClass, "mt-2 pr-10")}
-        defaultValue=""
+        value={value ?? ""}
         {...rest}
       >
         <option value="" disabled>
-          選択してください
+          {placeholder ?? "選択してください"}
         </option>
         {options.map((o) => (
           <option key={o.value} value={o.value}>
