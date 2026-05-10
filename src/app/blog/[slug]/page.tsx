@@ -4,7 +4,9 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { Toc } from "@/components/blog/Toc";
 import { articleJsonLd, breadcrumbJsonLd } from "@/lib/jsonld";
+import { buildToc } from "@/lib/toc";
 import {
   getArticleBySlug,
   getArticleSlugs,
@@ -50,6 +52,8 @@ export default async function ArticlePage({ params }: { params: Params }) {
     limit: 3,
     filters: `slug[not_equals]${article.slug}`,
   });
+
+  const { html: bodyHtml, toc } = buildToc(article.body);
 
   const date = new Date(article.publishedAt).toLocaleDateString("ja-JP", {
     year: "numeric",
@@ -110,22 +114,34 @@ export default async function ArticlePage({ params }: { params: Params }) {
         ) : null}
 
         <Container className="py-16 md:py-24">
-          <div
-            className="prose-article mx-auto"
-            dangerouslySetInnerHTML={{ __html: article.body }}
-          />
-          {article.tags && article.tags.length > 0 ? (
-            <div className="max-w-prose mx-auto mt-12 flex flex-wrap gap-2">
-              {article.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-full bg-cream px-3 py-1 text-xs font-semibold text-ink-soft"
-                >
-                  #{tag}
-                </span>
-              ))}
+          <div className="grid gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-8">
+              <div
+                className="prose-article"
+                dangerouslySetInnerHTML={{ __html: bodyHtml }}
+              />
+              {article.tags && article.tags.length > 0 ? (
+                <div className="mt-12 flex flex-wrap gap-2">
+                  {article.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-cream px-3 py-1 text-xs font-semibold text-ink-soft"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+              ) : null}
             </div>
-          ) : null}
+
+            {toc.length > 0 ? (
+              <aside className="lg:col-span-4 lg:pl-8">
+                <div className="lg:sticky lg:top-28">
+                  <Toc items={toc} />
+                </div>
+              </aside>
+            ) : null}
+          </div>
         </Container>
       </article>
 

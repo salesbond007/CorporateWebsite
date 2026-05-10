@@ -78,11 +78,11 @@
   }
 
   .prose-article h2 {
-    @apply mt-12 mb-4 text-h2 text-ink;
+    @apply mt-12 mb-4 text-h2 text-ink scroll-mt-24;
   }
 
   .prose-article h3 {
-    @apply mt-8 mb-3 text-xl text-ink;
+    @apply mt-8 mb-3 text-xl text-ink scroll-mt-24;
   }
 
   .prose-article p {
