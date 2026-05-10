@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { Hero } from "@/components/home/Hero";
 import { MissionSection } from "@/components/home/MissionSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
-import { AboutSection } from "@/components/home/AboutSection";
 import { BlogPreview } from "@/components/home/BlogPreview";
 import { CTASection } from "@/components/home/CTASection";
 import { isLocale } from "@/i18n/config";
@@ -22,7 +21,6 @@ export default function HomePage({
       <Hero locale={locale} dict={dict} />
       <MissionSection />
       <ServicesSection locale={locale} dict={dict} />
-      <AboutSection locale={locale} dict={dict} />
       <BlogPreview locale={locale} dict={dict} />
       <CTASection locale={locale} dict={dict} />
     </>
