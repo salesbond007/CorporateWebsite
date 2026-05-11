@@ -3,43 +3,101 @@
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
-import { TextField, TextareaField } from "./Field";
+import { TextField } from "./Field";
 import { localePath } from "@/i18n/path";
-import { site } from "@/lib/site";
 import { isEmailFormat } from "@/lib/email";
+import { cn } from "@/lib/cn";
 import type { Locale } from "@/i18n/config";
 
 type Props = {
   locale: Locale;
 };
 
+type Gender = "male" | "female" | "other";
+
 type FormState = {
   lastName: string;
   firstName: string;
-  furigana: string;
   email: string;
+  emailConfirm: string;
   phone: string;
-  affiliation: string;
-  position: string;
-  expertise: string;
-  achievements: string;
-  agreement: boolean;
+  birthYear: string;
+  birthMonth: string;
+  birthDay: string;
+  gender: Gender | "";
+  connections: string;
+  agreeTerms: boolean;
+  agreePrivacy: boolean;
+  agreeAntisocial: boolean;
+  agreeCompliance: boolean;
 };
 
 const initial: FormState = {
   lastName: "",
   firstName: "",
-  furigana: "",
   email: "",
+  emailConfirm: "",
   phone: "",
-  affiliation: "",
-  position: "",
-  expertise: "",
-  achievements: "",
-  agreement: false,
+  birthYear: "",
+  birthMonth: "",
+  birthDay: "",
+  gender: "",
+  connections: "",
+  agreeTerms: false,
+  agreePrivacy: false,
+  agreeAntisocial: false,
+  agreeCompliance: false,
 };
 
-type FieldErrors = Partial<Record<keyof FormState, string>>;
+type FieldErrors = Partial<Record<keyof FormState | "birthdate", string>>;
+
+const currentYear = new Date().getFullYear();
+const yearOptions = Array.from({ length: 80 }, (_, i) => {
+  const y = currentYear - 18 - i;
+  return { value: String(y), label: `${y}` };
+});
+const monthOptions = Array.from({ length: 12 }, (_, i) => ({
+  value: String(i + 1),
+  label: `${i + 1}`,
+}));
+const dayOptions = Array.from({ length: 31 }, (_, i) => ({
+  value: String(i + 1),
+  label: `${i + 1}`,
+}));
+
+const genderOptions: { value: Gender; label: string }[] = [
+  { value: "male", label: "男性" },
+  { value: "female", label: "女性" },
+  { value: "other", label: "その他" },
+];
+
+function isValidDate(y: string, m: string, d: string): boolean {
+  const yn = Number(y);
+  const mn = Number(m);
+  const dn = Number(d);
+  if (!yn || !mn || !dn) return false;
+  const date = new Date(yn, mn - 1, dn);
+  return (
+    date.getFullYear() === yn &&
+    date.getMonth() === mn - 1 &&
+    date.getDate() === dn
+  );
+}
+
+function isAdult(y: string, m: string, d: string): boolean {
+  const yn = Number(y);
+  const mn = Number(m);
+  const dn = Number(d);
+  if (!yn || !mn || !dn) return false;
+  const today = new Date();
+  const birth = new Date(yn, mn - 1, dn);
+  let age = today.getFullYear() - birth.getFullYear();
+  const beforeBirthday =
+    today.getMonth() < birth.getMonth() ||
+    (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate());
+  if (beforeBirthday) age--;
+  return age >= 18;
+}
 
 export function PartnerContactForm({ locale }: Props) {
   const [state, setState] = useState<FormState>(initial);
@@ -59,15 +117,46 @@ export function PartnerContactForm({ locale }: Props) {
     const next: FieldErrors = {};
     if (!state.lastName.trim()) next.lastName = "姓をご入力ください。";
     if (!state.firstName.trim()) next.firstName = "名をご入力ください。";
+
     if (!state.email.trim()) {
       next.email = "メールアドレスをご入力ください。";
     } else if (!isEmailFormat(state.email)) {
       next.email = "メールアドレスの形式が正しくありません。";
     }
-    if (!state.phone.trim()) next.phone = "電話番号をご入力ください。";
-    if (!state.expertise.trim()) {
-      next.expertise = "ご紹介可能な業界・領域をご入力ください。";
+
+    if (!state.emailConfirm.trim()) {
+      next.emailConfirm = "確認用メールアドレスをご入力ください。";
+    } else if (state.email && state.email !== state.emailConfirm) {
+      next.emailConfirm = "メールアドレスが一致しません。";
     }
+
+    if (!state.phone.trim()) {
+      next.phone = "電話番号をご入力ください。";
+    } else if (!/^[0-9]+$/.test(state.phone)) {
+      next.phone = "半角数字・ハイフン無しでご入力ください。";
+    }
+
+    if (!state.birthYear || !state.birthMonth || !state.birthDay) {
+      next.birthdate = "生年月日をご選択ください。";
+    } else if (!isValidDate(state.birthYear, state.birthMonth, state.birthDay)) {
+      next.birthdate = "生年月日が正しくありません。";
+    } else if (!isAdult(state.birthYear, state.birthMonth, state.birthDay)) {
+      next.birthdate = "18歳未満および高校生はご登録いただけません。";
+    }
+
+    if (!state.gender) next.gender = "性別をご選択ください。";
+    if (!state.connections.trim()) {
+      next.connections = "お繋がりのある企業をご入力ください（最低1社）。";
+    }
+
+    if (!state.agreeTerms) next.agreeTerms = "利用規約への同意が必要です。";
+    if (!state.agreePrivacy)
+      next.agreePrivacy = "プライバシーポリシーへの同意が必要です。";
+    if (!state.agreeAntisocial)
+      next.agreeAntisocial = "反社会的勢力に該当しないことの同意が必要です。";
+    if (!state.agreeCompliance)
+      next.agreeCompliance = "副業規則・退職元との取り決め遵守の同意が必要です。";
+
     return next;
   }
 
@@ -85,36 +174,7 @@ export function PartnerContactForm({ locale }: Props) {
       return;
     }
     setErrors({});
-
-    const subject = `【紹介営業パートナー登録】${state.lastName} ${state.firstName} 様`;
-    const body = [
-      "■ お名前",
-      `${state.lastName} ${state.firstName}`,
-      ...(state.furigana ? ["", "■ フリガナ", state.furigana] : []),
-      "",
-      "■ メールアドレス",
-      state.email,
-      "",
-      "■ 電話番号",
-      state.phone,
-      "",
-      "■ 現在のご所属",
-      state.affiliation || "（未入力）",
-      "",
-      "■ 役職",
-      state.position || "（未入力）",
-      "",
-      "■ ご紹介可能な業界・領域",
-      state.expertise,
-      "",
-      "■ 過去のご紹介実績・強み",
-      state.achievements || "（未入力）",
-    ].join("\n");
-
-    const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
+    // NOTE: 現在は送信処理を行わず、UIのみ完了状態を表示する。
     setSubmitted(true);
   }
 
@@ -140,13 +200,9 @@ export function PartnerContactForm({ locale }: Props) {
         </div>
         <h2 className="mt-6 text-h2">登録申請を受け付けました</h2>
         <p className="mt-4 text-ink-soft leading-relaxed">
-          メールクライアントが起動した場合は、内容を確認のうえそのまま送信してください。
+          ご登録ありがとうございます。
           <br />
-          起動しなかった場合は{" "}
-          <a className="text-brand-600 underline" href={`mailto:${site.email}`}>
-            {site.email}
-          </a>{" "}
-          まで直接ご連絡ください。
+          内容を確認のうえ、担当者よりご連絡いたします。
         </p>
         <div className="mt-8 flex justify-center gap-3">
           <Button href={localePath("/", locale)} variant="secondary">
@@ -169,12 +225,12 @@ export function PartnerContactForm({ locale }: Props) {
     <form
       onSubmit={onSubmit}
       noValidate
-      className="space-y-6 rounded-xl2 border border-ink-line bg-white p-8 md:p-10"
+      className="space-y-8 rounded-xl2 border border-ink-line bg-white p-8 md:p-10"
     >
       {/* 氏名 */}
       <div>
         <p className="flex items-center gap-2 text-sm font-semibold text-ink">
-          氏名
+          お名前
           <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">
             必須
           </span>
@@ -203,104 +259,289 @@ export function PartnerContactForm({ locale }: Props) {
         </div>
       </div>
 
+      {/* メール */}
       <TextField
-        label="フリガナ"
-        name="furigana"
-        placeholder="ヤマダ タロウ"
-        value={state.furigana}
-        onChange={(e) => update("furigana", e.target.value)}
-      />
-
-      <div className="grid gap-6 md:grid-cols-2">
-        <TextField
-          label="メールアドレス"
-          name="email"
-          type="email"
-          required
-          autoComplete="email"
-          placeholder="example@example.com"
-          value={state.email}
-          onChange={(e) => update("email", e.target.value)}
-          error={errors.email}
-        />
-        <TextField
-          label="電話番号"
-          name="phone"
-          type="tel"
-          required
-          inputMode="tel"
-          autoComplete="tel"
-          placeholder="090-XXXX-XXXX"
-          value={state.phone}
-          onChange={(e) => update("phone", e.target.value)}
-          error={errors.phone}
-        />
-      </div>
-
-      <div className="grid gap-6 md:grid-cols-2">
-        <TextField
-          label="現在のご所属"
-          name="affiliation"
-          autoComplete="organization"
-          placeholder="株式会社○○ / 個人事業主 など"
-          value={state.affiliation}
-          onChange={(e) => update("affiliation", e.target.value)}
-        />
-        <TextField
-          label="役職・職種"
-          name="position"
-          autoComplete="organization-title"
-          placeholder="営業部 部長 / 経営者 など"
-          value={state.position}
-          onChange={(e) => update("position", e.target.value)}
-        />
-      </div>
-
-      <TextareaField
-        label="ご紹介可能な業界・領域"
-        name="expertise"
+        label="メールアドレス"
+        name="email"
+        type="email"
         required
-        hint="例：IT/SaaS、製造業、金融、地方の中小企業の経営層 など"
-        value={state.expertise}
-        onChange={(e) => update("expertise", e.target.value)}
-        error={errors.expertise}
+        autoComplete="email"
+        placeholder="example@example.com"
+        value={state.email}
+        onChange={(e) => update("email", e.target.value)}
+        error={errors.email}
       />
 
-      <TextareaField
-        label="過去のご紹介実績・強み"
-        name="achievements"
-        hint="ご経験や、過去にご紹介された業界・規模感などをご記入ください。"
-        value={state.achievements}
-        onChange={(e) => update("achievements", e.target.value)}
+      <TextField
+        label="メールアドレス（確認用）"
+        name="emailConfirm"
+        type="email"
+        required
+        autoComplete="email"
+        placeholder="example@example.com"
+        value={state.emailConfirm}
+        onChange={(e) => update("emailConfirm", e.target.value)}
+        error={errors.emailConfirm}
       />
 
-      <div className="rounded-xl border border-ink-line bg-cream p-5">
-        <label className="flex items-start gap-3 text-sm">
-          <input
-            type="checkbox"
-            name="agreement"
-            required
-            checked={state.agreement}
-            onChange={(e) => update("agreement", e.target.checked)}
-            className="mt-1 h-4 w-4 rounded border-ink-line text-brand-500 focus:ring-brand-500"
+      {/* 電話番号 */}
+      <TextField
+        label="電話番号"
+        name="phone"
+        type="tel"
+        required
+        inputMode="numeric"
+        autoComplete="tel"
+        placeholder="09012345678"
+        hint="半角数字・ハイフン無しでご入力ください。"
+        value={state.phone}
+        onChange={(e) => update("phone", e.target.value)}
+        error={errors.phone}
+      />
+
+      {/* 生年月日 */}
+      <div id="birthdate">
+        <p className="flex items-center gap-2 text-sm font-semibold text-ink">
+          生年月日
+          <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">
+            必須
+          </span>
+        </p>
+        <div className="mt-2 grid gap-3 sm:grid-cols-3">
+          <BirthSelect
+            name="birthYear"
+            value={state.birthYear}
+            placeholder="年"
+            options={yearOptions}
+            onChange={(v) => update("birthYear", v)}
+            ariaLabel="生年"
           />
-          <span className="text-ink-soft leading-relaxed">
-            <Link
-              href={localePath("/privacy", locale)}
-              className="underline underline-offset-4 text-brand-600"
-            >
-              プライバシーポリシー
-            </Link>
-            に同意して送信します。
+          <BirthSelect
+            name="birthMonth"
+            value={state.birthMonth}
+            placeholder="月"
+            options={monthOptions}
+            onChange={(v) => update("birthMonth", v)}
+            ariaLabel="生月"
+          />
+          <BirthSelect
+            name="birthDay"
+            value={state.birthDay}
+            placeholder="日"
+            options={dayOptions}
+            onChange={(v) => update("birthDay", v)}
+            ariaLabel="生日"
+          />
+        </div>
+        {errors.birthdate ? (
+          <p className="mt-2 text-xs text-red-600">{errors.birthdate}</p>
+        ) : null}
+        <p className="mt-2 text-xs text-ink-muted">
+          ※ 18歳未満および高校生はご登録いただけません。
+        </p>
+      </div>
+
+      {/* 性別 */}
+      <fieldset id="gender">
+        <legend className="flex items-center gap-2 text-sm font-semibold text-ink">
+          性別
+          <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">
+            必須
+          </span>
+        </legend>
+        <div className="mt-3 grid gap-2 sm:grid-cols-3">
+          {genderOptions.map((opt) => {
+            const checked = state.gender === opt.value;
+            return (
+              <label
+                key={opt.value}
+                className={cn(
+                  "flex cursor-pointer items-center gap-3 rounded-lg border px-4 py-3 text-sm transition",
+                  checked
+                    ? "border-brand-500 bg-brand-50/60"
+                    : "border-ink-line bg-white hover:border-ink",
+                )}
+              >
+                <input
+                  type="radio"
+                  name="gender"
+                  value={opt.value}
+                  checked={checked}
+                  onChange={() => update("gender", opt.value)}
+                  className="h-4 w-4 text-brand-500 focus:ring-brand-500"
+                />
+                <span className="font-medium">{opt.label}</span>
+              </label>
+            );
+          })}
+        </div>
+        {errors.gender ? (
+          <p className="mt-2 text-xs text-red-600">{errors.gender}</p>
+        ) : null}
+      </fieldset>
+
+      {/* お繋がりのある企業 */}
+      <div>
+        <label
+          htmlFor="connections"
+          className="flex items-center gap-2 text-sm font-semibold text-ink"
+        >
+          お繋がりのある企業
+          <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">
+            必須
           </span>
         </label>
+        <textarea
+          id="connections"
+          name="connections"
+          rows={5}
+          required
+          placeholder={"例：\n・株式会社○○（製造業／代表取締役）\n・株式会社△△（IT／執行役員）"}
+          value={state.connections}
+          onChange={(e) => update("connections", e.target.value)}
+          className="mt-2 block w-full resize-y rounded-lg border border-ink-line bg-white px-4 py-3 text-sm text-ink placeholder:text-ink-muted focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200 transition"
+        />
+        <p className="mt-1.5 text-xs text-ink-muted">
+          最低1社、ご紹介可能な企業を業種・規模感とともにご記入ください。
+        </p>
+        {errors.connections ? (
+          <p className="mt-1.5 text-xs text-red-600">{errors.connections}</p>
+        ) : null}
       </div>
 
-      <div>
+      {/* 同意チェック */}
+      <div className="space-y-4 rounded-xl border border-ink-line bg-cream p-6">
+        <AgreementCheckbox
+          id="agreeTerms"
+          checked={state.agreeTerms}
+          onChange={(v) => update("agreeTerms", v)}
+          error={errors.agreeTerms}
+        >
+          <Link
+            href={localePath("/terms", locale)}
+            className="underline underline-offset-4 text-brand-600"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            利用規約
+          </Link>
+          に同意します。
+        </AgreementCheckbox>
+
+        <AgreementCheckbox
+          id="agreePrivacy"
+          checked={state.agreePrivacy}
+          onChange={(v) => update("agreePrivacy", v)}
+          error={errors.agreePrivacy}
+        >
+          <Link
+            href={localePath("/privacy", locale)}
+            className="underline underline-offset-4 text-brand-600"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            プライバシーポリシー
+          </Link>
+          に同意します。
+        </AgreementCheckbox>
+
+        <AgreementCheckbox
+          id="agreeAntisocial"
+          checked={state.agreeAntisocial}
+          onChange={(v) => update("agreeAntisocial", v)}
+          error={errors.agreeAntisocial}
+        >
+          反社会的勢力に属していないことを誓約します。
+        </AgreementCheckbox>
+
+        <AgreementCheckbox
+          id="agreeCompliance"
+          checked={state.agreeCompliance}
+          onChange={(v) => update("agreeCompliance", v)}
+          error={errors.agreeCompliance}
+        >
+          所属企業の副業規則および退職元との取り決めに違反していないことを誓約します。
+        </AgreementCheckbox>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-3">
         <Button type="submit" size="lg">
-          登録申請する
+          登録申請を送信
         </Button>
+        <Link
+          href={localePath("/contact/partner", locale)}
+          className="text-sm font-semibold text-ink-soft hover:text-ink"
+        >
+          ← 紹介営業パートナーの説明に戻る
+        </Link>
       </div>
     </form>
+  );
+}
+
+function BirthSelect({
+  name,
+  value,
+  placeholder,
+  options,
+  onChange,
+  ariaLabel,
+}: {
+  name: string;
+  value: string;
+  placeholder: string;
+  options: { value: string; label: string }[];
+  onChange: (v: string) => void;
+  ariaLabel: string;
+}) {
+  return (
+    <select
+      name={name}
+      value={value}
+      aria-label={ariaLabel}
+      required
+      onChange={(e) => onChange(e.target.value)}
+      className="block w-full rounded-lg border border-ink-line bg-white px-4 py-3 pr-10 text-sm text-ink focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-200 transition"
+    >
+      <option value="" disabled>
+        {placeholder}
+      </option>
+      {options.map((o) => (
+        <option key={o.value} value={o.value}>
+          {o.label}
+        </option>
+      ))}
+    </select>
+  );
+}
+
+function AgreementCheckbox({
+  id,
+  checked,
+  onChange,
+  error,
+  children,
+}: {
+  id: string;
+  checked: boolean;
+  onChange: (v: boolean) => void;
+  error?: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <label className="flex cursor-pointer items-start gap-3 text-sm">
+        <input
+          id={id}
+          type="checkbox"
+          required
+          checked={checked}
+          onChange={(e) => onChange(e.target.checked)}
+          className="mt-1 h-4 w-4 rounded border-ink-line text-brand-500 focus:ring-brand-500"
+        />
+        <span className="text-ink-soft leading-relaxed">{children}</span>
+      </label>
+      {error ? <p className="mt-1.5 pl-7 text-xs text-red-600">{error}</p> : null}
+    </div>
   );
 }
