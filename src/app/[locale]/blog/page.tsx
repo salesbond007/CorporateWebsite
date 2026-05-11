@@ -59,7 +59,6 @@ export default async function BlogPage({
       <PageHero
         eyebrow="Insights"
         title="記事・お知らせ"
-        description="TODO: ブログ・お知らせ一覧のリード文。SEO目的のキーワードを盛り込む。"
       />
 
       <section className="py-20 md:py-28">
