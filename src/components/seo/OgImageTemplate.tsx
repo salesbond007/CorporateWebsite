@@ -52,11 +52,11 @@ export function OgImageTemplate({ eyebrow, title, subtitle }: Props) {
       <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`${site.url.replace(/\/$/, "")}/logo.png`}
+          src={`${site.url.replace(/\/$/, "")}/logo-square.jpg`}
           alt=""
-          width={64}
-          height={64}
-          style={{ display: "block" }}
+          width={80}
+          height={80}
+          style={{ display: "block", borderRadius: 14 }}
         />
         <div
           style={{

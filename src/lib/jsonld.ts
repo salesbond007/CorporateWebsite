@@ -11,7 +11,7 @@ export function organizationJsonLd() {
     legalName: site.legalName,
     alternateName: site.legalNameEn,
     url: base,
-    logo: `${base}/logo.png`,
+    logo: `${base}/logo-square.jpg`,
     description: site.description,
     email: site.email,
     foundingDate: site.founded,
@@ -81,7 +81,7 @@ export function articleJsonLd(article: Article) {
       name: site.name,
       logo: {
         "@type": "ImageObject",
-        url: `${base}/logo.png`,
+        url: `${base}/logo-square.jpg`,
       },
     },
   };
