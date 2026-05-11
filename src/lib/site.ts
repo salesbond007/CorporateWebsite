@@ -17,7 +17,7 @@ export const site = {
     country: "JP",
   },
   founded: "2024-07",
-  corporateNumber: "8012801023311",
+  registrationNumber: "T8012801023311",
 } as const;
 
 export type NavKey =
