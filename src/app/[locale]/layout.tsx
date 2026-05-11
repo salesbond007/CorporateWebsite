@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { M_PLUS_Rounded_1c } from "next/font/google";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -91,6 +93,8 @@ export default function LocaleLayout({
         <main id="main">{children}</main>
         <Footer locale={locale} dict={dict} />
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
