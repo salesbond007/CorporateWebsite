@@ -102,10 +102,11 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h3 className="text-xs font-extrabold uppercase tracking-[0.2em] text-white/85">
+      <h3 className="text-sm font-extrabold uppercase tracking-[0.2em] text-white">
         {title}
       </h3>
-      <ul className="mt-4 space-y-2.5 text-sm font-bold">{children}</ul>
+      <div className="mt-2 h-[3px] w-10 rounded-full bg-white/90" aria-hidden="true" />
+      <ul className="mt-5 space-y-2.5 text-sm font-bold">{children}</ul>
     </div>
   );
 }
