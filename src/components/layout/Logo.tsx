@@ -31,10 +31,10 @@ export function Logo({
       <Image
         src="/logo.png"
         alt={dict.site.name}
-        width={540}
-        height={540}
+        width={2938}
+        height={1440}
         priority
-        sizes="(max-width: 768px) 40px, 44px"
+        sizes="(max-width: 768px) 100px, 130px"
         className={cn(
           "w-auto select-none",
           size,
