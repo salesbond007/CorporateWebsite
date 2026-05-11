@@ -68,10 +68,10 @@ export default function ServicesPage({
 
                     {/* Content */}
                     <div className="md:col-span-6">
-                      <p className="text-3xl md:text-4xl font-extrabold text-brand-600 leading-[1.15]">
+                      <p className="text-sm md:text-base font-bold text-brand-600">
                         {s.subtitle}
                       </p>
-                      <h2 className="mt-3 text-base md:text-lg font-bold text-ink-muted group-hover:text-brand-600 transition-colors">
+                      <h2 className="mt-2 text-2xl md:text-3xl font-black text-ink leading-tight group-hover:text-brand-600 transition-colors">
                         {s.title}
                       </h2>
                       <p className="mt-5 text-sm md:text-base text-ink leading-relaxed font-medium">
