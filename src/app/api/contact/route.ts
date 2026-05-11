@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { Resend } from "resend";
 import {
   businessContactSchema,
+  generalContactSchema,
   professionalContactSchema,
   type ContactFormType,
 } from "@/lib/contact";
@@ -24,25 +25,91 @@ function escapeHtml(value: string) {
     .replace(/'/g, "&#39;");
 }
 
+const fieldLabels: Record<string, string> = {
+  company: "会社名",
+  lastName: "姓",
+  firstName: "名",
+  name: "お名前",
+  furigana: "フリガナ",
+  email: "メールアドレス",
+  phone: "電話番号",
+  department: "部署",
+  position: "役職",
+  employeeCount: "従業員数",
+  inquiryType: "お問い合わせ種別",
+  serviceTypes: "対象サービス",
+  message: "お問い合わせ内容",
+  expertise: "専門分野",
+  experienceYears: "経験年数",
+  workStyle: "希望稼働形態",
+  portfolio: "ポートフォリオURL",
+  budget: "予算",
+};
+
+const enumLabels: Record<string, Record<string, string>> = {
+  position: {
+    executive: "経営者・役員",
+    "general-manager": "部長",
+    manager: "課長",
+    "section-chief": "係長・主任",
+    staff: "一般社員",
+    contract: "契約・嘱託・派遣等",
+    other: "その他",
+  },
+  employeeCount: {
+    "1": "1人、個人事業主",
+    "2-5": "2〜5人",
+    "6-30": "従業員数6〜30人",
+    "31-200": "従業員数31〜200人",
+    "201-600": "従業員数201〜600人",
+    "601-2000": "従業員数601〜2,000人",
+    "2001-plus": "従業員数2,001人以上",
+  },
+  inquiryType: {
+    service: "サービスについて",
+    partnership: "協業について",
+    proposal: "ご提案 / 営業",
+    other: "その他",
+    estimate: "お見積り依頼",
+  },
+  serviceTypes: {
+    "sales-bond": "セールスボンド（大手決裁者紹介サービス）",
+    "keyman-bond": "キーマンボンド（プロ人材マッチングサービス）",
+    "lead-bond": "リードボンド（インサイドセールス代行サービス）",
+  },
+};
+
+function humanize(key: string, value: unknown): string {
+  if (Array.isArray(value)) {
+    const map = enumLabels[key];
+    return value.map((v) => (map?.[String(v)] ?? String(v))).join(" / ");
+  }
+  const str = String(value ?? "");
+  const map = enumLabels[key];
+  return map?.[str] ?? str;
+}
+
 function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
   const rows = Object.entries(data)
-    .filter(([key]) => key !== "website" && key !== "agreement")
-    .map(
-      ([key, value]) => `
+    .filter(([key]) => key !== "website" && key !== "agreement" && key !== "type")
+    .map(([key, value]) => {
+      const label = fieldLabels[key] ?? key;
+      const display = humanize(key, value);
+      return `
         <tr>
-          <th align="left" style="padding:8px 12px;background:#FAF7F2;border-bottom:1px solid #E6E6E6;">${escapeHtml(
-            key,
-          )}</th>
-          <td style="padding:8px 12px;border-bottom:1px solid #E6E6E6;white-space:pre-wrap;">${escapeHtml(
-            String(value ?? ""),
-          )}</td>
+          <th align="left" style="padding:10px 14px;background:#FAF7F2;border-bottom:1px solid #E6E6E6;width:160px;">${escapeHtml(label)}</th>
+          <td style="padding:10px 14px;border-bottom:1px solid #E6E6E6;white-space:pre-wrap;">${escapeHtml(display)}</td>
         </tr>
-      `,
-    )
+      `;
+    })
     .join("");
 
   const heading =
-    type === "business" ? "企業様お問い合わせ" : "プロ人材お問い合わせ";
+    type === "business"
+      ? "企業様お問い合わせ"
+      : type === "professional"
+        ? "プロ人材お問い合わせ"
+        : "お問い合わせ（企業）";
 
   return `<!doctype html>
   <html><body style="font-family:-apple-system,'Segoe UI',sans-serif;color:#1A1A1A;">
@@ -64,11 +131,16 @@ export async function POST(req: Request) {
   const body = (payload ?? {}) as { type?: ContactFormType } & Record<string, unknown>;
   const type = body.type;
 
-  if (type !== "business" && type !== "professional") {
+  if (type !== "business" && type !== "professional" && type !== "general") {
     return NextResponse.json({ error: "Invalid form type" }, { status: 400 });
   }
 
-  const schema = type === "business" ? businessContactSchema : professionalContactSchema;
+  const schema =
+    type === "business"
+      ? businessContactSchema
+      : type === "professional"
+        ? professionalContactSchema
+        : generalContactSchema;
   const parsed = schema.safeParse(body);
 
   if (!parsed.success) {
@@ -86,11 +158,13 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   }
 
-  const to = type === "business" ? toBusiness : toProfessional;
+  const to = type === "professional" ? toProfessional : toBusiness;
   const subject =
     type === "business"
       ? "【企業様お問い合わせ】新規受信"
-      : "【プロ人材お問い合わせ】新規受信";
+      : type === "professional"
+        ? "【プロ人材お問い合わせ】新規受信"
+        : "【お問い合わせ（企業）】新規受信";
 
   if (!resend) {
     console.warn("[contact] RESEND_API_KEY is not set. Logging form data instead.");

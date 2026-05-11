@@ -5,7 +5,6 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { TextField, TextareaField, SelectField } from "./Field";
 import { localePath } from "@/i18n/path";
-import { site } from "@/lib/site";
 import { cn } from "@/lib/cn";
 import { isEmailFormat, isFreeEmail } from "@/lib/email";
 import type { Locale } from "@/i18n/config";
@@ -87,6 +86,8 @@ export function SimpleContactForm({ locale }: Props) {
   const [state, setState] = useState<FormState>(initial);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
 
   function update<K extends keyof FormState>(key: K, value: FormState[K]) {
     setState((s) => ({ ...s, [key]: value }));
@@ -129,7 +130,7 @@ export function SimpleContactForm({ locale }: Props) {
     return next;
   }
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const next = validate();
     if (Object.keys(next).length > 0) {
@@ -145,56 +146,52 @@ export function SimpleContactForm({ locale }: Props) {
     }
     setErrors({});
 
-    const inquiryLabel = inquiryTypeLabels[state.inquiryType as InquiryType];
-    const serviceLabels =
-      state.inquiryType === "service"
-        ? serviceOptions
-            .filter((o) => state.serviceTypes.includes(o.id))
-            .map((o) => `・${o.label}`)
-        : [];
-    const positionLabel =
-      positionOptions.find((p) => p.value === state.position)?.label ?? state.position;
-    const employeeLabel =
-      employeeCountOptions.find((p) => p.value === state.employeeCount)?.label ??
-      state.employeeCount;
+    setSending(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "general",
+          company: state.company,
+          lastName: state.lastName,
+          firstName: state.firstName,
+          email: state.email,
+          phone: state.phone,
+          department: state.department,
+          position: state.position,
+          employeeCount: state.employeeCount,
+          inquiryType: state.inquiryType,
+          serviceTypes:
+            state.inquiryType === "service" ? state.serviceTypes : [],
+          message: state.message,
+          agreement: state.agreement ? "on" : "",
+          website: "",
+        }),
+      });
 
-    // Frontend-only: compose a mailto: with the form contents.
-    const subject = `【お問い合わせ／企業】${state.company} ${state.lastName} ${state.firstName} 様`;
-    const body = [
-      "■ 会社名",
-      state.company,
-      "",
-      "■ 氏名",
-      `${state.lastName} ${state.firstName}`,
-      "",
-      "■ メールアドレス",
-      state.email,
-      "",
-      "■ 電話番号",
-      state.phone,
-      "",
-      "■ 部署",
-      state.department || "（未入力）",
-      "",
-      "■ 役職",
-      positionLabel,
-      "",
-      "■ 従業員数",
-      employeeLabel,
-      "",
-      "■ お問い合わせ種別",
-      inquiryLabel,
-      ...(serviceLabels.length > 0 ? ["", ...serviceLabels] : []),
-      "",
-      "■ 問い合わせ内容",
-      state.message || "（未入力）",
-    ].join("\n");
+      const json: { ok?: boolean; error?: string; issues?: Record<string, string[]> } =
+        await res.json().catch(() => ({}));
 
-    const mailto = `mailto:${site.email}?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailto;
-    setSubmitted(true);
+      if (!res.ok || !json.ok) {
+        const issueText =
+          json.issues && Object.values(json.issues).flat()[0];
+        setSendError(
+          issueText ??
+            json.error ??
+            "送信に失敗しました。時間をおいて再度お試しください。",
+        );
+        setSending(false);
+        return;
+      }
+
+      setSubmitted(true);
+    } catch (err) {
+      console.error("[SimpleContactForm] submit failed", err);
+      setSendError("通信エラーが発生しました。時間をおいて再度お試しください。");
+    } finally {
+      setSending(false);
+    }
   }
 
   if (submitted) {
@@ -217,15 +214,11 @@ export function SimpleContactForm({ locale }: Props) {
             />
           </svg>
         </div>
-        <h2 className="mt-6 text-h2">送信を受け付けました</h2>
+        <h2 className="mt-6 text-h2">送信が完了しました</h2>
         <p className="mt-4 text-ink-soft leading-relaxed">
-          メールクライアントが起動した場合は、内容を確認のうえそのまま送信してください。
+          お問い合わせありがとうございます。
           <br />
-          起動しなかった場合は{" "}
-          <a className="text-brand-600 underline" href={`mailto:${site.email}`}>
-            {site.email}
-          </a>{" "}
-          まで直接ご連絡ください。
+          内容を確認のうえ、担当者よりご連絡いたします。
         </p>
         <div className="mt-8 flex justify-center gap-3">
           <Button href={localePath("/", locale)} variant="secondary">
@@ -454,9 +447,18 @@ export function SimpleContactForm({ locale }: Props) {
         </label>
       </div>
 
+      {sendError ? (
+        <p
+          role="alert"
+          className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700"
+        >
+          {sendError}
+        </p>
+      ) : null}
+
       <div>
-        <Button type="submit" size="lg">
-          送信する
+        <Button type="submit" size="lg" disabled={sending}>
+          {sending ? "送信中..." : "送信する"}
         </Button>
       </div>
     </form>
