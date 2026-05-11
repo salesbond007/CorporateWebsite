@@ -69,12 +69,19 @@ test.describe("Contact form (general)", () => {
   });
 });
 
-test.describe("Contact form (professional)", () => {
-  test("renders professional-specific fields", async ({ page }) => {
+test.describe("Coming-soon pages", () => {
+  test("/contact/professional shows Coming Soon", async ({ page }) => {
     await page.goto("/ja/contact/professional");
-    await expect(
-      page.getByLabel("専門分野・職種", { exact: false }),
-    ).toBeVisible();
-    await expect(page.locator("select[name='workStyle']")).toBeVisible();
+    await expect(page.getByText("Coming Soon")).toBeVisible();
+  });
+
+  test("/contact/partner shows Coming Soon", async ({ page }) => {
+    await page.goto("/ja/contact/partner");
+    await expect(page.getByText("Coming Soon")).toBeVisible();
+  });
+
+  test("/services/sales-bond shows Coming Soon", async ({ page }) => {
+    await page.goto("/ja/services/sales-bond");
+    await expect(page.getByText("Coming Soon")).toBeVisible();
   });
 });
