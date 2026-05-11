@@ -33,7 +33,6 @@ export default function ServicesPage({
       <PageHero
         eyebrow="Services"
         title="サービス概要"
-        description="セールスボンドは事業拡大における不可能を可能にします。"
       />
 
       <section className="py-24 md:py-32">
