@@ -41,8 +41,8 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
   return (
     <>
       <PageHero
-        eyebrow={`Service ${service.number} / ${service.subtitle}`}
-        title={service.title}
+        eyebrow={`Service ${service.number} / ${service.title}`}
+        title={service.subtitle}
         description={service.summary}
       />
 
@@ -108,10 +108,10 @@ export default function ServiceDetailPage({ params }: { params: Params }) {
                     <span className="font-display text-sm font-bold text-brand-500">
                       {s.number}
                     </span>
-                    <p className="mt-1 text-xs font-semibold text-brand-600">
+                    <p className="mt-2 text-xl font-extrabold text-brand-600 group-hover:text-brand-700">
                       {s.subtitle}
                     </p>
-                    <p className="mt-1 text-lg font-bold group-hover:text-brand-600">
+                    <p className="mt-1 text-sm font-bold text-ink-muted">
                       {s.title}
                     </p>
                   </div>

@@ -68,21 +68,21 @@ export default function ServicesPage({
 
                     {/* Content */}
                     <div className="md:col-span-6">
-                      <p className="text-2xl md:text-3xl font-bold text-brand-600 leading-tight">
+                      <p className="text-3xl md:text-4xl font-extrabold text-brand-600 leading-[1.15]">
                         {s.subtitle}
                       </p>
-                      <h2 className="mt-2 text-lg md:text-xl font-bold text-ink group-hover:text-brand-600 transition-colors">
+                      <h2 className="mt-3 text-base md:text-lg font-bold text-ink-muted group-hover:text-brand-600 transition-colors">
                         {s.title}
                       </h2>
-                      <p className="mt-4 text-sm text-ink-soft leading-relaxed">
+                      <p className="mt-5 text-sm md:text-base text-ink leading-relaxed font-medium">
                         {s.summary}
                       </p>
-                      <ul className="mt-4 space-y-1.5 text-sm text-ink-muted">
+                      <ul className="mt-4 space-y-1.5 text-sm text-ink-soft">
                         {s.features.map((f) => (
                           <li key={f} className="flex gap-2">
                             <span
                               aria-hidden="true"
-                              className="mt-2 inline-block h-1 w-1 shrink-0 rounded-full bg-brand-500"
+                              className="mt-2 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-brand-500"
                             />
                             <span>{f}</span>
                           </li>

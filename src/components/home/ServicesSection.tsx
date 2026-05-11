@@ -49,13 +49,13 @@ export function ServicesSection({ locale, dict }: Props) {
                       →
                     </span>
                   </div>
-                  <p className="mt-10 text-xs font-extrabold uppercase tracking-[0.15em] text-brand-500">
+                  <p className="mt-10 text-xl md:text-2xl font-extrabold leading-tight text-brand-500">
                     {s.subtitle}
                   </p>
-                  <h3 className="mt-2 text-2xl font-black text-ink">
+                  <h3 className="mt-2 text-base font-bold text-ink-muted">
                     {s.title}
                   </h3>
-                  <div className="mt-3 h-1 w-12 rounded-full bg-brand-500" aria-hidden="true" />
+                  <div className="mt-4 h-1 w-12 rounded-full bg-brand-500" aria-hidden="true" />
                   <p className="mt-5 text-sm leading-relaxed text-ink font-medium">
                     {s.summary}
                   </p>
