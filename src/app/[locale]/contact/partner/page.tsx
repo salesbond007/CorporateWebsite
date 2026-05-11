@@ -5,6 +5,12 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import {
+  Squiggle,
+  Sparkle,
+  CircleScribble,
+  DotsDecoration,
+} from "@/components/ui/Doodle";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
@@ -14,30 +20,119 @@ export const metadata: Metadata = {
     "セールスボンドの紹介営業パートナー(サポーター)制度。お持ちの人脈を活かして、企業の決裁者開拓にご協力いただける方を募集しています。登録費用無料・完全成果報酬。",
 };
 
+type Stat = {
+  value: string;
+  unit?: string;
+  label: string;
+};
+
+const stats: Stat[] = [
+  { value: "0", unit: "円", label: "登録・利用料" },
+  { value: "0", unit: "件", label: "ノルマ・最低件数" },
+  { value: "2", unit: "種", label: "報酬(紹介+成約)" },
+  { value: "成果", label: "報酬発生のタイミング" },
+];
+
 type Benefit = {
   number: string;
   title: string;
   description: string;
+  icon: React.ReactNode;
+  highlight?: boolean;
 };
+
+function IconZero() {
+  return (
+    <svg viewBox="0 0 48 48" className="h-12 w-12" aria-hidden="true">
+      <circle cx="24" cy="24" r="20" fill="#FFE7D1" />
+      <circle cx="24" cy="24" r="14" fill="none" stroke="#F58220" strokeWidth="2.5" />
+      <path
+        d="M14 14 L34 34"
+        stroke="#F58220"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function IconShield() {
+  return (
+    <svg viewBox="0 0 48 48" className="h-12 w-12" aria-hidden="true">
+      <path
+        d="M24 4 L42 12 V24 C42 34 34 42 24 44 C14 42 6 34 6 24 V12 Z"
+        fill="#FFE7D1"
+      />
+      <path
+        d="M24 4 L42 12 V24 C42 34 34 42 24 44 C14 42 6 34 6 24 V12 Z"
+        fill="none"
+        stroke="#F58220"
+        strokeWidth="2"
+      />
+      <path
+        d="M16 24 L22 30 L34 18"
+        stroke="#F58220"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+    </svg>
+  );
+}
+
+function IconDoubleCoin() {
+  return (
+    <svg viewBox="0 0 48 48" className="h-12 w-12" aria-hidden="true">
+      <circle cx="18" cy="20" r="12" fill="#FFE7D1" />
+      <circle cx="18" cy="20" r="12" fill="none" stroke="#F58220" strokeWidth="2" />
+      <text
+        x="18"
+        y="25"
+        fontSize="13"
+        fontWeight="900"
+        fill="#F58220"
+        textAnchor="middle"
+      >
+        ¥
+      </text>
+      <circle cx="32" cy="30" r="12" fill="#F58220" />
+      <text
+        x="32"
+        y="35"
+        fontSize="13"
+        fontWeight="900"
+        fill="#FFF"
+        textAnchor="middle"
+      >
+        ¥
+      </text>
+    </svg>
+  );
+}
 
 const benefits: Benefit[] = [
   {
     number: "01",
-    title: "登録費用は完全無料",
+    title: "完全無料・ノルマなし",
     description:
-      "登録に費用は一切かかりません。ノルマも無く、ご自身のペースで活動いただけます。",
+      "登録費・月会費・成果ノルマ、すべてゼロ。動かない月があってもペナルティはありません。自分のペースで取り組める設計です。",
+    icon: <IconZero />,
+    highlight: true,
   },
   {
     number: "02",
-    title: "個人情報は厳重に保護",
+    title: "個人情報は当社が保護",
     description:
-      "お名前は紹介を承諾したクライアント企業のみに開示。連絡先は当社で管理し、紹介先には非公開です。",
+      "お名前は紹介承諾後にのみ開示。連絡先(電話・メール)は当社で管理し、紹介先には一切渡しません。",
+    icon: <IconShield />,
   },
   {
     number: "03",
-    title: "紹介+成約のダブル報酬",
+    title: "2段階の協力金",
     description:
-      "商談実施で発生する紹介協力金に加え、紹介先との成約時には成約協力金を追加でお支払いします。",
+      "商談実施で発生する紹介協力金に加え、成約時には成約協力金を別途お支払い。1件の紹介で2回の報酬チャンスがあります。",
+    icon: <IconDoubleCoin />,
   },
 ];
 
@@ -49,28 +144,48 @@ type Step = {
 
 const steps: Step[] = [
   {
-    number: "STEP 1",
-    title: "パートナー登録",
-    description:
-      "本ページの登録フォームから無料で登録。当社で内容を確認後、ご連絡いたします。",
+    number: "01",
+    title: "登録申請",
+    description: "本ページのフォームから無料で登録。",
   },
   {
-    number: "STEP 2",
-    title: "紹介依頼を受け取る",
-    description:
-      "当社クライアント企業からの開拓ニーズに合わせ、適合する依頼をお送りします。",
+    number: "02",
+    title: "依頼が届く",
+    description: "クライアントの開拓ニーズに合う依頼をお送りします。",
   },
   {
-    number: "STEP 3",
-    title: "紹介先とのマッチング",
-    description:
-      "お持ちの人脈の中から紹介可能な企業をご提案。当社が商談セッティングまでサポートします。",
+    number: "03",
+    title: "マッチング",
+    description: "お持ちの人脈から紹介先をご提案いただきます。",
   },
   {
-    number: "STEP 4",
-    title: "報酬の受け取り",
-    description:
-      "商談実施で紹介協力金、成約時には成約協力金が発生。月次でお支払いします。",
+    number: "04",
+    title: "報酬受け取り",
+    description: "商談実施 → 成約に応じて協力金が発生します。",
+  },
+];
+
+type Persona = {
+  emoji: string;
+  title: string;
+  body: string;
+};
+
+const personas: Persona[] = [
+  {
+    emoji: "01",
+    title: "経営者・幹部との人脈をお持ちの方",
+    body: "コンサルタント、士業、元営業役員、独立支援家。お持ちのネットワークを資産として活かせます。",
+  },
+  {
+    emoji: "02",
+    title: "副業・複業として収入を増やしたい方",
+    body: "現職を続けながら、自分のペースで取り組める仕組み。月1件の紹介から始められます。",
+  },
+  {
+    emoji: "03",
+    title: "人と人をつなぐ仕事に価値を感じる方",
+    body: "紹介を通じて、企業の課題解決と人のキャリアに貢献したい方。社会的意義のある活動です。",
   },
 ];
 
@@ -120,153 +235,343 @@ export default function PartnerContactPage({
         description="あなたの人脈で、企業の事業成長を加速する。お持ちのネットワークを活かして、クライアント企業の決裁者開拓にご協力いただける方を募集しています。"
       />
 
-      {/* Overview */}
-      <section className="py-20 md:py-28">
-        <Container>
-          <div className="grid items-start gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-5">
-              <p className="section-label">About</p>
-              <h2 className="mt-3 text-display-3 text-ink font-black">
-                紹介営業パートナーとは
-              </h2>
-            </div>
-            <div className="lg:col-span-7 space-y-5 text-base md:text-lg leading-[1.95] text-ink font-medium">
-              <p>
-                セールスボンドの紹介営業パートナー制度は、お持ちの人脈を活かしてクライアント企業の事業開拓にご協力いただく仕組みです。
-              </p>
-              <p>
-                <span className="marker font-bold">登録は無料・完全成果報酬</span>
-                。商談の実施・成約に応じて協力金をお支払いします。ノルマや義務はなく、ご自身のペースで活動いただけます。
-              </p>
-            </div>
+      {/* ───── Manifesto ───── */}
+      <section className="relative overflow-hidden py-24 md:py-32">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 dot-bg-soft opacity-60"
+        />
+        <Container className="relative">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+              <span>The idea</span>
+              <Squiggle className="h-3 w-12" />
+            </p>
+            <h2 className="mt-6 font-display text-[clamp(2rem,5vw,3.75rem)] font-black leading-[1.15] tracking-tight text-ink">
+              眠っている人脈を、
+              <br className="hidden md:block" />
+              <span className="relative inline-block">
+                <span className="relative z-10">価値ある機会</span>
+                <CircleScribble className="absolute -inset-x-2 -inset-y-2 h-[120%] w-[110%]" />
+              </span>
+              に。
+            </h2>
+            <p className="mx-auto mt-10 max-w-2xl text-base md:text-lg leading-[2] text-ink-soft font-medium">
+              ビジネスは「誰を知っているか」で動きます。
+              <br className="hidden md:block" />
+              あなたが積み重ねてきた信頼と関係性は、
+              <span className="marker font-bold">それ自体が事業資産</span>
+              です。
+              <br className="hidden md:block" />
+              セールスボンドは、その資産をクライアント企業の成長と、あなた自身の収入へと結びつけます。
+            </p>
           </div>
         </Container>
       </section>
 
-      {/* Benefits */}
-      <section className="bg-cream py-24 md:py-32">
+      {/* ───── Stats ───── */}
+      <section className="relative bg-ink py-20 md:py-24 text-white overflow-hidden">
+        <Sparkle className="absolute left-8 top-10 h-6 w-6 opacity-60" />
+        <DotsDecoration className="absolute right-12 bottom-12 h-16 w-16 opacity-50" />
+        <Container className="relative">
+          <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+            {stats.map((s, i) => (
+              <Reveal key={s.label} delay={i * 80}>
+                <div className="border-l-2 border-brand-500 pl-5">
+                  <p className="font-display font-black leading-none text-white text-[clamp(3rem,6vw,5rem)]">
+                    {s.value}
+                    {s.unit ? (
+                      <span className="ml-1 text-2xl md:text-3xl text-brand-500 font-black">
+                        {s.unit}
+                      </span>
+                    ) : null}
+                  </p>
+                  <p className="mt-4 text-xs font-bold uppercase tracking-[0.18em] text-white/60">
+                    {s.label}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ───── 3 Benefits — mixed layout ───── */}
+      <section className="py-28 md:py-36">
         <Container>
-          <div className="text-center">
-            <p className="section-label">Benefits</p>
-            <h2 className="mt-3 text-display-3 text-ink font-black">
-              パートナー登録の3つのメリット
-            </h2>
+          <div className="grid items-end gap-10 md:grid-cols-12 md:gap-12">
+            <div className="md:col-span-5">
+              <p className="section-label">Benefits</p>
+              <h2 className="mt-4 text-display-3 text-ink font-black">
+                安心して、
+                <br />
+                取り組める設計
+              </h2>
+            </div>
+            <p className="md:col-span-7 text-base md:text-lg leading-[1.95] text-ink-soft font-medium">
+              「副業として始めたいけれど、何かトラブルにならないか不安」「個人情報がどこまで開示されるのか心配」——そんな声に応えるため、参加者を守る仕組みを徹底しています。
+            </p>
           </div>
 
-          <ul className="mt-16 grid gap-6 md:grid-cols-3">
+          {/* 1 feature card + 2 smaller cards */}
+          <div className="mt-14 grid gap-6 lg:grid-cols-12">
             {benefits.map((b, i) => (
-              <li key={b.number}>
+              <div
+                key={b.number}
+                className={
+                  b.highlight
+                    ? "lg:col-span-12 lg:row-span-1"
+                    : "lg:col-span-6"
+                }
+              >
                 <Reveal delay={i * 100} className="h-full">
-                  <div className="h-full rounded-xl3 border-2 border-ink-line bg-white p-8 md:p-10">
-                    <span className="text-3xl font-black text-brand-500 leading-none">
-                      {b.number}
-                    </span>
-                    <div
-                      className="mt-6 h-1 w-12 rounded-full bg-brand-500"
-                      aria-hidden="true"
-                    />
-                    <h3 className="mt-6 text-xl md:text-2xl font-black text-ink leading-tight">
-                      {b.title}
-                    </h3>
-                    <p className="mt-4 text-sm md:text-base leading-relaxed text-ink font-medium">
-                      {b.description}
-                    </p>
+                  <div
+                    className={
+                      b.highlight
+                        ? "relative h-full overflow-hidden rounded-xl4 bg-brand-500 p-10 md:p-12 text-white"
+                        : "relative h-full overflow-hidden rounded-xl4 border-2 border-ink bg-white p-10 md:p-12"
+                    }
+                  >
+                    <div className="flex items-start justify-between gap-6">
+                      <div className="flex-1">
+                        <p
+                          className={
+                            b.highlight
+                              ? "font-display text-5xl md:text-6xl font-black leading-none text-white/90"
+                              : "font-display text-5xl md:text-6xl font-black leading-none text-brand-500"
+                          }
+                        >
+                          {b.number}
+                        </p>
+                        <h3
+                          className={
+                            b.highlight
+                              ? "mt-8 text-2xl md:text-3xl font-black text-white leading-tight"
+                              : "mt-8 text-2xl md:text-3xl font-black text-ink leading-tight"
+                          }
+                        >
+                          {b.title}
+                        </h3>
+                        <p
+                          className={
+                            b.highlight
+                              ? "mt-5 max-w-2xl text-base leading-relaxed text-white/90 font-medium"
+                              : "mt-5 text-base leading-relaxed text-ink-soft font-medium"
+                          }
+                        >
+                          {b.description}
+                        </p>
+                      </div>
+                      <div
+                        className={
+                          b.highlight
+                            ? "shrink-0 rounded-2xl bg-white/15 p-4"
+                            : "shrink-0 rounded-2xl bg-brand-50 p-4"
+                        }
+                      >
+                        {b.icon}
+                      </div>
+                    </div>
                   </div>
                 </Reveal>
-              </li>
+              </div>
             ))}
-          </ul>
+          </div>
         </Container>
       </section>
 
-      {/* Rewards */}
-      <section className="py-24 md:py-32">
+      {/* ───── Rewards — visual diagram ───── */}
+      <section className="bg-cream py-28 md:py-36">
         <Container>
-          <div className="grid items-center gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-5">
-              <p className="section-label">Rewards</p>
-              <h2 className="mt-3 text-display-3 text-ink font-black">
-                報酬の仕組み
-              </h2>
-              <p className="mt-6 text-base md:text-lg leading-relaxed text-ink-soft font-medium">
-                紹介の段階に応じて2種類の協力金をお支払いします。
-              </p>
-            </div>
+          <div className="text-center">
+            <p className="section-label">Rewards</p>
+            <h2 className="mt-4 text-display-3 text-ink font-black">
+              紹介と成約、
+              <span className="text-brand-500">2回</span>
+              の報酬チャンス
+            </h2>
+            <p className="mx-auto mt-6 max-w-xl text-base text-ink-soft leading-relaxed font-medium">
+              「紹介して終わり」ではありません。商談実施から成約まで、フェーズごとに協力金をお支払いします。
+            </p>
+          </div>
 
-            <div className="lg:col-span-7 space-y-6">
-              <div className="rounded-xl3 border-2 border-ink-line bg-white p-8 md:p-10">
-                <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-brand-500">
+          <div className="mt-16 grid items-stretch gap-4 md:grid-cols-[1fr_auto_1fr]">
+            {/* Step A: 紹介協力金 */}
+            <Reveal>
+              <div className="h-full rounded-xl3 border-2 border-ink-line bg-white p-8 md:p-10">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-9 w-9 place-items-center rounded-full bg-ink text-xs font-black text-white">
+                    A
+                  </span>
+                  <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-ink-muted">
+                    Phase 1
+                  </p>
+                </div>
+                <h3 className="mt-6 text-2xl md:text-3xl font-black text-ink leading-tight">
                   紹介協力金
-                </p>
-                <h3 className="mt-3 text-2xl md:text-3xl font-black text-ink leading-tight">
-                  商談実施で発生
                 </h3>
-                <p className="mt-4 text-sm md:text-base leading-relaxed text-ink font-medium">
-                  ご紹介いただいた企業との商談が成立した時点で発生する基本報酬です。紹介先企業の規模・役職により金額が変動します。
+                <p className="mt-2 text-sm font-bold text-brand-600">
+                  商談実施で発生
+                </p>
+                <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                  ご紹介いただいた企業との商談が成立した時点で発生する基本報酬。紹介先企業の規模・役職に応じて金額が変動します。
                 </p>
               </div>
+            </Reveal>
 
-              <div className="rounded-xl3 border-2 border-brand-500 bg-brand-50/50 p-8 md:p-10">
-                <p className="text-sm font-extrabold uppercase tracking-[0.18em] text-brand-600">
+            {/* Plus connector */}
+            <div className="hidden md:flex items-center justify-center">
+              <div className="grid h-14 w-14 place-items-center rounded-full bg-brand-500 text-white text-2xl font-black shadow-card">
+                +
+              </div>
+            </div>
+
+            {/* Step B: 成約協力金 */}
+            <Reveal delay={120}>
+              <div className="h-full rounded-xl3 border-2 border-brand-500 bg-brand-500 p-8 md:p-10 text-white">
+                <div className="flex items-center gap-3">
+                  <span className="grid h-9 w-9 place-items-center rounded-full bg-white text-xs font-black text-brand-600">
+                    B
+                  </span>
+                  <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-white/80">
+                    Phase 2
+                  </p>
+                </div>
+                <h3 className="mt-6 text-2xl md:text-3xl font-black leading-tight">
                   成約協力金
-                </p>
-                <h3 className="mt-3 text-2xl md:text-3xl font-black text-ink leading-tight">
-                  成約時に追加で発生
                 </h3>
-                <p className="mt-4 text-sm md:text-base leading-relaxed text-ink font-medium">
+                <p className="mt-2 text-sm font-bold text-white/90">
+                  成約時に追加で発生
+                </p>
+                <p className="mt-5 text-sm md:text-base leading-relaxed text-white/90 font-medium">
                   紹介先企業と当社クライアントが成約に至った場合、成果に応じた追加報酬をお支払いします。
                 </p>
               </div>
-            </div>
+            </Reveal>
           </div>
+
+          <p className="mt-10 text-center text-xs text-ink-muted">
+            ※ 具体的な金額・条件はご登録後に個別にご案内いたします。
+          </p>
         </Container>
       </section>
 
-      {/* Steps */}
-      <section className="bg-white py-24 md:py-32">
+      {/* ───── Flow — connected timeline ───── */}
+      <section className="py-28 md:py-36">
         <Container>
-          <div className="text-center">
-            <p className="section-label">Flow</p>
-            <h2 className="mt-3 text-display-3 text-ink font-black">
-              ご登録から報酬受け取りまで
-            </h2>
+          <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="section-label">Flow</p>
+              <h2 className="mt-4 text-display-3 text-ink font-black">
+                ご登録から報酬まで
+              </h2>
+            </div>
+            <p className="md:max-w-sm text-sm text-ink-soft leading-relaxed font-medium">
+              4ステップ。難しい手続きはありません。
+            </p>
           </div>
 
-          <ol className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {steps.map((s, i) => (
-              <li key={s.number}>
-                <Reveal delay={i * 80} className="h-full">
-                  <div className="h-full rounded-xl3 border-2 border-ink-line bg-cream/50 p-8">
-                    <p className="text-xs font-extrabold uppercase tracking-[0.2em] text-brand-500">
-                      {s.number}
-                    </p>
-                    <h3 className="mt-4 text-lg font-black text-ink leading-tight">
-                      {s.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-ink font-medium">
-                      {s.description}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
+          <div className="relative mt-16">
+            {/* Connecting line */}
+            <div
+              aria-hidden="true"
+              className="absolute left-0 right-0 top-7 hidden h-[2px] bg-ink-line lg:block"
+            />
+
+            <ol className="grid gap-10 lg:grid-cols-4">
+              {steps.map((s, i) => (
+                <li key={s.number} className="relative">
+                  <Reveal delay={i * 80}>
+                    <div className="flex flex-col items-start">
+                      <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-brand-500 font-display text-lg font-black text-white shadow-card">
+                        {s.number}
+                      </div>
+                      <h3 className="mt-6 text-lg md:text-xl font-black text-ink leading-tight">
+                        {s.title}
+                      </h3>
+                      <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                        {s.description}
+                      </p>
+                    </div>
+                  </Reveal>
+                </li>
+              ))}
+            </ol>
+          </div>
         </Container>
       </section>
 
-      {/* FAQ */}
-      <section className="bg-cream py-24 md:py-32">
+      {/* ───── Personas ───── */}
+      <section className="bg-white py-28 md:py-36 border-t border-ink-line">
+        <Container>
+          <div className="grid items-start gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-4 lg:sticky lg:top-28">
+              <p className="section-label">Who</p>
+              <h2 className="mt-4 text-display-3 text-ink font-black">
+                こんな方が
+                <br />
+                活躍しています
+              </h2>
+              <p className="mt-6 text-base text-ink-soft leading-relaxed font-medium">
+                経歴・職種は問いません。「人をつなぐ価値」を信じられる方であれば、どなたでもご参加いただけます。
+              </p>
+            </div>
+
+            <ul className="lg:col-span-8 space-y-4">
+              {personas.map((p, i) => (
+                <li key={p.title}>
+                  <Reveal delay={i * 80}>
+                    <div className="group flex items-start gap-6 rounded-xl3 border border-ink-line bg-cream/40 p-8 md:p-10 transition hover:border-brand-500 hover:bg-cream">
+                      <div className="shrink-0">
+                        <span className="font-display text-3xl md:text-4xl font-black text-brand-500">
+                          {p.emoji}
+                        </span>
+                      </div>
+                      <div>
+                        <h3 className="text-lg md:text-xl font-black text-ink leading-tight">
+                          {p.title}
+                        </h3>
+                        <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                          {p.body}
+                        </p>
+                      </div>
+                    </div>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </section>
+
+      {/* ───── FAQ ───── */}
+      <section className="bg-cream py-28 md:py-36">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12">
             <div className="lg:col-span-4">
-              <p className="section-label">FAQ</p>
-              <h2 className="mt-3 text-display-3 text-ink font-black">
-                よくあるご質問
+              <p className="inline-flex items-center gap-2 text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+                <span>FAQ</span>
+                <Squiggle className="h-3 w-10" />
+              </p>
+              <h2 className="mt-4 text-display-3 text-ink font-black">
+                よくある
+                <br />
+                ご質問
               </h2>
+              <p className="mt-6 text-sm text-ink-muted leading-relaxed">
+                その他のご質問は{" "}
+                <Link
+                  href={localePath("/contact", locale)}
+                  className="font-bold underline underline-offset-4 text-ink hover:text-brand-600"
+                >
+                  お問い合わせ
+                </Link>
+                からどうぞ。
+              </p>
             </div>
 
             <div className="lg:col-span-8">
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 {faqs.map((f) => (
                   <li
                     key={f.q}
@@ -277,9 +582,9 @@ export default function PartnerContactPage({
                         <span className="flex gap-4">
                           <span
                             aria-hidden="true"
-                            className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-500 text-sm font-black text-white"
+                            className="font-display text-lg font-black text-brand-500"
                           >
-                            Q
+                            Q.
                           </span>
                           <span className="text-base md:text-lg font-bold text-ink leading-snug">
                             {f.q}
@@ -287,12 +592,18 @@ export default function PartnerContactPage({
                         </span>
                         <span
                           aria-hidden="true"
-                          className="grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-brand-500 group-open:text-brand-500"
+                          className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-brand-500 group-open:text-brand-500"
                         >
                           +
                         </span>
                       </summary>
                       <div className="border-t border-ink-line p-6 pt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                        <span
+                          aria-hidden="true"
+                          className="mr-2 font-display text-lg font-black text-ink-muted"
+                        >
+                          A.
+                        </span>
                         {f.a}
                       </div>
                     </details>
@@ -304,62 +615,59 @@ export default function PartnerContactPage({
         </Container>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 md:py-32">
+      {/* ───── CTA ───── */}
+      <section className="py-28 md:py-36">
         <Container>
-          <div className="relative overflow-hidden rounded-xl4 bg-brand-500 px-8 py-16 md:px-16 md:py-20 text-center">
+          <div className="relative overflow-hidden rounded-xl4 bg-ink px-8 py-20 md:px-16 md:py-24 text-white">
             <div
-              className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/15"
               aria-hidden="true"
+              className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-500/30 blur-3xl"
             />
             <div
-              className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-white/10"
               aria-hidden="true"
+              className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-brand-500/20 blur-3xl"
             />
+            <DotsDecoration className="absolute right-8 top-8 h-16 w-16 text-brand-500 opacity-70" />
 
-            <p className="relative text-xs md:text-sm font-extrabold uppercase tracking-[0.18em] text-white">
-              Free registration
-            </p>
-            <h2 className="relative mt-4 text-display-2 text-white leading-tight">
-              パートナー登録は完全無料
-            </h2>
-            <p className="relative mx-auto mt-6 max-w-xl text-white/90 leading-relaxed font-medium">
-              ご登録後、当社担当者よりご連絡いたします。お気軽にお申し込みください。
-            </p>
+            <div className="relative grid items-center gap-12 lg:grid-cols-12">
+              <div className="lg:col-span-7">
+                <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+                  Apply now / 無料登録
+                </p>
+                <h2 className="mt-5 font-display text-[clamp(2rem,5vw,3.5rem)] font-black leading-[1.1] tracking-tight">
+                  最短3分。
+                  <br />
+                  あなたの人脈を、
+                  <br />
+                  <span className="text-brand-500">資産に変える。</span>
+                </h2>
+                <p className="mt-8 max-w-lg text-base md:text-lg leading-relaxed text-white/80 font-medium">
+                  ご登録後、当社の担当者よりご連絡いたします。費用や継続義務はありません。
+                </p>
+              </div>
 
-            <div className="relative mt-10 flex flex-wrap justify-center gap-3">
-              <Button
-                href={registerHref}
-                size="lg"
-                className="bg-white !text-brand-600 hover:!bg-brand-50"
-              >
-                無料登録はこちら
-              </Button>
-              <Button
-                href={localePath("/contact", locale)}
-                size="lg"
-                variant="ghost"
-                className="!text-white border-2 border-white/60 hover:!bg-white/15"
-              >
-                まずは問い合わせる
-              </Button>
+              <div className="lg:col-span-5 flex flex-col gap-3 lg:items-end">
+                <Button
+                  href={registerHref}
+                  size="lg"
+                  className="bg-brand-500 text-white hover:bg-brand-600 shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)]"
+                >
+                  無料でパートナー登録する
+                </Button>
+                <Button
+                  href={localePath("/contact", locale)}
+                  size="lg"
+                  variant="ghost"
+                  className="!text-white border-2 border-white/40 hover:!bg-white/10"
+                >
+                  まずは問い合わせる
+                </Button>
+                <p className="mt-3 text-xs text-white/60 lg:text-right">
+                  ※ 18歳未満および高校生はご登録いただけません。
+                </p>
+              </div>
             </div>
-
-            <p className="relative mt-6 text-xs text-white/80">
-              ※ 18歳未満および高校生はご登録いただけません。
-            </p>
           </div>
-
-          <p className="mt-8 text-center text-sm text-ink-muted">
-            すでに登録済みの方は{" "}
-            <Link
-              href={localePath("/contact", locale)}
-              className="font-bold underline underline-offset-4 text-ink hover:text-brand-600"
-            >
-              お問い合わせ
-            </Link>
-            よりご連絡ください。
-          </p>
         </Container>
       </section>
     </>
