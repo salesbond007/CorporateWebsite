@@ -13,33 +13,34 @@ import {
   isMicroCmsConfigured,
 } from "@/lib/microcms";
 import { localePath } from "@/i18n/path";
-import { isLocale, locales } from "@/i18n/config";
+import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 
 type Params = { slug: string; locale: string };
 type SearchParams = { page?: string };
 
 const PER_PAGE = 12;
-export const revalidate = 60;
 
-export async function generateStaticParams() {
-  const categories = await getCategories();
-  return locales.flatMap((locale) =>
-    categories.map((c) => ({ locale, slug: c.slug })),
-  );
-}
+// Categories are user-managed at runtime; render dynamically rather than
+// statically pre-generating, so newly added categories work without rebuilds.
+export const revalidate = 60;
+export const dynamicParams = true;
 
 export async function generateMetadata({
   params,
 }: {
   params: Params;
 }): Promise<Metadata> {
-  const category = await getCategoryBySlug(params.slug);
-  if (!category) return {};
-  return {
-    title: `${category.name} の記事`,
-    description: `${category.name} カテゴリの記事一覧。`,
-  };
+  try {
+    const category = await getCategoryBySlug(params.slug);
+    if (!category) return {};
+    return {
+      title: `${category.name} の記事`,
+      description: `${category.name} カテゴリの記事一覧。`,
+    };
+  } catch {
+    return {};
+  }
 }
 
 function parsePage(value: string | undefined): number {
@@ -61,20 +62,32 @@ export default async function CategoryPage({
 
   if (!isMicroCmsConfigured()) notFound();
 
-  const category = await getCategoryBySlug(params.slug);
+  let category;
+  let categories;
+  try {
+    category = await getCategoryBySlug(params.slug);
+    categories = await getCategories();
+  } catch (error) {
+    console.error("[CategoryPage] failed to load category:", error);
+    notFound();
+  }
+
   if (!category) notFound();
 
   const page = parsePage(searchParams.page);
   const offset = (page - 1) * PER_PAGE;
 
-  const [articles, categories] = await Promise.all([
-    getArticles({
+  let articles;
+  try {
+    articles = await getArticles({
       limit: PER_PAGE,
       offset,
       filters: `category[equals]${category.id}`,
-    }),
-    getCategories(),
-  ]);
+    });
+  } catch (error) {
+    console.error("[CategoryPage] failed to load articles:", error);
+    articles = { contents: [], totalCount: 0, offset: 0, limit: PER_PAGE };
+  }
 
   const totalPages = Math.max(1, Math.ceil(articles.totalCount / PER_PAGE));
 
@@ -83,14 +96,13 @@ export default async function CategoryPage({
       <PageHero
         eyebrow={`Category / ${category.name}`}
         title={`${category.name} の記事`}
-        description="TODO: カテゴリページのリード文。SEOキーワードを盛り込む。"
       />
 
       <section className="py-20 md:py-28">
         <Container>
           <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
             <CategoryNav
-              categories={categories}
+              categories={categories ?? []}
               currentSlug={category.slug}
               locale={locale}
               dict={dict}
