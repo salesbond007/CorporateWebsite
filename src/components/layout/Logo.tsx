@@ -9,9 +9,9 @@ type Props = {
   locale: Locale;
   dict: Dictionary;
   className?: string;
-  /** Render the logo in white (e.g. on dark sections). */
-  variant?: "default" | "white";
-  /** Override the height. Defaults to "h-10". */
+  /** ダーク背景向けの白カード版に切り替える */
+  variant?: "default" | "card";
+  /** タップ領域の高さを上書きしたい場合 */
   size?: string;
 };
 
@@ -28,19 +28,23 @@ export function Logo({
       className={cn("inline-flex items-center", className)}
       aria-label={dict.site.name}
     >
-      <Image
-        src="/logo.png"
-        alt={dict.site.name}
-        width={2938}
-        height={1440}
-        priority
-        sizes="(max-width: 768px) 100px, 130px"
+      <span
         className={cn(
-          "w-auto select-none",
+          "relative inline-flex aspect-square items-center justify-center overflow-hidden rounded-xl bg-white",
+          variant === "card" && "ring-2 ring-white shadow-soft",
           size,
-          variant === "white" && "[filter:brightness(0)_invert(1)]",
         )}
-      />
+      >
+        <Image
+          src="/logo-square.jpg"
+          alt={dict.site.name}
+          width={2048}
+          height={2048}
+          priority
+          sizes="48px"
+          className="h-full w-full object-contain"
+        />
+      </span>
     </Link>
   );
 }

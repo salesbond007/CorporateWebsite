@@ -36,7 +36,7 @@ export function Footer({ locale, dict }: Props) {
       <Container className="py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
-            <Logo locale={locale} dict={dict} variant="white" />
+            <Logo locale={locale} dict={dict} variant="card" size="h-12 md:h-14" />
           </div>
 
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:col-span-8">
