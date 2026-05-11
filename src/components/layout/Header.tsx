@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { navigation } from "@/lib/site";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { localePath } from "@/i18n/path";
+import { services } from "@/lib/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 
@@ -25,6 +25,12 @@ export function Header({ locale, dict }: Props) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  const serviceItems = services.map((s) => ({
+    href: `${localePath("/services", locale)}#${s.slug}`,
+    label: s.subtitle.replace(/サービス$/, ""),
+    sub: s.title,
+  }));
 
   const contactItems = [
     {
@@ -57,16 +63,34 @@ export function Header({ locale, dict }: Props) {
         <Logo locale={locale} dict={dict} />
 
         <nav className="hidden lg:flex items-center gap-8" aria-label="メイン">
-          {navigation.map((item) => (
-            <Link
-              key={item.href}
-              href={localePath(item.href, locale)}
-              className="text-sm font-bold text-ink hover:text-brand-600"
-            >
-              {dict.nav[item.key]}
-            </Link>
-          ))}
-          <ContactDropdown
+          <Link
+            href={localePath("/", locale)}
+            className="text-sm font-bold text-ink hover:text-brand-600"
+          >
+            {dict.nav.top}
+          </Link>
+
+          <NavDropdown
+            label={dict.nav.services}
+            href={localePath("/services", locale)}
+            items={serviceItems}
+          />
+
+          <Link
+            href={localePath("/blog", locale)}
+            className="text-sm font-bold text-ink hover:text-brand-600"
+          >
+            {dict.nav.blog}
+          </Link>
+
+          <Link
+            href={localePath("/company", locale)}
+            className="text-sm font-bold text-ink hover:text-brand-600"
+          >
+            {dict.nav.company}
+          </Link>
+
+          <NavDropdown
             label={dict.nav.contact.replace(/\(.*\)$/, "")}
             items={contactItems}
           />
@@ -94,13 +118,20 @@ export function Header({ locale, dict }: Props) {
   );
 }
 
-type ContactDropdownProps = {
+type NavDropdownItem = { href: string; label: string; sub?: string };
+
+type NavDropdownProps = {
   label: string;
-  items: { href: string; label: string; sub: string }[];
+  /** If set, the trigger label itself navigates here on click */
+  href?: string;
+  items: NavDropdownItem[];
 };
 
-function ContactDropdown({ label, items }: ContactDropdownProps) {
+function NavDropdown({ label, href, items }: NavDropdownProps) {
   const [open, setOpen] = useState(false);
+
+  const triggerClass =
+    "inline-flex items-center gap-1 text-sm font-bold text-ink hover:text-brand-600";
 
   return (
     <div
@@ -109,40 +140,31 @@ function ContactDropdown({ label, items }: ContactDropdownProps) {
       onMouseLeave={() => setOpen(false)}
       onFocus={() => setOpen(true)}
       onBlur={(e) => {
-        // close only when focus leaves the whole dropdown
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
       }}
     >
-      <button
-        type="button"
-        aria-haspopup="menu"
-        aria-expanded={open}
-        className="inline-flex items-center gap-1 text-sm font-bold text-ink hover:text-brand-600"
-      >
-        {label}
-        <svg
-          width="12"
-          height="12"
-          viewBox="0 0 12 12"
-          fill="none"
-          aria-hidden="true"
-          className={cn(
-            "transition-transform duration-200",
-            open && "rotate-180",
-          )}
+      {href ? (
+        <Link
+          href={href}
+          aria-haspopup="menu"
+          aria-expanded={open}
+          className={triggerClass}
         >
-          <path
-            d="M3 4.5L6 7.5L9 4.5"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
+          {label}
+          <Chevron open={open} />
+        </Link>
+      ) : (
+        <button
+          type="button"
+          aria-haspopup="menu"
+          aria-expanded={open}
+          className={triggerClass}
+        >
+          {label}
+          <Chevron open={open} />
+        </button>
+      )}
 
-      {/* invisible hover-bridge so the menu stays open between the
-          button and the panel */}
       <div
         className={cn(
           "absolute left-1/2 -translate-x-1/2 top-full pt-3 transition-opacity duration-150",
@@ -166,14 +188,40 @@ function ContactDropdown({ label, items }: ContactDropdownProps) {
                 <span className="block text-sm font-bold text-ink">
                   {item.label}
                 </span>
-                <span className="mt-0.5 block text-xs text-ink-muted">
-                  {item.sub}
-                </span>
+                {item.sub ? (
+                  <span className="mt-0.5 block text-xs text-ink-muted">
+                    {item.sub}
+                  </span>
+                ) : null}
               </Link>
             </li>
           ))}
         </ul>
       </div>
     </div>
+  );
+}
+
+function Chevron({ open }: { open: boolean }) {
+  return (
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 12 12"
+      fill="none"
+      aria-hidden="true"
+      className={cn(
+        "transition-transform duration-200",
+        open && "rotate-180",
+      )}
+    >
+      <path
+        d="M3 4.5L6 7.5L9 4.5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }

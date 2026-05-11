@@ -42,7 +42,7 @@ export default function ServicesPage({
             {services.map((s) => {
               const sx = s as typeof s & ServiceWithImage;
               return (
-              <li key={s.slug}>
+              <li key={s.slug} id={s.slug} className="scroll-mt-24 md:scroll-mt-28">
                 <Link
                   href={localePath(s.href, locale)}
                   className="group block rounded-xl2 border border-ink-line bg-white p-8 md:p-10 transition-all hover:border-brand-300 hover:shadow-card"
