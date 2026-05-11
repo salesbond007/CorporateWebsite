@@ -26,6 +26,24 @@ export function Header({ locale, dict }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const contactItems = [
+    {
+      href: localePath("/contact", locale),
+      label: `${dict.nav.contact}`,
+      sub: "サービス・お見積もりはこちら",
+    },
+    {
+      href: localePath("/contact/professional", locale),
+      label: `${dict.nav.contactProfessional}登録`,
+      sub: "プロ人材としてご活躍いただける方",
+    },
+    {
+      href: localePath("/contact/partner", locale),
+      label: `${dict.nav.contactPartner}登録`,
+      sub: "人脈を活かしてご協力いただける方",
+    },
+  ];
+
   return (
     <header
       className={cn(
@@ -48,6 +66,10 @@ export function Header({ locale, dict }: Props) {
               {dict.nav[item.key]}
             </Link>
           ))}
+          <ContactDropdown
+            label={dict.nav.contact.replace(/\(.*\)$/, "")}
+            items={contactItems}
+          />
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
@@ -69,5 +91,89 @@ export function Header({ locale, dict }: Props) {
         </div>
       </div>
     </header>
+  );
+}
+
+type ContactDropdownProps = {
+  label: string;
+  items: { href: string; label: string; sub: string }[];
+};
+
+function ContactDropdown({ label, items }: ContactDropdownProps) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div
+      className="relative"
+      onMouseEnter={() => setOpen(true)}
+      onMouseLeave={() => setOpen(false)}
+      onFocus={() => setOpen(true)}
+      onBlur={(e) => {
+        // close only when focus leaves the whole dropdown
+        if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
+      }}
+    >
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        className="inline-flex items-center gap-1 text-sm font-bold text-ink hover:text-brand-600"
+      >
+        {label}
+        <svg
+          width="12"
+          height="12"
+          viewBox="0 0 12 12"
+          fill="none"
+          aria-hidden="true"
+          className={cn(
+            "transition-transform duration-200",
+            open && "rotate-180",
+          )}
+        >
+          <path
+            d="M3 4.5L6 7.5L9 4.5"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </button>
+
+      {/* invisible hover-bridge so the menu stays open between the
+          button and the panel */}
+      <div
+        className={cn(
+          "absolute left-1/2 -translate-x-1/2 top-full pt-3 transition-opacity duration-150",
+          open
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none",
+        )}
+      >
+        <ul
+          role="menu"
+          className="min-w-[280px] rounded-xl2 border border-ink-line bg-white p-2 shadow-card"
+        >
+          {items.map((item) => (
+            <li key={item.href} role="none">
+              <Link
+                role="menuitem"
+                href={item.href}
+                className="block rounded-lg px-4 py-3 transition hover:bg-cream"
+                onClick={() => setOpen(false)}
+              >
+                <span className="block text-sm font-bold text-ink">
+                  {item.label}
+                </span>
+                <span className="mt-0.5 block text-xs text-ink-muted">
+                  {item.sub}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }
