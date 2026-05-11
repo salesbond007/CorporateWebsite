@@ -15,6 +15,8 @@ type SearchParams = { q?: string; page?: string };
 
 const PER_PAGE = 12;
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "記事検索",
   description: "TODO: 検索ページのメタディスクリプション",

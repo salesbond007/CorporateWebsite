@@ -7,6 +7,9 @@ import { CTASection } from "@/components/home/CTASection";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 
+// microCMS から取得する Insights セクションを最大60秒キャッシュ
+export const revalidate = 60;
+
 export default function HomePage({
   params,
 }: {
