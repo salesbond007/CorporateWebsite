@@ -24,9 +24,6 @@ export async function BlogPreview({ locale, dict }: Props) {
             <p className="mt-3 text-lg md:text-xl font-extrabold text-ink">
               記事・お知らせ
             </p>
-            <p className="mt-4 max-w-xl text-ink font-medium leading-relaxed">
-              営業・人材活用に関する考察や、最新のお知らせをお届けします。
-            </p>
           </div>
           <Link
             href={localePath("/blog", locale)}
