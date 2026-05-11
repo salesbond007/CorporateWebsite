@@ -17,6 +17,7 @@ export function Footer({ locale, dict }: Props) {
   const contactLinks = [
     { href: "/contact", label: dict.nav.contact },
     { href: "/contact/professional", label: dict.nav.contactProfessional },
+    { href: "/contact/partner", label: dict.nav.contactPartner },
   ];
 
   const legalLinks =

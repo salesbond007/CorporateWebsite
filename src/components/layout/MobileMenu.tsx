@@ -44,6 +44,12 @@ export function MobileMenu({ locale, dict }: Props) {
       label: `${dict.nav.contactProfessional}はこちら`,
       className: "bg-ink text-white hover:bg-ink-soft",
     },
+    {
+      href: "/contact/partner",
+      label: `${dict.nav.contactPartner}登録`,
+      className:
+        "bg-white text-ink border-2 border-ink hover:bg-ink hover:text-white",
+    },
   ];
 
   return (

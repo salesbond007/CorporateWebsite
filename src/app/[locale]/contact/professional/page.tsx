@@ -50,7 +50,22 @@ export default function ProfessionalContactPage({
 
               <div className="mt-6 rounded-xl2 bg-cream p-8">
                 <h3 className="text-sm font-semibold text-ink-muted">
-                  サービス・協業などのお問い合わせ
+                  紹介営業パートナーとしての登録は
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed">
+                  お持ちの人脈を活かして企業開拓にご協力いただける方は、専用フォームよりご登録ください。
+                </p>
+                <Link
+                  href={localePath("/contact/partner", locale)}
+                  className="mt-4 inline-flex link-arrow"
+                >
+                  紹介営業パートナー登録
+                </Link>
+              </div>
+
+              <div className="mt-6 rounded-xl2 bg-cream p-8">
+                <h3 className="text-sm font-semibold text-ink-muted">
+                  企業様のお問い合わせは
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed">
                   サービスや協業、ご提案などについては、共通のお問い合わせフォームをご利用ください。
