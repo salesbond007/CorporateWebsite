@@ -244,19 +244,19 @@ export default function PartnerContactPage({
               <li key={e.number}>
                 <Link
                   href="#email-capture-top"
-                  className="group block h-full"
+                  className="group block h-full text-center"
                 >
                   {/* Image placeholder */}
                   <div className="aspect-[4/3] bg-cream" />
 
-                  {/* Number with subtle baseline rule */}
-                  <div className="mt-6 flex items-baseline gap-4">
+                  {/* Number with subtle underline */}
+                  <div className="mt-6">
                     <span className="font-display text-2xl md:text-3xl font-black leading-none text-brand-500 tabular-nums">
                       {e.number}
                     </span>
                     <span
                       aria-hidden="true"
-                      className="block h-px flex-1 bg-ink-line"
+                      className="mx-auto mt-3 block h-px w-10 bg-ink-line"
                     />
                   </div>
 
