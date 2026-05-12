@@ -59,34 +59,17 @@ export default function ContactPage({
 
               <div className="mt-6 rounded-xl2 bg-cream p-8">
                 <h3 className="text-sm font-semibold text-ink-muted">
-                  プロ人材の方へ
+                  個人の方へ
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed">
-                  プロ人材としてご活躍いただける方は、こちらの専用フォームよりご応募ください。
-                </p>
-                <div className="mt-4">
-                  <Link
-                    href={localePath("/contact/professional", locale)}
-                    className="link-arrow"
-                  >
-                    プロ人材の方のお問い合わせ
-                  </Link>
-                </div>
-              </div>
-
-              <div className="mt-6 rounded-xl2 bg-cream p-8">
-                <h3 className="text-sm font-semibold text-ink-muted">
-                  紹介営業パートナーの方へ
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed">
-                  お持ちの人脈を活かして企業開拓にご協力いただける方は、こちらからご登録ください。
+                  お持ちの人脈や知見を活かして当社にご協力いただける方は、こちらをご覧ください。
                 </p>
                 <div className="mt-4">
                   <Link
                     href={localePath("/contact/partner", locale)}
                     className="link-arrow"
                   >
-                    紹介営業パートナー登録
+                    個人の方はこちら
                   </Link>
                 </div>
               </div>
