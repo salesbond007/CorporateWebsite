@@ -31,7 +31,7 @@ const engagements: Engagement[] = [
     number: "01",
     title: "人脈紹介(アポイント設定)",
     body: "お持ちの人脈を活かして、クライアント企業の決裁者開拓に貢献する成果報酬型の働き方。",
-    image: "https://i.imgur.com/bdxPwzC.jpeg",
+    image: "https://i.imgur.com/7IBhu7P.jpeg",
   },
   {
     number: "02",
