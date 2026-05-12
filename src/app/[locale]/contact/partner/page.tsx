@@ -48,44 +48,7 @@ const heroPatterns: HeroPattern[] = [
 ];
 
 /* ────────────────────────────────────────────────────────────
-   2. 数字バンド(プレースホルダ)
-   ──────────────────────────────────────────────────────────── */
-
-type Stat = { value: string; unit?: string; label: string };
-
-const stats: Stat[] = [
-  { value: "13", unit: "領域", label: "支援テーマ" },
-  { value: "0", unit: "円", label: "登録・利用料" },
-  { value: "0", unit: "件", label: "ノルマ・活動義務" },
-  { value: "業務委託", label: "顧問契約 / 紹介報酬" },
-];
-
-/* ────────────────────────────────────────────────────────────
-   3. セールスボンドの強み 3つ
-   ──────────────────────────────────────────────────────────── */
-
-type Strength = { number: string; title: string; body: string };
-
-const strengths: Strength[] = [
-  {
-    number: "01",
-    title: "13 領域、多様なご参画スタイル",
-    body: "経営全般から特定領域の専門支援、紹介営業まで。お持ちの強みに合わせて関与形態を選べます。",
-  },
-  {
-    number: "02",
-    title: "完全成果報酬・登録費用無料",
-    body: "登録・月会費は一切かかりません。お力をお貸しいただいた成果に応じて報酬をお支払いします。",
-  },
-  {
-    number: "03",
-    title: "個人情報を厳重に保護",
-    body: "ご登録情報は当社で管理。お名前は紹介承諾後にのみクライアント企業へ開示し、連絡先は非公開です。",
-  },
-];
-
-/* ────────────────────────────────────────────────────────────
-   4. 登録〜参画の流れ
+   2. 登録〜参画の流れ
    ──────────────────────────────────────────────────────────── */
 
 type Step = { number: string; title: string; body: string };
@@ -248,29 +211,6 @@ export default function PartnerContactPage({
         </Container>
       </section>
 
-      {/* ───── 2. Stats band ───── */}
-      <section className="border-y border-ink-line bg-ink py-12 md:py-14 text-white">
-        <Container>
-          <ul className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((s) => (
-              <li key={s.label} className="text-center">
-                <p className="font-display text-3xl md:text-4xl font-black leading-none text-white">
-                  {s.value}
-                  {s.unit ? (
-                    <span className="ml-1 text-lg md:text-xl text-brand-500">
-                      {s.unit}
-                    </span>
-                  ) : null}
-                </p>
-                <p className="mt-3 text-xs font-bold uppercase tracking-[0.18em] text-white/70">
-                  {s.label}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
       {/* ───── Email capture #1 ───── */}
       <section
         id="email-capture-top"
@@ -283,53 +223,7 @@ export default function PartnerContactPage({
         </Container>
       </section>
 
-      {/* ───── Strengths ───── */}
-      <section className="bg-cream py-20 md:py-28">
-        <Container>
-          <SectionHead
-            eyebrow="Strengths"
-            title="セールスボンドのパートナー制度の特徴"
-            sub="安心して取り組んでいただける仕組みを徹底しています。"
-          />
-
-          <ul className="mt-12 grid gap-6 md:grid-cols-3">
-            {strengths.map((s) => (
-              <li key={s.number} className="border border-ink-line bg-white">
-                <ImagePlaceholder
-                  ratio="aspect-[4/3]"
-                  label={`強み ${s.number} の補足画像`}
-                />
-                <div className="p-6 md:p-7">
-                  <p className="font-display text-3xl font-black text-brand-500 leading-none">
-                    {s.number}
-                  </p>
-                  <h3 className="mt-5 text-lg md:text-xl font-black text-ink leading-snug">
-                    {s.title}
-                  </h3>
-                  <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                    {s.body}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* ───── Email capture #2 ───── */}
-      <section className="bg-cream py-16 md:py-20">
-        <Container>
-          <div className="mx-auto max-w-2xl border-2 border-ink bg-white p-8 md:p-10">
-            <EmailCaptureForm
-              locale={locale}
-              heading="気になったらまずは無料登録"
-              subhead="メールアドレスを入力すると、本登録フォームをすぐにお送りします。"
-            />
-          </div>
-        </Container>
-      </section>
-
-      {/* ───── 7. Flow ───── */}
+      {/* ───── Flow ───── */}
       <section className="py-20 md:py-28">
         <Container>
           <SectionHead
