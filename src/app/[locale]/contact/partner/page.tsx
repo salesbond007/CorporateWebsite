@@ -195,7 +195,7 @@ export default function PartnerContactPage({
               新規事業を伸ばしたい、組織を変えたい、海外に出たい——。
               <br className="hidden md:block" />
               <span className="marker font-bold">本気で挑戦する企業の現場</span>
-              には、あなたの知見と人脈が"次の一手"になる瞬間がある。
+              には、あなたの知見と人脈が「次の一手」になる瞬間がある。
               <br className="hidden md:block" />
               セールスボンドは、その一手をクライアントに届ける役割を担っています。
             </p>
