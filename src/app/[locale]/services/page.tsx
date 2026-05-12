@@ -12,7 +12,7 @@ import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
 export const metadata: Metadata = {
-  title: "サービス概要",
+  title: "サービス案内",
   description:
     "セールスボンド株式会社の3つのサービス。セールスボンド(大手決裁者紹介)、キーマンボンド(プロ人材マッチング)、リードボンド(インサイドセールス代行)。",
 };
@@ -35,12 +35,12 @@ export default function ServicesPage({
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "ホーム", url: localePath("/", locale) },
-          { name: "サービス", url: localePath("/services", locale) },
+          { name: "サービス案内", url: localePath("/services", locale) },
         ])}
       />
       <PageHero
         eyebrow="Services"
-        title="サービス概要"
+        title="サービス案内"
       />
 
       <section className="py-24 md:py-32">
