@@ -34,6 +34,7 @@ const rows: { label: string; value: React.ReactNode }[] = [
   { label: "代表取締役", value: "飯住 孝裕" },
   { label: "設立", value: "2024年7月" },
   { label: "資本金", value: "41,002,000円" },
+  { label: "従業員数", value: "34名(業務委託を含む)" },
   { label: "登録番号", value: "T8012801023311" },
   {
     label: "住所",
