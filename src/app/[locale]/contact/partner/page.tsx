@@ -133,7 +133,7 @@ export default function PartnerContactPage({
 
       {/* ───── 0. Hero image with overlay ───── */}
       <section className="relative overflow-hidden bg-ink">
-        <div className="relative h-[clamp(520px,80vh,760px)] w-full">
+        <div className="relative h-[460px] md:h-[clamp(520px,80vh,760px)] w-full">
           <Image
             src="https://i.imgur.com/QMdMoAG.jpeg"
             alt="挑戦する企業の現場で活躍するビジネスパーソン"

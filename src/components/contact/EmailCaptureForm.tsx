@@ -103,7 +103,7 @@ export function EmailCaptureForm({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className={cn(
-            "h-14 flex-1 border-2 px-4 text-sm md:text-base text-ink placeholder:text-ink-muted transition focus:outline-none",
+            "h-14 w-full sm:flex-1 border-2 px-4 text-sm md:text-base text-ink placeholder:text-ink-muted transition focus:outline-none",
             isDark
               ? "border-white/30 bg-white focus:border-brand-500"
               : "border-ink-line bg-white focus:border-brand-500",
@@ -112,7 +112,7 @@ export function EmailCaptureForm({
         <button
           type="submit"
           disabled={submitting}
-          className="h-14 inline-flex shrink-0 items-center justify-center gap-2 bg-brand-500 px-8 text-sm md:text-base font-semibold text-white transition hover:bg-brand-600 disabled:opacity-60"
+          className="h-14 inline-flex w-full sm:w-auto sm:shrink-0 items-center justify-center gap-2 bg-brand-500 px-8 text-sm md:text-base font-semibold text-white transition hover:bg-brand-600 disabled:opacity-60"
         >
           {submitting ? "送信中..." : buttonLabel}
           {!submitting ? (
