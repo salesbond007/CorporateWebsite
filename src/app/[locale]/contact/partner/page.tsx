@@ -458,10 +458,7 @@ export default function PartnerContactPage({
           <div className="relative overflow-hidden bg-ink px-8 py-16 md:px-16 md:py-20 text-white">
             <div className="grid items-center gap-10 lg:grid-cols-12">
               <div className="lg:col-span-6">
-                <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-                  Apply now / 無料登録
-                </p>
-                <h2 className="mt-5 text-display-3 font-black leading-tight">
+                <h2 className="text-display-3 font-black leading-tight">
                   挑戦する企業の力に、
                   <br />
                   なりませんか?
