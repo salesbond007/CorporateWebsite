@@ -348,10 +348,10 @@ export default function PartnerContactPage({
                     i % 2 === 0 ? "md:border-r md:border-ink-line" : "",
                   ].join(" ")}
                 >
-                  <span className="font-display text-2xl md:text-3xl font-black leading-none text-brand-500 shrink-0 tabular-nums">
+                  <span className="font-display text-3xl md:text-4xl font-black leading-none text-brand-500 shrink-0 tabular-nums">
                     {m.number}
                   </span>
-                  <span className="text-sm md:text-base font-bold text-ink leading-snug">
+                  <span className="text-base md:text-lg lg:text-xl font-black text-ink leading-snug">
                     {m.title}
                   </span>
                 </li>
