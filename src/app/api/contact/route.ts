@@ -74,7 +74,7 @@ const enumLabels: Record<string, Record<string, string>> = {
     estimate: "お見積り依頼",
   },
   serviceTypes: {
-    "sales-bond": "セールスボンド（大手決裁者紹介サービス）",
+    "sales-bond": "リファボンド(大手決裁者紹介サービス)",
     "keyman-bond": "キーマンボンド（プロ人材マッチングサービス）",
     "lead-bond": "リードボンド（インサイドセールス代行サービス）",
   },

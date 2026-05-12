@@ -37,7 +37,7 @@ export const services = [
   {
     slug: "sales-bond",
     number: "01",
-    title: "セールスボンド",
+    title: "リファボンド",
     subtitle: "大手決裁者紹介サービス",
     summary:
       "人脈紹介を活用した、決裁者開拓サービス。ベンチャーから大企業、地方企業まで、幅広い開拓が可能です。完全成果報酬でご提供します。",
