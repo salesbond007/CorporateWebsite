@@ -14,6 +14,11 @@ export function MissionSection() {
             クライアントを
             <span className="text-brand-500">勝たせる</span>
           </h2>
+          <p className="mt-8 text-center text-xl md:text-2xl font-black text-ink leading-tight">
+            挑む企業に最短で、
+            <span className="text-brand-500">確実な解</span>
+            を。
+          </p>
         </div>
 
         <Reveal>
