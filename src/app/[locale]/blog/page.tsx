@@ -18,9 +18,9 @@ import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 
 export const metadata: Metadata = {
-  title: "記事・お知らせ",
+  title: "メディア",
   description:
-    "セールスボンドが発信する記事・お知らせ。営業・マーケティング・組織開発・人材活用に関する知見をお届けします。",
+    "セールスボンドが発信するメディア。営業・マーケティング・組織開発・人材活用に関する記事・お知らせをお届けします。",
 };
 
 export const revalidate = 60;
@@ -62,12 +62,12 @@ export default async function BlogPage({
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "ホーム", url: localePath("/", locale) },
-          { name: "記事・お知らせ", url: localePath("/blog", locale) },
+          { name: "メディア", url: localePath("/blog", locale) },
         ])}
       />
       <PageHero
         eyebrow="Insights"
-        title="記事・お知らせ"
+        title="メディア"
       />
 
       <section className="py-20 md:py-28">

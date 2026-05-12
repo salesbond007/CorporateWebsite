@@ -22,7 +22,7 @@ export async function BlogPreview({ locale, dict }: Props) {
           <div>
             <p className="section-label">Insights</p>
             <p className="mt-3 text-lg md:text-xl font-extrabold text-ink">
-              記事・お知らせ
+              メディア
             </p>
           </div>
           <Link

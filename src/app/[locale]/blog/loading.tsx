@@ -7,7 +7,7 @@ export default function BlogLoading() {
     <>
       <PageHero
         eyebrow="Insights"
-        title="記事・お知らせ"
+        title="メディア"
         description="読み込み中..."
       />
       <section className="py-20 md:py-28">
