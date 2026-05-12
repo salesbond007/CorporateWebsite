@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
-import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import {
   Squiggle,
@@ -11,6 +10,7 @@ import {
   CircleScribble,
   DotsDecoration,
 } from "@/components/ui/Doodle";
+import { EmailCaptureForm } from "@/components/contact/EmailCaptureForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { localePath } from "@/i18n/path";
@@ -156,7 +156,6 @@ export default function PartnerContactPage({
 }) {
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
-  const registerHref = localePath("/contact/partner/register", locale);
 
   return (
     <>
@@ -200,6 +199,11 @@ export default function PartnerContactPage({
               <br className="hidden md:block" />
               セールスボンドは、その一手をクライアントに届ける役割を担っています。
             </p>
+          </div>
+
+          {/* Email capture #1 — after manifesto */}
+          <div className="mx-auto mt-16 max-w-2xl border-2 border-ink bg-white p-8 md:p-10">
+            <EmailCaptureForm locale={locale} />
           </div>
         </Container>
       </section>
@@ -362,6 +366,15 @@ export default function PartnerContactPage({
           <p className="mt-10 text-center text-xs text-ink-muted">
             ※ 具体的な金額・条件は案件ごと、ご登録後の個別ご案内となります。
           </p>
+
+          {/* Email capture #2 — after engagement patterns */}
+          <div className="mx-auto mt-16 max-w-2xl border-2 border-ink bg-white p-8 md:p-10">
+            <EmailCaptureForm
+              locale={locale}
+              heading="気になったらまずは無料登録"
+              subhead="メールアドレスを入力するだけ。本登録フォームをすぐにお送りします。"
+            />
+          </div>
         </Container>
       </section>
 
@@ -505,24 +518,22 @@ export default function PartnerContactPage({
                 </p>
               </div>
 
-              <div className="lg:col-span-5 flex flex-col gap-3 lg:items-end">
-                <Button
-                  href={registerHref}
-                  size="lg"
-                  className="bg-brand-500 text-white hover:bg-brand-600 shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)]"
-                >
-                  無料で登録する
-                </Button>
-                <Button
-                  href={localePath("/contact", locale)}
-                  size="lg"
-                  variant="ghost"
-                  className="!text-white border-2 border-white/40 hover:!bg-white/10"
-                >
-                  まずは問い合わせる
-                </Button>
-                <p className="mt-3 text-xs text-white/60 lg:text-right">
-                  ※ 18歳未満および高校生はご登録いただけません。
+              <div className="lg:col-span-5">
+                <EmailCaptureForm
+                  locale={locale}
+                  tone="dark"
+                  heading="メールで本登録のご案内を受け取る"
+                  subhead="入力1分。本登録フォームをすぐにメールでお送りします。"
+                />
+                <p className="mt-6 text-xs text-white/70">
+                  メールではなく、まず問い合わせをご希望の方は{" "}
+                  <Link
+                    href={localePath("/contact", locale)}
+                    className="font-bold underline underline-offset-4 text-white hover:text-brand-300"
+                  >
+                    お問い合わせ/無料相談
+                  </Link>
+                  からどうぞ。
                 </p>
               </div>
             </div>
