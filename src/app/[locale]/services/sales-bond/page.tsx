@@ -144,10 +144,48 @@ export default function ReferBondPage({
       />
 
       <PageHero
-        eyebrow="Service 01 / 大手決裁者紹介サービス"
+        eyebrow="大手決裁者紹介サービス"
         title="人脈で、決裁者に届く。"
         description="アウトバウンドでは届かない層へ、最短で接点を。リファボンドは、人脈紹介で大手・上場・地方企業の決裁者に直接つながれる完全成果報酬型サービスです。"
       />
+
+      {/* ───── Top CTA banner ───── */}
+      <section className="bg-white py-12 md:py-16">
+        <Container>
+          <div className="mx-auto max-w-2xl">
+            {/* Tagline above the button */}
+            <div className="flex items-center justify-center gap-4">
+              <span aria-hidden="true" className="h-px w-12 md:w-16 bg-ink/30" />
+              <p className="text-sm md:text-base font-bold text-ink">
+                簡単 1 分で入力完了
+              </p>
+              <span aria-hidden="true" className="h-px w-12 md:w-16 bg-ink/30" />
+            </div>
+
+            {/* Big orange CTA button */}
+            <Link
+              href={contactHref}
+              className="mt-5 block bg-brand-500 text-white transition hover:bg-brand-600 shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)]"
+            >
+              <div className="flex items-center justify-center gap-4 md:gap-6 py-5 px-6 md:py-6 md:px-10">
+                <span className="text-lg md:text-2xl font-black text-yellow-300">
+                  無料
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="h-6 md:h-8 w-px bg-white/40"
+                />
+                <span className="text-base md:text-xl font-bold tracking-wide">
+                  資料請求・お問合せ
+                </span>
+                <span aria-hidden="true" className="ml-2 text-xl md:text-2xl">
+                  →
+                </span>
+              </div>
+            </Link>
+          </div>
+        </Container>
+      </section>
 
       {/* ───── Companies (logo marquee) ───── */}
       <section className="overflow-hidden border-b border-ink-line bg-white py-10 md:py-12">
