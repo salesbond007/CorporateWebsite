@@ -10,7 +10,7 @@ export function MissionSection() {
         </div>
 
         <div className="mt-10 max-w-3xl mx-auto">
-          <h2 className="text-display-2 text-ink text-center leading-tight">
+          <h2 className="text-display-3 text-ink text-center leading-tight">
             挑む企業に最短で、
             <span className="text-brand-500">確実な解</span>
             を。
