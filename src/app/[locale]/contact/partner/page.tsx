@@ -390,11 +390,8 @@ export default function PartnerContactPage({
           <ol className="mt-14 grid gap-10 md:grid-cols-3 md:gap-6 lg:gap-10">
             {steps.map((s) => (
               <li key={s.digit} className="flex h-full flex-col">
-                {/* Illustration placeholder — drop in <Image> when ready */}
-                <div className="aspect-[4/3] bg-cream" />
-
                 {/* STEP label */}
-                <p className="mt-6 font-display leading-none text-brand-500">
+                <p className="font-display leading-none text-brand-500">
                   <span className="text-sm md:text-base font-extrabold tracking-[0.18em] uppercase">
                     STEP
                   </span>
