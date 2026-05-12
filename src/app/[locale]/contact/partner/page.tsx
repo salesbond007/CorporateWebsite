@@ -243,57 +243,36 @@ export default function PartnerContactPage({
             </h2>
           </div>
 
-          <ul className="mt-16 border-t border-ink-line">
+          <ul className="mt-16 grid gap-10 md:grid-cols-3 md:gap-8 lg:gap-10">
             {engagements.map((e) => (
-              <li key={e.number} className="border-b border-ink-line">
+              <li key={e.number}>
                 <Link
                   href="#email-capture-top"
-                  className="group grid items-center gap-6 py-10 md:py-14 lg:grid-cols-12 lg:gap-10"
+                  className="group block h-full"
                 >
-                  {/* Large faded number */}
-                  <div className="lg:col-span-2">
-                    <p className="font-display text-5xl md:text-6xl lg:text-7xl font-black leading-none text-ink-line">
+                  {/* Image placeholder */}
+                  <div className="aspect-[4/3] bg-cream" />
+
+                  {/* Number with subtle baseline rule */}
+                  <div className="mt-6 flex items-baseline gap-4">
+                    <span className="font-display text-2xl md:text-3xl font-black leading-none text-brand-500 tabular-nums">
                       {e.number}
-                    </p>
-                  </div>
-
-                  {/* Title + body */}
-                  <div className="lg:col-span-5">
-                    <h3 className="text-2xl md:text-3xl font-black text-ink leading-tight tracking-tight transition-colors group-hover:text-brand-600">
-                      {e.title}
-                    </h3>
-                    <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                      {e.body}
-                    </p>
-                  </div>
-
-                  {/* Image placeholder (left empty — image to be added later) */}
-                  <div className="lg:col-span-4">
-                    <div className="aspect-[4/3] bg-cream" />
-                  </div>
-
-                  {/* Arrow icon */}
-                  <div className="lg:col-span-1 flex items-center lg:justify-end">
+                    </span>
                     <span
                       aria-hidden="true"
-                      className="inline-flex h-12 w-12 items-center justify-center border border-ink text-ink transition-all group-hover:bg-ink group-hover:text-white"
-                    >
-                      <svg
-                        width="16"
-                        height="16"
-                        viewBox="0 0 16 16"
-                        fill="none"
-                      >
-                        <path
-                          d="M3 8h10M9 4l4 4-4 4"
-                          stroke="currentColor"
-                          strokeWidth="1.6"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
+                      className="block h-px flex-1 bg-ink-line"
+                    />
                   </div>
+
+                  {/* Title */}
+                  <h3 className="mt-5 text-xl md:text-2xl font-black text-ink leading-snug tracking-tight transition-colors group-hover:text-brand-600">
+                    {e.title}
+                  </h3>
+
+                  {/* Body */}
+                  <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                    {e.body}
+                  </p>
                 </Link>
               </li>
             ))}
@@ -358,7 +337,7 @@ export default function PartnerContactPage({
         <Container>
           <SectionHead
             eyebrow="Flow"
-            title="ご登録から参画までの流れ"
+            title="ご登録から案件紹介までの流れ"
             sub="4ステップ。難しい手続きはありません。"
           />
 
