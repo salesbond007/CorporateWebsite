@@ -29,9 +29,9 @@ type HeroPattern = {
 const heroPatterns: HeroPattern[] = [
   {
     label: "Pattern A",
-    title: "顧問・社外取締役として",
-    body: "経営層・幹部としての経験を、クライアント企業の経営判断・組織運営に直接活かす働き方。",
-    imageAlt: "顧問として活躍する人物",
+    title: "紹介営業として",
+    body: "お持ちの人脈を活かして、クライアント企業の決裁者開拓に貢献する成果報酬型の働き方。",
+    imageAlt: "紹介営業として活躍する人物",
   },
   {
     label: "Pattern B",
@@ -41,9 +41,9 @@ const heroPatterns: HeroPattern[] = [
   },
   {
     label: "Pattern C",
-    title: "紹介営業として",
-    body: "お持ちの人脈を活かして、クライアント企業の決裁者開拓に貢献する成果報酬型の働き方。",
-    imageAlt: "紹介営業として活躍する人物",
+    title: "顧問・社外取締役として",
+    body: "経営層・幹部としての経験を、クライアント企業の経営判断・組織運営に直接活かす働き方。",
+    imageAlt: "顧問として活躍する人物",
   },
 ];
 
@@ -61,70 +61,7 @@ const stats: Stat[] = [
 ];
 
 /* ────────────────────────────────────────────────────────────
-   3. 支援領域(13テーマ)
-   ──────────────────────────────────────────────────────────── */
-
-const themes: string[] = [
-  "経営顧問・社外取締役としての経営支援",
-  "新規取引先の開拓支援",
-  "営業部門の生産性向上支援",
-  "既存取引先との取引拡大支援",
-  "新規提携先の開拓支援",
-  "人事領域(採用・評価・教育)の強化",
-  "資金調達支援",
-  "工場の生産改善・技術継承",
-  "調達・物流のコスト削減",
-  "システム構築・DX推進",
-  "デジタルマーケティング強化",
-  "海外展開支援",
-  "紹介営業(人脈を活かした決裁者紹介)",
-];
-
-/* ────────────────────────────────────────────────────────────
-   4. 登録者プロフィール(プレースホルダ)
-   ──────────────────────────────────────────────────────────── */
-
-type Profile = {
-  role: string;
-  company: string;
-  message: string;
-};
-
-const profiles: Profile[] = [
-  {
-    role: "元 大手SaaS企業 営業役員",
-    company: "現 業務委託 / 顧問",
-    message: "BtoB営業組織の立ち上げ、CRM導入、商談化率改善まで支援可能。",
-  },
-  {
-    role: "元 メーカー 海外事業部長",
-    company: "現 海外進出コンサル",
-    message: "東南アジア・北米の市場参入戦略から販路構築まで実行支援。",
-  },
-  {
-    role: "元 上場企業 CHRO",
-    company: "現 人事顧問",
-    message: "採用設計・人事評価制度・管理職育成のフレームワークを提供。",
-  },
-  {
-    role: "元 メガバンク 法人営業",
-    company: "現 資金調達アドバイザー",
-    message: "銀行融資・補助金・VC交渉まで、最適な調達手段を伴走支援。",
-  },
-  {
-    role: "元 大手SIer プロジェクトマネージャー",
-    company: "現 DX 推進アドバイザー",
-    message: "システム構築要件定義、ベンダー選定、社内浸透までを支援。",
-  },
-  {
-    role: "元 メーカー 工場長",
-    company: "現 製造業向け生産改善コンサル",
-    message: "工場の生産性 KPI 改善、ベテラン技術の継承プログラム設計。",
-  },
-];
-
-/* ────────────────────────────────────────────────────────────
-   5. セールスボンドの強み 3つ
+   3. セールスボンドの強み 3つ
    ──────────────────────────────────────────────────────────── */
 
 type Strength = { number: string; title: string; body: string };
@@ -148,39 +85,7 @@ const strengths: Strength[] = [
 ];
 
 /* ────────────────────────────────────────────────────────────
-   6. 活動事例(プレースホルダ)
-   ──────────────────────────────────────────────────────────── */
-
-type CaseStudy = {
-  industry: string;
-  challenge: string;
-  approach: string;
-  result: string;
-};
-
-const cases: CaseStudy[] = [
-  {
-    industry: "BtoB SaaS / 従業員数 約100名",
-    challenge:
-      "急成長に組織が追いつかず、エンタープライズ向け営業のスケールに課題。",
-    approach:
-      "元・上場SaaS の営業役員経験者を顧問としてアサイン。営業組織のフレームと商談プロセスを再設計。",
-    result:
-      "半年で大型案件の受注率が改善し、社内に営業ナレッジが定着。",
-  },
-  {
-    industry: "製造業 / 売上 約50億円",
-    challenge:
-      "新市場として東南アジアへ進出したいが、現地のパートナー開拓ノウハウがない。",
-    approach:
-      "元・大手メーカー海外事業部長を紹介営業パートナーとしてアサイン。現地有力企業をご紹介。",
-    result:
-      "初年度で2社との取引を開始し、現地代理店契約の締結まで到達。",
-  },
-];
-
-/* ────────────────────────────────────────────────────────────
-   7. 登録〜参画の流れ
+   4. 登録〜参画の流れ
    ──────────────────────────────────────────────────────────── */
 
 type Step = { number: string; title: string; body: string };
@@ -390,33 +295,6 @@ export default function PartnerContactPage({
         </Container>
       </section>
 
-      {/* ───── 3. 13 themes ───── */}
-      <section className="py-20 md:py-28">
-        <Container>
-          <SectionHead
-            eyebrow="Service Themes"
-            title="ご活躍いただける13の支援テーマ"
-            sub="経営全般から特定領域の専門支援、紹介営業まで。下記は代表例で、これ以外の領域でも歓迎します。"
-          />
-
-          <ul className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {themes.map((t, i) => (
-              <li
-                key={t}
-                className="flex items-start gap-3 border border-ink-line bg-white p-5"
-              >
-                <span className="font-display text-xl font-black text-brand-500 leading-none shrink-0 tabular-nums">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="text-sm md:text-base font-bold leading-snug text-ink">
-                  {t}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
       {/* ───── Email capture #1 ───── */}
       <section
         id="email-capture-top"
@@ -429,43 +307,7 @@ export default function PartnerContactPage({
         </Container>
       </section>
 
-      {/* ───── 4. Member profiles ───── */}
-      <section className="py-20 md:py-28">
-        <Container>
-          <SectionHead
-            eyebrow="Members"
-            title="ご登録いただいているパートナー例"
-            sub="多様なバックグラウンドの経営層・専門家・営業職経験者にご登録いただいています(個人特定を避けた紹介例)。"
-          />
-
-          <ul className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {profiles.map((p) => (
-              <li
-                key={p.role}
-                className="flex flex-col border border-ink-line bg-white"
-              >
-                <ImagePlaceholder
-                  ratio="aspect-[3/2]"
-                  label={`${p.role} の写真`}
-                />
-                <div className="flex-1 p-6">
-                  <p className="text-xs font-bold text-brand-600">
-                    {p.company}
-                  </p>
-                  <h3 className="mt-2 text-base md:text-lg font-black text-ink leading-snug">
-                    {p.role}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-soft font-medium">
-                    {p.message}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* ───── 5. Strengths ───── */}
+      {/* ───── Strengths ───── */}
       <section className="bg-cream py-20 md:py-28">
         <Container>
           <SectionHead
@@ -491,68 +333,6 @@ export default function PartnerContactPage({
                   <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
                     {s.body}
                   </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* ───── 6. Case studies ───── */}
-      <section className="py-20 md:py-28">
-        <Container>
-          <SectionHead
-            eyebrow="Case Studies"
-            title="パートナーとともに生まれた成果"
-            sub="ご参画いただいた方々の力で、クライアント企業の事業前進を支援した事例です。"
-          />
-
-          <ul className="mt-12 space-y-10">
-            {cases.map((c, i) => (
-              <li
-                key={c.industry}
-                className="grid gap-8 border border-ink-line bg-white md:grid-cols-12"
-              >
-                <div className="md:col-span-5">
-                  <ImagePlaceholder
-                    ratio="aspect-[4/3] md:aspect-auto md:h-full"
-                    label={`事例 ${String(i + 1).padStart(2, "0")} のイメージ画像`}
-                  />
-                </div>
-                <div className="md:col-span-7 p-7 md:p-10">
-                  <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-brand-500">
-                    Case 0{i + 1}
-                  </p>
-                  <h3 className="mt-3 text-lg md:text-xl font-black text-ink leading-snug">
-                    {c.industry}
-                  </h3>
-
-                  <dl className="mt-6 space-y-5 text-sm md:text-base">
-                    <div>
-                      <dt className="text-xs font-bold uppercase tracking-[0.18em] text-ink-muted">
-                        Challenge
-                      </dt>
-                      <dd className="mt-1.5 leading-relaxed text-ink font-medium">
-                        {c.challenge}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-xs font-bold uppercase tracking-[0.18em] text-ink-muted">
-                        Approach
-                      </dt>
-                      <dd className="mt-1.5 leading-relaxed text-ink font-medium">
-                        {c.approach}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="text-xs font-bold uppercase tracking-[0.18em] text-brand-600">
-                        Result
-                      </dt>
-                      <dd className="mt-1.5 leading-relaxed text-ink font-bold">
-                        {c.result}
-                      </dd>
-                    </div>
-                  </dl>
                 </div>
               </li>
             ))}
