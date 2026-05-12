@@ -36,7 +36,7 @@ export function ServicesSection({ locale, dict }: Props) {
               <Reveal delay={i * 100} className="h-full">
                 <Link
                   href={localePath(s.href, locale)}
-                  className="group block h-full rounded-xl3 border-2 border-ink-line bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-500 hover:shadow-card"
+                  className="group block h-full rounded-none border-2 border-ink-line bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:border-brand-500 hover:shadow-card"
                 >
                   <div className="flex items-start justify-between">
                     <span className="text-3xl font-black text-brand-500 leading-none">

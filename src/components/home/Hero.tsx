@@ -70,7 +70,7 @@ export function Hero({ locale, dict }: Props) {
               <div className="relative rounded-xl4 bg-white p-6 md:p-8 shadow-soft overflow-hidden">
                 <Illustration src={HERO_IMAGE} variant="abstract" alt="" />
               </div>
-              <div className="absolute -bottom-5 -left-5 rounded-full bg-brand-500 px-6 py-3 text-sm font-black text-white shadow-card">
+              <div className="absolute -bottom-5 -left-5 rounded-none bg-brand-500 px-6 py-3 text-sm font-black text-white shadow-card">
                 Sales Bond
               </div>
             </div>

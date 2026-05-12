@@ -13,7 +13,7 @@ export function CTASection({ locale, dict }: Props) {
   return (
     <section className="py-24 md:py-32">
       <Container>
-        <div className="relative overflow-hidden rounded-xl4 bg-brand-500 px-8 py-16 md:px-16 md:py-20">
+        <div className="relative overflow-hidden rounded-none bg-brand-500 px-8 py-16 md:px-16 md:py-20">
           <div
             className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/15"
             aria-hidden="true"
