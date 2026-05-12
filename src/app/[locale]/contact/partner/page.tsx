@@ -28,12 +28,12 @@ type Engagement = {
 const engagements: Engagement[] = [
   {
     number: "01",
-    title: "人脈紹介営業",
+    title: "人脈紹介(アポイント設定)",
     body: "お持ちの人脈を活かして、クライアント企業の決裁者開拓に貢献する成果報酬型の働き方。",
   },
   {
     number: "02",
-    title: "領域の専門家",
+    title: "経営課題の解決",
     body: "営業・マーケ・DX・人事・財務など、特定領域の深い専門性で企業の課題解決を伴走する働き方。",
   },
   {
@@ -259,18 +259,13 @@ export default function PartnerContactPage({
       {/* ───── 1. Engagement — 案件の内容 ───── */}
       <section className="bg-white py-24 md:py-32">
         <Container>
-          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-                Engagement
-              </p>
-              <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-                案件の内容
-              </h2>
-            </div>
-            <p className="md:max-w-sm text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-              お持ちの強みに合わせて、3 つの関わり方からお選びいただけます。
+          <div className="text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+              Engagement
             </p>
+            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+              案件の内容
+            </h2>
           </div>
 
           <ul className="mt-16 border-t border-ink-line">
@@ -288,17 +283,22 @@ export default function PartnerContactPage({
                   </div>
 
                   {/* Title + body */}
-                  <div className="lg:col-span-8">
+                  <div className="lg:col-span-5">
                     <h3 className="text-2xl md:text-3xl font-black text-ink leading-tight tracking-tight transition-colors group-hover:text-brand-600">
                       {e.title}
                     </h3>
-                    <p className="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                    <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
                       {e.body}
                     </p>
                   </div>
 
+                  {/* Image placeholder (left empty — image to be added later) */}
+                  <div className="lg:col-span-4">
+                    <div className="aspect-[4/3] bg-cream" />
+                  </div>
+
                   {/* Arrow icon */}
-                  <div className="lg:col-span-2 flex items-center lg:justify-end">
+                  <div className="lg:col-span-1 flex items-center lg:justify-end">
                     <span
                       aria-hidden="true"
                       className="inline-flex h-12 w-12 items-center justify-center border border-ink text-ink transition-all group-hover:bg-ink group-hover:text-white"
