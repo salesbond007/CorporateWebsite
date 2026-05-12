@@ -179,6 +179,50 @@ export default function PartnerContactPage({
         </div>
       </section>
 
+      {/* ───── Our Belief / セールスボンドの想い ───── */}
+      <section className="bg-white py-24 md:py-32">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+              Our Belief
+            </p>
+            <h2 className="mt-6 font-display text-[clamp(2rem,5vw,3.75rem)] font-black leading-[1.15] tracking-tight text-ink">
+              人生100年時代を、
+              <br className="md:hidden" />
+              <span className="text-brand-500">生き残れ。</span>
+            </h2>
+            <p className="mt-6 text-base md:text-lg font-bold tracking-[0.1em] text-ink-soft">
+              30代、40代、50代 ―
+            </p>
+
+            <div className="mt-14 space-y-7 text-base md:text-lg leading-[2] text-ink font-medium">
+              <p>
+                キャリアの「次」を、考え始めていませんか。
+                <br />
+                会社の中だけで完結する時代は、もう終わりました。
+              </p>
+              <p>
+                あなたが培ってきた人脈、経験、ビジネススキル。
+                <br />
+                それは、今この瞬間も、
+                <span className="font-black text-ink">
+                  必要としている企業があります
+                </span>
+                。
+              </p>
+              <p className="text-lg md:text-xl font-black text-ink leading-[1.7]">
+                セールスボンドは、
+                <span className="text-brand-500">その出会いをつくる場所</span>
+                です。
+              </p>
+              <p className="text-base md:text-lg italic text-ink-soft">
+                眠らせている力を、もう一度、社会のために使いませんか。
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* ───── 1. Hero patterns (3 ways to engage) ───── */}
       <section className="py-20 md:py-28">
         <Container>
