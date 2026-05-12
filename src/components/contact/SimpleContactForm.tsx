@@ -448,7 +448,7 @@ export function SimpleContactForm({ locale }: Props) {
         </p>
       ) : null}
 
-      <div>
+      <div className="flex justify-center">
         <Button type="submit" size="lg" disabled={sending}>
           {sending ? "送信中..." : "送信する"}
         </Button>
