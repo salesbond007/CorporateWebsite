@@ -37,6 +37,7 @@ const engagements: Engagement[] = [
     number: "02",
     title: "経営課題の解決",
     body: "営業・マーケ・DX・人事・財務など、特定領域の深い専門性で企業の課題解決を伴走する働き方。",
+    image: "https://i.imgur.com/MxWhvDK.jpeg",
   },
   {
     number: "03",
