@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
-import { PageHero } from "@/components/ui/PageHero";
 import { EmailCaptureForm } from "@/components/contact/EmailCaptureForm";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -258,11 +258,76 @@ export default function PartnerContactPage({
         ])}
       />
 
-      <PageHero
-        eyebrow="Partner Program"
-        title="あなたの経験と人脈で、挑戦する企業の力に。"
-        description="経営顧問・社外取締役・領域の専門家・紹介営業——多彩な関与形態で、これまで培った経験と人脈を企業の課題解決に活かせます。"
-      />
+      {/* ───── 0. Hero image with overlay ───── */}
+      <section className="relative overflow-hidden bg-ink">
+        <div className="relative h-[clamp(520px,80vh,760px)] w-full">
+          <Image
+            src="https://i.imgur.com/f0YW89g.jpeg"
+            alt="挑戦する企業の現場で活躍するビジネスパーソン"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          {/* readability gradient — darker on left where the text sits */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-r from-ink/55 via-ink/20 to-transparent"
+          />
+
+          <Container className="relative h-full">
+            <div className="flex h-full flex-col justify-end pb-12 md:justify-center md:pb-0">
+              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-white/85">
+                Partner Program
+              </p>
+
+              <h1 className="mt-5 max-w-3xl text-white">
+                <span className="inline-block bg-brand-500 px-4 py-1.5 font-display text-[clamp(2rem,5.5vw,4rem)] font-black leading-[1.15]">
+                  培った経験と人脈を
+                </span>
+                <br />
+                <span className="mt-3 inline-block bg-brand-500 px-4 py-1.5 font-display text-[clamp(2rem,5.5vw,4rem)] font-black leading-[1.15]">
+                  挑戦する企業の力に
+                </span>
+              </h1>
+
+              <p className="mt-6 max-w-xl text-sm md:text-base font-bold italic text-white/90 leading-relaxed">
+                顧問・社外取締役・領域の専門家・紹介営業として
+              </p>
+
+              <div className="mt-8">
+                <Link
+                  href="#email-capture-top"
+                  className="inline-flex h-14 items-center gap-3 bg-brand-500 px-7 text-sm md:text-base font-semibold text-white shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)] transition hover:bg-brand-600"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <circle
+                      cx="10"
+                      cy="7"
+                      r="3"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                    />
+                    <path
+                      d="M3 17c0-3 3-5 7-5s7 2 7 5"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                    />
+                  </svg>
+                  無料で登録
+                </Link>
+              </div>
+            </div>
+          </Container>
+        </div>
+      </section>
 
       {/* ───── 1. Hero patterns (3 ways to engage) ───── */}
       <section className="py-20 md:py-28">
