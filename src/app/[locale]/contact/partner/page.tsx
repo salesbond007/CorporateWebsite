@@ -43,6 +43,7 @@ const engagements: Engagement[] = [
     number: "03",
     title: "顧問/社外取締役",
     body: "経営層・幹部としての経験を、クライアント企業の経営判断・組織運営に直接活かす働き方。",
+    image: "https://i.imgur.com/3KusyJR.jpeg",
   },
 ];
 
