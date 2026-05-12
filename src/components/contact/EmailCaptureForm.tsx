@@ -19,6 +19,8 @@ type Props = {
   buttonLabel?: string;
   /** Dark backgrounds use the inverse text/border tone */
   tone?: "light" | "dark";
+  /** Compact horizontal layout (always row, smaller height, no arrow) */
+  compact?: boolean;
 };
 
 export function EmailCaptureForm({
@@ -28,6 +30,7 @@ export function EmailCaptureForm({
   subhead = "ご入力のメール宛に、本登録フォームをお送りします。所要時間1分。",
   buttonLabel = "登録する",
   tone = "light",
+  compact = false,
 }: Props) {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -88,7 +91,12 @@ export function EmailCaptureForm({
       <form
         onSubmit={onSubmit}
         noValidate
-        className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-stretch"
+        className={cn(
+          "mt-5 flex items-stretch gap-2",
+          compact
+            ? "flex-row"
+            : "flex-col gap-3 sm:flex-row sm:gap-3",
+        )}
       >
         <label htmlFor="email-capture" className="sr-only">
           メールアドレス
@@ -103,7 +111,10 @@ export function EmailCaptureForm({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           className={cn(
-            "h-14 w-full sm:flex-1 border-2 px-4 text-sm md:text-base text-ink placeholder:text-ink-muted transition focus:outline-none",
+            "border-2 px-4 text-ink placeholder:text-ink-muted transition focus:outline-none",
+            compact
+              ? "h-12 flex-1 text-sm"
+              : "h-14 w-full sm:flex-1 text-sm md:text-base",
             isDark
               ? "border-white/30 bg-white focus:border-brand-500"
               : "border-ink-line bg-white focus:border-brand-500",
@@ -112,10 +123,15 @@ export function EmailCaptureForm({
         <button
           type="submit"
           disabled={submitting}
-          className="h-14 inline-flex w-full sm:w-auto sm:shrink-0 items-center justify-center gap-2 bg-brand-500 px-8 text-sm md:text-base font-semibold text-white transition hover:bg-brand-600 disabled:opacity-60"
+          className={cn(
+            "inline-flex shrink-0 items-center justify-center bg-brand-500 font-semibold text-white transition hover:bg-brand-600 disabled:opacity-60",
+            compact
+              ? "h-12 px-5 text-sm"
+              : "h-14 w-full sm:w-auto gap-2 px-8 text-sm md:text-base",
+          )}
         >
           {submitting ? "送信中..." : buttonLabel}
-          {!submitting ? (
+          {!submitting && !compact ? (
             <svg
               width="14"
               height="14"
