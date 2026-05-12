@@ -4,6 +4,8 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { SimpleContactForm } from "@/components/contact/SimpleContactForm";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 import { site } from "@/lib/site";
@@ -24,6 +26,12 @@ export default function ContactPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "ホーム", url: localePath("/", locale) },
+          { name: "お問い合わせ", url: localePath("/contact", locale) },
+        ])}
+      />
       <PageHero
         eyebrow="Contact / Business"
         title="お問い合わせ"

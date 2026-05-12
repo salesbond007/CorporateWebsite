@@ -11,6 +11,8 @@ import {
   CircleScribble,
   DotsDecoration,
 } from "@/components/ui/Doodle";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
@@ -229,6 +231,13 @@ export default function PartnerContactPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "ホーム", url: localePath("/", locale) },
+          { name: "お問い合わせ", url: localePath("/contact", locale) },
+          { name: "個人の方はこちら", url: localePath("/contact/partner", locale) },
+        ])}
+      />
       <PageHero
         eyebrow="Partner Program"
         title="紹介営業パートナー登録"

@@ -5,6 +5,8 @@ import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { Button } from "@/components/ui/Button";
 import { Illustration } from "@/components/ui/Illustration";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { services } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
@@ -12,7 +14,7 @@ import { isLocale } from "@/i18n/config";
 export const metadata: Metadata = {
   title: "サービス概要",
   description:
-    "セールスボンド株式会社の3つのサービス。セールスボンド（大手決裁者紹介）、キーマンボンド（プロ人材マッチング）、リードボンド（インサイドセールス代行）。",
+    "セールスボンド株式会社の3つのサービス。セールスボンド(大手決裁者紹介)、キーマンボンド(プロ人材マッチング)、リードボンド(インサイドセールス代行)。",
 };
 
 type ServiceWithImage = {
@@ -30,6 +32,12 @@ export default function ServicesPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "ホーム", url: localePath("/", locale) },
+          { name: "サービス", url: localePath("/services", locale) },
+        ])}
+      />
       <PageHero
         eyebrow="Services"
         title="サービス概要"

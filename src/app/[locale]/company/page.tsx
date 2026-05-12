@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
 export const metadata: Metadata = {
@@ -69,9 +72,16 @@ export default function CompanyPage({
   params: { locale: string };
 }) {
   if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "ホーム", url: localePath("/", locale) },
+          { name: "会社概要", url: localePath("/company", locale) },
+        ])}
+      />
       {/* Company Profile */}
       <section className="pt-20 pb-20 md:pt-28 md:pb-28">
         <Container>
