@@ -8,9 +8,9 @@ import { isLocale } from "@/i18n/config";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "送信完了 - パートナー登録のご案内",
+  title: "送信完了 - 個人登録のご案内",
   description:
-    "パートナー登録のご案内メールをお送りしました。届いたメールから本登録フォームへお進みください。",
+    "個人登録のご案内メールをお送りしました。届いたメールから本登録フォームへお進みください。",
   robots: { index: false, follow: true },
 };
 
@@ -54,10 +54,7 @@ export default function PartnerSentPage({
             </svg>
           </div>
 
-          <p className="mt-8 inline-block bg-brand-500 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.18em] text-white">
-            Application sent
-          </p>
-          <h1 className="mt-6 text-display-3 font-black leading-tight text-ink">
+          <h1 className="mt-8 text-display-3 font-black leading-tight text-ink">
             送信が完了しました
           </h1>
 
@@ -65,11 +62,11 @@ export default function PartnerSentPage({
             <p className="mt-6 text-sm md:text-base text-ink-soft leading-relaxed">
               <span className="font-bold text-ink">{email}</span>
               <br />
-              宛に、パートナー登録のご案内メールをお送りしました。
+              宛に、個人登録のご案内メールをお送りしました。
             </p>
           ) : (
             <p className="mt-6 text-sm md:text-base text-ink-soft leading-relaxed">
-              ご入力のメールアドレス宛に、パートナー登録のご案内メールをお送りしました。
+              ご入力のメールアドレス宛に、個人登録のご案内メールをお送りしました。
             </p>
           )}
 
@@ -126,7 +123,7 @@ export default function PartnerSentPage({
               href={localePath("/contact/partner", locale)}
               variant="secondary"
             >
-              パートナー募集に戻る
+              個人登録ページに戻る
             </Button>
             <Button href={localePath("/", locale)}>トップへ戻る</Button>
           </div>
