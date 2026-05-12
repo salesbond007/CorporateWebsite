@@ -20,7 +20,7 @@ export async function BlogPreview({ locale, dict }: Props) {
       <Container>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="section-label">Insights</p>
+            <p className="section-label">Media</p>
             <p className="mt-3 text-lg md:text-xl font-extrabold text-ink">
               メディア
             </p>

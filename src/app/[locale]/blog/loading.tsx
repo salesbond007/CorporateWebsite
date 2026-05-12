@@ -6,7 +6,7 @@ export default function BlogLoading() {
   return (
     <>
       <PageHero
-        eyebrow="Insights"
+        eyebrow="Media"
         title="メディア"
         description="読み込み中..."
       />

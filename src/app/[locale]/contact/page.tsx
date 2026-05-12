@@ -11,9 +11,9 @@ import { isLocale } from "@/i18n/config";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "お問い合わせ",
+  title: "お問い合わせ/無料相談",
   description:
-    "セールスボンド株式会社へのお問い合わせはこちらから。サービスに関するご相談・採用に関するお問い合わせを受け付けています。",
+    "セールスボンド株式会社へのお問い合わせ・無料相談はこちらから。サービスに関するご相談・お見積もり・採用に関するお問い合わせを受け付けています。",
 };
 
 export default function ContactPage({
@@ -29,12 +29,12 @@ export default function ContactPage({
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "ホーム", url: localePath("/", locale) },
-          { name: "お問い合わせ", url: localePath("/contact", locale) },
+          { name: "お問い合わせ/無料相談", url: localePath("/contact", locale) },
         ])}
       />
       <PageHero
-        eyebrow="Contact / Business"
-        title="お問い合わせ"
+        eyebrow="Contact"
+        title="お問い合わせ/無料相談"
         description="サービスに関するご相談、その他ご質問はこちらのフォームからお送りください。"
       />
 

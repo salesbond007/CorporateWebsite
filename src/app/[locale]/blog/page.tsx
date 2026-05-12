@@ -66,7 +66,7 @@ export default async function BlogPage({
         ])}
       />
       <PageHero
-        eyebrow="Insights"
+        eyebrow="Media"
         title="メディア"
       />
 
