@@ -16,34 +16,30 @@ export const metadata: Metadata = {
 };
 
 /* ────────────────────────────────────────────────────────────
-   1. Hero に並べる 3 パターン
+   1. 案件の内容 3 パターン
    ──────────────────────────────────────────────────────────── */
 
-type HeroPattern = {
-  label: string;
+type Engagement = {
+  number: string;
   title: string;
   body: string;
-  imageAlt: string;
 };
 
-const heroPatterns: HeroPattern[] = [
+const engagements: Engagement[] = [
   {
-    label: "Pattern A",
-    title: "紹介営業として",
+    number: "01",
+    title: "人脈紹介営業",
     body: "お持ちの人脈を活かして、クライアント企業の決裁者開拓に貢献する成果報酬型の働き方。",
-    imageAlt: "紹介営業として活躍する人物",
   },
   {
-    label: "Pattern B",
-    title: "領域の専門家として",
+    number: "02",
+    title: "領域の専門家",
     body: "営業・マーケ・DX・人事・財務など、特定領域の深い専門性で企業の課題解決を伴走する働き方。",
-    imageAlt: "専門家として活躍する人物",
   },
   {
-    label: "Pattern C",
-    title: "顧問・社外取締役として",
+    number: "03",
+    title: "顧問/社外取締役",
     body: "経営層・幹部としての経験を、クライアント企業の経営判断・組織運営に直接活かす働き方。",
-    imageAlt: "顧問として活躍する人物",
   },
 ];
 
@@ -217,41 +213,73 @@ export default function PartnerContactPage({
         </Container>
       </section>
 
-      {/* ───── 1. Hero patterns (3 ways to engage) ───── */}
-      <section className="py-20 md:py-28">
+      {/* ───── 1. Engagement — 案件の内容 ───── */}
+      <section className="bg-white py-24 md:py-32">
         <Container>
-          <div className="grid gap-6 md:grid-cols-3 md:gap-8">
-            {heroPatterns.map((p) => (
-              <article
-                key={p.title}
-                className="flex h-full flex-col border-2 border-ink-line bg-white"
-              >
-                <ImagePlaceholder
-                  ratio="aspect-[4/3]"
-                  label={p.imageAlt}
-                />
-                <div className="flex flex-1 flex-col p-6 md:p-7">
-                  <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-brand-500">
-                    {p.label}
-                  </p>
-                  <h2 className="mt-3 text-xl md:text-2xl font-black text-ink leading-snug">
-                    {p.title}
-                  </h2>
-                  <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                    {p.body}
-                  </p>
-                  <div className="mt-6 pt-6 border-t border-ink-line">
-                    <Link
-                      href="#email-capture-top"
-                      className="link-arrow text-sm"
-                    >
-                      まずは無料登録
-                    </Link>
-                  </div>
-                </div>
-              </article>
-            ))}
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+                Engagement
+              </p>
+              <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+                案件の内容
+              </h2>
+            </div>
+            <p className="md:max-w-sm text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              お持ちの強みに合わせて、3 つの関わり方からお選びいただけます。
+            </p>
           </div>
+
+          <ul className="mt-16 border-t border-ink-line">
+            {engagements.map((e) => (
+              <li key={e.number} className="border-b border-ink-line">
+                <Link
+                  href="#email-capture-top"
+                  className="group grid items-center gap-6 py-10 md:py-14 lg:grid-cols-12 lg:gap-10"
+                >
+                  {/* Large faded number */}
+                  <div className="lg:col-span-2">
+                    <p className="font-display text-5xl md:text-6xl lg:text-7xl font-black leading-none text-ink-line">
+                      {e.number}
+                    </p>
+                  </div>
+
+                  {/* Title + body */}
+                  <div className="lg:col-span-8">
+                    <h3 className="text-2xl md:text-3xl font-black text-ink leading-tight tracking-tight transition-colors group-hover:text-brand-600">
+                      {e.title}
+                    </h3>
+                    <p className="mt-4 max-w-2xl text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                      {e.body}
+                    </p>
+                  </div>
+
+                  {/* Arrow icon */}
+                  <div className="lg:col-span-2 flex items-center lg:justify-end">
+                    <span
+                      aria-hidden="true"
+                      className="inline-flex h-12 w-12 items-center justify-center border border-ink text-ink transition-all group-hover:bg-ink group-hover:text-white"
+                    >
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 16 16"
+                        fill="none"
+                      >
+                        <path
+                          d="M3 8h10M9 4l4 4-4 4"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
 
@@ -470,53 +498,3 @@ function SectionHead({
   );
 }
 
-function ImagePlaceholder({
-  ratio,
-  label,
-}: {
-  ratio: string;
-  label: string;
-}) {
-  return (
-    <div
-      className={`relative w-full overflow-hidden border-b border-ink-line bg-cream ${ratio}`}
-    >
-      <div className="absolute inset-0 grid place-items-center text-center px-4">
-        <div>
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            className="mx-auto mb-3 text-ink-muted/60"
-            aria-hidden="true"
-          >
-            <rect
-              x="4"
-              y="6"
-              width="24"
-              height="20"
-              stroke="currentColor"
-              strokeWidth="1.5"
-            />
-            <circle cx="12" cy="14" r="2" stroke="currentColor" strokeWidth="1.5" />
-            <path
-              d="M4 22l8-6 6 4 10-7"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <p className="text-[10px] md:text-xs font-bold tracking-wide text-ink-muted">
-            画像枠
-          </p>
-          <p className="mt-1 text-[10px] md:text-xs text-ink-muted/80">
-            {label}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
