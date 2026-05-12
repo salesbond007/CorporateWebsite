@@ -190,8 +190,8 @@ export default function PartnerContactPage({
       </section>
 
       {/* ───── Our Belief / セールスボンドの想い ───── */}
-      <section className="relative overflow-hidden">
-        {/* Background image (full bleed) */}
+      <section className="relative overflow-hidden bg-ink">
+        {/* Background image */}
         <Image
           src="https://i.imgur.com/GL0UfBm.jpeg"
           alt=""
@@ -200,50 +200,59 @@ export default function PartnerContactPage({
           className="object-cover"
         />
 
-        {/* Dark veil over the image side for legibility & mood */}
-        <div aria-hidden="true" className="absolute inset-0 bg-ink/55" />
+        {/* Layer 1 — flat dark veil (works for any image brightness) */}
+        <div aria-hidden="true" className="absolute inset-0 bg-ink/65" />
 
-        {/* White triangle: upper-left half, diagonal from TR → BL */}
+        {/* Layer 2 — vertical gradient deepens the area behind the body copy */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-white"
-          style={{ clipPath: "polygon(0 0, 100% 0, 0 100%)" }}
+          className="absolute inset-0 bg-gradient-to-b from-ink/30 via-transparent to-ink/50"
         />
 
-        <Container className="relative py-24 md:py-32 lg:py-40">
-          <div className="max-w-[20rem] sm:max-w-sm md:max-w-md">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              Our Belief
+        <Container className="relative py-32 md:py-40 lg:py-48 text-center text-white">
+          <p
+            className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500"
+            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.55)" }}
+          >
+            Our Belief
+          </p>
+
+          <h2
+            className="mt-6 font-display text-[clamp(1.75rem,4vw,3rem)] font-black leading-[1.15] tracking-tight text-white"
+            style={{ textShadow: "0 2px 18px rgba(0,0,0,0.65)" }}
+          >
+            人生100年時代を、
+            <span className="text-brand-500">生き残れ。</span>
+          </h2>
+
+          <p
+            className="mt-6 text-base md:text-lg font-bold tracking-[0.1em] text-white/95"
+            style={{ textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
+          >
+            30代、40代、50代、60代 ―
+          </p>
+
+          <div
+            className="mx-auto mt-12 max-w-2xl space-y-6 text-base md:text-lg leading-[2] font-medium text-white"
+            style={{ textShadow: "0 1px 10px rgba(0,0,0,0.55)" }}
+          >
+            <p>会社の中だけで完結する時代は、もう終わりました。</p>
+            <p>
+              あなたが培ってきた人脈、経験、ビジネススキル。
+              <br />
+              それは、今この瞬間も、
+              <span className="font-black text-white">
+                必要としている企業があります
+              </span>
+              。
             </p>
-
-            <h2 className="mt-6 font-display text-[clamp(1.5rem,3.5vw,2.75rem)] font-black leading-[1.15] tracking-tight text-ink">
-              人生100年時代を、
-              <span className="text-brand-500">生き残れ。</span>
-            </h2>
-
-            <p className="mt-6 text-sm md:text-base font-bold tracking-[0.1em] text-ink-soft">
-              30代、40代、50代、60代 ―
+            <p className="text-lg md:text-xl font-black text-white leading-[1.7]">
+              セールスボンドは、
+              <span className="text-brand-500">
+                30代からシニアまで幅広く活躍できる場所
+              </span>
+              を提供します。
             </p>
-
-            <div className="mt-10 space-y-5 text-sm md:text-base leading-[1.9] text-ink font-medium">
-              <p>会社の中だけで完結する時代は、もう終わりました。</p>
-              <p>
-                あなたが培ってきた人脈、経験、ビジネススキル。
-                <br />
-                それは、今この瞬間も、
-                <span className="font-black text-ink">
-                  必要としている企業があります
-                </span>
-                。
-              </p>
-              <p className="text-base md:text-lg font-black text-ink leading-[1.7]">
-                セールスボンドは、
-                <span className="text-brand-500">
-                  30代からシニアまで幅広く活躍できる場所
-                </span>
-                を提供します。
-              </p>
-            </div>
           </div>
         </Container>
       </section>
