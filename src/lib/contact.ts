@@ -72,8 +72,19 @@ export const generalContactSchema = z.object({
   message: z.string().trim().max(5000).optional().or(z.literal("")),
 });
 
+/**
+ * /contact/partner LP のメール 1 項目フォーム。
+ * ご経歴等は後送の本登録メール内のフォームで受け取るため、ここでは
+ * 連絡先取得が目的(同意は本登録時に取得)。
+ */
+export const partnerLeadSchema = z.object({
+  website: z.string().max(0).optional().or(z.literal("")),
+  email: z.string().trim().email("正しいメールアドレスを入力してください"),
+});
+
 export type BusinessContactInput = z.infer<typeof businessContactSchema>;
 export type ProfessionalContactInput = z.infer<typeof professionalContactSchema>;
 export type GeneralContactInput = z.infer<typeof generalContactSchema>;
+export type PartnerLeadInput = z.infer<typeof partnerLeadSchema>;
 
-export type ContactFormType = "business" | "professional" | "general";
+export type ContactFormType = "business" | "professional" | "general" | "partner_lead";

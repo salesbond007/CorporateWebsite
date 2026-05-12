@@ -37,7 +37,7 @@ export function EmailCaptureForm({
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const trimmed = email.trim();
     if (!trimmed) {
@@ -50,11 +50,38 @@ export function EmailCaptureForm({
     }
     setError(null);
     setSubmitting(true);
-    // UI-only: redirect to the "sent" confirmation page.
-    // Backend mail delivery to be wired up later.
-    router.push(
-      `${localePath("/contact/partner/sent", locale)}?email=${encodeURIComponent(trimmed)}`,
-    );
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "partner_lead",
+          email: trimmed,
+          website: "",
+        }),
+      });
+
+      const json: { ok?: boolean; error?: string } = await res
+        .json()
+        .catch(() => ({}));
+
+      if (!res.ok || !json.ok) {
+        setError(
+          json.error ?? "送信に失敗しました。時間をおいて再度お試しください。",
+        );
+        setSubmitting(false);
+        return;
+      }
+
+      router.push(
+        `${localePath("/contact/partner/sent", locale)}?email=${encodeURIComponent(trimmed)}`,
+      );
+    } catch (err) {
+      console.error("[EmailCaptureForm] submit failed", err);
+      setError("通信エラーが発生しました。時間をおいて再度お試しください。");
+      setSubmitting(false);
+    }
   }
 
   const isDark = tone === "dark";

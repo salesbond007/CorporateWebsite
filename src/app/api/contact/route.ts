@@ -3,6 +3,7 @@ import { Resend } from "resend";
 import {
   businessContactSchema,
   generalContactSchema,
+  partnerLeadSchema,
   professionalContactSchema,
   type ContactFormType,
 } from "@/lib/contact";
@@ -109,7 +110,9 @@ function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
       ? "企業様お問い合わせ"
       : type === "professional"
         ? "プロ人材お問い合わせ"
-        : "お問い合わせ（企業）";
+        : type === "partner_lead"
+          ? "個人パートナー登録(メール仮登録)"
+          : "お問い合わせ(企業)";
 
   return `<!doctype html>
   <html><body style="font-family:-apple-system,'Segoe UI',sans-serif;color:#1A1A1A;">
@@ -131,7 +134,12 @@ export async function POST(req: Request) {
   const body = (payload ?? {}) as { type?: ContactFormType } & Record<string, unknown>;
   const type = body.type;
 
-  if (type !== "business" && type !== "professional" && type !== "general") {
+  if (
+    type !== "business" &&
+    type !== "professional" &&
+    type !== "general" &&
+    type !== "partner_lead"
+  ) {
     return NextResponse.json({ error: "Invalid form type" }, { status: 400 });
   }
 
@@ -140,7 +148,9 @@ export async function POST(req: Request) {
       ? businessContactSchema
       : type === "professional"
         ? professionalContactSchema
-        : generalContactSchema;
+        : type === "partner_lead"
+          ? partnerLeadSchema
+          : generalContactSchema;
   const parsed = schema.safeParse(body);
 
   if (!parsed.success) {
@@ -159,12 +169,9 @@ export async function POST(req: Request) {
   }
 
   const to = type === "professional" ? toProfessional : toBusiness;
-  const subject =
-    type === "business"
-      ? "【企業様お問い合わせ】新規受信"
-      : type === "professional"
-        ? "【プロ人材お問い合わせ】新規受信"
-        : "【お問い合わせ（企業）】新規受信";
+  // 件名はすべてのフォームで統一(管理画面で並べやすい)。
+  // フォーム種別は本文(renderHtml)の見出しで判別。
+  const subject = "ホームページからの問い合わせ";
 
   if (!resend) {
     console.warn("[contact] RESEND_API_KEY is not set. Logging form data instead.");
