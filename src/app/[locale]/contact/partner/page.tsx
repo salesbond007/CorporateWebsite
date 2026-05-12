@@ -44,6 +44,49 @@ const engagements: Engagement[] = [
 ];
 
 /* ────────────────────────────────────────────────────────────
+   1.5 活躍する方々(6 タイプ)
+   ──────────────────────────────────────────────────────────── */
+
+type Member = {
+  number: string;
+  title: string;
+  body: string;
+};
+
+const members: Member[] = [
+  {
+    number: "01",
+    title: "大手企業の役員・要職経験者(元を含む)",
+    body: "経営の最前線で培われた、判断力と戦略眼。\n組織を率いてきた経験を、次のステージで活かす方々が活躍しています。",
+  },
+  {
+    number: "02",
+    title: "圧倒的な人脈をお持ちの方",
+    body: "キャリアを通じて築き上げた、経営層・決裁者クラスとの関係。\nその人脈そのものが、企業の事業機会を生み出す価値ある資産です。",
+  },
+  {
+    number: "03",
+    title: "多くの取引実績を持つフリーランス",
+    body: "独立後も幅広い企業と継続的に取引を重ね、確かな成果を積み上げてきた方。\n培った専門性と信頼が、新たな案件創出に繋がっています。",
+  },
+  {
+    number: "04",
+    title: "現役の経営者・代表取締役",
+    body: "自社経営の傍ら、培った知見を他社の経営支援にも還元する方々。\n「経営者にしか分からない視点」が、多くの企業から求められています。",
+  },
+  {
+    number: "05",
+    title: "現役のビジネスパーソン",
+    body: "本業を続けながら、培ったスキルや人脈を社外でも活かす方。\n複業時代の新しいキャリアの形を体現しています。",
+  },
+  {
+    number: "06",
+    title: "第一線で挑み続けるシニア層(50代以降)",
+    body: "キャリアを重ねたからこそ持てる、揺るぎない経験と人脈。\n「まだまだ現役」の力で、企業の重要課題に向き合う方々が活躍しています。",
+  },
+];
+
+/* ────────────────────────────────────────────────────────────
    2. 登録〜参画の流れ
    ──────────────────────────────────────────────────────────── */
 
@@ -277,6 +320,45 @@ export default function PartnerContactPage({
                     </span>
                   </div>
                 </Link>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* ───── 1.5 Members — 活躍する方々 ───── */}
+      <section className="bg-cream py-24 md:py-32">
+        <Container>
+          <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+                Members
+              </p>
+              <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+                活躍する方々
+              </h2>
+            </div>
+            <p className="md:max-w-md text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              年齢、肩書き、働き方を問わず。
+              <br className="hidden md:inline" />
+              培った力を持つ方が活躍しています。
+            </p>
+          </div>
+
+          <ul className="mt-16 grid gap-x-10 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+            {members.map((m) => (
+              <li key={m.number}>
+                <p className="font-display text-4xl md:text-5xl font-black leading-none text-brand-500">
+                  {m.number}
+                </p>
+                <div className="mt-6 border-t-2 border-ink pt-6">
+                  <h3 className="text-base md:text-lg font-black text-ink leading-snug">
+                    {m.title}
+                  </h3>
+                  <p className="mt-4 whitespace-pre-line text-sm leading-relaxed text-ink-soft font-medium">
+                    {m.body}
+                  </p>
+                </div>
               </li>
             ))}
           </ul>
