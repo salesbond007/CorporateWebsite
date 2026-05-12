@@ -191,33 +191,51 @@ export default function PartnerContactPage({
 
       {/* ───── Our Belief / セールスボンドの想い ───── */}
       <section className="relative overflow-hidden bg-ink">
-        {/* Background image — placeholder until provided.
-            When ready, drop <Image src="..." alt="" fill className="object-cover" /> here. */}
-        <div className="absolute inset-0">
-          {/* <Image src="https://i.imgur.com/XXXX.jpeg" alt="" fill className="object-cover" /> */}
-        </div>
+        {/* Background image */}
+        <Image
+          src="https://i.imgur.com/GL0UfBm.jpeg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
 
-        {/* Dark readability overlay */}
+        {/* Layer 1 — flat dark veil (works for any image brightness) */}
+        <div aria-hidden="true" className="absolute inset-0 bg-ink/65" />
+
+        {/* Layer 2 — vertical gradient deepens the area behind the body copy */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-b from-ink/70 via-ink/55 to-ink/75"
+          className="absolute inset-0 bg-gradient-to-b from-ink/30 via-transparent to-ink/50"
         />
 
         <Container className="relative py-32 md:py-40 lg:py-48 text-center text-white">
-          <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+          <p
+            className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500"
+            style={{ textShadow: "0 1px 6px rgba(0,0,0,0.55)" }}
+          >
             Our Belief
           </p>
 
-          <h2 className="mt-6 font-display text-[clamp(1.75rem,4vw,3rem)] font-black leading-[1.15] tracking-tight text-white">
+          <h2
+            className="mt-6 font-display text-[clamp(1.75rem,4vw,3rem)] font-black leading-[1.15] tracking-tight text-white"
+            style={{ textShadow: "0 2px 18px rgba(0,0,0,0.65)" }}
+          >
             人生100年時代を、
             <span className="text-brand-500">生き残れ。</span>
           </h2>
 
-          <p className="mt-6 text-base md:text-lg font-bold tracking-[0.1em] text-white/85">
+          <p
+            className="mt-6 text-base md:text-lg font-bold tracking-[0.1em] text-white/95"
+            style={{ textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
+          >
             30代、40代、50代、60代 ―
           </p>
 
-          <div className="mx-auto mt-12 max-w-2xl space-y-6 text-base md:text-lg leading-[2] font-medium text-white/95">
+          <div
+            className="mx-auto mt-12 max-w-2xl space-y-6 text-base md:text-lg leading-[2] font-medium text-white"
+            style={{ textShadow: "0 1px 10px rgba(0,0,0,0.55)" }}
+          >
             <p>会社の中だけで完結する時代は、もう終わりました。</p>
             <p>
               あなたが培ってきた人脈、経験、ビジネススキル。
