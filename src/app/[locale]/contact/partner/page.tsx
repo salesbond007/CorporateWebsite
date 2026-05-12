@@ -192,36 +192,47 @@ export default function PartnerContactPage({
       {/* ───── Our Belief / セールスボンドの想い ───── */}
       <section className="bg-white py-24 md:py-32">
         <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              Our Belief
-            </p>
-            <h2 className="mt-6 font-display text-[clamp(1.5rem,4vw,3rem)] font-black leading-[1.15] tracking-tight text-ink">
-              人生100年時代を、
-              <span className="text-brand-500">生き残れ。</span>
-            </h2>
-            <p className="mt-6 text-base md:text-lg font-bold tracking-[0.1em] text-ink-soft">
-              30代、40代、50代、60代 ―
-            </p>
+          <div className="grid items-center gap-10 md:grid-cols-12 md:gap-12 lg:gap-16">
+            {/* Left: portrait image (3:4 / 4:5) — placeholder until asset is ready */}
+            <div className="md:col-span-5">
+              <div className="relative aspect-[4/5] overflow-hidden bg-cream">
+                {/* When ready: drop <Image src="..." alt="..." fill className="object-cover" /> here */}
+              </div>
+            </div>
 
-            <div className="mt-14 space-y-7 text-base md:text-lg leading-[2] text-ink font-medium">
-              <p>会社の中だけで完結する時代は、もう終わりました。</p>
-              <p>
-                あなたが培ってきた人脈、経験、ビジネススキル。
-                <br />
-                それは、今この瞬間も、
-                <span className="font-black text-ink">
-                  必要としている企業があります
-                </span>
-                。
+            {/* Right: text content */}
+            <div className="md:col-span-7">
+              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+                Our Belief
               </p>
-              <p className="text-lg md:text-xl font-black text-ink leading-[1.7]">
-                セールスボンドは、
-                <span className="text-brand-500">
-                  30代からシニアまで幅広く活躍できる場所
-                </span>
-                を提供します。
+              <h2 className="mt-6 font-display text-[clamp(1.5rem,3.5vw,2.75rem)] font-black leading-[1.2] tracking-tight text-ink">
+                人生100年時代を、
+                <br className="lg:hidden" />
+                <span className="text-brand-500">生き残れ。</span>
+              </h2>
+              <p className="mt-6 text-base md:text-lg font-bold tracking-[0.1em] text-ink-soft">
+                30代、40代、50代、60代 ―
               </p>
+
+              <div className="mt-10 space-y-6 text-base md:text-lg leading-[2] text-ink font-medium">
+                <p>会社の中だけで完結する時代は、もう終わりました。</p>
+                <p>
+                  あなたが培ってきた人脈、経験、ビジネススキル。
+                  <br />
+                  それは、今この瞬間も、
+                  <span className="font-black text-ink">
+                    必要としている企業があります
+                  </span>
+                  。
+                </p>
+                <p className="text-lg md:text-xl font-black text-ink leading-[1.7]">
+                  セールスボンドは、
+                  <span className="text-brand-500">
+                    30代からシニアまで幅広く活躍できる場所
+                  </span>
+                  を提供します。
+                </p>
+              </div>
             </div>
           </div>
         </Container>
