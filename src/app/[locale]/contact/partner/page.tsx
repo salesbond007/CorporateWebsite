@@ -331,11 +331,17 @@ export default function PartnerContactPage({
       {/* ───── Flow ───── */}
       <section className="bg-white py-20 md:py-28">
         <Container>
-          <SectionHead
-            eyebrow="Flow"
-            title="ご登録から案件紹介までの流れ"
-            sub="4ステップ。難しい手続きはありません。"
-          />
+          <div className="text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+              Flow
+            </p>
+            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+              ご登録から案件紹介までの流れ
+            </h2>
+            <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              4ステップ。難しい手続きはありません。
+            </p>
+          </div>
 
           <ol className="mt-14 grid gap-6 lg:grid-cols-4 lg:gap-3">
             {steps.map((s, i) => (
