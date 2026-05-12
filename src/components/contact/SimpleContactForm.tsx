@@ -256,35 +256,27 @@ export function SimpleContactForm({ locale }: Props) {
       />
 
       {/* 2. 氏名 */}
-      <div>
-        <p className="flex items-center gap-2 text-sm font-semibold text-ink">
-          氏名
-          <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">
-            必須
-          </span>
-        </p>
-        <div className="mt-2 grid gap-4 md:grid-cols-2">
-          <TextField
-            label="姓"
-            name="lastName"
-            required
-            autoComplete="family-name"
-            placeholder="山田"
-            value={state.lastName}
-            onChange={(e) => update("lastName", e.target.value)}
-            error={errors.lastName}
-          />
-          <TextField
-            label="名"
-            name="firstName"
-            required
-            autoComplete="given-name"
-            placeholder="太郎"
-            value={state.firstName}
-            onChange={(e) => update("firstName", e.target.value)}
-            error={errors.firstName}
-          />
-        </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <TextField
+          label="姓"
+          name="lastName"
+          required
+          autoComplete="family-name"
+          placeholder="山田"
+          value={state.lastName}
+          onChange={(e) => update("lastName", e.target.value)}
+          error={errors.lastName}
+        />
+        <TextField
+          label="名"
+          name="firstName"
+          required
+          autoComplete="given-name"
+          placeholder="太郎"
+          value={state.firstName}
+          onChange={(e) => update("firstName", e.target.value)}
+          error={errors.firstName}
+        />
       </div>
 
       {/* 3. メールアドレス */}
