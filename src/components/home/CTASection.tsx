@@ -41,7 +41,7 @@ export function CTASection({ locale, dict }: Props) {
               <Button
                 href={localePath("/contact", locale)}
                 size="lg"
-                className="bg-white !text-brand-600 hover:!bg-brand-50"
+                className="bg-white !text-brand-600 hover:!bg-brand-50 md:w-72"
               >
                 {dict.nav.contact}
               </Button>
@@ -49,7 +49,7 @@ export function CTASection({ locale, dict }: Props) {
                 href={localePath("/contact/partner", locale)}
                 size="lg"
                 variant="ghost"
-                className="!text-white border-2 border-white/60 hover:!bg-white/15"
+                className="!text-white border-2 border-white/60 hover:!bg-white/15 md:w-72"
               >
                 個人の方はこちら
               </Button>
