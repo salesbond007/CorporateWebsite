@@ -41,7 +41,11 @@ export default function ContactPage({
       <section className="py-20 md:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12">
-            <aside className="lg:col-span-4">
+            <div className="lg:col-start-5 lg:col-span-8 lg:row-start-1">
+              <SimpleContactForm locale={locale} />
+            </div>
+
+            <aside className="lg:col-start-1 lg:col-span-4 lg:row-start-1">
               <div className="rounded-xl2 border border-ink-line p-8">
                 <h2 className="text-lg font-bold">受付について</h2>
                 <p className="mt-3 text-sm text-ink-soft leading-relaxed">
@@ -82,10 +86,6 @@ export default function ContactPage({
                 </div>
               </div>
             </aside>
-
-            <div className="lg:col-span-8">
-              <SimpleContactForm locale={locale} />
-            </div>
           </div>
         </Container>
       </section>
