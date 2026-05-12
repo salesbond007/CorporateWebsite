@@ -23,6 +23,7 @@ type Engagement = {
   number: string;
   title: string;
   body: string;
+  image?: string;
 };
 
 const engagements: Engagement[] = [
@@ -30,6 +31,7 @@ const engagements: Engagement[] = [
     number: "01",
     title: "人脈紹介(アポイント設定)",
     body: "お持ちの人脈を活かして、クライアント企業の決裁者開拓に貢献する成果報酬型の働き方。",
+    image: "https://i.imgur.com/bdxPwzC.jpeg",
   },
   {
     number: "02",
@@ -277,8 +279,18 @@ export default function PartnerContactPage({
                   href="#email-capture-top"
                   className="group block h-full text-center"
                 >
-                  {/* Image placeholder */}
-                  <div className="aspect-[4/3] bg-cream" />
+                  {/* Image (or cream placeholder until provided) */}
+                  <div className="relative aspect-[4/3] overflow-hidden bg-cream">
+                    {e.image ? (
+                      <Image
+                        src={e.image}
+                        alt={e.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        className="object-cover"
+                      />
+                    ) : null}
+                  </div>
 
                   {/* Number with subtle underline */}
                   <div className="mt-6">
