@@ -124,9 +124,13 @@ export default function ServicesPage({
           <p className="text-sm text-ink-muted">
             サービスに関するご相談・お見積もりはこちらから
           </p>
-          <div className="mt-5">
-            <Button href={localePath("/contact", locale)} size="lg">
-              問い合わせはこちら
+          <div className="mt-6">
+            <Button
+              href={localePath("/contact", locale)}
+              size="lg"
+              className="!h-16 !px-12 !text-lg shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)]"
+            >
+              無料で相談する
             </Button>
           </div>
         </Container>
