@@ -117,10 +117,6 @@ const faqs: Faq[] = [
     q: "ノルマや活動義務はありますか?",
     a: "ありません。お力を貸していただける範囲・タイミングで、無理のない関与をお願いしています。",
   },
-  {
-    q: "得意領域が記載 13 領域以外なのですが、応募できますか?",
-    a: "歓迎します。記載は代表例で、これ以外の領域でも企業の経営課題解決にご貢献いただける方はぜひご応募ください。",
-  },
 ];
 
 /* ────────────────────────────────────────────────────────────
@@ -413,13 +409,16 @@ export default function PartnerContactPage({
       {/* ───── 8. FAQ ───── */}
       <section className="bg-cream py-20 md:py-28">
         <Container>
-          <SectionHead
-            eyebrow="FAQ"
-            title="よくあるご質問"
-            sub={null}
-          />
+          <div className="text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+              FAQ
+            </p>
+            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+              よくあるご質問
+            </h2>
+          </div>
 
-          <ul className="mx-auto mt-10 max-w-3xl space-y-3">
+          <ul className="mx-auto mt-12 max-w-3xl space-y-3">
             {faqs.map((f) => (
               <li key={f.q} className="border border-ink-line bg-white">
                 <details className="group">
@@ -446,17 +445,6 @@ export default function PartnerContactPage({
               </li>
             ))}
           </ul>
-
-          <p className="mt-10 text-center text-sm text-ink-muted">
-            その他のご質問は{" "}
-            <Link
-              href={localePath("/contact", locale)}
-              className="font-bold underline underline-offset-4 text-ink hover:text-brand-600"
-            >
-              お問い合わせ/無料相談
-            </Link>
-            よりご連絡ください。
-          </p>
         </Container>
       </section>
 
@@ -486,16 +474,6 @@ export default function PartnerContactPage({
                   heading=""
                   subhead=""
                 />
-                <p className="mt-6 text-xs text-white/70">
-                  メールではなく問い合わせをご希望の方は{" "}
-                  <Link
-                    href={localePath("/contact", locale)}
-                    className="font-bold underline underline-offset-4 text-white hover:text-brand-300"
-                  >
-                    お問い合わせ/無料相談
-                  </Link>
-                  からどうぞ。
-                </p>
               </div>
             </div>
           </div>
