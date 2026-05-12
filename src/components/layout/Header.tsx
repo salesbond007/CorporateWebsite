@@ -111,6 +111,13 @@ export function Header({ locale, dict }: Props) {
           >
             {dict.nav.contactProfessional}はこちら
           </Button>
+          <Button
+            href={localePath("/contact/partner", locale)}
+            size="md"
+            className="hidden lg:inline-flex !bg-white !text-brand-600 border-2 border-brand-500 hover:!bg-brand-500 hover:!text-white"
+          >
+            パートナー登録
+          </Button>
           <MobileMenu locale={locale} dict={dict} />
         </div>
       </div>
