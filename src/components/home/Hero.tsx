@@ -47,7 +47,7 @@ export function Hero({ locale, dict }: Props) {
               </span>
               {dict.hero.subtitleSuffix}
             </p>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap justify-center gap-3 md:justify-start">
               <Button href={localePath("/services", locale)} size="lg">
                 {dict.buttons.viewServices}
               </Button>
