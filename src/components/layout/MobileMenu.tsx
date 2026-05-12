@@ -116,7 +116,7 @@ export function MobileMenu({ locale, dict }: Props) {
                   href={localePath(item.href, locale)}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-semibold transition",
+                    "flex items-center justify-between rounded-none px-4 py-3.5 text-sm font-semibold transition",
                     item.className,
                   )}
                 >
