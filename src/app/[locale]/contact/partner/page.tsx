@@ -182,11 +182,7 @@ export default function PartnerContactPage({
 
           <Container className="relative h-full">
             <div className="flex h-full flex-col justify-end pb-12 md:justify-center md:pb-0">
-              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-white/85">
-                Partner Program
-              </p>
-
-              <h1 className="mt-5 max-w-3xl text-white">
+              <h1 className="max-w-3xl text-white">
                 <span className="inline-block bg-brand-500 px-4 py-1.5 font-display text-[clamp(2rem,5.5vw,4rem)] font-black leading-[1.15]">
                   培った経験と人脈を
                 </span>
@@ -197,37 +193,17 @@ export default function PartnerContactPage({
               </h1>
 
               <p className="mt-6 max-w-xl text-sm md:text-base font-bold italic text-white/90 leading-relaxed">
-                顧問・社外取締役・領域の専門家・紹介営業として
+                人脈紹介、領域の専門家、顧問として
               </p>
 
-              <div className="mt-8">
-                <Link
-                  href="#email-capture-top"
-                  className="inline-flex h-14 items-center gap-3 bg-brand-500 px-7 text-sm md:text-base font-semibold text-white shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)] transition hover:bg-brand-600"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    aria-hidden="true"
-                  >
-                    <circle
-                      cx="10"
-                      cy="7"
-                      r="3"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                    />
-                    <path
-                      d="M3 17c0-3 3-5 7-5s7 2 7 5"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                    />
-                  </svg>
-                  無料で登録
-                </Link>
+              <div className="mt-8 max-w-md">
+                <EmailCaptureForm
+                  locale={locale}
+                  tone="dark"
+                  heading=""
+                  subhead=""
+                  buttonLabel="無料で登録"
+                />
               </div>
             </div>
           </Container>
