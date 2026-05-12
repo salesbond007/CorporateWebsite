@@ -79,19 +79,23 @@ type Step = {
 const steps: Step[] = [
   {
     digit: "1",
-    title: "会員登録",
-    body: "まずはサイト上から「無料」の会員登録をしていただきます。",
+    title: "メール仮登録",
+    body: "本ページのフォームからメールアドレスをご登録。本登録のご案内をすぐにお送りします。",
   },
   {
     digit: "2",
-    title: "エージェント面談",
-    titleNote: "(必要に応じて)",
-    body: "電話、もしくは面談にてヒアリング。エージェントと面談いただき、ご希望の条件、経験などをお伺いします。",
+    title: "本登録",
+    body: "届いたメールから本登録フォームへ。ご経歴・関心領域・ご紹介可能な人脈などをご記入ください。",
   },
   {
     digit: "3",
+    title: "面接 / 審査",
+    body: "当社担当者よりご連絡し、オンライン面談を実施。お力をお借りできる領域をすり合わせます。",
+  },
+  {
+    digit: "4",
     title: "案件のご紹介",
-    body: "ご希望に合った案件をご紹介します。企業との面談を通じて、相性、条件の擦り合わせを行います。",
+    body: "お持ちの強みに合った案件をご提案。ご合意のうえで参画 → 成果に応じた報酬をお支払いします。",
   },
 ];
 
@@ -384,25 +388,28 @@ export default function PartnerContactPage({
               ご登録から案件紹介までの流れ
             </h2>
             <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-              3ステップ。難しい手続きはありません。
+              4ステップ。難しい手続きはありません。
             </p>
           </div>
 
-          <ol className="mt-14 grid gap-10 md:grid-cols-3 md:gap-6 lg:gap-10">
-            {steps.map((s) => (
-              <li key={s.digit} className="flex h-full flex-col">
+          <ol className="mt-14 grid gap-6 lg:grid-cols-4 lg:gap-3">
+            {steps.map((s, i) => (
+              <li
+                key={s.digit}
+                className="relative flex h-full flex-col border-2 border-ink bg-white p-6 md:p-7"
+              >
                 {/* STEP label */}
                 <p className="font-display leading-none text-brand-500">
-                  <span className="text-sm md:text-base font-extrabold tracking-[0.18em] uppercase">
+                  <span className="text-sm font-extrabold tracking-[0.18em] uppercase">
                     STEP
                   </span>
-                  <span className="ml-2 text-4xl md:text-5xl font-black align-baseline">
+                  <span className="ml-2 text-3xl md:text-4xl font-black align-baseline">
                     {s.digit}
                   </span>
                 </p>
 
                 {/* Title (+ optional inline note) */}
-                <h3 className="mt-5 text-xl md:text-2xl font-black text-ink leading-snug">
+                <h3 className="mt-5 text-lg md:text-xl font-black text-ink leading-snug">
                   {s.title}
                   {s.titleNote ? (
                     <span className="ml-2 text-sm md:text-base font-bold text-ink-soft">
@@ -412,9 +419,45 @@ export default function PartnerContactPage({
                 </h3>
 
                 {/* Body */}
-                <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                <p className="mt-3 text-sm leading-relaxed text-ink-soft font-medium">
                   {s.body}
                 </p>
+
+                {/* Connector arrow → between steps (lg+) */}
+                {i < steps.length - 1 ? (
+                  <span
+                    aria-hidden="true"
+                    className="hidden lg:grid place-items-center absolute -right-[14px] top-1/2 -translate-y-1/2 z-10 h-9 w-9 bg-white"
+                  >
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                      <path
+                        d="M3 9h12M10 4l5 5-5 5"
+                        stroke="#F58220"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                ) : null}
+
+                {/* Connector arrow ↓ between steps (mobile) */}
+                {i < steps.length - 1 ? (
+                  <span
+                    aria-hidden="true"
+                    className="flex lg:hidden justify-center mt-4"
+                  >
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path
+                        d="M10 3v14M5 12l5 5 5-5"
+                        stroke="#F58220"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                ) : null}
               </li>
             ))}
           </ol>
