@@ -15,7 +15,7 @@ import { getDictionary } from "@/i18n/dictionary";
 export const metadata: Metadata = {
   title: "サービス案内",
   description:
-    "セールスボンド株式会社の3つのサービス。リファボンド(大手決裁者紹介)、キーマンボンド(プロ人材マッチング)、セルボンド(インサイドセールス代行)。",
+    "セールスボンド株式会社の3つのサービス。リファボンド(大手決裁者紹介)、キーマンボンド(プロ人材マッチング)、セルボンド(インサイドセールス支援)。",
 };
 
 type ServiceWithImage = {
