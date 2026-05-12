@@ -3,13 +3,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
-import { Button } from "@/components/ui/Button";
 import { Illustration } from "@/components/ui/Illustration";
+import { CTASection } from "@/components/home/CTASection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { services } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionary";
 
 export const metadata: Metadata = {
   title: "サービス案内",
@@ -29,6 +30,7 @@ export default function ServicesPage({
 }) {
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
+  const dict = getDictionary(locale);
 
   return (
     <>
@@ -118,23 +120,8 @@ export default function ServicesPage({
         </Container>
       </section>
 
-      {/* CTA */}
-      <section className="pb-24 md:pb-32">
-        <Container className="text-center">
-          <p className="text-sm text-ink-muted">
-            サービスに関するご相談・お見積もりはこちらから
-          </p>
-          <div className="mt-6">
-            <Button
-              href={localePath("/contact", locale)}
-              size="lg"
-              className="!h-16 !px-12 !text-lg shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)]"
-            >
-              無料で相談する
-            </Button>
-          </div>
-        </Container>
-      </section>
+      {/* CTA (shared with home) */}
+      <CTASection locale={locale} dict={dict} />
     </>
   );
 }
