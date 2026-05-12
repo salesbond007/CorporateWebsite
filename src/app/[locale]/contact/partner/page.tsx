@@ -281,7 +281,7 @@ export default function PartnerContactPage({
                   className="group block h-full text-center"
                 >
                   {/* Image (or cream placeholder until provided) */}
-                  <div className="relative aspect-[4/3] overflow-hidden bg-cream">
+                  <div className="relative aspect-[4/3] overflow-hidden bg-cream border border-ink/15">
                     {e.image ? (
                       <Image
                         src={e.image}
