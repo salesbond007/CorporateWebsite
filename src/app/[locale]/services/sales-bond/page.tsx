@@ -149,6 +149,37 @@ export default function ReferBondPage({
         description="アウトバウンドでは届かない層へ、最短で接点を。リファボンドは、人脈紹介で大手・上場・地方企業の決裁者に直接つながれる完全成果報酬型サービスです。"
       />
 
+      {/* ───── Companies (logo marquee) ───── */}
+      <section className="overflow-hidden border-b border-ink-line bg-white py-10 md:py-12">
+        <Container>
+          <p className="text-center text-xs font-extrabold uppercase tracking-[0.22em] text-ink-muted">
+            Companies
+          </p>
+        </Container>
+
+        {/* Marquee: items are duplicated so the -50% translate loops seamlessly */}
+        <div
+          className="relative mt-6 overflow-hidden"
+          aria-label="ご利用企業ロゴ一覧"
+        >
+          <ul className="flex w-max gap-8 md:gap-12 animate-marquee">
+            {[...Array(2)].flatMap((_, dup) =>
+              Array.from({ length: 8 }, (_, i) => (
+                <li
+                  key={`${dup}-${i}`}
+                  aria-hidden={dup === 1 ? "true" : undefined}
+                  className="grid h-16 w-40 md:h-20 md:w-48 shrink-0 place-items-center border border-ink/15 bg-cream"
+                >
+                  <span className="text-xs font-bold tracking-wider text-ink-muted">
+                    LOGO {String(i + 1).padStart(2, "0")}
+                  </span>
+                </li>
+              )),
+            )}
+          </ul>
+        </div>
+      </section>
+
       {/* ───── Hero CTA strip ───── */}
       <section className="border-b border-ink-line bg-white py-10 md:py-12">
         <Container>
