@@ -159,7 +159,7 @@ export default function PartnerContactPage({
             fill
             priority
             sizes="100vw"
-            className="object-cover object-center"
+            className="object-cover object-center motion-safe:animate-hero-pan"
           />
           {/* readability gradient — darker on left where the text sits */}
           <div

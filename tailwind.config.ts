@@ -92,12 +92,17 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-8px)" },
         },
+        heroPan: {
+          "0%": { transform: "translateX(-3%) scale(1.12)" },
+          "100%": { transform: "translateX(3%) scale(1.12)" },
+        },
       },
       animation: {
         "fade-up": "fadeUp 0.7s ease-out both",
         marquee: "marquee 30s linear infinite",
         wiggle: "wiggle 1.6s ease-in-out infinite",
         "float-y": "floatY 3s ease-in-out infinite",
+        "hero-pan": "heroPan 24s ease-in-out infinite alternate",
       },
     },
   },
