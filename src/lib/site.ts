@@ -69,7 +69,7 @@ export const services = [
   {
     slug: "lead-bond",
     number: "03",
-    title: "リードボンド",
+    title: "セルボンド",
     subtitle: "インサイドセールス代行サービス",
     summary:
       "戦略立案から現場運用まで一気通貫で対応する、インサイドセールス代行サービス。再現性のあるノウハウにより、中小企業のリード獲得を支援します。",
