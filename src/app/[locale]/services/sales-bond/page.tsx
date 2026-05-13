@@ -177,7 +177,7 @@ export default function ReferBondPage({
             <div className="lg:col-span-7">
               <p className="inline-flex items-center gap-2 border border-white/40 bg-white/10 px-3 py-1 text-xs md:text-sm font-extrabold tracking-[0.16em] uppercase text-white backdrop-blur-sm">
                 <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-yellow-300" />
-                Refer Bond / リファボンド
+                リファボンド
               </p>
 
               <h1 className="mt-6 font-display font-black leading-[1.05] tracking-tight text-white text-[clamp(2.5rem,7vw,5rem)]">
