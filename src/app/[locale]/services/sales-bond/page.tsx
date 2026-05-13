@@ -343,25 +343,42 @@ export default function ReferBondPage({
       </section>
 
       {/* ───── Solution bridge: Refer Bond が解決します ───── */}
-      <section className="relative overflow-hidden bg-brand-500 py-20 md:py-24 text-white">
+      <section className="relative bg-brand-500 py-20 md:py-24 text-white">
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-[0.18]"
+          className="absolute inset-0 overflow-hidden opacity-[0.18]"
           style={{
             backgroundImage:
               "radial-gradient(rgba(255,255,255,0.85) 1px, transparent 1px)",
             backgroundSize: "22px 22px",
           }}
         />
+        {/* Down arrow bridging from the Challenges section above */}
         <div
           aria-hidden="true"
-          className="absolute -top-24 left-1/2 -translate-x-1/2 h-0 w-0 border-l-[40px] border-r-[40px] border-t-[40px] border-l-transparent border-r-transparent border-t-cream"
-        />
+          className="absolute left-1/2 top-0 z-10 -translate-x-1/2 -translate-y-1/2"
+        >
+          <div className="grid h-16 w-16 place-items-center rounded-full bg-white shadow-[0_10px_24px_-6px_rgba(0,0,0,0.25)] md:h-20 md:w-20">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              className="h-8 w-8 md:h-10 md:w-10 text-brand-500"
+            >
+              <path
+                d="M12 4v14M5 13l7 7 7-7"
+                stroke="currentColor"
+                strokeWidth="2.6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        </div>
 
         <Container className="relative">
           <div className="mx-auto max-w-3xl text-center">
-            <p className="inline-flex items-center gap-2 border border-white/40 bg-white/10 px-4 py-1.5 text-xs md:text-sm font-extrabold tracking-[0.16em] uppercase text-white backdrop-blur-sm">
-              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-yellow-300" />
+            <p className="inline-flex items-center gap-3 border-2 border-white/50 bg-white/10 px-5 py-2.5 md:px-7 md:py-3 text-base md:text-xl font-extrabold tracking-wide text-white backdrop-blur-sm">
+              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-yellow-300" />
               リファボンドが解決します
             </p>
             <h2 className="mt-6 font-display font-black leading-[1.25] tracking-tight text-white text-[clamp(1.75rem,4.5vw,3rem)]">
