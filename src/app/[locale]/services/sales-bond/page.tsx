@@ -314,7 +314,12 @@ export default function ReferBondPage({
               Challenges
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              こんな経営課題はありませんか?
+              <span className="block text-sm md:text-base font-bold text-ink-soft tracking-wide">
+                新規開拓において
+              </span>
+              <span className="mt-2 block">
+                こんな営業課題はありませんか?
+              </span>
             </h2>
           </div>
 
