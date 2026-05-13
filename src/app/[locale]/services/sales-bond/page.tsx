@@ -193,14 +193,14 @@ export default function ReferBondPage({
                 を紹介。
               </h1>
 
-              <ul className="mt-8 space-y-3">
+              <ul className="mt-8 space-y-4">
                 {[
                   "完全成果報酬でローリスク!",
                   "ベンチャー企業から大手企業まで幅広く開拓可能!",
                 ].map((item) => (
                   <li
                     key={item}
-                    className="flex items-center gap-3 text-base md:text-xl font-bold text-white"
+                    className="flex items-center gap-3 border-b-2 border-white/70 pb-3 text-base md:text-xl font-bold text-white"
                   >
                     <svg
                       width="22"
@@ -224,13 +224,8 @@ export default function ReferBondPage({
                 ))}
               </ul>
 
-              <div
-                aria-hidden="true"
-                className="mt-8 h-[3px] w-full max-w-xl bg-white"
-              />
-
               {/* CTA frame */}
-              <div className="mt-8 max-w-xl">
+              <div className="mt-10 max-w-xl">
                 <div className="flex items-center justify-center gap-3">
                   <span aria-hidden="true" className="h-px w-10 bg-white/40" />
                   <p className="text-xs md:text-sm font-bold text-white/90">
