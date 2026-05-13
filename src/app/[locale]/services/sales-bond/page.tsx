@@ -152,100 +152,150 @@ export default function ReferBondPage({
       />
 
       {/* ───── Hero ───── */}
-      <section className="relative overflow-hidden border-b border-ink-line bg-cream">
-        <div className="absolute inset-0 dot-bg opacity-60" aria-hidden="true" />
+      <section className="relative overflow-hidden bg-ink text-white">
         <div
           aria-hidden="true"
-          className="absolute -top-40 -right-32 h-[480px] w-[480px] rounded-full bg-brand-200/55 blur-3xl"
+          className="absolute inset-0 opacity-[0.08]"
+          style={{
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px)",
+            backgroundSize: "22px 22px",
+          }}
         />
         <div
           aria-hidden="true"
-          className="absolute -bottom-32 -left-20 h-[360px] w-[360px] rounded-full bg-brand-100/70 blur-3xl"
+          className="absolute -top-32 -right-20 h-[520px] w-[520px] rounded-full bg-brand-500/30 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -bottom-40 -left-32 h-[440px] w-[440px] rounded-full bg-brand-500/15 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-brand-500/60 to-transparent"
         />
 
-        <Container className="relative py-20 md:py-28 lg:py-32">
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              Refer Bond
-            </p>
-            <h1 className="mt-5 text-display-2 text-ink font-black leading-[1.2]">
-              人脈紹介で大手企業の
-              <br className="md:hidden" />
-              <span className="text-brand-500">決裁者アポ</span>
-              を創出
-            </h1>
-
-            <ul className="mt-10 md:mt-12 flex flex-wrap justify-center gap-3 md:gap-4">
-              {[
-                "初期費用 / 月額固定費 0",
-                "完全成果報酬性",
-                "スタートアップ〜大手企業まで幅広く紹介可能",
-              ].map((prop) => (
-                <li
-                  key={prop}
-                  className="inline-flex items-center gap-2.5 border-2 border-ink bg-white px-5 py-3 shadow-[0_6px_0_-2px_rgba(245,130,32,0.85)]"
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    aria-hidden="true"
-                    className="shrink-0"
-                  >
-                    <circle cx="10" cy="10" r="9" fill="#F58220" />
-                    <path
-                      d="M6 10.5l2.8 2.8L14.5 7.5"
-                      stroke="white"
-                      strokeWidth="2.2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <span className="text-sm md:text-base font-black text-ink leading-none">
-                    {prop}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Container>
-      </section>
-
-      {/* ───── Top CTA banner ───── */}
-      <section className="bg-white py-12 md:py-16">
-        <Container>
-          <div className="mx-auto max-w-2xl">
-            {/* Tagline above the button */}
-            <div className="flex items-center justify-center gap-4">
-              <span aria-hidden="true" className="h-px w-12 md:w-16 bg-ink/30" />
-              <p className="text-sm md:text-base font-bold text-ink">
-                簡単 1 分で入力完了
+        <Container className="relative py-20 md:py-24 lg:py-28">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-12">
+            {/* Left: copy + CTA */}
+            <div className="lg:col-span-7">
+              <p className="text-sm md:text-base font-bold text-white/85">
+                大手企業の決裁者を紹介
               </p>
-              <span aria-hidden="true" className="h-px w-12 md:w-16 bg-ink/30" />
+              <h1 className="mt-3 font-display font-black leading-[0.95] tracking-tight text-white text-[clamp(3.25rem,9vw,6.5rem)]">
+                <span className="bg-gradient-to-r from-white to-brand-200 bg-clip-text text-transparent">
+                  リファボンド
+                </span>
+              </h1>
+
+              <div className="mt-8 flex items-center gap-4">
+                <span aria-hidden="true" className="h-px w-10 md:w-14 bg-brand-500" />
+                <p className="text-xs md:text-sm font-extrabold tracking-[0.18em] uppercase text-brand-200">
+                  Refer Bond
+                </p>
+              </div>
+
+              <ul className="mt-6 space-y-3">
+                {["完全成果報酬性", "ベンチャー〜大手まで紹介可能"].map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-3 text-base md:text-xl font-bold text-white"
+                  >
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                      aria-hidden="true"
+                      className="shrink-0"
+                    >
+                      <circle cx="11" cy="11" r="10" fill="#F58220" />
+                      <path
+                        d="M6.6 11.4l3 3 5.8-6.4"
+                        stroke="white"
+                        strokeWidth="2.2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              {/* CTA frame */}
+              <div className="mt-10 max-w-xl">
+                <div className="flex items-center justify-center gap-3">
+                  <span aria-hidden="true" className="h-px w-10 bg-white/30" />
+                  <p className="text-xs md:text-sm font-bold text-white/80">
+                    簡単 1 分で入力完了
+                  </p>
+                  <span aria-hidden="true" className="h-px w-10 bg-white/30" />
+                </div>
+                <Link
+                  href={contactHref}
+                  className="group mt-4 flex items-center justify-center gap-4 md:gap-6 bg-brand-500 px-6 py-5 md:px-10 md:py-6 text-white transition hover:bg-brand-600 shadow-[0_24px_50px_-12px_rgba(245,130,32,0.7)]"
+                >
+                  <span className="text-lg md:text-2xl font-black text-yellow-300">
+                    無料
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="h-6 md:h-8 w-px bg-white/40"
+                  />
+                  <span className="text-base md:text-xl font-bold tracking-wide">
+                    資料請求・お問合せ
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="ml-1 text-xl md:text-2xl transition group-hover:translate-x-1"
+                  >
+                    →
+                  </span>
+                </Link>
+              </div>
             </div>
 
-            {/* Big orange CTA button */}
-            <Link
-              href={contactHref}
-              className="mt-5 block bg-brand-500 text-white transition hover:bg-brand-600 shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)]"
-            >
-              <div className="flex items-center justify-center gap-4 md:gap-6 py-5 px-6 md:py-6 md:px-10">
-                <span className="text-lg md:text-2xl font-black text-yellow-300">
-                  無料
-                </span>
-                <span
-                  aria-hidden="true"
-                  className="h-6 md:h-8 w-px bg-white/40"
-                />
-                <span className="text-base md:text-xl font-bold tracking-wide">
-                  資料請求・お問合せ
-                </span>
-                <span aria-hidden="true" className="ml-2 text-xl md:text-2xl">
-                  →
-                </span>
+            {/* Right: stat tiles */}
+            <div className="lg:col-span-5">
+              <div className="grid grid-cols-2 gap-4 md:gap-6">
+                {[
+                  { label: "完全成果報酬", value: "0", unit: "円", caption: "初期費用 / 月額固定費" },
+                  { label: "紹介可能企業", value: "幅広", unit: "", caption: "ベンチャー〜大手" },
+                ].map((s) => (
+                  <div
+                    key={s.label}
+                    className="relative border border-white/15 bg-white/[0.04] backdrop-blur-sm px-5 py-6 md:px-6 md:py-8 text-center"
+                  >
+                    <p className="text-[10px] md:text-xs font-extrabold tracking-[0.18em] uppercase text-brand-300">
+                      {s.label}
+                    </p>
+                    <p className="mt-3 font-display font-black leading-none text-white">
+                      <span className="text-4xl md:text-5xl">{s.value}</span>
+                      {s.unit ? (
+                        <span className="ml-1 text-xl md:text-2xl text-brand-300">
+                          {s.unit}
+                        </span>
+                      ) : null}
+                    </p>
+                    <p className="mt-3 text-xs md:text-sm font-bold text-white/75 leading-snug">
+                      {s.caption}
+                    </p>
+                  </div>
+                ))}
               </div>
-            </Link>
+
+              <div className="mt-4 md:mt-6 border border-white/15 bg-white/[0.04] backdrop-blur-sm p-5 md:p-6">
+                <p className="text-[10px] md:text-xs font-extrabold tracking-[0.18em] uppercase text-brand-300">
+                  How it works
+                </p>
+                <p className="mt-3 text-sm md:text-base font-bold text-white leading-relaxed">
+                  各業界の経営層・幹部経験者・現役経営者が
+                  <span className="text-brand-300">サポーター</span>
+                  として登録。人脈紹介で大手企業の決裁者に直接つながります。
+                </p>
+              </div>
+            </div>
           </div>
         </Container>
       </section>
