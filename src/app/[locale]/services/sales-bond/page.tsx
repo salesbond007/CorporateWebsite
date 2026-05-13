@@ -313,25 +313,6 @@ export default function ReferBondPage({
         </div>
       </section>
 
-      {/* ───── Hero CTA strip ───── */}
-      <section className="border-b border-ink-line bg-white py-10 md:py-12">
-        <Container>
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <p className="text-sm md:text-base text-ink-soft font-medium">
-              <span className="font-black text-ink">初期費用 0 円・月額費用 0 円</span>
-              。商談実施に応じた成果報酬のみで開始できます。
-            </p>
-            <Button
-              href={contactHref}
-              size="lg"
-              className="shadow-[0_14px_30px_-12px_rgba(245,130,32,0.7)]"
-            >
-              無料で相談する
-            </Button>
-          </div>
-        </Container>
-      </section>
-
       {/* ───── Challenges ───── */}
       <section className="bg-cream py-24 md:py-32">
         <Container>
