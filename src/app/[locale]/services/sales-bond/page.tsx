@@ -310,14 +310,14 @@ export default function ReferBondPage({
       <section className="bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              Challenges
-            </p>
-            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              <span className="block text-lg md:text-2xl font-bold text-ink leading-snug">
-                新規開拓において
+            <h2 className="text-display-3 text-ink font-black leading-tight">
+              <span className="block text-xl md:text-3xl font-bold text-ink leading-snug">
+                <span className="underline decoration-brand-700 decoration-[4px] underline-offset-[6px]">
+                  新規開拓
+                </span>
+                において
               </span>
-              <span className="mt-2 block">
+              <span className="mt-3 block">
                 こんな営業課題はありませんか?
               </span>
             </h2>
