@@ -242,13 +242,6 @@ export default function ReferBondPage({
                   href={contactHref}
                   className="group mt-4 flex items-center justify-center gap-4 md:gap-6 bg-ink px-6 py-5 md:px-10 md:py-6 text-white transition hover:bg-black shadow-[0_24px_50px_-12px_rgba(0,0,0,0.45)]"
                 >
-                  <span className="text-lg md:text-2xl font-black text-yellow-300">
-                    無料
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className="h-6 md:h-8 w-px bg-white/40"
-                  />
                   <span className="text-base md:text-xl font-bold tracking-wide">
                     資料請求・お問合せ
                   </span>
