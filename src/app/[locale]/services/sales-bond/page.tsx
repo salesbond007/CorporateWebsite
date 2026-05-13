@@ -497,7 +497,7 @@ export default function ReferBondPage({
             </h2>
           </div>
 
-          <ul className="mx-auto mt-16 max-w-5xl space-y-6 md:space-y-8">
+          <ul className="mt-16 space-y-6 md:space-y-8">
             {reasons.map((r, i) => {
               const reverse = i % 2 === 1;
               return (
