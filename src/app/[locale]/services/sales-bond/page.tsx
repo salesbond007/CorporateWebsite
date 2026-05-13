@@ -23,24 +23,23 @@ export const metadata: Metadata = {
     "リファボンド(旧:セールスボンド)は、人脈紹介で大手・上場・地方企業の決裁者/役員と直接つながれる完全成果報酬型サービス。初期費用・月額費用ゼロ。アウトバウンドでは届かない層への商談機会を創出します。",
 };
 
-type Challenge = { title: string; body: string };
+type Challenge = { titleTop: string; titleBottom: string; body: string };
 
 const challenges: Challenge[] = [
   {
-    title: "テレアポ・メール営業で決裁者まで届かない",
-    body: "情報システム部・受付段階で止まり、本当に話したい役員クラスにアプローチできていない。",
+    titleTop: "決裁者アポが",
+    titleBottom: "思うように取れない",
+    body: "受付・担当者で止まり、役員クラスまで届かない",
   },
   {
-    title: "大手・上場企業との初回接点が作れない",
-    body: "問い合わせフォームや代表番号からの一斉アプローチでは、案件化に至らないまま時間とコストだけが消耗していく。",
+    titleTop: "新規開拓の商談数が",
+    titleBottom: "伸び悩んでいる",
+    body: "テレアポ・広告のチャネルが頭打ちで増えない",
   },
   {
-    title: "地方の有力企業と接点を持つ手段がない",
-    body: "東京拠点のみのリソースでは地方ネットワークが薄く、地方ローカル企業の開拓が後回しになっている。",
-  },
-  {
-    title: "営業リストが枯渇・既存ルートが頭打ち",
-    body: "ホワイトペーパー・展示会・既存代理店…これまでの開拓チャネルが頭打ちで、新規パイプラインの厚みに課題がある。",
+    titleTop: "展示会や広告で獲得したリードが、",
+    titleBottom: "商談につながらない",
+    body: "母数はあるのに有効な商談に転換できない",
   },
 ];
 
@@ -323,21 +322,22 @@ export default function ReferBondPage({
             </h2>
           </div>
 
-          <ul className="mx-auto mt-14 grid max-w-5xl gap-4 md:grid-cols-2 md:gap-6">
+          <ul className="mx-auto mt-14 grid max-w-6xl gap-6 md:grid-cols-3 md:gap-8">
             {challenges.map((c, i) => (
-              <li key={c.title}>
-                <Reveal delay={(i % 2) * 80}>
-                  <div className="h-full border border-ink-line bg-white p-7 md:p-8">
-                    <p className="flex items-start gap-3 text-base md:text-lg font-black text-ink leading-snug">
-                      <span
-                        aria-hidden="true"
-                        className="mt-1 grid h-6 w-6 shrink-0 place-items-center bg-brand-500 text-xs font-black text-white"
-                      >
-                        !
-                      </span>
-                      {c.title}
+              <li key={c.titleTop}>
+                <Reveal delay={i * 80} className="h-full">
+                  <div className="h-full rounded-2xl border border-ink-line bg-white p-6 md:p-8">
+                    {/* Illustration placeholder — to be filled later */}
+                    <div
+                      aria-hidden="true"
+                      className="aspect-[5/4] w-full rounded-xl bg-cream"
+                    />
+                    <p className="mt-6 text-center text-lg md:text-xl font-black text-ink leading-snug">
+                      {c.titleTop}
+                      <br />
+                      {c.titleBottom}
                     </p>
-                    <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                    <p className="mt-3 text-center text-sm leading-relaxed text-ink-soft font-medium">
                       {c.body}
                     </p>
                   </div>
