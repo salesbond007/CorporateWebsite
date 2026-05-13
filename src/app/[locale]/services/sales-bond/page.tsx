@@ -23,23 +23,20 @@ export const metadata: Metadata = {
     "リファボンド(旧:セールスボンド)は、人脈紹介で大手・上場・地方企業の決裁者/役員と直接つながれる完全成果報酬型サービス。初期費用・月額費用ゼロ。アウトバウンドでは届かない層への商談機会を創出します。",
 };
 
-type Challenge = { titleTop: string; titleBottom: string; body: string };
+type Challenge = { titleTop: string; titleBottom: string };
 
 const challenges: Challenge[] = [
   {
     titleTop: "決裁者アポが",
     titleBottom: "思うように取れない",
-    body: "受付・担当者で止まり、役員クラスまで届かない",
   },
   {
     titleTop: "新規開拓の商談数が",
     titleBottom: "伸び悩んでいる",
-    body: "テレアポ・広告のチャネルが頭打ちで増えない",
   },
   {
     titleTop: "展示会や広告で獲得したリードが、",
     titleBottom: "商談につながらない",
-    body: "母数はあるのに有効な商談に転換できない",
   },
 ];
 
@@ -332,13 +329,10 @@ export default function ReferBondPage({
                       aria-hidden="true"
                       className="aspect-[5/4] w-full rounded-xl bg-cream"
                     />
-                    <p className="mt-6 text-center text-lg md:text-xl font-black text-ink leading-snug">
+                    <p className="mt-6 text-center text-base md:text-lg font-black text-ink leading-snug">
                       {c.titleTop}
                       <br />
                       {c.titleBottom}
-                    </p>
-                    <p className="mt-3 text-center text-sm leading-relaxed text-ink-soft font-medium">
-                      {c.body}
                     </p>
                   </div>
                 </Reveal>
