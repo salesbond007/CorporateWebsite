@@ -519,7 +519,7 @@ export default function ReferBondPage({
                         {/* Illustration placeholder */}
                         <div
                           aria-hidden="true"
-                          className={`aspect-[16/9] w-full rounded-xl bg-cream ${reverse ? "md:order-1" : ""}`}
+                          className={`mx-auto aspect-square w-full max-w-sm rounded-xl bg-cream ${reverse ? "md:order-1" : ""}`}
                         />
                       </div>
                     </div>
