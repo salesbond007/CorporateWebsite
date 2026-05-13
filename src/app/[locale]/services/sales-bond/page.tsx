@@ -172,9 +172,9 @@ export default function ReferBondPage({
         />
 
         <Container className="relative py-20 md:py-24 lg:py-28">
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-12">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
             {/* Left: copy + CTA */}
-            <div className="lg:col-span-7">
+            <div className="lg:col-span-6">
               <p className="inline-flex items-center gap-2 border border-white/40 bg-white/10 px-3 py-1 text-xs md:text-sm font-extrabold tracking-[0.16em] uppercase text-white backdrop-blur-sm">
                 <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-yellow-300" />
                 リファボンド
@@ -251,14 +251,14 @@ export default function ReferBondPage({
             </div>
 
             {/* Right: hero visual */}
-            <div className="lg:col-span-5">
+            <div className="lg:col-span-6">
               <div className="relative mx-auto aspect-[4/3] w-full overflow-hidden border-2 border-white/30 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]">
                 <Image
                   src="https://i.imgur.com/QMdMoAG.jpeg"
                   alt="挑戦する企業の現場で活躍するビジネスパーソン"
                   fill
                   priority
-                  sizes="(min-width: 1024px) 520px, 95vw"
+                  sizes="(min-width: 1024px) 600px, 95vw"
                   className="object-cover object-center motion-safe:animate-hero-pan-fast"
                 />
                 <div
