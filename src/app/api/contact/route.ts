@@ -180,7 +180,7 @@ export async function POST(req: Request) {
   }
 
   try {
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: fromAddress,
       to,
       replyTo:
@@ -190,9 +190,23 @@ export async function POST(req: Request) {
       subject,
       html: renderHtml(type, parsed.data as Record<string, unknown>),
     });
+    if (error) {
+      console.error("[contact] resend returned error", {
+        name: error.name,
+        message: error.message,
+        from: fromAddress,
+        to,
+        type,
+      });
+      return NextResponse.json(
+        { error: "送信に失敗しました。時間をおいて再度お試しください。" },
+        { status: 500 },
+      );
+    }
+    console.info("[contact] sent", { id: data?.id, to, type });
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("[contact] send failed", err);
+    console.error("[contact] send threw", err);
     return NextResponse.json(
       { error: "送信に失敗しました。時間をおいて再度お試しください。" },
       { status: 500 },
