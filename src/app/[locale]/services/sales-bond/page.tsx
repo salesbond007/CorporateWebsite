@@ -503,8 +503,8 @@ export default function ReferBondPage({
               return (
                 <li key={r.number}>
                   <Reveal delay={i * 80}>
-                    <div className="rounded-2xl border border-ink-line bg-white p-6 md:p-10">
-                      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+                    <div className="rounded-2xl border border-ink-line bg-white p-6 md:p-8">
+                      <div className="grid items-center gap-6 md:grid-cols-2 md:gap-10">
                         <div className={reverse ? "md:order-2" : ""}>
                           <p className="font-display text-3xl md:text-4xl font-black leading-none text-brand-500">
                             {r.number}
@@ -519,7 +519,7 @@ export default function ReferBondPage({
                         {/* Illustration placeholder */}
                         <div
                           aria-hidden="true"
-                          className={`aspect-[5/4] w-full rounded-xl bg-cream ${reverse ? "md:order-1" : ""}`}
+                          className={`aspect-[16/9] w-full rounded-xl bg-cream ${reverse ? "md:order-1" : ""}`}
                         />
                       </div>
                     </div>
