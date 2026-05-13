@@ -224,8 +224,13 @@ export default function ReferBondPage({
                 ))}
               </ul>
 
+              <div
+                aria-hidden="true"
+                className="mt-8 h-[3px] w-full max-w-xl bg-white"
+              />
+
               {/* CTA frame */}
-              <div className="mt-10 max-w-xl">
+              <div className="mt-8 max-w-xl">
                 <div className="flex items-center justify-center gap-3">
                   <span aria-hidden="true" className="h-px w-10 bg-white/40" />
                   <p className="text-xs md:text-sm font-bold text-white/90">
