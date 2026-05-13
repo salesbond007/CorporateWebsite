@@ -348,6 +348,72 @@ export default function ReferBondPage({
         </Container>
       </section>
 
+      {/* ───── Solution bridge: Refer Bond が解決します ───── */}
+      <section className="relative overflow-hidden bg-brand-500 py-20 md:py-24 text-white">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-[0.18]"
+          style={{
+            backgroundImage:
+              "radial-gradient(rgba(255,255,255,0.85) 1px, transparent 1px)",
+            backgroundSize: "22px 22px",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -top-24 left-1/2 -translate-x-1/2 h-0 w-0 border-l-[40px] border-r-[40px] border-t-[40px] border-l-transparent border-r-transparent border-t-cream"
+        />
+
+        <Container className="relative">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="inline-flex items-center gap-2 border border-white/40 bg-white/10 px-4 py-1.5 text-xs md:text-sm font-extrabold tracking-[0.16em] uppercase text-white backdrop-blur-sm">
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-yellow-300" />
+              リファボンドが解決します
+            </p>
+            <h2 className="mt-6 font-display font-black leading-[1.25] tracking-tight text-white text-[clamp(1.75rem,4.5vw,3rem)]">
+              リファボンドは
+              <br className="md:hidden" />
+              ダイレクトに
+              <br />
+              <span className="relative inline-block">
+                決裁者 / 代表
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 -bottom-1 h-2 bg-yellow-300/90"
+                />
+              </span>
+              を紹介!
+            </h2>
+          </div>
+
+          {/* CTA box */}
+          <div className="mx-auto mt-12 max-w-2xl">
+            <div className="border-2 border-white/40 bg-white/10 backdrop-blur-sm p-6 md:p-8 text-center">
+              <p className="text-sm md:text-base font-bold text-white/90">
+                サービス内容・料金体系・事例をまとめた資料を無料配布中
+              </p>
+              <Link
+                href={contactHref}
+                className="group mt-5 flex items-center justify-center gap-3 bg-ink px-6 py-4 md:px-10 md:py-5 text-white transition hover:bg-black shadow-[0_18px_40px_-12px_rgba(0,0,0,0.45)]"
+              >
+                <span className="text-base md:text-xl font-bold tracking-wide">
+                  資料請求はこちら
+                </span>
+                <span
+                  aria-hidden="true"
+                  className="text-xl md:text-2xl transition group-hover:translate-x-1"
+                >
+                  →
+                </span>
+              </Link>
+              <p className="mt-3 text-xs text-white/75 font-medium">
+                簡単 1 分で入力完了
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* ───── What is Refer Bond ───── */}
       <section className="bg-white py-24 md:py-32">
         <Container>
