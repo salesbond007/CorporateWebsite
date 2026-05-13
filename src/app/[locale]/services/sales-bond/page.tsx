@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
-import { PageHero } from "@/components/ui/PageHero";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -151,11 +151,66 @@ export default function ReferBondPage({
         ])}
       />
 
-      <PageHero
-        eyebrow="大手決裁者紹介サービス"
-        title="人脈で、決裁者に届く。"
-        description="アウトバウンドでは届かない層へ、最短で接点を。リファボンドは、人脈紹介で大手・上場・地方企業の決裁者に直接つながれる完全成果報酬型サービスです。"
-      />
+      {/* ───── Hero ───── */}
+      <section className="relative overflow-hidden border-b border-ink-line bg-cream">
+        <div className="absolute inset-0 dot-bg opacity-60" aria-hidden="true" />
+        <div
+          aria-hidden="true"
+          className="absolute -top-40 -right-32 h-[480px] w-[480px] rounded-full bg-brand-200/55 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -bottom-32 -left-20 h-[360px] w-[360px] rounded-full bg-brand-100/70 blur-3xl"
+        />
+
+        <Container className="relative py-20 md:py-28 lg:py-32">
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+              Refer Bond
+            </p>
+            <h1 className="mt-5 text-display-2 text-ink font-black leading-[1.2]">
+              人脈紹介で大手企業の
+              <br className="md:hidden" />
+              <span className="text-brand-500">決裁者アポ</span>
+              を創出
+            </h1>
+
+            <ul className="mt-10 md:mt-12 flex flex-wrap justify-center gap-3 md:gap-4">
+              {[
+                "初期費用 / 月額固定費 0",
+                "完全成果報酬性",
+                "スタートアップ〜大手企業まで幅広く紹介可能",
+              ].map((prop) => (
+                <li
+                  key={prop}
+                  className="inline-flex items-center gap-2.5 border-2 border-ink bg-white px-5 py-3 shadow-[0_6px_0_-2px_rgba(245,130,32,0.85)]"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    aria-hidden="true"
+                    className="shrink-0"
+                  >
+                    <circle cx="10" cy="10" r="9" fill="#F58220" />
+                    <path
+                      d="M6 10.5l2.8 2.8L14.5 7.5"
+                      stroke="white"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <span className="text-sm md:text-base font-black text-ink leading-none">
+                    {prop}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Container>
+      </section>
 
       {/* ───── Top CTA banner ───── */}
       <section className="bg-white py-12 md:py-16">
