@@ -429,10 +429,7 @@ export default function ReferBondPage({
       <section className="bg-white py-24 md:py-32">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              About Refer Bond
-            </p>
-            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+            <h2 className="text-display-3 text-ink font-black leading-tight">
               リファボンドとは?
             </h2>
             <p className="mt-8 text-base md:text-lg leading-[1.95] text-ink font-medium">
@@ -495,11 +492,8 @@ export default function ReferBondPage({
       <section className="bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              Why Refer Bond
-            </p>
-            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              選ばれる3つの理由
+            <h2 className="text-display-3 text-ink font-black leading-tight">
+              リファボンドの特徴
             </h2>
           </div>
 
