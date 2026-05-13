@@ -66,6 +66,14 @@ const reasons: Reason[] = [
 
 type FlowStep = { digit: string; title: string; body: string };
 
+const logos: string[] = [
+  "https://i.imgur.com/DsBUTxo.png",
+  "https://i.imgur.com/Cem1VTy.png",
+  "https://i.imgur.com/iymZ2CC.png",
+  "https://i.imgur.com/OeRRBLb.png?3",
+  "https://i.imgur.com/4va7wOB.png",
+];
+
 const flowSteps: FlowStep[] = [
   {
     digit: "1",
@@ -202,15 +210,19 @@ export default function ReferBondPage({
         >
           <ul className="flex w-max gap-8 md:gap-12 animate-marquee">
             {[...Array(2)].flatMap((_, dup) =>
-              Array.from({ length: 8 }, (_, i) => (
+              logos.map((src, i) => (
                 <li
                   key={`${dup}-${i}`}
                   aria-hidden={dup === 1 ? "true" : undefined}
-                  className="grid h-16 w-40 md:h-20 md:w-48 shrink-0 place-items-center border border-ink/15 bg-cream"
+                  className="flex h-16 md:h-20 w-40 md:w-48 shrink-0 items-center justify-center bg-white border border-ink/15 px-5 py-3"
                 >
-                  <span className="text-xs font-bold tracking-wider text-ink-muted">
-                    LOGO {String(i + 1).padStart(2, "0")}
-                  </span>
+                  <Image
+                    src={src}
+                    alt=""
+                    width={180}
+                    height={60}
+                    className="max-h-full w-auto object-contain"
+                  />
                 </li>
               )),
             )}
