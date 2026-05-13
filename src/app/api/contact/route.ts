@@ -13,9 +13,9 @@ export const runtime = "nodejs";
 const resendKey = process.env.RESEND_API_KEY;
 const resend = resendKey ? new Resend(resendKey) : null;
 
-const fromAddress = process.env.CONTACT_MAIL_FROM ?? "noreply@example.com";
-const toBusiness = process.env.CONTACT_MAIL_TO_BUSINESS ?? fromAddress;
-const toProfessional = process.env.CONTACT_MAIL_TO_PROFESSIONAL ?? fromAddress;
+const fromAddress = process.env.CONTACT_MAIL_FROM ?? "Sales Bond <noreply@salesbond.jp>";
+const toBusiness = process.env.CONTACT_MAIL_TO_BUSINESS ?? "info@salesbond.jp";
+const toProfessional = process.env.CONTACT_MAIL_TO_PROFESSIONAL ?? "info@salesbond.jp";
 
 function escapeHtml(value: string) {
   return value
