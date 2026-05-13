@@ -45,18 +45,18 @@ type Reason = { number: string; title: string; body: string };
 const reasons: Reason[] = [
   {
     number: "01",
-    title: "アウトバウンドでは届かない層へ",
-    body: "テレアポ・メール・広告では接点を作れない大手・上場企業の決裁者/役員クラスへ、人脈を介した「紹介」という最短ルートで直接アプローチします。",
+    title: "会いたい決裁者と、ピンポイントでつながる",
+    body: "「地方を攻めたい」「ベンチャーに会いたい」「大手と商談したい」など、多様なご要望に柔軟に対応します。ターゲットを指定できるため費用対効果の高い開拓が実現します。",
   },
   {
     number: "02",
-    title: "大手・上場・地方を網羅する人脈ネットワーク",
-    body: "首都圏の大手・上場企業はもちろん、各業界の経営層・現役経営者を含むサポーターネットワークから、地方の有力企業や特定業界の決裁者まで幅広く紹介を受けられます。",
+    title: "月額費用 0 円の完全成果報酬型!",
+    body: "初期費用も月額費用も 0 円。アポ単価のみの完全成果報酬だから、ローリスクではじめられます。",
   },
   {
     number: "03",
-    title: "完全成果報酬・初期費用ゼロ",
-    body: "初期費用・月額費用は一切かかりません。商談実施に応じた成果報酬のみのシンプルな課金設計。リスクを取らずに開拓チャネルを増やせます。",
+    title: "紹介経由だから信頼を起点に商談がはじまる",
+    body: "テレアポや飛び込みと違い、紹介経由だから初回から信頼ベースで商談がスタートします。",
   },
 ];
 
@@ -497,24 +497,36 @@ export default function ReferBondPage({
             </h2>
           </div>
 
-          <ul className="mt-16 grid gap-6 md:grid-cols-3 md:gap-8">
-            {reasons.map((r, i) => (
-              <li key={r.number}>
-                <Reveal delay={i * 80} className="h-full">
-                  <div className="h-full border-2 border-ink bg-white p-8 md:p-10">
-                    <p className="font-display text-4xl md:text-5xl font-black leading-none text-brand-500">
-                      {r.number}
-                    </p>
-                    <h3 className="mt-6 text-lg md:text-xl font-black text-ink leading-snug">
-                      {r.title}
-                    </h3>
-                    <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                      {r.body}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
+          <ul className="mx-auto mt-16 max-w-5xl space-y-6 md:space-y-8">
+            {reasons.map((r, i) => {
+              const reverse = i % 2 === 1;
+              return (
+                <li key={r.number}>
+                  <Reveal delay={i * 80}>
+                    <div className="rounded-2xl border border-ink-line bg-white p-6 md:p-10">
+                      <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+                        <div className={reverse ? "md:order-2" : ""}>
+                          <p className="font-display text-3xl md:text-4xl font-black leading-none text-brand-500">
+                            {r.number}
+                          </p>
+                          <h3 className="mt-4 text-xl md:text-2xl font-black text-ink leading-snug">
+                            {r.title}
+                          </h3>
+                          <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                            {r.body}
+                          </p>
+                        </div>
+                        {/* Illustration placeholder */}
+                        <div
+                          aria-hidden="true"
+                          className={`aspect-[5/4] w-full rounded-xl bg-cream ${reverse ? "md:order-1" : ""}`}
+                        />
+                      </div>
+                    </div>
+                  </Reveal>
+                </li>
+              );
+            })}
           </ul>
         </Container>
       </section>
