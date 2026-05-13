@@ -193,14 +193,14 @@ export default function ReferBondPage({
                 を紹介。
               </h1>
 
-              <ul className="mt-8 space-y-4">
+              <ul className="mt-8 space-y-3">
                 {[
                   "完全成果報酬でローリスク!",
                   "ベンチャー企業から大手企業まで幅広く開拓可能!",
                 ].map((item) => (
                   <li
                     key={item}
-                    className="flex items-center gap-3 border-b-2 border-white/70 pb-3 text-base md:text-xl font-bold text-white"
+                    className="flex items-center gap-3 text-base md:text-xl font-bold text-white"
                   >
                     <svg
                       width="22"
