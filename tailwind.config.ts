@@ -103,6 +103,7 @@ const config: Config = {
         wiggle: "wiggle 1.6s ease-in-out infinite",
         "float-y": "floatY 3s ease-in-out infinite",
         "hero-pan": "heroPan 16s ease-in-out infinite alternate",
+        "hero-pan-fast": "heroPan 7s ease-in-out infinite alternate",
       },
     },
   },

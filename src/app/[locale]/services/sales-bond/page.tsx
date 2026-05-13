@@ -194,7 +194,7 @@ export default function ReferBondPage({
               </h1>
 
               <ul className="mt-8 space-y-3">
-                {["完全成果報酬性", "ベンチャー〜大手まで紹介可能"].map((item) => (
+                {["月額固定費 0", "ベンチャー〜大手まで紹介可能"].map((item) => (
                   <li
                     key={item}
                     className="flex items-center gap-3 text-base md:text-xl font-bold text-white"
@@ -256,14 +256,14 @@ export default function ReferBondPage({
 
             {/* Right: hero visual */}
             <div className="lg:col-span-5">
-              <div className="relative mx-auto aspect-[4/5] w-full max-w-md overflow-hidden border-2 border-white/30 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]">
+              <div className="relative mx-auto aspect-square w-full max-w-lg overflow-hidden border-2 border-white/30 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]">
                 <Image
                   src="https://i.imgur.com/QMdMoAG.jpeg"
                   alt="挑戦する企業の現場で活躍するビジネスパーソン"
                   fill
                   priority
-                  sizes="(min-width: 1024px) 420px, 90vw"
-                  className="object-cover object-center motion-safe:animate-hero-pan"
+                  sizes="(min-width: 1024px) 480px, 90vw"
+                  className="object-cover object-center motion-safe:animate-hero-pan-fast"
                 />
                 <div
                   aria-hidden="true"
@@ -369,45 +369,65 @@ export default function ReferBondPage({
       {/* ───── What is Refer Bond ───── */}
       <section className="bg-white py-24 md:py-32">
         <Container>
-          <div className="grid items-center gap-12 md:grid-cols-12 md:gap-16">
-            {/* Visual placeholder (left) */}
-            <div className="md:col-span-5">
-              <div className="aspect-[4/5] border border-ink/15 bg-cream" />
-            </div>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+              About Refer Bond
+            </p>
+            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+              リファボンドとは?
+            </h2>
+            <p className="mt-8 text-base md:text-lg leading-[1.95] text-ink font-medium">
+              リファボンドは、各業界の
+              <span className="font-black">経営層・幹部経験者・現役経営者</span>
+              がサポーターとして登録する、
+              <span className="font-black text-brand-500">人脈紹介プラットフォーム</span>
+              です。テレアポ・広告では到達できない大手・上場・地方の決裁者へ、
+              <span className="font-bold">人脈を介した「紹介」という最短ルート</span>
+              で接点を生み出します。
+            </p>
+          </div>
 
-            {/* Description (right) */}
-            <div className="md:col-span-7">
-              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-                About Refer Bond
-              </p>
-              <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-                人脈という資産を、
-                <br />
-                <span className="text-brand-500">商談機会</span>
-                に変える。
-              </h2>
-              <p className="mt-6 text-base md:text-lg leading-[1.95] text-ink font-medium">
-                リファボンドは、各業界の
-                <span className="font-black">経営層・幹部経験者・現役経営者</span>
-                がサポーターとして登録する紹介プラットフォームです。
-              </p>
-              <p className="mt-5 text-base md:text-lg leading-[1.95] text-ink-soft font-medium">
-                テレアポ・広告では到達できない大手・上場・地方の決裁者へ、
-                <span className="font-bold text-ink">
-                  人脈を介した「紹介」という最短ルート
-                </span>
-                で接点を生み出します。事前面談を経た紹介のため、
-                <span className="font-bold text-ink">
-                  文脈を共有した状態で商談が開始
-                </span>
-                し、いきなりのコールドアプローチでは届かない深度から関係構築できます。
-              </p>
-              <div className="mt-8">
-                <Link href={contactHref} className="link-arrow">
-                  サービス資料・お見積もりはこちら
-                </Link>
-              </div>
-            </div>
+          {/* 3-step concept cards */}
+          <ol className="mx-auto mt-14 grid max-w-5xl gap-4 md:grid-cols-3 md:gap-6">
+            {[
+              {
+                num: "01",
+                title: "経営者ネットワーク",
+                body: "各業界の経営層・幹部経験者・現役経営者がサポーターとして登録。地方・特定業界の有力人脈までを含む独自のネットワーク。",
+              },
+              {
+                num: "02",
+                title: "人脈による紹介",
+                body: "テレアポ・広告では届かない大手・上場企業の決裁者へ、サポーター自身の人脈を介した「紹介」で直接接点を創出。",
+              },
+              {
+                num: "03",
+                title: "文脈ある商談",
+                body: "事前面談を経た紹介のため、文脈を共有した状態で商談がスタート。コールドアプローチでは届かない深度から関係構築できます。",
+              },
+            ].map((s, i) => (
+              <li key={s.num}>
+                <Reveal delay={i * 80} className="h-full">
+                  <div className="relative h-full border-2 border-ink bg-white p-7 md:p-8">
+                    <p className="font-display text-4xl md:text-5xl font-black leading-none text-brand-500">
+                      {s.num}
+                    </p>
+                    <h3 className="mt-5 text-lg md:text-xl font-black text-ink leading-snug">
+                      {s.title}
+                    </h3>
+                    <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                      {s.body}
+                    </p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+
+          <div className="mt-12 text-center">
+            <Link href={contactHref} className="link-arrow">
+              サービス資料・お見積もりはこちら
+            </Link>
           </div>
         </Container>
       </section>
@@ -699,7 +719,7 @@ export default function ReferBondPage({
                   size="lg"
                   className="bg-brand-500 text-white hover:bg-brand-600 shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)] !h-14 md:w-72"
                 >
-                  無料で相談する
+                  無料相談 / 資料請求
                 </Button>
                 <Button
                   href={localePath("/services", locale)}
