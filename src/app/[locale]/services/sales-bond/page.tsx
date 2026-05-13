@@ -194,7 +194,10 @@ export default function ReferBondPage({
               </h1>
 
               <ul className="mt-8 space-y-3">
-                {["月額固定費 0", "ベンチャー〜大手まで紹介可能"].map((item) => (
+                {[
+                  "完全成果報酬でローリスク!",
+                  "ベンチャー企業から大手企業まで幅広く開拓可能!",
+                ].map((item) => (
                   <li
                     key={item}
                     className="flex items-center gap-3 text-base md:text-xl font-bold text-white"
@@ -256,13 +259,13 @@ export default function ReferBondPage({
 
             {/* Right: hero visual */}
             <div className="lg:col-span-5">
-              <div className="relative mx-auto aspect-square w-full max-w-lg overflow-hidden border-2 border-white/30 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]">
+              <div className="relative mx-auto aspect-[4/3] w-full overflow-hidden border-2 border-white/30 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.5)]">
                 <Image
                   src="https://i.imgur.com/QMdMoAG.jpeg"
                   alt="挑戦する企業の現場で活躍するビジネスパーソン"
                   fill
                   priority
-                  sizes="(min-width: 1024px) 480px, 90vw"
+                  sizes="(min-width: 1024px) 520px, 95vw"
                   className="object-cover object-center motion-safe:animate-hero-pan-fast"
                 />
                 <div
