@@ -319,17 +319,17 @@ export default function ReferBondPage({
             </h2>
           </div>
 
-          <ul className="mx-auto mt-14 grid max-w-6xl gap-6 md:grid-cols-3 md:gap-8">
+          <ul className="mt-14 grid gap-6 md:grid-cols-3 md:gap-6">
             {challenges.map((c, i) => (
               <li key={c.titleTop}>
                 <Reveal delay={i * 80} className="h-full">
-                  <div className="h-full rounded-2xl border border-ink-line bg-white p-6 md:p-8">
+                  <div className="h-full rounded-2xl border border-ink-line bg-white p-6 md:p-7">
                     {/* Illustration placeholder — to be filled later */}
                     <div
                       aria-hidden="true"
                       className="aspect-[5/4] w-full rounded-xl bg-cream"
                     />
-                    <p className="mt-6 text-center text-base md:text-lg font-black text-ink leading-snug">
+                    <p className="mt-6 text-center text-lg md:text-xl font-black text-ink leading-snug">
                       {c.titleTop}
                       <br />
                       {c.titleBottom}
