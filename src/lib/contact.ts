@@ -1,5 +1,38 @@
 import { z } from "zod";
 
+/**
+ * 企業向けフォームでブロックするフリーメール / 個人メールのドメイン。
+ * 「会社のメールアドレスをご入力ください」というガード用。
+ */
+const blockedFreeEmailDomains = new Set<string>([
+  "gmail.com",
+  "yahoo.co.jp",
+  "yahoo.com",
+  "outlook.com",
+  "outlook.jp",
+  "hotmail.com",
+  "hotmail.co.jp",
+  "live.jp",
+  "live.com",
+  "msn.com",
+  "icloud.com",
+  "me.com",
+  "mac.com",
+  "aol.com",
+]);
+
+const corporateEmail = z
+  .string()
+  .trim()
+  .email("正しいメールアドレスを入力してください")
+  .refine(
+    (email) => {
+      const domain = email.split("@")[1]?.toLowerCase();
+      return domain ? !blockedFreeEmailDomains.has(domain) : false;
+    },
+    { message: "会社のメールアドレスをご入力ください" },
+  );
+
 const honeypotAndAgreement = {
   // honeypot — must stay empty
   website: z.string().max(0).optional().or(z.literal("")),
@@ -18,6 +51,7 @@ const baseSchema = {
 
 export const businessContactSchema = z.object({
   ...baseSchema,
+  email: corporateEmail,
   company: z.string().trim().min(1, "会社名を入力してください").max(200),
   department: z.string().trim().max(200).optional().or(z.literal("")),
   phone: z.string().trim().max(40).optional().or(z.literal("")),
@@ -45,7 +79,7 @@ export const generalContactSchema = z.object({
   company: z.string().trim().min(1, "会社名を入力してください").max(200),
   lastName: z.string().trim().min(1, "姓を入力してください").max(100),
   firstName: z.string().trim().min(1, "名を入力してください").max(100),
-  email: z.string().trim().email("正しいメールアドレスを入力してください"),
+  email: corporateEmail,
   phone: z.string().trim().min(1, "電話番号を入力してください").max(40),
   department: z.string().trim().max(200).optional().or(z.literal("")),
   position: z.enum([
