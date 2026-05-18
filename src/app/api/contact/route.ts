@@ -198,6 +198,49 @@ export async function POST(req: Request) {
       html: renderHtml(type, parsed.data as Record<string, unknown>),
     });
     console.info("[contact] sent", { messageId: info.messageId, to, type });
+
+    if (type === "general") {
+      const senderEmail = (parsed.data as { email?: string }).email;
+      const company = String((parsed.data as { company?: string }).company ?? "").trim();
+      const lastName = String((parsed.data as { lastName?: string }).lastName ?? "").trim();
+      if (senderEmail) {
+        const autoReplyText = `${company}
+${lastName} 様
+
+お世話になっております。
+セールスボンド株式会社でございます。
+
+この度は弊社ホームページよりお問い合わせをいただき、誠にありがとうございます。
+
+内容を確認のうえ、担当者より改めてご連絡を差し上げますので、今しばらくお待ちくださいますようお願いいたします。
+
+何卒よろしくお願い申し上げます。
+
+──────────────────────────
+セールスボンド株式会社
+https://www.salesbond.jp
+※このメールは自動送信です。ご返信いただいてもお答えできません。
+──────────────────────────`;
+        try {
+          await transporter.sendMail({
+            from: fromAddress,
+            to: senderEmail,
+            subject: "お問い合わせありがとうございます(セールスボンド株式会社)",
+            text: autoReplyText,
+          });
+          console.info("[contact] auto-reply sent", { to: senderEmail });
+        } catch (replyErr) {
+          const r = replyErr as { code?: string; message?: string };
+          console.error("[contact] auto-reply failed", {
+            code: r.code,
+            message: r.message,
+            to: senderEmail,
+          });
+          // 自動返信の失敗は本体の成功を覆さない
+        }
+      }
+    }
+
     return NextResponse.json({ ok: true });
   } catch (err) {
     const e = err as { code?: string; response?: string; message?: string };
