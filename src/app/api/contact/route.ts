@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import {
-  businessContactSchema,
   generalContactSchema,
   partnerLeadSchema,
   professionalContactSchema,
@@ -117,13 +116,11 @@ function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
     .join("");
 
   const heading =
-    type === "business"
-      ? "企業様お問い合わせ"
-      : type === "professional"
-        ? "プロ人材お問い合わせ"
-        : type === "partner_lead"
-          ? "個人パートナー登録(メール仮登録)"
-          : "お問い合わせ(企業)";
+    type === "professional"
+      ? "プロ人材お問い合わせ"
+      : type === "partner_lead"
+        ? "個人パートナー登録(メール仮登録)"
+        : "お問い合わせ(企業)";
 
   return `<!doctype html>
   <html><body style="font-family:-apple-system,'Segoe UI',sans-serif;color:#1A1A1A;">
@@ -146,7 +143,6 @@ export async function POST(req: Request) {
   const type = body.type;
 
   if (
-    type !== "business" &&
     type !== "professional" &&
     type !== "general" &&
     type !== "partner_lead"
@@ -155,13 +151,11 @@ export async function POST(req: Request) {
   }
 
   const schema =
-    type === "business"
-      ? businessContactSchema
-      : type === "professional"
-        ? professionalContactSchema
-        : type === "partner_lead"
-          ? partnerLeadSchema
-          : generalContactSchema;
+    type === "professional"
+      ? professionalContactSchema
+      : type === "partner_lead"
+        ? partnerLeadSchema
+        : generalContactSchema;
   const parsed = schema.safeParse(body);
 
   if (!parsed.success) {

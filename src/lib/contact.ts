@@ -49,16 +49,6 @@ const baseSchema = {
   message: z.string().trim().min(10, "本文は10文字以上でご入力ください").max(5000),
 };
 
-export const businessContactSchema = z.object({
-  ...baseSchema,
-  email: corporateEmail,
-  company: z.string().trim().min(1, "会社名を入力してください").max(200),
-  department: z.string().trim().max(200).optional().or(z.literal("")),
-  phone: z.string().trim().max(40).optional().or(z.literal("")),
-  inquiryType: z.enum(["service", "estimate", "partnership", "other"]),
-  budget: z.enum(["under-500k", "500k-3m", "3m-10m", "10m-plus", "undecided"]).optional(),
-});
-
 export const professionalContactSchema = z.object({
   ...baseSchema,
   furigana: z.string().trim().max(100).optional().or(z.literal("")),
@@ -116,9 +106,8 @@ export const partnerLeadSchema = z.object({
   email: z.string().trim().email("正しいメールアドレスを入力してください"),
 });
 
-export type BusinessContactInput = z.infer<typeof businessContactSchema>;
 export type ProfessionalContactInput = z.infer<typeof professionalContactSchema>;
 export type GeneralContactInput = z.infer<typeof generalContactSchema>;
 export type PartnerLeadInput = z.infer<typeof partnerLeadSchema>;
 
-export type ContactFormType = "business" | "professional" | "general" | "partner_lead";
+export type ContactFormType = "professional" | "general" | "partner_lead";
