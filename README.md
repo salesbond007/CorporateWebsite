@@ -56,6 +56,10 @@ npm run dev
 `MICROCMS_*` が未設定でもビルド・起動は可能。記事一覧は空表示になる。
 `RESEND_API_KEY` が未設定の場合、問い合わせ送信はサーバログに出力されるドライランになる。
 
+## CRM 連携
+
+`/api/contact` はメール送信に加えて、`CRM_WEBHOOK_URL` が設定されていれば社内CRMの Webhook にも問い合わせデータを転送する。`CRM_WEBHOOK_TOKEN` を設定するとリクエストヘッダ `x-webhook-token` に付与される。`CRM_WEBHOOK_URL` が未設定なら転送はスキップされ、メール送信のみ動作する。
+
 ## microCMS スキーマ
 
 **APIエンドポイント名**: `articles` (リスト形式)
