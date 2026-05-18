@@ -35,6 +35,9 @@ export function isValidPhone(input: string): boolean {
   // E.164: 国番号含めて 7〜15 桁
   if (digits.length < 7 || digits.length > 15) return false;
 
+  // 先頭 000... は明らかに無効
+  if (digits.startsWith("000")) return false;
+
   // 明らかなフェイク
   if (OBVIOUS_FAKE_PATTERNS.some((p) => p.test(s))) return false;
 

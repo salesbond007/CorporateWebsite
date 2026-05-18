@@ -8,7 +8,7 @@ import { CompanyAutocomplete } from "./CompanyAutocomplete";
 import { localePath } from "@/i18n/path";
 import { cn } from "@/lib/cn";
 import { isEmailFormat, isFreeEmail } from "@/lib/email";
-import { isValidPhone } from "@/lib/phone";
+import { isValidPhone, normalizePhone } from "@/lib/phone";
 import type { Locale } from "@/i18n/config";
 
 type Props = {
@@ -169,7 +169,7 @@ export function SimpleContactForm({ locale }: Props) {
           lastName: state.lastName,
           firstName: state.firstName,
           email: state.email,
-          phone: state.phone,
+          phone: normalizePhone(state.phone),
           department: state.department,
           position: state.position,
           employeeCount: state.employeeCount,
@@ -333,9 +333,10 @@ export function SimpleContactForm({ locale }: Props) {
         inputMode="tel"
         autoComplete="tel"
         placeholder="0312345678 / 09012345678 / +1234567890"
-        hint="ハイフンは任意。海外からの場合は + から始まる国際番号もご利用いただけます。"
+        hint="ハイフン・スペース・カッコ・全角数字は自動で正規化されます。海外番号は + 付きで入力可。"
         value={state.phone}
         onChange={(e) => update("phone", e.target.value)}
+        onBlur={(e) => update("phone", normalizePhone(e.target.value))}
         error={errors.phone}
       />
 
