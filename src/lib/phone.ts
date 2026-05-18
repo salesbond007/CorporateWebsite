@@ -6,15 +6,25 @@
  * - 全桁同一 (0000000000) や明らかな順列 (0123456789) のフェイクのみ弾く
  */
 
-const NORMALIZE_DROP_RE = /[\s\-()ー－〜~.]/g;
+// 電話番号入力に紛れがちな区切り文字をまとめて除去対象に
+// - ASCII カッコ ()
+// - 全角カッコ （）
+// - ハイフン各種 - ー － ‐ ‒ – — ―
+// - スペース全般 (\s が全角スペース U+3000 を含む)
+// - ドット . ．
+// - 中黒 ・
+// - チルダ ~ 〜
+const NORMALIZE_DROP_RE = /[\s\-－ー‐‒–—―()（）.．・~〜]/g;
 
-function toFullWidthDigits(s: string): string {
-  return s.replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0));
+function toHalfWidth(s: string): string {
+  return s
+    .replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0))
+    .replace(/＋/g, "+");
 }
 
 export function normalizePhone(input: string): string {
   if (!input) return "";
-  let s = toFullWidthDigits(input).trim();
+  let s = toHalfWidth(input).trim();
   s = s.replace(NORMALIZE_DROP_RE, "");
   return s;
 }
