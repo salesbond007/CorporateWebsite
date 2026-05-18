@@ -8,7 +8,7 @@ import { CompanyAutocomplete } from "./CompanyAutocomplete";
 import { localePath } from "@/i18n/path";
 import { cn } from "@/lib/cn";
 import { isEmailFormat, isFreeEmail } from "@/lib/email";
-import { isValidJapanesePhone } from "@/lib/phone";
+import { isValidPhone } from "@/lib/phone";
 import type { Locale } from "@/i18n/config";
 
 type Props = {
@@ -130,8 +130,8 @@ export function SimpleContactForm({ locale }: Props) {
 
     if (!state.phone.trim()) {
       next.phone = "電話番号をご入力ください。";
-    } else if (!isValidJapanesePhone(state.phone)) {
-      next.phone = "正しい電話番号をご入力ください(例: 03-1234-5678 / 090-1234-5678)。";
+    } else if (!isValidPhone(state.phone)) {
+      next.phone = "正しい電話番号をご入力ください。";
     }
     // 部署は任意
     if (!state.position) next.position = "役職をご選択ください。";
@@ -332,7 +332,8 @@ export function SimpleContactForm({ locale }: Props) {
         required
         inputMode="tel"
         autoComplete="tel"
-        placeholder="03-XXXX-XXXX または 090-XXXX-XXXX"
+        placeholder="0312345678 / 09012345678 / +1234567890"
+        hint="ハイフンは任意。海外からの場合は + から始まる国際番号もご利用いただけます。"
         value={state.phone}
         onChange={(e) => update("phone", e.target.value)}
         error={errors.phone}
