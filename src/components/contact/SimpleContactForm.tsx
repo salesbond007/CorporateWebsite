@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { TextField, TextareaField, SelectField } from "./Field";
+import { CompanyAutocomplete } from "./CompanyAutocomplete";
 import { localePath } from "@/i18n/path";
 import { cn } from "@/lib/cn";
 import { isEmailFormat, isFreeEmail } from "@/lib/email";
@@ -52,6 +53,8 @@ const employeeCountOptions = [
 
 type FormState = {
   company: string;
+  companyAddress: string;
+  corporateNumber: string;
   employeeCount: string;
   department: string;
   lastName: string;
@@ -67,6 +70,8 @@ type FormState = {
 
 const initial: FormState = {
   company: "",
+  companyAddress: "",
+  corporateNumber: "",
   employeeCount: "",
   department: "",
   lastName: "",
@@ -154,6 +159,8 @@ export function SimpleContactForm({ locale }: Props) {
         body: JSON.stringify({
           type: "general",
           company: state.company,
+          companyAddress: state.companyAddress,
+          corporateNumber: state.corporateNumber,
           lastName: state.lastName,
           firstName: state.firstName,
           email: state.email,
@@ -243,16 +250,35 @@ export function SimpleContactForm({ locale }: Props) {
       noValidate
       className="space-y-6 rounded-xl2 border border-ink-line bg-white p-8 md:p-10"
     >
-      {/* 1. 会社名 */}
-      <TextField
+      {/* 1. 会社名（法人番号DB連携 オートコンプリート） */}
+      <CompanyAutocomplete
         label="会社名"
         name="company"
         required
-        autoComplete="organization"
         placeholder="株式会社○○"
         value={state.company}
-        onChange={(e) => update("company", e.target.value)}
         error={errors.company}
+        onChange={(v) => {
+          update("company", v);
+          // 候補から外れた場合は紐づけ情報をリセット
+          if (state.corporateNumber) {
+            update("corporateNumber", "");
+            update("companyAddress", "");
+          }
+        }}
+        onSelect={(c) => {
+          setState((s) => ({
+            ...s,
+            company: c.name,
+            companyAddress: c.address,
+            corporateNumber: c.corporateNumber,
+          }));
+          setErrors((e) => {
+            if (!e.company) return e;
+            const { company: _omit, ...rest } = e;
+            return rest;
+          });
+        }}
       />
 
       {/* 2. 氏名 */}

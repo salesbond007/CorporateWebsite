@@ -38,6 +38,8 @@ function escapeHtml(value: string) {
 
 const fieldLabels: Record<string, string> = {
   company: "会社名",
+  companyAddress: "本社所在地",
+  corporateNumber: "法人番号",
   lastName: "姓",
   firstName: "名",
   name: "お名前",

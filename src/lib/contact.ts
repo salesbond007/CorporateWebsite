@@ -67,6 +67,13 @@ export const professionalContactSchema = z.object({
 export const generalContactSchema = z.object({
   ...honeypotAndAgreement,
   company: z.string().trim().min(1, "会社名を入力してください").max(200),
+  companyAddress: z.string().trim().max(300).optional().or(z.literal("")),
+  corporateNumber: z
+    .string()
+    .trim()
+    .regex(/^\d{13}$/, "法人番号は13桁の数字です")
+    .optional()
+    .or(z.literal("")),
   lastName: z.string().trim().min(1, "姓を入力してください").max(100),
   firstName: z.string().trim().min(1, "名を入力してください").max(100),
   email: corporateEmail,
