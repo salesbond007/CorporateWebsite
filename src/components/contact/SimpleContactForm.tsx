@@ -333,7 +333,6 @@ export function SimpleContactForm({ locale }: Props) {
         inputMode="tel"
         autoComplete="tel"
         placeholder="0312345678 / 09012345678 / +1234567890"
-        hint="ハイフン・スペース・カッコ・全角数字は自動で正規化されます。海外番号は + 付きで入力可。"
         value={state.phone}
         onChange={(e) => update("phone", e.target.value)}
         onBlur={(e) => update("phone", normalizePhone(e.target.value))}
