@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isValidJapanesePhone } from "@/lib/phone";
 
 /**
  * 企業向けフォームでブロックするフリーメール / 個人メールのドメイン。
@@ -77,7 +78,14 @@ export const generalContactSchema = z.object({
   lastName: z.string().trim().min(1, "姓を入力してください").max(100),
   firstName: z.string().trim().min(1, "名を入力してください").max(100),
   email: corporateEmail,
-  phone: z.string().trim().min(1, "電話番号を入力してください").max(40),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "電話番号を入力してください")
+    .max(40)
+    .refine(isValidJapanesePhone, {
+      message: "正しい電話番号をご入力ください",
+    }),
   department: z.string().trim().max(200).optional().or(z.literal("")),
   position: z.enum([
     "executive",

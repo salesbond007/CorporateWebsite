@@ -8,6 +8,7 @@ import { CompanyAutocomplete } from "./CompanyAutocomplete";
 import { localePath } from "@/i18n/path";
 import { cn } from "@/lib/cn";
 import { isEmailFormat, isFreeEmail } from "@/lib/email";
+import { isValidJapanesePhone } from "@/lib/phone";
 import type { Locale } from "@/i18n/config";
 
 type Props = {
@@ -127,7 +128,11 @@ export function SimpleContactForm({ locale }: Props) {
       next.email = "フリーメール（Gmail / Yahoo 等）はご利用いただけません。勤務先のメールアドレスをご入力ください。";
     }
 
-    if (!state.phone.trim()) next.phone = "電話番号をご入力ください。";
+    if (!state.phone.trim()) {
+      next.phone = "電話番号をご入力ください。";
+    } else if (!isValidJapanesePhone(state.phone)) {
+      next.phone = "正しい電話番号をご入力ください(例: 03-1234-5678 / 090-1234-5678)。";
+    }
     // 部署は任意
     if (!state.position) next.position = "役職をご選択ください。";
     if (!state.employeeCount) next.employeeCount = "従業員数をご選択ください。";
