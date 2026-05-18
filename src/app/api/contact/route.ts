@@ -27,6 +27,73 @@ const fromAddress =
 const toBusiness = process.env.CONTACT_MAIL_TO_BUSINESS ?? "info@salesbond.jp";
 const toProfessional = process.env.CONTACT_MAIL_TO_PROFESSIONAL ?? "info@salesbond.jp";
 
+// ============================================================
+// CRM 連携: 問い合わせを CRM Webhook にも転送する
+// ============================================================
+const crmWebhookUrl = process.env.CRM_WEBHOOK_URL;
+const crmWebhookToken = process.env.CRM_WEBHOOK_TOKEN;
+
+function buildCrmPayload(type: ContactFormType, data: Record<string, unknown>) {
+  const d = data as Record<string, unknown>;
+  const get = (k: string) => (typeof d[k] === "string" ? (d[k] as string) : "");
+
+  const company = get("company");
+  const lastName = get("lastName");
+  const firstName = get("firstName");
+  const contactName =
+    [lastName, firstName].filter(Boolean).join(" ") || get("name") || "";
+
+  const subject = humanize("inquiryType", d.inquiryType) || "Webサイトからの問い合わせ";
+  const message = get("message");
+
+  const skip = new Set([
+    "website", "agreement", "type",
+    "email", "phone", "company", "lastName", "firstName", "name", "message",
+  ]);
+  const detailLines = Object.entries(data)
+    .filter(([k, v]) => !skip.has(k) && v !== "" && v != null)
+    .map(([k, v]) => `${fieldLabels[k] ?? k}: ${humanize(k, v)}`);
+
+  const body =
+    [message, detailLines.length ? `\n[詳細]\n${detailLines.join("\n")}` : ""]
+      .filter(Boolean)
+      .join("")
+      .trim() || "(本文なし)";
+
+  return {
+    company_name: company,
+    contact_name: contactName,
+    email: get("email"),
+    phone: get("phone"),
+    subject,
+    body,
+    source: `website-${type}`,
+  };
+}
+
+async function forwardToCRM(type: ContactFormType, data: Record<string, unknown>) {
+  if (!crmWebhookUrl) return;
+  try {
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    if (crmWebhookToken) headers["x-webhook-token"] = crmWebhookToken;
+
+    const res = await fetch(crmWebhookUrl, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(buildCrmPayload(type, data)),
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      console.error("[contact->crm] forward failed", { status: res.status, text });
+    } else {
+      console.info("[contact->crm] forwarded", { type });
+    }
+  } catch (err) {
+    console.error("[contact->crm] forward threw", err);
+  }
+}
+
 function escapeHtml(value: string) {
   return value
     .replace(/&/g, "&amp;")
@@ -200,6 +267,7 @@ export async function POST(req: Request) {
       html: renderHtml(type, parsed.data as Record<string, unknown>),
     });
     console.info("[contact] sent", { messageId: info.messageId, to, type });
+    await forwardToCRM(type, parsed.data as Record<string, unknown>);
 
     if (type === "general") {
       const senderEmail = (parsed.data as { email?: string }).email;
