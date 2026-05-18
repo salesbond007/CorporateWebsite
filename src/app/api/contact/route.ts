@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import {
   businessContactSchema,
   generalContactSchema,
@@ -10,10 +10,21 @@ import {
 
 export const runtime = "nodejs";
 
-const resendKey = process.env.RESEND_API_KEY;
-const resend = resendKey ? new Resend(resendKey) : null;
+const gmailUser = process.env.GMAIL_USER;
+const gmailPass = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, "");
 
-const fromAddress = process.env.CONTACT_MAIL_FROM ?? "Sales Bond <noreply@salesbond.jp>";
+const transporter =
+  gmailUser && gmailPass
+    ? nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: { user: gmailUser, pass: gmailPass },
+      })
+    : null;
+
+const fromAddress =
+  process.env.CONTACT_MAIL_FROM ?? `Sales Bond <${gmailUser ?? "info@salesbond.jp"}>`;
 const toBusiness = process.env.CONTACT_MAIL_TO_BUSINESS ?? "info@salesbond.jp";
 const toProfessional = process.env.CONTACT_MAIL_TO_PROFESSIONAL ?? "info@salesbond.jp";
 
@@ -173,40 +184,37 @@ export async function POST(req: Request) {
   // フォーム種別は本文(renderHtml)の見出しで判別。
   const subject = "ホームページからの問い合わせ";
 
-  if (!resend) {
-    console.warn("[contact] RESEND_API_KEY is not set. Logging form data instead.");
+  if (!transporter) {
+    console.warn("[contact] GMAIL_USER / GMAIL_APP_PASSWORD is not set. Logging form data instead.");
     console.info({ type, data: parsed.data });
     return NextResponse.json({ ok: true, dryRun: true });
   }
 
+  const replyTo =
+    typeof (parsed.data as { email?: string }).email === "string"
+      ? (parsed.data as { email: string }).email
+      : undefined;
+
   try {
-    const { data, error } = await resend.emails.send({
+    const info = await transporter.sendMail({
       from: fromAddress,
       to,
-      replyTo:
-        typeof (parsed.data as { email?: string }).email === "string"
-          ? (parsed.data as { email: string }).email
-          : undefined,
+      replyTo,
       subject,
       html: renderHtml(type, parsed.data as Record<string, unknown>),
     });
-    if (error) {
-      console.error("[contact] resend returned error", {
-        name: error.name,
-        message: error.message,
-        from: fromAddress,
-        to,
-        type,
-      });
-      return NextResponse.json(
-        { error: "送信に失敗しました。時間をおいて再度お試しください。" },
-        { status: 500 },
-      );
-    }
-    console.info("[contact] sent", { id: data?.id, to, type });
+    console.info("[contact] sent", { messageId: info.messageId, to, type });
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("[contact] send threw", err);
+    const e = err as { code?: string; response?: string; message?: string };
+    console.error("[contact] send threw", {
+      code: e.code,
+      response: e.response,
+      message: e.message,
+      from: fromAddress,
+      to,
+      type,
+    });
     return NextResponse.json(
       { error: "送信に失敗しました。時間をおいて再度お試しください。" },
       { status: 500 },
