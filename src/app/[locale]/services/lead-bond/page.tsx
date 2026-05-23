@@ -462,14 +462,12 @@ export default function SalesSupportPage({
               />
               {/* Center */}
               <div className="absolute left-1/2 top-1/2 grid h-28 w-28 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-brand-500 text-center shadow-[0_12px_40px_-8px_rgba(245,130,32,0.7)] md:h-32 md:w-32">
-                <span className="font-display text-base font-black leading-tight text-white md:text-lg">
-                  Sales
-                  <br />
-                  Bond
+                <span className="font-display text-lg font-black leading-tight text-white md:text-xl">
+                  セルボンド
                 </span>
               </div>
               {/* Nodes */}
-              {["戦略立案", "アポ獲得", "商談", "成約", "営業DX", "定着化"].map(
+              {["戦略立案", "アポ獲得", "商談", "成約", "営業DX", "AI活用/定着"].map(
                 (label, i, arr) => {
                   const angle = (i / arr.length) * Math.PI * 2 - Math.PI / 2;
                   const left = 50 + 38 * Math.cos(angle);
