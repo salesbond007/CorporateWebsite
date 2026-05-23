@@ -45,37 +45,35 @@ function renderProblemLine(line: string, hl: string) {
   );
 }
 
-type FlowPhase = { step: string; title: string };
+type Point = {
+  num: string;
+  pre: string;
+  highlight: string;
+  post: string;
+  body: string;
+};
 
-const phases: FlowPhase[] = [
-  { step: "01", title: "戦略策定" },
-  { step: "02", title: "アポ獲得" },
-  { step: "03", title: "商談" },
-  { step: "04", title: "成約" },
-];
-
-type Reason = { number: string; title: string; body: string };
-
-const reasons: Reason[] = [
+const points: Point[] = [
   {
-    number: "01",
-    title: "戦略から成約まで一気通貫",
-    body: "「リード獲得だけ」「商談だけ」ではなく、戦略設計から成約・仕組み化まで責任を持って伴走します。",
+    num: "01",
+    pre: "営業の",
+    highlight: "すべて",
+    post: "を伴走",
+    body: "戦略立案からアポ獲得、商談、成約、組織への定着まで。営業プロセスのすべてを一気通貫で支援し、「点」ではなく「線」で成果につなげます。",
   },
   {
-    number: "02",
-    title: "大手企業の開拓実績",
-    body: "エンタープライズ攻略のノウハウと人脈を保有。自社では届かない層へアプローチできます。",
+    num: "02",
+    pre: "ベンチャー企業から",
+    highlight: "大企業 / 上場企業",
+    post: "の成約にも対応",
+    body: "スタートアップの立ち上げ期から、大手・上場企業の決裁者開拓まで幅広く対応。エンタープライズ攻略のノウハウで、自社だけでは届かない層へもアプローチします。",
   },
   {
-    number: "03",
-    title: "AIによる再現性の構築",
-    body: "属人化しがちな営業活動を AI で型化。ノウハウが個人ではなく組織に残ります。",
-  },
-  {
-    number: "04",
-    title: "最短2週間で稼働開始",
-    body: "採用・育成を待たず、即戦力チームでスピーディーに売上創出を始められます。",
+    num: "03",
+    pre: "課題に",
+    highlight: "最適なプラン",
+    post: "を提供",
+    body: "アポ数が足りないときはアポ獲得、商談工数が足りないときは商談対応など、貴社の課題に応じて必要な支援だけを柔軟に組み合わせてご提供します。",
   },
 ];
 
@@ -572,71 +570,8 @@ export default function SalesSupportPage({
               Service
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              戦略から成約まで、
-              <br />
-              営業のすべてを伴走。
+              サービス内容
             </h2>
-          </div>
-
-          <ol className="mt-14 flex flex-col items-stretch gap-3 lg:flex-row lg:items-center lg:gap-2">
-            {phases.map((p, i) => (
-              <li key={p.step} className="flex flex-1 items-center gap-2">
-                <div className="flex-1 rounded-2xl border-2 border-ink bg-white px-4 py-6 text-center">
-                  <p className="font-display text-2xl md:text-3xl font-black leading-none text-brand-500">
-                    {p.step}
-                  </p>
-                  <p className="mt-3 text-sm md:text-base font-black text-ink leading-snug">
-                    {p.title}
-                  </p>
-                </div>
-                {i < phases.length - 1 ? (
-                  <span aria-hidden="true" className="shrink-0 text-brand-500">
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 22 22"
-                      fill="none"
-                      className="hidden lg:block"
-                    >
-                      <path
-                        d="M4 11h13M12 5l6 6-6 6"
-                        stroke="currentColor"
-                        strokeWidth="2.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <svg
-                      width="22"
-                      height="22"
-                      viewBox="0 0 22 22"
-                      fill="none"
-                      className="mx-auto block lg:hidden"
-                    >
-                      <path
-                        d="M11 4v13M5 12l6 6 6-6"
-                        stroke="currentColor"
-                        strokeWidth="2.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </span>
-                ) : null}
-              </li>
-            ))}
-          </ol>
-
-          <div className="mx-auto mt-12 max-w-3xl border-l-4 border-brand-500 bg-cream/60 px-6 py-6 md:px-8">
-            <p className="text-base md:text-lg leading-[1.95] text-ink font-medium">
-              単なる「営業代行」ではありません。
-              <br className="hidden md:block" />
-              戦略を描き、現場で売り、AI で型を残す。
-              <span className="font-black">
-                「自走できる営業組織」
-              </span>
-              をつくる支援サービスです。
-            </p>
           </div>
 
           {/* Details */}
@@ -689,34 +624,57 @@ export default function SalesSupportPage({
         </Container>
       </section>
 
-      {/* ───── Reasons ───── */}
+      {/* ───── Features (POINT) ───── */}
       <section id="reasons" className="scroll-mt-32 bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <h2 className="text-display-3 text-ink font-black leading-tight">
-              選ばれる4つの理由
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+              Features
+            </p>
+            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+              セルボンドの特徴
             </h2>
           </div>
 
-          <ul className="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-2 md:gap-8">
-            {reasons.map((r, i) => (
-              <li key={r.number}>
-                <Reveal delay={(i % 2) * 80} className="h-full">
-                  <div className="h-full rounded-2xl border-2 border-ink bg-white p-8 md:p-10">
-                    <p className="font-display text-4xl md:text-5xl font-black leading-none text-brand-500">
-                      {r.number}
-                    </p>
-                    <h3 className="mt-5 text-lg md:text-xl font-black text-ink leading-snug">
-                      {r.title}
-                    </h3>
-                    <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                      {r.body}
-                    </p>
+          <div className="mt-16 space-y-16 md:space-y-24">
+            {points.map((pt, i) => {
+              const reverse = i % 2 === 1;
+              return (
+                <Reveal key={pt.num}>
+                  <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
+                    {/* Image placeholder */}
+                    <div className={reverse ? "md:order-2" : ""}>
+                      <div className="grid aspect-[4/3] w-full place-items-center rounded-2xl border border-ink-line bg-white">
+                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-ink-muted/50">
+                          Image
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Text */}
+                    <div className={reverse ? "md:order-1" : ""}>
+                      <p className="flex items-end gap-2 text-brand-500">
+                        <span className="text-sm font-extrabold uppercase tracking-[0.2em]">
+                          Point
+                        </span>
+                        <span className="font-display text-5xl md:text-6xl font-black leading-none">
+                          {pt.num}
+                        </span>
+                      </p>
+                      <h3 className="mt-4 text-xl md:text-2xl font-black leading-snug text-ink">
+                        {pt.pre}
+                        <span className="text-brand-500">{pt.highlight}</span>
+                        {pt.post}
+                      </h3>
+                      <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                        {pt.body}
+                      </p>
+                    </div>
                   </div>
                 </Reveal>
-              </li>
-            ))}
-          </ul>
+              );
+            })}
+          </div>
         </Container>
       </section>
 
