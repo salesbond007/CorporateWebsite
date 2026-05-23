@@ -338,13 +338,21 @@ export default function SalesSupportPage({
               「戦略立案」「アポ獲得」「商談」「営業DX」など営業課題に応じて最適な支援が可能
             </p>
 
-            <div className="mt-10">
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Button
                 href={contactHref}
                 size="lg"
-                className="!h-16 w-full px-12 text-lg font-bold !bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.6)] sm:w-auto"
+                className="!h-16 w-full px-10 text-lg font-bold !bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.6)] sm:w-auto"
               >
-                資料請求 / 無料相談
+                資料請求
+              </Button>
+              <Button
+                href={contactHref}
+                size="lg"
+                variant="secondary"
+                className="!h-16 w-full px-10 text-lg font-bold sm:w-auto"
+              >
+                無料相談
               </Button>
             </div>
           </div>
