@@ -155,7 +155,7 @@ const enumLabels: Record<string, Record<string, string>> = {
   serviceTypes: {
     "sales-bond": "リファボンド(大手決裁者紹介サービス)",
     "keyman-bond": "キーマンボンド（プロ人材マッチングサービス）",
-    "lead-bond": "BtoB営業支援サービス",
+    "lead-bond": "セルボンド(BtoB営業支援サービス)",
   },
 };
 

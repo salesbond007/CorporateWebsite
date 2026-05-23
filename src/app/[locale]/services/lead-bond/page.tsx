@@ -18,7 +18,7 @@ export function generateStaticParams() {
 
 export const metadata: Metadata = {
   title:
-    "BtoB営業支援サービス｜新規開拓から成約までサポートする営業支援",
+    "セルボンド｜BtoB営業支援サービス｜新規開拓から成約までサポート",
   description:
     "営業戦略の策定からアポ獲得・商談・成約まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。最短2週間で稼働し、自走できる営業組織づくりまで伴走します。",
 };
