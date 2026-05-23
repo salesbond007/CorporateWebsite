@@ -483,6 +483,38 @@ export default function SalesSupportPage({
         </Container>
       </section>
 
+      {/* ───── Solution (diagram placeholder) ───── */}
+      <section className="bg-white py-24 md:py-32">
+        <Container>
+          <div className="text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+              Solution
+            </p>
+            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+              課題を
+              <span className="text-brand-500">こう解決</span>
+              します
+            </h2>
+          </div>
+
+          <div className="mt-14 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
+            {/* 図（ダイアグラム）プレースホルダー */}
+            <div className="grid aspect-square w-full place-items-center rounded-2xl border-2 border-dashed border-ink-line bg-cream">
+              <span className="text-sm font-bold tracking-wide text-ink-muted">
+                図（ダイアグラム）を配置
+              </span>
+            </div>
+
+            {/* 説明テキストプレースホルダー */}
+            <div className="grid min-h-[280px] place-items-center rounded-2xl border-2 border-dashed border-ink-line bg-cream p-8">
+              <span className="text-sm font-bold tracking-wide text-ink-muted">
+                説明テキストを配置
+              </span>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* ───── Service overview (flow) ───── */}
       <section id="service" className="scroll-mt-32 bg-white py-24 md:py-32">
         <Container>
