@@ -324,23 +324,6 @@ export default function SalesSupportPage({
               戦略の立案からアポ獲得 / 商談まで
             </p>
 
-            <ul className="mt-8 space-y-3.5">
-              {[
-                "戦略立案・アポ獲得・商談・成約まで一気通貫で支援",
-                "大手企業の開拓ノウハウで、再現性のある売上を創出",
-              ].map((b) => (
-                <li key={b} className="flex items-start gap-3">
-                  <span
-                    aria-hidden="true"
-                    className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-brand-500"
-                  />
-                  <span className="text-base md:text-lg font-bold text-ink leading-relaxed">
-                    {b}
-                  </span>
-                </li>
-              ))}
-            </ul>
-
             <div className="mt-10">
               <Button
                 href={contactHref}
