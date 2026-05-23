@@ -335,7 +335,7 @@ export default function SalesSupportPage({
               </span>
             </h1>
             <p className="mt-6 text-base md:text-lg font-black text-ink-soft leading-snug">
-              「戦略立案」「アポ獲得」「商談」「営業DX」など課題に応じて幅広く対応可能
+              「戦略立案」「アポ獲得」「商談」「営業DX」など営業課題に応じて最適な支援が可能
             </p>
 
             <div className="mt-10">
