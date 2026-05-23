@@ -23,45 +23,27 @@ export const metadata: Metadata = {
     "営業戦略の策定からアポ獲得・商談・成約まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。最短2週間で稼働し、自走できる営業組織づくりまで伴走します。",
 };
 
-type Problem = {
-  line1: string;
-  pre: string;
-  highlight: string;
-  post: string;
-};
+type Problem = { lines: [string, string, string]; highlight: string };
 
 const problems: Problem[] = [
-  {
-    line1: "早期に成果を出したいが",
-    pre: "営業人材が",
-    highlight: "不足",
-    post: "している",
-  },
-  {
-    line1: "新規事業を立ち上げたけれど",
-    pre: "営業の",
-    highlight: "進め方",
-    post: "が決まらない",
-  },
-  {
-    line1: "営業組織を作りたいが",
-    pre: "",
-    highlight: "何から",
-    post: "手をつければ良いか分からない",
-  },
-  {
-    line1: "外注を試したいが",
-    pre: "",
-    highlight: "部分的な支援",
-    post: "が多い",
-  },
-  {
-    line1: "既存対応で手一杯で",
-    pre: "",
-    highlight: "新規開拓",
-    post: "まで手が回らない",
-  },
+  { lines: ["早期に成果を出したいが", "営業人材が", "不足している"], highlight: "不足" },
+  { lines: ["新規事業を立ち上げたが", "営業の進め方が", "決まらない"], highlight: "進め方" },
+  { lines: ["営業組織を作りたいが", "何から手をつければ", "良いか分からない"], highlight: "何から" },
+  { lines: ["外注を試したいが", "部分的な", "支援が多い"], highlight: "部分的な" },
+  { lines: ["既存対応で手一杯で", "新規開拓まで", "手が回らない"], highlight: "新規開拓" },
 ];
+
+function renderProblemLine(line: string, hl: string) {
+  const idx = line.indexOf(hl);
+  if (!hl || idx === -1) return line;
+  return (
+    <>
+      {line.slice(0, idx)}
+      <span className="text-brand-500">{hl}</span>
+      {line.slice(idx + hl.length)}
+    </>
+  );
+}
 
 type FlowPhase = { step: string; title: string };
 
@@ -435,7 +417,7 @@ export default function SalesSupportPage({
         {/* Wider than the default container so 5 cards keep reference-like width */}
         <ul className="mx-auto mt-16 grid max-w-[1440px] grid-cols-1 gap-x-5 gap-y-16 px-5 sm:grid-cols-2 lg:grid-cols-5">
             {problems.map((p, i) => (
-              <li key={p.line1}>
+              <li key={p.lines[0]}>
                 <Reveal delay={(i % 5) * 60} className="h-full">
                   <div className="relative flex h-full flex-col items-center rounded-2xl border border-ink-line bg-white px-3 pb-5 pt-14 text-center shadow-sm">
                     {/* 課題 number badge with downward tail */}
@@ -458,13 +440,13 @@ export default function SalesSupportPage({
                       className="aspect-square w-full max-w-[104px] rounded-xl bg-cream"
                     />
 
-                    {/* Title */}
-                    <p className="mt-5 text-lg font-black leading-relaxed text-ink">
-                      {p.line1}
-                      <br />
-                      {p.pre}
-                      <span className="text-brand-500">{p.highlight}</span>
-                      {p.post}
+                    {/* Title (always 3 lines) */}
+                    <p className="mt-5 text-lg font-black leading-snug text-ink">
+                      {p.lines.map((line, li) => (
+                        <span key={li} className="block">
+                          {renderProblemLine(line, p.highlight)}
+                        </span>
+                      ))}
                     </p>
 
                     {/* Down chevron */}
