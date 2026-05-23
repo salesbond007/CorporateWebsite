@@ -222,14 +222,14 @@ export default function SalesSupportPage({
                 BtoB営業支援サービス
               </p>
 
-              <h1 className="mt-6 font-display font-black leading-[1.18] tracking-tight text-ink text-[clamp(2.25rem,5vw,3.75rem)]">
+              <h1 className="mt-6 font-display font-black leading-[1.22] tracking-tight text-ink text-[clamp(1.875rem,4.2vw,3.25rem)]">
                 短期の
                 <span className="text-brand-500">成約数向上</span>
-                に
-                <br className="hidden md:block" />
-                コミット
+                にコミットする
+                <br />
+                伴走型営業支援サービス
               </h1>
-              <p className="mt-5 text-lg md:text-2xl font-black text-ink-soft leading-snug">
+              <p className="mt-5 text-base md:text-xl font-black text-ink-soft leading-snug">
                 戦略の立案からアポ獲得 / 商談まで
               </p>
 
