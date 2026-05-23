@@ -22,14 +22,6 @@ export const metadata: Metadata = {
     "営業戦略の策定からアポ獲得・商談・成約まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。最短2週間で稼働し、自走できる営業組織づくりまで伴走します。",
 };
 
-const navItems = [
-  { id: "problems", label: "課題" },
-  { id: "service", label: "サービス" },
-  { id: "reasons", label: "選ばれる理由" },
-  { id: "flow", label: "導入の流れ" },
-  { id: "faq", label: "FAQ" },
-];
-
 type Problem = { icon: string; text: string };
 
 const problems: Problem[] = [
@@ -272,62 +264,59 @@ export default function SalesSupportPage({
               </div>
             </div>
 
-            {/* Right: client logos (CEREBRIX-style staggered grid) */}
+            {/* Right: hero visual */}
             <div className="lg:col-span-5">
-              <p className="mb-4 text-center text-xs font-extrabold uppercase tracking-[0.22em] text-ink-muted lg:text-left">
-                導入企業
-              </p>
-              <ul className="grid grid-cols-2 gap-4 md:gap-5">
-                {logoPlaceholders.map((label, i) => (
-                  <li
-                    key={label}
-                    className={`flex h-24 items-center justify-center rounded-2xl border border-ink-line bg-white shadow-sm md:h-28 ${
-                      i % 2 === 1 ? "md:mt-8" : ""
-                    }`}
-                  >
-                    <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink-muted/60">
-                      {label}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mt-5 text-center text-xs text-ink-muted lg:text-left">
-                ※ 掲載企業ロゴは準備中です。順次公開いたします。
-              </p>
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-ink-line bg-white shadow-sm">
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 grid place-items-center"
+                >
+                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink-muted/50">
+                    Image
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
         </Container>
       </section>
 
-      {/* ───── Section nav (sticky) ───── */}
-      <nav
-        aria-label="ページ内ナビゲーション"
-        className="sticky top-16 z-30 border-y border-ink-line bg-white/95 backdrop-blur md:top-20"
-      >
+      {/* ───── Clients (logo marquee) ───── */}
+      <section className="overflow-hidden border-b border-ink-line bg-white py-12 md:py-16">
         <Container>
-          <div className="flex items-center justify-between gap-4">
-            <ul className="flex items-center gap-1 overflow-x-auto py-3 md:gap-2">
-              {navItems.map((n) => (
-                <li key={n.id}>
-                  <a
-                    href={`#${n.id}`}
-                    className="block whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-bold text-ink-soft transition hover:bg-brand-50 hover:text-brand-600 md:px-4 md:text-sm"
-                  >
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-            <Button
-              href={contactHref}
-              size="sm"
-              className="hidden shrink-0 sm:inline-flex"
-            >
-              無料相談
-            </Button>
-          </div>
+          <p className="text-center text-xs font-extrabold uppercase tracking-[0.22em] text-ink-muted">
+            導入企業
+          </p>
         </Container>
-      </nav>
+
+        {/* Marquee: items duplicated so the -50% translate loops seamlessly */}
+        <div
+          className="relative mt-8 overflow-hidden"
+          aria-label="導入企業ロゴ一覧"
+        >
+          <ul className="flex w-max gap-6 md:gap-8 animate-marquee">
+            {[...Array(2)].flatMap((_, dup) =>
+              logoPlaceholders.map((label, i) => (
+                <li
+                  key={`${dup}-${i}`}
+                  aria-hidden={dup === 1 ? "true" : undefined}
+                  className="flex h-20 w-44 shrink-0 items-center justify-center rounded-xl border border-ink-line bg-white md:h-24 md:w-52"
+                >
+                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink-muted/60">
+                    {label}
+                  </span>
+                </li>
+              )),
+            )}
+          </ul>
+        </div>
+
+        <Container>
+          <p className="mt-8 text-center text-xs text-ink-muted">
+            ※ 掲載企業ロゴは準備中です。順次公開いたします。
+          </p>
+        </Container>
+      </section>
 
       {/* ───── Problems ───── */}
       <section id="problems" className="scroll-mt-32 bg-cream py-24 md:py-32">
