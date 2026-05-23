@@ -493,7 +493,7 @@ export default function SalesSupportPage({
 
             {/* Right: copy */}
             <div>
-              <p className="text-lg font-bold text-white/90">セールスボンドは</p>
+              <p className="text-lg font-bold text-white/90">セルボンドは</p>
               <h2 className="mt-3 font-display font-black leading-[1.4] text-white text-[clamp(1.5rem,3vw,2.5rem)]">
                 戦略から成約、組織への定着まで営業のすべてに伴走する
               </h2>
@@ -509,7 +509,7 @@ export default function SalesSupportPage({
               />
 
               <p className="mt-6 text-sm md:text-base leading-relaxed text-white/85 font-medium">
-                営業は、戦略・実行・仕組み化のどこか一つが欠けても成果になりません。多くの企業がそれぞれの工程を別の会社や部門に切り分けて発注し、結果として「点」の支援に終わってしまっています。セールスボンドは、戦略立案からアポ獲得、商談、成約、そしてAIによる再現性の構築までを一気通貫で担う、BtoB特化の営業支援チームです。
+                営業は、戦略・実行・仕組み化のどこか一つが欠けても成果になりません。多くの企業がそれぞれの工程を別の会社や部門に切り分けて発注し、結果として「点」の支援に終わってしまっています。セルボンドは、戦略立案からアポ獲得、商談、成約、そしてAIによる再現性の構築までを一気通貫で担う、BtoB特化の営業支援チームです。
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
