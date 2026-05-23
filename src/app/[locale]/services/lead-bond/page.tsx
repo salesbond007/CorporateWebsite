@@ -338,18 +338,9 @@ export default function SalesSupportPage({
       </section>
 
       {/* ───── Clients (logo marquee) ───── */}
-      <section className="overflow-hidden border-b border-ink-line bg-white py-12 md:py-16">
-        <Container>
-          <p className="text-center text-xs font-extrabold uppercase tracking-[0.22em] text-ink-muted">
-            導入企業
-          </p>
-        </Container>
-
+      <section className="overflow-hidden border-b border-ink-line bg-white py-7 md:py-9">
         {/* Marquee: items duplicated so the -50% translate loops seamlessly */}
-        <div
-          className="relative mt-8 overflow-hidden"
-          aria-label="導入企業ロゴ一覧"
-        >
+        <div className="relative overflow-hidden" aria-label="導入企業ロゴ一覧">
           <ul className="flex w-max gap-6 md:gap-8 animate-marquee">
             {[...Array(2)].flatMap((_, dup) =>
               logos.map((logo, i) => (
