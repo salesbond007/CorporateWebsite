@@ -723,13 +723,21 @@ export default function SalesSupportPage({
               <p className="mx-auto mt-6 max-w-xl text-sm md:text-base leading-relaxed text-white/85 font-medium">
                 新規開拓から成約まで、まるごとお任せください。貴社の状況に最適な解決策をご提案します。
               </p>
-              <div className="mt-10 flex justify-center">
+              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="bg-brand-500 text-white hover:bg-brand-600 shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)] !h-14 md:w-72"
+                  className="!h-16 w-full px-12 text-lg font-bold !bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.7)] sm:w-auto"
                 >
-                  お問い合わせ(無料)
+                  資料請求
+                </Button>
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  variant="ghost"
+                  className="!h-16 w-full px-12 text-lg font-bold border-2 border-white/50 !text-white hover:!bg-white/10 sm:w-auto"
+                >
+                  無料相談
                 </Button>
               </div>
             </div>
