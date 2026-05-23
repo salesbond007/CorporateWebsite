@@ -47,33 +47,38 @@ function renderProblemLine(line: string, hl: string) {
 
 type Point = {
   num: string;
-  pre: string;
-  highlight: string;
-  post: string;
+  label: string;
+  title: [string, string];
   body: string;
 };
 
 const points: Point[] = [
   {
     num: "01",
-    pre: "営業の",
-    highlight: "すべて",
-    post: "を伴走",
-    body: "戦略立案からアポ獲得、商談、成約、組織への定着まで。営業プロセスのすべてを一気通貫で支援し、「点」ではなく「線」で成果につなげます。",
+    label: "営業のすべてを伴走",
+    title: [
+      "戦略立案から成約、組織への定着まで。",
+      "営業プロセスのすべてを一気通貫で支援",
+    ],
+    body: "戦略策定、アポ獲得、商談、クロージング、そして組織への定着まで。営業のすべての工程を一気通貫で支援することで、「点」の支援では生まれない、「線」としての成果創出を実現します。",
   },
   {
     num: "02",
-    pre: "ベンチャー企業から",
-    highlight: "大企業 / 上場企業",
-    post: "の成約にも対応",
-    body: "スタートアップの立ち上げ期から、大手・上場企業の決裁者開拓まで幅広く対応。エンタープライズ攻略のノウハウで、自社だけでは届かない層へもアプローチします。",
+    label: "大手・上場企業の開拓まで対応",
+    title: [
+      "スタートアップから大手・上場企業まで。",
+      "幅広い企業フェーズに合わせた支援",
+    ],
+    body: "立ち上げ期のスタートアップから、上場企業の大手企業開拓まで対応。エンタープライズ攻略のノウハウと決裁者ネットワークを活かし、自社だけでは届かない層への接点創出も実現します。",
   },
   {
     num: "03",
-    pre: "課題に",
-    highlight: "最適なプラン",
-    post: "を提供",
-    body: "アポ数が足りないときはアポ獲得、商談工数が足りないときは商談対応など、貴社の課題に応じて必要な支援だけを柔軟に組み合わせてご提供します。",
+    label: "課題に応じた柔軟なプラン設計",
+    title: [
+      "必要なときに、必要な支援だけを。",
+      "課題に応じた柔軟なプラン設計",
+    ],
+    body: "アポイント不足にはインサイドセールスを、商談リソース不足にはフィールドセールスを。貴社の課題に応じて必要な支援だけを切り出し、組み合わせて提供する柔軟な体制を構築します。",
   },
 ];
 
@@ -536,9 +541,9 @@ export default function SalesSupportPage({
               const reverse = i % 2 === 1;
               return (
                 <Reveal key={pt.num}>
-                  <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
-                    {/* Image placeholder */}
-                    <div className={reverse ? "md:order-2" : ""}>
+                  <div className="grid items-center gap-8 md:grid-cols-12 md:gap-12">
+                    {/* Image placeholder (smaller) */}
+                    <div className={`md:col-span-5 ${reverse ? "md:order-2" : ""}`}>
                       <div className="grid aspect-[4/3] w-full place-items-center rounded-2xl border border-ink-line bg-white">
                         <span className="text-xs font-bold uppercase tracking-[0.2em] text-ink-muted/50">
                           Image
@@ -547,7 +552,7 @@ export default function SalesSupportPage({
                     </div>
 
                     {/* Text */}
-                    <div className={reverse ? "md:order-1" : ""}>
+                    <div className={`md:col-span-7 ${reverse ? "md:order-1" : ""}`}>
                       <p className="flex items-end gap-2 text-brand-500">
                         <span className="text-sm font-extrabold uppercase tracking-[0.2em]">
                           Point
@@ -556,10 +561,12 @@ export default function SalesSupportPage({
                           {pt.num}
                         </span>
                       </p>
-                      <h3 className="mt-4 text-xl md:text-2xl font-black leading-snug text-ink">
-                        {pt.pre}
-                        <span className="text-brand-500">{pt.highlight}</span>
-                        {pt.post}
+                      <p className="mt-2 text-base md:text-lg font-black text-brand-600">
+                        {pt.label}
+                      </p>
+                      <h3 className="mt-3 text-lg md:text-2xl font-black leading-snug text-ink">
+                        <span className="block">{pt.title[0]}</span>
+                        <span className="block">{pt.title[1]}</span>
                       </h3>
                       <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
                         {pt.body}
