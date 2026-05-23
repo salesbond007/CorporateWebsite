@@ -231,12 +231,15 @@ export default function SalesSupportPage({
               </p>
 
               <h1 className="mt-6 font-display font-black leading-[1.18] tracking-tight text-ink text-[clamp(2.25rem,5vw,3.75rem)]">
-                新規開拓から
-                <span className="text-brand-500">成約</span>
-                まで
-                <br />
-                サポート
+                短期の
+                <span className="text-brand-500">成約数向上</span>
+                に
+                <br className="hidden md:block" />
+                コミット
               </h1>
+              <p className="mt-5 text-lg md:text-2xl font-black text-ink-soft leading-snug">
+                戦略の立案からアポ獲得 / 商談まで
+              </p>
 
               <ul className="mt-8 space-y-3.5">
                 {[
