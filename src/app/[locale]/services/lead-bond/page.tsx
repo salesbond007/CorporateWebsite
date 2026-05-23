@@ -265,10 +265,14 @@ const faqs: Faq[] = [
 type ClientLogo = { name: string; src?: string };
 const logos: ClientLogo[] = [
   { name: "導入企業ロゴ", src: "https://i.imgur.com/ksEvm8K.png" },
-  { name: "LOGO 2" },
-  { name: "LOGO 3" },
-  { name: "LOGO 4" },
-  { name: "LOGO 5" },
+  { name: "導入企業ロゴ", src: "https://i.imgur.com/49U009p.png" },
+  { name: "導入企業ロゴ", src: "https://i.imgur.com/Yk8CM9h.png" },
+  { name: "導入企業ロゴ", src: "https://i.imgur.com/VLnqY2m.png" },
+  { name: "導入企業ロゴ", src: "https://i.imgur.com/mzYHaa1.png" },
+  { name: "導入企業ロゴ", src: "https://i.imgur.com/cGzkTEY.png" },
+  { name: "導入企業ロゴ", src: "https://i.imgur.com/CSrtRVU.png" },
+  { name: "導入企業ロゴ", src: "https://i.imgur.com/0ZZYyYI.png" },
+  { name: "導入企業ロゴ", src: "https://i.imgur.com/DcgcrQR.png" },
 ];
 
 export default function SalesSupportPage({
@@ -377,15 +381,15 @@ export default function SalesSupportPage({
                 <li
                   key={`${dup}-${i}`}
                   aria-hidden={dup === 1 ? "true" : undefined}
-                  className="flex h-20 w-44 shrink-0 items-center justify-center rounded-xl border border-ink-line bg-white px-4 md:h-24 md:w-52"
+                  className="flex h-24 w-52 shrink-0 items-center justify-center rounded-xl border border-ink-line bg-white p-2.5 md:h-28 md:w-60"
                 >
                   {logo.src ? (
                     <Image
                       src={logo.src}
                       alt={logo.name}
-                      width={180}
-                      height={70}
-                      className="max-h-[64%] w-auto object-contain"
+                      width={240}
+                      height={110}
+                      className="h-full w-full object-contain"
                     />
                   ) : (
                     <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink-muted/60">
@@ -397,12 +401,6 @@ export default function SalesSupportPage({
             )}
           </ul>
         </div>
-
-        <Container>
-          <p className="mt-8 text-center text-xs text-ink-muted">
-            ※ 掲載企業ロゴは準備中です。順次公開いたします。
-          </p>
-        </Container>
       </section>
 
       {/* ───── Problems ───── */}
