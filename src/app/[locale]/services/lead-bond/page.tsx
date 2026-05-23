@@ -313,25 +313,29 @@ export default function SalesSupportPage({
 
         <Container className="relative py-16 md:py-20 lg:py-24">
           <div className="max-w-3xl">
-            <h1 className="font-display font-black leading-[1.12] tracking-tight text-ink">
+            <h1 className="font-display font-black leading-[1.15] tracking-tight text-ink">
               <span className="block text-[clamp(2.25rem,6vw,4.25rem)]">
-                営業の
+                成約まで
                 <span className="relative inline-block">
-                  プロ
+                  伴走
                   <span
                     aria-hidden="true"
                     className="absolute inset-x-0 -bottom-1 h-1.5 bg-amber-400 md:h-2"
                   />
                 </span>
-                が
+                ！
               </span>
-              <span className="mt-1 block text-[clamp(2.25rem,6vw,4.25rem)]">
-                <span className="text-[0.5em] font-black">貴社の</span>
-                売上を伸ばす
+              <span className="mt-2 block">
+                <span className="text-[clamp(1.125rem,2.8vw,1.75rem)]">
+                  成長企業に選ばれる
+                </span>
+                <span className="text-[clamp(2rem,5vw,3.25rem)]">
+                  営業支援サービス
+                </span>
               </span>
             </h1>
-            <p className="mt-6 text-base md:text-xl font-black text-ink-soft leading-snug">
-              大企業・成長企業に選ばれる営業代行サービス
+            <p className="mt-6 text-base md:text-lg font-black text-ink-soft leading-snug">
+              「戦略立案」「アポ獲得」「商談」「営業DX」など課題に応じて幅広く対応可能
             </p>
 
             <div className="mt-10">
