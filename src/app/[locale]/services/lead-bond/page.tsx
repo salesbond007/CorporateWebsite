@@ -299,68 +299,51 @@ export default function SalesSupportPage({
         />
 
         <Container className="relative py-16 md:py-20 lg:py-24">
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
-            {/* Left: copy + CTA */}
-            <div className="lg:col-span-7">
-              <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-1.5 text-xs md:text-sm font-extrabold tracking-wide text-brand-600 shadow-sm">
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-                BtoB営業支援サービス
-              </p>
+          <div className="max-w-3xl">
+            <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-1.5 text-xs md:text-sm font-extrabold tracking-wide text-brand-600 shadow-sm">
+              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+              BtoB営業支援サービス
+            </p>
 
-              <h1 className="mt-6 font-display font-black leading-[1.22] tracking-tight text-ink text-[clamp(1.875rem,4.2vw,3.25rem)]">
-                短期の
-                <span className="text-brand-500">成約数向上</span>
-                にコミットする
-                <br />
-                伴走型営業支援サービス
-              </h1>
-              <p className="mt-5 text-base md:text-xl font-black text-ink-soft leading-snug">
-                戦略の立案からアポ獲得 / 商談まで
-              </p>
+            <h1 className="mt-6 font-display font-black leading-[1.22] tracking-tight text-ink text-[clamp(1.875rem,4.2vw,3.25rem)]">
+              短期の
+              <span className="text-brand-500">成約数向上</span>
+              にコミットする
+              <br />
+              伴走型営業支援サービス
+            </h1>
+            <p className="mt-5 text-base md:text-xl font-black text-ink-soft leading-snug">
+              戦略の立案からアポ獲得 / 商談まで
+            </p>
 
-              <ul className="mt-8 space-y-3.5">
-                {[
-                  "戦略立案・アポ獲得・商談・成約まで一気通貫で支援",
-                  "大手企業の開拓ノウハウで、再現性のある売上を創出",
-                ].map((b) => (
-                  <li key={b} className="flex items-start gap-3">
-                    <span
-                      aria-hidden="true"
-                      className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-brand-500"
-                    />
-                    <span className="text-base md:text-lg font-bold text-ink leading-relaxed">
-                      {b}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-10 flex flex-wrap gap-3">
-                <Button
-                  href={contactHref}
-                  size="lg"
-                  className="shadow-[0_18px_40px_-12px_rgba(245,130,32,0.6)]"
-                >
-                  お問い合わせ(無料)
-                </Button>
-                <Button href="#service" size="lg" variant="secondary">
-                  サービス内容を見る
-                </Button>
-              </div>
-            </div>
-
-            {/* Right: hero visual */}
-            <div className="lg:col-span-5">
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl border border-ink-line bg-white shadow-sm">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 grid place-items-center"
-                >
-                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink-muted/50">
-                    Image
+            <ul className="mt-8 space-y-3.5">
+              {[
+                "戦略立案・アポ獲得・商談・成約まで一気通貫で支援",
+                "大手企業の開拓ノウハウで、再現性のある売上を創出",
+              ].map((b) => (
+                <li key={b} className="flex items-start gap-3">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-brand-500"
+                  />
+                  <span className="text-base md:text-lg font-bold text-ink leading-relaxed">
+                    {b}
                   </span>
-                </div>
-              </div>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Button
+                href={contactHref}
+                size="lg"
+                className="!bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.6)]"
+              >
+                資料請求 / 無料相談
+              </Button>
+              <Button href="#service" size="lg" variant="secondary">
+                サービス内容を見る
+              </Button>
             </div>
           </div>
         </Container>
