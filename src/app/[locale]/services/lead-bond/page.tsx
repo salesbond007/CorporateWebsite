@@ -23,15 +23,44 @@ export const metadata: Metadata = {
     "営業戦略の策定からアポ獲得・商談・成約まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。最短2週間で稼働し、自走できる営業組織づくりまで伴走します。",
 };
 
-type Problem = { icon: string; text: string };
+type Problem = {
+  line1: string;
+  pre: string;
+  highlight: string;
+  post: string;
+};
 
 const problems: Problem[] = [
-  { icon: "🚀", text: "新規事業を立ち上げたが、何から営業を始めればいいか分からない" },
-  { icon: "⚡", text: "採用が間に合わず、売上機会を逃している" },
-  { icon: "👥", text: "既存メンバーが手一杯で、新規開拓ができない" },
-  { icon: "🎯", text: "大手企業を開拓したいが、ルートもノウハウもない" },
-  { icon: "📊", text: "トップセールス頼みで、再現性のある営業組織になっていない" },
-  { icon: "🤖", text: "AIや営業DXを進めたいが、社内に推進できる人材がいない" },
+  {
+    line1: "早期に成果を出したいが",
+    pre: "営業人材が",
+    highlight: "不足",
+    post: "している",
+  },
+  {
+    line1: "新規事業を立ち上げたけれど",
+    pre: "営業の",
+    highlight: "進め方",
+    post: "が決まらない",
+  },
+  {
+    line1: "営業組織を作りたいが",
+    pre: "",
+    highlight: "何から",
+    post: "手をつければ良いか分からない",
+  },
+  {
+    line1: "外注を試したいが",
+    pre: "",
+    highlight: "部分的な支援",
+    post: "が多い",
+  },
+  {
+    line1: "既存対応で手一杯で",
+    pre: "",
+    highlight: "新規開拓",
+    post: "まで手が回らない",
+  },
 ];
 
 type FlowPhase = { step: string; title: string };
@@ -402,17 +431,52 @@ export default function SalesSupportPage({
             </h2>
           </div>
 
-          <ul className="mt-14 grid gap-5 md:grid-cols-2 lg:grid-cols-3 md:gap-6">
+          <ul className="mt-16 grid grid-cols-1 gap-x-4 gap-y-14 sm:grid-cols-2 lg:grid-cols-5">
             {problems.map((p, i) => (
-              <li key={p.text}>
-                <Reveal delay={(i % 3) * 80} className="h-full">
-                  <div className="flex h-full items-start gap-4 rounded-2xl border border-ink-line bg-white p-6 md:p-7">
-                    <span aria-hidden="true" className="text-3xl leading-none">
-                      {p.icon}
+              <li key={p.line1}>
+                <Reveal delay={(i % 5) * 60} className="h-full">
+                  <div className="relative flex h-full flex-col items-center rounded-2xl border border-ink-line bg-white px-4 pb-5 pt-12 text-center shadow-sm">
+                    {/* 課題 number badge with downward tail */}
+                    <span className="absolute -top-6 left-1/2 -translate-x-1/2">
+                      <span className="relative flex h-16 w-16 flex-col items-center justify-center rounded-full bg-brand-500 text-white shadow-card">
+                        <span className="text-[10px] font-bold leading-none">課題</span>
+                        <span className="font-display text-2xl font-black leading-none">
+                          {i + 1}
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-brand-500"
+                        />
+                      </span>
                     </span>
-                    <p className="text-sm md:text-base font-bold leading-relaxed text-ink">
-                      {p.text}
+
+                    {/* Illustration placeholder — to be filled later */}
+                    <div
+                      aria-hidden="true"
+                      className="aspect-square w-full max-w-[140px] rounded-xl bg-cream"
+                    />
+
+                    {/* Title */}
+                    <p className="mt-4 text-sm md:text-base font-black leading-snug text-ink">
+                      {p.line1}
+                      <br />
+                      {p.pre}
+                      <span className="text-brand-500">{p.highlight}</span>
+                      {p.post}
                     </p>
+
+                    {/* Down chevron */}
+                    <span className="mt-auto pt-4 text-ink-line" aria-hidden="true">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path
+                          d="M5 7l7 7 7-7M5 13l7 7 7-7"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
                   </div>
                 </Reveal>
               </li>
