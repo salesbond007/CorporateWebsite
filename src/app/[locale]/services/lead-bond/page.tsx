@@ -110,40 +110,125 @@ const details: Detail[] = [
   },
 ];
 
-type Step = { digit: string; title: string; body: string; period: string };
+type Step = {
+  digit: string;
+  titleTop: string;
+  titleBottom?: string;
+  body: string;
+  period?: string;
+};
 
 const steps: Step[] = [
   {
     digit: "01",
-    title: "お問い合わせ・無料相談",
-    body: "貴社の課題・ターゲット像をオンライン(約60分)でヒアリングします。",
-    period: "当日〜",
+    titleTop: "無料相談・",
+    titleBottom: "お問い合わせ",
+    body: "まずはお気軽にお問い合わせください。",
   },
   {
     digit: "02",
-    title: "ご提案・お見積り",
-    body: "課題に合わせた支援内容と体制、お見積りをご提示します。",
-    period: "数日",
+    titleTop: "ヒアリング",
+    body: "お持ちの課題感や改善したい点をざっくばらんにご相談ください。",
+    period: "お問い合わせ後、最短即日",
   },
   {
     digit: "03",
-    title: "契約・キックオフ",
-    body: "支援範囲・KPI・体制を確定し、プロジェクトの初動を設計します。",
-    period: "1週間程度",
+    titleTop: "ご提案",
+    body: "お伺いした課題をもとに、具体的な成果シミュレーションをご提案します。",
+    period: "無料相談後、3日〜1週間前後",
   },
   {
     digit: "04",
-    title: "プロジェクト開始",
-    body: "即戦力チームが稼働開始。戦略実行・アポ獲得・商談を進めます。",
-    period: "最短2週間",
+    titleTop: "お見積り・",
+    titleBottom: "ご契約",
+    body: "お見積り内容をご確認いただいた後に、契約締結を実施します。",
   },
   {
     digit: "05",
-    title: "定例MTG・改善・成果創出",
-    body: "定例で数値を振り返り、改善を重ねながら成果を最大化します。",
-    period: "継続",
+    titleTop: "キックオフ",
+    titleBottom: "ミーティング",
+    body: "支援体制準備のため、プロジェクトの最終要件をすり合わせます。",
+    period: "契約から、3日〜1週間前後",
+  },
+  {
+    digit: "06",
+    titleTop: "プロジェクト",
+    titleBottom: "セットアップ",
+    body: "専任チームを組成。ターゲットリスト・スクリプト・業務ツールの整備を行います。",
+    period: "契約から、最短2週間",
+  },
+  {
+    digit: "07",
+    titleTop: "稼働開始・",
+    titleBottom: "施策改善",
+    body: "プロジェクトをスタート。週1回の定例会を実施し、成果を最大化します。",
+    period: "最短2週間で稼働開始",
   },
 ];
+
+function StepIcon({ index }: { index: number }) {
+  const common = {
+    width: 40,
+    height: 40,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+  };
+  switch (index) {
+    case 0:
+      return (
+        <svg {...common}>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <path d="M3 7l9 6 9-6" />
+        </svg>
+      );
+    case 1:
+      return (
+        <svg {...common}>
+          <path d="M4 5h16v10H9l-4 4v-4H4z" />
+        </svg>
+      );
+    case 2:
+      return (
+        <svg {...common}>
+          <path d="M9 18h6M10 21h4" />
+          <path d="M12 3a6 6 0 00-3.5 10.9c.4.3.5.6.5 1.1h6c0-.5.1-.8.5-1.1A6 6 0 0012 3z" />
+        </svg>
+      );
+    case 3:
+      return (
+        <svg {...common}>
+          <path d="M7 3h8l4 4v14H7z" />
+          <path d="M15 3v4h4" />
+        </svg>
+      );
+    case 4:
+      return (
+        <svg {...common}>
+          <path d="M6 21V4" />
+          <path d="M6 4h11l-2.5 4L17 12H6" />
+        </svg>
+      );
+    case 5:
+      return (
+        <svg {...common}>
+          <path d="M12 3l9 5-9 5-9-5 9-5z" />
+          <path d="M3 13l9 5 9-5" />
+        </svg>
+      );
+    default:
+      return (
+        <svg {...common}>
+          <path d="M4 19h16" />
+          <path d="M7 16v-4M12 16V8M17 16v-6" />
+        </svg>
+      );
+  }
+}
 
 type Faq = { q: string; a: string };
 
@@ -522,38 +607,46 @@ export default function SalesSupportPage({
         <Container>
           <div className="text-center">
             <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              Flow
+              Support
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              ご利用までの流れ
+              支援の流れ
             </h2>
           </div>
 
-          <ol className="mx-auto mt-14 max-w-3xl">
+          <ol className="mt-16 grid gap-x-5 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
             {steps.map((s, i) => (
-              <li key={s.digit} className="relative flex gap-5 pb-10 last:pb-0">
-                {i < steps.length - 1 ? (
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-6 top-12 h-[calc(100%-3rem)] w-px bg-ink-line"
-                  />
-                ) : null}
-                <span className="relative z-10 grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-500 font-display text-lg font-black text-white">
-                  {s.digit}
-                </span>
-                <Reveal className="flex-1">
-                  <div className="rounded-2xl border border-ink-line bg-white p-6">
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <h3 className="text-base md:text-lg font-black text-ink">
-                        {s.title}
-                      </h3>
-                      <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-600">
-                        {s.period}
-                      </span>
-                    </div>
-                    <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              <li key={s.digit}>
+                <Reveal delay={(i % 4) * 60} className="h-full">
+                  <div className="relative flex h-full flex-col items-center rounded-2xl border border-ink-line bg-cream/60 px-5 pb-6 pt-10 text-center">
+                    {/* Number badge overlapping top edge */}
+                    <span className="absolute -top-5 left-1/2 grid h-10 w-10 -translate-x-1/2 place-items-center rounded-full bg-brand-500 font-display text-sm font-black text-white shadow-card">
+                      {s.digit}
+                    </span>
+                    {/* Icon */}
+                    <span className="text-brand-400" aria-hidden="true">
+                      <StepIcon index={i} />
+                    </span>
+                    {/* Title */}
+                    <h3 className="mt-4 text-lg md:text-xl font-black leading-snug text-brand-600">
+                      {s.titleTop}
+                      {s.titleBottom ? (
+                        <>
+                          <br />
+                          {s.titleBottom}
+                        </>
+                      ) : null}
+                    </h3>
+                    {/* Body */}
+                    <p className="mt-3 text-sm leading-relaxed text-ink-soft font-medium">
                       {s.body}
                     </p>
+                    {/* Period pill */}
+                    {s.period ? (
+                      <span className="mt-auto self-center rounded-md bg-white px-3 py-1.5 text-xs font-bold text-ink-muted">
+                        {s.period}
+                      </span>
+                    ) : null}
                   </div>
                 </Reveal>
               </li>
