@@ -48,7 +48,7 @@ function renderProblemLine(line: string, hl: string) {
 type Point = {
   num: string;
   label: string;
-  title: [string, string];
+  title: string[];
   body: string;
 };
 
@@ -64,12 +64,9 @@ const points: Point[] = [
   },
   {
     num: "02",
-    label: "大手・上場企業の開拓まで対応",
-    title: [
-      "スタートアップから大手・上場企業まで。",
-      "幅広い企業フェーズに合わせた支援",
-    ],
-    body: "立ち上げ期のスタートアップから、上場企業の大手企業開拓まで対応。エンタープライズ攻略のノウハウと決裁者ネットワークを活かし、自社だけでは届かない層への接点創出も実現します。",
+    label: "大手企業/上場企業の開拓にも対応",
+    title: ["大手企業/上場企業の開拓にも対応"],
+    body: "立ち上げ期のスタートアップから、大手・上場企業の決裁者開拓まで対応。エンタープライズ攻略のノウハウと決裁者ネットワークを活かし、自社だけでは届かない層への接点創出も実現します。",
   },
   {
     num: "03",
@@ -578,8 +575,11 @@ export default function SalesSupportPage({
                         {pt.label}
                       </p>
                       <h3 className="mt-3 text-lg md:text-2xl font-black leading-snug text-ink">
-                        <span className="block">{pt.title[0]}</span>
-                        <span className="block">{pt.title[1]}</span>
+                        {pt.title.map((t, ti) => (
+                          <span key={ti} className="block">
+                            {t}
+                          </span>
+                        ))}
                       </h3>
                       <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
                         {pt.body}
