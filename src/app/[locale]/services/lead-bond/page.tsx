@@ -313,17 +313,12 @@ export default function SalesSupportPage({
 
         <Container className="relative py-16 md:py-20 lg:py-24">
           <div className="max-w-3xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-1.5 text-xs md:text-sm font-extrabold tracking-wide text-brand-600 shadow-sm">
-              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-              BtoB営業支援サービス
-            </p>
-
-            <h1 className="mt-6 font-display font-black leading-[1.22] tracking-tight text-ink text-[clamp(1.875rem,4.2vw,3.25rem)]">
+            <h1 className="font-display font-black leading-[1.22] tracking-tight text-ink text-[clamp(1.875rem,4.2vw,3.25rem)]">
               短期の
               <span className="text-brand-500">成約数向上</span>
               にコミットする
               <br />
-              伴走型営業支援サービス
+              成約まで伴走する
             </h1>
             <p className="mt-5 text-base md:text-xl font-black text-ink-soft leading-snug">
               戦略の立案からアポ獲得 / 商談まで
@@ -346,16 +341,13 @@ export default function SalesSupportPage({
               ))}
             </ul>
 
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-10">
               <Button
                 href={contactHref}
                 size="lg"
-                className="!bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.6)]"
+                className="!h-16 w-full px-12 text-lg font-bold !bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.6)] sm:w-auto"
               >
                 資料請求 / 無料相談
-              </Button>
-              <Button href="#service" size="lg" variant="secondary">
-                サービス内容を見る
               </Button>
             </div>
           </div>
