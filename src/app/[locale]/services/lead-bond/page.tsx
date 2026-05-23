@@ -434,11 +434,6 @@ export default function SalesSupportPage({
               <span className="text-brand-500">ワンストップ</span>
               で解決します。
             </p>
-            <div className="mt-6">
-              <Button href={contactHref} size="lg">
-                無料相談で課題整理から始める
-              </Button>
-            </div>
           </div>
         </Container>
       </section>
@@ -519,6 +514,24 @@ export default function SalesSupportPage({
               <p className="mt-6 text-sm md:text-base leading-relaxed text-white/85 font-medium">
                 営業は、戦略・実行・仕組み化のどこか一つが欠けても成果になりません。多くの企業がそれぞれの工程を別の会社や部門に切り分けて発注し、結果として「点」の支援に終わってしまっています。セールスボンドは、戦略立案からアポ獲得、商談、成約、そしてAIによる再現性の構築までを一気通貫で担う、BtoB特化の営業支援チームです。
               </p>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  className="!bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.6)]"
+                >
+                  資料問い合わせ
+                </Button>
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  variant="ghost"
+                  className="border-2 border-white/50 !text-white hover:!bg-white/10"
+                >
+                  無料相談
+                </Button>
+              </div>
             </div>
           </div>
         </Container>
@@ -576,6 +589,19 @@ export default function SalesSupportPage({
                 </Reveal>
               );
             })}
+          </div>
+
+          <div className="mt-16 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button
+              href={contactHref}
+              size="lg"
+              className="!bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.6)]"
+            >
+              資料問い合わせ
+            </Button>
+            <Button href={contactHref} size="lg" variant="secondary">
+              無料相談
+            </Button>
           </div>
         </Container>
       </section>
