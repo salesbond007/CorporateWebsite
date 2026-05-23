@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -18,10 +17,18 @@ export function generateStaticParams() {
 
 export const metadata: Metadata = {
   title:
-    "BtoB営業支援サービス｜戦略立案から成約まで一気通貫で伴走する営業支援",
+    "BtoB営業支援サービス｜新規開拓から成約までサポートする営業支援",
   description:
-    "営業戦略の策定からアポ獲得・商談・成約、営業DX・人材紹介まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。最短2週間で稼働し、自走できる営業組織づくりまで伴走します。",
+    "営業戦略の策定からアポ獲得・商談・成約まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。最短2週間で稼働し、自走できる営業組織づくりまで伴走します。",
 };
+
+const navItems = [
+  { id: "problems", label: "課題" },
+  { id: "service", label: "サービス" },
+  { id: "reasons", label: "選ばれる理由" },
+  { id: "flow", label: "導入の流れ" },
+  { id: "faq", label: "FAQ" },
+];
 
 type Problem = { icon: string; text: string };
 
@@ -41,7 +48,6 @@ const phases: FlowPhase[] = [
   { step: "02", title: "アポ獲得" },
   { step: "03", title: "商談" },
   { step: "04", title: "成約" },
-  { step: "05", title: "DX / 人材紹介" },
 ];
 
 type Reason = { number: string; title: string; body: string };
@@ -110,16 +116,6 @@ const details: Detail[] = [
       "契約締結サポート",
     ],
   },
-  {
-    number: "05",
-    title: "営業DX・人材紹介(オプション)",
-    items: [
-      "AIを活用した営業の型化",
-      "SFA / CRM 導入・運用支援",
-      "営業人材の紹介・採用支援",
-      "ノウハウの社内移管",
-    ],
-  },
 ];
 
 type Step = { digit: string; title: string; body: string; period: string };
@@ -182,12 +178,12 @@ const faqs: Faq[] = [
   },
   {
     q: "費用感はどのくらいですか?",
-    a: "支援範囲(戦略・アポ・商談・DX等)や体制により変動します。貴社の課題・予算に合わせて柔軟にカスタマイズしますので、まずは無料相談でご相談ください。",
+    a: "支援範囲(戦略・アポ・商談等)や体制により変動します。貴社の課題・予算に合わせて柔軟にカスタマイズしますので、まずは無料相談でご相談ください。",
   },
 ];
 
-// 実績ロゴはプレースホルダー。差し替え時はここを実ロゴに置き換える。
-const logoPlaceholders = Array.from({ length: 7 }, (_, i) => `LOGO ${i + 1}`);
+// 導入企業ロゴはプレースホルダー。差し替え時はここを実ロゴに置き換える。
+const logoPlaceholders = Array.from({ length: 6 }, (_, i) => `LOGO ${i + 1}`);
 
 export default function SalesSupportPage({
   params,
@@ -214,115 +210,124 @@ export default function SalesSupportPage({
         ])}
       />
 
-      {/* ───── Hero ───── */}
-      <section className="relative overflow-hidden bg-ink text-white">
+      {/* ───── Hero (light) ───── */}
+      <section className="relative overflow-hidden bg-gradient-to-br from-cream via-white to-brand-50">
         <div
           aria-hidden="true"
-          className="absolute inset-0 opacity-[0.08]"
-          style={{
-            backgroundImage:
-              "radial-gradient(rgba(255,255,255,0.7) 1px, transparent 1px)",
-            backgroundSize: "22px 22px",
-          }}
+          className="absolute -top-32 right-[-10%] h-[460px] w-[460px] rounded-full bg-brand-200/40 blur-3xl"
         />
         <div
           aria-hidden="true"
-          className="absolute -top-32 -right-20 h-[520px] w-[520px] rounded-full bg-brand-500/30 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute -bottom-40 -left-32 h-[440px] w-[440px] rounded-full bg-brand-500/15 blur-3xl"
+          className="absolute -bottom-40 -left-32 h-[380px] w-[380px] rounded-full bg-brand-100/60 blur-3xl"
         />
 
-        <Container className="relative py-20 md:py-24 lg:py-28">
-          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-12">
+        <Container className="relative py-16 md:py-20 lg:py-24">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+            {/* Left: copy + CTA */}
             <div className="lg:col-span-7">
-              <p className="inline-flex items-center gap-2 border border-white/40 bg-white/10 px-3 py-1 text-xs md:text-sm font-extrabold tracking-[0.16em] uppercase text-white backdrop-blur-sm">
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-yellow-300" />
+              <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-1.5 text-xs md:text-sm font-extrabold tracking-wide text-brand-600 shadow-sm">
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-500" />
                 BtoB営業支援サービス
               </p>
 
-              <h1 className="mt-6 font-display font-black leading-[1.15] tracking-tight text-white text-[clamp(2.25rem,5.5vw,4rem)]">
-                その営業課題、
+              <h1 className="mt-6 font-display font-black leading-[1.18] tracking-tight text-ink text-[clamp(2.25rem,5vw,3.75rem)]">
+                新規開拓から
+                <span className="text-brand-500">成約</span>
+                まで
                 <br />
-                <span className="relative inline-block">
-                  私たちが引き受けます
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-x-0 -bottom-1 h-2 bg-brand-500/90"
-                  />
-                </span>
-                。
+                サポート
               </h1>
 
-              <p className="mt-8 max-w-xl text-base md:text-lg leading-[1.95] text-white/85 font-medium">
-                戦略立案から成約、DX化まで。
-                <br className="hidden md:block" />
-                必要なソリューションを、ワンストップで。
-              </p>
-
-              <ul className="mt-8 flex flex-wrap gap-3">
+              <ul className="mt-8 space-y-3.5">
                 {[
-                  "戦略から成約まで一気通貫",
-                  "大手企業の開拓実績",
-                  "最短2週間で稼働開始",
-                ].map((badge) => (
-                  <li
-                    key={badge}
-                    className="inline-flex items-center gap-2 border border-white/25 bg-white/[0.06] px-4 py-2 text-xs md:text-sm font-bold text-white backdrop-blur-sm"
-                  >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 18 18"
-                      fill="none"
+                  "戦略立案・アポ獲得・商談・成約まで一気通貫で支援",
+                  "大手企業の開拓ノウハウで、再現性のある売上を創出",
+                ].map((b) => (
+                  <li key={b} className="flex items-start gap-3">
+                    <span
                       aria-hidden="true"
-                      className="shrink-0"
-                    >
-                      <circle cx="9" cy="9" r="8" fill="#F58220" />
-                      <path
-                        d="M5 9.5l3 3 5-6"
-                        stroke="white"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    {badge}
+                      className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-brand-500"
+                    />
+                    <span className="text-base md:text-lg font-bold text-ink leading-relaxed">
+                      {b}
+                    </span>
                   </li>
                 ))}
               </ul>
 
-              <div className="mt-10">
+              <div className="mt-10 flex flex-wrap gap-3">
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="bg-brand-500 text-white hover:bg-brand-600 shadow-[0_24px_50px_-12px_rgba(245,130,32,0.7)]"
+                  className="shadow-[0_18px_40px_-12px_rgba(245,130,32,0.6)]"
                 >
-                  無料相談はこちら
+                  お問い合わせ(無料)
+                </Button>
+                <Button href="#service" size="lg" variant="secondary">
+                  サービス内容を見る
                 </Button>
               </div>
             </div>
 
-            {/* Right: visual placeholder */}
+            {/* Right: client logos (CEREBRIX-style staggered grid) */}
             <div className="lg:col-span-5">
-              <div className="relative mx-auto aspect-[4/3] w-full overflow-hidden rounded-2xl border border-white/15 bg-white/[0.04] backdrop-blur-sm">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 grid place-items-center"
-                >
-                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-white/40">
-                    Image
-                  </span>
-                </div>
-              </div>
+              <p className="mb-4 text-center text-xs font-extrabold uppercase tracking-[0.22em] text-ink-muted lg:text-left">
+                導入企業
+              </p>
+              <ul className="grid grid-cols-2 gap-4 md:gap-5">
+                {logoPlaceholders.map((label, i) => (
+                  <li
+                    key={label}
+                    className={`flex h-24 items-center justify-center rounded-2xl border border-ink-line bg-white shadow-sm md:h-28 ${
+                      i % 2 === 1 ? "md:mt-8" : ""
+                    }`}
+                  >
+                    <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink-muted/60">
+                      {label}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-center text-xs text-ink-muted lg:text-left">
+                ※ 掲載企業ロゴは準備中です。順次公開いたします。
+              </p>
             </div>
           </div>
         </Container>
       </section>
 
+      {/* ───── Section nav (sticky) ───── */}
+      <nav
+        aria-label="ページ内ナビゲーション"
+        className="sticky top-16 z-30 border-y border-ink-line bg-white/95 backdrop-blur md:top-20"
+      >
+        <Container>
+          <div className="flex items-center justify-between gap-4">
+            <ul className="flex items-center gap-1 overflow-x-auto py-3 md:gap-2">
+              {navItems.map((n) => (
+                <li key={n.id}>
+                  <a
+                    href={`#${n.id}`}
+                    className="block whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-bold text-ink-soft transition hover:bg-brand-50 hover:text-brand-600 md:px-4 md:text-sm"
+                  >
+                    {n.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <Button
+              href={contactHref}
+              size="sm"
+              className="hidden shrink-0 sm:inline-flex"
+            >
+              無料相談
+            </Button>
+          </div>
+        </Container>
+      </nav>
+
       {/* ───── Problems ───── */}
-      <section className="bg-cream py-24 md:py-32">
+      <section id="problems" className="scroll-mt-32 bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
             <h2 className="text-display-3 text-ink font-black leading-tight">
@@ -365,14 +370,14 @@ export default function SalesSupportPage({
       </section>
 
       {/* ───── Service overview (flow) ───── */}
-      <section className="bg-white py-24 md:py-32">
+      <section id="service" className="scroll-mt-32 bg-white py-24 md:py-32">
         <Container>
           <div className="text-center">
             <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
               Service
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              戦略から成約、その先まで。
+              戦略から成約まで、
               <br />
               営業のすべてを伴走。
             </h2>
@@ -438,53 +443,9 @@ export default function SalesSupportPage({
               をつくる支援サービスです。
             </p>
           </div>
-        </Container>
-      </section>
 
-      {/* ───── Reasons ───── */}
-      <section className="bg-cream py-24 md:py-32">
-        <Container>
-          <div className="text-center">
-            <h2 className="text-display-3 text-ink font-black leading-tight">
-              選ばれる4つの理由
-            </h2>
-          </div>
-
-          <ul className="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-2 md:gap-8">
-            {reasons.map((r, i) => (
-              <li key={r.number}>
-                <Reveal delay={(i % 2) * 80} className="h-full">
-                  <div className="h-full rounded-2xl border-2 border-ink bg-white p-8 md:p-10">
-                    <p className="font-display text-4xl md:text-5xl font-black leading-none text-brand-500">
-                      {r.number}
-                    </p>
-                    <h3 className="mt-5 text-lg md:text-xl font-black text-ink leading-snug">
-                      {r.title}
-                    </h3>
-                    <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                      {r.body}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* ───── Details ───── */}
-      <section className="bg-white py-24 md:py-32">
-        <Container>
-          <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              Details
-            </p>
-            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              サービス内容
-            </h2>
-          </div>
-
-          <ul className="mx-auto mt-12 max-w-3xl space-y-3">
+          {/* Details */}
+          <ul className="mx-auto mt-14 max-w-3xl space-y-3">
             {details.map((d, i) => (
               <li key={d.number} className="rounded-2xl border border-ink-line bg-white">
                 <details className="group" open={i === 0}>
@@ -499,7 +460,7 @@ export default function SalesSupportPage({
                       +
                     </span>
                   </summary>
-                  <ul className="border-t border-ink-line px-6 py-5 pl-[4.25rem] space-y-2.5">
+                  <ul className="space-y-2.5 border-t border-ink-line px-6 py-5 pl-[4.25rem]">
                     {d.items.map((item) => (
                       <li
                         key={item}
@@ -533,50 +494,39 @@ export default function SalesSupportPage({
         </Container>
       </section>
 
-      {/* ───── Cases (logo marquee) ───── */}
-      <section className="overflow-hidden bg-cream py-24 md:py-32">
+      {/* ───── Reasons ───── */}
+      <section id="reasons" className="scroll-mt-32 bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              Clients
-            </p>
-            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              導入企業
+            <h2 className="text-display-3 text-ink font-black leading-tight">
+              選ばれる4つの理由
             </h2>
           </div>
-        </Container>
 
-        {/* Marquee: items duplicated so the -50% translate loops seamlessly */}
-        <div
-          className="relative mt-12 overflow-hidden"
-          aria-label="導入企業ロゴ一覧"
-        >
-          <ul className="flex w-max gap-6 md:gap-8 animate-marquee">
-            {[...Array(2)].flatMap((_, dup) =>
-              logoPlaceholders.map((label, i) => (
-                <li
-                  key={`${dup}-${i}`}
-                  aria-hidden={dup === 1 ? "true" : undefined}
-                  className="flex h-20 w-44 md:h-24 md:w-52 shrink-0 items-center justify-center rounded-xl border border-ink-line bg-white"
-                >
-                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink-muted/60">
-                    {label}
-                  </span>
-                </li>
-              )),
-            )}
+          <ul className="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-2 md:gap-8">
+            {reasons.map((r, i) => (
+              <li key={r.number}>
+                <Reveal delay={(i % 2) * 80} className="h-full">
+                  <div className="h-full rounded-2xl border-2 border-ink bg-white p-8 md:p-10">
+                    <p className="font-display text-4xl md:text-5xl font-black leading-none text-brand-500">
+                      {r.number}
+                    </p>
+                    <h3 className="mt-5 text-lg md:text-xl font-black text-ink leading-snug">
+                      {r.title}
+                    </h3>
+                    <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+                      {r.body}
+                    </p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
           </ul>
-        </div>
-
-        <Container>
-          <p className="mt-10 text-center text-xs text-ink-muted">
-            ※ 掲載企業ロゴは準備中です。順次公開いたします。
-          </p>
         </Container>
       </section>
 
       {/* ───── Flow ───── */}
-      <section className="bg-white py-24 md:py-32">
+      <section id="flow" className="scroll-mt-32 bg-white py-24 md:py-32">
         <Container>
           <div className="text-center">
             <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
@@ -590,7 +540,6 @@ export default function SalesSupportPage({
           <ol className="mx-auto mt-14 max-w-3xl">
             {steps.map((s, i) => (
               <li key={s.digit} className="relative flex gap-5 pb-10 last:pb-0">
-                {/* timeline line */}
                 {i < steps.length - 1 ? (
                   <span
                     aria-hidden="true"
@@ -622,7 +571,7 @@ export default function SalesSupportPage({
       </section>
 
       {/* ───── FAQ ───── */}
-      <section className="bg-cream py-24 md:py-32">
+      <section id="faq" className="scroll-mt-32 bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
             <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
@@ -683,7 +632,7 @@ export default function SalesSupportPage({
                 <span className="text-brand-500">抱え込まないでください。</span>
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-sm md:text-base leading-relaxed text-white/85 font-medium">
-                戦略から成約まで、まるごとお任せください。貴社の状況に最適な解決策をご提案します。
+                新規開拓から成約まで、まるごとお任せください。貴社の状況に最適な解決策をご提案します。
               </p>
               <div className="mt-10 flex justify-center">
                 <Button
@@ -691,7 +640,7 @@ export default function SalesSupportPage({
                   size="lg"
                   className="bg-brand-500 text-white hover:bg-brand-600 shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)] !h-14 md:w-72"
                 >
-                  無料相談はこちら
+                  お問い合わせ(無料)
                 </Button>
               </div>
             </div>
