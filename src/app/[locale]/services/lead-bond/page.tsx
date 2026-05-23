@@ -483,33 +483,82 @@ export default function SalesSupportPage({
         </Container>
       </section>
 
-      {/* ───── Solution (diagram placeholder) ───── */}
-      <section className="bg-white py-24 md:py-32">
-        <Container>
-          <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              Solution
-            </p>
-            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              課題を
-              <span className="text-brand-500">こう解決</span>
-              します
-            </h2>
-          </div>
+      {/* ───── Solution ───── */}
+      <section className="relative overflow-hidden bg-ink py-24 md:py-32 text-white">
+        {/* Background photo + dark overlay */}
+        <Image
+          src="https://i.imgur.com/QMdMoAG.jpeg"
+          alt=""
+          aria-hidden="true"
+          fill
+          sizes="100vw"
+          className="object-cover opacity-20"
+        />
+        <div aria-hidden="true" className="absolute inset-0 bg-ink/80" />
+        <div
+          aria-hidden="true"
+          className="absolute -right-32 -top-24 h-96 w-96 rounded-full bg-brand-500/20 blur-3xl"
+        />
 
-          <div className="mt-14 grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
-            {/* 図（ダイアグラム）プレースホルダー */}
-            <div className="grid aspect-square w-full place-items-center rounded-2xl border-2 border-dashed border-ink-line bg-cream">
-              <span className="text-sm font-bold tracking-wide text-ink-muted">
-                図（ダイアグラム）を配置
-              </span>
+        <Container className="relative">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Left: circular diagram */}
+            <div className="relative mx-auto aspect-square w-full max-w-[420px]">
+              <div
+                aria-hidden="true"
+                className="absolute inset-[14%] rounded-full border-2 border-dashed border-white/25"
+              />
+              {/* Center */}
+              <div className="absolute left-1/2 top-1/2 grid h-28 w-28 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-brand-500 text-center shadow-[0_12px_40px_-8px_rgba(245,130,32,0.7)] md:h-32 md:w-32">
+                <span className="font-display text-base font-black leading-tight text-white md:text-lg">
+                  Sales
+                  <br />
+                  Bond
+                </span>
+              </div>
+              {/* Nodes */}
+              {["戦略立案", "アポ獲得", "商談", "成約", "営業DX", "定着化"].map(
+                (label, i, arr) => {
+                  const angle = (i / arr.length) * Math.PI * 2 - Math.PI / 2;
+                  const left = 50 + 38 * Math.cos(angle);
+                  const top = 50 + 38 * Math.sin(angle);
+                  return (
+                    <div
+                      key={label}
+                      className="absolute -translate-x-1/2 -translate-y-1/2"
+                      style={{ left: `${left}%`, top: `${top}%` }}
+                    >
+                      <div className="grid h-16 w-16 place-items-center rounded-full border border-white/40 bg-white/10 text-center backdrop-blur-sm md:h-[76px] md:w-[76px]">
+                        <span className="px-1 text-[11px] font-bold leading-tight text-white md:text-xs">
+                          {label}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                },
+              )}
             </div>
 
-            {/* 説明テキストプレースホルダー */}
-            <div className="grid min-h-[280px] place-items-center rounded-2xl border-2 border-dashed border-ink-line bg-cream p-8">
-              <span className="text-sm font-bold tracking-wide text-ink-muted">
-                説明テキストを配置
-              </span>
+            {/* Right: copy */}
+            <div>
+              <p className="text-lg font-bold text-white/90">セールスボンドは</p>
+              <h2 className="mt-3 font-display font-black leading-[1.4] text-white text-[clamp(1.5rem,3vw,2.5rem)]">
+                戦略から成約、組織への定着まで営業のすべてに伴走する
+              </h2>
+              <p className="mt-2 text-xl md:text-2xl font-black text-white">
+                から
+                <span className="text-brand-400">課題を解決</span>
+                できます
+              </p>
+
+              <span
+                aria-hidden="true"
+                className="mt-6 block h-1 w-16 rounded-full bg-brand-500"
+              />
+
+              <p className="mt-6 text-sm md:text-base leading-relaxed text-white/85 font-medium">
+                営業は、戦略・実行・仕組み化のどこか一つが欠けても成果になりません。多くの企業がそれぞれの工程を別の会社や部門に切り分けて発注し、結果として「点」の支援に終わってしまっています。セールスボンドは、戦略立案からアポ獲得、商談、成約、そしてAIによる再現性の構築までを一気通貫で担う、BtoB特化の営業支援チームです。
+              </p>
             </div>
           </div>
         </Container>
