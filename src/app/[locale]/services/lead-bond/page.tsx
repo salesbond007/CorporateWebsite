@@ -77,49 +77,6 @@ const points: Point[] = [
   },
 ];
 
-type Detail = { number: string; title: string; items: string[] };
-
-const details: Detail[] = [
-  {
-    number: "01",
-    title: "営業戦略策定",
-    items: [
-      "ターゲット顧客(ICP)の定義",
-      "営業プロセス・KPI設計",
-      "トークスクリプト / 提案資料作成",
-      "競合分析・勝ち筋の言語化",
-    ],
-  },
-  {
-    number: "02",
-    title: "アポイント獲得",
-    items: [
-      "ターゲットリスト作成",
-      "インサイドセールス実行",
-      "大手企業の決裁者アプローチ",
-      "ナーチャリング・追客",
-    ],
-  },
-  {
-    number: "03",
-    title: "商談実行",
-    items: [
-      "商談代行(オンライン / 対面)",
-      "ヒアリング・提案・見積もり",
-      "顧客課題に応じたソリューション提案",
-    ],
-  },
-  {
-    number: "04",
-    title: "クロージング・成約",
-    items: [
-      "意思決定者へのアプローチ",
-      "受注クロージング",
-      "契約締結サポート",
-    ],
-  },
-];
-
 type Step = {
   digit: string;
   titleTop: string;
@@ -562,68 +519,6 @@ export default function SalesSupportPage({
         </Container>
       </section>
 
-      {/* ───── Service overview (flow) ───── */}
-      <section id="service" className="scroll-mt-32 bg-white py-24 md:py-32">
-        <Container>
-          <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
-              Service
-            </p>
-            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              サービス内容
-            </h2>
-          </div>
-
-          {/* Details */}
-          <ul className="mx-auto mt-14 max-w-3xl space-y-3">
-            {details.map((d, i) => (
-              <li key={d.number} className="rounded-2xl border border-ink-line bg-white">
-                <details className="group" open={i === 0}>
-                  <summary className="flex cursor-pointer list-none items-center gap-4 p-6">
-                    <span className="font-display text-2xl md:text-3xl font-black leading-none text-brand-500 tabular-nums">
-                      {d.number}
-                    </span>
-                    <span className="flex-1 text-base md:text-lg font-black text-ink leading-snug">
-                      {d.title}
-                    </span>
-                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-brand-500 group-open:text-brand-500">
-                      +
-                    </span>
-                  </summary>
-                  <ul className="space-y-2.5 border-t border-ink-line px-6 py-5 pl-[4.25rem]">
-                    {d.items.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-2.5 text-sm md:text-base text-ink-soft font-medium"
-                      >
-                        <svg
-                          width="18"
-                          height="18"
-                          viewBox="0 0 18 18"
-                          fill="none"
-                          aria-hidden="true"
-                          className="mt-1 shrink-0"
-                        >
-                          <circle cx="9" cy="9" r="8" fill="#F58220" />
-                          <path
-                            d="M5 9.5l3 3 5-6"
-                            stroke="white"
-                            strokeWidth="2"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
       {/* ───── Features (POINT) ───── */}
       <section id="reasons" className="scroll-mt-32 bg-cream py-24 md:py-32">
         <Container>
@@ -632,7 +527,7 @@ export default function SalesSupportPage({
               Features
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              セルボンドの特徴
+              セルボンドの内容 / 特徴
             </h2>
           </div>
 
