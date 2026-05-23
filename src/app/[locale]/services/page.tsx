@@ -15,7 +15,7 @@ import { getDictionary } from "@/i18n/dictionary";
 export const metadata: Metadata = {
   title: "サービス案内",
   description:
-    "セールスボンド株式会社の3つのサービス。リファボンド(大手決裁者紹介)、キーマンボンド(プロ人材マッチング)、BtoB特化営業支援サービス(戦略立案から成約まで一気通貫)。",
+    "セールスボンド株式会社の3つのサービス。リファボンド(大手決裁者紹介)、キーマンボンド(プロ人材マッチング)、BtoB営業支援サービス(戦略立案から成約まで一気通貫)。",
 };
 
 type ServiceWithImage = {
@@ -77,10 +77,12 @@ export default function ServicesPage({
 
                     {/* Content */}
                     <div className="md:col-span-6">
-                      <p className="text-base md:text-lg font-bold text-brand-600">
-                        {s.subtitle}
-                      </p>
-                      <h2 className="mt-2 text-2xl md:text-3xl font-black text-ink leading-tight group-hover:text-brand-600 transition-colors">
+                      {s.subtitle ? (
+                        <p className="mb-2 text-base md:text-lg font-bold text-brand-600">
+                          {s.subtitle}
+                        </p>
+                      ) : null}
+                      <h2 className="text-2xl md:text-3xl font-black text-ink leading-tight group-hover:text-brand-600 transition-colors">
                         {s.title}
                       </h2>
                       <p className="mt-5 text-sm md:text-base text-ink leading-relaxed font-medium">

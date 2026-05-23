@@ -49,10 +49,14 @@ export function ServicesSection({ locale, dict }: Props) {
                       →
                     </span>
                   </div>
-                  <p className="mt-10 text-base font-bold text-brand-500">
-                    {s.subtitle}
-                  </p>
-                  <h3 className="mt-2 text-2xl md:text-3xl font-black text-ink leading-tight">
+                  {s.subtitle ? (
+                    <p className="mt-10 mb-2 text-base font-bold text-brand-500">
+                      {s.subtitle}
+                    </p>
+                  ) : null}
+                  <h3
+                    className={`${s.subtitle ? "" : "mt-10 "}text-2xl md:text-3xl font-black text-ink leading-tight`}
+                  >
                     {s.title}
                   </h3>
                   <div className="mt-4 h-1 w-12 rounded-full bg-brand-500" aria-hidden="true" />

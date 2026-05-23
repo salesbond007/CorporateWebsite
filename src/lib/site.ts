@@ -69,8 +69,8 @@ export const services = [
   {
     slug: "lead-bond",
     number: "03",
-    title: "BtoB特化営業支援サービス",
-    subtitle: "戦略立案から成約まで一気通貫",
+    title: "BtoB営業支援サービス",
+    subtitle: "",
     summary:
       "営業戦略の策定からアポ獲得・商談・成約、そして営業DX・人材紹介まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。自走できる営業組織づくりまで伴走します。",
     features: [

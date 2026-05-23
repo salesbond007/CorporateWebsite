@@ -18,7 +18,7 @@ export function generateStaticParams() {
 
 export const metadata: Metadata = {
   title:
-    "BtoB特化営業支援サービス｜戦略立案から成約まで一気通貫で伴走する営業支援",
+    "BtoB営業支援サービス｜戦略立案から成約まで一気通貫で伴走する営業支援",
   description:
     "営業戦略の策定からアポ獲得・商談・成約、営業DX・人材紹介まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。最短2週間で稼働し、自走できる営業組織づくりまで伴走します。",
 };
@@ -239,7 +239,7 @@ export default function SalesSupportPage({
             <div className="lg:col-span-7">
               <p className="inline-flex items-center gap-2 border border-white/40 bg-white/10 px-3 py-1 text-xs md:text-sm font-extrabold tracking-[0.16em] uppercase text-white backdrop-blur-sm">
                 <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-yellow-300" />
-                BtoB特化営業支援サービス
+                BtoB営業支援サービス
               </p>
 
               <h1 className="mt-6 font-display font-black leading-[1.15] tracking-tight text-white text-[clamp(2.25rem,5.5vw,4rem)]">
