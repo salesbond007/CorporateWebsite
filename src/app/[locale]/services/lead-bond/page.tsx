@@ -430,8 +430,10 @@ export default function SalesSupportPage({
               ありませんか?
             </h2>
           </div>
+        </Container>
 
-          <ul className="mt-16 grid grid-cols-1 gap-x-5 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        {/* Wider than the default container so 5 cards keep reference-like width */}
+        <ul className="mx-auto mt-16 grid max-w-[1440px] grid-cols-1 gap-x-5 gap-y-16 px-5 sm:grid-cols-2 lg:grid-cols-5">
             {problems.map((p, i) => (
               <li key={p.line1}>
                 <Reveal delay={(i % 5) * 60} className="h-full">
@@ -481,9 +483,10 @@ export default function SalesSupportPage({
                 </Reveal>
               </li>
             ))}
-          </ul>
+        </ul>
 
-          <div className="mt-14 text-center">
+        <Container>
+          <div className="mt-16 text-center">
             <p className="text-lg md:text-xl font-black text-ink">
               その課題、すべて
               <span className="text-brand-500">ワンストップ</span>
