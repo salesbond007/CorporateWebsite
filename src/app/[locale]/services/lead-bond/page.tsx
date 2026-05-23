@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -259,8 +260,16 @@ const faqs: Faq[] = [
   },
 ];
 
-// 導入企業ロゴはプレースホルダー。差し替え時はここを実ロゴに置き換える。
-const logoPlaceholders = Array.from({ length: 6 }, (_, i) => `LOGO ${i + 1}`);
+// 導入企業ロゴ。src があれば実ロゴ、無ければプレースホルダー表示。
+// 追加時はここに { name, src } を足す。
+type ClientLogo = { name: string; src?: string };
+const logos: ClientLogo[] = [
+  { name: "導入企業ロゴ", src: "https://i.imgur.com/ksEvm8K.png" },
+  { name: "LOGO 2" },
+  { name: "LOGO 3" },
+  { name: "LOGO 4" },
+  { name: "LOGO 5" },
+];
 
 export default function SalesSupportPage({
   params,
@@ -364,15 +373,25 @@ export default function SalesSupportPage({
         >
           <ul className="flex w-max gap-6 md:gap-8 animate-marquee">
             {[...Array(2)].flatMap((_, dup) =>
-              logoPlaceholders.map((label, i) => (
+              logos.map((logo, i) => (
                 <li
                   key={`${dup}-${i}`}
                   aria-hidden={dup === 1 ? "true" : undefined}
-                  className="flex h-20 w-44 shrink-0 items-center justify-center rounded-xl border border-ink-line bg-white md:h-24 md:w-52"
+                  className="flex h-20 w-44 shrink-0 items-center justify-center rounded-xl border border-ink-line bg-white px-4 md:h-24 md:w-52"
                 >
-                  <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink-muted/60">
-                    {label}
-                  </span>
+                  {logo.src ? (
+                    <Image
+                      src={logo.src}
+                      alt={logo.name}
+                      width={180}
+                      height={70}
+                      className="max-h-[64%] w-auto object-contain"
+                    />
+                  ) : (
+                    <span className="text-xs font-bold tracking-[0.2em] uppercase text-ink-muted/60">
+                      {logo.name}
+                    </span>
+                  )}
                 </li>
               )),
             )}
