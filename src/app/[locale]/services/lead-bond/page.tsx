@@ -702,42 +702,41 @@ export default function SalesSupportPage({
       {/* ───── Final CTA ───── */}
       <section className="py-24 md:py-32">
         <Container>
-          <div className="relative overflow-hidden rounded-2xl bg-ink px-8 py-16 md:px-16 md:py-20 text-white">
+          <div className="relative overflow-hidden rounded-2xl bg-brand-500 px-8 py-14 md:px-16 md:py-16 text-white">
             <div
               aria-hidden="true"
-              className="absolute -right-32 -top-32 h-96 w-96 bg-brand-500/30 blur-3xl"
+              className="absolute inset-0 opacity-[0.15]"
+              style={{
+                backgroundImage:
+                  "radial-gradient(rgba(255,255,255,0.85) 1px, transparent 1px)",
+                backgroundSize: "22px 22px",
+              }}
             />
             <div
               aria-hidden="true"
-              className="absolute -bottom-24 -left-24 h-80 w-80 bg-brand-500/20 blur-3xl"
+              className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-300/40 blur-3xl"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-brand-700/40 blur-3xl"
             />
 
-            <div className="relative text-center">
-              <h2 className="font-display text-[clamp(1.75rem,4vw,3rem)] font-black leading-[1.15] tracking-tight">
-                営業の課題は、
-                <br className="md:hidden" />
-                <span className="text-brand-500">抱え込まないでください。</span>
-              </h2>
-              <p className="mx-auto mt-6 max-w-xl text-sm md:text-base leading-relaxed text-white/85 font-medium">
-                新規開拓から成約まで、まるごとお任せください。貴社の状況に最適な解決策をご提案します。
-              </p>
-              <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Button
-                  href={contactHref}
-                  size="lg"
-                  className="!h-16 w-full px-12 text-lg font-bold !bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.7)] sm:w-auto"
-                >
-                  資料請求
-                </Button>
-                <Button
-                  href={contactHref}
-                  size="lg"
-                  variant="ghost"
-                  className="!h-16 w-full px-12 text-lg font-bold border-2 border-white/50 !text-white hover:!bg-white/10 sm:w-auto"
-                >
-                  無料相談
-                </Button>
-              </div>
+            <div className="relative flex flex-col items-center justify-center gap-4 sm:flex-row">
+              <Button
+                href={contactHref}
+                size="lg"
+                className="!h-16 w-full px-12 text-lg font-bold !bg-white !text-brand-600 hover:!bg-cream shadow-[0_18px_40px_-12px_rgba(0,0,0,0.35)] sm:w-auto"
+              >
+                資料請求
+              </Button>
+              <Button
+                href={contactHref}
+                size="lg"
+                variant="ghost"
+                className="!h-16 w-full px-12 text-lg font-bold border-2 border-white !text-white hover:!bg-white/15 sm:w-auto"
+              >
+                無料相談
+              </Button>
             </div>
           </div>
         </Container>
