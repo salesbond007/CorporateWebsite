@@ -431,21 +431,21 @@ export default function SalesSupportPage({
             </h2>
           </div>
 
-          <ul className="mt-16 grid grid-cols-1 gap-x-4 gap-y-14 sm:grid-cols-2 lg:grid-cols-5">
+          <ul className="mt-16 grid grid-cols-1 gap-x-5 gap-y-14 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
             {problems.map((p, i) => (
               <li key={p.line1}>
                 <Reveal delay={(i % 5) * 60} className="h-full">
-                  <div className="relative flex h-full flex-col items-center rounded-2xl border border-ink-line bg-white px-4 pb-5 pt-12 text-center shadow-sm">
+                  <div className="relative flex h-full flex-col items-center rounded-2xl border border-ink-line bg-white px-3 pb-5 pt-14 text-center shadow-sm">
                     {/* 課題 number badge with downward tail */}
-                    <span className="absolute -top-6 left-1/2 -translate-x-1/2">
-                      <span className="relative flex h-16 w-16 flex-col items-center justify-center rounded-full bg-brand-500 text-white shadow-card">
-                        <span className="text-[10px] font-bold leading-none">課題</span>
-                        <span className="font-display text-2xl font-black leading-none">
+                    <span className="absolute -top-7 left-1/2 -translate-x-1/2">
+                      <span className="relative flex h-[72px] w-[72px] flex-col items-center justify-center rounded-full bg-brand-500 text-white shadow-card">
+                        <span className="text-[11px] font-bold leading-none">課題</span>
+                        <span className="font-display text-3xl font-black leading-none">
                           {i + 1}
                         </span>
                         <span
                           aria-hidden="true"
-                          className="absolute -bottom-1 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-brand-500"
+                          className="absolute -bottom-1 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rotate-45 bg-brand-500"
                         />
                       </span>
                     </span>
@@ -453,11 +453,11 @@ export default function SalesSupportPage({
                     {/* Illustration placeholder — to be filled later */}
                     <div
                       aria-hidden="true"
-                      className="aspect-square w-full max-w-[140px] rounded-xl bg-cream"
+                      className="aspect-square w-full max-w-[104px] rounded-xl bg-cream"
                     />
 
                     {/* Title */}
-                    <p className="mt-4 text-sm md:text-base font-black leading-snug text-ink">
+                    <p className="mt-5 text-lg font-black leading-relaxed text-ink">
                       {p.line1}
                       <br />
                       {p.pre}
@@ -466,8 +466,8 @@ export default function SalesSupportPage({
                     </p>
 
                     {/* Down chevron */}
-                    <span className="mt-auto pt-4 text-ink-line" aria-hidden="true">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <span className="mt-auto pt-5 text-ink-line" aria-hidden="true">
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none">
                         <path
                           d="M5 7l7 7 7-7M5 13l7 7 7-7"
                           stroke="currentColor"
