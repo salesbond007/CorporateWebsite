@@ -313,15 +313,14 @@ export default function SalesSupportPage({
 
         <Container className="relative py-16 md:py-20 lg:py-24">
           <div className="max-w-3xl">
-            <h1 className="font-display font-black leading-[1.22] tracking-tight text-ink text-[clamp(1.875rem,4.2vw,3.25rem)]">
-              短期の
-              <span className="text-brand-500">成約数向上</span>
-              にコミットする
+            <h1 className="font-display font-black leading-[1.22] tracking-tight text-ink text-[clamp(1.75rem,4vw,3rem)]">
+              成約まで
+              <span className="text-brand-500">伴走</span>
               <br />
-              成約まで伴走する
+              成長企業に選ばれる営業代行サービス
             </h1>
             <p className="mt-5 text-base md:text-xl font-black text-ink-soft leading-snug">
-              戦略の立案からアポ獲得 / 商談まで
+              アポイント獲得から成約まで幅広い営業ソリューションを提供
             </p>
 
             <div className="mt-10">
