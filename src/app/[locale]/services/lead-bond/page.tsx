@@ -306,11 +306,11 @@ export default function SalesSupportPage({
               「戦略立案」「アポ獲得」「商談」「営業DX」など営業課題に応じて最適な支援が可能
             </p>
 
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
               <Button
                 href={contactHref}
                 size="lg"
-                className="!h-16 w-full px-10 text-lg font-bold !bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.6)] sm:w-auto"
+                className="!h-[68px] w-full px-12 text-xl font-black !bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_22px_50px_-12px_rgba(255,138,30,0.85)] hover:-translate-y-1 md:!h-[80px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[240px]"
               >
                 資料請求
               </Button>
@@ -318,7 +318,7 @@ export default function SalesSupportPage({
                 href={contactHref}
                 size="lg"
                 variant="secondary"
-                className="!h-16 w-full px-10 text-lg font-bold sm:w-auto"
+                className="!h-[68px] w-full px-12 text-xl font-black hover:-translate-y-1 md:!h-[80px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[240px]"
               >
                 無料相談
               </Button>
