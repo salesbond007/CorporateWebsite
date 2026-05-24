@@ -716,22 +716,27 @@ export default function SalesSupportPage({
               className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-brand-700/40 blur-3xl"
             />
 
-            <div className="relative flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button
-                href={contactHref}
-                size="lg"
-                className="!h-16 w-full px-12 text-lg font-bold !bg-white !text-brand-600 hover:!bg-cream shadow-[0_18px_40px_-12px_rgba(0,0,0,0.35)] sm:w-auto"
-              >
-                資料請求
-              </Button>
-              <Button
-                href={contactHref}
-                size="lg"
-                variant="ghost"
-                className="!h-16 w-full px-12 text-lg font-bold border-2 border-white !text-white hover:!bg-white/15 sm:w-auto"
-              >
-                無料相談
-              </Button>
+            <div className="relative text-center">
+              <p className="text-2xl md:text-3xl font-black text-white">
+                資料請求・無料相談はこちら
+              </p>
+              <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  className="!h-[72px] w-full px-12 text-xl font-black !bg-white !text-brand-600 hover:!bg-cream hover:-translate-y-1 shadow-[0_22px_50px_-12px_rgba(0,0,0,0.4)] md:!h-[84px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[260px]"
+                >
+                  資料請求
+                </Button>
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  variant="ghost"
+                  className="!h-[72px] w-full px-12 text-xl font-black border-2 border-white !text-white hover:!bg-white/15 hover:-translate-y-1 md:!h-[84px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[260px]"
+                >
+                  無料相談
+                </Button>
+              </div>
             </div>
           </div>
         </Container>
