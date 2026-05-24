@@ -495,11 +495,6 @@ export default function SalesSupportPage({
               <h2 className="mt-3 font-display font-black leading-[1.4] text-white text-[clamp(1.5rem,3vw,2.5rem)]">
                 戦略から成約、組織への定着まで営業のすべてに伴走する
               </h2>
-              <p className="mt-2 text-xl md:text-2xl font-black text-white">
-                から
-                <span className="text-brand-400">課題を解決</span>
-                できます
-              </p>
 
               <span
                 aria-hidden="true"
