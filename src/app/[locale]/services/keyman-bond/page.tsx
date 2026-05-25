@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -199,19 +198,10 @@ export default function KeymanBondPage({
                   aria-hidden="true"
                   className="absolute -left-5 -top-5 hidden h-28 w-28 rounded-full border-2 border-brand-300/60 md:block"
                 />
-                <div className="relative aspect-[4/5] overflow-hidden rounded-xl4 border-4 border-white shadow-[0_30px_70px_-25px_rgba(20,20,20,0.35)] lg:aspect-[5/6]">
-                  <Image
-                    src="https://i.imgur.com/QMdMoAG.jpeg"
-                    alt="経営課題に伴走するプロ人材"
-                    fill
-                    priority
-                    sizes="(min-width: 1024px) 520px, 90vw"
-                    className="object-cover object-center"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 bg-gradient-to-t from-ink/25 via-transparent to-transparent"
-                  />
+                <div className="relative grid aspect-[4/5] place-items-center overflow-hidden rounded-xl4 border-4 border-white bg-cream shadow-[0_30px_70px_-25px_rgba(20,20,20,0.35)] lg:aspect-[5/6]">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-ink-muted/50">
+                    Image
+                  </span>
                 </div>
                 {/* floating accent label */}
                 <div className="absolute -bottom-4 left-4 rounded-xl2 bg-ink px-5 py-3 text-white shadow-card md:left-8">
