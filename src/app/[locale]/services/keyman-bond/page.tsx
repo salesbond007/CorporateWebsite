@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -102,59 +103,75 @@ export default function KeymanBondPage({
         ])}
       />
 
-      {/* ───── Hero ───── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-cream via-white to-brand-50">
-        <div
-          aria-hidden="true"
-          className="absolute -top-32 right-[-10%] h-[460px] w-[460px] rounded-full bg-brand-200/40 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute -bottom-40 -left-32 h-[380px] w-[380px] rounded-full bg-brand-100/60 blur-3xl"
-        />
-
-        <Container className="relative py-16 md:py-20 lg:py-24">
-          <div className="max-w-3xl">
-            <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-1.5 text-xs md:text-sm font-extrabold tracking-wide text-brand-600 shadow-sm">
-              <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-              キーマンボンド｜プロ人材マッチングサービス
-            </p>
-
-            <h1 className="mt-6 font-display font-black leading-[1.18] tracking-tight text-ink text-[clamp(2rem,4.5vw,3.5rem)]">
-              経営課題を、
-              <br />
-              その道の
-              <span className="relative inline-block">
-                プロ
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-0 -bottom-1 h-1.5 bg-amber-400 md:h-2"
-                />
-              </span>
-              と解決する。
-            </h1>
-            <p className="mt-6 text-base md:text-xl font-bold text-ink-soft leading-snug">
-              経営層・CxO・エキスパートクラスの実力者が、実働型で伴走
-            </p>
-
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Button
-                href={contactHref}
-                size="lg"
-                className="!h-[68px] w-full px-12 text-xl font-black !bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_22px_50px_-12px_rgba(255,138,30,0.85)] hover:-translate-y-1 md:!h-[80px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[240px]"
-              >
-                資料請求
-              </Button>
-              <Button
-                href={contactHref}
-                size="lg"
-                variant="secondary"
-                className="!h-[68px] w-full px-12 text-xl font-black hover:-translate-y-1 md:!h-[80px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[240px]"
-              >
-                無料相談
-              </Button>
+      {/* ───── Hero (split: 法人 / 個人) ───── */}
+      <section className="relative">
+        <div className="grid grid-cols-1 md:grid-cols-2">
+          {/* Left: 法人(企業) → 資料請求 */}
+          <div className="relative flex min-h-[360px] flex-col items-center justify-center overflow-hidden py-12 md:min-h-[540px]">
+            <Image
+              src="https://i.imgur.com/QMdMoAG.jpeg"
+              alt=""
+              aria-hidden="true"
+              fill
+              priority
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+            />
+            <div aria-hidden="true" className="absolute inset-0 bg-ink/45" />
+            <div className="relative w-full">
+              <div className="w-full bg-brand-500/95 py-4 text-center md:py-5">
+                <p className="text-xl md:text-3xl font-black text-white">
+                  経営課題を解決したい
+                  <span className="text-yellow-300">企業</span>
+                </p>
+              </div>
+              <div className="mt-6 flex justify-center">
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  className="!h-14 px-10 text-base font-black !bg-white !text-brand-600 hover:!bg-cream shadow-[0_18px_40px_-12px_rgba(0,0,0,0.4)]"
+                >
+                  法人の方 資料請求
+                </Button>
+              </div>
             </div>
           </div>
+
+          {/* Right: 個人(プロ人材) → 募集 */}
+          <div className="relative flex min-h-[360px] flex-col items-center justify-center overflow-hidden py-12 md:min-h-[540px]">
+            <Image
+              src="https://i.imgur.com/GL0UfBm.jpeg"
+              alt=""
+              aria-hidden="true"
+              fill
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover"
+            />
+            <div aria-hidden="true" className="absolute inset-0 bg-ink/65" />
+            <div className="relative w-full">
+              <div className="w-full bg-ink/90 py-4 text-center md:py-5">
+                <p className="text-xl md:text-3xl font-black text-white">
+                  経営を支援する
+                  <span className="text-brand-400">プロ人材</span>
+                </p>
+              </div>
+              <div className="mt-6 flex justify-center">
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  className="!h-14 px-10 text-base font-black !bg-white !text-ink border-2 border-white hover:!bg-cream"
+                >
+                  個人の方 募集
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <Container>
+          <p className="py-8 text-center text-base md:text-lg font-black text-ink md:py-10">
+            企業の経営課題を、その道のプロと解決するパートナー
+          </p>
         </Container>
       </section>
 
