@@ -370,7 +370,12 @@ export default function KeymanBondPage({
                   これまで培った経験・専門性を、企業の経営課題解決に活かしませんか。活躍の場をご用意しています。
                 </p>
               </div>
-              <Button href={contactHref} size="lg" variant="secondary" className="shrink-0">
+              <Button
+                href={localePath("/contact/professional", locale)}
+                size="lg"
+                variant="secondary"
+                className="shrink-0"
+              >
                 登録のお問い合わせ
               </Button>
             </div>
