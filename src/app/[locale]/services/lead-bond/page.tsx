@@ -566,7 +566,22 @@ export default function SalesSupportPage({
             <div>
               <p className="text-lg font-bold text-white/90">セルボンドは</p>
               <h2 className="mt-3 font-display font-black leading-[1.4] text-white text-[clamp(1.5rem,3vw,2.5rem)]">
-                新規開拓から成約、組織への定着まで営業のすべてに伴走する
+                <span className="relative inline-block">
+                  新規開拓
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-1 h-1.5 bg-amber-300"
+                  />
+                </span>
+                から
+                <span className="relative inline-block">
+                  成約
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-1 h-1.5 bg-amber-300"
+                  />
+                </span>
+                、組織への定着まで営業のすべてに伴走する
               </h2>
 
               <span
