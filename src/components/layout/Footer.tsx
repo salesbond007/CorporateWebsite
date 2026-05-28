@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "./Logo";
 import { navigation, services } from "@/lib/site";
@@ -13,6 +16,10 @@ type Props = {
 
 export function Footer({ locale, dict }: Props) {
   const year = new Date().getFullYear();
+  const pathname = usePathname() ?? "";
+  const footerBg = pathname.includes("/services/sales-bond")
+    ? "bg-emerald-500"
+    : "bg-brand-500";
 
   const contactLinks = [
     { href: "/contact", label: dict.nav.contact },
@@ -31,7 +38,7 @@ export function Footer({ locale, dict }: Props) {
         ];
 
   return (
-    <footer className="mt-32 bg-brand-500 text-white">
+    <footer className={`mt-32 ${footerBg} text-white`}>
       <Container className="py-16 md:py-20">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
