@@ -171,8 +171,8 @@ export default function ReferBondPage({
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
             {/* Left: copy + CTA */}
             <div className="lg:col-span-7">
-              <p className="inline-flex items-center gap-2 border border-white/40 bg-white/10 px-3 py-1 text-xs md:text-sm font-extrabold tracking-[0.16em] uppercase text-white backdrop-blur-sm">
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-yellow-300" />
+              <p className="inline-flex items-center gap-2.5 border-2 border-white/50 bg-white/10 px-5 py-2 text-sm md:text-base font-extrabold tracking-[0.18em] uppercase text-white backdrop-blur-sm">
+                <span aria-hidden="true" className="h-2 w-2 rounded-full bg-yellow-300" />
                 リファボンド
               </p>
 
