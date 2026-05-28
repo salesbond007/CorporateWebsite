@@ -177,22 +177,23 @@ export default function ReferBondPage({
               </p>
 
               <h1 className="mt-6 font-display font-black leading-[1.05] tracking-tight text-white text-[clamp(2.5rem,7vw,5rem)]">
-                大手企業の
-                <br />
                 <span className="relative inline-block">
-                  決裁者
+                  人脈
                   <span
                     aria-hidden="true"
                     className="absolute inset-x-0 -bottom-1 h-2 bg-yellow-300/90"
                   />
                 </span>
-                を紹介。
+                を活用して
+                <br />
+                決裁者を紹介
               </h1>
 
               <ul className="mt-8 space-y-3">
                 {[
+                  "大手企業/上場企業の決裁者の紹介も可能",
                   "完全成果報酬でローリスク!",
-                  "ベンチャー企業から大手企業まで幅広く開拓可能!",
+                  "ベンチャー企業、地方企業、海外企業など幅広いニーズに対応",
                 ].map((item) => (
                   <li
                     key={item}
