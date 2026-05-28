@@ -148,7 +148,7 @@ export default function ReferBondPage({
       />
 
       {/* ───── Hero ───── */}
-      <section className="relative overflow-hidden bg-brand-500 text-white">
+      <section className="relative overflow-hidden bg-emerald-500 text-white">
         <div
           aria-hidden="true"
           className="absolute inset-0 opacity-[0.18]"
@@ -160,11 +160,11 @@ export default function ReferBondPage({
         />
         <div
           aria-hidden="true"
-          className="absolute -top-32 -right-20 h-[520px] w-[520px] rounded-full bg-brand-300/45 blur-3xl"
+          className="absolute -top-32 -right-20 h-[520px] w-[520px] rounded-full bg-emerald-300/45 blur-3xl"
         />
         <div
           aria-hidden="true"
-          className="absolute -bottom-40 -left-32 h-[440px] w-[440px] rounded-full bg-brand-700/40 blur-3xl"
+          className="absolute -bottom-40 -left-32 h-[440px] w-[440px] rounded-full bg-emerald-700/40 blur-3xl"
         />
 
         <Container className="relative py-20 md:py-24 lg:py-28">
@@ -209,7 +209,7 @@ export default function ReferBondPage({
                       <circle cx="11" cy="11" r="10" fill="white" />
                       <path
                         d="M6.6 11.4l3 3 5.8-6.4"
-                        stroke="#F58220"
+                        stroke="#10B981"
                         strokeWidth="2.4"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -259,7 +259,7 @@ export default function ReferBondPage({
                 />
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 bg-gradient-to-t from-brand-700/40 via-transparent to-transparent"
+                  className="absolute inset-0 bg-gradient-to-t from-emerald-700/40 via-transparent to-transparent"
                 />
               </div>
             </div>
@@ -308,7 +308,7 @@ export default function ReferBondPage({
           <div className="text-center">
             <h2 className="text-display-3 text-ink font-black leading-tight">
               <span className="block text-xl md:text-3xl font-bold text-ink leading-snug">
-                <span className="underline decoration-brand-700 decoration-[4px] underline-offset-[6px]">
+                <span className="underline decoration-emerald-700 decoration-[4px] underline-offset-[6px]">
                   新規開拓
                 </span>
                 において
@@ -343,7 +343,7 @@ export default function ReferBondPage({
       </section>
 
       {/* ───── Solution bridge: Refer Bond が解決します ───── */}
-      <section className="relative bg-brand-500 py-20 md:py-24 text-white">
+      <section className="relative bg-emerald-500 py-20 md:py-24 text-white">
         <div
           aria-hidden="true"
           className="absolute inset-0 overflow-hidden opacity-[0.18]"
@@ -362,7 +362,7 @@ export default function ReferBondPage({
             <svg
               viewBox="0 0 24 24"
               fill="none"
-              className="h-8 w-8 md:h-10 md:w-10 text-brand-500"
+              className="h-8 w-8 md:h-10 md:w-10 text-emerald-500"
             >
               <path
                 d="M12 4v14M5 13l7 7 7-7"
@@ -436,7 +436,7 @@ export default function ReferBondPage({
               リファボンドは、各業界の
               <span className="font-black">経営層・幹部経験者・現役経営者</span>
               がサポーターとして登録する、
-              <span className="font-black text-brand-500">人脈紹介プラットフォーム</span>
+              <span className="font-black text-emerald-500">人脈紹介プラットフォーム</span>
               です。テレアポ・広告では到達できない大手・上場・地方の決裁者へ、
               <span className="font-bold">人脈を介した「紹介」という最短ルート</span>
               で接点を生み出します。
@@ -465,7 +465,7 @@ export default function ReferBondPage({
               <li key={s.num}>
                 <Reveal delay={i * 80} className="h-full">
                   <div className="relative h-full border-2 border-ink bg-white p-7 md:p-8">
-                    <p className="font-display text-4xl md:text-5xl font-black leading-none text-brand-500">
+                    <p className="font-display text-4xl md:text-5xl font-black leading-none text-emerald-500">
                       {s.num}
                     </p>
                     <h3 className="mt-5 text-lg md:text-xl font-black text-ink leading-snug">
@@ -506,7 +506,7 @@ export default function ReferBondPage({
                     <div className="rounded-2xl border border-ink-line bg-white p-6 md:p-8">
                       <div className="grid items-center gap-6 md:grid-cols-2 md:gap-10">
                         <div className={reverse ? "md:order-2" : ""}>
-                          <p className="font-display text-3xl md:text-4xl font-black leading-none text-brand-500">
+                          <p className="font-display text-3xl md:text-4xl font-black leading-none text-emerald-500">
                             {r.number}
                           </p>
                           <h3 className="mt-4 text-xl md:text-2xl font-black text-ink leading-snug">
@@ -535,7 +535,7 @@ export default function ReferBondPage({
       <section className="bg-white py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-emerald-500">
               Flow
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
@@ -552,7 +552,7 @@ export default function ReferBondPage({
                 key={s.digit}
                 className="relative flex h-full flex-col border-2 border-ink bg-white p-6 md:p-7"
               >
-                <p className="font-display leading-none text-brand-500">
+                <p className="font-display leading-none text-emerald-500">
                   <span className="text-sm font-extrabold tracking-[0.18em] uppercase">
                     STEP
                   </span>
@@ -576,7 +576,7 @@ export default function ReferBondPage({
                       <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
                         <path
                           d="M3 9h12M10 4l5 5-5 5"
-                          stroke="#F58220"
+                          stroke="#10B981"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -590,7 +590,7 @@ export default function ReferBondPage({
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path
                           d="M10 3v14M5 12l5 5 5-5"
-                          stroke="#F58220"
+                          stroke="#10B981"
                           strokeWidth="2"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -609,7 +609,7 @@ export default function ReferBondPage({
       <section className="bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-emerald-500">
               FAQ
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
@@ -623,14 +623,14 @@ export default function ReferBondPage({
                 <details className="group">
                   <summary className="flex cursor-pointer items-start justify-between gap-4 p-6 list-none">
                     <span className="flex gap-3">
-                      <span className="font-display text-lg font-black text-brand-500">
+                      <span className="font-display text-lg font-black text-emerald-500">
                         Q.
                       </span>
                       <span className="text-base md:text-lg font-bold text-ink leading-snug">
                         {f.q}
                       </span>
                     </span>
-                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-brand-500 group-open:text-brand-500">
+                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-emerald-500 group-open:text-emerald-500">
                       +
                     </span>
                   </summary>
@@ -653,18 +653,18 @@ export default function ReferBondPage({
           <div className="relative overflow-hidden bg-ink px-8 py-16 md:px-16 md:py-20 text-white">
             <div
               aria-hidden="true"
-              className="absolute -right-32 -top-32 h-96 w-96 bg-brand-500/30 blur-3xl"
+              className="absolute -right-32 -top-32 h-96 w-96 bg-emerald-500/30 blur-3xl"
             />
             <div
               aria-hidden="true"
-              className="absolute -bottom-24 -left-24 h-80 w-80 bg-brand-500/20 blur-3xl"
+              className="absolute -bottom-24 -left-24 h-80 w-80 bg-emerald-500/20 blur-3xl"
             />
 
             <div className="relative grid items-center gap-10 lg:grid-cols-12">
               <div className="lg:col-span-7">
                 <h2 className="font-display text-[clamp(1.75rem,4vw,3rem)] font-black leading-[1.15] tracking-tight">
                   人脈で、
-                  <span className="text-brand-500">決裁者に届く。</span>
+                  <span className="text-emerald-500">決裁者に届く。</span>
                 </h2>
                 <p className="mt-6 max-w-xl text-sm md:text-base leading-relaxed text-white/85 font-medium">
                   初期費用ゼロ・月額費用ゼロ・完全成果報酬。アウトバウンドでは届かない層への商談機会づくりを、まずはお気軽にご相談ください。
@@ -675,7 +675,7 @@ export default function ReferBondPage({
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="bg-brand-500 text-white hover:bg-brand-600 shadow-[0_18px_40px_-12px_rgba(245,130,32,0.7)] !h-14 md:w-72"
+                  className="bg-emerald-500 text-white hover:bg-emerald-600 shadow-[0_18px_40px_-12px_rgba(16,185,129,0.7)] !h-14 md:w-72"
                 >
                   無料相談 / 資料請求
                 </Button>

@@ -39,7 +39,7 @@ function renderProblemLine(line: string, hl: string) {
   return (
     <>
       {line.slice(0, idx)}
-      <span className="text-brand-500">{hl}</span>
+      <span className="text-sky-500">{hl}</span>
       {line.slice(idx + hl.length)}
     </>
   );
@@ -269,14 +269,14 @@ export default function SalesSupportPage({
       />
 
       {/* ───── Hero (light) ───── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-cream via-white to-brand-50">
+      <section className="relative overflow-hidden bg-gradient-to-br from-cream via-white to-sky-50">
         <div
           aria-hidden="true"
-          className="absolute -top-32 right-[-10%] h-[460px] w-[460px] rounded-full bg-brand-200/40 blur-3xl"
+          className="absolute -top-32 right-[-10%] h-[460px] w-[460px] rounded-full bg-sky-200/40 blur-3xl"
         />
         <div
           aria-hidden="true"
-          className="absolute -bottom-40 -left-32 h-[380px] w-[380px] rounded-full bg-brand-100/60 blur-3xl"
+          className="absolute -bottom-40 -left-32 h-[380px] w-[380px] rounded-full bg-sky-100/60 blur-3xl"
         />
 
         <Container className="relative py-16 md:py-20 lg:py-24">
@@ -310,7 +310,7 @@ export default function SalesSupportPage({
               <Button
                 href={contactHref}
                 size="lg"
-                className="!h-[68px] w-full px-12 text-xl font-black !bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_22px_50px_-12px_rgba(255,138,30,0.85)] hover:-translate-y-1 md:!h-[80px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[240px]"
+                className="!h-[68px] w-full px-12 text-xl font-black !bg-[#0EA5E9] hover:!bg-sky-500 shadow-[0_22px_50px_-12px_rgba(14,165,233,0.85)] hover:-translate-y-1 md:!h-[80px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[240px]"
               >
                 資料請求
               </Button>
@@ -379,14 +379,14 @@ export default function SalesSupportPage({
                   <div className="relative flex h-full flex-col items-center rounded-2xl border border-ink-line bg-white px-3 pb-5 pt-14 text-center shadow-sm">
                     {/* 課題 number badge with downward tail */}
                     <span className="absolute -top-7 left-1/2 -translate-x-1/2">
-                      <span className="relative flex h-[72px] w-[72px] flex-col items-center justify-center rounded-full bg-brand-500 text-white shadow-card">
+                      <span className="relative flex h-[72px] w-[72px] flex-col items-center justify-center rounded-full bg-sky-500 text-white shadow-card">
                         <span className="text-[11px] font-bold leading-none">課題</span>
                         <span className="font-display text-3xl font-black leading-none">
                           {i + 1}
                         </span>
                         <span
                           aria-hidden="true"
-                          className="absolute -bottom-1 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rotate-45 bg-brand-500"
+                          className="absolute -bottom-1 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rotate-45 bg-sky-500"
                         />
                       </span>
                     </span>
@@ -428,7 +428,7 @@ export default function SalesSupportPage({
           <div className="mt-16 text-center">
             <p className="text-lg md:text-xl font-black text-ink">
               その課題、すべて
-              <span className="text-brand-500">ワンストップ</span>
+              <span className="text-sky-500">ワンストップ</span>
               で解決します。
             </p>
           </div>
@@ -449,7 +449,7 @@ export default function SalesSupportPage({
         <div aria-hidden="true" className="absolute inset-0 bg-ink/80" />
         <div
           aria-hidden="true"
-          className="absolute -right-32 -top-24 h-96 w-96 rounded-full bg-brand-500/20 blur-3xl"
+          className="absolute -right-32 -top-24 h-96 w-96 rounded-full bg-sky-500/20 blur-3xl"
         />
 
         <Container className="relative">
@@ -461,7 +461,7 @@ export default function SalesSupportPage({
                 className="absolute inset-[14%] rounded-full border-2 border-dashed border-white/25"
               />
               {/* Center */}
-              <div className="absolute left-1/2 top-1/2 grid h-28 w-28 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-brand-500 text-center shadow-[0_12px_40px_-8px_rgba(245,130,32,0.7)] md:h-32 md:w-32">
+              <div className="absolute left-1/2 top-1/2 grid h-28 w-28 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-sky-500 text-center shadow-[0_12px_40px_-8px_rgba(14,165,233,0.7)] md:h-32 md:w-32">
                 <span className="font-display text-lg font-black leading-tight text-white md:text-xl">
                   セルボンド
                 </span>
@@ -498,7 +498,7 @@ export default function SalesSupportPage({
 
               <span
                 aria-hidden="true"
-                className="mt-6 block h-1 w-16 rounded-full bg-brand-500"
+                className="mt-6 block h-1 w-16 rounded-full bg-sky-500"
               />
 
               <p className="mt-6 text-sm md:text-base leading-relaxed text-white/85 font-medium">
@@ -509,7 +509,7 @@ export default function SalesSupportPage({
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="!bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.6)]"
+                  className="!bg-[#0EA5E9] hover:!bg-sky-500 shadow-[0_18px_40px_-12px_rgba(14,165,233,0.6)]"
                 >
                   資料問い合わせ
                 </Button>
@@ -531,7 +531,7 @@ export default function SalesSupportPage({
       <section id="reasons" className="scroll-mt-32 bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-sky-500">
               Features
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
@@ -556,7 +556,7 @@ export default function SalesSupportPage({
 
                     {/* Text */}
                     <div className={`md:col-span-7 ${reverse ? "md:order-1" : ""}`}>
-                      <p className="flex items-end gap-2 text-brand-500">
+                      <p className="flex items-end gap-2 text-sky-500">
                         <span className="text-sm font-extrabold uppercase tracking-[0.2em]">
                           Point
                         </span>
@@ -564,7 +564,7 @@ export default function SalesSupportPage({
                           {pt.num}
                         </span>
                       </p>
-                      <p className="mt-2 text-base md:text-lg font-black text-brand-600">
+                      <p className="mt-2 text-base md:text-lg font-black text-sky-600">
                         {pt.label}
                       </p>
                       <h3 className="mt-3 text-lg md:text-2xl font-black leading-snug text-ink">
@@ -588,7 +588,7 @@ export default function SalesSupportPage({
             <Button
               href={contactHref}
               size="lg"
-              className="!bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_18px_40px_-12px_rgba(255,138,30,0.6)]"
+              className="!bg-[#0EA5E9] hover:!bg-sky-500 shadow-[0_18px_40px_-12px_rgba(14,165,233,0.6)]"
             >
               資料問い合わせ
             </Button>
@@ -603,7 +603,7 @@ export default function SalesSupportPage({
       <section id="flow" className="scroll-mt-32 bg-white py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-sky-500">
               Support
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
@@ -617,15 +617,15 @@ export default function SalesSupportPage({
                 <Reveal delay={(i % 4) * 60} className="h-full">
                   <div className="relative flex h-full flex-col items-center rounded-2xl border border-ink-line bg-cream/60 px-5 pb-6 pt-10 text-center">
                     {/* Number badge overlapping top edge */}
-                    <span className="absolute -top-5 left-1/2 grid h-10 w-10 -translate-x-1/2 place-items-center rounded-full bg-brand-500 font-display text-sm font-black text-white shadow-card">
+                    <span className="absolute -top-5 left-1/2 grid h-10 w-10 -translate-x-1/2 place-items-center rounded-full bg-sky-500 font-display text-sm font-black text-white shadow-card">
                       {s.digit}
                     </span>
                     {/* Icon */}
-                    <span className="text-brand-400" aria-hidden="true">
+                    <span className="text-sky-400" aria-hidden="true">
                       <StepIcon index={i} />
                     </span>
                     {/* Title */}
-                    <h3 className="mt-4 text-lg md:text-xl font-black leading-snug text-brand-600">
+                    <h3 className="mt-4 text-lg md:text-xl font-black leading-snug text-sky-600">
                       {s.titleTop}
                       {s.titleBottom ? (
                         <>
@@ -656,7 +656,7 @@ export default function SalesSupportPage({
       <section id="faq" className="scroll-mt-32 bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-sky-500">
               FAQ
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
@@ -670,14 +670,14 @@ export default function SalesSupportPage({
                 <details className="group">
                   <summary className="flex cursor-pointer items-start justify-between gap-4 p-6 list-none">
                     <span className="flex gap-3">
-                      <span className="font-display text-lg font-black text-brand-500">
+                      <span className="font-display text-lg font-black text-sky-500">
                         Q.
                       </span>
                       <span className="text-base md:text-lg font-bold text-ink leading-snug">
                         {f.q}
                       </span>
                     </span>
-                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-brand-500 group-open:text-brand-500">
+                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-sky-500 group-open:text-sky-500">
                       +
                     </span>
                   </summary>
@@ -697,7 +697,7 @@ export default function SalesSupportPage({
       {/* ───── Final CTA ───── */}
       <section className="py-24 md:py-32">
         <Container>
-          <div className="relative overflow-hidden rounded-2xl bg-brand-500 px-8 py-14 md:px-16 md:py-16 text-white">
+          <div className="relative overflow-hidden rounded-2xl bg-sky-500 px-8 py-14 md:px-16 md:py-16 text-white">
             <div
               aria-hidden="true"
               className="absolute inset-0 opacity-[0.15]"
@@ -709,11 +709,11 @@ export default function SalesSupportPage({
             />
             <div
               aria-hidden="true"
-              className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-300/40 blur-3xl"
+              className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-sky-300/40 blur-3xl"
             />
             <div
               aria-hidden="true"
-              className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-brand-700/40 blur-3xl"
+              className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-sky-700/40 blur-3xl"
             />
 
             <div className="relative text-center">
@@ -724,7 +724,7 @@ export default function SalesSupportPage({
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="!h-[72px] w-full px-12 text-xl font-black !bg-white !text-brand-600 hover:!bg-cream hover:-translate-y-1 shadow-[0_22px_50px_-12px_rgba(0,0,0,0.4)] md:!h-[84px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[260px]"
+                  className="!h-[72px] w-full px-12 text-xl font-black !bg-white !text-sky-600 hover:!bg-cream hover:-translate-y-1 shadow-[0_22px_50px_-12px_rgba(0,0,0,0.4)] md:!h-[84px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[260px]"
                 >
                   資料請求
                 </Button>

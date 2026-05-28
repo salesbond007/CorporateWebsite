@@ -103,23 +103,23 @@ export default function KeymanBondPage({
       />
 
       {/* ───── Hero ───── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-cream via-white to-brand-50">
+      <section className="relative overflow-hidden bg-gradient-to-br from-cream via-white to-rose-50">
         <div className="absolute inset-0 dot-bg opacity-50" aria-hidden="true" />
         <div
           aria-hidden="true"
-          className="absolute -top-40 right-[-12%] h-[520px] w-[520px] rounded-full bg-brand-200/40 blur-3xl"
+          className="absolute -top-40 right-[-12%] h-[520px] w-[520px] rounded-full bg-rose-200/40 blur-3xl"
         />
         <div
           aria-hidden="true"
-          className="absolute -bottom-40 -left-32 h-[420px] w-[420px] rounded-full bg-brand-100/60 blur-3xl"
+          className="absolute -bottom-40 -left-32 h-[420px] w-[420px] rounded-full bg-rose-100/60 blur-3xl"
         />
 
         <Container className="relative py-16 md:py-24 lg:py-28">
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
             {/* Left: copy */}
             <div className="lg:col-span-6">
-              <p className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white px-4 py-1.5 text-xs md:text-sm font-extrabold tracking-wide text-brand-600 shadow-sm">
-                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+              <p className="inline-flex items-center gap-2 rounded-full border border-rose-200 bg-white px-4 py-1.5 text-xs md:text-sm font-extrabold tracking-wide text-rose-800 shadow-sm">
+                <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-rose-700" />
                 キーマンボンド｜プロ人材マッチングサービス
               </p>
 
@@ -153,7 +153,7 @@ export default function KeymanBondPage({
                         aria-hidden="true"
                         className="shrink-0"
                       >
-                        <circle cx="9" cy="9" r="8" fill="#F58220" />
+                        <circle cx="9" cy="9" r="8" fill="#BE123C" />
                         <path
                           d="M5 9.5l3 3 5-6"
                           stroke="white"
@@ -172,7 +172,7 @@ export default function KeymanBondPage({
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="!h-[64px] w-full px-12 text-lg font-black !bg-[#FF8A1E] hover:!bg-brand-500 shadow-[0_22px_50px_-12px_rgba(255,138,30,0.85)] hover:-translate-y-1 md:!h-[72px] md:text-xl sm:w-auto sm:min-w-[220px]"
+                  className="!h-[64px] w-full px-12 text-lg font-black !bg-[#BE123C] hover:!bg-rose-700 shadow-[0_22px_50px_-12px_rgba(190,18,60,0.85)] hover:-translate-y-1 md:!h-[72px] md:text-xl sm:w-auto sm:min-w-[220px]"
                 >
                   資料請求
                 </Button>
@@ -192,11 +192,11 @@ export default function KeymanBondPage({
               <div className="relative mx-auto max-w-md lg:ml-auto lg:mr-0 lg:max-w-none">
                 <div
                   aria-hidden="true"
-                  className="absolute -bottom-6 -right-6 h-40 w-40 rounded-xl3 bg-brand-500/15"
+                  className="absolute -bottom-6 -right-6 h-40 w-40 rounded-xl3 bg-rose-700/15"
                 />
                 <div
                   aria-hidden="true"
-                  className="absolute -left-5 -top-5 hidden h-28 w-28 rounded-full border-2 border-brand-300/60 md:block"
+                  className="absolute -left-5 -top-5 hidden h-28 w-28 rounded-full border-2 border-rose-300/60 md:block"
                 />
                 <div className="relative grid aspect-[4/5] place-items-center overflow-hidden rounded-xl4 border-4 border-white bg-cream shadow-[0_30px_70px_-25px_rgba(20,20,20,0.35)] lg:aspect-[5/6]">
                   <span className="text-xs font-bold uppercase tracking-[0.2em] text-ink-muted/50">
@@ -205,7 +205,7 @@ export default function KeymanBondPage({
                 </div>
                 {/* floating accent label */}
                 <div className="absolute -bottom-4 left-4 rounded-xl2 bg-ink px-5 py-3 text-white shadow-card md:left-8">
-                  <p className="text-xs font-extrabold tracking-[0.18em] uppercase text-brand-300">
+                  <p className="text-xs font-extrabold tracking-[0.18em] uppercase text-rose-300">
                     Pro Talent
                   </p>
                   <p className="text-sm font-black">経営課題に伴走するプロ</p>
@@ -220,7 +220,7 @@ export default function KeymanBondPage({
       <section className="bg-white py-24 md:py-32">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
               For Corporates
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
@@ -228,7 +228,7 @@ export default function KeymanBondPage({
             </h2>
             <p className="mt-8 text-base md:text-lg leading-[1.95] text-ink font-medium">
               キーマンボンドは、経営課題の解決に取り組む企業向けに、事業会社やアカデミアで経験を積んだ
-              <span className="font-black text-brand-500">
+              <span className="font-black text-rose-700">
                 上級役職者・専門家
               </span>
               を「アドバイザー」「顧問」「社外役員」として提案する経営支援サービスです。
@@ -265,7 +265,7 @@ export default function KeymanBondPage({
       <section className="bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
               Solution
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
@@ -284,7 +284,7 @@ export default function KeymanBondPage({
                     <p className="flex items-center gap-2.5 text-base md:text-lg font-black text-ink">
                       <span
                         aria-hidden="true"
-                        className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-500 text-xs font-black text-white"
+                        className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-rose-700 text-xs font-black text-white"
                       >
                         ✓
                       </span>
@@ -305,7 +305,7 @@ export default function KeymanBondPage({
       <section className="bg-white py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
               Professionals
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
@@ -326,7 +326,7 @@ export default function KeymanBondPage({
                       aria-hidden="true"
                       className="aspect-[4/3] w-full rounded-xl bg-cream"
                     />
-                    <p className="mt-5 inline-flex w-fit rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-600">
+                    <p className="mt-5 inline-flex w-fit rounded-full bg-rose-50 px-3 py-1 text-xs font-bold text-rose-800">
                       {p.field}
                     </p>
                     <p className="mt-3 text-base font-bold leading-relaxed text-ink">
@@ -350,7 +350,7 @@ export default function KeymanBondPage({
           <div className="rounded-2xl border-2 border-ink bg-white p-8 md:p-12">
             <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
               <div>
-                <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+                <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
                   For Talent
                 </p>
                 <h2 className="mt-3 text-xl md:text-2xl font-black text-ink leading-snug">
@@ -378,7 +378,7 @@ export default function KeymanBondPage({
         <Container>
           <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
                 Column
               </p>
               <h2 className="mt-3 text-xl md:text-2xl font-black text-ink leading-snug">
@@ -399,7 +399,7 @@ export default function KeymanBondPage({
       <section className="bg-cream py-24 md:py-32">
         <Container>
           <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-brand-500">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
               FAQ
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
@@ -413,14 +413,14 @@ export default function KeymanBondPage({
                 <details className="group">
                   <summary className="flex cursor-pointer items-start justify-between gap-4 p-6 list-none">
                     <span className="flex gap-3">
-                      <span className="font-display text-lg font-black text-brand-500">
+                      <span className="font-display text-lg font-black text-rose-700">
                         Q.
                       </span>
                       <span className="text-base md:text-lg font-bold text-ink leading-snug">
                         {f.q}
                       </span>
                     </span>
-                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-brand-500 group-open:text-brand-500">
+                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-rose-700 group-open:text-rose-700">
                       +
                     </span>
                   </summary>
@@ -440,7 +440,7 @@ export default function KeymanBondPage({
       {/* ───── Final CTA ───── */}
       <section className="py-24 md:py-32">
         <Container>
-          <div className="relative overflow-hidden rounded-2xl bg-brand-500 px-8 py-14 md:px-16 md:py-16 text-white">
+          <div className="relative overflow-hidden rounded-2xl bg-rose-700 px-8 py-14 md:px-16 md:py-16 text-white">
             <div
               aria-hidden="true"
               className="absolute inset-0 opacity-[0.15]"
@@ -452,11 +452,11 @@ export default function KeymanBondPage({
             />
             <div
               aria-hidden="true"
-              className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-300/40 blur-3xl"
+              className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-rose-300/40 blur-3xl"
             />
             <div
               aria-hidden="true"
-              className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-brand-700/40 blur-3xl"
+              className="absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-rose-900/40 blur-3xl"
             />
 
             <div className="relative text-center">
@@ -467,7 +467,7 @@ export default function KeymanBondPage({
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="!h-[72px] w-full px-12 text-xl font-black !bg-white !text-brand-600 hover:!bg-cream hover:-translate-y-1 shadow-[0_22px_50px_-12px_rgba(0,0,0,0.4)] md:!h-[84px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[260px]"
+                  className="!h-[72px] w-full px-12 text-xl font-black !bg-white !text-rose-800 hover:!bg-cream hover:-translate-y-1 shadow-[0_22px_50px_-12px_rgba(0,0,0,0.4)] md:!h-[84px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[260px]"
                 >
                   資料請求
                 </Button>
