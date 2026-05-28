@@ -96,7 +96,7 @@ const reasons: Reason[] = [
     number: "02",
     title: "月額費用 0 円の完全成果報酬型!",
     body: "初期費用も月額費用も 0 円。アポ単価のみの完全成果報酬だから、ローリスクではじめられます。",
-    image: "https://i.imgur.com/9Gu4NXh.png",
+    image: "https://i.imgur.com/P1GeVIm.png",
   },
   {
     number: "03",
