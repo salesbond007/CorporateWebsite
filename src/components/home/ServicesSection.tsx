@@ -21,13 +21,11 @@ const summariesBySlug: Record<string, ServiceSummary> = {
     [
       { text: "人脈紹介", mark: "underline" },
       { text: "を活用した、" },
-      { text: "決裁者開拓サービス", mark: "color" },
-      { text: "。" },
+      { text: "決裁者開拓", mark: "color" },
+      { text: "サービス。" },
     ],
     [
-      { text: "ベンチャーから大企業、地方企業まで、" },
-      { text: "幅広い開拓", mark: "color" },
-      { text: "が可能です。" },
+      { text: "ベンチャーから大企業、地方企業まで、幅広い開拓が可能です。" },
     ],
     [
       { text: "完全成果報酬", mark: "color" },
