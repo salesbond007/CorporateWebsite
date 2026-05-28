@@ -506,10 +506,14 @@ export default function ReferBondPage({
             />
           </div>
 
-          <div className="mt-12 text-center">
-            <Link href={contactHref} className="link-arrow">
-              サービス資料・お見積もりはこちら
-            </Link>
+          <div className="mt-12 flex justify-center">
+            <Button
+              href={contactHref}
+              size="lg"
+              className="!h-[64px] px-12 text-lg font-black !bg-emerald-500 !text-white hover:!bg-emerald-600 shadow-[0_18px_40px_-12px_rgba(16,185,129,0.6)] hover:-translate-y-1 md:!h-[72px] md:text-xl"
+            >
+              サービス資料・お問い合わせはこちら
+            </Button>
           </div>
         </Container>
       </section>
