@@ -40,6 +40,49 @@ const challenges: Challenge[] = [
   },
 ];
 
+function ChallengeIcon({ index }: { index: number }) {
+  const common = {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.5,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    className: "h-16 w-16 md:h-20 md:w-20",
+  };
+  switch (index) {
+    // 1. 決裁者アポが取れない: カレンダーに×
+    case 0:
+      return (
+        <svg {...common}>
+          <rect x="3" y="5" width="18" height="16" rx="2" />
+          <path d="M3 10h18M8 3v4M16 3v4" />
+          <path d="M9.5 14.5l5 5M14.5 14.5l-5 5" />
+        </svg>
+      );
+    // 2. 新規開拓・商談数が伸び悩み: フラットな棒グラフ
+    case 1:
+      return (
+        <svg {...common}>
+          <path d="M3 20h18" />
+          <rect x="5.5" y="13" width="3" height="7" />
+          <rect x="10.5" y="11" width="3" height="9" />
+          <rect x="15.5" y="12" width="3" height="8" />
+          <path d="M5 8l4-1 5 1 5-2" />
+        </svg>
+      );
+    // 3. リードが商談につながらない: 漏れのあるファネル
+    default:
+      return (
+        <svg {...common}>
+          <path d="M3 5h18l-7 8.5V20l-4-2v-4.5z" />
+          <path d="M16 17l5 5M21 17l-5 5" />
+        </svg>
+      );
+  }
+}
+
 type Reason = { number: string; title: string; body: string };
 
 const reasons: Reason[] = [
@@ -337,11 +380,13 @@ export default function ReferBondPage({
               <li key={c.titleTop}>
                 <Reveal delay={i * 80} className="h-full">
                   <div className="h-full rounded-2xl border border-ink-line bg-white p-6 md:p-7">
-                    {/* Illustration placeholder — to be filled later */}
+                    {/* Themed business icon */}
                     <div
                       aria-hidden="true"
-                      className="aspect-[5/4] w-full rounded-xl bg-cream"
-                    />
+                      className="grid aspect-[5/4] w-full place-items-center rounded-xl bg-emerald-50 text-emerald-500"
+                    >
+                      <ChallengeIcon index={i} />
+                    </div>
                     <p className="mt-6 text-center text-lg md:text-xl font-black text-ink leading-snug">
                       {c.titleTop}
                       <br />
