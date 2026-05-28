@@ -238,7 +238,7 @@ export default function ReferBondPage({
                 {(
                   [
                     { pre: "", underline: "大手/上場企業", post: "の決裁者紹介にも対応" },
-                    { pre: "完全成果報酬でローリスク!", underline: "", post: "" },
+                    { pre: "", underline: "完全成果報酬", post: "でローリスク!" },
                     {
                       pre: "ベンチャー企業、地方企業、海外企業など",
                       underline: "幅広いニーズ",
