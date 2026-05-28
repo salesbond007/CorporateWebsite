@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -327,14 +328,14 @@ export default function SalesSupportPage({
       />
 
       {/* ───── Hero (light) ───── */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-cream via-white to-sky-50">
+      <section className="relative overflow-hidden bg-gradient-to-br from-sky-50 via-white to-sky-100">
         <div
           aria-hidden="true"
-          className="absolute -top-32 right-[-10%] h-[460px] w-[460px] rounded-full bg-sky-200/40 blur-3xl"
+          className="absolute -top-32 right-[-10%] h-[480px] w-[480px] rounded-full bg-sky-200/60 blur-3xl"
         />
         <div
           aria-hidden="true"
-          className="absolute -bottom-40 -left-32 h-[380px] w-[380px] rounded-full bg-sky-100/60 blur-3xl"
+          className="absolute -bottom-40 -left-32 h-[420px] w-[420px] rounded-full bg-sky-300/40 blur-3xl"
         />
 
         <Container className="relative py-16 md:py-20 lg:py-24">
@@ -628,7 +629,22 @@ export default function SalesSupportPage({
                   Core
                 </span>
                 <span className="text-xl md:text-3xl font-black">
-                  戦略〜成約までを一気通貫で支援
+                  <span className="relative inline-block">
+                    戦略
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-0 -bottom-1 h-1.5 bg-amber-300"
+                    />
+                  </span>
+                  〜
+                  <span className="relative inline-block">
+                    成約
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-0 -bottom-1 h-1.5 bg-amber-300"
+                    />
+                  </span>
+                  までを一気通貫で支援
                 </span>
               </div>
               <ol className="mt-8 flex flex-col items-stretch gap-3 md:flex-row md:items-center">
@@ -694,38 +710,45 @@ export default function SalesSupportPage({
             必要に応じて組み合わせ可能なオプション
           </p>
           <ul className="mx-auto grid max-w-3xl gap-3 sm:grid-cols-3">
-            {[
-              {
-                num: "01",
-                title: "人材紹介",
-                subtitle: "アサイン型マッチング",
-                body: "実際にアサインした営業マンとの直接マッチング。エースをそのまま採用も可能。",
-                accentBorder: "border-sky-300",
-                accentBg: "bg-sky-100",
-                accentText: "text-sky-700",
-              },
-              {
-                num: "02",
-                title: "営業DX",
-                subtitle: "CRM構築 / AI教育",
-                body: "SFA・CRMの構築から、AIを活用した営業教育・型化まで。自走化を加速。",
-                accentBorder: "border-sky-400",
-                accentBg: "bg-sky-200",
-                accentText: "text-sky-800",
-              },
-              {
-                num: "03",
-                title: "リファボンド",
-                subtitle: "成果報酬型・決裁者紹介",
-                body: "大手決裁者への人脈紹介。完全成果報酬型のため、リスクなく開拓が可能。",
-                accentBorder: "border-emerald-300",
-                accentBg: "bg-emerald-100",
-                accentText: "text-emerald-700",
-              },
-            ].map((opt) => (
-              <li key={opt.num}>
+            {(
+              [
+                {
+                  num: "01",
+                  title: "人材紹介",
+                  subtitle: "アサイン型マッチング",
+                  body: "実際にアサインした営業マンとの直接マッチング。エースをそのまま採用も可能。",
+                  accentBorder: "border-sky-300",
+                  accentBg: "bg-sky-100",
+                  accentText: "text-sky-700",
+                  href: undefined,
+                },
+                {
+                  num: "02",
+                  title: "営業DX",
+                  subtitle: "CRM構築 / AI教育",
+                  body: "SFA・CRMの構築から、AIを活用した営業教育・型化まで。自走化を加速。",
+                  accentBorder: "border-sky-400",
+                  accentBg: "bg-sky-200",
+                  accentText: "text-sky-800",
+                  href: undefined,
+                },
+                {
+                  num: "03",
+                  title: "リファボンド",
+                  subtitle: "成果報酬型・決裁者紹介",
+                  body: "大手決裁者への人脈紹介。完全成果報酬型のため、リスク少なく開拓が可能。",
+                  accentBorder: "border-emerald-300",
+                  accentBg: "bg-emerald-100",
+                  accentText: "text-emerald-700",
+                  href: "/services/sales-bond",
+                },
+              ] as const
+            ).map((opt) => {
+              const inner = (
                 <div
-                  className={`h-full rounded-xl border ${opt.accentBorder} bg-white p-4`}
+                  className={`group h-full rounded-xl border ${opt.accentBorder} bg-white p-4 transition ${
+                    opt.href ? "hover:-translate-y-0.5 hover:shadow-card" : ""
+                  }`}
                 >
                   <span
                     className={`inline-flex items-center rounded-full ${opt.accentBg} px-2 py-0.5 text-[10px] font-extrabold tracking-[0.16em] uppercase ${opt.accentText}`}
@@ -741,9 +764,28 @@ export default function SalesSupportPage({
                   <p className="mt-2 text-xs leading-relaxed text-ink-soft font-medium">
                     {opt.body}
                   </p>
+                  {opt.href ? (
+                    <p
+                      className={`mt-3 inline-flex items-center gap-1 text-[11px] font-bold ${opt.accentText} transition group-hover:gap-2`}
+                    >
+                      詳しく見る
+                      <span aria-hidden="true">→</span>
+                    </p>
+                  ) : null}
                 </div>
-              </li>
-            ))}
+              );
+              return (
+                <li key={opt.num}>
+                  {opt.href ? (
+                    <Link href={localePath(opt.href, locale)} className="block h-full">
+                      {inner}
+                    </Link>
+                  ) : (
+                    inner
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </Container>
       </section>
