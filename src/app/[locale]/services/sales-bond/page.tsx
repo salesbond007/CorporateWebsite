@@ -190,13 +190,19 @@ export default function ReferBondPage({
               </h1>
 
               <ul className="mt-8 space-y-3">
-                {[
-                  "大手企業/上場企業の決裁者の紹介も可能",
-                  "完全成果報酬でローリスク!",
-                  "ベンチャー企業、地方企業、海外企業など幅広いニーズに対応",
-                ].map((item) => (
+                {(
+                  [
+                    { pre: "", underline: "大手/上場企業", post: "の決裁者紹介にも対応" },
+                    { pre: "完全成果報酬でローリスク!", underline: "", post: "" },
+                    {
+                      pre: "ベンチャー企業、地方企業、海外企業など",
+                      underline: "幅広いニーズ",
+                      post: "に対応",
+                    },
+                  ] as const
+                ).map((item) => (
                   <li
-                    key={item}
+                    key={`${item.pre}-${item.underline}`}
                     className="flex items-center gap-3 text-base md:text-xl font-bold text-white"
                   >
                     <svg
@@ -216,7 +222,19 @@ export default function ReferBondPage({
                         strokeLinejoin="round"
                       />
                     </svg>
-                    {item}
+                    <span>
+                      {item.pre}
+                      {item.underline ? (
+                        <span className="relative inline-block">
+                          {item.underline}
+                          <span
+                            aria-hidden="true"
+                            className="absolute inset-x-0 -bottom-0.5 h-1.5 bg-yellow-300/90"
+                          />
+                        </span>
+                      ) : null}
+                      {item.post}
+                    </span>
                   </li>
                 ))}
               </ul>
