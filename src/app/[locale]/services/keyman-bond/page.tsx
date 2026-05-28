@@ -87,7 +87,6 @@ export default function KeymanBondPage({
   if (!service) notFound();
 
   const contactHref = localePath("/contact", locale);
-  const blogHref = localePath("/blog", locale);
 
   return (
     <>
@@ -226,6 +225,10 @@ export default function KeymanBondPage({
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
               キーマンボンドとは?
             </h2>
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-6 block h-1 w-16 rounded-full bg-rose-700"
+            />
             <p className="mt-8 text-base md:text-lg leading-[1.95] text-ink font-medium">
               キーマンボンドは、経営課題の解決に取り組む企業向けに、事業会社やアカデミアで経験を積んだ
               <span className="font-black text-rose-700">
@@ -243,8 +246,12 @@ export default function KeymanBondPage({
             ].map((c, i) => (
               <li key={c.t}>
                 <Reveal delay={i * 80} className="h-full">
-                  <div className="h-full rounded-2xl border border-ink-line bg-cream/50 p-7 text-center">
-                    <h3 className="text-lg font-black text-ink">{c.t}</h3>
+                  <div className="relative h-full overflow-hidden rounded-2xl border border-rose-200 bg-white p-7 text-center shadow-sm">
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-0 top-0 h-1 bg-rose-700"
+                    />
+                    <h3 className="text-lg font-black text-rose-800">{c.t}</h3>
                     <p className="mt-3 text-sm leading-relaxed text-ink-soft font-medium">
                       {c.b}
                     </p>
@@ -275,15 +282,17 @@ export default function KeymanBondPage({
             {solutions.map((s, i) => (
               <li key={s.title}>
                 <Reveal delay={(i % 3) * 70} className="h-full">
-                  <div className="h-full rounded-2xl border border-ink-line bg-white p-6 md:p-7">
+                  <div className="group h-full rounded-2xl border border-ink-line bg-white p-6 transition-all hover:-translate-y-1 hover:border-rose-300 hover:shadow-card md:p-7">
                     <p className="flex items-center gap-2.5 text-base md:text-lg font-black text-ink">
                       <span
                         aria-hidden="true"
-                        className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-rose-700 text-xs font-black text-white"
+                        className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-rose-700 text-xs font-black text-white shadow-[0_6px_18px_-6px_rgba(190,18,60,0.6)]"
                       >
                         ✓
                       </span>
-                      {s.title}
+                      <span className="transition-colors group-hover:text-rose-800">
+                        {s.title}
+                      </span>
                     </p>
                     <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
                       {s.body}
@@ -293,6 +302,19 @@ export default function KeymanBondPage({
               </li>
             ))}
           </ul>
+
+          <div className="mt-16 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button
+              href={contactHref}
+              size="lg"
+              className="!bg-[#BE123C] hover:!bg-rose-700 shadow-[0_18px_40px_-12px_rgba(190,18,60,0.6)]"
+            >
+              資料請求
+            </Button>
+            <Button href={contactHref} size="lg" variant="secondary">
+              無料相談
+            </Button>
+          </div>
         </Container>
       </section>
 
@@ -315,13 +337,17 @@ export default function KeymanBondPage({
             {pros.map((p, i) => (
               <li key={p.field}>
                 <Reveal delay={(i % 3) * 70} className="h-full">
-                  <div className="flex h-full flex-col rounded-2xl border border-ink-line bg-white p-6">
+                  <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink-line bg-white p-6">
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-0 top-0 h-1 bg-rose-700"
+                    />
                     {/* Photo placeholder */}
                     <div
                       aria-hidden="true"
-                      className="aspect-[4/3] w-full rounded-xl bg-cream"
+                      className="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-rose-50 to-cream"
                     />
-                    <p className="mt-5 inline-flex w-fit rounded-full bg-rose-50 px-3 py-1 text-xs font-bold text-rose-800">
+                    <p className="mt-5 inline-flex w-fit rounded-full bg-rose-700 px-3 py-1 text-xs font-bold text-white">
                       {p.field}
                     </p>
                     <p className="mt-3 text-base font-bold leading-relaxed text-ink">
@@ -364,28 +390,6 @@ export default function KeymanBondPage({
                 登録のお問い合わせ
               </Button>
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* ───── Column (ビジネスコラム) ───── */}
-      <section className="bg-white py-20 md:py-24">
-        <Container>
-          <div className="flex flex-col items-center gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
-            <div>
-              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
-                Column
-              </p>
-              <h2 className="mt-3 text-xl md:text-2xl font-black text-ink leading-snug">
-                経営課題に役立つ情報をお届け
-              </h2>
-              <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                プロ人材の活用や経営課題の解決に役立つコラムを発信しています。
-              </p>
-            </div>
-            <Button href={blogHref} size="lg" className="shrink-0">
-              メディアを見る
-            </Button>
           </div>
         </Container>
       </section>
