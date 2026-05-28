@@ -502,55 +502,23 @@ export default function ReferBondPage({
             </p>
           </div>
 
-          {/* Service explanation image */}
-          <div className="mx-auto mt-12 max-w-4xl">
+          {/* Service explanation headline + image */}
+          <h3 className="mx-auto mt-14 max-w-4xl text-center font-display font-black leading-tight text-ink text-[clamp(1.5rem,4vw,2.5rem)]">
+            人脈を活用して
+            <span className="text-emerald-500">決裁者</span>
+            を紹介!
+          </h3>
+          <div className="mx-auto mt-8 max-w-5xl">
             <Image
               src="https://i.imgur.com/J89f30K.png"
               alt="リファボンドのサービス説明"
               width={1600}
               height={900}
-              sizes="(min-width: 1024px) 896px, (min-width: 768px) 90vw, 100vw"
-              className="h-auto w-full rounded-2xl"
+              sizes="(min-width: 1024px) 1024px, (min-width: 768px) 92vw, 100vw"
+              className="h-auto w-full rounded-2xl border border-ink/20"
               style={{ height: "auto" }}
             />
           </div>
-
-          {/* 3-step concept cards */}
-          <ol className="mx-auto mt-14 grid max-w-5xl gap-4 md:grid-cols-3 md:gap-6">
-            {[
-              {
-                num: "01",
-                title: "経営者ネットワーク",
-                body: "各業界の経営層・幹部経験者・現役経営者がサポーターとして登録。地方・特定業界の有力人脈までを含む独自のネットワーク。",
-              },
-              {
-                num: "02",
-                title: "人脈による紹介",
-                body: "テレアポ・広告では届かない大手・上場企業の決裁者へ、サポーター自身の人脈を介した「紹介」で直接接点を創出。",
-              },
-              {
-                num: "03",
-                title: "文脈ある商談",
-                body: "事前面談を経た紹介のため、文脈を共有した状態で商談がスタート。コールドアプローチでは届かない深度から関係構築できます。",
-              },
-            ].map((s, i) => (
-              <li key={s.num}>
-                <Reveal delay={i * 80} className="h-full">
-                  <div className="relative h-full border-2 border-ink bg-white p-7 md:p-8">
-                    <p className="font-display text-4xl md:text-5xl font-black leading-none text-emerald-500">
-                      {s.num}
-                    </p>
-                    <h3 className="mt-5 text-lg md:text-xl font-black text-ink leading-snug">
-                      {s.title}
-                    </h3>
-                    <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                      {s.body}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
 
           <div className="mt-12 text-center">
             <Link href={contactHref} className="link-arrow">
