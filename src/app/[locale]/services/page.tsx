@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
-import { Illustration } from "@/components/ui/Illustration";
 import { CTASection } from "@/components/home/CTASection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -16,11 +15,6 @@ export const metadata: Metadata = {
   title: "サービス案内",
   description:
     "セールスボンド株式会社の3つのサービス。リファボンド(大手決裁者紹介)、キーマンボンド(プロ人材マッチング)、セルボンド(BtoB営業支援サービス)。",
-};
-
-type ServiceWithImage = {
-  image?: string;
-  illustrationVariant: "abstract" | "grid" | "blob";
 };
 
 // サービスごとのテーマカラー。Tailwind に静的に拾わせるため、完全なクラス名を列挙。
@@ -74,6 +68,56 @@ const fallbackTheme: SlugTheme = {
   arrow: "text-brand-600",
 };
 
+// サービスごとのアイコン（テーマ色で表示）。
+// sales-bond: 紹介(人脈)→ users、lead-bond: 売上向上 → trending up、
+// keyman-bond: プロ人材 → briefcase。
+function ServiceIcon({ slug }: { slug: string }) {
+  const common = {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    className: "h-full w-full",
+  };
+  switch (slug) {
+    case "sales-bond":
+      return (
+        <svg {...common}>
+          <circle cx="9" cy="8" r="3.2" />
+          <circle cx="17" cy="10" r="2.6" />
+          <path d="M3 20c0-3.6 2.7-6.2 6-6.2s6 2.6 6 6.2" />
+          <path d="M15 20c0-2.6 1.7-4.6 4-4.6s4 2 4 4.6" />
+        </svg>
+      );
+    case "lead-bond":
+      return (
+        <svg {...common}>
+          <path d="M3 17l6-6 4 4 7-7" />
+          <path d="M14 8h6v6" />
+          <path d="M3 21h18" />
+        </svg>
+      );
+    case "keyman-bond":
+      return (
+        <svg {...common}>
+          <rect x="3" y="7" width="18" height="13" rx="2" />
+          <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
+          <path d="M3 13h18" />
+          <path d="M11 11h2" />
+        </svg>
+      );
+    default:
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+        </svg>
+      );
+  }
+}
+
 export default function ServicesPage({
   params,
 }: {
@@ -100,7 +144,6 @@ export default function ServicesPage({
         <Container>
           <ul className="space-y-6">
             {services.map((s) => {
-              const sx = s as typeof s & ServiceWithImage;
               const theme = themeBySlug[s.slug] ?? fallbackTheme;
               return (
               <li key={s.slug} id={s.slug} className="scroll-mt-24 md:scroll-mt-28">
@@ -116,14 +159,12 @@ export default function ServicesPage({
                       </span>
                     </div>
 
-                    {/* Illustration */}
+                    {/* Themed icon tile */}
                     <div className="md:col-span-3">
-                      <div className={`mx-auto aspect-square w-32 rounded-2xl ${theme.bgTile} p-4 md:w-full md:max-w-[180px]`}>
-                        <Illustration
-                          src={sx.image}
-                          variant={sx.illustrationVariant}
-                          alt={`${s.title} のイラスト`}
-                        />
+                      <div className={`mx-auto grid aspect-square w-32 place-items-center rounded-2xl ${theme.bgTile} p-7 md:w-full md:max-w-[180px] md:p-10`}>
+                        <span className={theme.number}>
+                          <ServiceIcon slug={s.slug} />
+                        </span>
                       </div>
                     </div>
 
