@@ -268,39 +268,33 @@ export default function ReferBondPage({
         </Container>
       </section>
 
-      {/* ───── Companies (logo marquee) ───── */}
-      <section className="overflow-hidden border-b border-ink-line bg-white py-10 md:py-12">
+      {/* ───── Companies (static, balanced row) ───── */}
+      <section className="border-b border-ink-line bg-white py-10 md:py-12">
         <Container>
           <p className="text-center text-xs font-extrabold uppercase tracking-[0.22em] text-ink-muted">
             Companies
           </p>
-        </Container>
 
-        {/* Marquee: items are duplicated so the -50% translate loops seamlessly */}
-        <div
-          className="relative mt-6 overflow-hidden"
-          aria-label="ご利用企業ロゴ一覧"
-        >
-          <ul className="flex w-max gap-8 md:gap-12 animate-marquee">
-            {[...Array(2)].flatMap((_, dup) =>
-              logos.map((src, i) => (
-                <li
-                  key={`${dup}-${i}`}
-                  aria-hidden={dup === 1 ? "true" : undefined}
-                  className="flex h-16 md:h-20 w-40 md:w-48 shrink-0 items-center justify-center bg-white border border-ink/15 px-5 py-3"
-                >
-                  <Image
-                    src={src}
-                    alt=""
-                    width={180}
-                    height={60}
-                    className="max-h-full w-auto object-contain"
-                  />
-                </li>
-              )),
-            )}
+          <ul
+            className="mt-6 flex flex-wrap items-center justify-center gap-6 md:gap-10"
+            aria-label="ご利用企業ロゴ一覧"
+          >
+            {logos.map((src, i) => (
+              <li
+                key={i}
+                className="flex h-16 w-40 shrink-0 items-center justify-center border border-ink/15 bg-white px-5 py-3 md:h-20 md:w-48"
+              >
+                <Image
+                  src={src}
+                  alt=""
+                  width={180}
+                  height={60}
+                  className="max-h-full w-auto object-contain"
+                />
+              </li>
+            ))}
           </ul>
-        </div>
+        </Container>
       </section>
 
       {/* ───── Challenges ───── */}
