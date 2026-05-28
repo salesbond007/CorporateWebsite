@@ -400,7 +400,7 @@ export default function ReferBondPage({
               ダイレクトに
               <br />
               <span className="relative inline-block">
-                決裁者 / 代表
+                決裁者
                 <span
                   aria-hidden="true"
                   className="absolute inset-x-0 -bottom-1 h-2 bg-yellow-300/90"
