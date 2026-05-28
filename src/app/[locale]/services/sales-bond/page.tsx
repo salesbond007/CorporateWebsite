@@ -493,11 +493,11 @@ export default function ReferBondPage({
             <p className="mt-8 text-base md:text-lg leading-[1.95] text-ink font-medium">
               リファボンドは、各業界の
               <span className="font-black">経営層・幹部経験者・現役経営者</span>
-              がサポーターとして登録する、
-              <span className="font-black text-emerald-500">人脈紹介プラットフォーム</span>
-              です。テレアポ・広告では到達できない大手・上場・地方の決裁者へ、
-              <span className="font-bold">人脈を介した「紹介」という最短ルート</span>
-              で接点を生み出します。
+              の
+              <span className="font-black text-emerald-500">人脈を活用して決裁者を紹介</span>
+              するサービスです。テレアポ・広告・展示会などでは到達できない
+              <span className="font-bold">決裁者との商談を実現</span>
+              します。
             </p>
           </div>
 
