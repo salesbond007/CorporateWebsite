@@ -617,7 +617,7 @@ export default function SalesSupportPage({
               セルボンドの概要
             </h2>
             <p className="mx-auto mt-6 max-w-3xl text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-              セルボンドのコア(戦略〜成約)に、3つのオプションを組み合わせて提供します。
+              セルボンドのコア(新規開拓〜成約)に、3つのオプションを組み合わせて提供します。
             </p>
           </div>
 
@@ -630,7 +630,7 @@ export default function SalesSupportPage({
                 </span>
                 <span className="text-xl md:text-3xl font-black">
                   <span className="relative inline-block">
-                    戦略
+                    新規開拓
                     <span
                       aria-hidden="true"
                       className="absolute inset-x-0 -bottom-1 h-1.5 bg-amber-300"
