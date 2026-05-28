@@ -501,6 +501,23 @@ export default function ReferBondPage({
             </p>
           </div>
 
+          {/* Service explanation image (placeholder — swap with real image later) */}
+          <div className="mx-auto mt-12 max-w-3xl">
+            <div
+              aria-hidden="true"
+              className="grid min-h-[260px] place-items-center rounded-2xl border-2 border-dashed border-ink-line bg-cream p-6 md:min-h-[360px]"
+            >
+              <div className="text-center">
+                <p className="text-sm font-bold tracking-wide text-ink-muted">
+                  サービス説明画像
+                </p>
+                <p className="mt-1 text-xs text-ink-muted/70">
+                  ここに画像が入ります(後ほど挿入)
+                </p>
+              </div>
+            </div>
+          </div>
+
           {/* 3-step concept cards */}
           <ol className="mx-auto mt-14 grid max-w-5xl gap-4 md:grid-cols-3 md:gap-6">
             {[
