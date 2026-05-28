@@ -19,7 +19,9 @@ export function Footer({ locale, dict }: Props) {
   const pathname = usePathname() ?? "";
   const footerBg = pathname.includes("/services/sales-bond")
     ? "bg-emerald-500"
-    : "bg-brand-500";
+    : pathname.includes("/services/lead-bond")
+      ? "bg-sky-500"
+      : "bg-brand-500";
 
   const contactLinks = [
     { href: "/contact", label: dict.nav.contact },

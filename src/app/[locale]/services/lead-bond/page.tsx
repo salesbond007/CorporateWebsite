@@ -45,6 +45,64 @@ function renderProblemLine(line: string, hl: string) {
   );
 }
 
+// Lucide-style business icons for each 課題 card.
+function ProblemIcon({ index }: { index: number }) {
+  const common = {
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    className: "h-14 w-14 md:h-16 md:w-16",
+  };
+  switch (index) {
+    case 0:
+      // 営業人材不足: ユーザー+×
+      return (
+        <svg {...common}>
+          <circle cx="9" cy="8" r="3.5" />
+          <path d="M3 20c0-3.8 2.8-6.5 6-6.5" />
+          <path d="M15 14l6 6M21 14l-6 6" />
+        </svg>
+      );
+    case 1:
+      // 進め方が決まらない: ?マーク
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1 1-1 1.7" />
+          <circle cx="12" cy="17" r="0.7" fill="currentColor" />
+        </svg>
+      );
+    case 2:
+      // 何から手をつければ: 積み木(組織づくり)
+      return (
+        <svg {...common}>
+          <rect x="3" y="13" width="8" height="8" rx="1" />
+          <rect x="13" y="13" width="8" height="8" rx="1" />
+          <rect x="8" y="3" width="8" height="8" rx="1" />
+        </svg>
+      );
+    case 3:
+      // 部分的な支援: パズルピース
+      return (
+        <svg {...common}>
+          <path d="M14 4h6v6h-2a2 2 0 1 0 0 4h2v6h-6v-2a2 2 0 1 1-4 0v2H4v-6h2a2 2 0 1 0 0-4H4V4h6" />
+        </svg>
+      );
+    default:
+      // 手が回らない: 時計
+      return (
+        <svg {...common}>
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7v5l3 2" />
+        </svg>
+      );
+  }
+}
+
 type Point = {
   num: string;
   label: string;
@@ -391,11 +449,13 @@ export default function SalesSupportPage({
                       </span>
                     </span>
 
-                    {/* Illustration placeholder — to be filled later */}
+                    {/* Themed business icon */}
                     <div
                       aria-hidden="true"
-                      className="aspect-square w-full max-w-[104px] rounded-xl bg-cream"
-                    />
+                      className="grid aspect-square w-full max-w-[104px] place-items-center rounded-xl bg-sky-50 text-sky-500"
+                    >
+                      <ProblemIcon index={i} />
+                    </div>
 
                     {/* Title (always 3 lines) */}
                     <p className="mt-5 text-lg font-black leading-snug text-ink">
@@ -524,6 +584,146 @@ export default function SalesSupportPage({
               </div>
             </div>
           </div>
+        </Container>
+      </section>
+
+      {/* ───── Overview (CORE + Options) ───── */}
+      <section className="bg-white py-24 md:py-32">
+        <Container>
+          <div className="text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-sky-500">
+              Overview
+            </p>
+            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+              セルボンドの概要
+            </h2>
+            <p className="mx-auto mt-6 max-w-3xl text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              セルボンドのコア(戦略〜成約)に、3つのオプションを組み合わせて提供します。
+            </p>
+          </div>
+
+          {/* CORE band */}
+          <div className="mx-auto mt-12 max-w-5xl">
+            <div className="overflow-hidden rounded-2xl bg-sky-500 px-5 py-6 text-white md:px-8 md:py-8">
+              <div className="flex flex-wrap items-center gap-3">
+                <span className="inline-flex items-center rounded-full bg-white px-4 py-1 text-xs font-extrabold tracking-[0.18em] uppercase text-sky-600">
+                  Core
+                </span>
+                <span className="text-base md:text-xl font-black">
+                  戦略〜成約までを一気通貫で支援
+                </span>
+              </div>
+              <ol className="mt-5 flex flex-col items-stretch gap-2 md:flex-row md:items-center">
+                {["戦略立案", "アポ獲得", "商談", "クロージング", "成約"].map(
+                  (label, i, arr) => (
+                    <li key={label} className="flex flex-1 items-center gap-2">
+                      <div className="flex-1 rounded-full bg-white px-3 py-2 text-center text-sm font-black text-sky-700 md:text-base">
+                        {label}
+                      </div>
+                      {i < arr.length - 1 ? (
+                        <span aria-hidden="true" className="shrink-0 text-white">
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            className="hidden md:block"
+                          >
+                            <path
+                              d="M4 10h12M11 5l5 5-5 5"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                          <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 20 20"
+                            fill="none"
+                            className="mx-auto block md:hidden"
+                          >
+                            <path
+                              d="M10 4v12M5 11l5 5 5-5"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                      ) : null}
+                    </li>
+                  ),
+                )}
+              </ol>
+            </div>
+          </div>
+
+          {/* + connector */}
+          <div className="my-8 flex justify-center md:my-10">
+            <span
+              aria-hidden="true"
+              className="grid h-12 w-12 place-items-center rounded-full border-2 border-sky-300 bg-white font-black text-sky-500"
+            >
+              +
+            </span>
+          </div>
+
+          {/* 3 options */}
+          <ul className="mx-auto grid max-w-5xl gap-5 md:grid-cols-3">
+            {[
+              {
+                num: "01",
+                title: "人材紹介",
+                subtitle: "アサイン型マッチング",
+                body: "実際にアサインした営業マンとの直接マッチング。エースをそのまま採用も可能。",
+                accentBorder: "border-sky-300",
+                accentBg: "bg-sky-100",
+                accentText: "text-sky-700",
+              },
+              {
+                num: "02",
+                title: "営業DX",
+                subtitle: "CRM構築 / AI教育",
+                body: "SFA・CRMの構築から、AIを活用した営業教育・型化まで。自走化を加速。",
+                accentBorder: "border-sky-400",
+                accentBg: "bg-sky-200",
+                accentText: "text-sky-800",
+              },
+              {
+                num: "03",
+                title: "リファボンド",
+                subtitle: "成果報酬型・決裁者紹介",
+                body: "大手決裁者への人脈紹介。完全成果報酬型のため、リスクなく開拓が可能。",
+                accentBorder: "border-emerald-300",
+                accentBg: "bg-emerald-100",
+                accentText: "text-emerald-700",
+              },
+            ].map((opt) => (
+              <li key={opt.num}>
+                <div
+                  className={`h-full rounded-2xl border-2 ${opt.accentBorder} bg-white p-6`}
+                >
+                  <span
+                    className={`inline-flex items-center rounded-full ${opt.accentBg} px-3 py-1 text-[11px] font-extrabold tracking-[0.18em] uppercase ${opt.accentText}`}
+                  >
+                    Option {opt.num}
+                  </span>
+                  <h3 className="mt-4 text-xl font-black text-ink">
+                    {opt.title}
+                  </h3>
+                  <p className={`mt-1 text-sm font-bold ${opt.accentText}`}>
+                    {opt.subtitle}
+                  </p>
+                  <p className="mt-4 text-sm leading-relaxed text-ink-soft font-medium">
+                    {opt.body}
+                  </p>
+                </div>
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
 
