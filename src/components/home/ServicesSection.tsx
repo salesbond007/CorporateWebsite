@@ -63,6 +63,10 @@ export function ServicesSection({ locale, dict }: Props) {
                   <p className="mt-5 text-sm leading-relaxed text-ink font-medium">
                     {s.summary}
                   </p>
+                  <p className="mt-5 inline-flex items-center gap-1 text-xs font-bold text-brand-600 group-hover:gap-2 transition-all">
+                    サービス詳細を見る
+                    <span aria-hidden="true">→</span>
+                  </p>
                 </Link>
               </Reveal>
             </li>
