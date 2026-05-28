@@ -362,34 +362,15 @@ export default function KeymanBondPage({
           <p className="mt-8 text-center text-xs text-ink-muted">
             ※ プロフィールは一例です。貴社の課題に応じて最適な人材をご提案します。
           </p>
-        </Container>
-      </section>
 
-      {/* ───── For Talent (個人の皆さまへ) ───── */}
-      <section className="bg-cream py-20 md:py-24">
-        <Container>
-          <div className="rounded-2xl border-2 border-ink bg-white p-8 md:p-12">
-            <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
-                  For Talent
-                </p>
-                <h2 className="mt-3 text-xl md:text-2xl font-black text-ink leading-snug">
-                  プロ人材として活躍したい方へ
-                </h2>
-                <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                  これまで培った経験・専門性を、企業の経営課題解決に活かしませんか。活躍の場をご用意しています。
-                </p>
-              </div>
-              <Button
-                href={localePath("/contact/professional", locale)}
-                size="lg"
-                variant="secondary"
-                className="shrink-0"
-              >
-                登録のお問い合わせ
-              </Button>
-            </div>
+          <div className="mt-12 flex justify-center">
+            <Button
+              href={localePath("/contact/professional", locale)}
+              size="lg"
+              className="!h-[64px] px-10 text-base font-black !bg-[#BE123C] hover:!bg-rose-700 shadow-[0_18px_40px_-12px_rgba(190,18,60,0.6)] hover:-translate-y-1 md:!h-[72px] md:px-14 md:text-lg"
+            >
+              プロ人材として活躍したい方はこちら →
+            </Button>
           </div>
         </Container>
       </section>
