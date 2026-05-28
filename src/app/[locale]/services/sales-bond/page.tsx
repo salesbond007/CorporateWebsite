@@ -501,21 +501,17 @@ export default function ReferBondPage({
             </p>
           </div>
 
-          {/* Service explanation image (placeholder — swap with real image later) */}
-          <div className="mx-auto mt-12 max-w-3xl">
-            <div
-              aria-hidden="true"
-              className="grid min-h-[260px] place-items-center rounded-2xl border-2 border-dashed border-ink-line bg-cream p-6 md:min-h-[360px]"
-            >
-              <div className="text-center">
-                <p className="text-sm font-bold tracking-wide text-ink-muted">
-                  サービス説明画像
-                </p>
-                <p className="mt-1 text-xs text-ink-muted/70">
-                  ここに画像が入ります(後ほど挿入)
-                </p>
-              </div>
-            </div>
+          {/* Service explanation image */}
+          <div className="mx-auto mt-12 max-w-4xl">
+            <Image
+              src="https://i.imgur.com/J89f30K.png"
+              alt="リファボンドのサービス説明"
+              width={1600}
+              height={900}
+              sizes="(min-width: 1024px) 896px, (min-width: 768px) 90vw, 100vw"
+              className="h-auto w-full rounded-2xl"
+              style={{ height: "auto" }}
+            />
           </div>
 
           {/* 3-step concept cards */}
