@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -47,30 +49,7 @@ const pros: Pro[] = [
   { field: "営業・事業開発", catch: "戦略から販路開拓まで、売上の最大化を実現するプロ" },
 ];
 
-type Faq = { q: string; a: string };
-
-const faqs: Faq[] = [
-  {
-    q: "どんな領域・課題に対応できますか?",
-    a: "新規事業・マーケティング・人事・DX・財務・営業・海外展開・法務など、幅広い経営領域に対応しています。まずは無料相談で貴社の課題をお聞かせください。",
-  },
-  {
-    q: "どのような契約形態になりますか?",
-    a: "アドバイザー(顧問)・業務委託・社外役員など、課題と関与度に応じて柔軟に設計します。スポットでのご相談から継続的な伴走まで対応可能です。",
-  },
-  {
-    q: "費用感はどのくらいですか?",
-    a: "起用するプロ人材の領域・関与度・期間によって変動します。ご予算に合わせた設計が可能ですので、まずは無料相談・資料請求でご確認ください。",
-  },
-  {
-    q: "稼働開始までどのくらいかかりますか?",
-    a: "ヒアリングのうえ要件に合うプロ人材をご提案し、面談を経て稼働開始となります。課題の内容により異なりますので、個別にご案内します。",
-  },
-  {
-    q: "プロ人材として登録したいのですが?",
-    a: "経験・専門性を活かしてご活躍いただけるプロ人材を募集しています。お問い合わせよりご連絡ください。",
-  },
-];
+type Faq = { q: string; a: ReactNode };
 
 export default function KeymanBondPage({
   params,
@@ -83,6 +62,41 @@ export default function KeymanBondPage({
   if (!service) notFound();
 
   const contactHref = localePath("/contact", locale);
+  const professionalHref = localePath("/contact/professional", locale);
+
+  const faqs: Faq[] = [
+    {
+      q: "どんな領域・課題に対応できますか?",
+      a: "新規事業・マーケティング・人事・DX・財務・営業・海外展開・法務など、幅広い経営領域に対応しています。まずは無料相談で貴社の課題をお聞かせください。",
+    },
+    {
+      q: "どのような契約形態になりますか?",
+      a: "アドバイザー(顧問)・業務委託・社外役員など、課題と関与度に応じて柔軟に設計します。スポットでのご相談から継続的な伴走まで対応可能です。",
+    },
+    {
+      q: "費用感はどのくらいですか?",
+      a: "起用するプロ人材の領域・関与度・期間によって変動します。ご予算に合わせた設計が可能ですので、まずは無料相談・資料請求でご確認ください。",
+    },
+    {
+      q: "稼働開始までどのくらいかかりますか?",
+      a: "ヒアリングのうえ要件に合うプロ人材をご提案し、面談を経て稼働開始となります。課題の内容により異なりますので、個別にご案内します。",
+    },
+    {
+      q: "プロ人材として登録したいのですが?",
+      a: (
+        <>
+          経験・専門性を活かしてご活躍いただけるプロ人材を募集しています。
+          <Link
+            href={professionalHref}
+            className="font-bold text-rose-700 underline underline-offset-2 hover:text-rose-800"
+          >
+            個人登録のお問い合わせ
+          </Link>
+          よりご連絡ください。
+        </>
+      ),
+    },
+  ];
 
   return (
     <>
@@ -361,7 +375,7 @@ export default function KeymanBondPage({
 
           <div className="mt-12 flex justify-center">
             <Button
-              href={localePath("/contact/professional", locale)}
+              href={professionalHref}
               size="lg"
               className="!h-[64px] px-10 text-base font-black !bg-[#BE123C] hover:!bg-rose-700 shadow-[0_18px_40px_-12px_rgba(190,18,60,0.6)] hover:-translate-y-1 md:!h-[72px] md:px-14 md:text-lg"
             >
