@@ -83,13 +83,14 @@ function ChallengeIcon({ index }: { index: number }) {
   }
 }
 
-type Reason = { number: string; title: string; body: string };
+type Reason = { number: string; title: string; body: string; image?: string };
 
 const reasons: Reason[] = [
   {
     number: "01",
-    title: "会いたい決裁者と、ピンポイントでつながる",
-    body: "「地方を攻めたい」「ベンチャーに会いたい」「大手と商談したい」など、多様なご要望に柔軟に対応します。ターゲットを指定できるため費用対効果の高い開拓が実現します。",
+    title: "大手/上場企業の決裁者との商談を実現!",
+    body: "「大手/上場企業を開拓したい」「地方を攻めたい」「ベンチャーに会いたい」など、多様なご要望に柔軟に対応します。ターゲットを指定できるため費用対効果の高い開拓が実現します。",
+    image: "https://i.imgur.com/gQXW8Lx.png",
   },
   {
     number: "02",
@@ -587,11 +588,25 @@ export default function ReferBondPage({
                             {r.body}
                           </p>
                         </div>
-                        {/* Illustration placeholder */}
-                        <div
-                          aria-hidden="true"
-                          className={`mx-auto aspect-square w-full max-w-sm rounded-xl bg-cream ${reverse ? "md:order-1" : ""}`}
-                        />
+                        {/* Visual: image if provided, otherwise placeholder */}
+                        {r.image ? (
+                          <div className={`mx-auto w-full max-w-sm ${reverse ? "md:order-1" : ""}`}>
+                            <Image
+                              src={r.image}
+                              alt={r.title}
+                              width={1200}
+                              height={1200}
+                              sizes="(min-width: 1024px) 384px, (min-width: 640px) 50vw, 90vw"
+                              className="h-auto w-full rounded-xl"
+                              style={{ height: "auto" }}
+                            />
+                          </div>
+                        ) : (
+                          <div
+                            aria-hidden="true"
+                            className={`mx-auto aspect-square w-full max-w-sm rounded-xl bg-cream ${reverse ? "md:order-1" : ""}`}
+                          />
+                        )}
                       </div>
                     </div>
                   </Reveal>
