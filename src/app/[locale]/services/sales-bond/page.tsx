@@ -83,7 +83,45 @@ function ChallengeIcon({ index }: { index: number }) {
   }
 }
 
-type Reason = { number: string; title: string; body: string; image?: string };
+type Reason = {
+  number: string;
+  title: string;
+  body: string;
+  image?: string;
+  bodyHighlights?: string[];
+};
+
+function renderBodyWithUnderlines(body: string, highlights?: string[]) {
+  if (!highlights || highlights.length === 0) return body;
+  const matches: { start: number; end: number; text: string }[] = [];
+  for (const hl of highlights) {
+    let idx = body.indexOf(hl);
+    while (idx !== -1) {
+      matches.push({ start: idx, end: idx + hl.length, text: hl });
+      idx = body.indexOf(hl, idx + hl.length);
+    }
+  }
+  if (matches.length === 0) return body;
+  matches.sort((a, b) => a.start - b.start);
+  const out: React.ReactNode[] = [];
+  let cursor = 0;
+  matches.forEach((m, i) => {
+    if (m.start < cursor) return;
+    if (m.start > cursor) out.push(body.slice(cursor, m.start));
+    out.push(
+      <span key={i} className="relative inline-block font-bold text-ink">
+        {m.text}
+        <span
+          aria-hidden="true"
+          className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-amber-400"
+        />
+      </span>,
+    );
+    cursor = m.end;
+  });
+  if (cursor < body.length) out.push(body.slice(cursor));
+  return out;
+}
 
 const reasons: Reason[] = [
   {
@@ -91,16 +129,18 @@ const reasons: Reason[] = [
     title: "大手/上場企業の決裁者との商談を実現!",
     body: "「大手/上場企業を開拓したい」「地方を攻めたい」「ベンチャーに会いたい」など、多様なご要望に柔軟に対応します。ターゲットを指定できるため費用対効果の高い開拓が実現します。",
     image: "https://i.imgur.com/gQXW8Lx.png",
+    bodyHighlights: ["大手/上場企業", "地方", "ベンチャー"],
   },
   {
     number: "02",
     title: "月額費用 0 円の完全成果報酬型!",
-    body: "初期費用も月額費用も 0 円。アポ単価のみの完全成果報酬だから、ローリスクではじめられます。",
+    body: "初期費用も月額費用も 0 円。アポイント単価のみの完全成果報酬型だから、ローリスクではじめられます。",
     image: "https://i.imgur.com/P1GeVIm.png",
+    bodyHighlights: ["完全成果報酬型"],
   },
   {
     number: "03",
-    title: "紹介経由だから信頼を起点に商談がはじまる",
+    title: "紹介だから、信頼がある状態から商談が始まる",
     body: "テレアポや飛び込みと違い、紹介経由だから初回から信頼ベースで商談がスタートします。",
   },
 ];
@@ -523,7 +563,7 @@ export default function ReferBondPage({
         <Container>
           <div className="text-center">
             <h2 className="text-display-3 text-ink font-black leading-tight">
-              リファボンドの特徴
+              リファボンドの特徴 / 選ばれる理由
             </h2>
           </div>
 
@@ -543,7 +583,7 @@ export default function ReferBondPage({
                             {r.title}
                           </h3>
                           <p className="mt-4 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                            {r.body}
+                            {renderBodyWithUnderlines(r.body, r.bodyHighlights)}
                           </p>
                         </div>
                         {/* Visual: image if provided, otherwise placeholder */}
