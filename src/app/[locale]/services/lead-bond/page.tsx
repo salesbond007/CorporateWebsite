@@ -562,7 +562,25 @@ export default function SalesSupportPage({
               />
 
               <p className="mt-6 text-sm md:text-base leading-relaxed text-white/85 font-medium">
-                営業は、戦略・実行・仕組み化のどこか一つが欠けても成果になりません。多くの企業がそれぞれの工程を別の会社や部門に切り分けて発注し、結果として「点」の支援に終わってしまっています。セルボンドは、戦略立案からアポ獲得、商談、成約、そしてAIによる再現性の構築までを一気通貫で担う、BtoB特化の営業支援チームです。
+                営業は、
+                <span className="font-black text-white">
+                  戦略・実行・仕組み化
+                </span>
+                のどこか一つが欠けても成果になりません。多くの企業がそれぞれの工程を別の会社や部門に切り分けて発注し、結果として
+                <span className="font-bold text-sky-300">「点」の支援</span>
+                に終わってしまっています。セルボンドは、戦略立案からアポ獲得、商談、成約、そしてAIによる再現性の構築までを
+                <span className="relative inline-block font-black text-sky-300">
+                  一気通貫
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-amber-300"
+                  />
+                </span>
+                で担う、
+                <span className="font-black text-white">
+                  BtoB特化の営業支援チーム
+                </span>
+                です。
               </p>
 
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
@@ -602,52 +620,52 @@ export default function SalesSupportPage({
             </p>
           </div>
 
-          {/* CORE band */}
-          <div className="mx-auto mt-12 max-w-5xl">
-            <div className="overflow-hidden rounded-2xl bg-sky-500 px-5 py-6 text-white md:px-8 md:py-8">
-              <div className="flex flex-wrap items-center gap-3">
-                <span className="inline-flex items-center rounded-full bg-white px-4 py-1 text-xs font-extrabold tracking-[0.18em] uppercase text-sky-600">
+          {/* CORE band — main emphasis */}
+          <div className="mx-auto mt-12 max-w-6xl">
+            <div className="overflow-hidden rounded-3xl bg-sky-500 px-6 py-10 text-white shadow-[0_30px_60px_-20px_rgba(14,165,233,0.45)] md:px-12 md:py-14">
+              <div className="flex flex-wrap items-center gap-4">
+                <span className="inline-flex items-center rounded-full bg-white px-5 py-1.5 text-sm font-extrabold tracking-[0.18em] uppercase text-sky-600 md:text-base">
                   Core
                 </span>
-                <span className="text-base md:text-xl font-black">
+                <span className="text-xl md:text-3xl font-black">
                   戦略〜成約までを一気通貫で支援
                 </span>
               </div>
-              <ol className="mt-5 flex flex-col items-stretch gap-2 md:flex-row md:items-center">
+              <ol className="mt-8 flex flex-col items-stretch gap-3 md:flex-row md:items-center">
                 {["戦略立案", "アポ獲得", "商談", "クロージング", "成約"].map(
                   (label, i, arr) => (
-                    <li key={label} className="flex flex-1 items-center gap-2">
-                      <div className="flex-1 rounded-full bg-white px-3 py-2 text-center text-sm font-black text-sky-700 md:text-base">
+                    <li key={label} className="flex flex-1 items-center gap-2 md:gap-3">
+                      <div className="flex-1 rounded-full bg-white px-4 py-3 text-center text-base font-black text-sky-700 shadow-sm md:py-4 md:text-lg">
                         {label}
                       </div>
                       {i < arr.length - 1 ? (
                         <span aria-hidden="true" className="shrink-0 text-white">
                           <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 20 20"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
                             fill="none"
                             className="hidden md:block"
                           >
                             <path
-                              d="M4 10h12M11 5l5 5-5 5"
+                              d="M4 12h14M13 6l6 6-6 6"
                               stroke="currentColor"
-                              strokeWidth="2"
+                              strokeWidth="2.2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
                             />
                           </svg>
                           <svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 20 20"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
                             fill="none"
                             className="mx-auto block md:hidden"
                           >
                             <path
-                              d="M10 4v12M5 11l5 5 5-5"
+                              d="M12 4v14M6 13l6 6 6-6"
                               stroke="currentColor"
-                              strokeWidth="2"
+                              strokeWidth="2.2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
                             />
@@ -671,8 +689,11 @@ export default function SalesSupportPage({
             </span>
           </div>
 
-          {/* 3 options */}
-          <ul className="mx-auto grid max-w-5xl gap-5 md:grid-cols-3">
+          {/* 3 options — secondary, smaller cards */}
+          <p className="mx-auto mb-4 max-w-3xl text-center text-xs font-bold text-ink-muted md:text-sm">
+            必要に応じて組み合わせ可能なオプション
+          </p>
+          <ul className="mx-auto grid max-w-3xl gap-3 sm:grid-cols-3">
             {[
               {
                 num: "01",
@@ -704,20 +725,20 @@ export default function SalesSupportPage({
             ].map((opt) => (
               <li key={opt.num}>
                 <div
-                  className={`h-full rounded-2xl border-2 ${opt.accentBorder} bg-white p-6`}
+                  className={`h-full rounded-xl border ${opt.accentBorder} bg-white p-4`}
                 >
                   <span
-                    className={`inline-flex items-center rounded-full ${opt.accentBg} px-3 py-1 text-[11px] font-extrabold tracking-[0.18em] uppercase ${opt.accentText}`}
+                    className={`inline-flex items-center rounded-full ${opt.accentBg} px-2 py-0.5 text-[10px] font-extrabold tracking-[0.16em] uppercase ${opt.accentText}`}
                   >
                     Option {opt.num}
                   </span>
-                  <h3 className="mt-4 text-xl font-black text-ink">
+                  <h3 className="mt-2 text-base font-black text-ink">
                     {opt.title}
                   </h3>
-                  <p className={`mt-1 text-sm font-bold ${opt.accentText}`}>
+                  <p className={`mt-0.5 text-[11px] font-bold ${opt.accentText}`}>
                     {opt.subtitle}
                   </p>
-                  <p className="mt-4 text-sm leading-relaxed text-ink-soft font-medium">
+                  <p className="mt-2 text-xs leading-relaxed text-ink-soft font-medium">
                     {opt.body}
                   </p>
                 </div>
