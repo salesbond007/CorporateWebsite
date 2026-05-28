@@ -233,11 +233,6 @@ export default function KeymanBondPage({
               </span>
               を「アドバイザー」「顧問」「社外役員」として提案する経営支援サービスです。
             </p>
-            <p className="mt-5 text-base md:text-lg leading-[1.95] text-ink-soft font-medium">
-              助言だけでなく現場に入り込む
-              <span className="font-bold text-ink">「実働型」の支援</span>
-              で、新規事業・マーケ・DX・人事・財務・海外展開まで、事業成長のあらゆるフェーズで生じる課題に伴走します。
-            </p>
           </div>
 
           <ul className="mx-auto mt-14 grid max-w-4xl gap-6 md:grid-cols-3">
