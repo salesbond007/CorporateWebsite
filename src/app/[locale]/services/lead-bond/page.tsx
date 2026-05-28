@@ -352,6 +352,10 @@ export default function SalesSupportPage({
 
         <Container className="relative py-16 md:py-20 lg:py-24">
           <div className="max-w-3xl">
+            <p className="mb-6 inline-flex items-center gap-2 rounded-full bg-white px-4 py-1.5 text-sm font-extrabold tracking-[0.16em] text-sky-600 shadow-sm ring-1 ring-sky-200 md:text-base">
+              <span aria-hidden="true" className="h-2 w-2 rounded-full bg-sky-500" />
+              セルボンド
+            </p>
             <h1 className="font-display font-black leading-[1.15] tracking-tight text-ink">
               <span className="block text-[clamp(2.25rem,6vw,4.25rem)]">
                 成約まで
