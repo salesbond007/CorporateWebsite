@@ -825,7 +825,7 @@ export default function SalesSupportPage({
               Features
             </p>
             <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              セルボンドの内容 / 特徴
+              セルボンドが選ばれる理由
             </h2>
           </div>
 
