@@ -25,10 +25,7 @@ export function CTASection({ locale, dict }: Props) {
 
           <div className="relative grid items-center gap-10 md:grid-cols-2">
             <div>
-              <p className="text-xs md:text-sm font-extrabold uppercase tracking-[0.18em] text-white">
-                Get in touch
-              </p>
-              <h2 className="mt-4 text-display-2 text-white leading-tight">
+              <h2 className="text-display-2 text-white leading-tight">
                 無料で相談する
               </h2>
               <p className="mt-7 max-w-xl text-white/90 leading-relaxed font-medium">
