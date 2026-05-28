@@ -488,28 +488,13 @@ export default function ReferBondPage({
       {/* ───── What is Refer Bond ───── */}
       <section className="bg-white py-24 md:py-32">
         <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="text-display-3 text-ink font-black leading-tight">
-              リファボンドとは?
-            </h2>
-            <p className="mt-8 text-base md:text-lg leading-[1.95] text-ink font-medium">
-              リファボンドは、各業界の
-              <span className="font-black">経営層・幹部経験者・現役経営者</span>
-              の
-              <span className="font-black text-emerald-500">人脈を活用して決裁者を紹介</span>
-              するサービスです。テレアポ・広告・展示会などでは到達できない
-              <span className="font-bold">決裁者との商談を実現</span>
-              します。
-            </p>
-          </div>
-
           {/* Service explanation headline + image */}
-          <h3 className="mx-auto mt-14 max-w-4xl text-center font-display font-black leading-tight text-ink text-[clamp(1.5rem,4vw,2.5rem)]">
+          <h2 className="mx-auto max-w-4xl text-center font-display font-black leading-tight text-ink text-display-3">
             人脈を活用して
             <span className="text-emerald-500">決裁者</span>
             を紹介!
-          </h3>
-          <div className="mx-auto mt-8 max-w-5xl">
+          </h2>
+          <div className="mx-auto mt-10 max-w-5xl">
             <Image
               src="https://i.imgur.com/J89f30K.png"
               alt="リファボンドのサービス説明"
