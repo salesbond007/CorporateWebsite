@@ -35,6 +35,7 @@ export function Hero({ locale, dict }: Props) {
           <div className="lg:col-span-7 animate-fade-up">
             <h1 className="text-display-2 text-ink font-extrabold leading-[1.1]">
               {dict.hero.titleLine1}
+              <br />
               <span className="text-brand-500">
                 {dict.hero.titleHighlight}
               </span>
