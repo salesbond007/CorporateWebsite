@@ -518,12 +518,12 @@ export default function KeymanBondPage({
                       </span>
                     </div>
 
-                    <div className="relative mt-6 grid place-items-center">
+                    <div className="relative mt-6 grid h-[180px] place-items-center">
                       <FeatureDiagram kind={c.kind} />
                     </div>
 
-                    <div className="relative mt-6">
-                      <h3 className="text-xl font-black leading-tight text-ink">
+                    <div className="relative mt-6 flex flex-1 flex-col">
+                      <h3 className="min-h-[2.75rem] text-xl font-black leading-tight text-ink">
                         {c.t}
                       </h3>
                       <span
