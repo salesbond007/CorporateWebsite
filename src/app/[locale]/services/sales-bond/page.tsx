@@ -147,7 +147,7 @@ const reasons: Reason[] = [
   },
 ];
 
-type FlowStep = { digit: string; title: string; body: string };
+type FlowStep = { digit: string; title: string; body: React.ReactNode };
 
 const logos: string[] = [
   "https://i.imgur.com/DsBUTxo.png",
@@ -158,11 +158,6 @@ const logos: string[] = [
 ];
 
 const flowSteps: FlowStep[] = [
-  {
-    digit: "1",
-    title: "お問い合わせ",
-    body: "本ページのフォームより、貴社の課題・ターゲット像をお知らせください。",
-  },
   {
     digit: "2",
     title: "ヒアリング・ご提案",
@@ -175,8 +170,13 @@ const flowSteps: FlowStep[] = [
   },
   {
     digit: "4",
-    title: "商談実施 → 成果報酬",
-    body: "商談実施で成果報酬が発生。成約報酬は任意設定で別途設計いただけます。",
+    title: "商談実施",
+    body: "貴社と決裁者との商談を実施。実施完了をもって商談1件分の成果報酬が発生します。",
+  },
+  {
+    digit: "5",
+    title: "成果報酬",
+    body: "商談実施分の成果報酬をお支払いいただきます。成約報酬は任意設定で別途設計いただけます。",
   },
 ];
 
@@ -220,6 +220,26 @@ export default function ReferBondPage({
   if (!service) notFound();
 
   const contactHref = localePath("/contact", locale);
+
+  const allFlowSteps: FlowStep[] = [
+    {
+      digit: "1",
+      title: "お問い合わせ",
+      body: (
+        <>
+          弊社の
+          <Link
+            href={contactHref}
+            className="font-bold text-emerald-600 underline underline-offset-2 hover:text-emerald-700"
+          >
+            法人向けお問い合わせフォーム
+          </Link>
+          より問い合わせをお願いします。
+        </>
+      ),
+    },
+    ...flowSteps,
+  ];
 
   return (
     <>
@@ -632,8 +652,8 @@ export default function ReferBondPage({
             </p>
           </div>
 
-          <ol className="mt-14 grid gap-6 lg:grid-cols-4 lg:gap-3">
-            {flowSteps.map((s, i) => (
+          <ol className="mt-14 grid gap-6 lg:grid-cols-5 lg:gap-3">
+            {allFlowSteps.map((s, i) => (
               <li
                 key={s.digit}
                 className="relative flex h-full flex-col border-2 border-ink bg-white p-6 md:p-7"
@@ -653,7 +673,7 @@ export default function ReferBondPage({
                   {s.body}
                 </p>
 
-                {i < flowSteps.length - 1 ? (
+                {i < allFlowSteps.length - 1 ? (
                   <>
                     <span
                       aria-hidden="true"
