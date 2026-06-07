@@ -73,7 +73,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
           articleJsonLd(article),
           breadcrumbJsonLd([
             { name: "ホーム", url: localePath("/", locale) },
-            { name: "記事一覧", url: localePath("/blog", locale) },
+            { name: "メディア", url: localePath("/blog", locale) },
             {
               name: article.title,
               url: localePath(`/blog/${article.slug}`, locale),
@@ -89,7 +89,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
                 href={localePath("/blog", locale)}
                 className="hover:text-ink"
               >
-                記事一覧
+                メディア
               </Link>
               <span className="mx-2">/</span>
               <time dateTime={article.publishedAt}>{date}</time>

@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
 export const metadata: Metadata = {
   title: "会社概要",
   description:
-    "セールスボンド株式会社（Sales Bond Co., Ltd.）の会社概要。本社所在地、代表者、事業内容（大手決裁者紹介サービス・プロ人材マッチングサービス・営業BPO事業）など。",
+    "セールスボンド株式会社（Sales Bond Co., Ltd.）の会社概要。本社所在地、代表者、事業内容（大手決裁者紹介サービス・プロ人材/顧問マッチングサービス・営業BPO事業）など。",
 };
 
 type Office = {
@@ -31,6 +34,7 @@ const rows: { label: string; value: React.ReactNode }[] = [
   { label: "代表取締役", value: "飯住 孝裕" },
   { label: "設立", value: "2024年7月" },
   { label: "資本金", value: "41,002,000円" },
+  { label: "従業員数", value: "34名(業務委託を含む)" },
   { label: "登録番号", value: "T8012801023311" },
   {
     label: "住所",
@@ -55,7 +59,7 @@ const rows: { label: string; value: React.ReactNode }[] = [
     value: (
       <ul className="space-y-1.5">
         <li>大手決裁者紹介サービス</li>
-        <li>プロ人材マッチングサービス</li>
+        <li>プロ人材/顧問マッチングサービス</li>
         <li>営業BPO事業</li>
       </ul>
     ),
@@ -69,9 +73,16 @@ export default function CompanyPage({
   params: { locale: string };
 }) {
   if (!isLocale(params.locale)) notFound();
+  const locale = params.locale;
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "ホーム", url: localePath("/", locale) },
+          { name: "会社概要", url: localePath("/company", locale) },
+        ])}
+      />
       {/* Company Profile */}
       <section className="pt-20 pb-20 md:pt-28 md:pb-28">
         <Container>

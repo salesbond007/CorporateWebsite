@@ -44,6 +44,20 @@ export function websiteJsonLd() {
     name: site.name,
     url: base,
     inLanguage: "ja",
+    publisher: {
+      "@type": "Organization",
+      name: site.legalName,
+      url: base,
+      logo: `${base}/logo-square.jpg`,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: `${base}/ja/blog/search?q={search_term_string}`,
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 }
 

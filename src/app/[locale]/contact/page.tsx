@@ -4,14 +4,16 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { SimpleContactForm } from "@/components/contact/SimpleContactForm";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "お問い合わせ",
+  title: "お問い合わせ/無料相談",
   description:
-    "セールスボンド株式会社へのお問い合わせはこちらから。サービスに関するご相談・採用に関するお問い合わせを受け付けています。",
+    "セールスボンド株式会社へのお問い合わせ・無料相談はこちらから。サービスに関するご相談・お見積もり・採用に関するお問い合わせを受け付けています。",
 };
 
 export default function ContactPage({
@@ -24,16 +26,26 @@ export default function ContactPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "ホーム", url: localePath("/", locale) },
+          { name: "お問い合わせ/無料相談", url: localePath("/contact", locale) },
+        ])}
+      />
       <PageHero
-        eyebrow="Contact / Business"
-        title="お問い合わせ"
+        eyebrow="Contact"
+        title="お問い合わせ/無料相談"
         description="サービスに関するご相談、その他ご質問はこちらのフォームからお送りください。"
       />
 
       <section className="py-20 md:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-12">
-            <aside className="lg:col-span-4">
+            <div className="lg:col-start-5 lg:col-span-8 lg:row-start-1">
+              <SimpleContactForm locale={locale} />
+            </div>
+
+            <aside className="lg:col-start-1 lg:col-span-4 lg:row-start-1">
               <div className="rounded-xl2 border border-ink-line p-8">
                 <h2 className="text-lg font-bold">受付について</h2>
                 <p className="mt-3 text-sm text-ink-soft leading-relaxed">
@@ -59,42 +71,21 @@ export default function ContactPage({
 
               <div className="mt-6 rounded-xl2 bg-cream p-8">
                 <h3 className="text-sm font-semibold text-ink-muted">
-                  プロ人材の方へ
+                  個人の方へ
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed">
-                  プロ人材としてご活躍いただける方は、こちらの専用フォームよりご応募ください。
-                </p>
-                <div className="mt-4">
-                  <Link
-                    href={localePath("/contact/professional", locale)}
-                    className="link-arrow"
-                  >
-                    プロ人材の方のお問い合わせ
-                  </Link>
-                </div>
-              </div>
-
-              <div className="mt-6 rounded-xl2 bg-cream p-8">
-                <h3 className="text-sm font-semibold text-ink-muted">
-                  紹介営業パートナーの方へ
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed">
-                  お持ちの人脈を活かして企業開拓にご協力いただける方は、こちらからご登録ください。
+                  お持ちの人脈や知見を活かして当社にご協力いただける方は、こちらをご覧ください。
                 </p>
                 <div className="mt-4">
                   <Link
                     href={localePath("/contact/partner", locale)}
                     className="link-arrow"
                   >
-                    紹介営業パートナー登録
+                    個人の方はこちら
                   </Link>
                 </div>
               </div>
             </aside>
-
-            <div className="lg:col-span-8">
-              <SimpleContactForm locale={locale} />
-            </div>
           </div>
         </Container>
       </section>

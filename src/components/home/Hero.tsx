@@ -35,6 +35,7 @@ export function Hero({ locale, dict }: Props) {
           <div className="lg:col-span-7 animate-fade-up">
             <h1 className="text-display-2 text-ink font-extrabold leading-[1.1]">
               {dict.hero.titleLine1}
+              <br />
               <span className="text-brand-500">
                 {dict.hero.titleHighlight}
               </span>
@@ -47,7 +48,7 @@ export function Hero({ locale, dict }: Props) {
               </span>
               {dict.hero.subtitleSuffix}
             </p>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="mt-10 flex flex-wrap justify-center gap-3 md:justify-start">
               <Button href={localePath("/services", locale)} size="lg">
                 {dict.buttons.viewServices}
               </Button>
@@ -70,7 +71,7 @@ export function Hero({ locale, dict }: Props) {
               <div className="relative rounded-xl4 bg-white p-6 md:p-8 shadow-soft overflow-hidden">
                 <Illustration src={HERO_IMAGE} variant="abstract" alt="" />
               </div>
-              <div className="absolute -bottom-5 -left-5 rounded-full bg-brand-500 px-6 py-3 text-sm font-black text-white shadow-card">
+              <div className="absolute -bottom-5 -left-5 rounded-none bg-brand-500 px-6 py-3 text-sm font-black text-white shadow-card">
                 Sales Bond
               </div>
             </div>

@@ -6,6 +6,8 @@ import { ArticleCard } from "@/components/blog/ArticleCard";
 import { Pagination } from "@/components/blog/Pagination";
 import { CategoryNav } from "@/components/blog/CategoryNav";
 import { SearchBox } from "@/components/blog/SearchBox";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { breadcrumbJsonLd } from "@/lib/jsonld";
 import {
   getArticles,
   getCategories,
@@ -16,8 +18,9 @@ import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 
 export const metadata: Metadata = {
-  title: "記事・お知らせ",
-  description: "TODO: ブログ一覧のメタディスクリプション",
+  title: "メディア",
+  description:
+    "セールスボンドが発信するメディア。営業・マーケティング・組織開発・人材活用に関する記事・お知らせをお届けします。",
 };
 
 export const revalidate = 60;
@@ -56,9 +59,15 @@ export default async function BlogPage({
 
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "ホーム", url: localePath("/", locale) },
+          { name: "メディア", url: localePath("/blog", locale) },
+        ])}
+      />
       <PageHero
-        eyebrow="Insights"
-        title="記事・お知らせ"
+        eyebrow="Media"
+        title="メディア"
       />
 
       <section className="py-20 md:py-28">

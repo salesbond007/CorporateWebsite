@@ -13,7 +13,7 @@ export function CTASection({ locale, dict }: Props) {
   return (
     <section className="py-24 md:py-32">
       <Container>
-        <div className="relative overflow-hidden rounded-xl4 bg-brand-500 px-8 py-16 md:px-16 md:py-20">
+        <div className="relative overflow-hidden rounded-none bg-brand-500 px-8 py-16 md:px-16 md:py-20">
           <div
             className="absolute -right-24 -top-24 h-80 w-80 rounded-full bg-white/15"
             aria-hidden="true"
@@ -25,15 +25,12 @@ export function CTASection({ locale, dict }: Props) {
 
           <div className="relative grid items-center gap-10 md:grid-cols-2">
             <div>
-              <p className="text-xs md:text-sm font-extrabold uppercase tracking-[0.18em] text-white">
-                Get in touch
-              </p>
-              <h2 className="mt-4 text-display-2 text-white leading-tight">
-                ご相談はこちら
+              <h2 className="text-display-2 text-white leading-tight">
+                無料で相談する
               </h2>
               <p className="mt-7 max-w-xl text-white/90 leading-relaxed font-medium">
                 サービスの詳細・お見積もり・導入事例など、貴社の課題に合わせてご提案します。
-                プロ人材・紹介営業パートナーとしてご活躍いただける方も歓迎しています。
+                知見や人脈を活かしてご活躍いただける個人の方も歓迎しています。
               </p>
             </div>
 
@@ -41,25 +38,17 @@ export function CTASection({ locale, dict }: Props) {
               <Button
                 href={localePath("/contact", locale)}
                 size="lg"
-                className="bg-white !text-brand-600 hover:!bg-brand-50"
+                className="bg-white !text-brand-600 hover:!bg-brand-50 md:w-72"
               >
                 {dict.nav.contact}
-              </Button>
-              <Button
-                href={localePath("/contact/professional", locale)}
-                size="lg"
-                variant="ghost"
-                className="!text-white border-2 border-white/60 hover:!bg-white/15"
-              >
-                {dict.nav.contactProfessional}
               </Button>
               <Button
                 href={localePath("/contact/partner", locale)}
                 size="lg"
                 variant="ghost"
-                className="!text-white border-2 border-white/60 hover:!bg-white/15"
+                className="!text-white border-2 border-white/60 hover:!bg-white/15 md:w-72"
               >
-                {dict.nav.contactPartner}
+                個人の方はこちら
               </Button>
             </div>
           </div>

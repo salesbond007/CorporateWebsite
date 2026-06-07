@@ -40,15 +40,9 @@ export function MobileMenu({ locale, dict }: Props) {
       className: "bg-brand-500 text-white hover:bg-brand-600",
     },
     {
-      href: "/contact/professional",
-      label: `${dict.nav.contactProfessional}はこちら`,
-      className: "bg-ink text-white hover:bg-ink-soft",
-    },
-    {
       href: "/contact/partner",
-      label: `${dict.nav.contactPartner}登録`,
-      className:
-        "bg-white text-ink border-2 border-ink hover:bg-ink hover:text-white",
+      label: "個人の方はこちら",
+      className: "bg-ink text-white hover:bg-ink-soft",
     },
   ];
 
@@ -122,7 +116,7 @@ export function MobileMenu({ locale, dict }: Props) {
                   href={localePath(item.href, locale)}
                   onClick={() => setOpen(false)}
                   className={cn(
-                    "flex items-center justify-between rounded-xl px-4 py-3.5 text-sm font-semibold transition",
+                    "flex items-center justify-between rounded-none px-4 py-3.5 text-sm font-semibold transition",
                     item.className,
                   )}
                 >

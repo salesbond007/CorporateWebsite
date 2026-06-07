@@ -4,9 +4,11 @@ import Link from "next/link";
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { TextField, TextareaField, SelectField } from "./Field";
+import { CompanyAutocomplete } from "./CompanyAutocomplete";
 import { localePath } from "@/i18n/path";
 import { cn } from "@/lib/cn";
 import { isEmailFormat, isFreeEmail } from "@/lib/email";
+import { isValidPhone, normalizePhone } from "@/lib/phone";
 import type { Locale } from "@/i18n/config";
 
 type Props = {
@@ -23,9 +25,9 @@ const inquiryTypeLabels: Record<InquiryType, string> = {
 };
 
 const serviceOptions = [
-  { id: "sales-bond", label: "セールスボンド（大手決裁者紹介サービス）について" },
-  { id: "keyman-bond", label: "キーマンボンド（プロ人材マッチングサービス）について" },
-  { id: "lead-bond", label: "リードボンド（インサイドセールス代行サービス）について" },
+  { id: "sales-bond", label: "リファボンド(大手決裁者紹介サービス)について" },
+  { id: "keyman-bond", label: "キーマンボンド（プロ人材/顧問マッチングサービス）について" },
+  { id: "lead-bond", label: "セルボンド(BtoB営業支援サービス)について" },
 ] as const;
 
 type ServiceId = (typeof serviceOptions)[number]["id"];
@@ -52,6 +54,8 @@ const employeeCountOptions = [
 
 type FormState = {
   company: string;
+  companyAddress: string;
+  corporateNumber: string;
   employeeCount: string;
   department: string;
   lastName: string;
@@ -67,6 +71,8 @@ type FormState = {
 
 const initial: FormState = {
   company: "",
+  companyAddress: "",
+  corporateNumber: "",
   employeeCount: "",
   department: "",
   lastName: "",
@@ -122,7 +128,11 @@ export function SimpleContactForm({ locale }: Props) {
       next.email = "フリーメール（Gmail / Yahoo 等）はご利用いただけません。勤務先のメールアドレスをご入力ください。";
     }
 
-    if (!state.phone.trim()) next.phone = "電話番号をご入力ください。";
+    if (!state.phone.trim()) {
+      next.phone = "電話番号をご入力ください。";
+    } else if (!isValidPhone(state.phone)) {
+      next.phone = "正しい電話番号をご入力ください。";
+    }
     // 部署は任意
     if (!state.position) next.position = "役職をご選択ください。";
     if (!state.employeeCount) next.employeeCount = "従業員数をご選択ください。";
@@ -154,10 +164,12 @@ export function SimpleContactForm({ locale }: Props) {
         body: JSON.stringify({
           type: "general",
           company: state.company,
+          companyAddress: state.companyAddress,
+          corporateNumber: state.corporateNumber,
           lastName: state.lastName,
           firstName: state.firstName,
           email: state.email,
-          phone: state.phone,
+          phone: normalizePhone(state.phone),
           department: state.department,
           position: state.position,
           employeeCount: state.employeeCount,
@@ -243,48 +255,59 @@ export function SimpleContactForm({ locale }: Props) {
       noValidate
       className="space-y-6 rounded-xl2 border border-ink-line bg-white p-8 md:p-10"
     >
-      {/* 1. 会社名 */}
-      <TextField
+      {/* 1. 会社名（法人番号DB連携 オートコンプリート） */}
+      <CompanyAutocomplete
         label="会社名"
         name="company"
         required
-        autoComplete="organization"
         placeholder="株式会社○○"
         value={state.company}
-        onChange={(e) => update("company", e.target.value)}
         error={errors.company}
+        onChange={(v) => {
+          update("company", v);
+          // 候補から外れた場合は紐づけ情報をリセット
+          if (state.corporateNumber) {
+            update("corporateNumber", "");
+            update("companyAddress", "");
+          }
+        }}
+        onSelect={(c) => {
+          setState((s) => ({
+            ...s,
+            company: c.name,
+            companyAddress: c.address,
+            corporateNumber: c.corporateNumber,
+          }));
+          setErrors((e) => {
+            if (!e.company) return e;
+            const { company: _omit, ...rest } = e;
+            return rest;
+          });
+        }}
       />
 
       {/* 2. 氏名 */}
-      <div>
-        <p className="flex items-center gap-2 text-sm font-semibold text-ink">
-          氏名
-          <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">
-            必須
-          </span>
-        </p>
-        <div className="mt-2 grid gap-4 md:grid-cols-2">
-          <TextField
-            label="姓"
-            name="lastName"
-            required
-            autoComplete="family-name"
-            placeholder="山田"
-            value={state.lastName}
-            onChange={(e) => update("lastName", e.target.value)}
-            error={errors.lastName}
-          />
-          <TextField
-            label="名"
-            name="firstName"
-            required
-            autoComplete="given-name"
-            placeholder="太郎"
-            value={state.firstName}
-            onChange={(e) => update("firstName", e.target.value)}
-            error={errors.firstName}
-          />
-        </div>
+      <div className="grid gap-4 md:grid-cols-2">
+        <TextField
+          label="姓"
+          name="lastName"
+          required
+          autoComplete="family-name"
+          placeholder="山田"
+          value={state.lastName}
+          onChange={(e) => update("lastName", e.target.value)}
+          error={errors.lastName}
+        />
+        <TextField
+          label="名"
+          name="firstName"
+          required
+          autoComplete="given-name"
+          placeholder="太郎"
+          value={state.firstName}
+          onChange={(e) => update("firstName", e.target.value)}
+          error={errors.firstName}
+        />
       </div>
 
       {/* 3. メールアドレス */}
@@ -309,9 +332,10 @@ export function SimpleContactForm({ locale }: Props) {
         required
         inputMode="tel"
         autoComplete="tel"
-        placeholder="03-XXXX-XXXX または 090-XXXX-XXXX"
+        placeholder="0312345678 / 09012345678 / +1234567890"
         value={state.phone}
         onChange={(e) => update("phone", e.target.value)}
+        onBlur={(e) => update("phone", normalizePhone(e.target.value))}
         error={errors.phone}
       />
 
@@ -456,7 +480,7 @@ export function SimpleContactForm({ locale }: Props) {
         </p>
       ) : null}
 
-      <div>
+      <div className="flex justify-center">
         <Button type="submit" size="lg" disabled={sending}>
           {sending ? "送信中..." : "送信する"}
         </Button>

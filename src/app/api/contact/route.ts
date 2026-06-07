@@ -1,20 +1,98 @@
 import { NextResponse } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import {
-  businessContactSchema,
   generalContactSchema,
+  partnerLeadSchema,
   professionalContactSchema,
   type ContactFormType,
 } from "@/lib/contact";
 
 export const runtime = "nodejs";
 
-const resendKey = process.env.RESEND_API_KEY;
-const resend = resendKey ? new Resend(resendKey) : null;
+const gmailUser = process.env.GMAIL_USER;
+const gmailPass = process.env.GMAIL_APP_PASSWORD?.replace(/\s+/g, "");
 
-const fromAddress = process.env.CONTACT_MAIL_FROM ?? "noreply@example.com";
-const toBusiness = process.env.CONTACT_MAIL_TO_BUSINESS ?? fromAddress;
-const toProfessional = process.env.CONTACT_MAIL_TO_PROFESSIONAL ?? fromAddress;
+const transporter =
+  gmailUser && gmailPass
+    ? nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true,
+        auth: { user: gmailUser, pass: gmailPass },
+      })
+    : null;
+
+const fromAddress =
+  process.env.CONTACT_MAIL_FROM ?? `Sales Bond <${gmailUser ?? "info@salesbond.jp"}>`;
+const toBusiness = process.env.CONTACT_MAIL_TO_BUSINESS ?? "info@salesbond.jp";
+const toProfessional = process.env.CONTACT_MAIL_TO_PROFESSIONAL ?? "info@salesbond.jp";
+
+// ============================================================
+// CRM 連携: 問い合わせを CRM Webhook にも転送する
+// ============================================================
+const crmWebhookUrl = process.env.CRM_WEBHOOK_URL;
+const crmWebhookToken = process.env.CRM_WEBHOOK_TOKEN;
+
+function buildCrmPayload(type: ContactFormType, data: Record<string, unknown>) {
+  const d = data as Record<string, unknown>;
+  const get = (k: string) => (typeof d[k] === "string" ? (d[k] as string) : "");
+
+  const company = get("company");
+  const lastName = get("lastName");
+  const firstName = get("firstName");
+  const contactName =
+    [lastName, firstName].filter(Boolean).join(" ") || get("name") || "";
+
+  const subject = humanize("inquiryType", d.inquiryType) || "Webサイトからの問い合わせ";
+  const message = get("message");
+
+  const skip = new Set([
+    "website", "agreement", "type",
+    "email", "phone", "company", "lastName", "firstName", "name", "message",
+  ]);
+  const detailLines = Object.entries(data)
+    .filter(([k, v]) => !skip.has(k) && v !== "" && v != null)
+    .map(([k, v]) => `${fieldLabels[k] ?? k}: ${humanize(k, v)}`);
+
+  const body =
+    [message, detailLines.length ? `\n[詳細]\n${detailLines.join("\n")}` : ""]
+      .filter(Boolean)
+      .join("")
+      .trim() || "(本文なし)";
+
+  return {
+    company_name: company,
+    contact_name: contactName,
+    email: get("email"),
+    phone: get("phone"),
+    subject,
+    body,
+    source: `website-${type}`,
+  };
+}
+
+async function forwardToCRM(type: ContactFormType, data: Record<string, unknown>) {
+  if (!crmWebhookUrl) return;
+  try {
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    if (crmWebhookToken) headers["x-webhook-token"] = crmWebhookToken;
+
+    const res = await fetch(crmWebhookUrl, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(buildCrmPayload(type, data)),
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      console.error("[contact->crm] forward failed", { status: res.status, text });
+    } else {
+      console.info("[contact->crm] forwarded", { type });
+    }
+  } catch (err) {
+    console.error("[contact->crm] forward threw", err);
+  }
+}
 
 function escapeHtml(value: string) {
   return value
@@ -27,6 +105,8 @@ function escapeHtml(value: string) {
 
 const fieldLabels: Record<string, string> = {
   company: "会社名",
+  companyAddress: "本社所在地",
+  corporateNumber: "法人番号",
   lastName: "姓",
   firstName: "名",
   name: "お名前",
@@ -73,9 +153,9 @@ const enumLabels: Record<string, Record<string, string>> = {
     estimate: "お見積り依頼",
   },
   serviceTypes: {
-    "sales-bond": "セールスボンド（大手決裁者紹介サービス）",
-    "keyman-bond": "キーマンボンド（プロ人材マッチングサービス）",
-    "lead-bond": "リードボンド（インサイドセールス代行サービス）",
+    "sales-bond": "リファボンド(大手決裁者紹介サービス)",
+    "keyman-bond": "キーマンボンド（プロ人材/顧問マッチングサービス）",
+    "lead-bond": "セルボンド(BtoB営業支援サービス)",
   },
 };
 
@@ -105,11 +185,11 @@ function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
     .join("");
 
   const heading =
-    type === "business"
-      ? "企業様お問い合わせ"
-      : type === "professional"
-        ? "プロ人材お問い合わせ"
-        : "お問い合わせ（企業）";
+    type === "professional"
+      ? "プロ人材お問い合わせ"
+      : type === "partner_lead"
+        ? "個人パートナー登録(メール仮登録)"
+        : "お問い合わせ(企業)";
 
   return `<!doctype html>
   <html><body style="font-family:-apple-system,'Segoe UI',sans-serif;color:#1A1A1A;">
@@ -131,15 +211,19 @@ export async function POST(req: Request) {
   const body = (payload ?? {}) as { type?: ContactFormType } & Record<string, unknown>;
   const type = body.type;
 
-  if (type !== "business" && type !== "professional" && type !== "general") {
+  if (
+    type !== "professional" &&
+    type !== "general" &&
+    type !== "partner_lead"
+  ) {
     return NextResponse.json({ error: "Invalid form type" }, { status: 400 });
   }
 
   const schema =
-    type === "business"
-      ? businessContactSchema
-      : type === "professional"
-        ? professionalContactSchema
+    type === "professional"
+      ? professionalContactSchema
+      : type === "partner_lead"
+        ? partnerLeadSchema
         : generalContactSchema;
   const parsed = schema.safeParse(body);
 
@@ -159,33 +243,87 @@ export async function POST(req: Request) {
   }
 
   const to = type === "professional" ? toProfessional : toBusiness;
-  const subject =
-    type === "business"
-      ? "【企業様お問い合わせ】新規受信"
-      : type === "professional"
-        ? "【プロ人材お問い合わせ】新規受信"
-        : "【お問い合わせ（企業）】新規受信";
+  // 件名はすべてのフォームで統一(管理画面で並べやすい)。
+  // フォーム種別は本文(renderHtml)の見出しで判別。
+  const subject = "ホームページからの問い合わせ";
 
-  if (!resend) {
-    console.warn("[contact] RESEND_API_KEY is not set. Logging form data instead.");
+  if (!transporter) {
+    console.warn("[contact] GMAIL_USER / GMAIL_APP_PASSWORD is not set. Logging form data instead.");
     console.info({ type, data: parsed.data });
     return NextResponse.json({ ok: true, dryRun: true });
   }
 
+  const replyTo =
+    typeof (parsed.data as { email?: string }).email === "string"
+      ? (parsed.data as { email: string }).email
+      : undefined;
+
   try {
-    await resend.emails.send({
+    const info = await transporter.sendMail({
       from: fromAddress,
       to,
-      replyTo:
-        typeof (parsed.data as { email?: string }).email === "string"
-          ? (parsed.data as { email: string }).email
-          : undefined,
+      replyTo,
       subject,
       html: renderHtml(type, parsed.data as Record<string, unknown>),
     });
+    console.info("[contact] sent", { messageId: info.messageId, to, type });
+    await forwardToCRM(type, parsed.data as Record<string, unknown>);
+
+    if (type === "general") {
+      const senderEmail = (parsed.data as { email?: string }).email;
+      const company = String((parsed.data as { company?: string }).company ?? "").trim();
+      const lastName = String((parsed.data as { lastName?: string }).lastName ?? "").trim();
+      if (senderEmail) {
+        const autoReplyText = `${company}
+${lastName} 様
+
+お世話になっております。
+セールスボンド株式会社でございます。
+
+この度は弊社ホームページよりお問い合わせをいただき、誠にありがとうございます。
+
+内容を確認のうえ、担当者より改めてご連絡を差し上げますので、今しばらくお待ちくださいますようお願いいたします。
+
+何卒よろしくお願い申し上げます。
+
+────────────────────────────
+セールスボンド株式会社
+〒160-0023 東京都新宿区西新宿3丁目3番13号 西新宿水間ビル2F
+Email：info@salesbond.jp
+HP：https://www.salesbond1962.com
+────────────────────────────
+※このメールは自動送信です。ご返信いただいてもお答えできません。`;
+        try {
+          await transporter.sendMail({
+            from: fromAddress,
+            to: senderEmail,
+            subject: "お問い合わせありがとうございます(セールスボンド株式会社)",
+            text: autoReplyText,
+          });
+          console.info("[contact] auto-reply sent", { to: senderEmail });
+        } catch (replyErr) {
+          const r = replyErr as { code?: string; message?: string };
+          console.error("[contact] auto-reply failed", {
+            code: r.code,
+            message: r.message,
+            to: senderEmail,
+          });
+          // 自動返信の失敗は本体の成功を覆さない
+        }
+      }
+    }
+
     return NextResponse.json({ ok: true });
   } catch (err) {
-    console.error("[contact] send failed", err);
+    const e = err as { code?: string; response?: string; message?: string };
+    console.error("[contact] send threw", {
+      code: e.code,
+      response: e.response,
+      message: e.message,
+      from: fromAddress,
+      to,
+      type,
+    });
     return NextResponse.json(
       { error: "送信に失敗しました。時間をおいて再度お試しください。" },
       { status: 500 },

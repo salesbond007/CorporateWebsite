@@ -7,7 +7,7 @@
   "nav": {
     "top": "Home",
     "services": "Services",
-    "blog": "Insights",
+    "blog": "Media",
     "company": "Company",
     "contact": "Contact (Business)",
     "contactProfessional": "For professionals",
@@ -25,7 +25,7 @@
   },
   "buttons": {
     "viewServices": "Explore services",
-    "contact": "Contact us",
+    "contact": "Free consultation",
     "back": "Back",
     "submit": "Submit",
     "submitting": "Submitting…",
@@ -34,9 +34,9 @@
   },
   "hero": {
     "eyebrow": "B to B Sales Support",
-    "titleLine1": "Business growth & improvement via the ",
-    "titleHighlight": "shortest route",
-    "titleSuffix": ".",
+    "titleLine1": "The shortest path to ",
+    "titleHighlight": "a definite answer",
+    "titleSuffix": " for ambitious companies.",
     "subtitlePrefix": "Sales Bond accelerates corporate growth through three services: ",
     "subtitleHighlight": "decision-maker introductions, expert talent matching, and inside-sales BPO",
     "subtitleSuffix": "."

@@ -7,29 +7,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = site.url.replace(/\/$/, "");
   const now = new Date();
 
-  const staticPaths = [
-    "",
-    "/services",
-    "/company",
-    "/blog",
-    "/contact",
-    "/contact/professional",
-    "/contact/partner",
-    "/privacy",
-    "/terms",
+  type StaticPath = {
+    path: string;
+    priority: number;
+    changeFrequency: "daily" | "weekly" | "monthly" | "yearly";
+  };
+  const staticPaths: StaticPath[] = [
+    { path: "", priority: 1.0, changeFrequency: "weekly" },
+    { path: "/services", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/blog", priority: 0.8, changeFrequency: "daily" },
+    { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
+    { path: "/contact/partner", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/company", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
+    { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
   ];
 
   const staticEntries: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    staticPaths.map((path) => ({
+    staticPaths.map(({ path, priority, changeFrequency }) => ({
       url: `${base}/${locale}${path}`,
       lastModified: now,
-      changeFrequency: "weekly",
-      priority:
-        path === ""
-          ? 1
-          : path === "/privacy" || path === "/terms"
-            ? 0.3
-            : 0.8,
+      changeFrequency,
+      priority,
       alternates: {
         languages: Object.fromEntries(
           locales.map((l) => [l, `${base}/${l}${path}`]),

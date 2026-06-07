@@ -1,4 +1,38 @@
 import { z } from "zod";
+import { isValidPhone } from "@/lib/phone";
+
+/**
+ * 企業向けフォームでブロックするフリーメール / 個人メールのドメイン。
+ * 「会社のメールアドレスをご入力ください」というガード用。
+ */
+const blockedFreeEmailDomains = new Set<string>([
+  "gmail.com",
+  "yahoo.co.jp",
+  "yahoo.com",
+  "outlook.com",
+  "outlook.jp",
+  "hotmail.com",
+  "hotmail.co.jp",
+  "live.jp",
+  "live.com",
+  "msn.com",
+  "icloud.com",
+  "me.com",
+  "mac.com",
+  "aol.com",
+]);
+
+const corporateEmail = z
+  .string()
+  .trim()
+  .email("正しいメールアドレスを入力してください")
+  .refine(
+    (email) => {
+      const domain = email.split("@")[1]?.toLowerCase();
+      return domain ? !blockedFreeEmailDomains.has(domain) : false;
+    },
+    { message: "会社のメールアドレスをご入力ください" },
+  );
 
 const honeypotAndAgreement = {
   // honeypot — must stay empty
@@ -15,15 +49,6 @@ const baseSchema = {
   email: z.string().trim().email("正しいメールアドレスを入力してください"),
   message: z.string().trim().min(10, "本文は10文字以上でご入力ください").max(5000),
 };
-
-export const businessContactSchema = z.object({
-  ...baseSchema,
-  company: z.string().trim().min(1, "会社名を入力してください").max(200),
-  department: z.string().trim().max(200).optional().or(z.literal("")),
-  phone: z.string().trim().max(40).optional().or(z.literal("")),
-  inquiryType: z.enum(["service", "estimate", "partnership", "other"]),
-  budget: z.enum(["under-500k", "500k-3m", "3m-10m", "10m-plus", "undecided"]).optional(),
-});
 
 export const professionalContactSchema = z.object({
   ...baseSchema,
@@ -43,10 +68,24 @@ export const professionalContactSchema = z.object({
 export const generalContactSchema = z.object({
   ...honeypotAndAgreement,
   company: z.string().trim().min(1, "会社名を入力してください").max(200),
+  companyAddress: z.string().trim().max(300).optional().or(z.literal("")),
+  corporateNumber: z
+    .string()
+    .trim()
+    .regex(/^\d{13}$/, "法人番号は13桁の数字です")
+    .optional()
+    .or(z.literal("")),
   lastName: z.string().trim().min(1, "姓を入力してください").max(100),
   firstName: z.string().trim().min(1, "名を入力してください").max(100),
-  email: z.string().trim().email("正しいメールアドレスを入力してください"),
-  phone: z.string().trim().min(1, "電話番号を入力してください").max(40),
+  email: corporateEmail,
+  phone: z
+    .string()
+    .trim()
+    .min(1, "電話番号を入力してください")
+    .max(40)
+    .refine(isValidPhone, {
+      message: "正しい電話番号をご入力ください",
+    }),
   department: z.string().trim().max(200).optional().or(z.literal("")),
   position: z.enum([
     "executive",
@@ -72,8 +111,18 @@ export const generalContactSchema = z.object({
   message: z.string().trim().max(5000).optional().or(z.literal("")),
 });
 
-export type BusinessContactInput = z.infer<typeof businessContactSchema>;
+/**
+ * /contact/partner LP のメール 1 項目フォーム。
+ * ご経歴等は後送の本登録メール内のフォームで受け取るため、ここでは
+ * 連絡先取得が目的(同意は本登録時に取得)。
+ */
+export const partnerLeadSchema = z.object({
+  website: z.string().max(0).optional().or(z.literal("")),
+  email: z.string().trim().email("正しいメールアドレスを入力してください"),
+});
+
 export type ProfessionalContactInput = z.infer<typeof professionalContactSchema>;
 export type GeneralContactInput = z.infer<typeof generalContactSchema>;
+export type PartnerLeadInput = z.infer<typeof partnerLeadSchema>;
 
-export type ContactFormType = "business" | "professional" | "general";
+export type ContactFormType = "professional" | "general" | "partner_lead";

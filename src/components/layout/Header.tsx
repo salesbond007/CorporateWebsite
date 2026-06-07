@@ -27,7 +27,7 @@ export function Header({ locale, dict }: Props) {
   }, []);
 
   const serviceItems = services.map((s) => ({
-    href: `${localePath("/services", locale)}#${s.slug}`,
+    href: localePath(s.href, locale),
     label: s.subtitle.replace(/サービス$/, ""),
     sub: s.title,
   }));
@@ -35,18 +35,13 @@ export function Header({ locale, dict }: Props) {
   const contactItems = [
     {
       href: localePath("/contact", locale),
-      label: `${dict.nav.contact}`,
+      label: dict.nav.contact,
       sub: "サービス・お見積もりはこちら",
     },
     {
-      href: localePath("/contact/professional", locale),
-      label: `${dict.nav.contactProfessional}登録`,
-      sub: "プロ人材としてご活躍いただける方",
-    },
-    {
       href: localePath("/contact/partner", locale),
-      label: `${dict.nav.contactPartner}登録`,
-      sub: "人脈を活かしてご協力いただける方",
+      label: "個人の方はこちら",
+      sub: "人脈・知見を活かしてご協力いただける方",
     },
   ];
 
@@ -105,11 +100,11 @@ export function Header({ locale, dict }: Props) {
             {dict.nav.contact}
           </Button>
           <Button
-            href={localePath("/contact/professional", locale)}
+            href={localePath("/contact/partner", locale)}
             size="md"
             className="hidden md:inline-flex !bg-ink !text-white hover:!bg-ink-soft shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)]"
           >
-            {dict.nav.contactProfessional}はこちら
+            個人の方はこちら
           </Button>
           <MobileMenu locale={locale} dict={dict} />
         </div>
