@@ -27,114 +27,376 @@ export const metadata: Metadata = {
 
 function ServiceOverviewDiagram() {
   return (
-    <div className="overflow-hidden rounded-3xl border border-rose-100 bg-gradient-to-br from-white via-rose-50/40 to-white p-6 shadow-[0_30px_80px_-40px_rgba(190,18,60,0.45)] md:p-10">
-      <p className="text-center text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
-        Service Overview
-      </p>
-      <h3 className="mt-3 text-center text-lg md:text-2xl font-black leading-snug text-ink">
-        企業とプロ人材を、最短距離でつなぐ
-      </h3>
+    <div className="relative overflow-hidden bg-cream/40">
+      {/* Editorial frame */}
+      <div className="relative mx-auto max-w-6xl px-4 py-12 md:px-10 md:py-16">
+        {/* Subtle dot grid background */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              "radial-gradient(#BE123C 1px, transparent 1px)",
+            backgroundSize: "18px 18px",
+          }}
+        />
+        {/* Rose blob */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-32 top-10 h-72 w-72 rounded-full bg-rose-200/40 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-24 bottom-0 h-72 w-72 rounded-full bg-amber-100/40 blur-3xl"
+        />
 
-      <svg
-        viewBox="0 0 720 360"
-        className="mx-auto mt-8 h-auto w-full max-w-4xl"
-        role="img"
-        aria-label="企業からプラットフォーム経由でプロ人材/顧問へつながるサービス概要"
-      >
-        <defs>
-          <linearGradient id="kb-line" x1="0" x2="1" y1="0" y2="0">
-            <stop offset="0%" stopColor="#FDA4AF" />
-            <stop offset="100%" stopColor="#BE123C" />
-          </linearGradient>
-          <marker
-            id="kb-arrow"
-            viewBox="0 0 10 10"
-            refX="8"
-            refY="5"
-            markerWidth="8"
-            markerHeight="8"
-            orient="auto-start-reverse"
+        {/* Header — magazine kicker */}
+        <div className="relative">
+          <div className="flex items-center gap-3">
+            <span aria-hidden="true" className="block h-px w-10 bg-rose-700" />
+            <p className="text-[10px] font-extrabold uppercase tracking-[0.32em] text-rose-700">
+              Service Overview ／ N°01
+            </p>
+            <span aria-hidden="true" className="block h-px flex-1 bg-rose-700/20" />
+          </div>
+          <h3 className="mt-4 font-display text-2xl font-black leading-tight text-ink md:text-4xl">
+            企業と<span className="relative inline-block">
+              <span className="text-rose-700">プロ人材</span>
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-0 -bottom-1 h-1.5 bg-amber-300"
+              />
+            </span>
+            を、
+            <br className="md:hidden" />
+            最短距離でつなぐ。
+          </h3>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-ink-soft font-medium md:text-base">
+            社内では届かない知見を、外から呼び込む。経営課題を抱える企業と、その道のプロフェッショナルを、専属エージェントが結びます。
+          </p>
+        </div>
+
+        {/* Main editorial illustration */}
+        <div className="relative mt-12 md:mt-16">
+          <svg
+            viewBox="0 0 1000 460"
+            className="block h-auto w-full"
+            role="img"
+            aria-label="企業からプラットフォーム経由でプロ人材へとつながるサービス概要"
           >
-            <path d="M0 0L10 5L0 10z" fill="#BE123C" />
-          </marker>
-        </defs>
+            <defs>
+              <linearGradient id="kb-rose" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#9F1239" />
+                <stop offset="100%" stopColor="#BE123C" />
+              </linearGradient>
+              <linearGradient id="kb-line" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stopColor="#BE123C" stopOpacity="0.15" />
+                <stop offset="50%" stopColor="#BE123C" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#BE123C" stopOpacity="0.15" />
+              </linearGradient>
+              <filter id="kb-shadow" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="6" />
+                <feOffset dx="0" dy="10" result="off" />
+                <feComponentTransfer><feFuncA type="linear" slope="0.18" /></feComponentTransfer>
+                <feMerge>
+                  <feMergeNode />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <pattern id="kb-stripes" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="6" stroke="#BE123C" strokeWidth="1" opacity="0.16" />
+              </pattern>
+            </defs>
 
-        {/* Connecting flowy lines */}
-        <path
-          d="M150 100 Q 280 140 360 200"
-          stroke="url(#kb-line)"
-          strokeWidth="2.2"
-          fill="none"
-          strokeLinecap="round"
-          markerEnd="url(#kb-arrow)"
-        />
-        <path
-          d="M360 200 Q 440 140 570 100"
-          stroke="url(#kb-line)"
-          strokeWidth="2.2"
-          fill="none"
-          strokeLinecap="round"
-          markerEnd="url(#kb-arrow)"
-        />
+            {/* Decorative editorial annotations */}
+            <text x="20" y="34" fontSize="10" fontWeight="800" fill="#9F1239" letterSpacing="3">
+              FROM
+            </text>
+            <text x="20" y="48" fontSize="11" fontWeight="900" fill="#1F2937">
+              社内では解けない課題
+            </text>
 
-        {/* Node 1: 企業 (top left) */}
-        <g transform="translate(40, 30)">
-          <rect width="220" height="130" rx="20" fill="#FFFFFF" stroke="#BE123C" strokeWidth="1.6" />
-          <rect width="220" height="6" rx="3" fill="#BE123C" />
-          <text x="110" y="38" textAnchor="middle" fontSize="11" fontWeight="800" fill="#9F1239" letterSpacing="2">
-            01 ／ CORPORATE
-          </text>
-          {/* building icon */}
-          <g transform="translate(86, 50)" stroke="#BE123C" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <rect x="3" y="6" width="42" height="36" rx="2" />
-            <path d="M11 14h6M21 14h6M31 14h6M11 22h6M21 22h6M31 22h6M11 30h6M21 30h6M31 30h6" />
-          </g>
-          <text x="110" y="118" textAnchor="middle" fontSize="15" fontWeight="900" fill="#1F2937">
-            企業で困りごとがある
-          </text>
-        </g>
+            <text x="980" y="34" textAnchor="end" fontSize="10" fontWeight="800" fill="#9F1239" letterSpacing="3">
+              TO
+            </text>
+            <text x="980" y="48" textAnchor="end" fontSize="11" fontWeight="900" fill="#1F2937">
+              現場で動くプロ
+            </text>
 
-        {/* Node 2: 弊社/プラットフォーム (bottom center) */}
-        <g transform="translate(248, 196)">
-          <rect width="224" height="138" rx="20" fill="#BE123C" />
-          <text x="112" y="32" textAnchor="middle" fontSize="11" fontWeight="800" fill="#FECDD3" letterSpacing="2">
-            02 ／ PLATFORM
-          </text>
-          {/* hub icon */}
-          <g transform="translate(82, 42)" stroke="#FFFFFF" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="30" cy="20" r="9" />
-            <circle cx="9" cy="10" r="4" />
-            <circle cx="51" cy="10" r="4" />
-            <circle cx="9" cy="32" r="4" />
-            <circle cx="51" cy="32" r="4" />
-            <path d="M13 12L22 17M47 12L38 17M13 30L22 23M47 30L38 23" />
-          </g>
-          <text x="112" y="112" textAnchor="middle" fontSize="15" fontWeight="900" fill="#FFFFFF">
-            弊社・プラットフォームに相談
-          </text>
-          <text x="112" y="128" textAnchor="middle" fontSize="10" fontWeight="700" fill="#FECDD3">
-            エージェントが最適な人材をマッチング
-          </text>
-        </g>
+            {/* Curved spine line connecting all three */}
+            <path
+              d="M180 200 C 320 80, 440 80, 500 200 S 680 320, 820 200"
+              stroke="url(#kb-line)"
+              strokeWidth="2"
+              fill="none"
+              strokeDasharray="0"
+              strokeLinecap="round"
+            />
+            {/* dashed companion */}
+            <path
+              d="M180 200 C 320 80, 440 80, 500 200 S 680 320, 820 200"
+              stroke="#BE123C"
+              strokeWidth="1.2"
+              strokeDasharray="2 6"
+              fill="none"
+              opacity="0.45"
+              transform="translate(0, 8)"
+            />
 
-        {/* Node 3: プロ人材/顧問 (top right) */}
-        <g transform="translate(460, 30)">
-          <rect width="220" height="130" rx="20" fill="#FFFFFF" stroke="#BE123C" strokeWidth="1.6" />
-          <rect width="220" height="6" rx="3" fill="#BE123C" />
-          <text x="110" y="38" textAnchor="middle" fontSize="11" fontWeight="800" fill="#9F1239" letterSpacing="2">
-            03 ／ TALENT
-          </text>
-          {/* person + star */}
-          <g transform="translate(88, 50)" stroke="#BE123C" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="24" cy="14" r="7" />
-            <path d="M8 40c0-7 7-12 16-12s16 5 16 12" />
-            <path d="M38 4l1.4 2.6L42 8l-2 2 .5 3-2.5-1.4L35.5 13l.5-3-2-2 2.6-1.4z" fill="#FBBF24" stroke="#F59E0B" strokeWidth="1.2" />
-          </g>
-          <text x="110" y="118" textAnchor="middle" fontSize="15" fontWeight="900" fill="#1F2937">
-            プロ人材/顧問を紹介
-          </text>
-        </g>
-      </svg>
+            {/* ============== SCENE 1: 企業（困りごと） ============== */}
+            <g transform="translate(40, 70)">
+              {/* paper card backdrop */}
+              <g filter="url(#kb-shadow)">
+                <rect x="0" y="0" width="260" height="270" rx="4" fill="#FFFFFF" />
+                <rect x="0" y="0" width="260" height="270" rx="4" fill="url(#kb-stripes)" />
+              </g>
+              {/* corner crop marks */}
+              <path d="M0 0h10M0 0v10M260 0h-10M260 0v10M0 270h10M0 270v-10M260 270h-10M260 270v-10" stroke="#9F1239" strokeWidth="1.5" />
+
+              {/* magazine number */}
+              <text x="22" y="60" fontSize="78" fontWeight="900" fill="#FECDD3" fontFamily="serif">01</text>
+              <text x="118" y="42" fontSize="10" fontWeight="800" fill="#9F1239" letterSpacing="3">CHAPTER</text>
+              <text x="118" y="58" fontSize="11" fontWeight="900" fill="#1F2937" letterSpacing="0.5">CORPORATE</text>
+
+              {/* Office scene illustration */}
+              <g transform="translate(24, 88)">
+                {/* desk surface */}
+                <rect x="0" y="110" width="212" height="6" fill="#9F1239" />
+                <rect x="0" y="116" width="212" height="38" fill="#FECDD3" opacity="0.5" />
+                <line x1="0" y1="116" x2="212" y2="116" stroke="#BE123C" strokeWidth="1" />
+
+                {/* monitor */}
+                <rect x="62" y="42" width="78" height="56" rx="3" fill="#1F2937" />
+                <rect x="65" y="45" width="72" height="48" rx="1" fill="#FECDD3" />
+                {/* chart on monitor */}
+                <path d="M68 86 L82 78 L94 82 L106 70 L118 74 L132 64" stroke="#BE123C" strokeWidth="1.6" fill="none" strokeLinecap="round" />
+                <path d="M68 90L132 90" stroke="#9CA3AF" strokeWidth="0.8" />
+                <rect x="92" y="98" width="18" height="12" fill="#1F2937" />
+                <rect x="80" y="110" width="42" height="3" fill="#1F2937" />
+
+                {/* worried executive (left of monitor) */}
+                <g transform="translate(20, 52)">
+                  <ellipse cx="14" cy="14" rx="11" ry="12" fill="#FBBF24" />
+                  {/* hair */}
+                  <path d="M3 14C3 6 9 2 14 2C20 2 25 6 25 14C25 12 22 9 17 9C13 9 9 11 6 14L3 14z" fill="#1F2937" />
+                  {/* face */}
+                  <circle cx="10" cy="14" r="0.9" fill="#1F2937" />
+                  <circle cx="18" cy="14" r="0.9" fill="#1F2937" />
+                  <path d="M10 19 Q14 17 18 19" stroke="#1F2937" strokeWidth="0.8" fill="none" />
+                  {/* sweat drop */}
+                  <path d="M25 11 Q26 13 25 15 Q24 13 25 11z" fill="#60A5FA" />
+                  {/* body */}
+                  <path d="M2 36 C2 30 6 26 14 26 C22 26 26 30 26 36 L26 50 L2 50z" fill="#1F2937" />
+                  <path d="M14 27 L14 36" stroke="#FFFFFF" strokeWidth="0.8" />
+                </g>
+
+                {/* stacked papers */}
+                <g transform="translate(150, 80)">
+                  <rect x="0" y="0" width="50" height="32" rx="1" fill="#FFFFFF" stroke="#BE123C" strokeWidth="1" />
+                  <rect x="2" y="-4" width="50" height="32" rx="1" fill="#FFFFFF" stroke="#BE123C" strokeWidth="1" />
+                  <rect x="4" y="-8" width="50" height="32" rx="1" fill="#FFFFFF" stroke="#BE123C" strokeWidth="1" />
+                  <path d="M10 -2 h36 M10 2 h36 M10 6 h36 M10 10 h28" stroke="#9CA3AF" strokeWidth="0.8" />
+                  {/* alert dot */}
+                  <circle cx="52" cy="-8" r="5" fill="#BE123C" />
+                  <text x="52" y="-5" textAnchor="middle" fontSize="7" fontWeight="900" fill="#FFFFFF">!</text>
+                </g>
+
+                {/* worry lines emanating from head */}
+                <g stroke="#BE123C" strokeWidth="1.6" strokeLinecap="round" fill="none">
+                  <path d="M50 18 L46 10" />
+                  <path d="M58 8 L58 2" />
+                  <path d="M68 14 L72 6" />
+                </g>
+
+                {/* floating challenge tags */}
+                <g transform="translate(120, 4)">
+                  <g transform="translate(-50, -2)">
+                    <rect width="46" height="18" rx="9" fill="#FFFFFF" stroke="#BE123C" strokeWidth="1.2" />
+                    <text x="23" y="13" textAnchor="middle" fontSize="9" fontWeight="800" fill="#9F1239">売上</text>
+                  </g>
+                  <g transform="translate(0, -8)">
+                    <rect width="46" height="18" rx="9" fill="#9F1239" />
+                    <text x="23" y="13" textAnchor="middle" fontSize="9" fontWeight="800" fill="#FFFFFF">採用</text>
+                  </g>
+                  <g transform="translate(52, 2)">
+                    <rect width="38" height="18" rx="9" fill="#FFFFFF" stroke="#BE123C" strokeWidth="1.2" />
+                    <text x="19" y="13" textAnchor="middle" fontSize="9" fontWeight="800" fill="#9F1239">DX</text>
+                  </g>
+                </g>
+              </g>
+
+              {/* caption */}
+              <line x1="22" y1="234" x2="48" y2="234" stroke="#BE123C" strokeWidth="2.4" />
+              <text x="22" y="252" fontSize="14" fontWeight="900" fill="#1F2937">企業で困りごとがある</text>
+              <text x="22" y="264" fontSize="9" fontWeight="700" fill="#6B7280">SOCIAL ISSUES INSIDE THE FIRM</text>
+            </g>
+
+            {/* ============== SCENE 2: プラットフォーム （中央・浮上） ============== */}
+            <g transform="translate(370, 30)">
+              {/* dark card */}
+              <g filter="url(#kb-shadow)">
+                <rect x="0" y="0" width="260" height="340" rx="6" fill="url(#kb-rose)" />
+              </g>
+              {/* decorative top stripe */}
+              <rect x="0" y="0" width="260" height="6" fill="#FBBF24" />
+              <rect x="0" y="6" width="260" height="2" fill="#FFFFFF" opacity="0.4" />
+
+              {/* magazine number (white) */}
+              <text x="22" y="64" fontSize="78" fontWeight="900" fill="#FFFFFF" opacity="0.2" fontFamily="serif">02</text>
+              <text x="118" y="42" fontSize="10" fontWeight="800" fill="#FECDD3" letterSpacing="3">FEATURE</text>
+              <text x="118" y="58" fontSize="11" fontWeight="900" fill="#FFFFFF" letterSpacing="0.5">PLATFORM</text>
+
+              {/* Quote bar */}
+              <line x1="22" y1="76" x2="50" y2="76" stroke="#FBBF24" strokeWidth="2.4" />
+
+              {/* Platform illustration */}
+              <g transform="translate(20, 92)">
+                {/* outer rectangle representing platform UI */}
+                <rect x="0" y="0" width="220" height="150" rx="6" fill="#FFFFFF" opacity="0.08" stroke="#FFFFFF" strokeOpacity="0.35" strokeWidth="1" />
+                {/* search bar */}
+                <rect x="14" y="14" width="160" height="20" rx="10" fill="#FFFFFF" opacity="0.18" />
+                <text x="22" y="28" fontSize="9" fontWeight="700" fill="#FECDD3">課題を入力…</text>
+                <circle cx="200" cy="24" r="10" fill="#FBBF24" />
+                <path d="M196 24 L199 27 L205 21" stroke="#9F1239" strokeWidth="1.8" fill="none" strokeLinecap="round" />
+
+                {/* 6 candidate profile cards */}
+                {Array.from({ length: 6 }).map((_, i) => {
+                  const col = i % 3;
+                  const row = Math.floor(i / 3);
+                  const x = 14 + col * 66;
+                  const y = 48 + row * 50;
+                  const matched = i === 2;
+                  return (
+                    <g key={i} transform={`translate(${x}, ${y})`}>
+                      <rect
+                        width="58"
+                        height="40"
+                        rx="4"
+                        fill={matched ? "#FBBF24" : "#FFFFFF"}
+                        opacity={matched ? "1" : "0.18"}
+                      />
+                      <circle cx="14" cy="20" r="9" fill={matched ? "#9F1239" : "#FECDD3"} opacity={matched ? "1" : "0.55"} />
+                      <path d="M9 25 C9 21 12 19 14 19 C16 19 19 21 19 25 z" fill={matched ? "#9F1239" : "#FECDD3"} opacity={matched ? "1" : "0.55"} />
+                      <rect x="28" y="14" width="24" height="3" rx="1.5" fill={matched ? "#9F1239" : "#FFFFFF"} opacity={matched ? "1" : "0.6"} />
+                      <rect x="28" y="20" width="18" height="2.4" rx="1.2" fill={matched ? "#9F1239" : "#FFFFFF"} opacity={matched ? "1" : "0.45"} />
+                      <rect x="28" y="25" width="14" height="2.4" rx="1.2" fill={matched ? "#9F1239" : "#FFFFFF"} opacity={matched ? "1" : "0.45"} />
+                      {matched ? (
+                        <>
+                          <circle cx="50" cy="8" r="6" fill="#9F1239" />
+                          <path d="M47 8 L49.5 10.5 L53 7" stroke="#FBBF24" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+                        </>
+                      ) : null}
+                    </g>
+                  );
+                })}
+
+                {/* Magnifier over the matched card */}
+                <g transform="translate(122, 80)">
+                  <circle cx="0" cy="0" r="22" fill="none" stroke="#FBBF24" strokeWidth="2.4" />
+                  <circle cx="0" cy="0" r="22" fill="#FBBF24" opacity="0.08" />
+                  <line x1="16" y1="16" x2="28" y2="28" stroke="#FBBF24" strokeWidth="3" strokeLinecap="round" />
+                </g>
+              </g>
+
+              {/* caption */}
+              <line x1="22" y1="266" x2="48" y2="266" stroke="#FBBF24" strokeWidth="2.4" />
+              <text x="22" y="286" fontSize="15" fontWeight="900" fill="#FFFFFF">弊社・プラットフォームに相談</text>
+              <text x="22" y="302" fontSize="9" fontWeight="700" fill="#FECDD3">SPECIALIZED AGENTS &amp; MATCHING PLATFORM</text>
+              <text x="22" y="322" fontSize="11" fontWeight="700" fill="#FBBF24">"課題に応じた人材を、エージェントが厳選"</text>
+            </g>
+
+            {/* ============== SCENE 3: プロ人材 ============== */}
+            <g transform="translate(700, 70)">
+              {/* paper card backdrop */}
+              <g filter="url(#kb-shadow)">
+                <rect x="0" y="0" width="260" height="270" rx="4" fill="#FFFFFF" />
+                <rect x="0" y="0" width="260" height="270" rx="4" fill="url(#kb-stripes)" />
+              </g>
+              {/* corner crop marks */}
+              <path d="M0 0h10M0 0v10M260 0h-10M260 0v10M0 270h10M0 270v-10M260 270h-10M260 270v-10" stroke="#9F1239" strokeWidth="1.5" />
+
+              {/* magazine number */}
+              <text x="22" y="60" fontSize="78" fontWeight="900" fill="#FECDD3" fontFamily="serif">03</text>
+              <text x="118" y="42" fontSize="10" fontWeight="800" fill="#9F1239" letterSpacing="3">RESULT</text>
+              <text x="118" y="58" fontSize="11" fontWeight="900" fill="#1F2937" letterSpacing="0.5">TALENT</text>
+
+              {/* Pro figure scene */}
+              <g transform="translate(40, 88)">
+                {/* doorway/arch */}
+                <path d="M16 124 L16 40 A 50 50 0 0 1 116 40 L116 124" fill="none" stroke="#BE123C" strokeWidth="1.4" strokeDasharray="3 4" />
+
+                {/* pro person */}
+                <g transform="translate(40, 30)">
+                  {/* head */}
+                  <ellipse cx="26" cy="20" rx="13" ry="14" fill="#FBBF24" />
+                  {/* hair */}
+                  <path d="M14 18C14 9 19 5 26 5C33 5 38 9 38 18C38 16 35 13 30 13C26 13 21 14 18 18L14 18z" fill="#1F2937" />
+                  {/* eyes/mouth */}
+                  <circle cx="22" cy="20" r="1" fill="#1F2937" />
+                  <circle cx="30" cy="20" r="1" fill="#1F2937" />
+                  <path d="M22 26 Q26 29 30 26" stroke="#1F2937" strokeWidth="0.9" fill="none" />
+                  {/* suit body */}
+                  <path d="M6 90 L6 52 C6 44 14 38 26 38 C38 38 46 44 46 52 L46 90 z" fill="#1F2937" />
+                  {/* collar V */}
+                  <path d="M20 38 L26 50 L32 38 L32 60 L20 60 z" fill="#FFFFFF" />
+                  <path d="M26 50 L26 60" stroke="#1F2937" strokeWidth="0.8" />
+                  {/* tie */}
+                  <path d="M24 50 L28 50 L29 60 L26 64 L23 60 z" fill="#BE123C" />
+                  {/* briefcase */}
+                  <g transform="translate(48, 64)">
+                    <rect x="0" y="6" width="22" height="16" rx="1" fill="#9F1239" />
+                    <rect x="0" y="6" width="22" height="2" fill="#1F2937" />
+                    <path d="M7 6 V 2 H 15 V 6" stroke="#1F2937" strokeWidth="1.4" fill="none" />
+                    <circle cx="11" cy="14" r="1" fill="#FBBF24" />
+                  </g>
+                </g>
+
+                {/* MATCH badge */}
+                <g transform="translate(132, 38) rotate(8)">
+                  <rect x="-2" y="-2" width="62" height="32" rx="16" fill="#FBBF24" />
+                  <text x="29" y="18" textAnchor="middle" fontSize="13" fontWeight="900" fill="#9F1239" letterSpacing="1">MATCH</text>
+                </g>
+
+                {/* sparkles */}
+                <g fill="#FBBF24" stroke="#F59E0B" strokeWidth="0.8">
+                  <path d="M4 6 L6 10 L10 12 L6 14 L4 18 L2 14 L-2 12 L2 10 z" />
+                  <path d="M120 100 L121.5 103 L124.5 104.5 L121.5 106 L120 109 L118.5 106 L115.5 104.5 L118.5 103 z" />
+                  <path d="M30 116 L31 118 L33 119 L31 120 L30 122 L29 120 L27 119 L29 118 z" />
+                </g>
+
+                {/* underline path */}
+                <path d="M16 130 L116 130" stroke="#BE123C" strokeWidth="2" strokeLinecap="round" />
+                <path d="M16 132 L116 132" stroke="#FBBF24" strokeWidth="1.8" strokeLinecap="round" />
+              </g>
+
+              {/* caption */}
+              <line x1="22" y1="234" x2="48" y2="234" stroke="#BE123C" strokeWidth="2.4" />
+              <text x="22" y="252" fontSize="14" fontWeight="900" fill="#1F2937">プロ人材/顧問を紹介</text>
+              <text x="22" y="264" fontSize="9" fontWeight="700" fill="#6B7280">RIGHT EXPERT, READY TO EXECUTE</text>
+            </g>
+
+            {/* Bottom editorial annotation strip */}
+            <g transform="translate(0, 432)">
+              <text x="170" y="0" textAnchor="middle" fontSize="10" fontWeight="800" fill="#9F1239" letterSpacing="2">
+                ・社内では届かない・
+              </text>
+              <text x="500" y="0" textAnchor="middle" fontSize="10" fontWeight="800" fill="#9F1239" letterSpacing="2">
+                ・専属エージェント＋プラットフォーム・
+              </text>
+              <text x="830" y="0" textAnchor="middle" fontSize="10" fontWeight="800" fill="#9F1239" letterSpacing="2">
+                ・現場で動くプロ・
+              </text>
+            </g>
+          </svg>
+
+          {/* Bottom signature line — magazine outro */}
+          <div className="mt-6 flex items-center gap-3 text-[10px] font-extrabold uppercase tracking-[0.32em] text-rose-700">
+            <span aria-hidden="true" className="block h-px flex-1 bg-rose-700/30" />
+            <span>キーマンボンド ／ KEYMAN BOND</span>
+            <span aria-hidden="true" className="block h-px flex-1 bg-rose-700/30" />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -831,21 +1093,6 @@ export default function KeymanBondPage({
             </Button>
             <Button href={contactHref} size="lg" variant="secondary">
               資料請求
-            </Button>
-          </div>
-        </Container>
-      </section>
-
-      {/* ───── Talent CTA ───── */}
-      <section className="bg-white py-20 md:py-24">
-        <Container>
-          <div className="flex justify-center">
-            <Button
-              href={professionalHref}
-              size="lg"
-              className="!h-[64px] px-10 text-base font-black !bg-[#BE123C] hover:!bg-rose-700 shadow-[0_18px_40px_-12px_rgba(190,18,60,0.6)] hover:-translate-y-1 md:!h-[72px] md:px-14 md:text-lg"
-            >
-              プロ人材として活躍したい方はこちら →
             </Button>
           </div>
         </Container>
