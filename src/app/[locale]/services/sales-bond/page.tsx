@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/jsonld";
 import { services } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import { isLocale, locales } from "@/i18n/config";
@@ -244,14 +244,31 @@ export default function ReferBondPage({
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "ホーム", url: localePath("/", locale) },
-          { name: "サービス紹介", url: localePath("/services", locale) },
-          {
-            name: service.title,
+        data={[
+          breadcrumbJsonLd([
+            { name: "ホーム", url: localePath("/", locale) },
+            { name: "サービス紹介", url: localePath("/services", locale) },
+            {
+              name: service.title,
+              url: localePath(`/services/${SERVICE_SLUG}`, locale),
+            },
+          ]),
+          serviceJsonLd({
+            name: "リファボンド（大手決裁者紹介サービス）",
+            description:
+              "人脈紹介(リファラル)を活用した大手・上場企業の決裁者開拓サービス。完全成果報酬型で、紹介営業によりアポイント獲得から商談まで支援します。",
             url: localePath(`/services/${SERVICE_SLUG}`, locale),
-          },
-        ])}
+            keywords: [
+              "決裁者紹介",
+              "人脈紹介",
+              "リファラル営業",
+              "紹介営業",
+              "アポイント獲得",
+              "完全成果報酬",
+              "大手企業開拓",
+            ],
+          }),
+        ]}
       />
 
       {/* ───── Hero ───── */}

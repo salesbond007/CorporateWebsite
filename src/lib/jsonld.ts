@@ -9,12 +9,33 @@ export function organizationJsonLd() {
     "@type": "Organization",
     name: site.legalName,
     legalName: site.legalName,
-    alternateName: site.legalNameEn,
+    alternateName: [site.legalNameEn, "Sales Bond", "セールスボンド"],
     url: base,
     logo: `${base}/logo-square.jpg`,
+    image: `${base}/logo-square.jpg`,
     description: site.description,
+    slogan: site.slogan,
+    keywords: site.keywords.join(", "),
+    knowsAbout: [
+      "営業代行",
+      "インサイドセールス",
+      "顧問紹介",
+      "人脈紹介",
+      "リファラル営業",
+      "紹介営業",
+      "アポイント獲得",
+      "BtoB営業支援",
+      "決裁者紹介",
+      "プロ人材マッチング",
+      "営業BPO",
+    ],
     email: site.email,
     foundingDate: site.founded,
+    founder: {
+      "@type": "Person",
+      name: site.founderName,
+      alternateName: site.founderNameKana,
+    },
     address: {
       "@type": "PostalAddress",
       streetAddress: site.address.streetAddress,
@@ -42,8 +63,11 @@ export function websiteJsonLd() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: site.name,
+    alternateName: ["Sales Bond", "セールスボンド"],
     url: base,
     inLanguage: "ja",
+    description: site.description,
+    keywords: site.keywords.join(", "),
     publisher: {
       "@type": "Organization",
       name: site.legalName,
@@ -58,6 +82,52 @@ export function websiteJsonLd() {
       },
       "query-input": "required name=search_term_string",
     },
+  };
+}
+
+/**
+ * SiteNavigationElement — 主要ナビ項目をクローラに提示し
+ * サイトリンク(sitelinks)生成のヒントを与えます。
+ */
+export function siteNavigationJsonLd(
+  items: { name: string; url: string }[],
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "SiteNavigationElement",
+      position: i + 1,
+      name: item.name,
+      url: item.url.startsWith("http") ? item.url : `${base}${item.url}`,
+    })),
+  };
+}
+
+/**
+ * 各サービスを Service スキーマで出力 — Googleが「サービス内容」を理解し
+ * リッチリザルトの候補に上げやすくなる。
+ */
+export function serviceJsonLd(service: {
+  name: string;
+  description: string;
+  url: string;
+  keywords?: string[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: service.name,
+    name: service.name,
+    description: service.description,
+    url: service.url.startsWith("http") ? service.url : `${base}${service.url}`,
+    provider: {
+      "@type": "Organization",
+      name: site.legalName,
+      url: base,
+    },
+    areaServed: "JP",
+    keywords: service.keywords?.join(", "),
   };
 }
 

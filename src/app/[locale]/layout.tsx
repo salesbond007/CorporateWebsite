@@ -6,7 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { organizationJsonLd, websiteJsonLd } from "@/lib/jsonld";
+import { organizationJsonLd, websiteJsonLd, siteNavigationJsonLd } from "@/lib/jsonld";
 import { site } from "@/lib/site";
 import { isLocale, locales, ogLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
@@ -33,11 +33,17 @@ export async function generateMetadata({
 
   return {
     metadataBase: new URL(site.url),
+    applicationName: site.name,
     title: {
       default: dict.site.name,
       template: `%s | ${dict.site.name}`,
     },
     description: dict.site.description,
+    keywords: [...site.keywords],
+    authors: [{ name: site.legalName, url: site.url }],
+    creator: site.legalName,
+    publisher: site.legalName,
+    category: "Business Services",
     alternates: {
       canonical: `/${params.locale}`,
       languages: {
@@ -59,7 +65,17 @@ export async function generateMetadata({
       title: dict.site.name,
       description: dict.site.description,
     },
-    robots: { index: true, follow: true },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-snippet": -1,
+        "max-image-preview": "large",
+        "max-video-preview": -1,
+      },
+    },
   };
 }
 
@@ -92,7 +108,23 @@ export default function LocaleLayout({
         <Header locale={locale} dict={dict} />
         <main id="main">{children}</main>
         <Footer locale={locale} dict={dict} />
-        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
+        <JsonLd
+          data={[
+            organizationJsonLd(),
+            websiteJsonLd(),
+            siteNavigationJsonLd([
+              { name: "ホーム", url: `/${locale}` },
+              { name: "サービス案内", url: `/${locale}/services` },
+              { name: "リファボンド（大手決裁者紹介）", url: `/${locale}/services/sales-bond` },
+              { name: "キーマンボンド（プロ人材/顧問マッチング）", url: `/${locale}/services/keyman-bond` },
+              { name: "セルボンド（BtoB営業支援）", url: `/${locale}/services/lead-bond` },
+              { name: "メディア", url: `/${locale}/blog` },
+              { name: "会社概要", url: `/${locale}/company` },
+              { name: "お問い合わせ", url: `/${locale}/contact` },
+              { name: "個人の方はこちら", url: `/${locale}/contact/partner` },
+            ]),
+          ]}
+        />
         <Analytics />
         <SpeedInsights />
       </body>

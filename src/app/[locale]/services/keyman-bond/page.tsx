@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/jsonld";
 import { services } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import { isLocale, locales } from "@/i18n/config";
@@ -611,14 +611,32 @@ export default function KeymanBondPage({
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "ホーム", url: localePath("/", locale) },
-          { name: "サービス紹介", url: localePath("/services", locale) },
-          {
-            name: service.title,
+        data={[
+          breadcrumbJsonLd([
+            { name: "ホーム", url: localePath("/", locale) },
+            { name: "サービス紹介", url: localePath("/services", locale) },
+            {
+              name: service.title,
+              url: localePath(`/services/${SERVICE_SLUG}`, locale),
+            },
+          ]),
+          serviceJsonLd({
+            name: "キーマンボンド（プロ人材/顧問マッチングサービス）",
+            description:
+              "経営層・CxO・各分野のプロフェッショナル人材を、顧問・アドバイザー・社外役員として企業の経営課題に紹介。AIマッチングで事業フェーズに最適な人材を提案します。",
             url: localePath(`/services/${SERVICE_SLUG}`, locale),
-          },
-        ])}
+            keywords: [
+              "顧問",
+              "顧問紹介",
+              "プロ人材",
+              "プロ人材マッチング",
+              "CxO",
+              "経営支援",
+              "アドバイザー",
+              "社外役員",
+            ],
+          }),
+        ]}
       />
 
       {/* ───── Hero ───── */}

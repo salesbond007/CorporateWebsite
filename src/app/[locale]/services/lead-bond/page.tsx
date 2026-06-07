@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/jsonld";
 import { services } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import { isLocale, locales } from "@/i18n/config";
@@ -517,14 +517,31 @@ export default function SalesSupportPage({
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "ホーム", url: localePath("/", locale) },
-          { name: "サービス紹介", url: localePath("/services", locale) },
-          {
-            name: service.title,
+        data={[
+          breadcrumbJsonLd([
+            { name: "ホーム", url: localePath("/", locale) },
+            { name: "サービス紹介", url: localePath("/services", locale) },
+            {
+              name: service.title,
+              url: localePath(`/services/${SERVICE_SLUG}`, locale),
+            },
+          ]),
+          serviceJsonLd({
+            name: "セルボンド（BtoB営業支援サービス）",
+            description:
+              "営業戦略の策定からアポイント獲得・商談・成約まで一気通貫で支援。インサイドセールス・営業代行・営業DX・人材紹介をワンストップで提供するBtoB営業支援サービス。",
             url: localePath(`/services/${SERVICE_SLUG}`, locale),
-          },
-        ])}
+            keywords: [
+              "BtoB営業支援",
+              "営業代行",
+              "インサイドセールス",
+              "営業BPO",
+              "アポイント獲得",
+              "営業DX",
+              "営業戦略",
+            ],
+          }),
+        ]}
       />
 
       {/* ───── Hero (light) ───── */}
