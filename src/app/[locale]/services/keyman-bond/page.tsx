@@ -710,7 +710,7 @@ export default function KeymanBondPage({
               <div className="relative mx-auto w-full lg:ml-auto lg:mr-0">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://i.imgur.com/qxw7FjS.png"
+                  src="https://i.imgur.com/F0ZKMUf.png"
                   alt="経営課題に伴走するプロフェッショナル人材"
                   className="block h-auto w-full"
                   loading="eager"
