@@ -10,8 +10,8 @@ type Cell = {
 const cells: Cell[] = [
   { label: "売上拡大", en: "Revenue", bg: "bg-brand-500", text: "text-white" },
   { label: "大手企業開拓", en: "Enterprise", bg: "bg-emerald-500", text: "text-white" },
-  { label: "人事採用", en: "Talent", bg: "bg-sky-500", text: "text-white" },
-  { label: "DX推進", en: "DX", bg: "bg-rose-700", text: "text-white" },
+  { label: "プロ人材/顧問マッチング", en: "Talent", bg: "bg-rose-700", text: "text-white" },
+  { label: "営業代行", en: "Sales", bg: "bg-sky-500", text: "text-white" },
 ];
 
 function CrossCell({
@@ -52,46 +52,35 @@ export function MissionSection() {
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
           {/* Left: heading + copy */}
           <div className="lg:col-span-7">
-            <div className="flex items-center gap-3">
-              <span aria-hidden="true" className="block h-7 w-7 bg-ink" />
-              <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-ink">
+            <div className="flex items-center gap-4">
+              <span aria-hidden="true" className="block h-10 w-10 bg-ink md:h-12 md:w-12" />
+              <h2 className="font-display font-black leading-none tracking-tight text-ink text-[clamp(3rem,8vw,6rem)] uppercase">
                 Mission
-              </p>
+              </h2>
             </div>
 
-            <h2 className="mt-8 font-display font-black leading-[1.05] tracking-tight text-ink text-[clamp(2.5rem,6vw,4.75rem)]">
-              ABOUT
-              <span className="ml-3 md:ml-4">
-                &ldquo;<span className="text-brand-500">BOND</span>&rdquo;
-              </span>
-            </h2>
-
-            <p className="mt-8 text-xl md:text-2xl lg:text-3xl font-black leading-snug text-ink">
+            <p className="mt-10 text-xl md:text-2xl lg:text-3xl font-black leading-snug text-ink">
               挑む企業に最短で、
               <span className="text-brand-500">確実な解</span>
               を。
             </p>
-            <p className="mt-2 text-xs md:text-sm font-extrabold tracking-[0.18em] uppercase text-ink-muted">
-              One Bond, Every Answer.
-            </p>
 
             <div className="mt-8 max-w-xl space-y-5 text-sm md:text-base text-ink-soft leading-[1.95] font-medium">
               <p>
-                売上拡大、大手企業開拓、人事採用、DX推進——
-                明確な経営課題を抱えながらも、社内リソースのみでは
-                <span className="font-bold text-ink">対応範囲・実行スピードに限界</span>
-                があります。
+                明確な経営課題を抱えながらも、その遂行が思うように進まない事例は少なくありません。
+              </p>
+              <p>売上拡大、大手企業開拓、人事採用、DX推進——。</p>
+              <p>
+                社内リソースのみで対処を図る場合、対応範囲には自ずと限界があり、施策実行のスピードも鈍化する傾向にあります。
               </p>
               <p>
-                セールスボンドは、大手・上場企業の役員クラスを中心とした
-                <span className="font-black text-ink">プロフェッショナル人材</span>
-                と、その
-                <span className="font-black text-ink">事業ネットワーク</span>
-                を提供。外部から
-                <span className="font-black text-brand-600">知見・人脈・実行力</span>
-                を導入し、次なる成長フェーズへの
-                <span className="font-black text-brand-600">確かな起点</span>
-                となります。
+                当社は、大手・上場企業の役員・部長職以上を中心とした実績豊富なプロフェッショナル人材と、それらが長年にわたり構築してきた事業ネットワークをご提供いたします。
+              </p>
+              <p>
+                社内に存在しない知見・人脈・実行力を、最適な形で外部から導入することで、組織の課題解決を加速させます。
+              </p>
+              <p>
+                セールスボンドは、企業が次なる成長フェーズへと移行するための、確かな起点となることを使命としています。
               </p>
             </div>
           </div>
