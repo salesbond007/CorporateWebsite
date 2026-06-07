@@ -67,20 +67,67 @@ export function MissionSection() {
 
             <div className="mt-8 max-w-xl space-y-5 text-sm md:text-base text-ink-soft leading-[1.95] font-medium">
               <p>
-                明確な経営課題を抱えながらも、その遂行が思うように進まない事例は少なくありません。
-              </p>
-              <p>売上拡大、大手企業開拓、人事採用、DX推進——。</p>
-              <p>
-                社内リソースのみで対処を図る場合、対応範囲には自ずと限界があり、施策実行のスピードも鈍化する傾向にあります。
+                明確な経営課題を抱えながらも、その遂行が
+                <span className="font-black text-ink">思うように進まない</span>
+                事例は少なくありません。
               </p>
               <p>
-                当社は、大手・上場企業の役員・部長職以上を中心とした実績豊富なプロフェッショナル人材と、それらが長年にわたり構築してきた事業ネットワークをご提供いたします。
+                <span className="font-black text-ink">売上拡大</span>、
+                <span className="font-black text-ink">大手企業開拓</span>、
+                <span className="font-black text-ink">人事採用</span>、
+                <span className="font-black text-ink">DX推進</span>——。
               </p>
               <p>
-                社内に存在しない知見・人脈・実行力を、最適な形で外部から導入することで、組織の課題解決を加速させます。
+                社内リソースのみで対処を図る場合、
+                <span className="relative inline-block font-black text-ink">
+                  対応範囲には自ずと限界
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-amber-300"
+                  />
+                </span>
+                があり、
+                <span className="font-black text-ink">施策実行のスピードも鈍化</span>
+                する傾向にあります。
               </p>
               <p>
-                セールスボンドは、企業が次なる成長フェーズへと移行するための、確かな起点となることを使命としています。
+                当社は、大手・上場企業の役員・部長職以上を中心とした
+                <span className="font-black text-ink">実績豊富なプロフェッショナル人材</span>
+                と、それらが長年にわたり構築してきた
+                <span className="relative inline-block font-black text-ink">
+                  事業ネットワーク
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-amber-300"
+                  />
+                </span>
+                をご提供いたします。
+              </p>
+              <p>
+                社内に存在しない
+                <span className="font-black text-brand-600">知見・人脈・実行力</span>
+                を、最適な形で外部から導入することで、
+                <span className="relative inline-block font-black text-ink">
+                  組織の課題解決を加速
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-amber-300"
+                  />
+                </span>
+                させます。
+              </p>
+              <p>
+                セールスボンドは、企業が
+                <span className="font-black text-ink">次なる成長フェーズ</span>
+                へと移行するための、
+                <span className="relative inline-block font-black text-brand-600">
+                  確かな起点
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-amber-300"
+                  />
+                </span>
+                となることを使命としています。
               </p>
             </div>
           </div>
