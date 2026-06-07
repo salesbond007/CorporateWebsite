@@ -559,17 +559,6 @@ function SolutionIconArt({ kind }: { kind: SolutionIcon }) {
   }
 }
 
-type Pro = { field: string; catch: string };
-
-const pros: Pro[] = [
-  { field: "新規事業", catch: "事業構想から立ち上げ・収益化まで、0→1を伴走するプロ" },
-  { field: "マーケティング", catch: "戦略設計から実行まで、成果に直結する施策を主導するプロ" },
-  { field: "人事・組織", catch: "採用・制度設計・組織開発で、強い組織づくりを支えるプロ" },
-  { field: "DX・IT", catch: "要件定義から運用まで、現場に入り変革を推進するプロ" },
-  { field: "財務・経営管理", catch: "資金調達・管理会計で、経営の意思決定を支えるプロ" },
-  { field: "営業・事業開発", catch: "戦略から販路開拓まで、売上の最大化を実現するプロ" },
-];
-
 type Faq = { q: string; a: ReactNode };
 
 export default function KeymanBondPage({

@@ -145,6 +145,7 @@ export function CompanyAutocomplete({
           if (suggestions.length > 0) setOpen(true);
         }}
         onKeyDown={handleKey}
+        role="combobox"
         aria-autocomplete="list"
         aria-expanded={open}
         aria-controls={`${name}-listbox`}
