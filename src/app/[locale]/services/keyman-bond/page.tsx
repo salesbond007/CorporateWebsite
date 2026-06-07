@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
@@ -23,6 +24,121 @@ export const metadata: Metadata = {
   description:
     "キーマンボンドは、経営層・CxO・エキスパートクラスのプロ人材を、課題に応じてアドバイザー/顧問として提案するプロ人材マッチングサービス。新規事業・マーケ・DX・人事・財務・海外展開まで、実働型で経営課題の解決に伴走します。",
 };
+
+type FeatureKind = "hands-on" | "multi-domain" | "phase-fit";
+
+function FeatureDiagram({ kind }: { kind: FeatureKind }) {
+  if (kind === "hands-on") {
+    return (
+      <svg
+        viewBox="0 0 280 110"
+        className="h-auto w-full max-w-[260px]"
+        role="img"
+        aria-label="助言だけで終わらず、設計・実行・成果まで伴走するフロー"
+      >
+        {/* 助言 (faded) */}
+        <rect x="4" y="40" width="48" height="28" rx="6" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1.5" />
+        <line x1="14" y1="54" x2="42" y2="54" stroke="#9CA3AF" strokeWidth="1.2" />
+        <text x="28" y="58" textAnchor="middle" fontSize="11" fontWeight="700" fill="#9CA3AF">助言</text>
+        <path d="M58 54h12M66 50l4 4-4 4" stroke="#D1D5DB" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        {/* 設計 */}
+        <rect x="74" y="40" width="48" height="28" rx="6" fill="#FFE4E6" stroke="#BE123C" strokeWidth="1.5" />
+        <text x="98" y="58" textAnchor="middle" fontSize="11" fontWeight="800" fill="#9F1239">設計</text>
+        <path d="M128 54h12M136 50l4 4-4 4" stroke="#BE123C" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        {/* 実行 */}
+        <rect x="144" y="40" width="48" height="28" rx="6" fill="#BE123C" />
+        <text x="168" y="58" textAnchor="middle" fontSize="11" fontWeight="800" fill="#FFFFFF">実行</text>
+        <path d="M198 54h12M206 50l4 4-4 4" stroke="#BE123C" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+        {/* 成果 */}
+        <rect x="214" y="40" width="56" height="28" rx="6" fill="#9F1239" />
+        <text x="242" y="58" textAnchor="middle" fontSize="11" fontWeight="800" fill="#FFFFFF">成果</text>
+        {/* underline accent */}
+        <path d="M76 78h196" stroke="#FDA4AF" strokeWidth="2" strokeLinecap="round" strokeDasharray="2 4" />
+        <text x="174" y="96" textAnchor="middle" fontSize="9" fontWeight="700" fill="#9F1239">プロが現場で担う領域</text>
+      </svg>
+    );
+  }
+
+  if (kind === "multi-domain") {
+    const labels = ["経営", "マーケ", "DX", "人事", "財務", "営業"];
+    return (
+      <svg
+        viewBox="0 0 220 160"
+        className="h-auto w-full max-w-[240px]"
+        role="img"
+        aria-label="プロ人材がカバーする多領域のハブ&スポーク図"
+      >
+        {labels.map((label, i) => {
+          const angle = ((i / labels.length) * Math.PI * 2) - Math.PI / 2;
+          const x = 110 + 62 * Math.cos(angle);
+          const y = 80 + 56 * Math.sin(angle);
+          return (
+            <g key={label}>
+              <line x1="110" y1="80" x2={x} y2={y} stroke="#FCA5A5" strokeWidth="1" strokeDasharray="3 3" />
+              <circle cx={x} cy={y} r="16" fill="#FFFFFF" stroke="#BE123C" strokeWidth="1.6" />
+              <text x={x} y={y + 3.5} textAnchor="middle" fontSize="9.5" fontWeight="800" fill="#9F1239">
+                {label}
+              </text>
+            </g>
+          );
+        })}
+        <circle cx="110" cy="80" r="26" fill="#BE123C" />
+        <circle cx="110" cy="80" r="33" fill="none" stroke="#BE123C" strokeWidth="1" opacity="0.3" />
+        <text x="110" y="78" textAnchor="middle" fontSize="9" fontWeight="800" fill="#FECDD3">EXPERT</text>
+        <text x="110" y="90" textAnchor="middle" fontSize="11" fontWeight="900" fill="#FFFFFF">Pro</text>
+      </svg>
+    );
+  }
+
+  // phase-fit
+  return (
+    <svg
+      viewBox="0 0 280 150"
+      className="h-auto w-full max-w-[260px]"
+      role="img"
+      aria-label="事業フェーズごとに最適なプロ人材を配置する成長曲線"
+    >
+      {/* baseline */}
+      <line x1="10" y1="125" x2="270" y2="125" stroke="#E5E7EB" strokeWidth="1" />
+      <line x1="10" y1="125" x2="10" y2="15" stroke="#E5E7EB" strokeWidth="1" />
+      {/* growth curve */}
+      <path
+        d="M14 120 C 60 118 80 100 110 80 C 140 60 170 50 200 35 C 220 25 250 18 268 15"
+        stroke="#BE123C"
+        strokeWidth="2.4"
+        fill="none"
+        strokeLinecap="round"
+      />
+      {/* curve glow */}
+      <path
+        d="M14 120 C 60 118 80 100 110 80 C 140 60 170 50 200 35 C 220 25 250 18 268 15"
+        stroke="#BE123C"
+        strokeWidth="6"
+        fill="none"
+        strokeLinecap="round"
+        opacity="0.12"
+      />
+      {/* waypoints */}
+      {[
+        { x: 56, y: 115, label: "シード", role: "CxO候補" },
+        { x: 142, y: 70, label: "拡大期", role: "事業責任者" },
+        { x: 230, y: 25, label: "上場準備", role: "顧問" },
+      ].map((w) => (
+        <g key={w.label}>
+          <circle cx={w.x} cy={w.y} r="13" fill="none" stroke="#BE123C" strokeWidth="1" opacity="0.35" />
+          <circle cx={w.x} cy={w.y} r="6" fill="#BE123C" />
+          <circle cx={w.x} cy={w.y} r="2.4" fill="#FFFFFF" />
+          <text x={w.x} y={144} textAnchor="middle" fontSize="9.5" fontWeight="800" fill="#9F1239">
+            {w.label}
+          </text>
+          <text x={w.x} y={w.y - 18} textAnchor="middle" fontSize="8.5" fontWeight="700" fill="#6B7280">
+            {w.role}
+          </text>
+        </g>
+      ))}
+    </svg>
+  );
+}
 
 type Solution = { title: string; body: string };
 
@@ -207,10 +323,15 @@ export default function KeymanBondPage({
                   aria-hidden="true"
                   className="absolute -left-5 -top-5 hidden h-28 w-28 rounded-full border-2 border-rose-300/60 md:block"
                 />
-                <div className="relative grid aspect-[4/5] place-items-center overflow-hidden rounded-xl4 border-4 border-white bg-cream shadow-[0_30px_70px_-25px_rgba(20,20,20,0.35)] lg:aspect-[5/6]">
-                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-ink-muted/50">
-                    Image
-                  </span>
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl4 border-4 border-white bg-cream shadow-[0_30px_70px_-25px_rgba(20,20,20,0.35)] lg:aspect-[5/6]">
+                  <Image
+                    src="/hero.jpg"
+                    alt="経営課題に伴走するプロフェッショナル人材"
+                    fill
+                    sizes="(max-width: 1024px) 90vw, 50vw"
+                    className="object-cover"
+                    priority
+                  />
                 </div>
                 {/* floating accent label */}
                 <div className="absolute -bottom-4 left-4 rounded-xl2 bg-ink px-5 py-3 text-white shadow-card md:left-8">
@@ -248,23 +369,67 @@ export default function KeymanBondPage({
             </p>
           </div>
 
-          <ul className="mx-auto mt-14 grid max-w-4xl gap-6 md:grid-cols-3">
+          <ul className="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-3">
             {[
-              { t: "実働型で伴走", b: "助言だけで終わらせず、現場に入り実行まで担います。" },
-              { t: "多領域の実力者", b: "経営層・CxO・各分野のエキスパートが多数。" },
-              { t: "フェーズに最適配置", b: "事業フェーズと課題に応じて最適な人材を提案。" },
+              {
+                num: "01",
+                en: "Hands-on",
+                t: "実働型で伴走",
+                b: "助言だけで終わらせず、現場に入り実行まで担います。",
+                kind: "hands-on" as const,
+              },
+              {
+                num: "02",
+                en: "Multi-domain",
+                t: "多領域の実力者",
+                b: "経営層・CxO・各分野のエキスパートが多数。",
+                kind: "multi-domain" as const,
+              },
+              {
+                num: "03",
+                en: "Phase-fit",
+                t: "フェーズに最適配置",
+                b: "事業フェーズと課題に応じて最適な人材を提案。",
+                kind: "phase-fit" as const,
+              },
             ].map((c, i) => (
               <li key={c.t}>
                 <Reveal delay={i * 80} className="h-full">
-                  <div className="relative h-full overflow-hidden rounded-2xl border border-rose-200 bg-white p-7 text-center shadow-sm">
+                  <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-rose-100 bg-white p-7 shadow-[0_24px_60px_-30px_rgba(190,18,60,0.35)] transition-all hover:-translate-y-1 hover:border-rose-300 hover:shadow-[0_30px_70px_-25px_rgba(190,18,60,0.55)]">
                     <span
                       aria-hidden="true"
-                      className="absolute inset-x-0 top-0 h-1 bg-rose-700"
+                      className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-rose-700 via-rose-500 to-rose-700"
                     />
-                    <h3 className="text-lg font-black text-rose-800">{c.t}</h3>
-                    <p className="mt-3 text-sm leading-relaxed text-ink-soft font-medium">
-                      {c.b}
-                    </p>
+                    <div
+                      aria-hidden="true"
+                      className="pointer-events-none absolute -right-12 -top-12 h-40 w-40 rounded-full bg-rose-100/60 blur-2xl transition-opacity group-hover:opacity-80"
+                    />
+
+                    <div className="relative flex items-baseline gap-3">
+                      <span className="font-display text-5xl font-black leading-none text-rose-700/90">
+                        {c.num}
+                      </span>
+                      <span className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-600/80">
+                        {c.en}
+                      </span>
+                    </div>
+
+                    <div className="relative mt-6 grid place-items-center">
+                      <FeatureDiagram kind={c.kind} />
+                    </div>
+
+                    <div className="relative mt-6">
+                      <h3 className="text-xl font-black leading-tight text-ink">
+                        {c.t}
+                      </h3>
+                      <span
+                        aria-hidden="true"
+                        className="mt-3 block h-0.5 w-10 rounded-full bg-rose-700"
+                      />
+                      <p className="mt-3 text-sm leading-relaxed text-ink-soft font-medium">
+                        {c.b}
+                      </p>
+                    </div>
                   </div>
                 </Reveal>
               </li>
