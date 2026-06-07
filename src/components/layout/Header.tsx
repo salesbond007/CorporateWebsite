@@ -27,7 +27,7 @@ export function Header({ locale, dict }: Props) {
   }, []);
 
   const serviceItems = services.map((s) => ({
-    href: `${localePath("/services", locale)}#${s.slug}`,
+    href: localePath(s.href, locale),
     label: s.subtitle.replace(/サービス$/, ""),
     sub: s.title,
   }));
