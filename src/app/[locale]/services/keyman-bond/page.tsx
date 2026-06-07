@@ -135,26 +135,6 @@ function ServiceOverviewDiagram() {
           </text>
         </g>
       </svg>
-
-      <div className="mt-6 grid gap-3 sm:grid-cols-3 md:gap-4">
-        {[
-          { num: "01", label: "企業", body: "解決したい経営課題があり、社内リソースのみでは推進が難しい状況。" },
-          { num: "02", label: "プラットフォーム", body: "弊社エージェントとプラットフォームで、課題に応じた人材を選定。" },
-          { num: "03", label: "プロ人材/顧問", body: "経営層・CxO・各分野のエキスパートクラスを最適な形でご提案。" },
-        ].map((item) => (
-          <div
-            key={item.num}
-            className="rounded-xl border border-rose-100 bg-white px-4 py-3"
-          >
-            <p className="text-[10px] font-extrabold tracking-[0.18em] uppercase text-rose-600">
-              {item.num} ／ {item.label}
-            </p>
-            <p className="mt-1.5 text-xs leading-relaxed text-ink-soft font-medium md:text-sm">
-              {item.body}
-            </p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }
