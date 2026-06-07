@@ -105,11 +105,14 @@ function ProblemIcon({ index }: { index: number }) {
   }
 }
 
+type PointKind = "pipeline" | "modular" | "enterprise";
+
 type Point = {
   num: string;
   label: string;
   title: string[];
   body: string;
+  kind: PointKind;
 };
 
 const points: Point[] = [
@@ -121,6 +124,7 @@ const points: Point[] = [
       "営業プロセスのすべてを一気通貫で支援",
     ],
     body: "戦略策定、アポ獲得、商談、クロージング、そして組織への定着まで。営業のすべての工程を一気通貫で支援することで、「点」の支援では生まれない、「線」としての成果創出を実現します。",
+    kind: "pipeline",
   },
   {
     num: "02",
@@ -130,14 +134,198 @@ const points: Point[] = [
       "課題に応じた柔軟なプラン設計",
     ],
     body: "アポイント不足にはインサイドセールスを、商談リソース不足にはフィールドセールスを。貴社の課題に応じて必要な支援だけを切り出し、組み合わせて提供する柔軟な体制を構築します。",
+    kind: "modular",
   },
   {
     num: "03",
     label: "大手企業/上場企業の開拓にも対応",
     title: ["大手企業/上場企業の開拓にも対応"],
     body: "立ち上げ期のスタートアップから、大手・上場企業の決裁者開拓まで対応。エンタープライズ攻略のノウハウと決裁者ネットワークを活かし、自社だけでは届かない層への接点創出も実現します。",
+    kind: "enterprise",
   },
 ];
+
+function PointIllustration({ kind }: { kind: PointKind }) {
+  if (kind === "pipeline") {
+    return (
+      <svg
+        viewBox="0 0 320 240"
+        className="block h-auto w-full"
+        role="img"
+        aria-label="戦略立案からアポ獲得・商談・成約・組織定着までの一気通貫フロー"
+      >
+        <defs>
+          <linearGradient id="lb-pl" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stopColor="#7DD3FC" />
+            <stop offset="100%" stopColor="#0284C7" />
+          </linearGradient>
+        </defs>
+        {/* baseline rail */}
+        <line x1="24" y1="180" x2="296" y2="180" stroke="#E0F2FE" strokeWidth="4" strokeLinecap="round" />
+        <line x1="24" y1="180" x2="296" y2="180" stroke="url(#lb-pl)" strokeWidth="3" strokeLinecap="round" strokeDasharray="0 18 280" />
+        {/* nodes */}
+        {[
+          { x: 40, label: "戦略", desc: "Plan" },
+          { x: 100, label: "アポ", desc: "Reach" },
+          { x: 160, label: "商談", desc: "Pitch" },
+          { x: 220, label: "成約", desc: "Close" },
+          { x: 280, label: "定着", desc: "Embed" },
+        ].map((n, i) => (
+          <g key={n.label}>
+            <line x1={n.x} y1="180" x2={n.x} y2="80" stroke="#BAE6FD" strokeWidth="1.4" strokeDasharray="2 4" />
+            <rect x={n.x - 22} y="56" width="44" height="36" rx="6" fill="#FFFFFF" stroke="#0284C7" strokeWidth="1.6" />
+            <text x={n.x} y="72" textAnchor="middle" fontSize="9" fontWeight="800" fill="#0369A1" letterSpacing="1">{n.desc}</text>
+            <text x={n.x} y="86" textAnchor="middle" fontSize="11" fontWeight="900" fill="#0C4A6E">{n.label}</text>
+            <circle cx={n.x} cy="180" r="6" fill="#FFFFFF" stroke="#0284C7" strokeWidth="2" />
+            <circle cx={n.x} cy="180" r="2.6" fill="#0284C7" />
+            <text x={n.x} y="206" textAnchor="middle" fontSize="9" fontWeight="700" fill="#0369A1">{`0${i + 1}`}</text>
+          </g>
+        ))}
+        {/* growth arrow */}
+        <path d="M40 160 C 110 150 200 120 296 60" stroke="#0EA5E9" strokeWidth="2" fill="none" strokeLinecap="round" strokeDasharray="4 4" opacity="0.5" />
+        {/* outcome chip */}
+        <g transform="translate(232, 24)">
+          <rect width="80" height="22" rx="11" fill="#0EA5E9" />
+          <text x="40" y="15" textAnchor="middle" fontSize="10" fontWeight="900" fill="#FFFFFF">線としての成果</text>
+        </g>
+      </svg>
+    );
+  }
+
+  if (kind === "modular") {
+    return (
+      <svg
+        viewBox="0 0 320 240"
+        className="block h-auto w-full"
+        role="img"
+        aria-label="必要な支援だけを切り出して組み合わせる柔軟なプラン"
+      >
+        {/* base palette of modules (top row) */}
+        {[
+          { x: 16, label: "戦略", color: "#E0F2FE", text: "#0369A1" },
+          { x: 80, label: "IS", color: "#E0F2FE", text: "#0369A1" },
+          { x: 144, label: "FS", color: "#E0F2FE", text: "#0369A1" },
+          { x: 208, label: "DX", color: "#E0F2FE", text: "#0369A1" },
+          { x: 272, label: "教育", color: "#E0F2FE", text: "#0369A1" },
+        ].map((m) => (
+          <g key={m.label}>
+            <rect x={m.x} y="20" width="40" height="38" rx="5" fill={m.color} stroke="#7DD3FC" strokeWidth="1.4" />
+            <text x={m.x + 20} y="44" textAnchor="middle" fontSize="11" fontWeight="800" fill={m.text}>{m.label}</text>
+          </g>
+        ))}
+        {/* down arrow */}
+        <path d="M160 70 L160 96 M150 88 L160 98 L170 88" stroke="#0284C7" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        {/* assembled stack (showing only selected modules combined) */}
+        <g>
+          <rect x="56" y="106" width="208" height="116" rx="10" fill="#FFFFFF" stroke="#0EA5E9" strokeWidth="2" />
+          <text x="160" y="124" textAnchor="middle" fontSize="9" fontWeight="800" fill="#0EA5E9" letterSpacing="2">YOUR PLAN</text>
+
+          {/* chosen modules stacked */}
+          <g transform="translate(72, 138)">
+            <rect width="78" height="34" rx="6" fill="#0EA5E9" />
+            <text x="39" y="22" textAnchor="middle" fontSize="11" fontWeight="900" fill="#FFFFFF">IS</text>
+            <text x="39" y="58" textAnchor="middle" fontSize="8" fontWeight="700" fill="#0C4A6E">アポ獲得</text>
+          </g>
+          <g transform="translate(170, 138)">
+            <rect width="78" height="34" rx="6" fill="#0284C7" />
+            <text x="39" y="22" textAnchor="middle" fontSize="11" fontWeight="900" fill="#FFFFFF">FS</text>
+            <text x="39" y="58" textAnchor="middle" fontSize="8" fontWeight="700" fill="#0C4A6E">商談</text>
+          </g>
+          {/* plus sign between */}
+          <text x="160" y="160" textAnchor="middle" fontSize="20" fontWeight="900" fill="#0EA5E9">+</text>
+
+          <text x="160" y="208" textAnchor="middle" fontSize="9.5" fontWeight="800" fill="#0369A1">必要な分だけ、柔軟に組み合わせ</text>
+        </g>
+      </svg>
+    );
+  }
+
+  // enterprise
+  return (
+    <svg
+      viewBox="0 0 320 240"
+      className="block h-auto w-full"
+      role="img"
+      aria-label="エンタープライズ攻略のノウハウと決裁者ネットワーク"
+    >
+      {/* sky background subtle */}
+      <rect x="0" y="0" width="320" height="240" fill="#F0F9FF" rx="0" />
+      {/* baseline */}
+      <line x1="20" y1="200" x2="300" y2="200" stroke="#7DD3FC" strokeWidth="1.4" />
+
+      {/* skyline buildings */}
+      <g stroke="#0284C7" strokeWidth="1.6" fill="#FFFFFF" strokeLinejoin="round">
+        <rect x="28" y="138" width="42" height="62" />
+        <rect x="76" y="110" width="36" height="90" />
+        <rect x="208" y="120" width="38" height="80" />
+        <rect x="252" y="148" width="36" height="52" />
+      </g>
+      {/* center tall building (filled sky-600) - listed enterprise */}
+      <g>
+        <rect x="124" y="60" width="76" height="140" fill="#0284C7" stroke="#0369A1" strokeWidth="1.6" />
+        {/* windows */}
+        <g fill="#FFFFFF" opacity="0.85">
+          {Array.from({ length: 12 }).map((_, r) =>
+            Array.from({ length: 4 }).map((__, c) => (
+              <rect
+                key={`${r}-${c}`}
+                x={132 + c * 16}
+                y={70 + r * 11}
+                width="8"
+                height="6"
+                fill={(r + c) % 5 === 0 ? "#FBBF24" : "#FFFFFF"}
+              />
+            )),
+          )}
+        </g>
+        {/* roof badge */}
+        <rect x="148" y="48" width="28" height="14" rx="2" fill="#0EA5E9" />
+        <text x="162" y="58" textAnchor="middle" fontSize="8" fontWeight="900" fill="#FFFFFF" letterSpacing="1">TSE</text>
+      </g>
+
+      {/* windows for side buildings */}
+      <g fill="#BAE6FD">
+        {Array.from({ length: 5 }).map((_, r) =>
+          Array.from({ length: 3 }).map((__, c) => (
+            <rect key={`l-${r}-${c}`} x={34 + c * 12} y={146 + r * 10} width="6" height="4" />
+          )),
+        )}
+        {Array.from({ length: 7 }).map((_, r) =>
+          Array.from({ length: 2 }).map((__, c) => (
+            <rect key={`m-${r}-${c}`} x={82 + c * 14} y={118 + r * 10} width="6" height="4" />
+          )),
+        )}
+        {Array.from({ length: 6 }).map((_, r) =>
+          Array.from({ length: 2 }).map((__, c) => (
+            <rect key={`r-${r}-${c}`} x={214 + c * 14} y={128 + r * 10} width="6" height="4" />
+          )),
+        )}
+      </g>
+
+      {/* connection lines from center building to side targets */}
+      <g stroke="#0EA5E9" strokeWidth="1.4" strokeDasharray="3 3" fill="none">
+        <path d="M124 96 Q 70 70 50 96" />
+        <path d="M200 96 Q 260 70 280 110" />
+      </g>
+
+      {/* "決裁者" badges on side buildings */}
+      <g>
+        <circle cx="50" cy="96" r="9" fill="#FBBF24" />
+        <text x="50" y="100" textAnchor="middle" fontSize="9" fontWeight="900" fill="#0C4A6E">★</text>
+        <circle cx="280" cy="110" r="9" fill="#FBBF24" />
+        <text x="280" y="114" textAnchor="middle" fontSize="9" fontWeight="900" fill="#0C4A6E">★</text>
+      </g>
+
+      {/* label top */}
+      <g transform="translate(12, 18)">
+        <rect width="92" height="22" rx="11" fill="#0EA5E9" />
+        <text x="46" y="15" textAnchor="middle" fontSize="10" fontWeight="900" fill="#FFFFFF" letterSpacing="1">ENTERPRISE</text>
+      </g>
+      <text x="22" y="58" fontSize="11" fontWeight="900" fill="#0C4A6E">大手・上場企業の</text>
+      <text x="22" y="74" fontSize="11" fontWeight="900" fill="#0C4A6E">決裁者へアプローチ</text>
+    </svg>
+  );
+}
 
 type Step = {
   digit: string;
@@ -839,12 +1027,10 @@ export default function SalesSupportPage({
               return (
                 <Reveal key={pt.num}>
                   <div className="grid items-center gap-8 md:grid-cols-12 md:gap-12">
-                    {/* Image placeholder (smaller) */}
+                    {/* Illustration */}
                     <div className={`md:col-span-5 ${reverse ? "md:order-2" : ""}`}>
-                      <div className="grid aspect-[4/3] w-full place-items-center rounded-2xl border border-ink-line bg-white">
-                        <span className="text-xs font-bold uppercase tracking-[0.2em] text-ink-muted/50">
-                          Image
-                        </span>
+                      <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-ink-line bg-white p-4 md:p-6">
+                        <PointIllustration kind={pt.kind} />
                       </div>
                     </div>
 

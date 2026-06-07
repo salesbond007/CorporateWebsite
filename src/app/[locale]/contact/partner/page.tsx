@@ -180,8 +180,14 @@ export default function PartnerContactPage({
                 </span>
               </h1>
 
-              <p className="mt-6 max-w-xl text-sm md:text-base font-bold italic text-white/90 leading-relaxed">
-                人脈紹介、領域の専門家、顧問として
+              <p className="mt-8 max-w-2xl font-display font-black leading-[1.35] tracking-tight text-white text-[clamp(1.375rem,3.4vw,2.25rem)]">
+                <span className="relative inline-block">
+                  人脈紹介、領域の専門家、顧問として
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-1 h-1.5 bg-amber-400 md:h-2"
+                  />
+                </span>
               </p>
 
               <div className="mt-8 max-w-md">
