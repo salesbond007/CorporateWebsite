@@ -9,8 +9,8 @@ type Cell = {
 
 const cells: Cell[] = [
   { label: "売上拡大", en: "Revenue", bg: "bg-brand-500", text: "text-white" },
-  { label: "大手企業開拓", en: "Enterprise", bg: "bg-emerald-500", text: "text-white" },
-  { label: "プロ人材/顧問マッチング", en: "Talent", bg: "bg-rose-700", text: "text-white" },
+  { label: "決裁者紹介", en: "Enterprise", bg: "bg-emerald-500", text: "text-white" },
+  { label: "プロ人材/顧問紹介", en: "Talent", bg: "bg-rose-700", text: "text-white" },
   { label: "営業代行", en: "Sales", bg: "bg-sky-500", text: "text-white" },
 ];
 
