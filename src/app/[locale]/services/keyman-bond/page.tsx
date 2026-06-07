@@ -760,16 +760,16 @@ export default function KeymanBondPage({
               },
               {
                 num: "02",
-                en: "Multi-domain",
-                t: "多領域の実力者",
-                b: "経営層・CxO・各分野のエキスパートが多数。",
+                en: "Broad coverage",
+                t: "様々な経営課題に対応",
+                b: "経営者・CxO・各分野のプロフェッショナルが在籍。業界や業種問わず対応が可能。",
                 kind: "multi-domain" as const,
               },
               {
                 num: "03",
-                en: "Phase-fit",
-                t: "フェーズに最適配置",
-                b: "事業フェーズと課題に応じて最適な人材を提案。",
+                en: "AI Matching",
+                t: "最適な人材をマッチング",
+                b: "事業フェーズや課題に応じて最適な人材をAIが提案。",
                 kind: "phase-fit" as const,
               },
             ].map((c, i) => (
