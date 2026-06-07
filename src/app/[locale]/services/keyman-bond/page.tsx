@@ -756,15 +756,10 @@ export default function KeymanBondPage({
                   aria-hidden="true"
                   className="absolute -left-5 -top-5 hidden h-28 w-28 rounded-full border-2 border-rose-300/60 md:block"
                 />
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl4 border-4 border-white bg-cream shadow-[0_30px_70px_-25px_rgba(20,20,20,0.35)] lg:aspect-[5/6]">
-                  <Image
-                    src="/hero.jpg"
-                    alt="経営課題に伴走するプロフェッショナル人材"
-                    fill
-                    sizes="(max-width: 1024px) 90vw, 50vw"
-                    className="object-cover"
-                    priority
-                  />
+                <div className="relative grid aspect-[4/5] place-items-center overflow-hidden rounded-xl4 border-4 border-white bg-cream shadow-[0_30px_70px_-25px_rgba(20,20,20,0.35)] lg:aspect-[5/6]">
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-ink-muted/50">
+                    Image
+                  </span>
                 </div>
                 {/* floating accent label */}
                 <div className="absolute -bottom-4 left-4 rounded-xl2 bg-ink px-5 py-3 text-white shadow-card md:left-8">
