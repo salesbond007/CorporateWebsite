@@ -96,44 +96,56 @@ function ServiceOverviewDiagram() {
           </div>
         </div>
 
-        {/* Right: Sales Bond platform */}
+        {/* Right: キーマンボンド platform */}
         <div className="flex flex-col items-center">
           <p className="font-display text-lg md:text-2xl font-black text-rose-700 tracking-tight">
             <span className="relative inline-block">
-              Sales
+              キーマンボンド
               <span aria-hidden="true" className="absolute inset-x-0 -bottom-0.5 h-1 bg-rose-700/20" />
             </span>
-            <span className="ml-1.5">Bond</span>
           </p>
           <svg
-            viewBox="0 0 260 180"
-            className="mt-4 h-auto w-full max-w-[280px]"
+            viewBox="0 0 280 200"
+            className="mt-4 h-auto w-full max-w-[300px]"
             role="img"
             aria-label="プラットフォームで適切なプロ人材/顧問を選定する図"
           >
+            {/* Laptop / platform under the people */}
+            <g stroke="#1F2937" strokeWidth="1.6" fill="#FFFFFF" strokeLinejoin="round">
+              {/* laptop base */}
+              <path d="M40 178h200l-10-8H50z" />
+            </g>
+            <g stroke="#1F2937" strokeWidth="1.6" fill="#FFFFFF" strokeLinejoin="round">
+              {/* laptop screen */}
+              <rect x="58" y="44" width="164" height="126" rx="3" />
+              {/* screen inner */}
+              <rect x="66" y="52" width="148" height="110" rx="2" fill="#FAF7F2" />
+              {/* notch */}
+              <circle cx="140" cy="48" r="0.8" fill="#1F2937" />
+            </g>
+
+            {/* People on top of the screen */}
             <g stroke="#1F2937" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
-              {/* baseline */}
-              <line x1="6" y1="160" x2="254" y2="160" />
               {/* left person */}
-              <circle cx="50" cy="68" r="14" />
-              <path d="M30 132c0-12 9-22 20-22s20 10 20 22" />
+              <circle cx="92" cy="86" r="11" />
+              <path d="M78 130c0-9 7-15 14-15s14 6 14 15" />
               {/* right person */}
-              <circle cx="210" cy="68" r="14" />
-              <path d="M190 132c0-12 9-22 20-22s20 10 20 22" />
+              <circle cx="188" cy="86" r="11" />
+              <path d="M174 130c0-9 7-15 14-15s14 6 14 15" />
               {/* back-center person (smaller) */}
-              <circle cx="130" cy="58" r="11" />
-              <path d="M114 110c0-9 7-16 16-16s16 7 16 16" />
+              <circle cx="140" cy="78" r="9" />
+              <path d="M127 118c0-7 6-13 13-13s13 6 13 13" />
             </g>
 
             {/* highlighted person (foreground) with magnifier */}
             <g>
-              <circle cx="130" cy="100" r="20" fill="#FFFFFF" stroke="#BE123C" strokeWidth="2" />
-              <circle cx="130" cy="100" r="6" fill="#BE123C" />
-              <path d="M115 138c0-9 7-16 15-16s15 7 15 16" stroke="#BE123C" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              <circle cx="140" cy="112" r="16" fill="#FFFFFF" stroke="#BE123C" strokeWidth="2" />
+              <circle cx="140" cy="112" r="5" fill="#BE123C" />
+              <path d="M126 142c0-8 6-14 14-14s14 6 14 14" stroke="#BE123C" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
             </g>
             <g stroke="#BE123C" strokeWidth="3" fill="none" strokeLinecap="round">
-              <circle cx="160" cy="92" r="22" />
-              <line x1="178" y1="110" x2="194" y2="126" />
+              <circle cx="166" cy="106" r="18" />
+              <line x1="180" y1="120" x2="194" y2="134" />
             </g>
           </svg>
           <p className="mt-4 text-xs md:text-sm font-bold text-ink-soft">
