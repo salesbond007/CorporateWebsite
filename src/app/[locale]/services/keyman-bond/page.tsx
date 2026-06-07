@@ -20,9 +20,9 @@ export function generateStaticParams() {
 
 export const metadata: Metadata = {
   title:
-    "キーマンボンド｜プロ人材マッチングサービス｜経営課題をその道のプロと解決",
+    "キーマンボンド｜プロ人材/顧問マッチングサービス｜経営課題をその道のプロと解決",
   description:
-    "キーマンボンドは、経営層・CxO・エキスパートクラスのプロ人材を、課題に応じてアドバイザー/顧問として提案するプロ人材マッチングサービス。新規事業・マーケ・DX・人事・財務・海外展開まで、実働型で経営課題の解決に伴走します。",
+    "キーマンボンドは、経営層・CxO・エキスパートクラスのプロ人材を、課題に応じてアドバイザー/顧問として提案するプロ人材/顧問マッチングサービス。新規事業・マーケ・DX・人事・財務・海外展開まで、実働型で経営課題の解決に伴走します。",
 };
 
 type FeatureKind = "hands-on" | "multi-domain" | "phase-fit";
@@ -140,6 +140,110 @@ function FeatureDiagram({ kind }: { kind: FeatureKind }) {
   );
 }
 
+type ContractStep = {
+  num: string;
+  title: string;
+  body: string;
+  isFree?: boolean;
+  icon: "chat" | "register" | "task" | "introduce" | "launch";
+};
+
+const contractSteps: ContractStep[] = [
+  {
+    num: "01",
+    title: "ご相談",
+    body: "貴社の状況・解決したい課題をお気軽にご相談ください。",
+    icon: "chat",
+  },
+  {
+    num: "02",
+    title: "プラットフォームへの登録",
+    body: "弊社マッチングプラットフォームへご登録いただきます。",
+    isFree: true,
+    icon: "register",
+  },
+  {
+    num: "03",
+    title: "経営課題の登録",
+    body: "解決したい経営課題を登録。マッチング精度を高めます。",
+    isFree: true,
+    icon: "task",
+  },
+  {
+    num: "04",
+    title: "プロ人材のご紹介",
+    body: "弊社エージェントが、課題に適したプロ人材をご紹介します。",
+    icon: "introduce",
+  },
+  {
+    num: "05",
+    title: "面談後、実働開始",
+    body: "面談・合意のうえ、プロ人材が現場に入り実働を開始します。",
+    icon: "launch",
+  },
+];
+
+function ContractStepIcon({ kind }: { kind: ContractStep["icon"] }) {
+  const c = {
+    viewBox: "0 0 32 32",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.7,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    className: "h-9 w-9",
+  };
+  switch (kind) {
+    case "chat":
+      return (
+        <svg {...c}>
+          <path d="M5 7h22v14H13l-5 5v-5H5z" />
+          <circle cx="12" cy="14" r="1" fill="currentColor" />
+          <circle cx="16" cy="14" r="1" fill="currentColor" />
+          <circle cx="20" cy="14" r="1" fill="currentColor" />
+        </svg>
+      );
+    case "register":
+      return (
+        <svg {...c}>
+          <circle cx="13" cy="12" r="4" />
+          <path d="M5 26c0-4 3.6-7 8-7 1.6 0 3 .4 4.2 1.1" />
+          <path d="M21 22h6M24 19v6" />
+        </svg>
+      );
+    case "task":
+      return (
+        <svg {...c}>
+          <rect x="7" y="6" width="18" height="22" rx="2" />
+          <path d="M11 4h10v4H11z" />
+          <path d="M11 14h10M11 18h10M11 22h6" />
+          <path d="M9 11l1.2 1.2L13 9.5" />
+        </svg>
+      );
+    case "introduce":
+      return (
+        <svg {...c}>
+          <circle cx="9" cy="11" r="3.2" />
+          <circle cx="23" cy="11" r="3.2" />
+          <path d="M4 24c0-3.2 2.4-5.4 5.5-5.4 1.2 0 2.3.3 3.2.9" />
+          <path d="M28 24c0-3.2-2.4-5.4-5.5-5.4-1.2 0-2.3.3-3.2.9" />
+          <path d="M13 21l3-3 3 3" />
+          <path d="M16 18v8" />
+        </svg>
+      );
+    case "launch":
+      return (
+        <svg {...c}>
+          <path d="M11 21c-3 0-5-2-5-5 2 0 4 1 5 3" />
+          <path d="M14 22c5-2 9-6 11-13l-3-3c-7 2-11 6-13 11l5 5z" />
+          <circle cx="20" cy="12" r="2" />
+          <path d="M8 26l3-3" />
+        </svg>
+      );
+  }
+}
+
 type Solution = { title: string; body: string };
 
 const solutions: Solution[] = [
@@ -245,7 +349,7 @@ export default function KeymanBondPage({
             <div className="lg:col-span-6">
               <p className="inline-flex items-center gap-2 rounded-full border border-rose-200 bg-white px-4 py-1.5 text-xs md:text-sm font-extrabold tracking-wide text-rose-800 shadow-sm">
                 <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-rose-700" />
-                キーマンボンド｜プロ人材マッチングサービス
+                キーマンボンド｜プロ人材/顧問マッチングサービス
               </p>
 
               <h1 className="mt-6 font-display font-black leading-[1.2] tracking-tight text-ink text-[clamp(2rem,4.2vw,3.25rem)]">
@@ -488,6 +592,118 @@ export default function KeymanBondPage({
             </Button>
             <Button href={contactHref} size="lg" variant="secondary">
               無料相談
+            </Button>
+          </div>
+        </Container>
+      </section>
+
+      {/* ───── Contract Flow ───── */}
+      <section className="bg-white py-24 md:py-32">
+        <Container>
+          <div className="text-center">
+            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
+              Process
+            </p>
+            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
+              ご契約から実働までの流れ
+            </h2>
+            <span
+              aria-hidden="true"
+              className="mx-auto mt-6 block h-1 w-16 rounded-full bg-rose-700"
+            />
+            <p className="mx-auto mt-6 max-w-2xl text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              ご相談から実働開始まで、最短で着手できる5ステップ。プラットフォーム登録・課題登録は無料です。
+            </p>
+          </div>
+
+          <div className="relative mt-16">
+            {/* Connecting rail behind cards (desktop) */}
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute left-[6%] right-[6%] top-[88px] hidden h-[2px] lg:block"
+              style={{
+                backgroundImage:
+                  "linear-gradient(to right, #BE123C 0, #BE123C 8px, transparent 8px, transparent 16px)",
+                backgroundSize: "16px 2px",
+                backgroundRepeat: "repeat-x",
+              }}
+            />
+
+            <ol className="relative grid gap-x-3 gap-y-8 sm:grid-cols-2 lg:grid-cols-5">
+              {contractSteps.map((s, i) => (
+                <li key={s.num} className="relative">
+                  <Reveal delay={i * 80} className="h-full">
+                    <div className="relative flex h-full flex-col items-center text-center">
+                      {/* Number capsule */}
+                      <div className="relative grid h-[72px] w-[72px] place-items-center">
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-0 rounded-full bg-rose-100"
+                        />
+                        <span
+                          aria-hidden="true"
+                          className="absolute inset-[6px] rounded-full bg-white shadow-[0_8px_22px_-10px_rgba(190,18,60,0.55)]"
+                        />
+                        <span className="relative font-display text-lg font-black leading-none text-rose-700">
+                          <span className="block text-[10px] font-extrabold tracking-[0.18em] uppercase text-rose-500/80">
+                            Step
+                          </span>
+                          <span className="block">{s.num}</span>
+                        </span>
+                        {s.isFree ? (
+                          <span className="absolute -right-2 -top-2 rotate-6 rounded-full bg-amber-400 px-2 py-0.5 text-[10px] font-black uppercase tracking-wide text-ink shadow-sm">
+                            無料
+                          </span>
+                        ) : null}
+                      </div>
+
+                      {/* Card */}
+                      <div className="mt-5 flex w-full flex-1 flex-col items-center rounded-2xl border border-rose-100 bg-white p-5 shadow-[0_18px_50px_-30px_rgba(190,18,60,0.4)]">
+                        <span className="grid h-12 w-12 place-items-center rounded-xl bg-rose-50 text-rose-700">
+                          <ContractStepIcon kind={s.icon} />
+                        </span>
+                        <h3 className="mt-4 text-base font-black leading-snug text-ink md:text-lg">
+                          {s.title}
+                        </h3>
+                        <p className="mt-2 text-xs leading-relaxed text-ink-soft font-medium md:text-sm">
+                          {s.body}
+                        </p>
+                      </div>
+
+                      {/* Mobile down arrow between cards */}
+                      {i < contractSteps.length - 1 ? (
+                        <span
+                          aria-hidden="true"
+                          className="mt-4 inline-block text-rose-400 lg:hidden"
+                        >
+                          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                            <path
+                              d="M12 4v14M6 13l6 6 6-6"
+                              stroke="currentColor"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                        </span>
+                      ) : null}
+                    </div>
+                  </Reveal>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="mt-14 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Button
+              href={contactHref}
+              size="lg"
+              className="!bg-[#BE123C] hover:!bg-rose-700 shadow-[0_18px_40px_-12px_rgba(190,18,60,0.6)]"
+            >
+              ご相談・お問い合わせ
+            </Button>
+            <Button href={contactHref} size="lg" variant="secondary">
+              資料請求
             </Button>
           </div>
         </Container>
