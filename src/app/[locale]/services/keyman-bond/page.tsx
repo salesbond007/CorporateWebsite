@@ -25,36 +25,44 @@ export const metadata: Metadata = {
     "キーマンボンドは、経営層・CxO・エキスパートクラスのプロ人材を、課題に応じてアドバイザー/顧問として提案するプロ人材/顧問マッチングサービス。新規事業・マーケ・DX・人事・財務・海外展開まで、実働型で経営課題の解決に伴走します。",
 };
 
-type FeatureKind = "hands-on" | "multi-domain" | "phase-fit";
+type FeatureKind = "flexible" | "multi-domain" | "phase-fit";
 
 function FeatureDiagram({ kind }: { kind: FeatureKind }) {
-  if (kind === "hands-on") {
+  if (kind === "flexible") {
     return (
       <svg
         viewBox="0 0 280 110"
         className="h-auto w-full max-w-[260px]"
         role="img"
-        aria-label="助言だけで終わらず、設計・実行・成果まで伴走するフロー"
+        aria-label="スポット・プロジェクト・伴走の3モードを柔軟に組み合わせる図"
       >
-        {/* 助言 (faded) */}
-        <rect x="4" y="40" width="48" height="28" rx="6" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1.5" />
-        <line x1="14" y1="54" x2="42" y2="54" stroke="#9CA3AF" strokeWidth="1.2" />
-        <text x="28" y="58" textAnchor="middle" fontSize="11" fontWeight="700" fill="#9CA3AF">助言</text>
-        <path d="M58 54h12M66 50l4 4-4 4" stroke="#D1D5DB" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        {/* 設計 */}
-        <rect x="74" y="40" width="48" height="28" rx="6" fill="#FFE4E6" stroke="#BE123C" strokeWidth="1.5" />
-        <text x="98" y="58" textAnchor="middle" fontSize="11" fontWeight="800" fill="#9F1239">設計</text>
-        <path d="M128 54h12M136 50l4 4-4 4" stroke="#BE123C" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        {/* 実行 */}
-        <rect x="144" y="40" width="48" height="28" rx="6" fill="#BE123C" />
-        <text x="168" y="58" textAnchor="middle" fontSize="11" fontWeight="800" fill="#FFFFFF">実行</text>
-        <path d="M198 54h12M206 50l4 4-4 4" stroke="#BE123C" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-        {/* 成果 */}
-        <rect x="214" y="40" width="56" height="28" rx="6" fill="#9F1239" />
-        <text x="242" y="58" textAnchor="middle" fontSize="11" fontWeight="800" fill="#FFFFFF">成果</text>
-        {/* underline accent */}
-        <path d="M76 78h196" stroke="#FDA4AF" strokeWidth="2" strokeLinecap="round" strokeDasharray="2 4" />
-        <text x="174" y="96" textAnchor="middle" fontSize="9" fontWeight="700" fill="#9F1239">プロが現場で担う領域</text>
+        <text x="140" y="14" textAnchor="middle" fontSize="9.5" fontWeight="700" fill="#9F1239">
+          貴社の状況に応じて選択
+        </text>
+
+        {/* SPOT */}
+        <rect x="14" y="30" width="74" height="46" rx="8" fill="#FFE4E6" stroke="#BE123C" strokeWidth="1.4" />
+        <text x="51" y="46" textAnchor="middle" fontSize="8.5" fontWeight="800" fill="#BE123C" letterSpacing="1">SPOT</text>
+        <text x="51" y="61" textAnchor="middle" fontSize="11" fontWeight="900" fill="#9F1239">スポット</text>
+        <text x="51" y="71" textAnchor="middle" fontSize="8" fontWeight="700" fill="#9F1239">単発相談</text>
+
+        {/* PROJECT */}
+        <rect x="103" y="30" width="74" height="46" rx="8" fill="#FECDD3" stroke="#BE123C" strokeWidth="1.4" />
+        <text x="140" y="46" textAnchor="middle" fontSize="8.5" fontWeight="800" fill="#BE123C" letterSpacing="1">PROJECT</text>
+        <text x="140" y="61" textAnchor="middle" fontSize="11" fontWeight="900" fill="#9F1239">プロジェクト</text>
+        <text x="140" y="71" textAnchor="middle" fontSize="8" fontWeight="700" fill="#9F1239">期間限定</text>
+
+        {/* EMBED */}
+        <rect x="192" y="30" width="74" height="46" rx="8" fill="#BE123C" />
+        <text x="229" y="46" textAnchor="middle" fontSize="8.5" fontWeight="800" fill="#FECDD3" letterSpacing="1">EMBED</text>
+        <text x="229" y="61" textAnchor="middle" fontSize="11" fontWeight="900" fill="#FFFFFF">伴走支援</text>
+        <text x="229" y="71" textAnchor="middle" fontSize="8" fontWeight="700" fill="#FECDD3">継続実働</text>
+
+        {/* connector */}
+        <path d="M22 92 Q140 102 258 92" stroke="#FDA4AF" strokeWidth="1.6" fill="none" strokeDasharray="3 3" />
+        <text x="140" y="105" textAnchor="middle" fontSize="9" fontWeight="800" fill="#9F1239">
+          柔軟に組み合わせ可能
+        </text>
       </svg>
     );
   }
@@ -477,10 +485,10 @@ export default function KeymanBondPage({
             {[
               {
                 num: "01",
-                en: "Hands-on",
-                t: "実働型で伴走",
-                b: "助言だけで終わらせず、現場に入り実行まで担います。",
-                kind: "hands-on" as const,
+                en: "Flexible",
+                t: "柔軟なサポートが可能",
+                b: "スポットでのご依頼から伴走支援まで、貴社のご状況に応じて柔軟なサポートが可能。",
+                kind: "flexible" as const,
               },
               {
                 num: "02",
