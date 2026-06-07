@@ -61,7 +61,7 @@ function ServiceOverviewDiagram() {
           <div className="mt-8 flex items-center gap-3">
             <span aria-hidden="true" className="block h-[2px] w-10 bg-rose-700" />
             <span className="font-display text-[10px] font-bold uppercase tracking-[0.4em] text-ink/60">
-              Keyman Bond — Editor's Note
+              Keyman Bond — Editor&apos;s Note
             </span>
           </div>
 
