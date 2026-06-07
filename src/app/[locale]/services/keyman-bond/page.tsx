@@ -25,6 +25,140 @@ export const metadata: Metadata = {
     "キーマンボンドは、経営層・CxO・エキスパートクラスのプロ人材を、課題に応じてアドバイザー/顧問として提案するプロ人材/顧問マッチングサービス。新規事業・マーケ・DX・人事・財務・海外展開まで、実働型で経営課題の解決に伴走します。",
 };
 
+function ServiceOverviewDiagram() {
+  return (
+    <div className="overflow-hidden rounded-3xl border border-rose-100 bg-gradient-to-br from-white via-rose-50/40 to-white p-6 shadow-[0_30px_80px_-40px_rgba(190,18,60,0.45)] md:p-10">
+      <p className="text-center text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
+        Service Overview
+      </p>
+      <h3 className="mt-3 text-center text-lg md:text-2xl font-black leading-snug text-ink">
+        企業とプロ人材を、最短距離でつなぐ
+      </h3>
+
+      <svg
+        viewBox="0 0 720 360"
+        className="mx-auto mt-8 h-auto w-full max-w-4xl"
+        role="img"
+        aria-label="企業からプラットフォーム経由でプロ人材/顧問へつながるサービス概要"
+      >
+        <defs>
+          <linearGradient id="kb-line" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stopColor="#FDA4AF" />
+            <stop offset="100%" stopColor="#BE123C" />
+          </linearGradient>
+          <marker
+            id="kb-arrow"
+            viewBox="0 0 10 10"
+            refX="8"
+            refY="5"
+            markerWidth="8"
+            markerHeight="8"
+            orient="auto-start-reverse"
+          >
+            <path d="M0 0L10 5L0 10z" fill="#BE123C" />
+          </marker>
+        </defs>
+
+        {/* Connecting flowy lines */}
+        <path
+          d="M150 100 Q 280 140 360 200"
+          stroke="url(#kb-line)"
+          strokeWidth="2.2"
+          fill="none"
+          strokeLinecap="round"
+          markerEnd="url(#kb-arrow)"
+        />
+        <path
+          d="M360 200 Q 440 140 570 100"
+          stroke="url(#kb-line)"
+          strokeWidth="2.2"
+          fill="none"
+          strokeLinecap="round"
+          markerEnd="url(#kb-arrow)"
+        />
+
+        {/* Node 1: 企業 (top left) */}
+        <g transform="translate(40, 30)">
+          <rect width="220" height="130" rx="20" fill="#FFFFFF" stroke="#BE123C" strokeWidth="1.6" />
+          <rect width="220" height="6" rx="3" fill="#BE123C" />
+          <text x="110" y="38" textAnchor="middle" fontSize="11" fontWeight="800" fill="#9F1239" letterSpacing="2">
+            01 ／ CORPORATE
+          </text>
+          {/* building icon */}
+          <g transform="translate(86, 50)" stroke="#BE123C" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="6" width="42" height="36" rx="2" />
+            <path d="M11 14h6M21 14h6M31 14h6M11 22h6M21 22h6M31 22h6M11 30h6M21 30h6M31 30h6" />
+          </g>
+          <text x="110" y="118" textAnchor="middle" fontSize="15" fontWeight="900" fill="#1F2937">
+            企業で困りごとがある
+          </text>
+        </g>
+
+        {/* Node 2: 弊社/プラットフォーム (bottom center) */}
+        <g transform="translate(248, 196)">
+          <rect width="224" height="138" rx="20" fill="#BE123C" />
+          <text x="112" y="32" textAnchor="middle" fontSize="11" fontWeight="800" fill="#FECDD3" letterSpacing="2">
+            02 ／ PLATFORM
+          </text>
+          {/* hub icon */}
+          <g transform="translate(82, 42)" stroke="#FFFFFF" strokeWidth="1.7" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="30" cy="20" r="9" />
+            <circle cx="9" cy="10" r="4" />
+            <circle cx="51" cy="10" r="4" />
+            <circle cx="9" cy="32" r="4" />
+            <circle cx="51" cy="32" r="4" />
+            <path d="M13 12L22 17M47 12L38 17M13 30L22 23M47 30L38 23" />
+          </g>
+          <text x="112" y="112" textAnchor="middle" fontSize="15" fontWeight="900" fill="#FFFFFF">
+            弊社・プラットフォームに相談
+          </text>
+          <text x="112" y="128" textAnchor="middle" fontSize="10" fontWeight="700" fill="#FECDD3">
+            エージェントが最適な人材をマッチング
+          </text>
+        </g>
+
+        {/* Node 3: プロ人材/顧問 (top right) */}
+        <g transform="translate(460, 30)">
+          <rect width="220" height="130" rx="20" fill="#FFFFFF" stroke="#BE123C" strokeWidth="1.6" />
+          <rect width="220" height="6" rx="3" fill="#BE123C" />
+          <text x="110" y="38" textAnchor="middle" fontSize="11" fontWeight="800" fill="#9F1239" letterSpacing="2">
+            03 ／ TALENT
+          </text>
+          {/* person + star */}
+          <g transform="translate(88, 50)" stroke="#BE123C" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <circle cx="24" cy="14" r="7" />
+            <path d="M8 40c0-7 7-12 16-12s16 5 16 12" />
+            <path d="M38 4l1.4 2.6L42 8l-2 2 .5 3-2.5-1.4L35.5 13l.5-3-2-2 2.6-1.4z" fill="#FBBF24" stroke="#F59E0B" strokeWidth="1.2" />
+          </g>
+          <text x="110" y="118" textAnchor="middle" fontSize="15" fontWeight="900" fill="#1F2937">
+            プロ人材/顧問を紹介
+          </text>
+        </g>
+      </svg>
+
+      <div className="mt-6 grid gap-3 sm:grid-cols-3 md:gap-4">
+        {[
+          { num: "01", label: "企業", body: "解決したい経営課題があり、社内リソースのみでは推進が難しい状況。" },
+          { num: "02", label: "プラットフォーム", body: "弊社エージェントとプラットフォームで、課題に応じた人材を選定。" },
+          { num: "03", label: "プロ人材/顧問", body: "経営層・CxO・各分野のエキスパートクラスを最適な形でご提案。" },
+        ].map((item) => (
+          <div
+            key={item.num}
+            className="rounded-xl border border-rose-100 bg-white px-4 py-3"
+          >
+            <p className="text-[10px] font-extrabold tracking-[0.18em] uppercase text-rose-600">
+              {item.num} ／ {item.label}
+            </p>
+            <p className="mt-1.5 text-xs leading-relaxed text-ink-soft font-medium md:text-sm">
+              {item.body}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 type FeatureKind = "flexible" | "multi-domain" | "phase-fit";
 
 function FeatureDiagram({ kind }: { kind: FeatureKind }) {
@@ -290,7 +424,7 @@ export default function KeymanBondPage({
   if (!service) notFound();
 
   const contactHref = localePath("/contact", locale);
-  const professionalHref = localePath("/contact/professional", locale);
+  const professionalHref = localePath("/contact/partner", locale);
 
   const faqs: Faq[] = [
     {
@@ -479,6 +613,11 @@ export default function KeymanBondPage({
               </span>
               を「アドバイザー」「顧問」「社外役員」として提案する経営支援サービスです。
             </p>
+          </div>
+
+          {/* Service overview triad diagram */}
+          <div className="mx-auto mt-14 max-w-5xl">
+            <ServiceOverviewDiagram />
           </div>
 
           <ul className="mx-auto mt-16 grid max-w-5xl gap-6 md:grid-cols-3">
@@ -717,52 +856,10 @@ export default function KeymanBondPage({
         </Container>
       </section>
 
-      {/* ───── Advisers (登録プロ人材) ───── */}
-      <section className="bg-white py-24 md:py-32">
+      {/* ───── Talent CTA ───── */}
+      <section className="bg-white py-20 md:py-24">
         <Container>
-          <div className="text-center">
-            <p className="text-xs font-extrabold uppercase tracking-[0.22em] text-rose-700">
-              Professionals
-            </p>
-            <h2 className="mt-3 text-display-3 text-ink font-black leading-tight">
-              在籍するプロ人材
-            </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-              高度な経営ノウハウ・知見・人脈を持つ各業界のプロフェッショナルが在籍しています。
-            </p>
-          </div>
-
-          <ul className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {pros.map((p, i) => (
-              <li key={p.field}>
-                <Reveal delay={(i % 3) * 70} className="h-full">
-                  <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink-line bg-white p-6">
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-x-0 top-0 h-1 bg-rose-700"
-                    />
-                    {/* Photo placeholder */}
-                    <div
-                      aria-hidden="true"
-                      className="aspect-[4/3] w-full rounded-xl bg-gradient-to-br from-rose-50 to-cream"
-                    />
-                    <p className="mt-5 inline-flex w-fit rounded-full bg-rose-700 px-3 py-1 text-xs font-bold text-white">
-                      {p.field}
-                    </p>
-                    <p className="mt-3 text-base font-bold leading-relaxed text-ink">
-                      {p.catch}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-
-          <p className="mt-8 text-center text-xs text-ink-muted">
-            ※ プロフィールは一例です。貴社の課題に応じて最適な人材をご提案します。
-          </p>
-
-          <div className="mt-12 flex justify-center">
+          <div className="flex justify-center">
             <Button
               href={professionalHref}
               size="lg"
