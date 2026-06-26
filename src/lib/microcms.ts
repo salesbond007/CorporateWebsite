@@ -114,21 +114,4 @@ export async function searchArticles(
   });
 }
 
-/**
- * Convenience: fetch articles filtered by a category slug.
- * Returns an empty list when the category does not exist or microCMS is not configured.
- */
-export async function getArticlesByCategorySlug(
-  slug: string,
-  queries: MicroCMSQueries = {},
-): Promise<ArticleListResponse> {
-  if (!client) return emptyList;
-  const category = await getCategoryBySlug(slug);
-  if (!category) return emptyList;
-  return getArticles({
-    filters: `category[equals]${category.id}`,
-    ...queries,
-  });
-}
-
 export { isConfigured as isMicroCmsConfigured };
