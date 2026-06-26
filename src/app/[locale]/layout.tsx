@@ -119,6 +119,7 @@ export default function LocaleLayout({
               { name: "キーマンボンド（プロ人材/顧問マッチング）", url: `/${locale}/services/keyman-bond` },
               { name: "セルボンド（BtoB営業支援）", url: `/${locale}/services/lead-bond` },
               { name: "メディア", url: `/${locale}/blog` },
+              { name: "AI通信", url: `/${locale}/ai-tsushin` },
               { name: "会社概要", url: `/${locale}/company` },
               { name: "お問い合わせ", url: `/${locale}/contact` },
               { name: "個人の方はこちら", url: `/${locale}/contact/partner` },

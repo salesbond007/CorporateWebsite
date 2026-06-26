@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
+import { AiTsushinPreview } from "@/components/blog/AiTsushinPreview";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/jsonld";
 import { services } from "@/lib/site";
@@ -1017,6 +1018,9 @@ export default function KeymanBondPage({
           </div>
         </Container>
       </section>
+
+      {/* ───── AI Times preview ───── */}
+      <AiTsushinPreview locale={locale} tone="white" />
 
       {/* ───── FAQ ───── */}
       <section className="bg-cream py-24 md:py-32">
