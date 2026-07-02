@@ -25,93 +25,30 @@ export const metadata: Metadata = {
 // Data — Givery-style structure
 // ─────────────────────────────────────────────────────────
 
-type Problem = { num: string; title: string; body: string };
-
-const problems: Problem[] = [
-  {
-    num: "01",
-    title: "情報はあるが、動けない",
-    body: "生成AI・LLM・RAG——キーワードは日々増えるが、社内で「何を、いつ、どう始めるか」の判断が下せない。",
-  },
-  {
-    num: "02",
-    title: "導入したが、続かない",
-    body: "PoCまで進んだが、誰も触らないダッシュボードが残る。使いこなす人の不在が、投資を無意味にしていく。",
-  },
-  {
-    num: "03",
-    title: "相談相手が、いない",
-    body: "コンサルは高い、ベンダーは営業目線、社内には知見がない。等身大の判断を一緒にできる本物のプロがいない。",
-  },
+const worries: string[] = [
+  "どの業務から始めるか優先順位がわからない",
+  "ツールが多すぎて選べない",
+  "導入しても社内に浸透しない",
+  "アウトプットの質が安定しない",
+  "コストも工数も期待ほど減らない",
+  "情報漏洩が怖くて活用できない",
+  "使い始めても仕組み化できず終わる",
 ];
 
-// Why sections — three reasons, each with 3 sub-cards (Givery style)
-type WhyCard = { title: string; body: string };
+type ProRole = { title: string; body: string };
 
-type Why = {
-  kicker: string;
-  headline: string;
-  lead: string;
-  cards: WhyCard[];
-};
-
-const whys: Why[] = [
+const proRoles: ProRole[] = [
   {
-    kicker: "Reason 01",
-    headline: "なぜ「ハイクラスな知見」が集まるのか？",
-    lead: "顧問候補は、大手企業技術開発部や日系トップコンサル代表、IT企業代表など、経営と現場の両方を知り抜いた実力者のみ。「肩書きだけ」を排除する独自審査で、100人＋の少数精鋭を維持しています。",
-    cards: [
-      {
-        title: "大手企業出身の実力者",
-        body: "電機・製造・金融・通信など、日本を代表する企業でR&Dや事業部門を率いた経歴を持つ層が中心。",
-      },
-      {
-        title: "現役の代表・役員クラス",
-        body: "コンサル代表、IT企業代表、CTO/CDO級など、現在も経営意思決定に日常的に関わる層が在籍。",
-      },
-      {
-        title: "実装を語れる技術者",
-        body: "PoCで止めない実装力を持ち、生成AI・LLM・機械学習の現場を知り抜いたエンジニア出身の顧問も。",
-      },
-    ],
+    title: "IT企業代表",
+    body: "自社プロダクトを率いるIT企業の代表クラス。生成AI・LLMを事業へ組み込む実装力を、経営視点で語れる層。",
   },
   {
-    kicker: "Reason 02",
-    headline: "なぜ「使えるロードマップ」が描けるのか？",
-    lead: "顧問はまず「作戦」を描きます。業務理解 → 優先順位 → 成果の可視化までを最初に設計するから、単発の助言ではなく「どこから始め、どこに辿り着くか」の全体像が最初に手に入ります。",
-    cards: [
-      {
-        title: "業務ヒアリングを起点に設計",
-        body: "課題の輪郭・現状の取り組み・想定する成果をヒアリングし、AI活用の全体像を描き直します。",
-      },
-      {
-        title: "優先順位を明確に提示",
-        body: "「何を、いつ、どの順に」着手すべきかを図示。経営会議で意思決定に使える粒度に整理します。",
-      },
-      {
-        title: "定着まで見据えた設計",
-        body: "PoC止まりを避けるため、成果指標・組織側の担い手・運用の型化まで初期段階で織り込みます。",
-      },
-    ],
+    title: "大手企業技術開発部",
+    body: "電機・製造・金融・通信など、日本を代表する企業でR&Dや事業部門を率いた経歴を持つシニア層。",
   },
   {
-    kicker: "Reason 03",
-    headline: "なぜ「柔軟な伴走」ができるのか？",
-    lead: "月額制の柔軟な契約形態。無理な長期縛りを求めず、必要な時に必要な深さで関わる関係を前提としています。事業のフェーズや社内の温度感に合わせて、顧問の関わり方を都度チューニングできます。",
-    cards: [
-      {
-        title: "無理な長期契約は求めない",
-        body: "月額制で、状況に応じて続ける・変える・一度離れるを自由に。強制ではなく納得で続く関係だけを。",
-      },
-      {
-        title: "顧問の切り替えが可能",
-        body: "事業フェーズや必要な専門性が変わったら、別領域の顧問へスムーズに切り替え可能です。",
-      },
-      {
-        title: "月額10万円〜の設計",
-        body: "スモールスタートを想定した価格帯を用意。まずは無料相談で御社に合う関わり方をご提案します。",
-      },
-    ],
+    title: "大手日系コンサル",
+    body: "戦略・DXコンサルティングの現役代表・パートナークラス。経営層への提案・意思決定支援を得意とする層。",
   },
 ];
 
@@ -350,7 +287,7 @@ export default function AiKomonPage({
           <div className="relative flex items-center bg-white px-6 py-16 md:px-10 md:py-20 lg:px-16">
             <div className="w-full">
               <p className="text-sm md:text-base font-bold text-ink-soft leading-relaxed">
-                生成AI活用のお悩み解決サービス
+                その生成AIの悩み、まるごと引き受けます。
               </p>
               <h1 className="mt-4 font-display font-black leading-[1.05] tracking-tight text-ink text-[clamp(2.5rem,5.5vw,4.5rem)]">
                 AI顧問
@@ -384,9 +321,9 @@ export default function AiKomonPage({
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          Problems — 生成AI活用のお悩み
+          Worries — 横スライドで表示するAIのお悩み
       ══════════════════════════════════════════════════ */}
-      <section className="bg-[#faf5f5] py-20 md:py-28">
+      <section className="overflow-hidden bg-[#faf5f5] py-20 md:py-28">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
@@ -398,73 +335,108 @@ export default function AiKomonPage({
               こんなお悩みありませんか？
             </h2>
           </div>
+        </Container>
 
-          <ol className="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-3 md:gap-6">
-            {problems.map((p, i) => (
-              <li key={p.num}>
+        {/* Marquee row */}
+        <div className="relative mt-14" aria-label="AIに関するお悩みの例">
+          {/* fade edges */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-32"
+            style={{ background: "linear-gradient(to right, #faf5f5, transparent)" }}
+          />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-32"
+            style={{ background: "linear-gradient(to left, #faf5f5, transparent)" }}
+          />
+
+          <div className="overflow-hidden">
+            <ul className="flex w-max animate-marquee gap-5 md:gap-6">
+              {[...worries, ...worries].map((w, i) => (
+                <li
+                  key={`${i}-${w}`}
+                  aria-hidden={i >= worries.length ? "true" : undefined}
+                  className="flex w-[280px] shrink-0 items-center gap-4 rounded-2xl bg-white p-6 shadow-sm md:w-[320px] md:p-7"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#fce7ea] text-[#BE123C]"
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.7" />
+                      <path
+                        d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1 1-1 1.7"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                      />
+                      <circle cx="12" cy="17" r="0.9" fill="currentColor" />
+                    </svg>
+                  </span>
+                  <p className="text-sm md:text-[15px] font-black leading-snug text-ink">
+                    {w}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════
+          Pro Roles — AIに詳しいプロのみ紹介
+      ══════════════════════════════════════════════════ */}
+      <section className="bg-white py-20 md:py-28">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+              Pros
+            </p>
+            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+              AIに詳しいプロのみ紹介
+            </h2>
+            <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              経営と現場の両方を知り抜いた層のみが在籍。以下は代表例です。
+            </p>
+          </div>
+
+          <ul className="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-3 md:gap-6">
+            {proRoles.map((r, i) => (
+              <li key={r.title}>
                 <Reveal delay={i * 80} className="h-full">
-                  <div className="flex h-full flex-col rounded-2xl bg-white p-8 shadow-sm">
-                    <p className="font-display text-sm font-extrabold tracking-[0.16em] text-[#BE123C]">
-                      {p.num}
-                    </p>
-                    <h3 className="mt-4 text-lg md:text-xl font-black leading-snug text-ink">
-                      {p.title}
+                  <div className="flex h-full flex-col rounded-2xl border border-[#fce7ea] bg-white p-8 shadow-sm">
+                    <span
+                      aria-hidden="true"
+                      className="grid h-12 w-12 place-items-center rounded-full bg-[#fce7ea] text-[#BE123C]"
+                    >
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.7" />
+                        <path
+                          d="M4 20c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </span>
+                    <h3 className="mt-5 text-lg md:text-xl font-black leading-snug text-ink">
+                      {r.title}
                     </h3>
+                    <span
+                      aria-hidden="true"
+                      className="mt-4 block h-0.5 w-10 bg-[#BE123C]"
+                    />
                     <p className="mt-4 text-sm md:text-[15px] leading-[1.9] text-ink-soft font-medium">
-                      {p.body}
+                      {r.body}
                     </p>
                   </div>
                 </Reveal>
               </li>
             ))}
-          </ol>
+          </ul>
         </Container>
       </section>
-
-      {/* ═══════════════════════════════════════════════════
-          Why blocks (Reason 01/02/03) — Givery pattern
-      ══════════════════════════════════════════════════ */}
-      {whys.map((w, wi) => (
-        <section
-          key={w.headline}
-          className={`py-20 md:py-28 ${wi % 2 === 0 ? "bg-white" : "bg-[#faf5f5]"}`}
-        >
-          <Container>
-            <div className="mx-auto max-w-3xl text-center">
-              <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
-                {w.kicker}
-              </p>
-              <h2 className="mt-4 font-display font-black leading-[1.25] text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-                {w.headline}
-              </h2>
-              <p className="mt-6 text-sm md:text-base leading-[1.95] text-ink-soft font-medium">
-                {w.lead}
-              </p>
-            </div>
-
-            <ul className="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-3 md:gap-6">
-              {w.cards.map((c, i) => (
-                <li key={c.title}>
-                  <Reveal delay={i * 80} className="h-full">
-                    <div className="flex h-full flex-col rounded-2xl border border-[#fce7ea] bg-white p-7 shadow-sm">
-                      <h3 className="text-base md:text-lg font-black leading-snug text-ink">
-                        {c.title}
-                      </h3>
-                      <span
-                        aria-hidden="true"
-                        className="mt-4 block h-0.5 w-10 bg-[#BE123C]"
-                      />
-                      <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
-                        {c.body}
-                      </p>
-                    </div>
-                  </Reveal>
-                </li>
-              ))}
-            </ul>
-          </Container>
-        </section>
-      ))}
 
       {/* ═══════════════════════════════════════════════════
           Pricing
