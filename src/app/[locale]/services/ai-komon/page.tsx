@@ -690,19 +690,49 @@ export default function AiKomonPage({
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          AI顧問ボンドが解決 (from worries)
+          Connector arrow (悩み → 解決)
       ══════════════════════════════════════════════════ */}
-      <section className="bg-[#faf5f5] py-20 md:py-28">
+      <div
+        aria-hidden="true"
+        className="flex justify-center bg-[#faf5f5] pb-6 pt-2 md:pb-10"
+      >
+        <div className="grid h-16 w-16 place-items-center rounded-full bg-[#BE123C] shadow-[0_18px_40px_-12px_rgba(190,18,60,0.55)] md:h-20 md:w-20">
+          <svg
+            width="30"
+            height="30"
+            viewBox="0 0 24 24"
+            fill="none"
+            className="md:h-9 md:w-9"
+          >
+            <path
+              d="M12 4 L12 20 M5 13 L12 20 L19 13"
+              stroke="white"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </div>
+
+      {/* ═══════════════════════════════════════════════════
+          AI顧問ボンドが解決します！
+      ══════════════════════════════════════════════════ */}
+      <section className="bg-[#faf5f5] pb-20 pt-6 md:pb-28 md:pt-10">
         <Container>
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
               How We Solve
             </p>
-            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              AI顧問ボンドが解決
+            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.875rem,4.5vw,3rem)]">
+              AI顧問ボンドが解決します
+              <span className="text-[#BE123C]">！</span>
             </h2>
-            <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-              最初の一歩の設計から、実装・定着まで。AI活用のあらゆる悩みを、まるごと引き受けます。
+            <p className="mt-6 text-base md:text-lg font-black text-[#BE123C]">
+              AI顧問ボンドとは？
+            </p>
+            <p className="mt-3 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              最初の一歩の設計から、実装・定着まで。AI活用のあらゆる悩みを、まるごと引き受けます。以下は解決できる一例です。
             </p>
           </div>
 
