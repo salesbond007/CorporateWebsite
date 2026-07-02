@@ -16,9 +16,9 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "AI顧問｜本物のAIプロが伴走するAI顧問サービス",
+  title: "AI顧問ボンド｜AI活用の相談ならAI顧問ボンド",
   description:
-    "中堅企業のAI活用を、日本を代表するAIプロフェッショナル100人＋が顧問として伴走。無料相談でロードマップを提示し、御社の課題に最適な実装まで導きます。AI顧問 by セールスボンド。",
+    "AI活用の相談ならAI顧問ボンド。大手企業技術開発部やIT企業代表などハイクラス層のAIプロフェッショナルが顧問として伴走。月額10万円〜、無料相談でロードマップをご提示します。",
 };
 
 // ─────────────────────────────────────────────────────────
@@ -50,10 +50,10 @@ type Reason = { num: string; kicker: string; title: string; body: string };
 const reasons: Reason[] = [
   {
     num: "01",
-    kicker: "Real Professionals",
-    title: "「本物のプロ」だけが、顧問になる。",
+    kicker: "High-class Professionals",
+    title: "ハイクラス層だけが、顧問になる。",
     body:
-      "AIプロフェッショナル100人＋が在籍。大手電機メーカーで技術部門を率いたシニア顧問、日系トップコンサル代表、AI実装現場の責任者級——現場を知り抜いた人物のみを、顧問としてご紹介します。「肩書きだけ」の助言者は、一切いません。",
+      "大手企業技術開発部やIT企業代表など、経営と現場の両方を知り抜いた100人＋のハイクラス人材が在籍。日系トップコンサル代表、AI実装現場の責任者級まで——「肩書きだけ」の助言者は、一切いません。",
   },
   {
     num: "02",
@@ -168,7 +168,7 @@ function AdvisorPortrait({ initials }: { initials: string }) {
       {/* Duotone-esque gradient portrait placeholder */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-gradient-to-br from-rose-900 via-rose-800 to-ink"
+        className="absolute inset-0 bg-gradient-to-br from-[#003386] via-[#0055d4] to-[#00164a]"
       />
       <div
         aria-hidden="true"
@@ -184,15 +184,15 @@ function AdvisorPortrait({ initials }: { initials: string }) {
         className="absolute inset-0 h-full w-full"
         aria-hidden="true"
       >
-        <ellipse cx="100" cy="98" rx="38" ry="44" fill="#1F0713" opacity="0.85" />
+        <ellipse cx="100" cy="98" rx="38" ry="44" fill="#000c2e" opacity="0.85" />
         <path
           d="M28 250 C 28 190 60 158 100 158 C 140 158 172 190 172 250 z"
-          fill="#1F0713"
+          fill="#000c2e"
           opacity="0.85"
         />
       </svg>
       {/* Initials */}
-      <div className="absolute right-3 top-3 rounded-sm bg-amber-300 px-2 py-0.5 font-display text-[10px] font-black tracking-[0.16em] text-rose-900">
+      <div className="absolute right-3 top-3 rounded-sm bg-amber-300 px-2 py-0.5 font-display text-[10px] font-black tracking-[0.16em] text-[#00235d]">
         {initials}
       </div>
       {/* Grain */}
@@ -238,12 +238,13 @@ export default function AiKomonPage({
             },
           ]),
           serviceJsonLd({
-            name: "AI顧問（by セールスボンド）",
+            name: "AI顧問ボンド（by セールスボンド）",
             description:
-              "中堅企業向けのAI顧問サービス。AIプロフェッショナルを顧問として紹介し、ロードマップ提示から実装まで月額制で伴走支援します。",
+              "AI活用の相談ならAI顧問ボンド。大手企業技術開発部やIT企業代表などハイクラス層のAIプロフェッショナルが顧問として伴走。月額10万円〜の伴走支援。",
             url: localePath(`/services/${SERVICE_SLUG}`, locale),
             keywords: [
               "AI顧問",
+              "AI顧問ボンド",
               "AIアドバイザー",
               "AI活用",
               "AI導入支援",
@@ -259,14 +260,14 @@ export default function AiKomonPage({
       {/* ═══════════════════════════════════════════════════
           Hero
       ══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-rose-950 text-white">
+      <section className="relative overflow-hidden bg-[#00164a] text-white">
         {/* Deep gradient */}
         <div
           aria-hidden="true"
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 20% 20%, #4c0519 0%, transparent 55%), radial-gradient(circle at 80% 80%, #7f1d1d 0%, transparent 60%), linear-gradient(180deg, #450a0a 0%, #1f0a12 100%)",
+              "radial-gradient(circle at 20% 20%, #003386 0%, transparent 55%), radial-gradient(circle at 80% 80%, #0766f4 0%, transparent 60%), linear-gradient(180deg, #00164a 0%, #000e34 100%)",
           }}
         />
         {/* Subtle grid */}
@@ -275,7 +276,7 @@ export default function AiKomonPage({
           className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
-              "linear-gradient(#FDA4AF 1px, transparent 1px), linear-gradient(90deg, #FDA4AF 1px, transparent 1px)",
+              "linear-gradient(#93c5fd 1px, transparent 1px), linear-gradient(90deg, #93c5fd 1px, transparent 1px)",
             backgroundSize: "56px 56px",
           }}
         />
@@ -292,31 +293,32 @@ export default function AiKomonPage({
               <div className="flex items-center gap-3">
                 <span aria-hidden="true" className="block h-px w-10 bg-amber-300" />
                 <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.36em] text-amber-300">
-                  AI顧問 ／ by Sales Bond
+                  AI顧問ボンド ／ by Sales Bond
                 </p>
               </div>
 
               {/* Hook */}
               <h1 className="mt-8 font-display font-black leading-[1.06] tracking-tight text-white text-[clamp(2.5rem,6vw,4.75rem)]">
-                「AIをどう使うか」を、
+                AI活用の相談なら、
                 <br />
                 <span className="relative inline-block">
                   <span className="italic" style={{ fontFamily: '"Times New Roman", serif' }}>
-                    本物
+                    AI顧問ボンド
                   </span>
                   <span
                     aria-hidden="true"
                     className="absolute inset-x-0 -bottom-1 h-[6px] bg-amber-300"
                   />
                 </span>
-                に聞け。
+                。
               </h1>
 
               {/* Sub */}
               <p className="mt-8 max-w-2xl text-base md:text-lg leading-[1.85] text-white/85 font-medium">
-                中堅企業のAI活用を、日本を代表する
-                <span className="font-black text-white">AIプロフェッショナル100人＋</span>
-                が、顧問として伴走。生成AI・LLM・機械学習の現場を知る本物が、御社の課題に最適な
+                <span className="font-black text-white">
+                  大手企業技術開発部やIT企業代表などハイクラス層
+                </span>
+                のAIプロフェッショナルが顧問として伴走。生成AI・LLM・機械学習の現場を知る本物が、御社の課題に最適な
                 <span className="font-black text-white">ロードマップと実装</span>
                 を届けます。
               </p>
@@ -326,7 +328,7 @@ export default function AiKomonPage({
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="!h-[68px] w-full px-12 text-lg font-black !bg-amber-400 !text-rose-950 hover:!bg-amber-300 shadow-[0_22px_50px_-12px_rgba(251,191,36,0.55)] hover:-translate-y-1 md:!h-[76px] md:text-xl sm:w-auto sm:min-w-[240px]"
+                  className="!h-[68px] w-full px-12 text-lg font-black !bg-amber-400 !text-[#00164a] hover:!bg-amber-300 shadow-[0_22px_50px_-12px_rgba(251,191,36,0.55)] hover:-translate-y-1 md:!h-[76px] md:text-xl sm:w-auto sm:min-w-[240px]"
                 >
                   無料相談を予約する
                 </Button>
@@ -340,19 +342,35 @@ export default function AiKomonPage({
                 </Button>
               </div>
 
-              {/* Only-allowed proof point */}
-              <div className="mt-14 inline-flex items-center gap-4 rounded-full border border-amber-300/40 bg-white/[0.04] px-5 py-2.5 backdrop-blur-sm">
-                <span className="font-display text-[10px] font-extrabold uppercase tracking-[0.28em] text-amber-300">
-                  AI Professionals
-                </span>
-                <span className="h-4 w-px bg-white/25" aria-hidden="true" />
-                <span className="font-display text-xl font-black text-white md:text-2xl">
-                  100
-                  <span className="text-amber-300">＋</span>
-                </span>
-                <span className="text-xs font-bold text-white/70 md:text-sm">
-                  在籍
-                </span>
+              {/* Proof points */}
+              <div className="mt-14 flex flex-wrap gap-3">
+                {/* Talent */}
+                <div className="inline-flex items-center gap-4 rounded-full border border-amber-300/40 bg-white/[0.04] px-5 py-2.5 backdrop-blur-sm">
+                  <span className="font-display text-[10px] font-extrabold uppercase tracking-[0.28em] text-amber-300">
+                    High-class Pros
+                  </span>
+                  <span className="h-4 w-px bg-white/25" aria-hidden="true" />
+                  <span className="font-display text-xl font-black text-white md:text-2xl">
+                    100
+                    <span className="text-amber-300">＋</span>
+                  </span>
+                  <span className="text-xs font-bold text-white/70 md:text-sm">
+                    在籍
+                  </span>
+                </div>
+                {/* Pricing */}
+                <div className="inline-flex items-center gap-4 rounded-full border border-white/25 bg-white/[0.04] px-5 py-2.5 backdrop-blur-sm">
+                  <span className="font-display text-[10px] font-extrabold uppercase tracking-[0.28em] text-white/70">
+                    Monthly
+                  </span>
+                  <span className="h-4 w-px bg-white/25" aria-hidden="true" />
+                  <span className="font-display text-xl font-black text-white md:text-2xl">
+                    ¥10<span className="text-amber-300">万</span>
+                  </span>
+                  <span className="text-xs font-bold text-white/70 md:text-sm">
+                    〜／月
+                  </span>
+                </div>
               </div>
             </div>
 
@@ -368,14 +386,14 @@ export default function AiKomonPage({
                   aria-hidden="true"
                   className="absolute -bottom-4 -right-4 h-40 w-40 border border-amber-300/40"
                 />
-                <div className="absolute inset-0 overflow-hidden rounded-sm border border-white/10 bg-rose-950/60 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.7)]">
+                <div className="absolute inset-0 overflow-hidden rounded-sm border border-white/10 bg-[#00164a]/60 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.7)]">
                   {/* portrait */}
                   <div
                     aria-hidden="true"
                     className="absolute inset-0"
                     style={{
                       background:
-                        "radial-gradient(circle at 40% 30%, #7f1d1d 0%, #1f0a12 65%)",
+                        "radial-gradient(circle at 40% 30%, #0766f4 0%, #000e34 65%)",
                     }}
                   />
                   <svg
@@ -384,15 +402,15 @@ export default function AiKomonPage({
                     aria-hidden="true"
                   >
                     {/* silhouette */}
-                    <ellipse cx="150" cy="150" rx="58" ry="66" fill="#0f0409" />
+                    <ellipse cx="150" cy="150" rx="58" ry="66" fill="#000820" />
                     <path
                       d="M50 400 C 50 300 100 250 150 250 C 200 250 250 300 250 400 z"
-                      fill="#0f0409"
+                      fill="#000820"
                     />
                     {/* thin light on shoulder */}
                     <path
                       d="M108 218 C 130 240 170 240 192 218"
-                      stroke="#FCA5A5"
+                      stroke="#93c5fd"
                       strokeWidth="1.4"
                       fill="none"
                       opacity="0.4"
@@ -420,12 +438,12 @@ export default function AiKomonPage({
       {/* ═══════════════════════════════════════════════════
           Problems
       ══════════════════════════════════════════════════ */}
-      <section className="bg-cream py-24 md:py-32">
+      <section className="bg-[#f2f4f8] py-24 md:py-32">
         <Container>
           <div className="max-w-2xl">
             <div className="flex items-center gap-3">
-              <span aria-hidden="true" className="block h-px w-10 bg-rose-800" />
-              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-rose-800">
+              <span aria-hidden="true" className="block h-px w-10 bg-[#003386]" />
+              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
                 Problems ／ AI が進まない現場で
               </p>
             </div>
@@ -440,9 +458,9 @@ export default function AiKomonPage({
             {problems.map((p, i) => (
               <li key={p.num}>
                 <Reveal delay={i * 100} className="h-full">
-                  <div className="relative flex h-full flex-col border-t-2 border-rose-800 bg-white px-7 pb-8 pt-10">
+                  <div className="relative flex h-full flex-col border-t-2 border-[#003386] bg-white px-7 pb-8 pt-10">
                     <span
-                      className="absolute -top-6 left-6 font-display text-6xl font-black italic leading-none text-rose-800"
+                      className="absolute -top-6 left-6 font-display text-6xl font-black italic leading-none text-[#003386]"
                       style={{ fontFamily: '"Times New Roman", serif' }}
                     >
                       {p.num}
@@ -468,11 +486,11 @@ export default function AiKomonPage({
         <Container>
           <div className="text-center">
             <div className="inline-flex items-center gap-3">
-              <span aria-hidden="true" className="block h-px w-10 bg-rose-800" />
-              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-rose-800">
+              <span aria-hidden="true" className="block h-px w-10 bg-[#003386]" />
+              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
                 Why AI 顧問
               </p>
-              <span aria-hidden="true" className="block h-px w-10 bg-rose-800" />
+              <span aria-hidden="true" className="block h-px w-10 bg-[#003386]" />
             </div>
             <h2 className="mt-6 font-display font-black leading-[1.1] tracking-tight text-ink text-[clamp(2rem,4.5vw,3.25rem)]">
               &ldquo;肩書きだけ&rdquo;の助言は、
@@ -489,13 +507,13 @@ export default function AiKomonPage({
                   <div className="grid items-center gap-10 md:grid-cols-12 md:gap-14">
                     {/* Number panel */}
                     <div className={`md:col-span-5 ${reverse ? "md:order-2" : ""}`}>
-                      <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-rose-950 text-white">
+                      <div className="relative aspect-[4/3] overflow-hidden rounded-sm bg-[#00164a] text-white">
                         <div
                           aria-hidden="true"
                           className="absolute inset-0"
                           style={{
                             background:
-                              "radial-gradient(circle at 30% 30%, #881337 0%, transparent 55%), linear-gradient(160deg, #4c0519 0%, #1f0a12 100%)",
+                              "radial-gradient(circle at 30% 30%, #0055d4 0%, transparent 55%), linear-gradient(160deg, #003386 0%, #000e34 100%)",
                           }}
                         />
                         <div
@@ -527,7 +545,7 @@ export default function AiKomonPage({
 
                     {/* Copy */}
                     <div className={`md:col-span-7 ${reverse ? "md:order-1" : ""}`}>
-                      <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-rose-800">
+                      <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
                         Reason {r.num}
                       </p>
                       <h3 className="mt-3 font-display font-black leading-[1.15] tracking-tight text-ink text-[clamp(1.5rem,3vw,2.25rem)]">
@@ -535,7 +553,7 @@ export default function AiKomonPage({
                       </h3>
                       <span
                         aria-hidden="true"
-                        className="mt-5 block h-1 w-14 bg-rose-800"
+                        className="mt-5 block h-1 w-14 bg-[#003386]"
                       />
                       <p className="mt-6 text-sm md:text-base leading-[1.95] text-ink-soft font-medium">
                         {r.body}
@@ -564,7 +582,7 @@ export default function AiKomonPage({
         />
         <div
           aria-hidden="true"
-          className="absolute -left-32 top-1/3 h-96 w-96 rounded-full bg-rose-900/30 blur-[120px]"
+          className="absolute -left-32 top-1/3 h-96 w-96 rounded-full bg-[#00235d]/30 blur-[120px]"
         />
 
         <Container className="relative">
@@ -576,12 +594,15 @@ export default function AiKomonPage({
               </p>
             </div>
             <h2 className="mt-6 font-display font-black leading-[1.15] tracking-tight text-white text-[clamp(2rem,4.5vw,3.25rem)]">
-              &ldquo;本物&rdquo;と呼べる、
+              <span className="italic" style={{ fontFamily: '"Times New Roman", serif' }}>
+                ハイクラス層
+              </span>
+              が、
               <br />
-              その顔ぶれ。
+              顧問として在籍。
             </h2>
             <p className="mt-5 text-sm md:text-base leading-relaxed text-white/70 font-medium">
-              経営に踏み込めるプロだけを、顧問としてご紹介します。以下は在籍する顧問の代表例です。
+              大手企業技術開発部やIT企業代表など、経営と現場の両方に踏み込めるプロだけを、顧問としてご紹介します。以下は在籍する顧問の代表例です。
             </p>
           </div>
 
@@ -631,15 +652,15 @@ export default function AiKomonPage({
       {/* ═══════════════════════════════════════════════════
           Trust — Co-hosted Seminars
       ══════════════════════════════════════════════════ */}
-      <section className="bg-cream py-24 md:py-32">
+      <section className="bg-[#f2f4f8] py-24 md:py-32">
         <Container>
           <div className="text-center">
             <div className="inline-flex items-center gap-3">
-              <span aria-hidden="true" className="block h-px w-10 bg-rose-800" />
-              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-rose-800">
+              <span aria-hidden="true" className="block h-px w-10 bg-[#003386]" />
+              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
                 Trust ／ 共催セミナー実績
               </p>
-              <span aria-hidden="true" className="block h-px w-10 bg-rose-800" />
+              <span aria-hidden="true" className="block h-px w-10 bg-[#003386]" />
             </div>
             <h2 className="mt-6 font-display font-black leading-[1.15] tracking-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
               大手企業と、共に語ってきた。
@@ -653,9 +674,9 @@ export default function AiKomonPage({
             {seminars.map((s, i) => (
               <li key={s.partner}>
                 <Reveal delay={i * 100} className="h-full">
-                  <div className="flex h-full items-center justify-between rounded-sm border-t-2 border-rose-800 bg-white p-8 shadow-[0_20px_50px_-30px_rgba(190,18,60,0.35)]">
+                  <div className="flex h-full items-center justify-between rounded-sm border-t-2 border-[#003386] bg-white p-8 shadow-[0_20px_50px_-30px_rgba(190,18,60,0.35)]">
                     <div>
-                      <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.28em] text-rose-800">
+                      <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.28em] text-[#003386]">
                         {s.kicker}
                       </p>
                       <p className="mt-2 text-lg md:text-xl font-black text-ink">
@@ -663,7 +684,7 @@ export default function AiKomonPage({
                       </p>
                     </div>
                     <span
-                      className="font-display text-4xl font-black italic text-rose-800/25"
+                      className="font-display text-4xl font-black italic text-[#003386]/25"
                       style={{ fontFamily: '"Times New Roman", serif' }}
                       aria-hidden="true"
                     >
@@ -684,11 +705,11 @@ export default function AiKomonPage({
         <Container>
           <div className="text-center">
             <div className="inline-flex items-center gap-3">
-              <span aria-hidden="true" className="block h-px w-10 bg-rose-800" />
-              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-rose-800">
+              <span aria-hidden="true" className="block h-px w-10 bg-[#003386]" />
+              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
                 Flow ／ ご利用の流れ
               </p>
-              <span aria-hidden="true" className="block h-px w-10 bg-rose-800" />
+              <span aria-hidden="true" className="block h-px w-10 bg-[#003386]" />
             </div>
             <h2 className="mt-6 font-display font-black leading-[1.15] tracking-tight text-ink text-[clamp(2rem,4.5vw,3rem)]">
               まずは、話してみることから。
@@ -702,12 +723,12 @@ export default function AiKomonPage({
                   <div className="flex h-full flex-col rounded-sm border border-ink-line bg-white p-8">
                     <div className="flex items-baseline gap-3">
                       <span
-                        className="font-display text-5xl font-black italic leading-none text-rose-800"
+                        className="font-display text-5xl font-black italic leading-none text-[#003386]"
                         style={{ fontFamily: '"Times New Roman", serif' }}
                       >
                         {s.num}
                       </span>
-                      <span className="font-display text-[10px] font-extrabold uppercase tracking-[0.28em] text-rose-800">
+                      <span className="font-display text-[10px] font-extrabold uppercase tracking-[0.28em] text-[#003386]">
                         {s.en}
                       </span>
                     </div>
@@ -716,7 +737,7 @@ export default function AiKomonPage({
                     </h3>
                     <span
                       aria-hidden="true"
-                      className="mt-4 block h-0.5 w-10 bg-rose-800"
+                      className="mt-4 block h-0.5 w-10 bg-[#003386]"
                     />
                     <p className="mt-4 text-sm md:text-[15px] leading-[1.9] text-ink-soft font-medium">
                       {s.body}
@@ -726,7 +747,7 @@ export default function AiKomonPage({
                 {i < steps.length - 1 ? (
                   <span
                     aria-hidden="true"
-                    className="absolute right-[-14px] top-1/2 hidden -translate-y-1/2 text-rose-800 md:block"
+                    className="absolute right-[-14px] top-1/2 hidden -translate-y-1/2 text-[#003386] md:block"
                   >
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                       <path
@@ -747,7 +768,7 @@ export default function AiKomonPage({
             <Button
               href={contactHref}
               size="lg"
-              className="!bg-rose-800 hover:!bg-rose-900 shadow-[0_18px_40px_-12px_rgba(159,18,57,0.55)]"
+              className="!bg-[#003386] hover:!bg-[#00235d] shadow-[0_18px_40px_-12px_rgba(159,18,57,0.55)]"
             >
               無料相談を予約する
             </Button>
@@ -761,15 +782,15 @@ export default function AiKomonPage({
       {/* ═══════════════════════════════════════════════════
           FAQ
       ══════════════════════════════════════════════════ */}
-      <section className="bg-cream py-24 md:py-32">
+      <section className="bg-[#f2f4f8] py-24 md:py-32">
         <Container>
           <div className="text-center">
             <div className="inline-flex items-center gap-3">
-              <span aria-hidden="true" className="block h-px w-10 bg-rose-800" />
-              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-rose-800">
+              <span aria-hidden="true" className="block h-px w-10 bg-[#003386]" />
+              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
                 FAQ
               </p>
-              <span aria-hidden="true" className="block h-px w-10 bg-rose-800" />
+              <span aria-hidden="true" className="block h-px w-10 bg-[#003386]" />
             </div>
             <h2 className="mt-6 font-display font-black leading-tight text-ink text-[clamp(1.875rem,4vw,2.75rem)]">
               よくあるご質問
@@ -783,7 +804,7 @@ export default function AiKomonPage({
                   <summary className="flex cursor-pointer items-start justify-between gap-4 p-6 list-none">
                     <span className="flex gap-3">
                       <span
-                        className="font-display text-lg font-black italic text-rose-800"
+                        className="font-display text-lg font-black italic text-[#003386]"
                         style={{ fontFamily: '"Times New Roman", serif' }}
                       >
                         Q.
@@ -792,7 +813,7 @@ export default function AiKomonPage({
                         {f.q}
                       </span>
                     </span>
-                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-rose-800 group-open:text-rose-800">
+                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border-2 border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-[#003386] group-open:text-[#003386]">
                       +
                     </span>
                   </summary>
@@ -817,13 +838,13 @@ export default function AiKomonPage({
       ══════════════════════════════════════════════════ */}
       <section className="py-28 md:py-36">
         <Container>
-          <div className="relative overflow-hidden rounded-sm bg-rose-950 px-8 py-16 text-white md:px-16 md:py-20">
+          <div className="relative overflow-hidden rounded-sm bg-[#00164a] px-8 py-16 text-white md:px-16 md:py-20">
             <div
               aria-hidden="true"
               className="absolute inset-0"
               style={{
                 background:
-                  "radial-gradient(circle at 20% 30%, #881337 0%, transparent 55%), radial-gradient(circle at 80% 70%, #7f1d1d 0%, transparent 55%), linear-gradient(180deg, #450a0a 0%, #1f0a12 100%)",
+                  "radial-gradient(circle at 20% 30%, #0055d4 0%, transparent 55%), radial-gradient(circle at 80% 70%, #0766f4 0%, transparent 55%), linear-gradient(180deg, #00164a 0%, #000e34 100%)",
               }}
             />
             <div
@@ -831,7 +852,7 @@ export default function AiKomonPage({
               className="absolute inset-0 opacity-[0.06]"
               style={{
                 backgroundImage:
-                  "linear-gradient(#FDA4AF 1px, transparent 1px), linear-gradient(90deg, #FDA4AF 1px, transparent 1px)",
+                  "linear-gradient(#93c5fd 1px, transparent 1px), linear-gradient(90deg, #93c5fd 1px, transparent 1px)",
                 backgroundSize: "56px 56px",
               }}
             />
@@ -849,27 +870,27 @@ export default function AiKomonPage({
                 <span aria-hidden="true" className="block h-px w-10 bg-amber-300" />
               </div>
               <h2 className="mx-auto mt-8 max-w-2xl font-display font-black leading-[1.1] tracking-tight text-white text-[clamp(2rem,5vw,3.75rem)]">
-                「AIをどう使うか」を、
+                AI活用の相談なら、
                 <br />
                 <span className="relative inline-block">
                   <span className="italic" style={{ fontFamily: '"Times New Roman", serif' }}>
-                    本物
+                    AI顧問ボンド
                   </span>
                   <span
                     aria-hidden="true"
                     className="absolute inset-x-0 -bottom-1 h-[6px] bg-amber-300"
                   />
                 </span>
-                に聞け。
+                。
               </h2>
               <p className="mx-auto mt-6 max-w-xl text-sm md:text-base leading-relaxed text-white/80 font-medium">
-                まずは無料相談から。御社の現状をお聞かせいただければ、AI活用のロードマップをご提示します。
+                月額10万円〜、無理な縛りなし。まずは無料相談から。御社の現状をお聞かせいただければ、AI活用のロードマップをご提示します。
               </p>
               <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="!h-[72px] w-full px-12 text-xl font-black !bg-amber-400 !text-rose-950 hover:!bg-amber-300 shadow-[0_22px_50px_-12px_rgba(251,191,36,0.55)] hover:-translate-y-1 md:!h-[84px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[260px]"
+                  className="!h-[72px] w-full px-12 text-xl font-black !bg-amber-400 !text-[#00164a] hover:!bg-amber-300 shadow-[0_22px_50px_-12px_rgba(251,191,36,0.55)] hover:-translate-y-1 md:!h-[84px] md:px-16 md:text-2xl sm:w-auto sm:min-w-[260px]"
                 >
                   無料相談を予約する
                 </Button>

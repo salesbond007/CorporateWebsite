@@ -58,14 +58,14 @@ const themeBySlug: Record<string, SlugTheme> = {
     hoverArrowBorder: "group-hover:border-rose-700",
   },
   "ai-komon": {
-    number: "text-rose-900",
-    subtitle: "text-rose-900",
-    divider: "bg-rose-900",
-    detailLink: "text-rose-900",
-    colorMark: "text-rose-900",
-    hoverBorder: "hover:border-rose-900",
-    hoverArrowBg: "group-hover:bg-rose-900",
-    hoverArrowBorder: "group-hover:border-rose-900",
+    number: "text-[#0766f4]",
+    subtitle: "text-[#003386]",
+    divider: "bg-[#0766f4]",
+    detailLink: "text-[#0766f4]",
+    colorMark: "text-[#0766f4]",
+    hoverBorder: "hover:border-[#0766f4]",
+    hoverArrowBg: "group-hover:bg-[#0766f4]",
+    hoverArrowBorder: "group-hover:border-[#0766f4]",
   },
 };
 
@@ -128,14 +128,18 @@ const summariesBySlug: Record<string, ServiceSummary> = {
   ],
   "ai-komon": [
     [
-      { text: "中堅企業のAI活用を、" },
-      { text: "本物のAIプロ", mark: "underline" },
-      { text: "が顧問として伴走。" },
+      { text: "AI活用の相談なら、" },
+      { text: "AI顧問ボンド", mark: "underline" },
+      { text: "。" },
     ],
     [
-      { text: "無料相談で" },
-      { text: "ロードマップ", mark: "color" },
-      { text: "を提示し、御社の課題に最適な実装まで導きます。" },
+      { text: "大手企業技術開発部やIT企業代表など" },
+      { text: "ハイクラス層", mark: "color" },
+      { text: "のAIプロが伴走。" },
+    ],
+    [
+      { text: "月額10万円〜", mark: "color" },
+      { text: "、無理な縛りなし。" },
     ],
   ],
 };

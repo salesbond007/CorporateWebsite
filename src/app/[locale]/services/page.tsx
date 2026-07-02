@@ -14,7 +14,7 @@ import { getDictionary } from "@/i18n/dictionary";
 export const metadata: Metadata = {
   title: "サービス案内",
   description:
-    "セールスボンド株式会社のサービス案内。リファボンド(大手決裁者紹介)、キーマンボンド(プロ人材/顧問マッチング)、セルボンド(BtoB営業支援)、AI顧問(AIプロ伴走)を提供しています。",
+    "セールスボンド株式会社のサービス案内。リファボンド(大手決裁者紹介)、キーマンボンド(プロ人材/顧問マッチング)、セルボンド(BtoB営業支援)、AI顧問ボンド(ハイクラスAIプロが月額10万円〜で伴走)を提供しています。",
 };
 
 // サービスごとのテーマカラー。Tailwind に静的に拾わせるため、完全なクラス名を列挙。
@@ -57,13 +57,13 @@ const themeBySlug: Record<string, SlugTheme> = {
     arrow: "text-rose-700",
   },
   "ai-komon": {
-    number: "text-rose-900",
-    bgTile: "bg-rose-100",
-    subtitle: "text-rose-900",
-    hoverTitle: "group-hover:text-rose-900",
-    hoverBorder: "hover:border-rose-900",
-    featureDot: "bg-rose-900",
-    arrow: "text-rose-900",
+    number: "text-[#0766f4]",
+    bgTile: "bg-[#e3edff]",
+    subtitle: "text-[#003386]",
+    hoverTitle: "group-hover:text-[#0766f4]",
+    hoverBorder: "hover:border-[#0766f4]",
+    featureDot: "bg-[#0766f4]",
+    arrow: "text-[#0766f4]",
   },
 };
 
