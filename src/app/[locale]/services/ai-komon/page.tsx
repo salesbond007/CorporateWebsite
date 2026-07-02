@@ -200,7 +200,7 @@ export default function AiKomonPage({
       />
 
       {/* ═══════════════════════════════════════════════════
-          Hero — deep navy, centered, clean
+          Hero — diagonal split: left copy / right person
       ══════════════════════════════════════════════════ */}
       <section className="relative overflow-hidden bg-[#00164a] text-white">
         <div
@@ -208,66 +208,236 @@ export default function AiKomonPage({
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 50% 0%, #003386 0%, transparent 55%), linear-gradient(180deg, #00164a 0%, #000c2e 100%)",
+              "radial-gradient(circle at 20% 20%, #003386 0%, transparent 55%), radial-gradient(circle at 90% 80%, #0055d4 0%, transparent 50%), linear-gradient(180deg, #00164a 0%, #000c2e 100%)",
           }}
         />
 
-        <Container className="relative py-24 md:py-32">
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#7dd3fc]">
-              AI顧問ボンド ／ by Sales Bond
-            </p>
-            <h1 className="mt-6 font-display font-black leading-[1.15] tracking-tight text-white text-[clamp(2.25rem,5vw,4rem)]">
-              AI活用の相談なら、
-              <br />
-              AI顧問ボンド。
-            </h1>
-            <p className="mx-auto mt-6 max-w-xl text-base md:text-lg leading-[1.9] text-white/80 font-medium">
-              大手企業技術開発部やIT企業代表など、
-              <span className="font-black text-white">ハイクラス層</span>
-              のAIプロフェッショナルが顧問として伴走。ロードマップ提示から実装まで、月額制で確かな結果を届けます。
-            </p>
+        {/* Diagonal slash */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 hidden md:block"
+        >
+          <svg
+            viewBox="0 0 1440 700"
+            preserveAspectRatio="none"
+            className="h-full w-full"
+          >
+            <defs>
+              <linearGradient id="ai-slash" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#0766f4" stopOpacity="0" />
+                <stop offset="35%" stopColor="#0766f4" stopOpacity="0.9" />
+                <stop offset="65%" stopColor="#7dd3fc" stopOpacity="0.9" />
+                <stop offset="100%" stopColor="#7dd3fc" stopOpacity="0" />
+              </linearGradient>
+              <linearGradient id="ai-slash-soft" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#0766f4" stopOpacity="0" />
+                <stop offset="50%" stopColor="#0766f4" stopOpacity="0.25" />
+                <stop offset="100%" stopColor="#0766f4" stopOpacity="0" />
+              </linearGradient>
+            </defs>
+            {/* soft glow behind */}
+            <line
+              x1="880"
+              y1="-60"
+              x2="620"
+              y2="760"
+              stroke="url(#ai-slash-soft)"
+              strokeWidth="60"
+              strokeLinecap="round"
+            />
+            {/* main sharp line */}
+            <line
+              x1="880"
+              y1="-40"
+              x2="620"
+              y2="740"
+              stroke="url(#ai-slash)"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+            />
+          </svg>
+        </div>
 
-            {/* Proof pills */}
-            <ul className="mx-auto mt-10 flex flex-wrap justify-center gap-3">
-              <li className="inline-flex items-center gap-3 rounded-full bg-white/10 px-5 py-2.5">
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7dd3fc]">
-                  Pros
-                </span>
-                <span className="font-display text-lg font-black text-white">
-                  100
-                  <span className="text-[#7dd3fc]">＋</span>
-                </span>
-                <span className="text-xs font-bold text-white/70">在籍</span>
-              </li>
-              <li className="inline-flex items-center gap-3 rounded-full bg-white/10 px-5 py-2.5">
-                <span className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7dd3fc]">
-                  Monthly
-                </span>
-                <span className="font-display text-lg font-black text-white">
-                  ¥10<span className="text-[#7dd3fc]">万</span>
-                </span>
-                <span className="text-xs font-bold text-white/70">〜／月</span>
-              </li>
-            </ul>
+        <Container className="relative py-20 md:py-24 lg:py-28">
+          <div className="grid items-center gap-12 md:grid-cols-12 md:gap-6 lg:gap-10">
+            {/* ─── Left: content ─── */}
+            <div className="md:col-span-7">
+              <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#7dd3fc]">
+                AI顧問ボンド ／ by Sales Bond
+              </p>
+              <h1 className="mt-6 font-display font-black leading-[1.12] tracking-tight text-white text-[clamp(2rem,4.6vw,3.75rem)]">
+                AI活用の相談なら、
+                <br />
+                AI顧問ボンド。
+              </h1>
+              <p className="mt-6 max-w-xl text-sm md:text-base leading-[1.9] text-white/80 font-medium">
+                大手企業技術開発部やIT企業代表など、
+                <span className="font-black text-white">ハイクラス層</span>
+                のAIプロフェッショナルが顧問として伴走。ロードマップ提示から実装まで、月額制で確かな結果を届けます。
+              </p>
 
-            {/* CTAs */}
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Button
-                href={contactHref}
-                size="lg"
-                className="w-full px-10 !bg-[#0766f4] hover:!bg-[#0055d4] shadow-[0_18px_40px_-12px_rgba(7,102,244,0.55)] hover:-translate-y-0.5 sm:w-auto sm:min-w-[220px]"
-              >
-                無料相談を予約する
-              </Button>
-              <Button
-                href={contactHref}
-                size="lg"
-                variant="ghost"
-                className="w-full px-10 border border-white/40 !text-white hover:!bg-white/10 sm:w-auto sm:min-w-[220px]"
-              >
-                資料をダウンロード
-              </Button>
+              {/* Proof pills */}
+              <ul className="mt-8 flex flex-wrap gap-3">
+                <li className="inline-flex items-center gap-3 rounded-full bg-white/10 px-5 py-2.5">
+                  <span className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7dd3fc]">
+                    Pros
+                  </span>
+                  <span className="font-display text-lg font-black text-white">
+                    100
+                    <span className="text-[#7dd3fc]">＋</span>
+                  </span>
+                  <span className="text-xs font-bold text-white/70">在籍</span>
+                </li>
+                <li className="inline-flex items-center gap-3 rounded-full bg-white/10 px-5 py-2.5">
+                  <span className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7dd3fc]">
+                    Monthly
+                  </span>
+                  <span className="font-display text-lg font-black text-white">
+                    ¥10<span className="text-[#7dd3fc]">万</span>
+                  </span>
+                  <span className="text-xs font-bold text-white/70">〜／月</span>
+                </li>
+              </ul>
+
+              {/* CTAs */}
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  className="w-full px-10 !bg-[#0766f4] hover:!bg-[#0055d4] shadow-[0_18px_40px_-12px_rgba(7,102,244,0.55)] hover:-translate-y-0.5 sm:w-auto sm:min-w-[220px]"
+                >
+                  無料相談を予約する
+                </Button>
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  variant="ghost"
+                  className="w-full px-10 border border-white/40 !text-white hover:!bg-white/10 sm:w-auto sm:min-w-[220px]"
+                >
+                  資料をダウンロード
+                </Button>
+              </div>
+            </div>
+
+            {/* ─── Right: person icon ─── */}
+            <div className="relative md:col-span-5">
+              <div className="relative mx-auto w-full max-w-[360px] md:ml-auto md:mr-0">
+                <svg
+                  viewBox="0 0 360 440"
+                  className="block h-auto w-full"
+                  role="img"
+                  aria-label="AI顧問ボンドのハイクラスプロフェッショナル"
+                >
+                  <defs>
+                    <radialGradient id="ai-halo" cx="50%" cy="35%" r="55%">
+                      <stop offset="0%" stopColor="#0766f4" stopOpacity="0.55" />
+                      <stop offset="100%" stopColor="#00164a" stopOpacity="0" />
+                    </radialGradient>
+                    <linearGradient id="ai-suit" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#0055d4" />
+                      <stop offset="100%" stopColor="#001a4a" />
+                    </linearGradient>
+                    <linearGradient id="ai-skin" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#fde3c4" />
+                      <stop offset="100%" stopColor="#e5b98d" />
+                    </linearGradient>
+                    <linearGradient id="ai-hair" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#001a4a" />
+                      <stop offset="100%" stopColor="#000c2e" />
+                    </linearGradient>
+                  </defs>
+
+                  {/* halo */}
+                  <circle cx="180" cy="170" r="170" fill="url(#ai-halo)" />
+
+                  {/* orbit dots */}
+                  <g fill="#7dd3fc">
+                    <circle cx="72" cy="150" r="2" opacity="0.6" />
+                    <circle cx="300" cy="120" r="2.5" opacity="0.7" />
+                    <circle cx="325" cy="230" r="2" opacity="0.5" />
+                    <circle cx="55" cy="280" r="2.4" opacity="0.5" />
+                    <circle cx="110" cy="70" r="1.8" opacity="0.6" />
+                  </g>
+
+                  {/* neck */}
+                  <path
+                    d="M155 218 L155 262 C 155 268 165 272 180 272 C 195 272 205 268 205 262 L 205 218 z"
+                    fill="url(#ai-skin)"
+                  />
+                  <path
+                    d="M155 258 C 155 265 165 268 180 268 C 195 268 205 265 205 258"
+                    stroke="#c99a70"
+                    strokeWidth="1"
+                    fill="none"
+                    opacity="0.5"
+                  />
+
+                  {/* head base */}
+                  <ellipse cx="180" cy="150" rx="62" ry="72" fill="url(#ai-skin)" />
+
+                  {/* hair — swept side part */}
+                  <path
+                    d="M120 158 C 118 105 145 76 180 76 C 218 76 244 100 244 158 C 244 140 232 118 214 118 C 200 118 190 124 186 138 C 172 130 160 132 152 142 C 146 148 142 158 138 168 C 128 170 122 165 120 158 z"
+                    fill="url(#ai-hair)"
+                  />
+                  {/* subtle hair highlight */}
+                  <path
+                    d="M132 128 C 145 105 172 92 194 96"
+                    stroke="#3b82f6"
+                    strokeWidth="1.4"
+                    fill="none"
+                    opacity="0.4"
+                  />
+
+                  {/* eyebrows */}
+                  <path d="M148 148 Q 158 143 168 148" stroke="#001a4a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+                  <path d="M192 148 Q 202 143 212 148" stroke="#001a4a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+
+                  {/* eyes */}
+                  <ellipse cx="158" cy="160" rx="3.4" ry="4.2" fill="#001a4a" />
+                  <ellipse cx="202" cy="160" rx="3.4" ry="4.2" fill="#001a4a" />
+                  {/* eye highlights */}
+                  <circle cx="159.2" cy="158.4" r="1" fill="#ffffff" />
+                  <circle cx="203.2" cy="158.4" r="1" fill="#ffffff" />
+
+                  {/* nose (light shadow) */}
+                  <path d="M180 168 Q 176 182 174 190 Q 178 194 184 190" stroke="#c99a70" strokeWidth="1.2" fill="none" strokeLinecap="round" opacity="0.7" />
+
+                  {/* mouth */}
+                  <path d="M168 202 Q 180 210 192 202" stroke="#7a2820" strokeWidth="2" fill="none" strokeLinecap="round" />
+
+                  {/* ears */}
+                  <ellipse cx="118" cy="165" rx="6" ry="12" fill="url(#ai-skin)" />
+                  <ellipse cx="242" cy="165" rx="6" ry="12" fill="url(#ai-skin)" />
+
+                  {/* body — suit */}
+                  <path
+                    d="M50 440 C 50 340 105 275 180 275 C 255 275 310 340 310 440 z"
+                    fill="url(#ai-suit)"
+                  />
+                  {/* Left lapel */}
+                  <path d="M136 290 L 180 342 L 138 402 L 128 380 z" fill="#00164a" />
+                  {/* Right lapel */}
+                  <path d="M224 290 L 180 342 L 222 402 L 232 380 z" fill="#00164a" />
+                  {/* White collar */}
+                  <path d="M156 285 L 180 320 L 204 285 L 204 340 L 156 340 z" fill="#ffffff" />
+                  {/* Neckline dark shadow under collar */}
+                  <path d="M156 285 L 180 320 L 204 285" stroke="#001a4a" strokeWidth="1.4" fill="none" />
+                  {/* Tie */}
+                  <path d="M172 320 L 188 320 L 194 380 L 180 405 L 166 380 z" fill="#0766f4" />
+                  <path d="M175 320 L 185 320 L 187 335 L 173 335 z" fill="#003386" />
+
+                  {/* Amber lapel pin */}
+                  <circle cx="145" cy="336" r="4" fill="#fbbf24" />
+
+                  {/* Sparkle stars around head */}
+                  <g fill="#fbbf24" opacity="0.9">
+                    <path d="M290 76 L 293 84 L 301 87 L 293 90 L 290 98 L 287 90 L 279 87 L 287 84 z" />
+                    <path d="M64 108 L 66.5 114 L 72 116 L 66.5 118 L 64 124 L 61.5 118 L 56 116 L 61.5 114 z" />
+                    <path d="M330 200 L 331.5 204 L 335.5 205.5 L 331.5 207 L 330 211 L 328.5 207 L 324.5 205.5 L 328.5 204 z" />
+                  </g>
+                </svg>
+              </div>
             </div>
           </div>
         </Container>
