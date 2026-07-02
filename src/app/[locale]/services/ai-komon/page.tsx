@@ -234,6 +234,128 @@ type Plan = {
   recommended?: boolean;
 };
 
+type ConsultKind =
+  | "chat"
+  | "visit"
+  | "adoption"
+  | "department"
+  | "regular"
+  | "toolPick";
+
+type Consult = { kind: ConsultKind; title: string; body: string };
+
+const consults: Consult[] = [
+  {
+    kind: "chat",
+    title: "チャット相談",
+    body: "気軽にいつでもAIのプロに質問・相談",
+  },
+  {
+    kind: "visit",
+    title: "現場訪問・提案",
+    body: "実態を見た上で、最適なAI化プランを設計",
+  },
+  {
+    kind: "adoption",
+    title: "社内定着支援",
+    body: "使って終わりにしない、根付くまで伴走",
+  },
+  {
+    kind: "department",
+    title: "部署特化のAI化",
+    body: "営業・マーケなど、現場単位でのAI導入にも対応",
+  },
+  {
+    kind: "regular",
+    title: "定例MTGでの壁打ち",
+    body: "定期的に伴走し、課題を整理・次の一手を一緒に考える",
+  },
+  {
+    kind: "toolPick",
+    title: "AIツール選定サポート",
+    body: "多様なツールから、自社に最適な選択肢を見極めて提案",
+  },
+];
+
+function ConsultIcon({ kind }: { kind: ConsultKind }) {
+  const c = {
+    viewBox: "0 0 48 48",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    className: "h-10 w-10 md:h-11 md:w-11",
+  };
+  switch (kind) {
+    case "chat":
+      return (
+        <svg {...c}>
+          <path d="M8 12h32v22H18l-6 6v-6H8z" />
+          <circle cx="18" cy="23" r="1.6" fill="currentColor" />
+          <circle cx="24" cy="23" r="1.6" fill="currentColor" />
+          <circle cx="30" cy="23" r="1.6" fill="currentColor" />
+        </svg>
+      );
+    case "visit":
+      // building with arrow
+      return (
+        <svg {...c}>
+          <rect x="10" y="10" width="18" height="30" />
+          <path d="M14 16h4M22 16h4M14 22h4M22 22h4M14 28h4M22 28h4M14 34h4M22 34h4" />
+          <path d="M32 22h10M38 18l4 4-4 4" />
+          <rect x="32" y="30" width="10" height="10" />
+        </svg>
+      );
+    case "adoption":
+      // seedling / growth
+      return (
+        <svg {...c}>
+          <path d="M24 40V24" />
+          <path d="M24 24C16 24 12 18 12 12c6 0 12 4 12 12z" />
+          <path d="M24 26C32 26 36 20 36 14c-6 0-12 4-12 12z" />
+          <path d="M12 40h24" />
+        </svg>
+      );
+    case "department":
+      // team / group
+      return (
+        <svg {...c}>
+          <circle cx="24" cy="14" r="4" />
+          <path d="M16 26c0-4 3.6-7 8-7s8 3 8 7" />
+          <circle cx="10" cy="20" r="3" />
+          <path d="M4 32c0-3 2.6-5 6-5" />
+          <circle cx="38" cy="20" r="3" />
+          <path d="M44 32c0-3-2.6-5-6-5" />
+        </svg>
+      );
+    case "regular":
+      // calendar
+      return (
+        <svg {...c}>
+          <rect x="8" y="10" width="32" height="30" rx="2" />
+          <path d="M8 18h32" />
+          <path d="M16 6v8M32 6v8" />
+          <circle cx="16" cy="26" r="1.5" fill="currentColor" />
+          <circle cx="24" cy="26" r="1.5" fill="currentColor" />
+          <circle cx="32" cy="26" r="1.5" fill="currentColor" />
+          <circle cx="16" cy="33" r="1.5" fill="currentColor" />
+          <circle cx="24" cy="33" r="1.5" fill="currentColor" />
+        </svg>
+      );
+    case "toolPick":
+      // checklist
+      return (
+        <svg {...c}>
+          <rect x="10" y="6" width="28" height="36" rx="2" />
+          <path d="M15 14l2 2 4-4M15 24l2 2 4-4M15 34l2 2 4-4" />
+          <path d="M25 15h10M25 25h10M25 35h6" />
+        </svg>
+      );
+  }
+}
+
 const plans: Plan[] = [
   {
     name: "相談ライトプラン",
@@ -732,6 +854,46 @@ export default function AiKomonPage({
         </Container>
       </section>
 
+      {/* ═══════════════════════════════════════════════════
+          Consult Examples — 顧問ボンドの相談一例
+      ══════════════════════════════════════════════════ */}
+      <section className="bg-white py-20 md:py-28">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+              Consult Examples
+            </p>
+            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+              顧問ボンドの相談一例
+            </h2>
+            <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              チャットから現場訪問、部署単位のAI化まで。関わり方は、状況に合わせて自由に選べます。
+            </p>
+          </div>
+
+          <ul className="mx-auto mt-14 grid max-w-6xl gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+            {consults.map((c, i) => (
+              <li key={c.title}>
+                <Reveal delay={(i % 3) * 70} className="h-full">
+                  <div className="flex h-full items-start gap-5 rounded-2xl border border-[#fce7ea] bg-white p-7 shadow-sm">
+                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-[#faf5f5] text-[#BE123C]">
+                      <ConsultIcon kind={c.kind} />
+                    </span>
+                    <div>
+                      <h3 className="text-base md:text-lg font-black leading-snug text-ink">
+                        {c.title}
+                      </h3>
+                      <p className="mt-2 text-sm leading-[1.9] text-ink-soft font-medium">
+                        {c.body}
+                      </p>
+                    </div>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
 
       {/* ═══════════════════════════════════════════════════
           Pricing
