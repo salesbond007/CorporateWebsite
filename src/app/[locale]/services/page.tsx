@@ -57,13 +57,13 @@ const themeBySlug: Record<string, SlugTheme> = {
     arrow: "text-rose-700",
   },
   "ai-komon": {
-    number: "text-[#0766f4]",
-    bgTile: "bg-[#e3edff]",
-    subtitle: "text-[#003386]",
-    hoverTitle: "group-hover:text-[#0766f4]",
-    hoverBorder: "hover:border-[#0766f4]",
-    featureDot: "bg-[#0766f4]",
-    arrow: "text-[#0766f4]",
+    number: "text-[#BE123C]",
+    bgTile: "bg-[#fce7ea]",
+    subtitle: "text-[#a41e3a]",
+    hoverTitle: "group-hover:text-[#BE123C]",
+    hoverBorder: "hover:border-[#BE123C]",
+    featureDot: "bg-[#BE123C]",
+    arrow: "text-[#BE123C]",
   },
 };
 

@@ -24,7 +24,7 @@ export function Footer({ locale, dict }: Props) {
       : pathname.includes("/services/keyman-bond")
         ? "bg-rose-700"
         : pathname.includes("/services/ai-komon")
-          ? "bg-[#00235d]"
+          ? "bg-[#4c0519]"
           : "bg-brand-500";
 
   const contactLinks = [

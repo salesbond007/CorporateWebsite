@@ -58,14 +58,14 @@ const themeBySlug: Record<string, SlugTheme> = {
     hoverArrowBorder: "group-hover:border-rose-700",
   },
   "ai-komon": {
-    number: "text-[#0766f4]",
-    subtitle: "text-[#003386]",
-    divider: "bg-[#0766f4]",
-    detailLink: "text-[#0766f4]",
-    colorMark: "text-[#0766f4]",
-    hoverBorder: "hover:border-[#0766f4]",
-    hoverArrowBg: "group-hover:bg-[#0766f4]",
-    hoverArrowBorder: "group-hover:border-[#0766f4]",
+    number: "text-[#BE123C]",
+    subtitle: "text-[#a41e3a]",
+    divider: "bg-[#BE123C]",
+    detailLink: "text-[#BE123C]",
+    colorMark: "text-[#BE123C]",
+    hoverBorder: "hover:border-[#BE123C]",
+    hoverArrowBg: "group-hover:bg-[#BE123C]",
+    hoverArrowBorder: "group-hover:border-[#BE123C]",
   },
 };
 

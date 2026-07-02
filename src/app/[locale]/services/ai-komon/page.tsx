@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 // ─────────────────────────────────────────────────────────
-// Data
+// Data — Givery-style structure
 // ─────────────────────────────────────────────────────────
 
 type Problem = { num: string; title: string; body: string };
@@ -45,84 +45,119 @@ const problems: Problem[] = [
   },
 ];
 
-type Reason = { num: string; kicker: string; title: string; body: string };
+// Why sections — three reasons, each with 3 sub-cards (Givery style)
+type WhyCard = { title: string; body: string };
 
-const reasons: Reason[] = [
-  {
-    num: "01",
-    kicker: "High-class Pros",
-    title: "ハイクラス層のみが顧問。",
-    body:
-      "大手企業技術開発部やIT企業代表など、経営と現場の両方を知り抜いた100人＋のプロが在籍。肩書きだけの助言者はいません。",
-  },
-  {
-    num: "02",
-    kicker: "Roadmap-first",
-    title: "先にロードマップを描く。",
-    body:
-      "着手前に全体像・優先順位・成果の見え方を提示。単発の助言ではなく、どこから始めどこに辿り着くかを描き切ります。",
-  },
-  {
-    num: "03",
-    kicker: "Flexible",
-    title: "縛らない、深く伴走する。",
-    body:
-      "月額制の伴走支援。無理な長期契約は求めません。事業のフェーズや相性に応じて、続ける/変える/離れるを自由に選べます。",
-  },
-];
-
-type Advisor = {
-  name: string;
-  role: string;
-  bio: string;
-  focus: string[];
-  initials: string;
+type Why = {
+  kicker: string;
+  headline: string;
+  lead: string;
+  cards: WhyCard[];
 };
 
-const advisors: Advisor[] = [
+const whys: Why[] = [
   {
-    name: "元大手電機メーカー・技術部長級",
-    role: "Senior Advisor",
-    bio: "日本を代表する電機メーカーでR&D組織を率いた経歴。製造業・重工業領域のAI活用と、大企業組織内での実装推進を熟知。",
-    focus: ["製造業DX", "R&D", "AI推進"],
-    initials: "S.A.",
+    kicker: "Reason 01",
+    headline: "なぜ「ハイクラスな知見」が集まるのか？",
+    lead: "顧問候補は、大手企業技術開発部や日系トップコンサル代表、IT企業代表など、経営と現場の両方を知り抜いた実力者のみ。「肩書きだけ」を排除する独自審査で、100人＋の少数精鋭を維持しています。",
+    cards: [
+      {
+        title: "大手企業出身の実力者",
+        body: "電機・製造・金融・通信など、日本を代表する企業でR&Dや事業部門を率いた経歴を持つ層が中心。",
+      },
+      {
+        title: "現役の代表・役員クラス",
+        body: "コンサル代表、IT企業代表、CTO/CDO級など、現在も経営意思決定に日常的に関わる層が在籍。",
+      },
+      {
+        title: "実装を語れる技術者",
+        body: "PoCで止めない実装力を持ち、生成AI・LLM・機械学習の現場を知り抜いたエンジニア出身の顧問も。",
+      },
+    ],
   },
   {
-    name: "コンサルティング会社・代表",
-    role: "Strategy Advisor",
-    bio: "経営コンサルティングファームを率いる現役代表。AIをどう戦略化するかの視点で、経営層と現場の双方に届く提案が得意。",
-    focus: ["経営戦略", "AI投資", "組織変革"],
-    initials: "C.E.O.",
+    kicker: "Reason 02",
+    headline: "なぜ「使えるロードマップ」が描けるのか？",
+    lead: "顧問はまず「作戦」を描きます。業務理解 → 優先順位 → 成果の可視化までを最初に設計するから、単発の助言ではなく「どこから始め、どこに辿り着くか」の全体像が最初に手に入ります。",
+    cards: [
+      {
+        title: "業務ヒアリングを起点に設計",
+        body: "課題の輪郭・現状の取り組み・想定する成果をヒアリングし、AI活用の全体像を描き直します。",
+      },
+      {
+        title: "優先順位を明確に提示",
+        body: "「何を、いつ、どの順に」着手すべきかを図示。経営会議で意思決定に使える粒度に整理します。",
+      },
+      {
+        title: "定着まで見据えた設計",
+        body: "PoC止まりを避けるため、成果指標・組織側の担い手・運用の型化まで初期段階で織り込みます。",
+      },
+    ],
   },
   {
-    name: "SES会社・代表",
-    role: "Implementation Advisor",
-    bio: "自社エンジニア組織を率いる、AI実装の現場責任者。絵に描いた餅で終わらせない、実装レベルの筋の良さを判断できるプロ。",
-    focus: ["AI実装", "エンジニア組織", "PoC〜運用"],
-    initials: "S.E.S.",
+    kicker: "Reason 03",
+    headline: "なぜ「柔軟な伴走」ができるのか？",
+    lead: "月額制の柔軟な契約形態。無理な長期縛りを求めず、必要な時に必要な深さで関わる関係を前提としています。事業のフェーズや社内の温度感に合わせて、顧問の関わり方を都度チューニングできます。",
+    cards: [
+      {
+        title: "無理な長期契約は求めない",
+        body: "月額制で、状況に応じて続ける・変える・一度離れるを自由に。強制ではなく納得で続く関係だけを。",
+      },
+      {
+        title: "顧問の切り替えが可能",
+        body: "事業フェーズや必要な専門性が変わったら、別領域の顧問へスムーズに切り替え可能です。",
+      },
+      {
+        title: "月額10万円〜の設計",
+        body: "スモールスタートを想定した価格帯を用意。まずは無料相談で御社に合う関わり方をご提案します。",
+      },
+    ],
   },
 ];
 
-type Step = { num: string; en: string; title: string; body: string };
+type Plan = {
+  badge?: string;
+  name: string;
+  price: string;
+  priceSuffix?: string;
+  body: string;
+  features: string[];
+  recommended?: boolean;
+};
 
-const steps: Step[] = [
+const plans: Plan[] = [
   {
-    num: "01",
-    en: "Discovery",
-    title: "無料相談",
-    body: "御社の課題・現状・目指す姿をヒアリング。AI活用のロードマップ案を無料でご提示します。",
+    name: "相談ライトプラン",
+    price: "10万円",
+    priceSuffix: "〜／月",
+    body: "AIに関する疑問や、日常的な意思決定サポートを、月額でチャット中心にご相談いただけるプラン。",
+    features: [
+      "チャットでのAI相談 (無制限)",
+      "月1回のオンライン顧問ミーティング",
+      "スモールスタート向け",
+    ],
   },
   {
-    num: "02",
-    en: "Assignment",
-    title: "顧問アサイン",
-    body: "ロードマップに最適なAI顧問を厳選してご紹介。最初の面談まで丁寧にセットアップします。",
+    badge: "Recommended",
+    name: "AI戦略パートナープラン",
+    price: "個別見積",
+    body: "定例ミーティング × 実装ディスカッション × 意思決定支援まで含む、伴走型のフルサポートプラン。",
+    features: [
+      "月次の定例ディスカッション",
+      "ロードマップ提示 & 改訂",
+      "実装レビュー & 組織浸透支援",
+    ],
+    recommended: true,
   },
   {
-    num: "03",
-    en: "Engagement",
-    title: "伴走スタート",
-    body: "定例のディスカッションを起点に、意思決定・実装判断・組織浸透までを月次のリズムで伴走します。",
+    name: "個別案件相談",
+    price: "個別見積",
+    body: "特定のプロジェクトや、期間限定のご支援が必要な場合に。要件に応じて最適な顧問をアサインします。",
+    features: [
+      "スポット / プロジェクト対応",
+      "領域別の顧問アサイン",
+      "期間・関与度は柔軟に設計",
+    ],
   },
 ];
 
@@ -150,6 +185,83 @@ const faqs: Faq[] = [
     a: "中堅規模で、AI活用に本気で踏み込みたい経営層・DX推進責任者の方に最適です。",
   },
 ];
+
+// ─────────────────────────────────────────────────────────
+// Portrait illustration (used in hero)
+// ─────────────────────────────────────────────────────────
+function HeroPortrait() {
+  return (
+    <svg
+      viewBox="0 0 400 500"
+      className="absolute bottom-0 left-1/2 h-[95%] w-auto -translate-x-1/2"
+      preserveAspectRatio="xMidYMax meet"
+      role="img"
+      aria-label="AI顧問ボンドのハイクラスプロフェッショナル"
+    >
+      <defs>
+        <linearGradient id="ai-suit-b" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#1a1a1a" />
+          <stop offset="100%" stopColor="#0a0a0a" />
+        </linearGradient>
+        <linearGradient id="ai-skin-b" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#fde3c4" />
+          <stop offset="100%" stopColor="#e0b088" />
+        </linearGradient>
+        <linearGradient id="ai-hair-b" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor="#1a0e0a" />
+          <stop offset="100%" stopColor="#0a0605" />
+        </linearGradient>
+      </defs>
+      {/* neck */}
+      <path
+        d="M175 260 L175 310 C 175 316 185 320 200 320 C 215 320 225 316 225 310 L 225 260 z"
+        fill="url(#ai-skin-b)"
+      />
+      <path
+        d="M175 305 C 175 313 185 316 200 316 C 215 316 225 313 225 305"
+        stroke="#c99a70"
+        strokeWidth="1"
+        fill="none"
+        opacity="0.5"
+      />
+      {/* head */}
+      <ellipse cx="200" cy="180" rx="68" ry="82" fill="url(#ai-skin-b)" />
+      {/* hair */}
+      <path
+        d="M132 194 C 124 130 156 96 200 96 C 240 96 268 122 268 190 C 268 168 254 148 234 148 C 220 148 208 154 200 168 C 186 158 172 158 162 168 C 156 174 150 184 146 194 C 138 196 132 190 132 194 z"
+        fill="url(#ai-hair-b)"
+      />
+      {/* eyebrows */}
+      <path d="M162 180 Q 176 174 190 180" stroke="#0a0605" strokeWidth="3" fill="none" strokeLinecap="round" />
+      <path d="M210 180 Q 224 174 238 180" stroke="#0a0605" strokeWidth="3" fill="none" strokeLinecap="round" />
+      {/* eyes */}
+      <ellipse cx="176" cy="196" rx="4" ry="5" fill="#0a0605" />
+      <ellipse cx="224" cy="196" rx="4" ry="5" fill="#0a0605" />
+      <circle cx="177.5" cy="194" r="1.2" fill="#ffffff" />
+      <circle cx="225.5" cy="194" r="1.2" fill="#ffffff" />
+      {/* nose */}
+      <path d="M200 208 Q 195 226 192 234 Q 198 240 208 234" stroke="#c99a70" strokeWidth="1.4" fill="none" strokeLinecap="round" opacity="0.7" />
+      {/* mouth (smile) */}
+      <path d="M185 250 Q 200 262 215 250" stroke="#7a2820" strokeWidth="2.4" fill="none" strokeLinecap="round" />
+      {/* ears */}
+      <ellipse cx="130" cy="200" rx="7" ry="14" fill="url(#ai-skin-b)" />
+      <ellipse cx="270" cy="200" rx="7" ry="14" fill="url(#ai-skin-b)" />
+      {/* suit */}
+      <path
+        d="M50 500 C 50 400 105 315 200 315 C 295 315 350 400 350 500 z"
+        fill="url(#ai-suit-b)"
+      />
+      <path d="M148 330 L 200 388 L 154 452 L 138 424 z" fill="#050505" />
+      <path d="M252 330 L 200 388 L 246 452 L 262 424 z" fill="#050505" />
+      {/* white inner */}
+      <path d="M175 320 L 200 372 L 225 320 L 225 388 L 175 388 z" fill="#f5f5f5" />
+      <path d="M175 320 L 200 372 L 225 320" stroke="#c0c0c0" strokeWidth="1.2" fill="none" />
+      {/* lapel pin */}
+      <circle cx="158" cy="372" r="4.5" fill="#fbbf24" />
+      <circle cx="158" cy="372" r="2" fill="#d97706" opacity="0.6" />
+    </svg>
+  );
+}
 
 // ─────────────────────────────────────────────────────────
 // Page
@@ -200,262 +312,90 @@ export default function AiKomonPage({
       />
 
       {/* ═══════════════════════════════════════════════════
-          Hero — diagonal split: left copy / right person
+          Hero — Givery-style split (photo left, content right)
       ══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-[#00164a] text-white">
-        <div
-          aria-hidden="true"
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(circle at 20% 20%, #003386 0%, transparent 55%), radial-gradient(circle at 90% 80%, #0055d4 0%, transparent 50%), linear-gradient(180deg, #00164a 0%, #000c2e 100%)",
-          }}
-        />
-
-        {/* Diagonal slash */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 hidden md:block"
-        >
-          <svg
-            viewBox="0 0 1440 700"
-            preserveAspectRatio="none"
-            className="h-full w-full"
-          >
-            <defs>
-              <linearGradient id="ai-slash" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#0766f4" stopOpacity="0" />
-                <stop offset="35%" stopColor="#0766f4" stopOpacity="0.9" />
-                <stop offset="65%" stopColor="#7dd3fc" stopOpacity="0.9" />
-                <stop offset="100%" stopColor="#7dd3fc" stopOpacity="0" />
-              </linearGradient>
-              <linearGradient id="ai-slash-soft" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#0766f4" stopOpacity="0" />
-                <stop offset="50%" stopColor="#0766f4" stopOpacity="0.25" />
-                <stop offset="100%" stopColor="#0766f4" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            {/* soft glow behind */}
-            <line
-              x1="880"
-              y1="-60"
-              x2="620"
-              y2="760"
-              stroke="url(#ai-slash-soft)"
-              strokeWidth="60"
-              strokeLinecap="round"
+      <section className="relative overflow-hidden bg-white">
+        <div className="grid md:grid-cols-2">
+          {/* Left: photo panel */}
+          <div className="relative min-h-[380px] overflow-hidden bg-[#4c0519] md:min-h-[640px] lg:min-h-[720px]">
+            <div
+              aria-hidden="true"
+              className="absolute inset-0"
+              style={{
+                background:
+                  "radial-gradient(circle at 60% 40%, #a41e3a 0%, transparent 55%), radial-gradient(circle at 20% 90%, #7f1d1d 0%, transparent 60%), linear-gradient(160deg, #4c0519 0%, #3b0509 100%)",
+              }}
             />
-            {/* main sharp line */}
-            <line
-              x1="880"
-              y1="-40"
-              x2="620"
-              y2="740"
-              stroke="url(#ai-slash)"
-              strokeWidth="2.5"
-              strokeLinecap="round"
+            <div
+              aria-hidden="true"
+              className="absolute inset-y-0 left-0 w-2/3"
+              style={{
+                background:
+                  "linear-gradient(115deg, rgba(255,255,255,0.14) 0%, transparent 55%)",
+              }}
             />
-          </svg>
-        </div>
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
+              style={{
+                backgroundImage:
+                  "radial-gradient(#fff 1px, transparent 1px)",
+                backgroundSize: "3px 3px",
+              }}
+            />
+            <HeroPortrait />
+          </div>
 
-        <Container className="relative py-20 md:py-24 lg:py-28">
-          <div className="grid items-center gap-12 md:grid-cols-12 md:gap-6 lg:gap-10">
-            {/* ─── Left: content ─── */}
-            <div className="md:col-span-7">
-              <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#7dd3fc]">
-                AI顧問ボンド ／ by Sales Bond
+          {/* Right: content */}
+          <div className="relative flex items-center bg-white px-6 py-16 md:px-10 md:py-20 lg:px-16">
+            <div className="w-full">
+              <p className="text-sm md:text-base font-bold text-ink-soft leading-relaxed">
+                生成AI活用のお悩み解決サービス
               </p>
-              <h1 className="mt-6 font-display font-black leading-[1.12] tracking-tight text-white text-[clamp(2rem,4.6vw,3.75rem)]">
-                AI活用の相談なら、
-                <br />
-                AI顧問ボンド。
+              <h1 className="mt-4 font-display font-black leading-[1.05] tracking-tight text-ink text-[clamp(2.5rem,5.5vw,4.5rem)]">
+                AI顧問
+                <span className="text-[#BE123C]">ボンド</span>
               </h1>
-              <p className="mt-6 max-w-xl text-sm md:text-base leading-[1.9] text-white/80 font-medium">
-                大手企業技術開発部やIT企業代表など、
-                <span className="font-black text-white">ハイクラス層</span>
-                のAIプロフェッショナルが顧問として伴走。ロードマップ提示から実装まで、月額制で確かな結果を届けます。
-              </p>
-
-              {/* Proof pills */}
               <ul className="mt-8 flex flex-wrap gap-3">
-                <li className="inline-flex items-center gap-3 rounded-full bg-white/10 px-5 py-2.5">
-                  <span className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7dd3fc]">
-                    Pros
-                  </span>
-                  <span className="font-display text-lg font-black text-white">
-                    100
-                    <span className="text-[#7dd3fc]">＋</span>
-                  </span>
-                  <span className="text-xs font-bold text-white/70">在籍</span>
-                </li>
-                <li className="inline-flex items-center gap-3 rounded-full bg-white/10 px-5 py-2.5">
-                  <span className="text-[10px] font-extrabold uppercase tracking-[0.24em] text-[#7dd3fc]">
-                    Monthly
-                  </span>
-                  <span className="font-display text-lg font-black text-white">
-                    ¥10<span className="text-[#7dd3fc]">万</span>
-                  </span>
-                  <span className="text-xs font-bold text-white/70">〜／月</span>
-                </li>
+                {["ハイクラス層", "ロードマップ提示", "月額10万円〜"].map((tag) => (
+                  <li
+                    key={tag}
+                    className="inline-flex rounded-md bg-[#BE123C] px-4 py-1.5 text-sm font-black text-white shadow-[0_6px_18px_-8px_rgba(190,18,60,0.6)]"
+                  >
+                    {tag}
+                  </li>
+                ))}
               </ul>
-
-              {/* CTAs */}
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <p className="mt-8 max-w-lg text-sm md:text-base leading-[1.95] text-ink font-medium">
+                大手企業技術開発部やIT企業代表など、100人＋のハイクラスAIプロフェッショナルが顧問として伴走。ロードマップ提示から実装まで、月額制で確かな結果を届けます。
+              </p>
+              <div className="mt-10">
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="w-full px-10 !bg-[#0766f4] hover:!bg-[#0055d4] shadow-[0_18px_40px_-12px_rgba(7,102,244,0.55)] hover:-translate-y-0.5 sm:w-auto sm:min-w-[220px]"
+                  className="w-full !h-[64px] !bg-[#BE123C] hover:!bg-[#a41e3a] shadow-[0_18px_40px_-12px_rgba(190,18,60,0.55)] hover:-translate-y-0.5 text-lg font-black md:!h-[72px] md:text-xl md:max-w-md"
                 >
-                  無料相談を予約する
+                  お問い合わせ
                 </Button>
-                <Button
-                  href={contactHref}
-                  size="lg"
-                  variant="ghost"
-                  className="w-full px-10 border border-white/40 !text-white hover:!bg-white/10 sm:w-auto sm:min-w-[220px]"
-                >
-                  資料をダウンロード
-                </Button>
-              </div>
-            </div>
-
-            {/* ─── Right: person icon ─── */}
-            <div className="relative md:col-span-5">
-              <div className="relative mx-auto w-full max-w-[360px] md:ml-auto md:mr-0">
-                <svg
-                  viewBox="0 0 360 440"
-                  className="block h-auto w-full"
-                  role="img"
-                  aria-label="AI顧問ボンドのハイクラスプロフェッショナル"
-                >
-                  <defs>
-                    <radialGradient id="ai-halo" cx="50%" cy="35%" r="55%">
-                      <stop offset="0%" stopColor="#0766f4" stopOpacity="0.55" />
-                      <stop offset="100%" stopColor="#00164a" stopOpacity="0" />
-                    </radialGradient>
-                    <linearGradient id="ai-suit" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#0055d4" />
-                      <stop offset="100%" stopColor="#001a4a" />
-                    </linearGradient>
-                    <linearGradient id="ai-skin" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#fde3c4" />
-                      <stop offset="100%" stopColor="#e5b98d" />
-                    </linearGradient>
-                    <linearGradient id="ai-hair" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#001a4a" />
-                      <stop offset="100%" stopColor="#000c2e" />
-                    </linearGradient>
-                  </defs>
-
-                  {/* halo */}
-                  <circle cx="180" cy="170" r="170" fill="url(#ai-halo)" />
-
-                  {/* orbit dots */}
-                  <g fill="#7dd3fc">
-                    <circle cx="72" cy="150" r="2" opacity="0.6" />
-                    <circle cx="300" cy="120" r="2.5" opacity="0.7" />
-                    <circle cx="325" cy="230" r="2" opacity="0.5" />
-                    <circle cx="55" cy="280" r="2.4" opacity="0.5" />
-                    <circle cx="110" cy="70" r="1.8" opacity="0.6" />
-                  </g>
-
-                  {/* neck */}
-                  <path
-                    d="M155 218 L155 262 C 155 268 165 272 180 272 C 195 272 205 268 205 262 L 205 218 z"
-                    fill="url(#ai-skin)"
-                  />
-                  <path
-                    d="M155 258 C 155 265 165 268 180 268 C 195 268 205 265 205 258"
-                    stroke="#c99a70"
-                    strokeWidth="1"
-                    fill="none"
-                    opacity="0.5"
-                  />
-
-                  {/* head base */}
-                  <ellipse cx="180" cy="150" rx="62" ry="72" fill="url(#ai-skin)" />
-
-                  {/* hair — swept side part */}
-                  <path
-                    d="M120 158 C 118 105 145 76 180 76 C 218 76 244 100 244 158 C 244 140 232 118 214 118 C 200 118 190 124 186 138 C 172 130 160 132 152 142 C 146 148 142 158 138 168 C 128 170 122 165 120 158 z"
-                    fill="url(#ai-hair)"
-                  />
-                  {/* subtle hair highlight */}
-                  <path
-                    d="M132 128 C 145 105 172 92 194 96"
-                    stroke="#3b82f6"
-                    strokeWidth="1.4"
-                    fill="none"
-                    opacity="0.4"
-                  />
-
-                  {/* eyebrows */}
-                  <path d="M148 148 Q 158 143 168 148" stroke="#001a4a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-                  <path d="M192 148 Q 202 143 212 148" stroke="#001a4a" strokeWidth="2.4" fill="none" strokeLinecap="round" />
-
-                  {/* eyes */}
-                  <ellipse cx="158" cy="160" rx="3.4" ry="4.2" fill="#001a4a" />
-                  <ellipse cx="202" cy="160" rx="3.4" ry="4.2" fill="#001a4a" />
-                  {/* eye highlights */}
-                  <circle cx="159.2" cy="158.4" r="1" fill="#ffffff" />
-                  <circle cx="203.2" cy="158.4" r="1" fill="#ffffff" />
-
-                  {/* nose (light shadow) */}
-                  <path d="M180 168 Q 176 182 174 190 Q 178 194 184 190" stroke="#c99a70" strokeWidth="1.2" fill="none" strokeLinecap="round" opacity="0.7" />
-
-                  {/* mouth */}
-                  <path d="M168 202 Q 180 210 192 202" stroke="#7a2820" strokeWidth="2" fill="none" strokeLinecap="round" />
-
-                  {/* ears */}
-                  <ellipse cx="118" cy="165" rx="6" ry="12" fill="url(#ai-skin)" />
-                  <ellipse cx="242" cy="165" rx="6" ry="12" fill="url(#ai-skin)" />
-
-                  {/* body — suit */}
-                  <path
-                    d="M50 440 C 50 340 105 275 180 275 C 255 275 310 340 310 440 z"
-                    fill="url(#ai-suit)"
-                  />
-                  {/* Left lapel */}
-                  <path d="M136 290 L 180 342 L 138 402 L 128 380 z" fill="#00164a" />
-                  {/* Right lapel */}
-                  <path d="M224 290 L 180 342 L 222 402 L 232 380 z" fill="#00164a" />
-                  {/* White collar */}
-                  <path d="M156 285 L 180 320 L 204 285 L 204 340 L 156 340 z" fill="#ffffff" />
-                  {/* Neckline dark shadow under collar */}
-                  <path d="M156 285 L 180 320 L 204 285" stroke="#001a4a" strokeWidth="1.4" fill="none" />
-                  {/* Tie */}
-                  <path d="M172 320 L 188 320 L 194 380 L 180 405 L 166 380 z" fill="#0766f4" />
-                  <path d="M175 320 L 185 320 L 187 335 L 173 335 z" fill="#003386" />
-
-                  {/* Amber lapel pin */}
-                  <circle cx="145" cy="336" r="4" fill="#fbbf24" />
-
-                  {/* Sparkle stars around head */}
-                  <g fill="#fbbf24" opacity="0.9">
-                    <path d="M290 76 L 293 84 L 301 87 L 293 90 L 290 98 L 287 90 L 279 87 L 287 84 z" />
-                    <path d="M64 108 L 66.5 114 L 72 116 L 66.5 118 L 64 124 L 61.5 118 L 56 116 L 61.5 114 z" />
-                    <path d="M330 200 L 331.5 204 L 335.5 205.5 L 331.5 207 L 330 211 L 328.5 207 L 324.5 205.5 L 328.5 204 z" />
-                  </g>
-                </svg>
               </div>
             </div>
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          Problems — clean cards on light bg
+          Problems — 生成AI活用のお悩み
       ══════════════════════════════════════════════════ */}
-      <section className="bg-[#f2f4f8] py-20 md:py-32">
+      <section className="bg-[#faf5f5] py-20 md:py-28">
         <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
               Problems
             </p>
             <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              「AIをやろう」で、
+              生成AIの活用を推進する上で、
               <br className="md:hidden" />
-              止まっていませんか。
+              こんなお悩みありませんか？
             </h2>
           </div>
 
@@ -464,7 +404,7 @@ export default function AiKomonPage({
               <li key={p.num}>
                 <Reveal delay={i * 80} className="h-full">
                   <div className="flex h-full flex-col rounded-2xl bg-white p-8 shadow-sm">
-                    <p className="font-display text-sm font-extrabold tracking-[0.16em] text-[#0766f4]">
+                    <p className="font-display text-sm font-extrabold tracking-[0.16em] text-[#BE123C]">
                       {p.num}
                     </p>
                     <h3 className="mt-4 text-lg md:text-xl font-black leading-snug text-ink">
@@ -482,168 +422,145 @@ export default function AiKomonPage({
       </section>
 
       {/* ═══════════════════════════════════════════════════
-          Reasons — clean 3-column grid
+          Why blocks (Reason 01/02/03) — Givery pattern
       ══════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-32">
-        <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
-              Why AI顧問ボンド
-            </p>
-            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              選ばれる、3つの理由。
-            </h2>
-          </div>
+      {whys.map((w, wi) => (
+        <section
+          key={w.headline}
+          className={`py-20 md:py-28 ${wi % 2 === 0 ? "bg-white" : "bg-[#faf5f5]"}`}
+        >
+          <Container>
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+                {w.kicker}
+              </p>
+              <h2 className="mt-4 font-display font-black leading-[1.25] text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+                {w.headline}
+              </h2>
+              <p className="mt-6 text-sm md:text-base leading-[1.95] text-ink-soft font-medium">
+                {w.lead}
+              </p>
+            </div>
 
-          <ul className="mx-auto mt-14 grid max-w-6xl gap-6 md:grid-cols-3">
-            {reasons.map((r, i) => (
-              <li key={r.num}>
-                <Reveal delay={i * 80} className="h-full">
-                  <div className="flex h-full flex-col rounded-2xl border border-[#e3edff] bg-white p-8">
-                    <div className="inline-flex items-baseline gap-2">
-                      <span className="font-display text-3xl font-black text-[#0766f4] leading-none">
-                        {r.num}
-                      </span>
-                      <span className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#0766f4]/70">
-                        {r.kicker}
-                      </span>
+            <ul className="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-3 md:gap-6">
+              {w.cards.map((c, i) => (
+                <li key={c.title}>
+                  <Reveal delay={i * 80} className="h-full">
+                    <div className="flex h-full flex-col rounded-2xl border border-[#fce7ea] bg-white p-7 shadow-sm">
+                      <h3 className="text-base md:text-lg font-black leading-snug text-ink">
+                        {c.title}
+                      </h3>
+                      <span
+                        aria-hidden="true"
+                        className="mt-4 block h-0.5 w-10 bg-[#BE123C]"
+                      />
+                      <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
+                        {c.body}
+                      </p>
                     </div>
-                    <h3 className="mt-5 text-lg md:text-xl font-black leading-snug text-ink">
-                      {r.title}
-                    </h3>
-                    <span
-                      aria-hidden="true"
-                      className="mt-4 block h-0.5 w-10 bg-[#0766f4]"
-                    />
-                    <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
-                      {r.body}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </section>
+      ))}
 
       {/* ═══════════════════════════════════════════════════
-          Advisors — light bg, simple avatar cards
+          Pricing
       ══════════════════════════════════════════════════ */}
-      <section className="bg-[#f2f4f8] py-20 md:py-32">
+      <section className="bg-[#faf5f5] py-20 md:py-28">
         <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
-              Advisors ／ 代表例のご紹介
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+              Price
             </p>
             <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              ハイクラス層が、顧問として在籍。
+              料金プラン
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-              以下は在籍する顧問の代表例です。ご相談内容に応じて、最適な顧問をご紹介します。
+            <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              スモールスタートから戦略パートナーまで、3つのプランをご用意しています。
             </p>
           </div>
 
           <ul className="mx-auto mt-14 grid max-w-6xl gap-6 md:grid-cols-3">
-            {advisors.map((a, i) => (
-              <li key={a.name}>
+            {plans.map((p, i) => (
+              <li key={p.name}>
                 <Reveal delay={i * 80} className="h-full">
-                  <article className="flex h-full flex-col rounded-2xl bg-white p-8 shadow-sm">
-                    {/* Simple avatar circle */}
-                    <div className="grid h-16 w-16 place-items-center rounded-full bg-[#e3edff] font-display text-sm font-black tracking-[0.12em] text-[#0766f4]">
-                      {a.initials}
-                    </div>
-                    <p className="mt-5 text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#0766f4]">
-                      {a.role}
-                    </p>
-                    <h3 className="mt-2 text-base md:text-lg font-black leading-snug text-ink">
-                      {a.name}
+                  <div
+                    className={`flex h-full flex-col rounded-2xl bg-white p-8 shadow-sm ${
+                      p.recommended
+                        ? "border-2 border-[#BE123C] shadow-[0_20px_50px_-25px_rgba(190,18,60,0.5)]"
+                        : "border border-[#fce7ea]"
+                    }`}
+                  >
+                    {p.badge ? (
+                      <span className="inline-flex w-fit rounded-full bg-[#BE123C] px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-white">
+                        {p.badge}
+                      </span>
+                    ) : null}
+                    <h3
+                      className={`text-lg md:text-xl font-black text-ink leading-snug ${p.badge ? "mt-4" : ""}`}
+                    >
+                      {p.name}
                     </h3>
-                    <p className="mt-3 text-sm leading-[1.9] text-ink-soft font-medium">
-                      {a.bio}
+                    <div className="mt-5 flex items-baseline gap-1">
+                      <span className="font-display text-3xl md:text-4xl font-black text-[#BE123C]">
+                        {p.price}
+                      </span>
+                      {p.priceSuffix ? (
+                        <span className="text-sm font-bold text-ink-soft">
+                          {p.priceSuffix}
+                        </span>
+                      ) : null}
+                    </div>
+                    <span
+                      aria-hidden="true"
+                      className="mt-5 block h-px w-full bg-[#fce7ea]"
+                    />
+                    <p className="mt-5 text-sm leading-[1.9] text-ink-soft font-medium">
+                      {p.body}
                     </p>
-                    <ul className="mt-4 flex flex-wrap gap-2">
-                      {a.focus.map((f) => (
-                        <li
-                          key={f}
-                          className="rounded-full bg-[#f2f4f8] px-2.5 py-0.5 text-[11px] font-bold text-[#003386]"
-                        >
-                          #{f}
+                    <ul className="mt-6 space-y-2.5">
+                      {p.features.map((f) => (
+                        <li key={f} className="flex gap-2 text-sm text-ink font-medium">
+                          <span aria-hidden="true" className="mt-1.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-[#BE123C]">
+                            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                              <path d="M2 5.4 L4 7.4 L8 3" stroke="#fff" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                            </svg>
+                          </span>
+                          <span>{f}</span>
                         </li>
                       ))}
                     </ul>
-                  </article>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          Flow — clean 3-step
-      ══════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-32">
-        <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
-              Flow ／ ご利用の流れ
-            </p>
-            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              まずは、話してみることから。
-            </h2>
-          </div>
-
-          <ol className="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-3">
-            {steps.map((s, i) => (
-              <li key={s.num}>
-                <Reveal delay={i * 80} className="h-full">
-                  <div className="flex h-full flex-col rounded-2xl border border-[#e3edff] bg-white p-8">
-                    <div className="inline-flex items-baseline gap-2">
-                      <span className="font-display text-3xl font-black text-[#0766f4] leading-none">
-                        {s.num}
-                      </span>
-                      <span className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#0766f4]/70">
-                        {s.en}
-                      </span>
+                    <div className="mt-8 pt-2">
+                      <Button
+                        href={contactHref}
+                        size="md"
+                        className={`w-full ${p.recommended ? "!bg-[#BE123C] hover:!bg-[#a41e3a]" : "!bg-white !text-[#BE123C] border border-[#BE123C] hover:!bg-[#faf5f5]"}`}
+                      >
+                        このプランで相談する
+                      </Button>
                     </div>
-                    <h3 className="mt-5 text-lg md:text-xl font-black text-ink leading-snug">
-                      {s.title}
-                    </h3>
-                    <span
-                      aria-hidden="true"
-                      className="mt-4 block h-0.5 w-10 bg-[#0766f4]"
-                    />
-                    <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
-                      {s.body}
-                    </p>
                   </div>
                 </Reveal>
               </li>
             ))}
-          </ol>
+          </ul>
 
-          <div className="mt-14 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Button
-              href={contactHref}
-              size="lg"
-              className="!bg-[#0766f4] hover:!bg-[#0055d4] shadow-[0_18px_40px_-12px_rgba(7,102,244,0.5)]"
-            >
-              無料相談を予約する
-            </Button>
-            <Button href={contactHref} size="lg" variant="secondary">
-              資料をダウンロード
-            </Button>
-          </div>
+          <p className="mx-auto mt-10 max-w-2xl text-center text-xs text-ink-muted">
+            ※ 記載の金額は税抜表記です。詳細は無料相談時にご案内します。
+          </p>
         </Container>
       </section>
 
       {/* ═══════════════════════════════════════════════════
           FAQ
       ══════════════════════════════════════════════════ */}
-      <section className="bg-[#f2f4f8] py-20 md:py-32">
+      <section className="bg-white py-20 md:py-28">
         <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#003386]">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
               FAQ
             </p>
             <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
@@ -653,18 +570,18 @@ export default function AiKomonPage({
 
           <ul className="mx-auto mt-12 max-w-3xl space-y-3">
             {faqs.map((f) => (
-              <li key={f.q} className="rounded-2xl bg-white shadow-sm">
+              <li key={f.q} className="rounded-2xl bg-[#faf5f5]">
                 <details className="group">
                   <summary className="flex cursor-pointer items-start justify-between gap-4 p-6 list-none">
                     <span className="flex gap-3">
-                      <span className="font-display text-base font-black text-[#0766f4]">
+                      <span className="font-display text-base font-black text-[#BE123C]">
                         Q.
                       </span>
                       <span className="text-base md:text-lg font-bold text-ink leading-snug">
                         {f.q}
                       </span>
                     </span>
-                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-[#0766f4] group-open:text-[#0766f4]">
+                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-[#BE123C] group-open:text-[#BE123C]">
                       +
                     </span>
                   </summary>
@@ -684,35 +601,25 @@ export default function AiKomonPage({
       {/* ═══════════════════════════════════════════════════
           Final CTA
       ══════════════════════════════════════════════════ */}
-      <section className="bg-[#00164a] py-20 md:py-28 text-white">
+      <section className="bg-[#4c0519] py-20 md:py-28 text-white">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#7dd3fc]">
-              Book a Free Consultation
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#fda4af]">
+              Contact
             </p>
             <h2 className="mt-6 font-display font-black leading-tight text-white text-[clamp(1.875rem,4.5vw,3rem)]">
-              AI活用の相談なら、
-              <br />
-              AI顧問ボンド。
+              お問い合わせ
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-sm md:text-base leading-relaxed text-white/80 font-medium">
-              月額10万円〜、無理な縛りなし。まずは無料相談から、御社のロードマップをご提示します。
+              まずは無料相談から。御社の現状をお聞かせいただければ、AI活用のロードマップをご提示します。
             </p>
-            <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="mt-10">
               <Button
                 href={contactHref}
                 size="lg"
-                className="w-full px-10 !bg-[#0766f4] hover:!bg-[#0055d4] shadow-[0_18px_40px_-12px_rgba(7,102,244,0.55)] hover:-translate-y-0.5 sm:w-auto sm:min-w-[220px]"
+                className="w-full !h-[64px] !bg-[#BE123C] hover:!bg-[#a41e3a] shadow-[0_18px_40px_-12px_rgba(190,18,60,0.55)] hover:-translate-y-0.5 text-lg font-black md:!h-[72px] md:text-xl sm:w-auto sm:min-w-[280px]"
               >
                 無料相談を予約する
-              </Button>
-              <Button
-                href={contactHref}
-                size="lg"
-                variant="ghost"
-                className="w-full px-10 border border-white/40 !text-white hover:!bg-white/10 sm:w-auto sm:min-w-[220px]"
-              >
-                資料をダウンロード
               </Button>
             </div>
           </div>
