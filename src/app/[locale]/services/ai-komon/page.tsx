@@ -26,13 +26,15 @@ export const metadata: Metadata = {
 // ─────────────────────────────────────────────────────────
 
 const worries: string[] = [
-  "どの業務から始めるか優先順位がわからない",
-  "ツールが多すぎて選べない",
-  "導入しても社内に浸透しない",
-  "アウトプットの質が安定しない",
-  "コストも工数も期待ほど減らない",
-  "情報漏洩が怖くて活用できない",
-  "使い始めても仕組み化できず終わる",
+  "何から始めればいいかわからない",
+  "社内にAIを理解している人がいない",
+  "ツールを入れても誰も使わない",
+  "効果が出ているのか測れない",
+  "セキュリティリスクが怖い",
+  "現場が「自分の仕事が奪われる」と抵抗する",
+  "一部の人だけが使って組織に広がらない",
+  "導入したが業務フローに組み込めていない",
+  "バックオフィス業務をAIで効率化したい",
 ];
 
 type SupportKind =
@@ -457,14 +459,14 @@ export default function AiKomonPage({
           <div className="relative flex items-center bg-white px-6 py-16 md:px-10 md:py-20 lg:px-16">
             <div className="w-full">
               <p className="text-sm md:text-base font-bold text-ink-soft leading-relaxed">
-                AI活用に関する悩みをまるっと解決
+                AI活用に関する悩みをまるっと相談／解決
               </p>
               <h1 className="mt-4 font-display font-black leading-[1.05] tracking-tight text-ink text-[clamp(2.5rem,5.5vw,4.5rem)]">
                 AI顧問
                 <span className="text-[#BE123C]">ボンド</span>
               </h1>
               <ul className="mt-8 flex flex-wrap gap-3">
-                {["ハイクラス層", "ロードマップ提示", "月額10万円〜"].map((tag) => (
+                {["初めてのAI活用", "月額10万円〜", "現役のAIプロ"].map((tag) => (
                   <li
                     key={tag}
                     className="inline-flex rounded-md bg-[#BE123C] px-4 py-1.5 text-sm font-black text-white shadow-[0_6px_18px_-8px_rgba(190,18,60,0.6)]"
@@ -476,13 +478,21 @@ export default function AiKomonPage({
               <p className="mt-8 max-w-lg text-sm md:text-base leading-[1.95] text-ink font-medium">
                 大手企業技術開発部やIT企業代表など、100人＋のハイクラスAIプロフェッショナルが顧問として伴走。ロードマップ提示から実装まで、月額制で確かな結果を届けます。
               </p>
-              <div className="mt-10">
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
                 <Button
                   href={contactHref}
                   size="lg"
-                  className="w-full !h-[64px] !bg-[#BE123C] hover:!bg-[#a41e3a] shadow-[0_18px_40px_-12px_rgba(190,18,60,0.55)] hover:-translate-y-0.5 text-lg font-black md:!h-[72px] md:text-xl md:max-w-md"
+                  className="!h-[60px] w-full !bg-[#BE123C] hover:!bg-[#a41e3a] shadow-[0_18px_40px_-12px_rgba(190,18,60,0.55)] hover:-translate-y-0.5 text-base font-black md:!h-[68px] md:text-lg sm:w-auto sm:min-w-[240px]"
                 >
-                  お問い合わせ
+                  AI活用について無料相談する
+                </Button>
+                <Button
+                  href={contactHref}
+                  size="lg"
+                  variant="secondary"
+                  className="!h-[60px] w-full text-base font-black md:!h-[68px] md:text-lg sm:w-auto sm:min-w-[180px]"
+                >
+                  資料請求
                 </Button>
               </div>
             </div>
@@ -522,7 +532,10 @@ export default function AiKomonPage({
           />
 
           <div className="overflow-hidden">
-            <ul className="flex w-max animate-marquee gap-5 md:gap-6">
+            <ul
+              className="flex w-max animate-marquee gap-5 md:gap-6"
+              style={{ animationDuration: "60s" }}
+            >
               {[...worries, ...worries].map((w, i) => (
                 <li
                   key={`${i}-${w}`}
@@ -553,6 +566,117 @@ export default function AiKomonPage({
           </div>
         </div>
       </section>
+
+      {/* ═══════════════════════════════════════════════════
+          AI顧問ボンドが解決 (from worries)
+      ══════════════════════════════════════════════════ */}
+      <section className="bg-[#faf5f5] py-20 md:py-28">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+              How We Solve
+            </p>
+            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+              AI顧問ボンドが解決
+            </h2>
+            <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              最初の一歩の設計から、実装・定着まで。AI活用のあらゆる悩みを、まるごと引き受けます。
+            </p>
+          </div>
+
+          <ul className="mx-auto mt-14 grid max-w-6xl gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+            {supports.map((s, i) => (
+              <li key={s.title}>
+                <Reveal delay={(i % 3) * 70} className="h-full">
+                  <div className="flex h-full flex-col items-center rounded-2xl bg-white p-8 text-center shadow-sm">
+                    <span className="text-ink">
+                      <SupportIcon kind={s.kind} />
+                    </span>
+                    <h3 className="mt-5 text-base md:text-lg font-black leading-snug text-ink">
+                      {s.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
+                      {s.body}
+                    </p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════
+          About — AI顧問ボンドとは
+      ══════════════════════════════════════════════════ */}
+      <section className="bg-white py-20 md:py-28">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+              About
+            </p>
+            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+              AI顧問ボンドとは
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl text-sm md:text-base leading-[1.95] text-ink-soft font-medium">
+              生成AIの「わからない」をすぐ解消。技術的な疑問も活用の悩みも、経験豊富なプロが正確・迅速にサポートします。
+            </p>
+          </div>
+
+          <div className="mx-auto mt-10 max-w-3xl">
+            <p className="text-base md:text-lg leading-[2] text-ink font-medium">
+              AI顧問ボンドは、
+              <span className="font-black text-[#BE123C]">AI活用に本気で踏み込みたい企業</span>
+              のための顧問マッチングサービスです。大手企業技術開発部、大手日系コンサル、IT企業代表など、経営と現場の両方を知り抜いた
+              <span className="font-black text-ink">現役のAIプロフェッショナル</span>
+              が顧問として月次で伴走。単なる助言に留まらず、
+              <span className="font-black text-ink">ロードマップの提示から実装、組織への定着</span>
+              までを一緒に描き切ります。
+            </p>
+          </div>
+
+          <ul className="mx-auto mt-14 grid max-w-5xl gap-5 md:grid-cols-3 md:gap-6">
+            {[
+              {
+                kicker: "Point 01",
+                title: "現役のAIプロが伴走",
+                body: "AI活用の現場を知り抜いた実力者のみが顧問として在籍。等身大の意思決定を、隣で支えます。",
+              },
+              {
+                kicker: "Point 02",
+                title: "ロードマップから始める",
+                body: "着手前に全体像と優先順位を提示。単発の助言ではなく「どこから始めどこへ辿り着くか」まで描きます。",
+              },
+              {
+                kicker: "Point 03",
+                title: "月額制で柔軟に",
+                body: "月額10万円〜のスモールスタート。無理な長期縛りはなく、フェーズに応じて関わり方を調整できます。",
+              },
+            ].map((p, i) => (
+              <li key={p.kicker}>
+                <Reveal delay={i * 80} className="h-full">
+                  <div className="flex h-full flex-col rounded-2xl border border-[#fce7ea] bg-white p-7 shadow-sm">
+                    <p className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#BE123C]">
+                      {p.kicker}
+                    </p>
+                    <h3 className="mt-3 text-base md:text-lg font-black leading-snug text-ink">
+                      {p.title}
+                    </h3>
+                    <span
+                      aria-hidden="true"
+                      className="mt-4 block h-0.5 w-10 bg-[#BE123C]"
+                    />
+                    <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
+                      {p.body}
+                    </p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
 
       {/* ═══════════════════════════════════════════════════
           Pro Roles — AIに詳しいプロのみ紹介
@@ -608,44 +732,6 @@ export default function AiKomonPage({
         </Container>
       </section>
 
-      {/* ═══════════════════════════════════════════════════
-          Support Examples — 支援例 (3x3 grid)
-      ══════════════════════════════════════════════════ */}
-      <section className="bg-[#faf5f5] py-20 md:py-28">
-        <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
-              Support Examples
-            </p>
-            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              支援例
-            </h2>
-            <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-              最初の一歩の設計から、実装・定着まで。AI活用のあらゆる悩みを、まるごと引き受けます。
-            </p>
-          </div>
-
-          <ul className="mx-auto mt-14 grid max-w-6xl gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
-            {supports.map((s, i) => (
-              <li key={s.title}>
-                <Reveal delay={(i % 3) * 70} className="h-full">
-                  <div className="flex h-full flex-col items-center rounded-2xl bg-white p-8 text-center shadow-sm">
-                    <span className="text-ink">
-                      <SupportIcon kind={s.kind} />
-                    </span>
-                    <h3 className="mt-5 text-base md:text-lg font-black leading-snug text-ink">
-                      {s.title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
-                      {s.body}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
 
       {/* ═══════════════════════════════════════════════════
           Pricing
