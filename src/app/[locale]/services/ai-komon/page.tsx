@@ -457,7 +457,7 @@ export default function AiKomonPage({
           <div className="relative flex items-center bg-white px-6 py-16 md:px-10 md:py-20 lg:px-16">
             <div className="w-full">
               <p className="text-sm md:text-base font-bold text-ink-soft leading-relaxed">
-                その生成AIの悩み、まるごと引き受けます。
+                AI活用に関する悩みをまるっと解決
               </p>
               <h1 className="mt-4 font-display font-black leading-[1.05] tracking-tight text-ink text-[clamp(2.5rem,5.5vw,4.5rem)]">
                 AI顧問
