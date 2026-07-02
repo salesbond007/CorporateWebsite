@@ -110,6 +110,22 @@ export const services = [
     illustrationVariant: "blob" as const,
     href: "/services/lead-bond",
   },
+  {
+    slug: "ai-komon",
+    number: "04",
+    title: "AI顧問",
+    subtitle: "AI顧問サービス",
+    summary:
+      "中堅企業のAI活用を、本物のAIプロフェッショナルが顧問として伴走。無料相談でロードマップを提示し、御社の課題に合わせた実装まで導きます。",
+    features: [
+      "AIのプロフェッショナル 100人＋",
+      "ロードマップ提示型の伴走支援",
+      "本物のプロによる実装レベルの助言",
+    ],
+    image: "/logo-square.jpg",
+    illustrationVariant: "abstract" as const,
+    href: "/services/ai-komon",
+  },
 ] as const;
 
 // Each service entry can optionally include an `image` path that

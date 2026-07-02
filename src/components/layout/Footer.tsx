@@ -23,7 +23,9 @@ export function Footer({ locale, dict }: Props) {
       ? "bg-sky-500"
       : pathname.includes("/services/keyman-bond")
         ? "bg-rose-700"
-        : "bg-brand-500";
+        : pathname.includes("/services/ai-komon")
+          ? "bg-rose-900"
+          : "bg-brand-500";
 
   const contactLinks = [
     { href: "/contact", label: dict.nav.contact },

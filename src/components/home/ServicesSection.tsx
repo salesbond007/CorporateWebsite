@@ -57,6 +57,16 @@ const themeBySlug: Record<string, SlugTheme> = {
     hoverArrowBg: "group-hover:bg-rose-700",
     hoverArrowBorder: "group-hover:border-rose-700",
   },
+  "ai-komon": {
+    number: "text-rose-900",
+    subtitle: "text-rose-900",
+    divider: "bg-rose-900",
+    detailLink: "text-rose-900",
+    colorMark: "text-rose-900",
+    hoverBorder: "hover:border-rose-900",
+    hoverArrowBg: "group-hover:bg-rose-900",
+    hoverArrowBorder: "group-hover:border-rose-900",
+  },
 };
 
 const fallbackTheme: SlugTheme = {
@@ -116,6 +126,18 @@ const summariesBySlug: Record<string, ServiceSummary> = {
       { text: "づくりまで伴走します。" },
     ],
   ],
+  "ai-komon": [
+    [
+      { text: "中堅企業のAI活用を、" },
+      { text: "本物のAIプロ", mark: "underline" },
+      { text: "が顧問として伴走。" },
+    ],
+    [
+      { text: "無料相談で" },
+      { text: "ロードマップ", mark: "color" },
+      { text: "を提示し、御社の課題に最適な実装まで導きます。" },
+    ],
+  ],
 };
 
 function renderSegment(seg: Segment, key: number, colorClass: string) {
@@ -148,7 +170,7 @@ export function ServicesSection({ locale, dict }: Props) {
           <div>
             <p className="section-label">Services</p>
             <p className="mt-3 text-lg md:text-xl font-extrabold text-ink">
-              提供する3つのサービス
+              提供するサービス
             </p>
           </div>
           <Link
@@ -159,7 +181,7 @@ export function ServicesSection({ locale, dict }: Props) {
           </Link>
         </div>
 
-        <ul className="mt-14 grid gap-6 md:grid-cols-3">
+        <ul className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {services.map((s, i) => {
             const theme = themeBySlug[s.slug] ?? fallbackTheme;
             return (

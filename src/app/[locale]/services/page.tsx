@@ -14,7 +14,7 @@ import { getDictionary } from "@/i18n/dictionary";
 export const metadata: Metadata = {
   title: "サービス案内",
   description:
-    "セールスボンド株式会社の3つのサービス。リファボンド(大手決裁者紹介)、キーマンボンド(プロ人材マッチング)、セルボンド(BtoB営業支援サービス)。",
+    "セールスボンド株式会社のサービス案内。リファボンド(大手決裁者紹介)、キーマンボンド(プロ人材/顧問マッチング)、セルボンド(BtoB営業支援)、AI顧問(AIプロ伴走)を提供しています。",
 };
 
 // サービスごとのテーマカラー。Tailwind に静的に拾わせるため、完全なクラス名を列挙。
@@ -55,6 +55,15 @@ const themeBySlug: Record<string, SlugTheme> = {
     hoverBorder: "hover:border-rose-300",
     featureDot: "bg-rose-700",
     arrow: "text-rose-700",
+  },
+  "ai-komon": {
+    number: "text-rose-900",
+    bgTile: "bg-rose-100",
+    subtitle: "text-rose-900",
+    hoverTitle: "group-hover:text-rose-900",
+    hoverBorder: "hover:border-rose-900",
+    featureDot: "bg-rose-900",
+    arrow: "text-rose-900",
   },
 };
 
@@ -107,6 +116,16 @@ function ServiceIcon({ slug }: { slug: string }) {
           <path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2" />
           <path d="M3 13h18" />
           <path d="M11 11h2" />
+        </svg>
+      );
+    case "ai-komon":
+      // AI 顧問: 脳ノード + スパーク
+      return (
+        <svg {...common}>
+          <path d="M9 4a3 3 0 0 0-3 3v1a3 3 0 0 0-2 2.8V13a3 3 0 0 0 2 2.8V17a3 3 0 0 0 3 3h1V4H9z" />
+          <path d="M15 4a3 3 0 0 1 3 3v1a3 3 0 0 1 2 2.8V13a3 3 0 0 1-2 2.8V17a3 3 0 0 1-3 3h-1V4h1z" />
+          <path d="M9.5 9h1M13.5 9h1M9.5 15h1M13.5 15h1" />
+          <path d="M12 4v16" />
         </svg>
       );
     default:
