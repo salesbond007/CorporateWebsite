@@ -35,6 +35,176 @@ const worries: string[] = [
   "使い始めても仕組み化できず終わる",
 ];
 
+type SupportKind =
+  | "start"
+  | "agent"
+  | "guideline"
+  | "data"
+  | "toolFit"
+  | "accuracy"
+  | "training"
+  | "process"
+  | "model";
+
+type Support = { kind: SupportKind; title: string; body: string };
+
+const supports: Support[] = [
+  {
+    kind: "start",
+    title: "AI活用、何から始める？",
+    body: "自社に合ったAIの選び方から、最初の一歩を一緒に設計",
+  },
+  {
+    kind: "agent",
+    title: "AIエージェント構築",
+    body: "定型業務を自動化するAIエージェントの企画・開発を支援",
+  },
+  {
+    kind: "guideline",
+    title: "社内ルール・ガイドライン策定",
+    body: "情報漏洩などのリスクを防ぎながら、安心して使える利用ルールを整備",
+  },
+  {
+    kind: "data",
+    title: "自社データ連携基盤の構築",
+    body: "社内システムやデータと連携した、実務で使える生成AI環境を構築",
+  },
+  {
+    kind: "toolFit",
+    title: "ツール選定・使い分け診断",
+    body: "ChatGPT・Copilotなど乱立するツールから、自社に合うものを見極め",
+  },
+  {
+    kind: "accuracy",
+    title: "検索精度・回答精度の改善",
+    body: "誤答や的外れな回答を減らす、AIの検索・回答ロジックの改善",
+  },
+  {
+    kind: "training",
+    title: "社員向けAIリテラシー研修",
+    body: "現場が“自分ごと”として AIを使いこなせるようになる教育プログラム",
+  },
+  {
+    kind: "process",
+    title: "業務プロセスへの組み込み",
+    body: "導入して終わりにせず、日常業務に定着するまでのオペレーション設計",
+  },
+  {
+    kind: "model",
+    title: "モデル選定・精度検証",
+    body: "用途に応じて、複数のAIモデルを比較・検証し最適な選択を支援",
+  },
+];
+
+function SupportIcon({ kind }: { kind: SupportKind }) {
+  const c = {
+    viewBox: "0 0 48 48",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    className: "h-11 w-11 md:h-12 md:w-12",
+  };
+  switch (kind) {
+    case "start":
+      // rocket / start
+      return (
+        <svg {...c}>
+          <path d="M28 8c8 4 12 12 12 20l-6 6H14l-6-6c0-8 4-16 12-20l4-2 4 2z" />
+          <circle cx="24" cy="20" r="4" />
+          <path d="M14 34l-4 8 8-4M34 34l4 8-8-4" />
+          <path d="M20 42c0 2 2 4 4 4s4-2 4-4" />
+        </svg>
+      );
+    case "agent":
+      // robot head
+      return (
+        <svg {...c}>
+          <rect x="10" y="16" width="28" height="22" rx="4" />
+          <path d="M24 10v6" />
+          <circle cx="24" cy="8" r="2" />
+          <circle cx="18" cy="26" r="2.4" />
+          <circle cx="30" cy="26" r="2.4" />
+          <path d="M18 33h12" />
+          <path d="M6 22v10M42 22v10" />
+        </svg>
+      );
+    case "guideline":
+      // shield with checkmark
+      return (
+        <svg {...c}>
+          <path d="M24 6l14 5v11c0 9-6 16-14 20-8-4-14-11-14-20V11l14-5z" />
+          <path d="M18 24l4 4 8-8" />
+        </svg>
+      );
+    case "data":
+      // database cylinders connected
+      return (
+        <svg {...c}>
+          <ellipse cx="14" cy="12" rx="8" ry="3" />
+          <path d="M6 12v10c0 1.7 3.6 3 8 3s8-1.3 8-3V12" />
+          <ellipse cx="34" cy="26" rx="8" ry="3" />
+          <path d="M26 26v10c0 1.7 3.6 3 8 3s8-1.3 8-3V26" />
+          <path d="M22 20l8 6" strokeDasharray="2 2" />
+        </svg>
+      );
+    case "toolFit":
+      // gear + wrench diagnostic
+      return (
+        <svg {...c}>
+          <circle cx="18" cy="18" r="7" />
+          <path d="M18 8v3M18 25v3M8 18h3M25 18h3M11.5 11.5l2 2M22.5 22.5l2 2M11.5 24.5l2-2M22.5 13.5l2-2" />
+          <path d="M28 36l8-8 4 4-8 8-4-4z" />
+          <path d="M28 36l-2 4 4-2" />
+        </svg>
+      );
+    case "accuracy":
+      // magnifier + target
+      return (
+        <svg {...c}>
+          <circle cx="20" cy="20" r="12" />
+          <path d="M29 29l10 10" />
+          <circle cx="20" cy="20" r="6" />
+          <circle cx="20" cy="20" r="2" fill="currentColor" />
+        </svg>
+      );
+    case "training":
+      // graduation cap + open book
+      return (
+        <svg {...c}>
+          <path d="M6 20l18-8 18 8-18 8-18-8z" />
+          <path d="M14 22v8c0 2 4 4 10 4s10-2 10-4v-8" />
+          <path d="M40 20v10" />
+          <path d="M40 32a2 2 0 000 4" />
+        </svg>
+      );
+    case "process":
+      // process flow (nodes + arrows)
+      return (
+        <svg {...c}>
+          <rect x="6" y="10" width="12" height="10" rx="1.5" />
+          <rect x="30" y="10" width="12" height="10" rx="1.5" />
+          <rect x="18" y="28" width="12" height="10" rx="1.5" />
+          <path d="M18 15h12" />
+          <path d="M28 22l-4 6M20 22l4 6" />
+        </svg>
+      );
+    case "model":
+      // balance scale
+      return (
+        <svg {...c}>
+          <path d="M24 6v34" />
+          <path d="M14 40h20" />
+          <path d="M24 10l-14 4M24 10l14 4" />
+          <path d="M4 22c0 2 3 4 6 4s6-2 6-4l-6-8-6 8z" />
+          <path d="M32 22c0 2 3 4 6 4s6-2 6-4l-6-8-6 8z" />
+        </svg>
+      );
+  }
+}
+
 type ProRole = { title: string; body: string };
 
 const proRoles: ProRole[] = [
@@ -429,6 +599,45 @@ export default function AiKomonPage({
                     />
                     <p className="mt-4 text-sm md:text-[15px] leading-[1.9] text-ink-soft font-medium">
                       {r.body}
+                    </p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
+      {/* ═══════════════════════════════════════════════════
+          Support Examples — 支援例 (3x3 grid)
+      ══════════════════════════════════════════════════ */}
+      <section className="bg-[#faf5f5] py-20 md:py-28">
+        <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+              Support Examples
+            </p>
+            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+              支援例
+            </h2>
+            <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+              最初の一歩の設計から、実装・定着まで。AI活用のあらゆる悩みを、まるごと引き受けます。
+            </p>
+          </div>
+
+          <ul className="mx-auto mt-14 grid max-w-6xl gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+            {supports.map((s, i) => (
+              <li key={s.title}>
+                <Reveal delay={(i % 3) * 70} className="h-full">
+                  <div className="flex h-full flex-col items-center rounded-2xl bg-white p-8 text-center shadow-sm">
+                    <span className="text-ink">
+                      <SupportIcon kind={s.kind} />
+                    </span>
+                    <h3 className="mt-5 text-base md:text-lg font-black leading-snug text-ink">
+                      {s.title}
+                    </h3>
+                    <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
+                      {s.body}
                     </p>
                   </div>
                 </Reveal>
