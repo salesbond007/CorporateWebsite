@@ -110,22 +110,23 @@ export const services = [
     illustrationVariant: "blob" as const,
     href: "/services/lead-bond",
   },
-  {
-    slug: "ai-komon",
-    number: "04",
-    title: "AI顧問ボンド",
-    subtitle: "AI顧問サービス",
-    summary:
-      "AI活用の相談ならAI顧問ボンド。大手企業技術開発部やIT企業代表などハイクラス層が顧問として伴走。無料相談でロードマップを提示し、月額10万円〜の伴走支援で実装まで導きます。",
-    features: [
-      "ハイクラスAIプロフェッショナル 100人＋",
-      "ロードマップ提示型の伴走支援",
-      "月額10万円〜、無理な縛りなし",
-    ],
-    image: "/logo-square.jpg",
-    illustrationVariant: "abstract" as const,
-    href: "/services/ai-komon",
-  },
+  // AI顧問ボンド は現在非公開 (下記コメント解除で復活)
+  // {
+  //   slug: "ai-komon",
+  //   number: "04",
+  //   title: "AI顧問ボンド",
+  //   subtitle: "AI顧問サービス",
+  //   summary:
+  //     "AI活用の相談ならAI顧問ボンド。大手企業技術開発部やIT企業代表などハイクラス層が顧問として伴走。無料相談でロードマップを提示し、月額10万円〜の伴走支援で実装まで導きます。",
+  //   features: [
+  //     "ハイクラスAIプロフェッショナル 100人＋",
+  //     "ロードマップ提示型の伴走支援",
+  //     "月額10万円〜、無理な縛りなし",
+  //   ],
+  //   image: "/logo-square.jpg",
+  //   illustrationVariant: "abstract" as const,
+  //   href: "/services/ai-komon",
+  // },
 ] as const;
 
 // Each service entry can optionally include an `image` path that

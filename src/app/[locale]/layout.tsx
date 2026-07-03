@@ -118,7 +118,6 @@ export default function LocaleLayout({
               { name: "リファボンド（大手決裁者紹介）", url: `/${locale}/services/sales-bond` },
               { name: "キーマンボンド（プロ人材/顧問マッチング）", url: `/${locale}/services/keyman-bond` },
               { name: "セルボンド（BtoB営業支援）", url: `/${locale}/services/lead-bond` },
-              { name: "AI顧問ボンド（AI顧問サービス）", url: `/${locale}/services/ai-komon` },
               { name: "メディア", url: `/${locale}/blog` },
               { name: "会社概要", url: `/${locale}/company` },
               { name: "お問い合わせ", url: `/${locale}/contact` },

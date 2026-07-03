@@ -7,7 +7,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd, serviceJsonLd } from "@/lib/jsonld";
 import { services } from "@/lib/site";
 import { localePath } from "@/i18n/path";
-import { isLocale, locales } from "@/i18n/config";
+import { isLocale, locales, type Locale } from "@/i18n/config";
 
 const SERVICE_SLUG = "ai-komon";
 
@@ -19,6 +19,8 @@ export const metadata: Metadata = {
   title: "AI顧問ボンド｜AI活用の相談ならAI顧問ボンド",
   description:
     "AI活用の相談ならAI顧問ボンド。大手企業技術開発部やIT企業代表などハイクラス層のAIプロフェッショナルが顧問として伴走。月額10万円〜、無料相談でロードマップをご提示します。",
+  // 非公開: 検索エンジンにインデックスさせない
+  robots: { index: false, follow: false },
 };
 
 // ─────────────────────────────────────────────────────────
@@ -498,724 +500,740 @@ function HeroPortrait() {
 // Page
 // ─────────────────────────────────────────────────────────
 
-export default function AiKomonPage({
-  params,
-}: {
-  params: { locale: string };
-}) {
-  if (!isLocale(params.locale)) notFound();
-  const locale = params.locale;
-  const service = services.find((s) => s.slug === SERVICE_SLUG);
-  if (!service) notFound();
-
-  const contactHref = localePath("/contact", locale);
-
-  return (
-    <>
-      <JsonLd
-        data={[
-          breadcrumbJsonLd([
-            { name: "ホーム", url: localePath("/", locale) },
-            { name: "サービス紹介", url: localePath("/services", locale) },
-            {
-              name: service.title,
-              url: localePath(`/services/${SERVICE_SLUG}`, locale),
-            },
-          ]),
-          serviceJsonLd({
-            name: "AI顧問ボンド（by セールスボンド）",
-            description:
-              "AI活用の相談ならAI顧問ボンド。大手企業技術開発部やIT企業代表などハイクラス層のAIプロフェッショナルが顧問として伴走。月額10万円〜の伴走支援。",
-            url: localePath(`/services/${SERVICE_SLUG}`, locale),
-            keywords: [
-              "AI顧問",
-              "AI顧問ボンド",
-              "AIアドバイザー",
-              "AI活用",
-              "AI導入支援",
-              "AI戦略",
-              "生成AI活用",
-              "DX推進",
-              "顧問サービス",
-            ],
-          }),
-        ]}
-      />
-
-      {/* ═══════════════════════════════════════════════════
-          Hero — editorial split, big catch, trust row
-      ══════════════════════════════════════════════════ */}
-      <section className="relative overflow-hidden bg-white">
-        {/* deep red base band (mobile) */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-x-0 top-0 h-[52%] bg-[#4c0519] md:hidden"
-        />
-
-        <div className="relative grid md:grid-cols-12">
-          {/* Left: photo panel (5/12) */}
-          <div className="relative col-span-1 min-h-[360px] overflow-hidden bg-[#4c0519] md:col-span-5 md:min-h-[720px] lg:min-h-[760px]">
-            <div
-              aria-hidden="true"
-              className="absolute inset-0"
-              style={{
-                background:
-                  "radial-gradient(circle at 60% 40%, #a41e3a 0%, transparent 55%), radial-gradient(circle at 20% 90%, #7f1d1d 0%, transparent 60%), linear-gradient(160deg, #4c0519 0%, #3b0509 100%)",
-              }}
-            />
-            <div
-              aria-hidden="true"
-              className="absolute inset-y-0 left-0 w-2/3"
-              style={{
-                background:
-                  "linear-gradient(115deg, rgba(255,255,255,0.14) 0%, transparent 55%)",
-              }}
-            />
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
-              style={{
-                backgroundImage:
-                  "radial-gradient(#fff 1px, transparent 1px)",
-                backgroundSize: "3px 3px",
-              }}
-            />
-
-            {/* Editorial folio marks (magazine style) */}
-            <div className="absolute left-6 top-6 flex items-center gap-3 md:left-8 md:top-8">
-              <span aria-hidden="true" className="block h-px w-8 bg-amber-300" />
-              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-amber-300">
-                AI顧問ボンド ／ N&deg; 01
-              </p>
-            </div>
-            <div className="absolute bottom-6 left-6 flex items-center gap-3 md:bottom-8 md:left-8">
-              <span aria-hidden="true" className="block h-px w-8 bg-white/40" />
-              <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-white/70">
-                by Sales Bond
-              </p>
-            </div>
-
-            <HeroPortrait />
-          </div>
-
-          {/* Right: content (7/12) */}
-          <div className="relative col-span-1 flex items-center bg-white px-6 py-16 md:col-span-7 md:px-12 md:py-24 lg:px-20">
-            <div className="w-full">
-              {/* Brand mark */}
-              <div className="flex items-center gap-3">
-                <span aria-hidden="true" className="block h-px w-10 bg-[#BE123C]" />
-                <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.36em] text-[#BE123C]">
-                  AI顧問ボンド ／ by Sales Bond
-                </p>
-              </div>
-
-              {/* Catchphrase — big */}
-              <h1 className="mt-8 font-display font-black leading-[1.02] tracking-tight text-ink text-[clamp(2.5rem,5.5vw,4.75rem)]">
-                企業の
-                <span className="relative inline-block">
-                  <span>初めて</span>
-                  <span
-                    aria-hidden="true"
-                    className="absolute inset-x-0 -bottom-1 h-[6px] bg-amber-300"
-                  />
-                </span>
-                の
-                <br />
-                AI活用なら
-                <span className="text-[#BE123C]">！</span>
-              </h1>
-
-              <p className="mt-6 max-w-xl text-sm md:text-base leading-[1.95] text-ink-soft font-medium">
-                現役のAIプロフェッショナルが、
-                <span className="font-black text-ink">月額10万円〜</span>
-                で顧問として伴走。生成AI活用のあらゆる悩みを、
-                <span className="font-black text-ink">まるっと相談・解決</span>
-                します。
-              </p>
-
-              {/* CTAs */}
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-                <Button
-                  href={contactHref}
-                  size="lg"
-                  className="!h-[64px] w-full !bg-[#BE123C] hover:!bg-[#a41e3a] shadow-[0_22px_50px_-14px_rgba(190,18,60,0.55)] hover:-translate-y-0.5 text-base font-black md:!h-[72px] md:text-lg sm:w-auto sm:min-w-[260px]"
-                >
-                  無料相談する
-                </Button>
-                <Button
-                  href={contactHref}
-                  size="lg"
-                  variant="secondary"
-                  className="!h-[64px] w-full text-base font-black md:!h-[72px] md:text-lg sm:w-auto sm:min-w-[200px]"
-                >
-                  資料請求
-                </Button>
-              </div>
-              <p className="mt-3 text-xs text-ink-muted">
-                ※ ご相談は無料。最短翌営業日で相談枠をご案内します。
-              </p>
-
-              {/* Trust row */}
-              <ul className="mt-10 grid grid-cols-3 gap-3 border-t border-ink-line pt-8 md:mt-12 md:gap-6">
-                {[
-                  { label: "現役プロ在籍", value: "100", suffix: "＋" },
-                  { label: "対応領域", value: "全", suffix: "領域" },
-                  { label: "月額", value: "¥10", suffix: "万〜" },
-                ].map((t) => (
-                  <li key={t.label}>
-                    <p className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-ink-muted">
-                      {t.label}
-                    </p>
-                    <p className="mt-2 flex items-baseline gap-0.5 font-display font-black text-ink">
-                      <span className="text-2xl md:text-3xl">{t.value}</span>
-                      <span className="text-sm md:text-base text-[#BE123C]">
-                        {t.suffix}
-                      </span>
-                    </p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          Worries — 横スライドで表示するAIのお悩み
-      ══════════════════════════════════════════════════ */}
-      <section className="overflow-hidden bg-[#faf5f5] py-20 md:py-28">
-        <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
-              Problems
-            </p>
-            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              生成AIの活用を推進する上で、
-              <br className="md:hidden" />
-              こんなお悩みありませんか？
-            </h2>
-          </div>
-        </Container>
-
-        {/* Marquee row */}
-        <div className="relative mt-14" aria-label="AIに関するお悩みの例">
-          {/* fade edges */}
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-32"
-            style={{ background: "linear-gradient(to right, #faf5f5, transparent)" }}
-          />
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-32"
-            style={{ background: "linear-gradient(to left, #faf5f5, transparent)" }}
-          />
-
-          <div className="overflow-hidden">
-            <ul
-              className="flex w-max animate-marquee gap-5 md:gap-6"
-              style={{ animationDuration: "60s" }}
-            >
-              {[...worries, ...worries].map((w, i) => (
-                <li
-                  key={`${i}-${w}`}
-                  aria-hidden={i >= worries.length ? "true" : undefined}
-                  className="flex w-[280px] shrink-0 items-center gap-4 rounded-2xl bg-white p-6 shadow-sm md:w-[320px] md:p-7"
-                >
-                  <span
-                    aria-hidden="true"
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#fce7ea] text-[#BE123C]"
-                  >
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.7" />
-                      <path
-                        d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1 1-1 1.7"
-                        stroke="currentColor"
-                        strokeWidth="1.7"
-                        strokeLinecap="round"
-                      />
-                      <circle cx="12" cy="17" r="0.9" fill="currentColor" />
-                    </svg>
-                  </span>
-                  <p className="text-sm md:text-[15px] font-black leading-snug text-ink">
-                    {w}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          Connector arrow (悩み → 解決)
-      ══════════════════════════════════════════════════ */}
-      <div
-        aria-hidden="true"
-        className="flex justify-center bg-[#faf5f5] pb-6 pt-2 md:pb-10"
-      >
-        <div className="grid h-16 w-16 place-items-center rounded-full bg-[#BE123C] shadow-[0_18px_40px_-12px_rgba(190,18,60,0.55)] md:h-20 md:w-20">
-          <svg
-            width="30"
-            height="30"
-            viewBox="0 0 24 24"
-            fill="none"
-            className="md:h-9 md:w-9"
-          >
-            <path
-              d="M12 4 L12 20 M5 13 L12 20 L19 13"
-              stroke="white"
-              strokeWidth="2.6"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-      </div>
-
-      {/* ═══════════════════════════════════════════════════
-          AI顧問ボンドが解決します！
-      ══════════════════════════════════════════════════ */}
-      <section className="bg-[#faf5f5] pb-20 pt-6 md:pb-28 md:pt-10">
-        <Container>
-          <div className="mx-auto max-w-4xl text-center">
-            <p className="font-display text-3xl font-black italic text-[#BE123C] md:text-4xl" style={{ fontFamily: '"Times New Roman", serif' }}>
-              Answer.
-            </p>
-            <h2 className="mt-4 font-display font-black leading-[1.15] tracking-tight text-ink text-[clamp(2rem,5vw,3.5rem)]">
-              その悩み、
-              <br className="md:hidden" />
-              <span className="relative inline-block">
-                <span>AI顧問ボンド</span>
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-0 -bottom-1 h-[6px] bg-amber-300"
-                />
-              </span>
-              が
-              <br />
-              解決します
-              <span className="text-[#BE123C]">！</span>
-            </h2>
-            <p className="mx-auto mt-8 max-w-2xl text-sm md:text-base leading-[1.95] text-ink-soft font-medium">
-              最初の一歩の設計から、実装・定着まで。AI活用のあらゆる悩みを、まるごと引き受けます。
-              <br className="hidden md:inline" />
-              以下は、実際に解決できることの一例です。
-            </p>
-          </div>
-
-          <ul className="mx-auto mt-14 grid max-w-6xl gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
-            {supports.map((s, i) => (
-              <li key={s.title}>
-                <Reveal delay={(i % 3) * 70} className="h-full">
-                  <div className="flex h-full flex-col items-center rounded-2xl bg-white p-8 text-center shadow-sm">
-                    <span className="text-ink">
-                      <SupportIcon kind={s.kind} />
-                    </span>
-                    <h3 className="mt-5 text-base md:text-lg font-black leading-snug text-ink">
-                      {s.title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
-                      {s.body}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          About — AI顧問ボンドとは
-      ══════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-28">
-        <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
-              About
-            </p>
-            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              AI顧問ボンドとは
-            </h2>
-            <p className="mx-auto mt-6 max-w-2xl text-sm md:text-base leading-[1.95] text-ink-soft font-medium">
-              生成AIの「わからない」をすぐ解消。技術的な疑問も活用の悩みも、経験豊富なプロが正確・迅速にサポートします。
-            </p>
-          </div>
-
-          <div className="mx-auto mt-10 max-w-3xl">
-            <p className="text-base md:text-lg leading-[2] text-ink font-medium">
-              AI顧問ボンドは、
-              <span className="font-black text-[#BE123C]">AI活用に本気で踏み込みたい企業</span>
-              のための顧問マッチングサービスです。大手企業技術開発部、大手日系コンサル、IT企業代表など、経営と現場の両方を知り抜いた
-              <span className="font-black text-ink">現役のAIプロフェッショナル</span>
-              が顧問として月次で伴走。単なる助言に留まらず、
-              <span className="font-black text-ink">ロードマップの提示から実装、組織への定着</span>
-              までを一緒に描き切ります。
-            </p>
-          </div>
-
-          <ul className="mx-auto mt-14 grid max-w-5xl gap-5 md:grid-cols-3 md:gap-6">
-            {[
-              {
-                kicker: "Point 01",
-                title: "現役のAIプロが伴走",
-                body: "AI活用の現場を知り抜いた実力者のみが顧問として在籍。等身大の意思決定を、隣で支えます。",
-              },
-              {
-                kicker: "Point 02",
-                title: "ロードマップから始める",
-                body: "着手前に全体像と優先順位を提示。単発の助言ではなく「どこから始めどこへ辿り着くか」まで描きます。",
-              },
-              {
-                kicker: "Point 03",
-                title: "月額制で柔軟に",
-                body: "月額10万円〜のスモールスタート。無理な長期縛りはなく、フェーズに応じて関わり方を調整できます。",
-              },
-            ].map((p, i) => (
-              <li key={p.kicker}>
-                <Reveal delay={i * 80} className="h-full">
-                  <div className="flex h-full flex-col rounded-2xl border border-[#fce7ea] bg-white p-7 shadow-sm">
-                    <p className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#BE123C]">
-                      {p.kicker}
-                    </p>
-                    <h3 className="mt-3 text-base md:text-lg font-black leading-snug text-ink">
-                      {p.title}
-                    </h3>
-                    <span
-                      aria-hidden="true"
-                      className="mt-4 block h-0.5 w-10 bg-[#BE123C]"
-                    />
-                    <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
-                      {p.body}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-
-      {/* ═══════════════════════════════════════════════════
-          Pro Roles — AIに詳しいプロのみ紹介
-      ══════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-28">
-        <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
-              Pros
-            </p>
-            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              AIに詳しいプロのみ紹介
-            </h2>
-            <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-              経営と現場の両方を知り抜いた層のみが在籍。以下は代表例です。
-            </p>
-          </div>
-
-          <ul className="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-3 md:gap-6">
-            {proRoles.map((r, i) => (
-              <li key={r.title}>
-                <Reveal delay={i * 80} className="h-full">
-                  <div className="flex h-full flex-col rounded-2xl border border-[#fce7ea] bg-white p-8 shadow-sm">
-                    <span
-                      aria-hidden="true"
-                      className="grid h-12 w-12 place-items-center rounded-full bg-[#fce7ea] text-[#BE123C]"
-                    >
-                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                        <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.7" />
-                        <path
-                          d="M4 20c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5"
-                          stroke="currentColor"
-                          strokeWidth="1.7"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </span>
-                    <h3 className="mt-5 text-lg md:text-xl font-black leading-snug text-ink">
-                      {r.title}
-                    </h3>
-                    <span
-                      aria-hidden="true"
-                      className="mt-4 block h-0.5 w-10 bg-[#BE123C]"
-                    />
-                    <p className="mt-4 text-sm md:text-[15px] leading-[1.9] text-ink-soft font-medium">
-                      {r.body}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          Consult Examples — 顧問ボンドの相談一例
-      ══════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-28">
-        <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
-              Consult Examples
-            </p>
-            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              顧問ボンドの相談一例
-            </h2>
-            <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-              チャットから現場訪問、部署単位のAI化まで。関わり方は、状況に合わせて自由に選べます。
-            </p>
-          </div>
-
-          <ul className="mx-auto mt-14 grid max-w-6xl gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
-            {consults.map((c, i) => (
-              <li key={c.title}>
-                <Reveal delay={(i % 3) * 70} className="h-full">
-                  <div className="flex h-full items-start gap-5 rounded-2xl border border-[#fce7ea] bg-white p-7 shadow-sm">
-                    <span className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-[#faf5f5] text-[#BE123C]">
-                      <ConsultIcon kind={c.kind} />
-                    </span>
-                    <div>
-                      <h3 className="text-base md:text-lg font-black leading-snug text-ink">
-                        {c.title}
-                      </h3>
-                      <p className="mt-2 text-sm leading-[1.9] text-ink-soft font-medium">
-                        {c.body}
-                      </p>
-                    </div>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          Pricing
-      ══════════════════════════════════════════════════ */}
-      <section className="bg-[#faf5f5] py-20 md:py-28">
-        <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="font-display text-2xl font-black italic text-[#BE123C] md:text-3xl" style={{ fontFamily: '"Times New Roman", serif' }}>
-              Price.
-            </p>
-            <h2 className="mt-3 font-display font-black leading-tight text-ink text-[clamp(1.875rem,4.5vw,2.875rem)]">
-              事業フェーズに合わせて選べる、
-              <br className="md:hidden" />
-              3つのプラン
-            </h2>
-            <p className="mx-auto mt-6 max-w-xl text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-              スモールスタートから戦略パートナーまで。まずは無料相談で、御社に最適な関わり方をご提案します。
-            </p>
-          </div>
-
-          <ul className="mx-auto mt-16 grid max-w-6xl gap-6 md:grid-cols-3 md:items-stretch">
-            {plans.map((p, i) => (
-              <li
-                key={p.name}
-                className={p.recommended ? "md:-my-4" : ""}
-              >
-                <Reveal delay={i * 80} className="h-full">
-                  <div
-                    className={`flex h-full flex-col rounded-2xl p-8 md:p-9 ${
-                      p.recommended
-                        ? "relative bg-[#4c0519] text-white shadow-[0_35px_80px_-30px_rgba(190,18,60,0.6)]"
-                        : "border border-[#fce7ea] bg-white shadow-sm"
-                    }`}
-                  >
-                    {p.recommended ? (
-                      <div
-                        aria-hidden="true"
-                        className="absolute inset-0 rounded-2xl"
-                        style={{
-                          background:
-                            "radial-gradient(circle at 20% 20%, rgba(190,18,60,0.4) 0%, transparent 55%), linear-gradient(160deg, #4c0519 0%, #3b0509 100%)",
-                        }}
-                      />
-                    ) : null}
-
-                    <div className="relative">
-                      {p.badge ? (
-                        <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-amber-300 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#4c0519]">
-                          <span aria-hidden="true">★</span>
-                          {p.badge}
-                        </span>
-                      ) : (
-                        <p className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#BE123C]">
-                          {`Plan 0${i + 1}`}
-                        </p>
-                      )}
-                      <h3
-                        className={`text-xl md:text-2xl font-black leading-snug ${
-                          p.recommended ? "text-white mt-4" : "text-ink mt-3"
-                        }`}
-                      >
-                        {p.name}
-                      </h3>
-
-                      <div className="mt-6 flex items-baseline gap-1">
-                        <span
-                          className={`font-display text-4xl md:text-5xl font-black ${
-                            p.recommended ? "text-amber-300" : "text-[#BE123C]"
-                          }`}
-                        >
-                          {p.price}
-                        </span>
-                        {p.priceSuffix ? (
-                          <span
-                            className={`text-sm font-bold ${
-                              p.recommended ? "text-white/70" : "text-ink-soft"
-                            }`}
-                          >
-                            {p.priceSuffix}
-                          </span>
-                        ) : null}
-                      </div>
-
-                      <span
-                        aria-hidden="true"
-                        className={`mt-6 block h-px w-full ${
-                          p.recommended ? "bg-white/20" : "bg-[#fce7ea]"
-                        }`}
-                      />
-
-                      <p
-                        className={`mt-6 text-sm leading-[1.9] font-medium ${
-                          p.recommended ? "text-white/80" : "text-ink-soft"
-                        }`}
-                      >
-                        {p.body}
-                      </p>
-
-                      <ul className="mt-6 space-y-3">
-                        {p.features.map((f) => (
-                          <li
-                            key={f}
-                            className={`flex gap-2 text-sm font-medium ${
-                              p.recommended ? "text-white/90" : "text-ink"
-                            }`}
-                          >
-                            <span
-                              aria-hidden="true"
-                              className={`mt-1.5 grid h-4 w-4 shrink-0 place-items-center rounded-full ${
-                                p.recommended ? "bg-amber-300" : "bg-[#BE123C]"
-                              }`}
-                            >
-                              <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                                <path
-                                  d="M2 5.4 L4 7.4 L8 3"
-                                  stroke={p.recommended ? "#4c0519" : "#fff"}
-                                  strokeWidth="1.8"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />
-                              </svg>
-                            </span>
-                            <span>{f}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="relative mt-auto pt-10">
-                      <Button
-                        href={contactHref}
-                        size="md"
-                        className={`w-full ${
-                          p.recommended
-                            ? "!bg-amber-300 !text-[#4c0519] hover:!bg-amber-200"
-                            : "!bg-white !text-[#BE123C] border border-[#BE123C] hover:!bg-[#faf5f5]"
-                        }`}
-                      >
-                        このプランで相談する
-                      </Button>
-                    </div>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-
-          <p className="mx-auto mt-10 max-w-2xl text-center text-xs text-ink-muted">
-            ※ 記載の金額は税抜表記です。詳細は無料相談時にご案内します。
-          </p>
-        </Container>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          FAQ
-      ══════════════════════════════════════════════════ */}
-      <section className="bg-white py-20 md:py-28">
-        <Container>
-          <div className="mx-auto max-w-3xl text-center">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
-              FAQ
-            </p>
-            <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
-              よくあるご質問
-            </h2>
-          </div>
-
-          <ul className="mx-auto mt-12 max-w-3xl space-y-3">
-            {faqs.map((f) => (
-              <li key={f.q} className="rounded-2xl bg-[#faf5f5]">
-                <details className="group">
-                  <summary className="flex cursor-pointer items-start justify-between gap-4 p-6 list-none">
-                    <span className="flex gap-3">
-                      <span className="font-display text-base font-black text-[#BE123C]">
-                        Q.
-                      </span>
-                      <span className="text-base md:text-lg font-bold text-ink leading-snug">
-                        {f.q}
-                      </span>
-                    </span>
-                    <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-[#BE123C] group-open:text-[#BE123C]">
-                      +
-                    </span>
-                  </summary>
-                  <div className="border-t border-ink-line/60 p-6 pt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
-                    <span className="mr-2 font-display text-base font-black text-ink-muted">
-                      A.
-                    </span>
-                    {f.a}
-                  </div>
-                </details>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* ═══════════════════════════════════════════════════
-          Final CTA
-      ══════════════════════════════════════════════════ */}
-      <section className="bg-[#4c0519] py-20 md:py-28 text-white">
-        <Container>
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#fda4af]">
-              Contact
-            </p>
-            <h2 className="mt-6 font-display font-black leading-tight text-white text-[clamp(1.875rem,4.5vw,3rem)]">
-              お問い合わせ
-            </h2>
-            <p className="mx-auto mt-6 max-w-xl text-sm md:text-base leading-relaxed text-white/80 font-medium">
-              まずは無料相談から。御社の現状をお聞かせいただければ、AI活用のロードマップをご提示します。
-            </p>
-            <div className="mt-10">
-              <Button
-                href={contactHref}
-                size="lg"
-                className="w-full !h-[64px] !bg-[#BE123C] hover:!bg-[#a41e3a] shadow-[0_18px_40px_-12px_rgba(190,18,60,0.55)] hover:-translate-y-0.5 text-lg font-black md:!h-[72px] md:text-xl sm:w-auto sm:min-w-[280px]"
-              >
-                無料相談を予約する
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
-    </>
-  );
+export default function AiKomonPage() {
+  // Page is currently non-public — always 404.
+  // To re-enable: (1) uncomment ai-komon in src/lib/site.ts services array,
+  //               (2) remove this stub and restore the previous render body from git history
+  //               (or from the commented block below).
+  notFound();
+  return null;
 }
+
+/* ─────────────────────────────────────────────────────────────
+ * Original page body (commented out while ai-komon is non-public):
+ *
+ * export default function AiKomonPage({
+ *   params,
+ * }: {
+ *   params: { locale: string };
+ * }) {
+ *   // Page is currently non-public — always 404. Remove this early return to re-enable.
+ *   notFound();
+ *   if (!isLocale(params.locale)) notFound();
+ *   const locale = params.locale as Locale;
+ *   const service = services.find((s) => (s.slug as string) === SERVICE_SLUG);
+ *   if (!service) notFound();
+ * 
+ *   const contactHref = localePath("/contact", locale);
+ * 
+ *   return (
+ *     <>
+ *       <JsonLd
+ *         data={[
+ *           breadcrumbJsonLd([
+ *             { name: "ホーム", url: localePath("/", locale) },
+ *             { name: "サービス紹介", url: localePath("/services", locale) },
+ *             {
+ *               name: service.title,
+ *               url: localePath(`/services/${SERVICE_SLUG}`, locale),
+ *             },
+ *           ]),
+ *           serviceJsonLd({
+ *             name: "AI顧問ボンド（by セールスボンド）",
+ *             description:
+ *               "AI活用の相談ならAI顧問ボンド。大手企業技術開発部やIT企業代表などハイクラス層のAIプロフェッショナルが顧問として伴走。月額10万円〜の伴走支援。",
+ *             url: localePath(`/services/${SERVICE_SLUG}`, locale),
+ *             keywords: [
+ *               "AI顧問",
+ *               "AI顧問ボンド",
+ *               "AIアドバイザー",
+ *               "AI活用",
+ *               "AI導入支援",
+ *               "AI戦略",
+ *               "生成AI活用",
+ *               "DX推進",
+ *               "顧問サービス",
+ *             ],
+ *           }),
+ *         ]}
+ *       />
+ * 
+ *       {/* ═══════════════════════════════════════════════════
+ *           Hero — editorial split, big catch, trust row
+ *       ══════════════════════════════════════════════════ * /}
+ *       <section className="relative overflow-hidden bg-white">
+ *         {/* deep red base band (mobile) * /}
+ *         <div
+ *           aria-hidden="true"
+ *           className="absolute inset-x-0 top-0 h-[52%] bg-[#4c0519] md:hidden"
+ *         />
+ * 
+ *         <div className="relative grid md:grid-cols-12">
+ *           {/* Left: photo panel (5/12) * /}
+ *           <div className="relative col-span-1 min-h-[360px] overflow-hidden bg-[#4c0519] md:col-span-5 md:min-h-[720px] lg:min-h-[760px]">
+ *             <div
+ *               aria-hidden="true"
+ *               className="absolute inset-0"
+ *               style={{
+ *                 background:
+ *                   "radial-gradient(circle at 60% 40%, #a41e3a 0%, transparent 55%), radial-gradient(circle at 20% 90%, #7f1d1d 0%, transparent 60%), linear-gradient(160deg, #4c0519 0%, #3b0509 100%)",
+ *               }}
+ *             />
+ *             <div
+ *               aria-hidden="true"
+ *               className="absolute inset-y-0 left-0 w-2/3"
+ *               style={{
+ *                 background:
+ *                   "linear-gradient(115deg, rgba(255,255,255,0.14) 0%, transparent 55%)",
+ *               }}
+ *             />
+ *             <div
+ *               aria-hidden="true"
+ *               className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-overlay"
+ *               style={{
+ *                 backgroundImage:
+ *                   "radial-gradient(#fff 1px, transparent 1px)",
+ *                 backgroundSize: "3px 3px",
+ *               }}
+ *             />
+ * 
+ *             {/* Editorial folio marks (magazine style) * /}
+ *             <div className="absolute left-6 top-6 flex items-center gap-3 md:left-8 md:top-8">
+ *               <span aria-hidden="true" className="block h-px w-8 bg-amber-300" />
+ *               <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-amber-300">
+ *                 AI顧問ボンド ／ N&deg; 01
+ *               </p>
+ *             </div>
+ *             <div className="absolute bottom-6 left-6 flex items-center gap-3 md:bottom-8 md:left-8">
+ *               <span aria-hidden="true" className="block h-px w-8 bg-white/40" />
+ *               <p className="font-display text-[10px] font-extrabold uppercase tracking-[0.32em] text-white/70">
+ *                 by Sales Bond
+ *               </p>
+ *             </div>
+ * 
+ *             <HeroPortrait />
+ *           </div>
+ * 
+ *           {/* Right: content (7/12) * /}
+ *           <div className="relative col-span-1 flex items-center bg-white px-6 py-16 md:col-span-7 md:px-12 md:py-24 lg:px-20">
+ *             <div className="w-full">
+ *               {/* Brand mark * /}
+ *               <div className="flex items-center gap-3">
+ *                 <span aria-hidden="true" className="block h-px w-10 bg-[#BE123C]" />
+ *                 <p className="font-display text-[11px] font-extrabold uppercase tracking-[0.36em] text-[#BE123C]">
+ *                   AI顧問ボンド ／ by Sales Bond
+ *                 </p>
+ *               </div>
+ * 
+ *               {/* Catchphrase — big * /}
+ *               <h1 className="mt-8 font-display font-black leading-[1.02] tracking-tight text-ink text-[clamp(2.5rem,5.5vw,4.75rem)]">
+ *                 企業の
+ *                 <span className="relative inline-block">
+ *                   <span>初めて</span>
+ *                   <span
+ *                     aria-hidden="true"
+ *                     className="absolute inset-x-0 -bottom-1 h-[6px] bg-amber-300"
+ *                   />
+ *                 </span>
+ *                 の
+ *                 <br />
+ *                 AI活用なら
+ *                 <span className="text-[#BE123C]">！</span>
+ *               </h1>
+ * 
+ *               <p className="mt-6 max-w-xl text-sm md:text-base leading-[1.95] text-ink-soft font-medium">
+ *                 現役のAIプロフェッショナルが、
+ *                 <span className="font-black text-ink">月額10万円〜</span>
+ *                 で顧問として伴走。生成AI活用のあらゆる悩みを、
+ *                 <span className="font-black text-ink">まるっと相談・解決</span>
+ *                 します。
+ *               </p>
+ * 
+ *               {/* CTAs * /}
+ *               <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+ *                 <Button
+ *                   href={contactHref}
+ *                   size="lg"
+ *                   className="!h-[64px] w-full !bg-[#BE123C] hover:!bg-[#a41e3a] shadow-[0_22px_50px_-14px_rgba(190,18,60,0.55)] hover:-translate-y-0.5 text-base font-black md:!h-[72px] md:text-lg sm:w-auto sm:min-w-[260px]"
+ *                 >
+ *                   無料相談する
+ *                 </Button>
+ *                 <Button
+ *                   href={contactHref}
+ *                   size="lg"
+ *                   variant="secondary"
+ *                   className="!h-[64px] w-full text-base font-black md:!h-[72px] md:text-lg sm:w-auto sm:min-w-[200px]"
+ *                 >
+ *                   資料請求
+ *                 </Button>
+ *               </div>
+ *               <p className="mt-3 text-xs text-ink-muted">
+ *                 ※ ご相談は無料。最短翌営業日で相談枠をご案内します。
+ *               </p>
+ * 
+ *               {/* Trust row * /}
+ *               <ul className="mt-10 grid grid-cols-3 gap-3 border-t border-ink-line pt-8 md:mt-12 md:gap-6">
+ *                 {[
+ *                   { label: "現役プロ在籍", value: "100", suffix: "＋" },
+ *                   { label: "対応領域", value: "全", suffix: "領域" },
+ *                   { label: "月額", value: "¥10", suffix: "万〜" },
+ *                 ].map((t) => (
+ *                   <li key={t.label}>
+ *                     <p className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-ink-muted">
+ *                       {t.label}
+ *                     </p>
+ *                     <p className="mt-2 flex items-baseline gap-0.5 font-display font-black text-ink">
+ *                       <span className="text-2xl md:text-3xl">{t.value}</span>
+ *                       <span className="text-sm md:text-base text-[#BE123C]">
+ *                         {t.suffix}
+ *                       </span>
+ *                     </p>
+ *                   </li>
+ *                 ))}
+ *               </ul>
+ *             </div>
+ *           </div>
+ *         </div>
+ *       </section>
+ * 
+ *       {/* ═══════════════════════════════════════════════════
+ *           Worries — 横スライドで表示するAIのお悩み
+ *       ══════════════════════════════════════════════════ * /}
+ *       <section className="overflow-hidden bg-[#faf5f5] py-20 md:py-28">
+ *         <Container>
+ *           <div className="mx-auto max-w-3xl text-center">
+ *             <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+ *               Problems
+ *             </p>
+ *             <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+ *               生成AIの活用を推進する上で、
+ *               <br className="md:hidden" />
+ *               こんなお悩みありませんか？
+ *             </h2>
+ *           </div>
+ *         </Container>
+ * 
+ *         {/* Marquee row * /}
+ *         <div className="relative mt-14" aria-label="AIに関するお悩みの例">
+ *           {/* fade edges * /}
+ *           <div
+ *             aria-hidden="true"
+ *             className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 md:w-32"
+ *             style={{ background: "linear-gradient(to right, #faf5f5, transparent)" }}
+ *           />
+ *           <div
+ *             aria-hidden="true"
+ *             className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 md:w-32"
+ *             style={{ background: "linear-gradient(to left, #faf5f5, transparent)" }}
+ *           />
+ * 
+ *           <div className="overflow-hidden">
+ *             <ul
+ *               className="flex w-max animate-marquee gap-5 md:gap-6"
+ *               style={{ animationDuration: "60s" }}
+ *             >
+ *               {[...worries, ...worries].map((w, i) => (
+ *                 <li
+ *                   key={`${i}-${w}`}
+ *                   aria-hidden={i >= worries.length ? "true" : undefined}
+ *                   className="flex w-[280px] shrink-0 items-center gap-4 rounded-2xl bg-white p-6 shadow-sm md:w-[320px] md:p-7"
+ *                 >
+ *                   <span
+ *                     aria-hidden="true"
+ *                     className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#fce7ea] text-[#BE123C]"
+ *                   >
+ *                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+ *                       <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.7" />
+ *                       <path
+ *                         d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.9.4-1 1-1 1.7"
+ *                         stroke="currentColor"
+ *                         strokeWidth="1.7"
+ *                         strokeLinecap="round"
+ *                       />
+ *                       <circle cx="12" cy="17" r="0.9" fill="currentColor" />
+ *                     </svg>
+ *                   </span>
+ *                   <p className="text-sm md:text-[15px] font-black leading-snug text-ink">
+ *                     {w}
+ *                   </p>
+ *                 </li>
+ *               ))}
+ *             </ul>
+ *           </div>
+ *         </div>
+ *       </section>
+ * 
+ *       {/* ═══════════════════════════════════════════════════
+ *           Connector arrow (悩み → 解決)
+ *       ══════════════════════════════════════════════════ * /}
+ *       <div
+ *         aria-hidden="true"
+ *         className="flex justify-center bg-[#faf5f5] pb-6 pt-2 md:pb-10"
+ *       >
+ *         <div className="grid h-16 w-16 place-items-center rounded-full bg-[#BE123C] shadow-[0_18px_40px_-12px_rgba(190,18,60,0.55)] md:h-20 md:w-20">
+ *           <svg
+ *             width="30"
+ *             height="30"
+ *             viewBox="0 0 24 24"
+ *             fill="none"
+ *             className="md:h-9 md:w-9"
+ *           >
+ *             <path
+ *               d="M12 4 L12 20 M5 13 L12 20 L19 13"
+ *               stroke="white"
+ *               strokeWidth="2.6"
+ *               strokeLinecap="round"
+ *               strokeLinejoin="round"
+ *             />
+ *           </svg>
+ *         </div>
+ *       </div>
+ * 
+ *       {/* ═══════════════════════════════════════════════════
+ *           AI顧問ボンドが解決します！
+ *       ══════════════════════════════════════════════════ * /}
+ *       <section className="bg-[#faf5f5] pb-20 pt-6 md:pb-28 md:pt-10">
+ *         <Container>
+ *           <div className="mx-auto max-w-4xl text-center">
+ *             <p className="font-display text-3xl font-black italic text-[#BE123C] md:text-4xl" style={{ fontFamily: '"Times New Roman", serif' }}>
+ *               Answer.
+ *             </p>
+ *             <h2 className="mt-4 font-display font-black leading-[1.15] tracking-tight text-ink text-[clamp(2rem,5vw,3.5rem)]">
+ *               その悩み、
+ *               <br className="md:hidden" />
+ *               <span className="relative inline-block">
+ *                 <span>AI顧問ボンド</span>
+ *                 <span
+ *                   aria-hidden="true"
+ *                   className="absolute inset-x-0 -bottom-1 h-[6px] bg-amber-300"
+ *                 />
+ *               </span>
+ *               が
+ *               <br />
+ *               解決します
+ *               <span className="text-[#BE123C]">！</span>
+ *             </h2>
+ *             <p className="mx-auto mt-8 max-w-2xl text-sm md:text-base leading-[1.95] text-ink-soft font-medium">
+ *               最初の一歩の設計から、実装・定着まで。AI活用のあらゆる悩みを、まるごと引き受けます。
+ *               <br className="hidden md:inline" />
+ *               以下は、実際に解決できることの一例です。
+ *             </p>
+ *           </div>
+ * 
+ *           <ul className="mx-auto mt-14 grid max-w-6xl gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+ *             {supports.map((s, i) => (
+ *               <li key={s.title}>
+ *                 <Reveal delay={(i % 3) * 70} className="h-full">
+ *                   <div className="flex h-full flex-col items-center rounded-2xl bg-white p-8 text-center shadow-sm">
+ *                     <span className="text-ink">
+ *                       <SupportIcon kind={s.kind} />
+ *                     </span>
+ *                     <h3 className="mt-5 text-base md:text-lg font-black leading-snug text-ink">
+ *                       {s.title}
+ *                     </h3>
+ *                     <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
+ *                       {s.body}
+ *                     </p>
+ *                   </div>
+ *                 </Reveal>
+ *               </li>
+ *             ))}
+ *           </ul>
+ *         </Container>
+ *       </section>
+ * 
+ *       {/* ═══════════════════════════════════════════════════
+ *           About — AI顧問ボンドとは
+ *       ══════════════════════════════════════════════════ * /}
+ *       <section className="bg-white py-20 md:py-28">
+ *         <Container>
+ *           <div className="mx-auto max-w-3xl text-center">
+ *             <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+ *               About
+ *             </p>
+ *             <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+ *               AI顧問ボンドとは
+ *             </h2>
+ *             <p className="mx-auto mt-6 max-w-2xl text-sm md:text-base leading-[1.95] text-ink-soft font-medium">
+ *               生成AIの「わからない」をすぐ解消。技術的な疑問も活用の悩みも、経験豊富なプロが正確・迅速にサポートします。
+ *             </p>
+ *           </div>
+ * 
+ *           <div className="mx-auto mt-10 max-w-3xl">
+ *             <p className="text-base md:text-lg leading-[2] text-ink font-medium">
+ *               AI顧問ボンドは、
+ *               <span className="font-black text-[#BE123C]">AI活用に本気で踏み込みたい企業</span>
+ *               のための顧問マッチングサービスです。大手企業技術開発部、大手日系コンサル、IT企業代表など、経営と現場の両方を知り抜いた
+ *               <span className="font-black text-ink">現役のAIプロフェッショナル</span>
+ *               が顧問として月次で伴走。単なる助言に留まらず、
+ *               <span className="font-black text-ink">ロードマップの提示から実装、組織への定着</span>
+ *               までを一緒に描き切ります。
+ *             </p>
+ *           </div>
+ * 
+ *           <ul className="mx-auto mt-14 grid max-w-5xl gap-5 md:grid-cols-3 md:gap-6">
+ *             {[
+ *               {
+ *                 kicker: "Point 01",
+ *                 title: "現役のAIプロが伴走",
+ *                 body: "AI活用の現場を知り抜いた実力者のみが顧問として在籍。等身大の意思決定を、隣で支えます。",
+ *               },
+ *               {
+ *                 kicker: "Point 02",
+ *                 title: "ロードマップから始める",
+ *                 body: "着手前に全体像と優先順位を提示。単発の助言ではなく「どこから始めどこへ辿り着くか」まで描きます。",
+ *               },
+ *               {
+ *                 kicker: "Point 03",
+ *                 title: "月額制で柔軟に",
+ *                 body: "月額10万円〜のスモールスタート。無理な長期縛りはなく、フェーズに応じて関わり方を調整できます。",
+ *               },
+ *             ].map((p, i) => (
+ *               <li key={p.kicker}>
+ *                 <Reveal delay={i * 80} className="h-full">
+ *                   <div className="flex h-full flex-col rounded-2xl border border-[#fce7ea] bg-white p-7 shadow-sm">
+ *                     <p className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#BE123C]">
+ *                       {p.kicker}
+ *                     </p>
+ *                     <h3 className="mt-3 text-base md:text-lg font-black leading-snug text-ink">
+ *                       {p.title}
+ *                     </h3>
+ *                     <span
+ *                       aria-hidden="true"
+ *                       className="mt-4 block h-0.5 w-10 bg-[#BE123C]"
+ *                     />
+ *                     <p className="mt-4 text-sm leading-[1.9] text-ink-soft font-medium">
+ *                       {p.body}
+ *                     </p>
+ *                   </div>
+ *                 </Reveal>
+ *               </li>
+ *             ))}
+ *           </ul>
+ *         </Container>
+ *       </section>
+ * 
+ * 
+ *       {/* ═══════════════════════════════════════════════════
+ *           Pro Roles — AIに詳しいプロのみ紹介
+ *       ══════════════════════════════════════════════════ * /}
+ *       <section className="bg-white py-20 md:py-28">
+ *         <Container>
+ *           <div className="mx-auto max-w-3xl text-center">
+ *             <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+ *               Pros
+ *             </p>
+ *             <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+ *               AIに詳しいプロのみ紹介
+ *             </h2>
+ *             <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+ *               経営と現場の両方を知り抜いた層のみが在籍。以下は代表例です。
+ *             </p>
+ *           </div>
+ * 
+ *           <ul className="mx-auto mt-14 grid max-w-6xl gap-5 md:grid-cols-3 md:gap-6">
+ *             {proRoles.map((r, i) => (
+ *               <li key={r.title}>
+ *                 <Reveal delay={i * 80} className="h-full">
+ *                   <div className="flex h-full flex-col rounded-2xl border border-[#fce7ea] bg-white p-8 shadow-sm">
+ *                     <span
+ *                       aria-hidden="true"
+ *                       className="grid h-12 w-12 place-items-center rounded-full bg-[#fce7ea] text-[#BE123C]"
+ *                     >
+ *                       <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+ *                         <circle cx="12" cy="8" r="4" stroke="currentColor" strokeWidth="1.7" />
+ *                         <path
+ *                           d="M4 20c0-4 3.5-6.5 8-6.5s8 2.5 8 6.5"
+ *                           stroke="currentColor"
+ *                           strokeWidth="1.7"
+ *                           strokeLinecap="round"
+ *                         />
+ *                       </svg>
+ *                     </span>
+ *                     <h3 className="mt-5 text-lg md:text-xl font-black leading-snug text-ink">
+ *                       {r.title}
+ *                     </h3>
+ *                     <span
+ *                       aria-hidden="true"
+ *                       className="mt-4 block h-0.5 w-10 bg-[#BE123C]"
+ *                     />
+ *                     <p className="mt-4 text-sm md:text-[15px] leading-[1.9] text-ink-soft font-medium">
+ *                       {r.body}
+ *                     </p>
+ *                   </div>
+ *                 </Reveal>
+ *               </li>
+ *             ))}
+ *           </ul>
+ *         </Container>
+ *       </section>
+ * 
+ *       {/* ═══════════════════════════════════════════════════
+ *           Consult Examples — 顧問ボンドの相談一例
+ *       ══════════════════════════════════════════════════ * /}
+ *       <section className="bg-white py-20 md:py-28">
+ *         <Container>
+ *           <div className="mx-auto max-w-3xl text-center">
+ *             <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+ *               Consult Examples
+ *             </p>
+ *             <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+ *               顧問ボンドの相談一例
+ *             </h2>
+ *             <p className="mt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+ *               チャットから現場訪問、部署単位のAI化まで。関わり方は、状況に合わせて自由に選べます。
+ *             </p>
+ *           </div>
+ * 
+ *           <ul className="mx-auto mt-14 grid max-w-6xl gap-5 sm:grid-cols-2 md:grid-cols-3 md:gap-6">
+ *             {consults.map((c, i) => (
+ *               <li key={c.title}>
+ *                 <Reveal delay={(i % 3) * 70} className="h-full">
+ *                   <div className="flex h-full items-start gap-5 rounded-2xl border border-[#fce7ea] bg-white p-7 shadow-sm">
+ *                     <span className="grid h-14 w-14 shrink-0 place-items-center rounded-xl bg-[#faf5f5] text-[#BE123C]">
+ *                       <ConsultIcon kind={c.kind} />
+ *                     </span>
+ *                     <div>
+ *                       <h3 className="text-base md:text-lg font-black leading-snug text-ink">
+ *                         {c.title}
+ *                       </h3>
+ *                       <p className="mt-2 text-sm leading-[1.9] text-ink-soft font-medium">
+ *                         {c.body}
+ *                       </p>
+ *                     </div>
+ *                   </div>
+ *                 </Reveal>
+ *               </li>
+ *             ))}
+ *           </ul>
+ *         </Container>
+ *       </section>
+ * 
+ *       {/* ═══════════════════════════════════════════════════
+ *           Pricing
+ *       ══════════════════════════════════════════════════ * /}
+ *       <section className="bg-[#faf5f5] py-20 md:py-28">
+ *         <Container>
+ *           <div className="mx-auto max-w-3xl text-center">
+ *             <p className="font-display text-2xl font-black italic text-[#BE123C] md:text-3xl" style={{ fontFamily: '"Times New Roman", serif' }}>
+ *               Price.
+ *             </p>
+ *             <h2 className="mt-3 font-display font-black leading-tight text-ink text-[clamp(1.875rem,4.5vw,2.875rem)]">
+ *               事業フェーズに合わせて選べる、
+ *               <br className="md:hidden" />
+ *               3つのプラン
+ *             </h2>
+ *             <p className="mx-auto mt-6 max-w-xl text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+ *               スモールスタートから戦略パートナーまで。まずは無料相談で、御社に最適な関わり方をご提案します。
+ *             </p>
+ *           </div>
+ * 
+ *           <ul className="mx-auto mt-16 grid max-w-6xl gap-6 md:grid-cols-3 md:items-stretch">
+ *             {plans.map((p, i) => (
+ *               <li
+ *                 key={p.name}
+ *                 className={p.recommended ? "md:-my-4" : ""}
+ *               >
+ *                 <Reveal delay={i * 80} className="h-full">
+ *                   <div
+ *                     className={`flex h-full flex-col rounded-2xl p-8 md:p-9 ${
+ *                       p.recommended
+ *                         ? "relative bg-[#4c0519] text-white shadow-[0_35px_80px_-30px_rgba(190,18,60,0.6)]"
+ *                         : "border border-[#fce7ea] bg-white shadow-sm"
+ *                     }`}
+ *                   >
+ *                     {p.recommended ? (
+ *                       <div
+ *                         aria-hidden="true"
+ *                         className="absolute inset-0 rounded-2xl"
+ *                         style={{
+ *                           background:
+ *                             "radial-gradient(circle at 20% 20%, rgba(190,18,60,0.4) 0%, transparent 55%), linear-gradient(160deg, #4c0519 0%, #3b0509 100%)",
+ *                         }}
+ *                       />
+ *                     ) : null}
+ * 
+ *                     <div className="relative">
+ *                       {p.badge ? (
+ *                         <span className="inline-flex w-fit items-center gap-1.5 rounded-full bg-amber-300 px-3 py-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-[#4c0519]">
+ *                           <span aria-hidden="true">★</span>
+ *                           {p.badge}
+ *                         </span>
+ *                       ) : (
+ *                         <p className="text-[10px] font-extrabold uppercase tracking-[0.22em] text-[#BE123C]">
+ *                           {`Plan 0${i + 1}`}
+ *                         </p>
+ *                       )}
+ *                       <h3
+ *                         className={`text-xl md:text-2xl font-black leading-snug ${
+ *                           p.recommended ? "text-white mt-4" : "text-ink mt-3"
+ *                         }`}
+ *                       >
+ *                         {p.name}
+ *                       </h3>
+ * 
+ *                       <div className="mt-6 flex items-baseline gap-1">
+ *                         <span
+ *                           className={`font-display text-4xl md:text-5xl font-black ${
+ *                             p.recommended ? "text-amber-300" : "text-[#BE123C]"
+ *                           }`}
+ *                         >
+ *                           {p.price}
+ *                         </span>
+ *                         {p.priceSuffix ? (
+ *                           <span
+ *                             className={`text-sm font-bold ${
+ *                               p.recommended ? "text-white/70" : "text-ink-soft"
+ *                             }`}
+ *                           >
+ *                             {p.priceSuffix}
+ *                           </span>
+ *                         ) : null}
+ *                       </div>
+ * 
+ *                       <span
+ *                         aria-hidden="true"
+ *                         className={`mt-6 block h-px w-full ${
+ *                           p.recommended ? "bg-white/20" : "bg-[#fce7ea]"
+ *                         }`}
+ *                       />
+ * 
+ *                       <p
+ *                         className={`mt-6 text-sm leading-[1.9] font-medium ${
+ *                           p.recommended ? "text-white/80" : "text-ink-soft"
+ *                         }`}
+ *                       >
+ *                         {p.body}
+ *                       </p>
+ * 
+ *                       <ul className="mt-6 space-y-3">
+ *                         {p.features.map((f) => (
+ *                           <li
+ *                             key={f}
+ *                             className={`flex gap-2 text-sm font-medium ${
+ *                               p.recommended ? "text-white/90" : "text-ink"
+ *                             }`}
+ *                           >
+ *                             <span
+ *                               aria-hidden="true"
+ *                               className={`mt-1.5 grid h-4 w-4 shrink-0 place-items-center rounded-full ${
+ *                                 p.recommended ? "bg-amber-300" : "bg-[#BE123C]"
+ *                               }`}
+ *                             >
+ *                               <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+ *                                 <path
+ *                                   d="M2 5.4 L4 7.4 L8 3"
+ *                                   stroke={p.recommended ? "#4c0519" : "#fff"}
+ *                                   strokeWidth="1.8"
+ *                                   strokeLinecap="round"
+ *                                   strokeLinejoin="round"
+ *                                 />
+ *                               </svg>
+ *                             </span>
+ *                             <span>{f}</span>
+ *                           </li>
+ *                         ))}
+ *                       </ul>
+ *                     </div>
+ * 
+ *                     <div className="relative mt-auto pt-10">
+ *                       <Button
+ *                         href={contactHref}
+ *                         size="md"
+ *                         className={`w-full ${
+ *                           p.recommended
+ *                             ? "!bg-amber-300 !text-[#4c0519] hover:!bg-amber-200"
+ *                             : "!bg-white !text-[#BE123C] border border-[#BE123C] hover:!bg-[#faf5f5]"
+ *                         }`}
+ *                       >
+ *                         このプランで相談する
+ *                       </Button>
+ *                     </div>
+ *                   </div>
+ *                 </Reveal>
+ *               </li>
+ *             ))}
+ *           </ul>
+ * 
+ *           <p className="mx-auto mt-10 max-w-2xl text-center text-xs text-ink-muted">
+ *             ※ 記載の金額は税抜表記です。詳細は無料相談時にご案内します。
+ *           </p>
+ *         </Container>
+ *       </section>
+ * 
+ *       {/* ═══════════════════════════════════════════════════
+ *           FAQ
+ *       ══════════════════════════════════════════════════ * /}
+ *       <section className="bg-white py-20 md:py-28">
+ *         <Container>
+ *           <div className="mx-auto max-w-3xl text-center">
+ *             <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#BE123C]">
+ *               FAQ
+ *             </p>
+ *             <h2 className="mt-4 font-display font-black leading-tight text-ink text-[clamp(1.75rem,4vw,2.75rem)]">
+ *               よくあるご質問
+ *             </h2>
+ *           </div>
+ * 
+ *           <ul className="mx-auto mt-12 max-w-3xl space-y-3">
+ *             {faqs.map((f) => (
+ *               <li key={f.q} className="rounded-2xl bg-[#faf5f5]">
+ *                 <details className="group">
+ *                   <summary className="flex cursor-pointer items-start justify-between gap-4 p-6 list-none">
+ *                     <span className="flex gap-3">
+ *                       <span className="font-display text-base font-black text-[#BE123C]">
+ *                         Q.
+ *                       </span>
+ *                       <span className="text-base md:text-lg font-bold text-ink leading-snug">
+ *                         {f.q}
+ *                       </span>
+ *                     </span>
+ *                     <span className="mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border border-ink-line text-ink-muted transition group-open:rotate-45 group-open:border-[#BE123C] group-open:text-[#BE123C]">
+ *                       +
+ *                     </span>
+ *                   </summary>
+ *                   <div className="border-t border-ink-line/60 p-6 pt-5 text-sm md:text-base leading-relaxed text-ink-soft font-medium">
+ *                     <span className="mr-2 font-display text-base font-black text-ink-muted">
+ *                       A.
+ *                     </span>
+ *                     {f.a}
+ *                   </div>
+ *                 </details>
+ *               </li>
+ *             ))}
+ *           </ul>
+ *         </Container>
+ *       </section>
+ * 
+ *       {/* ═══════════════════════════════════════════════════
+ *           Final CTA
+ *       ══════════════════════════════════════════════════ * /}
+ *       <section className="bg-[#4c0519] py-20 md:py-28 text-white">
+ *         <Container>
+ *           <div className="mx-auto max-w-2xl text-center">
+ *             <p className="text-[11px] font-extrabold uppercase tracking-[0.32em] text-[#fda4af]">
+ *               Contact
+ *             </p>
+ *             <h2 className="mt-6 font-display font-black leading-tight text-white text-[clamp(1.875rem,4.5vw,3rem)]">
+ *               お問い合わせ
+ *             </h2>
+ *             <p className="mx-auto mt-6 max-w-xl text-sm md:text-base leading-relaxed text-white/80 font-medium">
+ *               まずは無料相談から。御社の現状をお聞かせいただければ、AI活用のロードマップをご提示します。
+ *             </p>
+ *             <div className="mt-10">
+ *               <Button
+ *                 href={contactHref}
+ *                 size="lg"
+ *                 className="w-full !h-[64px] !bg-[#BE123C] hover:!bg-[#a41e3a] shadow-[0_18px_40px_-12px_rgba(190,18,60,0.55)] hover:-translate-y-0.5 text-lg font-black md:!h-[72px] md:text-xl sm:w-auto sm:min-w-[280px]"
+ *               >
+ *                 無料相談を予約する
+ *               </Button>
+ *             </div>
+ *           </div>
+ *         </Container>
+ *       </section>
+ *     </>
+ *   );
+ * }
+ * 
+ * ───────────────────────────────────────────────────────────── */
