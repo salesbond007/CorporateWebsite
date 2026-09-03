@@ -36,7 +36,7 @@ export function Logo({
         )}
       >
         <Image
-          src="/logo-square.jpg"
+          src="/logo-square.png"
           alt={dict.site.name}
           width={2048}
           height={2048}

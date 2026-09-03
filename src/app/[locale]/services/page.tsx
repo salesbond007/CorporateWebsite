@@ -41,7 +41,7 @@ export default function ServicesPage({
         <Container className="relative py-20 md:py-28">
           <div className="flex flex-col items-center gap-6 md:flex-row md:items-center md:gap-8">
             <Image
-              src="/logo-square.jpg"
+              src="/logo-square.png"
               alt="セールスボンド株式会社"
               width={160}
               height={160}

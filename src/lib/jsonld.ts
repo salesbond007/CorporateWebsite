@@ -11,8 +11,8 @@ export function organizationJsonLd() {
     legalName: site.legalName,
     alternateName: [site.legalNameEn, "Sales Bond", "セールスボンド"],
     url: base,
-    logo: `${base}/logo-square.jpg`,
-    image: `${base}/logo-square.jpg`,
+    logo: `${base}/logo-square.png`,
+    image: `${base}/logo-square.png`,
     description: site.description,
     slogan: site.slogan,
     keywords: site.keywords.join(", "),
@@ -72,7 +72,7 @@ export function websiteJsonLd() {
       "@type": "Organization",
       name: site.legalName,
       url: base,
-      logo: `${base}/logo-square.jpg`,
+      logo: `${base}/logo-square.png`,
     },
     potentialAction: {
       "@type": "SearchAction",
@@ -165,7 +165,7 @@ export function articleJsonLd(article: Article) {
       name: site.name,
       logo: {
         "@type": "ImageObject",
-        url: `${base}/logo-square.jpg`,
+        url: `${base}/logo-square.png`,
       },
     },
   };
