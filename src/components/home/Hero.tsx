@@ -57,11 +57,7 @@ export function Hero({ locale, dict }: Props) {
 
       <Container className="relative py-24 md:py-32">
         <div className="max-w-none animate-fade-up">
-          <p className="eyebrow flex items-center gap-2 !text-brand-200">
-            <span aria-hidden="true" className="h-px w-8 bg-brand-200/70" />
-            {dict.hero.eyebrow}
-          </p>
-          <h1 className="mt-5 text-[clamp(1.5rem,4vw,3.75rem)] text-white font-extrabold leading-[1.15] tracking-tight">
+          <h1 className="text-[clamp(1.5rem,4vw,3.75rem)] text-white font-extrabold leading-[1.15] tracking-tight">
             <span className="whitespace-nowrap">{dict.hero.titleLine1}</span>
             <br />
             <span className="whitespace-nowrap">
