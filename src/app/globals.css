@@ -20,7 +20,7 @@
   }
 
   body {
-    @apply bg-cream text-ink font-sans;
+    @apply bg-white text-ink font-sans;
     font-feature-settings: "palt" 1;
     font-weight: 500;
   }
@@ -149,6 +149,6 @@
   }
 
   .prose-article code {
-    @apply bg-cream px-1.5 py-0.5 rounded text-sm;
+    @apply bg-ink-line/40 px-1.5 py-0.5 rounded text-sm;
   }
 }

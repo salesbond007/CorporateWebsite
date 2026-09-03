@@ -152,7 +152,7 @@ export default function PhysicalAiTrainingPage({
       </section>
 
       {/* Pain points */}
-      <section className="bg-cream py-24 md:py-32">
+      <section className="border-t border-ink-line bg-white py-24 md:py-32">
         <Container>
           <p className="max-w-2xl text-xl md:text-2xl font-black text-ink">
             こんな課題はありませんか？
@@ -190,7 +190,7 @@ export default function PhysicalAiTrainingPage({
             {strengths.map((s, i) => (
               <li
                 key={s.title}
-                className="rounded-2xl border border-ink-line bg-cream/40 p-7"
+                className="rounded-2xl border border-ink-line bg-white p-7"
               >
                 <span className="font-display text-2xl font-black text-brand-300">
                   {String(i + 1).padStart(2, "0")}
@@ -208,7 +208,7 @@ export default function PhysicalAiTrainingPage({
       </section>
 
       {/* Curriculum */}
-      <section id="curriculum" className="scroll-mt-20 bg-cream py-24 md:py-32">
+      <section id="curriculum" className="scroll-mt-20 border-t border-ink-line bg-white py-24 md:py-32">
         <Container>
           <p className="section-label !text-brand-500">Curriculum</p>
           <p className="mt-3 max-w-2xl text-xl md:text-2xl font-black text-ink">

@@ -68,7 +68,7 @@ export function Pagination({ currentPage, totalPages, basePath }: Props) {
                   "grid h-10 min-w-10 place-items-center rounded-full px-3 text-sm font-semibold transition",
                   item === currentPage
                     ? "bg-ink text-white"
-                    : "text-ink-soft hover:bg-cream",
+                    : "text-ink-soft hover:bg-ink-line/30",
                 )}
               >
                 {item}
@@ -117,7 +117,7 @@ function PageLink({
     <Link
       href={href}
       aria-label={ariaLabel}
-      className={cn(base, "text-ink-soft hover:bg-cream", className)}
+      className={cn(base, "text-ink-soft hover:bg-ink-line/30", className)}
     >
       {children}
     </Link>

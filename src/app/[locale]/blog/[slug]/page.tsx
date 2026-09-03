@@ -82,7 +82,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
         ]}
       />
       <article>
-        <header className="border-b border-ink-line bg-cream">
+        <header className="border-b border-ink-line bg-white">
           <Container className="py-16 md:py-24">
             <p className="text-xs text-ink-muted">
               <Link
@@ -111,7 +111,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
 
         {article.thumbnail ? (
           <Container className="-mt-10 md:-mt-16">
-            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl2 bg-cream shadow-card">
+            <div className="relative aspect-[16/9] w-full overflow-hidden rounded-xl2 bg-ink-line/30 shadow-card">
               <Image
                 src={article.thumbnail.url}
                 alt=""
@@ -136,7 +136,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
                   {article.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full bg-cream px-3 py-1 text-xs font-semibold text-ink-soft"
+                      className="rounded-full bg-ink-line/40 px-3 py-1 text-xs font-semibold text-ink-soft"
                     >
                       #{tag}
                     </span>
@@ -157,7 +157,7 @@ export default async function ArticlePage({ params }: { params: Params }) {
       </article>
 
       {related.length > 0 ? (
-        <section className="border-t border-ink-line bg-cream py-20 md:py-28">
+        <section className="border-t border-ink-line bg-white py-20 md:py-28">
           <Container>
             <h2 className="text-h2">関連記事</h2>
             <div className="mt-10 grid gap-8 md:grid-cols-3">

@@ -411,7 +411,7 @@ export function SimpleContactForm({ locale }: Props) {
                 </label>
 
                 {type === "service" && checked ? (
-                  <div className="ml-7 mt-3 space-y-2 rounded-lg border border-dashed border-ink-line bg-cream/60 p-4">
+                  <div className="ml-7 mt-3 space-y-2 rounded-lg border border-dashed border-ink-line bg-ink-line/20 p-4">
                     <p className="text-xs font-semibold text-ink-muted">
                       該当するサービスをお選びください（複数選択可）
                     </p>
@@ -449,7 +449,7 @@ export function SimpleContactForm({ locale }: Props) {
         onChange={(e) => update("message", e.target.value)}
       />
 
-      <div className="rounded-xl border border-ink-line bg-cream p-5">
+      <div className="rounded-xl border border-ink-line bg-ink-line/20 p-5">
         <label className="flex items-start gap-3 text-sm">
           <input
             type="checkbox"

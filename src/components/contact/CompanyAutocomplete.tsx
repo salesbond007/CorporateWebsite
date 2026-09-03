@@ -188,7 +188,7 @@ export function CompanyAutocomplete({
                 onMouseEnter={() => setActiveIndex(i)}
                 className={cn(
                   "cursor-pointer border-b border-ink-line/60 px-4 py-3 last:border-b-0",
-                  active ? "bg-brand-50" : "hover:bg-cream",
+                  active ? "bg-brand-50" : "hover:bg-ink-line/30",
                 )}
               >
                 <p className="text-sm font-bold text-ink">{s.name}</p>

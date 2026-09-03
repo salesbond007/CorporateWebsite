@@ -54,11 +54,13 @@ export type NavKey =
   | "top"
   | "services"
   | "blog"
+  | "news"
   | "company";
 
 export const navigation: { key: NavKey; href: string }[] = [
   { key: "top", href: "/" },
   { key: "services", href: "/services" },
+  { key: "news", href: "/news" },
   { key: "company", href: "/company" },
 ];
 

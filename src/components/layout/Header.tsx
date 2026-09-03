@@ -48,7 +48,7 @@ export function Header({ locale, dict }: Props) {
       className={cn(
         "sticky top-0 z-40 w-full transition-all duration-300",
         scrolled
-          ? "bg-cream/90 backdrop-blur-md border-b border-ink-line/60"
+          ? "bg-white/90 backdrop-blur-md border-b border-ink-line/60"
           : "bg-transparent border-b border-transparent",
       )}
     >
@@ -73,6 +73,13 @@ export function Header({ locale, dict }: Props) {
           <span className="text-sm font-bold text-ink-muted">
             AI専門メディア
           </span>
+
+          <Link
+            href={localePath("/news", locale)}
+            className="text-sm font-bold text-ink hover:text-brand-600"
+          >
+            {dict.nav.news}
+          </Link>
 
           <Link
             href={localePath("/company", locale)}
@@ -174,7 +181,7 @@ function NavDropdown({ label, href, items }: NavDropdownProps) {
               <Link
                 role="menuitem"
                 href={item.href}
-                className="block rounded-lg px-4 py-3 transition hover:bg-cream"
+                className="block rounded-lg px-4 py-3 transition hover:bg-ink-line/30"
                 onClick={() => setOpen(false)}
               >
                 <span

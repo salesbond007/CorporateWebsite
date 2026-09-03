@@ -11,7 +11,7 @@ export function ComingSoon({ message, children }: Props) {
   return (
     <section className="py-24 md:py-32">
       <Container>
-        <div className="mx-auto max-w-2xl rounded-xl3 border-2 border-dashed border-ink-line bg-cream/50 p-10 md:p-14 text-center">
+        <div className="mx-auto max-w-2xl rounded-xl3 border-2 border-dashed border-ink-line bg-white p-10 md:p-14 text-center">
           <p className="inline-block rounded-full bg-brand-500 px-4 py-1.5 text-xs font-extrabold uppercase tracking-[0.18em] text-white">
             Coming Soon
           </p>

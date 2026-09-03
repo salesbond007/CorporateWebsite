@@ -117,7 +117,7 @@ export function CompanySection() {
                     </p>
                   </div>
                   <div className="md:col-span-8">
-                    <div className="aspect-[4/3] w-full overflow-hidden rounded-xl bg-cream">
+                    <div className="aspect-[4/3] w-full overflow-hidden rounded-xl bg-ink-line/30">
                       <iframe
                         title={`セールスボンド株式会社 ${o.name}の地図`}
                         src={`https://www.google.com/maps?q=${encodeURIComponent(o.query)}&output=embed`}
