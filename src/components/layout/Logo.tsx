@@ -20,7 +20,7 @@ export function Logo({
   dict,
   className,
   variant = "default",
-  size = "h-10 md:h-11",
+  size = "h-12 md:h-14",
 }: Props) {
   return (
     <Link
