@@ -72,6 +72,7 @@ export const services = [
       "生成AIの業務活用からフィジカルAI導入まで、企画・開発・研修をワンストップで支援します。",
     features: ["生成AI活用", "フィジカルAI導入", "研修・開発支援"],
     href: "/services/physical-ai-training",
+    image: "/services/cards/ai-solutions.jpg",
   },
   {
     slug: "ai-media",
@@ -81,6 +82,7 @@ export const services = [
     summary: "AI活用のリアルな知見を発信するオウンドメディア。",
     features: ["AI活用ノウハウを発信", "事例・トレンドを解説"],
     href: undefined,
+    image: "/services/cards/ai-media.jpg",
   },
   {
     slug: "talent",
@@ -91,6 +93,7 @@ export const services = [
       "営業BPO事業、エンジニア紹介、顧問紹介まで、貴社に必要な人材・実行力を提供します。",
     features: ["営業BPO事業", "エンジニア紹介", "顧問紹介"],
     href: undefined,
+    image: "/services/cards/talent.jpg",
   },
   // 以下は現在非公開 (下記コメント解除で復活)
   // {
@@ -154,9 +157,10 @@ export const services = [
   // },
 ] as const;
 
-// Each service entry can optionally include an `image` path that
-// overrides the inline SVG, and/or an `href` that links to a dedicated
-// LP instead of an anchor on /services. e.g. `image: "/illustrations/x.png"`
+// Each service entry can optionally include an `image` path (shown as a
+// background photo on hover in ServicesSection) and/or an `href` that
+// links to a dedicated LP instead of an anchor on /services.
+// e.g. `image: "/services/cards/ai-solutions.jpg"`
 export type Service = (typeof services)[number] & {
   image?: string;
   href?: string;

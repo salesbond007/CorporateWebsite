@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
@@ -47,11 +48,11 @@ const icons: Record<string, React.ReactNode> = {
 };
 
 const cardClass =
-  "group relative isolate block h-full overflow-hidden rounded-2xl border border-white/10 bg-ink p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
+  "group relative isolate flex aspect-square h-full flex-col overflow-hidden rounded-none border border-white/10 bg-ink p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
 
 export function ServicesSection({ locale, dict }: Props) {
   return (
-    <section id="services" className="relative scroll-mt-20 py-16 md:py-24 bg-cream">
+    <section id="services" className="relative scroll-mt-20 bg-white py-16 md:py-24">
       <Container>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <p className="text-2xl md:text-3xl font-black text-ink">
@@ -69,17 +70,32 @@ export function ServicesSection({ locale, dict }: Props) {
           {services.map((s, i) => {
             const cardContent = (
               <>
+                {/* ホバーで浮かび上がる背景写真 */}
+                {s.image ? (
+                  <Image
+                    src={s.image}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className="absolute inset-0 z-0 object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  />
+                ) : null}
+                {/* 常時のダークオーバーレイ(写真が出てもテキストが読める濃さ) */}
+                <div
+                  aria-hidden="true"
+                  className="absolute inset-0 z-0 bg-gradient-to-t from-ink via-ink/90 to-ink/70"
+                />
                 {/* コーナーのグロー装飾 */}
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute -top-16 -right-16 h-40 w-40 rounded-full bg-brand-600/40 blur-3xl transition-opacity duration-300 group-hover:bg-brand-500/60"
+                  className="pointer-events-none absolute -top-16 -right-16 z-0 h-40 w-40 rounded-full bg-brand-600/40 blur-3xl transition-opacity duration-300 group-hover:opacity-0"
                 />
                 <div
                   aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:16px_16px] text-white"
+                  className="pointer-events-none absolute inset-0 z-0 opacity-[0.07] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:16px_16px] text-white transition-opacity duration-300 group-hover:opacity-0"
                 />
 
-                <div className="relative flex items-start justify-between">
+                <div className="relative z-10 flex items-start justify-between">
                   <span className="grid h-12 w-12 place-items-center rounded-xl bg-white/10 text-brand-300 ring-1 ring-white/15 transition-colors group-hover:bg-brand-500 group-hover:text-white">
                     {icons[s.slug]}
                   </span>
@@ -88,28 +104,30 @@ export function ServicesSection({ locale, dict }: Props) {
                   </span>
                 </div>
 
-                {s.subtitle ? (
-                  <p className="relative mt-8 mb-2 text-xs font-bold uppercase tracking-[0.1em] text-brand-300">
-                    {s.subtitle}
+                <div className="relative z-10 mt-auto">
+                  {s.subtitle ? (
+                    <p className="mb-2 text-xs font-bold uppercase tracking-[0.1em] text-brand-300">
+                      {s.subtitle}
+                    </p>
+                  ) : null}
+                  <h3 className="text-2xl md:text-3xl font-black text-white leading-tight">
+                    {s.title}
+                  </h3>
+                  <div
+                    className="mt-4 h-1 w-12 rounded-full bg-brand-400 transition-all duration-300 group-hover:w-20"
+                    aria-hidden="true"
+                  />
+                  <p className="mt-5 text-sm leading-relaxed text-white/70 font-medium">
+                    {s.summary}
                   </p>
-                ) : null}
-                <h3 className="relative text-2xl md:text-3xl font-black text-white leading-tight">
-                  {s.title}
-                </h3>
-                <div
-                  className="relative mt-4 h-1 w-12 rounded-full bg-brand-400 transition-all duration-300 group-hover:w-20"
-                  aria-hidden="true"
-                />
-                <p className="relative mt-5 text-sm leading-relaxed text-white/70 font-medium">
-                  {s.summary}
-                </p>
 
-                {s.href ? (
-                  <span className="relative mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-brand-300 transition-all group-hover:gap-2.5">
-                    詳しく見る
-                    <span aria-hidden="true">→</span>
-                  </span>
-                ) : null}
+                  {s.href ? (
+                    <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-brand-300 transition-all group-hover:gap-2.5">
+                      詳しく見る
+                      <span aria-hidden="true">→</span>
+                    </span>
+                  ) : null}
+                </div>
               </>
             );
 
