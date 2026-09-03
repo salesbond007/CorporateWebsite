@@ -13,7 +13,7 @@ type Props = {
 
 export function ServicesSection({ locale, dict }: Props) {
   return (
-    <section className="relative py-28 md:py-36 bg-cream">
+    <section id="services" className="relative scroll-mt-20 py-28 md:py-36 bg-cream">
       <Container>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
