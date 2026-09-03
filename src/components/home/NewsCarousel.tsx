@@ -43,6 +43,14 @@ export function NewsCarousel({ items, locale }: Props) {
     el.scrollBy({ left: amount * direction, behavior: "smooth" });
   };
 
+  if (items.length === 0) {
+    return (
+      <p className="mt-10 text-sm text-ink-muted">
+        現在お知らせはありません。準備が整い次第、順次公開します。
+      </p>
+    );
+  }
+
   return (
     <div className="relative mt-10">
       <div

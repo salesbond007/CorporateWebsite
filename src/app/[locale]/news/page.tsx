@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
+import { ComingSoon } from "@/components/ui/ComingSoon";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { news } from "@/lib/news";
@@ -56,39 +57,43 @@ export default function NewsPage({
         </Container>
       </section>
 
-      <section className="bg-white py-24 md:py-32">
-        <Container>
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {news.map((item, i) => {
-              const cardContent = (
-                <>
-                  {item.date ? (
-                    <p className="text-xs font-bold tracking-[0.1em] text-brand-600 transition-colors group-hover:text-brand-100">
-                      {item.date}
-                    </p>
-                  ) : null}
-                  <h2 className="mt-3 text-lg font-black leading-snug text-ink transition-colors group-hover:text-white md:text-xl">
-                    {item.title}
-                  </h2>
-                </>
-              );
-              const className =
-                "group block h-full rounded-none border border-ink-line bg-white p-8 transition-all duration-300 hover:border-brand-500 hover:bg-brand-500 hover:shadow-card";
-              return (
-                <li key={`${item.title}-${i}`}>
-                  {item.href ? (
-                    <Link href={localePath(item.href, locale)} className={className}>
-                      {cardContent}
-                    </Link>
-                  ) : (
-                    <div className={className}>{cardContent}</div>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </Container>
-      </section>
+      {news.length > 0 ? (
+        <section className="bg-white py-24 md:py-32">
+          <Container>
+            <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {news.map((item, i) => {
+                const cardContent = (
+                  <>
+                    {item.date ? (
+                      <p className="text-xs font-bold tracking-[0.1em] text-brand-600 transition-colors group-hover:text-brand-100">
+                        {item.date}
+                      </p>
+                    ) : null}
+                    <h2 className="mt-3 text-lg font-black leading-snug text-ink transition-colors group-hover:text-white md:text-xl">
+                      {item.title}
+                    </h2>
+                  </>
+                );
+                const className =
+                  "group block h-full rounded-none border border-ink-line bg-white p-8 transition-all duration-300 hover:border-brand-500 hover:bg-brand-500 hover:shadow-card";
+                return (
+                  <li key={`${item.title}-${i}`}>
+                    {item.href ? (
+                      <Link href={localePath(item.href, locale)} className={className}>
+                        {cardContent}
+                      </Link>
+                    ) : (
+                      <div className={className}>{cardContent}</div>
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </Container>
+        </section>
+      ) : (
+        <ComingSoon message="お知らせの公開に向け、現在準備を進めています。今しばらくお待ちください。" />
+      )}
     </>
   );
 }
