@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
@@ -59,7 +60,6 @@ const overviewStats = [
   { label: "研修時間", value: "60〜90分" },
   { label: "研修回数", value: "全8回＋コンサル1回" },
   { label: "研修期間", value: "2ヶ月間" },
-  { label: "費用", value: "30万円 / 1名" },
 ];
 
 export default function PhysicalAiTrainingPage({
@@ -91,23 +91,34 @@ export default function PhysicalAiTrainingPage({
       />
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-ink">
+      <section className="relative isolate overflow-hidden bg-ink">
+        <div className="absolute inset-0" aria-hidden="true">
+          <Image
+            src="/services/physical-ai-training/hero.png"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+
+        {/* ワインレッドのオーバーレイ: 写真を馴染ませつつテキストの可読性を確保 */}
         <div
-          className="absolute inset-0 bg-gradient-to-br from-brand-900 via-ink to-ink"
+          className="absolute inset-0 bg-brand-900/45 mix-blend-multiply"
           aria-hidden="true"
         />
         <div
-          className="absolute -top-40 right-[-10%] h-[480px] w-[480px] rounded-full bg-brand-700/40 blur-3xl"
+          className="absolute inset-0 bg-[linear-gradient(to_right,rgba(29,5,11,0.9)_0%,rgba(29,5,11,0.68)_42%,rgba(29,5,11,0.25)_70%,rgba(29,5,11,0)_90%)]"
           aria-hidden="true"
         />
         <div
-          className="absolute -bottom-32 left-[-10%] h-[420px] w-[420px] rounded-full bg-brand-900/60 blur-3xl"
+          className="absolute inset-0 bg-gradient-to-t from-ink/50 via-transparent to-transparent"
           aria-hidden="true"
         />
 
         <Container className="relative py-20 md:py-28">
-          <p className="eyebrow !text-brand-200">BondAI Physical AI Training</p>
-          <h1 className="mt-5 max-w-3xl text-display-2 font-black leading-[1.15] text-white">
+          <h1 className="max-w-3xl text-display-2 font-black leading-[1.15] text-white">
             フィジカルAI研修
           </h1>
           <p className="mt-6 max-w-2xl text-lg md:text-xl font-bold leading-relaxed text-white">
@@ -123,17 +134,9 @@ export default function PhysicalAiTrainingPage({
             <Button href={localePath("/contact", locale)} size="lg">
               資料請求・お問い合わせ
             </Button>
-            <Button
-              href={`${localePath("/services/physical-ai-training", locale)}#curriculum`}
-              size="lg"
-              variant="secondary"
-              className="!border-white/70 !bg-white/10 !text-white backdrop-blur-sm hover:!bg-white hover:!text-ink"
-            >
-              研修内容を見る
-            </Button>
           </div>
 
-          <dl className="mt-14 grid grid-cols-2 gap-6 border-t border-white/15 pt-10 md:grid-cols-4">
+          <dl className="mt-14 grid grid-cols-3 gap-6 border-t border-white/15 pt-10">
             {overviewStats.map((s) => (
               <div key={s.label}>
                 <dt className="text-xs font-bold uppercase tracking-[0.14em] text-white/60">
@@ -151,8 +154,7 @@ export default function PhysicalAiTrainingPage({
       {/* Pain points */}
       <section className="bg-cream py-24 md:py-32">
         <Container>
-          <p className="section-label !text-brand-500">Are you facing this?</p>
-          <p className="mt-3 max-w-2xl text-xl md:text-2xl font-black text-ink">
+          <p className="max-w-2xl text-xl md:text-2xl font-black text-ink">
             こんな課題はありませんか？
           </p>
 
@@ -180,8 +182,7 @@ export default function PhysicalAiTrainingPage({
       {/* Strengths */}
       <section className="bg-white py-24 md:py-32">
         <Container>
-          <p className="section-label !text-brand-500">Why BondAI</p>
-          <p className="mt-3 max-w-2xl text-xl md:text-2xl font-black text-ink">
+          <p className="max-w-2xl text-xl md:text-2xl font-black text-ink">
             選ばれる理由
           </p>
 
@@ -219,41 +220,6 @@ export default function PhysicalAiTrainingPage({
 
           <div className="mt-10">
             <CurriculumAccordion />
-          </div>
-        </Container>
-      </section>
-
-      {/* Pricing summary */}
-      <section className="bg-white py-24 md:py-32">
-        <Container>
-          <div className="mx-auto max-w-3xl rounded-3xl border border-ink-line bg-cream/50 p-8 md:p-12">
-            <p className="section-label !text-brand-500">Price</p>
-            <p className="mt-3 text-xl md:text-2xl font-black text-ink">
-              料金・実施概要
-            </p>
-
-            <dl className="mt-8 divide-y divide-ink-line">
-              {[
-                { label: "研修期間", value: "2ヶ月間" },
-                { label: "研修時間", value: "60〜90分 / 回" },
-                { label: "研修回数", value: "全8回＋コンサル1回（計9回）" },
-                { label: "費用", value: "30万円 / 1名" },
-                { label: "最低参加人数", value: "5名〜" },
-                { label: "対象", value: "部門を問わず全社員（コンサルのみ経営層・DX/AI責任者・技術責任者等）" },
-              ].map((row) => (
-                <div
-                  key={row.label}
-                  className="flex flex-col gap-1 py-4 sm:flex-row sm:items-center sm:justify-between"
-                >
-                  <dt className="text-sm font-bold text-ink-muted">{row.label}</dt>
-                  <dd className="text-base font-black text-ink">{row.value}</dd>
-                </div>
-              ))}
-            </dl>
-
-            <p className="mt-6 text-xs leading-relaxed text-ink-muted">
-              ※助成金・補助制度等の活用も想定した法人向け教育サービスとして設計しています。詳細はお問い合わせください。
-            </p>
           </div>
         </Container>
       </section>
