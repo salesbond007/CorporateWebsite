@@ -33,12 +33,9 @@
   },
   "hero": {
     "eyebrow": "B to B Sales Support",
-    "titleLine1": "The shortest path to ",
-    "titleHighlight": "a definite answer",
-    "titleSuffix": " for ambitious companies.",
-    "subtitlePrefix": "Sales Bond accelerates corporate growth through three services: ",
-    "subtitleHighlight": "decision-maker introductions, expert talent matching, and inside-sales BPO",
-    "subtitleSuffix": "."
+    "titleLine1": "Bringing Japanese companies ",
+    "titleHighlight": "choices they never had",
+    "titleSuffix": "."
   },
   "blog": {
     "search": "Search articles",

@@ -130,6 +130,44 @@ export function MissionSection() {
                 となることを使命としています。
               </p>
             </div>
+
+            <div className="mt-14 max-w-xl space-y-5 border-t border-ink-line pt-10 text-sm md:text-base text-ink-soft leading-[1.95] font-medium">
+              <p>
+                ボンドには、「つなぐ」という意味があります。
+                <br />
+                セールスボンドには
+                <br />
+                <span className="font-black text-ink">
+                  「まだつながっていないものを結ぶことで、新しい価値を生み出したい」
+                </span>
+                という想いを込めています。
+              </p>
+              <p>
+                企業と人材。
+                <br />
+                現場とテクノロジー。
+                <br />
+                サービスと顧客。
+                <br />
+                日本企業と世界。
+              </p>
+              <p>
+                一つひとつの出会いが、企業の新しい一歩になる。
+                <br />
+                一つひとつのつながりが、これまで選べなかった未来を選べるようにする。
+              </p>
+              <p>
+                私たちは、つながりによって日本企業の可能性を広げ、
+                <br />
+                <span className="relative inline-block font-black text-brand-600">
+                  次の選択肢をつくり続けます。
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-amber-300"
+                  />
+                </span>
+              </p>
+            </div>
           </div>
 
           {/* Right: cross composition */}
