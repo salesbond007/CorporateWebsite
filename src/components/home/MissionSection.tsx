@@ -1,55 +1,5 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
-
-type Connection = {
-  from: string;
-  fromEn: string;
-  to: string;
-  toEn: string;
-};
-
-const connections: Connection[] = [
-  { from: "現場", fromEn: "Field", to: "フィジカルAI", toEn: "Physical AI" },
-  { from: "企業", fromEn: "Company", to: "プロ人材", toEn: "Talent" },
-  { from: "サービス", fromEn: "Service", to: "新しい顧客", toEn: "New Customers" },
-  { from: "日本企業", fromEn: "Japan", to: "世界", toEn: "Global" },
-];
-
-function ConnectionRow({
-  connection,
-  index,
-}: {
-  connection: Connection;
-  index: number;
-}) {
-  return (
-    <li className="relative flex items-center gap-4 py-5 md:gap-6 md:py-6">
-      <span className="relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-900 font-display text-xs font-black text-white md:h-11 md:w-11 md:text-sm">
-        {String(index + 1).padStart(2, "0")}
-      </span>
-      <div className="flex flex-1 items-center justify-between gap-3 rounded-2xl border border-ink-line bg-white px-5 py-4 shadow-soft md:px-7 md:py-5">
-        <div>
-          <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-ink-muted md:text-xs">
-            {connection.fromEn}
-          </p>
-          <p className="text-sm font-black text-ink md:text-base">
-            {connection.from}
-          </p>
-        </div>
-        <span aria-hidden="true" className="text-brand-300">
-          →
-        </span>
-        <div className="text-right">
-          <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-brand-600 md:text-xs">
-            {connection.toEn}
-          </p>
-          <p className="text-sm font-black text-ink md:text-base">
-            {connection.to}
-          </p>
-        </div>
-      </div>
-    </li>
-  );
-}
 
 function Emphasis({ children }: { children: React.ReactNode }) {
   return <span className="font-black text-brand-600">{children}</span>;
@@ -69,7 +19,7 @@ export function MissionSection() {
       </div>
 
       <Container className="relative">
-        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
+        <div className="grid items-start gap-14 lg:grid-cols-12 lg:gap-16">
           {/* Left: heading + copy */}
           <div className="lg:col-span-7">
             <p className="text-xl md:text-2xl lg:text-3xl font-black leading-snug text-ink">
@@ -114,24 +64,17 @@ export function MissionSection() {
             </div>
           </div>
 
-          {/* Right: connections timeline */}
+          {/* Right: mission graphic */}
           <div className="lg:col-span-5">
-            <div className="relative mx-auto max-w-md">
-              <p className="eyebrow">Connections</p>
-              <ul className="relative mt-5">
-                {/* 縦の接続ライン */}
-                <span
-                  aria-hidden="true"
-                  className="absolute left-[17px] top-2 bottom-2 w-px bg-ink-line md:left-[21px]"
-                />
-                {connections.map((connection, i) => (
-                  <ConnectionRow key={connection.to} connection={connection} index={i} />
-                ))}
-              </ul>
-              <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-black text-white">
-                <span aria-hidden="true" className="h-1.5 w-6 rounded-full bg-brand-400" />
-                Sales Bond
-              </div>
+            <div className="relative mx-auto w-full max-w-sm overflow-hidden rounded-2xl border border-ink-line bg-white shadow-soft">
+              <Image
+                src="/mission/mission.png"
+                alt="AI・人材・営業の力を組み合わせ、売上向上とコスト削減の両面から貢献します。"
+                width={1024}
+                height={1536}
+                className="h-auto w-full"
+                sizes="(max-width: 768px) 100vw, 384px"
+              />
             </div>
           </div>
         </div>
