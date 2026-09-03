@@ -7,8 +7,4 @@ export type NewsItem = {
 };
 
 // microCMSと連携するまでの仮データ。連携後は特定タグの記事のみをここに流し込む想定。
-// テスト表示用に10件のダミーデータを用意。
-export const news: NewsItem[] = Array.from({ length: 10 }, (_, i) => ({
-  title: `テスト${i + 1}`,
-  date: "2026.09.03",
-}));
+export const news: NewsItem[] = [];
