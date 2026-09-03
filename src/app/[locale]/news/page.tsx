@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
@@ -30,11 +31,26 @@ export default function NewsPage({
         ])}
       />
 
-      <section className="relative overflow-hidden border-b-2 border-ink-line bg-white">
-        <div className="absolute inset-0 dot-bg opacity-60" aria-hidden="true" />
+      <section className="relative overflow-hidden border-b-2 border-ink-line bg-ink">
+        <Image
+          src="/hero/slide-2.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          className="absolute inset-0 bg-brand-900/45 mix-blend-multiply"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 bg-[linear-gradient(to_right,rgba(29,5,11,0.85)_0%,rgba(29,5,11,0.55)_45%,rgba(29,5,11,0.15)_75%,rgba(29,5,11,0)_95%)]"
+          aria-hidden="true"
+        />
         <Container className="relative py-20 md:py-28">
-          <p className="section-label !text-brand-500">News</p>
-          <h1 className="mt-3 text-display-2 text-ink font-black">
+          <p className="section-label !text-brand-200">News</p>
+          <h1 className="mt-3 text-display-2 text-white font-black">
             お知らせ
           </h1>
         </Container>
