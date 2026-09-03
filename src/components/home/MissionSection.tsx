@@ -1,39 +1,53 @@
 import { Container } from "@/components/ui/Container";
 
-type Node = {
-  label: string;
-  en: string;
-  /** グリッド上の位置 (3x3) */
-  position: "top" | "left" | "right" | "bottom";
+type Connection = {
+  from: string;
+  fromEn: string;
+  to: string;
+  toEn: string;
 };
 
-const nodes: Node[] = [
-  { label: "フィジカルAI", en: "Physical AI", position: "top" },
-  { label: "プロ人材", en: "Talent", position: "left" },
-  { label: "新しい顧客", en: "New Customers", position: "right" },
-  { label: "世界", en: "Global", position: "bottom" },
+const connections: Connection[] = [
+  { from: "現場", fromEn: "Field", to: "フィジカルAI", toEn: "Physical AI" },
+  { from: "企業", fromEn: "Company", to: "プロ人材", toEn: "Talent" },
+  { from: "サービス", fromEn: "Service", to: "新しい顧客", toEn: "New Customers" },
+  { from: "日本企業", fromEn: "Japan", to: "世界", toEn: "Global" },
 ];
 
-const positionClass: Record<Node["position"], string> = {
-  top: "col-start-2 row-start-1",
-  left: "col-start-1 row-start-2",
-  right: "col-start-3 row-start-2",
-  bottom: "col-start-2 row-start-3",
-};
-
-function NetworkNode({ node }: { node: Node }) {
+function ConnectionRow({
+  connection,
+  index,
+}: {
+  connection: Connection;
+  index: number;
+}) {
   return (
-    <div
-      className={`${positionClass[node.position]} flex flex-col items-center justify-center gap-1 rounded-2xl border border-brand-200/70 bg-white/80 p-3 text-center shadow-soft backdrop-blur-sm md:p-4`}
-    >
-      <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-500" />
-      <p className="mt-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-brand-600 md:text-xs">
-        {node.en}
-      </p>
-      <p className="text-sm font-black leading-tight text-ink md:text-base">
-        {node.label}
-      </p>
-    </div>
+    <li className="relative flex items-center gap-4 py-5 md:gap-6 md:py-6">
+      <span className="relative z-10 grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-900 font-display text-xs font-black text-white md:h-11 md:w-11 md:text-sm">
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <div className="flex flex-1 items-center justify-between gap-3 rounded-2xl border border-ink-line bg-white px-5 py-4 shadow-soft md:px-7 md:py-5">
+        <div>
+          <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-ink-muted md:text-xs">
+            {connection.fromEn}
+          </p>
+          <p className="text-sm font-black text-ink md:text-base">
+            {connection.from}
+          </p>
+        </div>
+        <span aria-hidden="true" className="text-brand-300">
+          →
+        </span>
+        <div className="text-right">
+          <p className="text-[10px] font-extrabold uppercase tracking-[0.16em] text-brand-600 md:text-xs">
+            {connection.toEn}
+          </p>
+          <p className="text-sm font-black text-ink md:text-base">
+            {connection.to}
+          </p>
+        </div>
+      </div>
+    </li>
   );
 }
 
@@ -100,37 +114,23 @@ export function MissionSection() {
             </div>
           </div>
 
-          {/* Right: hub & spoke network diagram */}
+          {/* Right: connections timeline */}
           <div className="lg:col-span-5">
-            <div className="relative mx-auto grid aspect-square w-full max-w-md grid-cols-3 grid-rows-3 gap-3 md:gap-4">
-              {/* 接続ライン */}
-              <svg
-                viewBox="0 0 100 100"
-                className="pointer-events-none absolute inset-0 h-full w-full text-brand-300"
-                aria-hidden="true"
-              >
-                <line x1="50" y1="16.5" x2="50" y2="50" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2.5 2.5" />
-                <line x1="16.5" y1="50" x2="50" y2="50" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2.5 2.5" />
-                <line x1="83.5" y1="50" x2="50" y2="50" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2.5 2.5" />
-                <line x1="50" y1="83.5" x2="50" y2="50" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2.5 2.5" />
-              </svg>
-
-              {nodes.map((node) => (
-                <NetworkNode key={node.label} node={node} />
-              ))}
-
-              {/* Center — Sales Bond hub */}
-              <div className="relative col-start-2 row-start-2 flex flex-col items-center justify-center gap-1 rounded-full bg-gradient-to-br from-ink to-brand-900 p-3 text-white shadow-[0_24px_60px_-18px_rgba(29,5,11,0.65)] md:p-4">
+            <div className="relative mx-auto max-w-md">
+              <p className="eyebrow">Connections</p>
+              <ul className="relative mt-5">
+                {/* 縦の接続ライン */}
                 <span
                   aria-hidden="true"
-                  className="h-1.5 w-8 rounded-full bg-brand-300"
+                  className="absolute left-[17px] top-2 bottom-2 w-px bg-ink-line md:left-[21px]"
                 />
-                <p className="mt-2 font-display text-base font-black leading-none md:text-lg">
-                  Sales
-                </p>
-                <p className="font-display text-base font-black leading-tight md:text-lg">
-                  Bond
-                </p>
+                {connections.map((connection, i) => (
+                  <ConnectionRow key={connection.to} connection={connection} index={i} />
+                ))}
+              </ul>
+              <div className="mt-2 inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-black text-white">
+                <span aria-hidden="true" className="h-1.5 w-6 rounded-full bg-brand-400" />
+                Sales Bond
               </div>
             </div>
           </div>
