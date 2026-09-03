@@ -43,9 +43,25 @@ function LogoStrip({ ariaHidden }: { ariaHidden?: boolean }) {
 
 export function ClientLogos() {
   return (
-    <section className="border-y border-ink-line bg-white py-12 md:py-14">
+    <section className="border-y border-ink-line bg-white py-8 md:py-14">
+      {/* スマホ: 2列グリッドで小さめに表示 */}
+      <div className="grid grid-cols-2 gap-x-6 gap-y-6 px-6 md:hidden">
+        {clients.map((c) => (
+          <div key={c.name} className="flex h-6 items-center justify-center">
+            <Image
+              src={c.src}
+              alt={c.name}
+              width={c.width}
+              height={28}
+              className="h-full w-auto object-contain"
+            />
+          </div>
+        ))}
+      </div>
+
+      {/* PC/タブレット: 横スクロールのマーキー */}
       <div
-        className="relative flex overflow-hidden"
+        className="relative hidden overflow-hidden md:flex"
         style={{
           maskImage:
             "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",

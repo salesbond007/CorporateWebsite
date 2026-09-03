@@ -19,7 +19,7 @@ const HERO_SLIDES = ["/hero/slide-1.png", "/hero/slide-2.png", "/hero/slide-3.pn
 
 export function Hero({ locale, dict }: Props) {
   return (
-    <section className="relative isolate flex min-h-[640px] items-center overflow-hidden bg-ink md:min-h-[760px]">
+    <section className="relative isolate flex min-h-[560px] items-center overflow-hidden bg-ink md:min-h-[760px]">
       {/* 背景: 3枚をクロスフェードでゆっくり切り替え */}
       <div className="absolute inset-0" aria-hidden="true">
         {HERO_SLIDES.map((src, i) => (
@@ -55,7 +55,7 @@ export function Hero({ locale, dict }: Props) {
         aria-hidden="true"
       />
 
-      <Container className="relative py-24 md:py-32">
+      <Container className="relative py-16 md:py-32">
         <div className="max-w-none animate-fade-up">
           <h1 className="text-[clamp(1.5rem,4vw,3.75rem)] text-white font-extrabold leading-[1.15] tracking-tight">
             <span className="whitespace-nowrap">{dict.hero.titleLine1}</span>
