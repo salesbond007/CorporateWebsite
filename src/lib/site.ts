@@ -64,18 +64,33 @@ export const navigation: { key: NavKey; href: string }[] = [
 
 export const services = [
   {
-    slug: "physical-ai-training",
+    slug: "ai-solutions",
     number: "01",
-    title: "フィジカルAI研修",
-    subtitle: "法人向けAI人材育成研修",
+    title: "AIソリューション",
+    subtitle: "生成AI・フィジカルAI・開発・研修",
     summary:
-      "生成AIからAIエージェント、フィジカルAIまでを体系的に学び、自社・自部署でAI活用を企画できる人材を育成する法人向け研修。全社員からAI活用の種を集め、研修後のAI導入コンサルティングで実装へとつなげます。",
-    features: [
-      "90分×全8回+コンサル1回、2ヶ月間のプログラム",
-      "生成AI・AIエージェント・フィジカルAIを体系的に習得",
-      "非エンジニアも参加可能。明日から使える知識も習得",
-    ],
+      "生成AIの業務活用からフィジカルAI導入まで、企画・開発・研修をワンストップで支援します。",
+    features: ["生成AI活用", "フィジカルAI導入", "研修・開発支援"],
     href: "/services/physical-ai-training",
+  },
+  {
+    slug: "ai-media",
+    number: "02",
+    title: "AI専門メディア",
+    subtitle: "BondAI",
+    summary: "AI活用のリアルな知見を発信するオウンドメディア。",
+    features: ["AI活用ノウハウを発信", "事例・トレンドを解説"],
+    href: undefined,
+  },
+  {
+    slug: "talent",
+    number: "03",
+    title: "人材",
+    subtitle: "営業BPO・エンジニア紹介・顧問紹介",
+    summary:
+      "営業BPO事業、エンジニア紹介、顧問紹介まで、貴社に必要な人材・実行力を提供します。",
+    features: ["営業BPO事業", "エンジニア紹介", "顧問紹介"],
+    href: undefined,
   },
   // 以下は現在非公開 (下記コメント解除で復活)
   // {
