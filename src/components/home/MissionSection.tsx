@@ -4,13 +4,6 @@ function Emphasis({ children }: { children: React.ReactNode }) {
   return <span className="font-black text-brand-600">{children}</span>;
 }
 
-const pairs = [
-  { from: "現場", to: "フィジカルAI" },
-  { from: "企業", to: "プロ人材" },
-  { from: "サービス", to: "新しい顧客" },
-  { from: "日本企業", to: "世界" },
-];
-
 export function MissionSection() {
   return (
     <section className="relative overflow-hidden bg-cream py-28 md:py-36">
@@ -26,53 +19,39 @@ export function MissionSection() {
 
       <Container className="relative">
         <div className="mx-auto max-w-2xl text-center">
-          <span
-            aria-hidden="true"
-            className="mx-auto block h-1 w-14 rounded-full bg-brand-500"
-          />
-
-          <p className="mt-10 text-2xl md:text-3xl lg:text-4xl font-black leading-snug text-ink">
+          <p className="text-2xl md:text-3xl lg:text-4xl font-black leading-snug text-ink">
             日本経済を支えてきた産業に
             <br />
             <span className="text-brand-500">新しい選択肢</span>を
           </p>
 
-          <p className="mx-auto mt-10 max-w-md text-sm md:text-base text-ink-soft leading-[2] font-medium">
-            日本経済を支えてきた、
-            製造、建設、物流、医療、小売、宿泊をはじめとする企業。
-            私たちは、その可能性を
-            <Emphasis>新しい力とつないでいきます</Emphasis>。
-          </p>
-
-          <ul className="mx-auto mt-12 flex max-w-xl flex-wrap items-center justify-center gap-2.5">
-            {pairs.map((p) => (
-              <li
-                key={p.to}
-                className="flex items-center gap-2 rounded-full border border-ink-line bg-white px-4 py-2 shadow-soft md:px-5 md:py-2.5"
-              >
-                <span className="text-xs font-bold text-ink-muted md:text-sm">
-                  {p.from}
-                </span>
-                <span aria-hidden="true" className="text-brand-300">
-                  →
-                </span>
-                <span className="text-xs font-black text-brand-600 md:text-sm">
-                  {p.to}
-                </span>
-              </li>
-            ))}
-          </ul>
-
-          <p className="mx-auto mt-12 max-w-md text-sm md:text-base text-ink-soft leading-[2] font-medium">
-            一つひとつの出会いが、企業の新しい一歩になり、
-            <Emphasis>これまでになかった選択肢を生み出します</Emphasis>。
-          </p>
-
-          <div className="mx-auto mt-14 max-w-md border-t border-ink-line pt-9">
-            <p className="text-base md:text-lg font-black leading-[1.9] text-ink">
+          <div className="mx-auto mt-10 space-y-6 text-sm md:text-base text-ink-soft leading-[1.9] font-medium">
+            <p>
+              日本経済を支えてきた、
+              <br />
+              製造、建設、物流、医療、小売、宿泊をはじめとする企業。
+              <br />
+              私たちは、その可能性を<Emphasis>新しい力とつないでいきます</Emphasis>。
+            </p>
+            <p>
+              現場と、<Emphasis>フィジカルAI</Emphasis>を。
+              <br />
+              企業と、<Emphasis>プロ人材</Emphasis>を。
+              <br />
+              サービスと、<Emphasis>新しい顧客</Emphasis>を。
+              <br />
+              日本企業と、<Emphasis>世界</Emphasis>を。
+            </p>
+            <p>
+              一つひとつの出会いが、企業の新しい一歩になり、
+              <br />
+              <Emphasis>これまでになかった選択肢を生み出します</Emphasis>。
+            </p>
+            <p>
               私たちは、企業がこれまで培ってきた強みを大切にしながら、
+              <br />
               日本企業の可能性を広げ、
-              <span className="relative inline-block text-brand-600">
+              <span className="relative inline-block font-black text-brand-600">
                 次の成長の選択肢をつくり続けます。
                 <span
                   aria-hidden="true"
