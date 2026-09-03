@@ -15,8 +15,11 @@
     -moz-osx-font-smoothing: grayscale;
     text-size-adjust: 100%;
     scroll-behavior: smooth;
-    /* 横方向のはみ出しを止める（装飾の絶対配置等の保険） */
-    overflow-x: clip;
+    /*
+     * 横方向のはみ出し防止はhtml/bodyではなく#page-wrapper側で行う。
+     * html/bodyにoverflowを設定すると、iOS Safariでposition:fixed要素が
+     * スクロールに追従せず消えてしまう不具合が起きるため。
+     */
   }
 
   body {

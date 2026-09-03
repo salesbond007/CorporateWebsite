@@ -106,9 +106,11 @@ export default function LocaleLayout({
         >
           {dict.nav.skipToContent}
         </a>
-        <Header locale={locale} dict={dict} />
-        <main id="main">{children}</main>
-        <Footer locale={locale} dict={dict} />
+        <div id="page-wrapper" className="overflow-x-clip">
+          <Header locale={locale} dict={dict} />
+          <main id="main">{children}</main>
+          <Footer locale={locale} dict={dict} />
+        </div>
         <BackToTop label={dict.buttons.backToTop} />
         <JsonLd
           data={[
