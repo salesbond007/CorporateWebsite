@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { localePath } from "@/i18n/path";
+import { services } from "@/lib/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 
@@ -25,8 +26,13 @@ export function Header({ locale, dict }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // サービスは一旦データ削除。ナビゲーションは空欄で表示。
-  const serviceItems: { href: string; label: string; sub?: string }[] = [];
+  const serviceItems = services.map((s) => ({
+    href: s.href
+      ? localePath(s.href, locale)
+      : `${localePath("/services", locale)}#${s.slug}`,
+    label: s.subtitle,
+    sub: s.title,
+  }));
 
   return (
     <header

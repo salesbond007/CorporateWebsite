@@ -64,52 +64,66 @@ export const navigation: { key: NavKey; href: string }[] = [
 
 export const services = [
   {
-    slug: "sales-bond",
+    slug: "physical-ai-training",
     number: "01",
-    title: "リファボンド",
-    subtitle: "大手決裁者紹介サービス",
+    title: "フィジカルAI研修",
+    subtitle: "法人向けAI人材育成研修",
     summary:
-      "人脈紹介を活用した、決裁者開拓サービス。ベンチャーから大企業、地方企業まで、幅広い開拓が可能です。完全成果報酬でご提供します。",
+      "生成AIからAIエージェント、フィジカルAIまでを体系的に学び、自社・自部署でAI活用を企画できる人材を育成する法人向け研修。全社員からAI活用の種を集め、研修後のAI導入コンサルティングで実装へとつなげます。",
     features: [
-      "人脈紹介を活用したキーマン開拓",
-      "完全成果報酬制",
-      "大手企業からベンチャー企業まで開拓可能",
+      "90分×全8回+コンサル1回、2ヶ月間のプログラム",
+      "生成AI・AIエージェント・フィジカルAIを体系的に習得",
+      "非エンジニアも参加可能。明日から使える知識も習得",
     ],
-    image: "/logo-square.jpg",
-    illustrationVariant: "abstract" as const,
+    href: "/services/physical-ai-training",
   },
-  {
-    slug: "keyman-bond",
-    number: "02",
-    title: "キーマンボンド",
-    subtitle: "プロ人材/顧問マッチングサービス",
-    summary:
-      "高度な経営課題を、その道のプロと共に解決する経営支援サービス。営業・マーケ・DX・人事・財務など多彩な領域に精通した経営層・CxO・エキスパートクラスの実力者が伴走します。",
-    features: [
-      "プロ人材が企業の経営課題を解決",
-      "事業フェーズに合わせて最適な人材を配置",
-    ],
-    image: "/logo-square.jpg",
-    illustrationVariant: "grid" as const,
-  },
-  {
-    slug: "lead-bond",
-    number: "03",
-    title: "セルボンド",
-    subtitle: "BtoB営業支援サービス",
-    summary:
-      "営業戦略の策定からアポ獲得・商談・成約、そして営業DX・人材紹介まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。自走できる営業組織づくりまで伴走します。",
-    features: [
-      "戦略策定〜成約まで一気通貫で伴走",
-      "足りない営業リソースを提供",
-    ],
-    image: "/logo-square.jpg",
-    illustrationVariant: "blob" as const,
-  },
-  // AI顧問ボンド は現在非公開 (下記コメント解除で復活)
+  // 以下は現在非公開 (下記コメント解除で復活)
+  // {
+  //   slug: "sales-bond",
+  //   number: "02",
+  //   title: "リファボンド",
+  //   subtitle: "大手決裁者紹介サービス",
+  //   summary:
+  //     "人脈紹介を活用した、決裁者開拓サービス。ベンチャーから大企業、地方企業まで、幅広い開拓が可能です。完全成果報酬でご提供します。",
+  //   features: [
+  //     "人脈紹介を活用したキーマン開拓",
+  //     "完全成果報酬制",
+  //     "大手企業からベンチャー企業まで開拓可能",
+  //   ],
+  //   image: "/logo-square.jpg",
+  //   illustrationVariant: "abstract" as const,
+  // },
+  // {
+  //   slug: "keyman-bond",
+  //   number: "03",
+  //   title: "キーマンボンド",
+  //   subtitle: "プロ人材/顧問マッチングサービス",
+  //   summary:
+  //     "高度な経営課題を、その道のプロと共に解決する経営支援サービス。営業・マーケ・DX・人事・財務など多彩な領域に精通した経営層・CxO・エキスパートクラスの実力者が伴走します。",
+  //   features: [
+  //     "プロ人材が企業の経営課題を解決",
+  //     "事業フェーズに合わせて最適な人材を配置",
+  //   ],
+  //   image: "/logo-square.jpg",
+  //   illustrationVariant: "grid" as const,
+  // },
+  // {
+  //   slug: "lead-bond",
+  //   number: "04",
+  //   title: "セルボンド",
+  //   subtitle: "BtoB営業支援サービス",
+  //   summary:
+  //     "営業戦略の策定からアポ獲得・商談・成約、そして営業DX・人材紹介まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。自走できる営業組織づくりまで伴走します。",
+  //   features: [
+  //     "戦略策定〜成約まで一気通貫で伴走",
+  //     "足りない営業リソースを提供",
+  //   ],
+  //   image: "/logo-square.jpg",
+  //   illustrationVariant: "blob" as const,
+  // },
   // {
   //   slug: "ai-komon",
-  //   number: "04",
+  //   number: "05",
   //   title: "AI顧問ボンド",
   //   subtitle: "AI顧問サービス",
   //   summary:
@@ -126,8 +140,12 @@ export const services = [
 ] as const;
 
 // Each service entry can optionally include an `image` path that
-// overrides the inline SVG. e.g. `image: "/illustrations/sales-bond.png"`
-export type Service = (typeof services)[number] & { image?: string };
+// overrides the inline SVG, and/or an `href` that links to a dedicated
+// LP instead of an anchor on /services. e.g. `image: "/illustrations/x.png"`
+export type Service = (typeof services)[number] & {
+  image?: string;
+  href?: string;
+};
 
 export function navLabel(dict: Dictionary, key: NavKey): string {
   return dict.nav[key];
