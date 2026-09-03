@@ -85,7 +85,7 @@ export const services = [
   {
     slug: "talent",
     number: "03",
-    title: "人材",
+    title: "人材ソリューション",
     subtitle: "営業BPO・エンジニア紹介・顧問紹介",
     summary:
       "営業BPO事業、エンジニア紹介、顧問紹介まで、貴社に必要な人材・実行力を提供します。",

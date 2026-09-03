@@ -26,13 +26,22 @@ export function Header({ locale, dict }: Props) {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const serviceItems = services.map((s) => ({
-    href: s.href
-      ? localePath(s.href, locale)
-      : `${localePath("/services", locale)}#${s.slug}`,
-    label: s.subtitle,
-    sub: s.title,
-  }));
+  const serviceItems = [
+    {
+      href: localePath("/services", locale),
+      label: "サービス一覧",
+      highlight: true,
+    },
+    ...services
+      .filter((s) => s.slug !== "ai-media")
+      .map((s) => ({
+        href: s.href
+          ? localePath(s.href, locale)
+          : `${localePath("/services", locale)}#${s.slug}`,
+        label: s.title,
+        sub: s.subtitle,
+      })),
+  ];
 
   return (
     <header
@@ -95,7 +104,13 @@ export function Header({ locale, dict }: Props) {
   );
 }
 
-type NavDropdownItem = { href: string; label: string; sub?: string };
+type NavDropdownItem = {
+  href: string;
+  label: string;
+  sub?: string;
+  /** 「サービス一覧」など一覧リンクをテキスト色で軽く区別する */
+  highlight?: boolean;
+};
 
 type NavDropdownProps = {
   label: string;
@@ -162,7 +177,12 @@ function NavDropdown({ label, href, items }: NavDropdownProps) {
                 className="block rounded-lg px-4 py-3 transition hover:bg-cream"
                 onClick={() => setOpen(false)}
               >
-                <span className="block text-sm font-bold text-ink">
+                <span
+                  className={cn(
+                    "block text-sm font-bold",
+                    item.highlight ? "text-brand-600" : "text-ink",
+                  )}
+                >
                   {item.label}
                 </span>
                 {item.sub ? (
