@@ -2,12 +2,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
-import { CTASection } from "@/components/home/CTASection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
-import { getDictionary } from "@/i18n/dictionary";
 
 export const metadata: Metadata = {
   title: "サービス案内",
@@ -21,7 +19,6 @@ export default function ServicesPage({
 }) {
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
-  const dict = getDictionary(locale);
 
   return (
     <>
@@ -68,9 +65,6 @@ export default function ServicesPage({
           />
         </Container>
       </section>
-
-      {/* CTA (shared with home) */}
-      <CTASection locale={locale} dict={dict} />
     </>
   );
 }
