@@ -15,7 +15,7 @@ type Props = {
  * 差し替え可能。約6秒ごとにゆっくりクロスフェードする(hero-crossfade アニメーション、
  * tailwind.config.ts 参照)。
  */
-const HERO_SLIDES = ["/hero/slide-1.jpg", "/hero/slide-2.jpg", "/hero/slide-3.jpg"];
+const HERO_SLIDES = ["/hero/slide-1.png", "/hero/slide-2.png", "/hero/slide-3.png"];
 
 export function Hero({ locale, dict }: Props) {
   return (
