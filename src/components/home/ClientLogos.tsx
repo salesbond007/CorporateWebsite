@@ -8,16 +8,16 @@ type ClientLogo = {
 };
 
 const clients: ClientLogo[] = [
-  { name: "Fixx", src: "/clients/fixx.png", width: 100 },
-  { name: "JAPAN AI株式会社", src: "/clients/japan-ai.webp", width: 180 },
-  { name: "LegalOn Technologies", src: "/clients/legalontechnology.jpg", width: 170 },
-  { name: "TOPPANコスモ", src: "/clients/toppan-cosmo.png", width: 140 },
-  { name: "kubell", src: "/clients/kubell.jpeg", width: 110 },
-  { name: "uluru", src: "/clients/ururu.png", width: 130 },
-  { name: "And L.", src: "/clients/andoeru.png", width: 120 },
-  { name: "三省堂書店", src: "/clients/sanseido.png", width: 150 },
-  { name: "KOMPEITO", src: "/clients/kompeito.png", width: 150 },
-  { name: "OKAN", src: "/clients/okan.png", width: 110 },
+  { name: "Fixx", src: "/clients/fixx.png", width: 116 },
+  { name: "JAPAN AI株式会社", src: "/clients/japan-ai.webp", width: 208 },
+  { name: "LegalOn Technologies", src: "/clients/legalontechnology.jpg", width: 196 },
+  { name: "TOPPANコスモ", src: "/clients/toppan-cosmo.png", width: 162 },
+  { name: "kubell", src: "/clients/kubell.jpeg", width: 128 },
+  { name: "uluru", src: "/clients/ururu.png", width: 150 },
+  { name: "And L.", src: "/clients/andoeru.png", width: 138 },
+  { name: "三省堂書店", src: "/clients/sanseido.png", width: 174 },
+  { name: "KOMPEITO", src: "/clients/kompeito.png", width: 174 },
+  { name: "OKAN", src: "/clients/okan.png", width: 128 },
 ];
 
 function LogoStrip({ ariaHidden }: { ariaHidden?: boolean }) {
@@ -27,13 +27,13 @@ function LogoStrip({ ariaHidden }: { ariaHidden?: boolean }) {
       aria-hidden={ariaHidden}
     >
       {clients.map((c) => (
-        <div key={c.name} className="flex h-10 shrink-0 items-center md:h-12">
+        <div key={c.name} className="flex h-12 shrink-0 items-center md:h-14">
           <Image
             src={c.src}
             alt={c.name}
             width={c.width}
-            height={48}
-            className="h-full w-auto object-contain grayscale opacity-60 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+            height={56}
+            className="h-full w-auto object-contain"
           />
         </div>
       ))}
@@ -44,9 +44,6 @@ function LogoStrip({ ariaHidden }: { ariaHidden?: boolean }) {
 export function ClientLogos() {
   return (
     <section className="border-y border-ink-line bg-white py-12 md:py-14">
-      <p className="mb-8 text-center text-xs font-bold uppercase tracking-[0.18em] text-ink-muted">
-        Our Clients
-      </p>
       <div
         className="relative flex overflow-hidden"
         style={{
