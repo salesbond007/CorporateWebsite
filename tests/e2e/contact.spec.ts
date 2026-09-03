@@ -74,14 +74,14 @@ test.describe("Coming-soon pages", () => {
     await page.goto("/ja/contact/professional");
     await expect(page.getByText("Coming Soon")).toBeVisible();
   });
+
+  test("/contact/partner shows Coming Soon", async ({ page }) => {
+    await page.goto("/ja/contact/partner");
+    await expect(page.getByText("Coming Soon")).toBeVisible();
+  });
 });
 
 test.describe("Removed pages", () => {
-  test("/contact/partner no longer exists", async ({ page }) => {
-    const res = await page.goto("/ja/contact/partner");
-    expect(res?.status()).toBe(404);
-  });
-
   test("/services/sales-bond no longer exists", async ({ page }) => {
     const res = await page.goto("/ja/services/sales-bond");
     expect(res?.status()).toBe(404);

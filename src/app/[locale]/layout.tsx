@@ -117,6 +117,7 @@ export default function LocaleLayout({
             siteNavigationJsonLd([
               { name: "ホーム", url: `/${locale}` },
               { name: "サービス案内", url: `/${locale}/services` },
+              { name: "フィジカルAI研修", url: `/${locale}/services/physical-ai-training` },
               { name: "会社概要", url: `/${locale}/company` },
               { name: "お問い合わせ", url: `/${locale}/contact` },
             ]),

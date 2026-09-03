@@ -13,9 +13,9 @@ test.describe("Home page", () => {
     await expect(page.locator("h1")).toBeVisible();
     await expect(page.getByRole("link", { name: "サービスを見る" })).toBeVisible();
 
-    // Three service cards, each anchored to a section on /ja/services
-    const cards = page.locator("ul li a[href*='/ja/services#']");
-    await expect(cards).toHaveCount(3);
+    // One service card (フィジカルAI研修), linking to its dedicated LP
+    const cards = page.locator("ul li a[href*='/ja/services/']");
+    await expect(cards).toHaveCount(1);
   });
 
   test("en home renders translated CTA labels", async ({ page }) => {

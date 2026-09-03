@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
+import { services } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
@@ -56,13 +58,44 @@ export default function ServicesPage({
         </Container>
       </section>
 
-      {/* サービスは一旦データ削除。枠(箱)のみ残す */}
       <section className="py-24 md:py-32">
         <Container>
-          <div
-            className="min-h-[240px] rounded-xl2 border-2 border-dashed border-ink-line md:min-h-[360px]"
-            aria-hidden="true"
-          />
+          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {services.map((s) => {
+              const href = s.href
+                ? localePath(s.href, locale)
+                : `${localePath("/services", locale)}#${s.slug}`;
+              return (
+                <li key={s.slug} id={s.slug} className="scroll-mt-24 md:scroll-mt-28">
+                  <Link
+                    href={href}
+                    className="group block h-full rounded-xl2 border border-ink-line bg-white p-8 transition-all hover:border-brand-300 hover:shadow-card"
+                  >
+                    <span className="font-display text-3xl font-bold text-brand-500">
+                      {s.number}
+                    </span>
+                    {s.subtitle ? (
+                      <p className="mt-6 mb-1 text-sm font-bold text-brand-600">
+                        {s.subtitle}
+                      </p>
+                    ) : null}
+                    <h2 className="text-xl md:text-2xl font-black text-ink leading-tight group-hover:text-brand-600 transition-colors">
+                      {s.title}
+                    </h2>
+                    <p className="mt-4 text-sm text-ink leading-relaxed font-medium">
+                      {s.summary}
+                    </p>
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-600">
+                      詳しく見る
+                      <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                        →
+                      </span>
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </Container>
       </section>
     </>
