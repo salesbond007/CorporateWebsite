@@ -46,9 +46,11 @@ const rows: { label: string; value: React.ReactNode }[] = [
     label: "事業内容",
     value: (
       <ul className="space-y-1.5">
-        <li>大手決裁者紹介サービス</li>
-        <li>プロ人材/顧問マッチングサービス</li>
+        <li>AI開発</li>
+        <li>AI研修</li>
+        <li>人材マッチング</li>
         <li>営業BPO事業</li>
+        <li>地方創生</li>
       </ul>
     ),
   },

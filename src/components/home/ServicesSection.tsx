@@ -13,7 +13,7 @@ type Props = {
 };
 
 const cardClass =
-  "group relative isolate flex aspect-square h-full flex-col justify-between overflow-hidden rounded-none border-2 border-ink bg-white p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
+  "group relative isolate flex aspect-square h-full flex-col justify-center overflow-hidden rounded-none border-2 border-ink bg-white p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
 
 export function ServicesSection({ locale, dict }: Props) {
   return (
@@ -48,26 +48,26 @@ export function ServicesSection({ locale, dict }: Props) {
                 {/* ホバー時のみのダークオーバーレイ(写真の上でテキストを読ませる) */}
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 z-0 bg-gradient-to-t from-ink via-ink/85 to-ink/60 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  className="absolute inset-0 z-0 bg-gradient-to-t from-ink/75 via-ink/50 to-ink/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 />
 
-                <div className="relative z-10">
-                  {s.subtitle ? (
-                    <p className="mb-2 text-xs font-bold uppercase tracking-[0.1em] text-brand-600 transition-colors duration-300 group-hover:text-brand-200">
-                      {s.subtitle}
-                    </p>
-                  ) : null}
-                  <h3 className="text-2xl md:text-3xl font-black text-ink leading-tight transition-colors duration-300 group-hover:text-white">
+                <div className="relative z-10 flex flex-col items-center text-center">
+                  {/* 高さを固定し、サブタイトルの折り返し数に関わらずタイトルの位置を揃える */}
+                  <div className="flex min-h-[2rem] items-end justify-center md:min-h-[2.25rem]">
+                    {s.subtitle ? (
+                      <p className="text-xs font-bold uppercase tracking-[0.1em] text-brand-600 transition-colors duration-300 group-hover:text-brand-200">
+                        {s.subtitle}
+                      </p>
+                    ) : null}
+                  </div>
+                  <h3 className="mt-2 text-2xl md:text-3xl font-black text-ink leading-tight transition-colors duration-300 group-hover:text-white">
                     {s.title}
                   </h3>
                   <div
                     className="mt-4 h-1 w-12 rounded-full bg-brand-500 transition-all duration-300 group-hover:w-20"
                     aria-hidden="true"
                   />
-                </div>
-
-                <div className="relative z-10">
-                  <p className="text-sm leading-relaxed text-ink-soft font-medium transition-colors duration-300 group-hover:text-white/80">
+                  <p className="mt-5 text-sm leading-relaxed text-ink-soft font-medium transition-colors duration-300 group-hover:text-white/80">
                     {s.summary}
                   </p>
 
