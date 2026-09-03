@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "./Logo";
-import { navigation, services } from "@/lib/site";
+import { navigation } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
@@ -52,16 +52,8 @@ export function Footer({ locale, dict }: Props) {
               ))}
             </FooterColumn>
 
-            <FooterColumn title={dict.footer.services}>
-              {services.map((s) => (
-                <FooterLink
-                  key={s.slug}
-                  href={`${localePath("/services", locale)}#${s.slug}`}
-                >
-                  {s.title}
-                </FooterLink>
-              ))}
-            </FooterColumn>
+            {/* サービスは一旦データ削除。見出しのみ空欄で表示 */}
+            <FooterColumn title={dict.footer.services}>{null}</FooterColumn>
 
             <FooterColumn title={dict.footer.contact}>
               {contactLinks.map((c) => (
