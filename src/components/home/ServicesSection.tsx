@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { ServiceCard } from "@/components/home/ServiceCard";
 import { services } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
@@ -32,69 +32,13 @@ export function ServicesSection({ locale, dict }: Props) {
         </div>
 
         <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => {
-            const cardContent = (
-              <>
-                {/* ホバーで浮かび上がる背景写真 */}
-                {s.image ? (
-                  <Image
-                    src={s.image}
-                    alt=""
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="absolute inset-0 z-0 object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                  />
-                ) : null}
-                {/* ホバー時のみのダークオーバーレイ(写真の上でテキストを読ませる) */}
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-0 z-0 bg-gradient-to-t from-ink/75 via-ink/50 to-ink/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                />
-
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  {/* 高さを固定し、サブタイトルの折り返し数に関わらずタイトルの位置を揃える */}
-                  <div className="flex min-h-[2rem] items-end justify-center md:min-h-[2.25rem]">
-                    {s.subtitle ? (
-                      <p className="text-xs font-bold uppercase tracking-[0.1em] text-brand-600 transition-colors duration-300 group-hover:text-brand-200">
-                        {s.subtitle}
-                      </p>
-                    ) : null}
-                  </div>
-                  <h3 className="mt-2 text-2xl md:text-3xl font-black text-ink leading-tight transition-colors duration-300 group-hover:text-white">
-                    {s.title}
-                  </h3>
-                  <div
-                    className="mt-4 h-1 w-12 rounded-full bg-brand-500 transition-all duration-300 group-hover:w-20"
-                    aria-hidden="true"
-                  />
-                  <p className="mt-5 text-sm leading-relaxed text-ink-soft font-medium transition-colors duration-300 group-hover:text-white/80">
-                    {s.summary}
-                  </p>
-
-                  {s.href ? (
-                    <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 transition-all duration-300 group-hover:gap-2.5 group-hover:text-brand-200">
-                      詳しく見る
-                      <span aria-hidden="true">→</span>
-                    </span>
-                  ) : null}
-                </div>
-              </>
-            );
-
-            return (
-              <li key={s.slug}>
-                <Reveal delay={i * 100} className="h-full">
-                  {s.href ? (
-                    <Link href={localePath(s.href, locale)} className={cardClass}>
-                      {cardContent}
-                    </Link>
-                  ) : (
-                    <div className={cardClass}>{cardContent}</div>
-                  )}
-                </Reveal>
-              </li>
-            );
-          })}
+          {services.map((s, i) => (
+            <li key={s.slug}>
+              <Reveal delay={i * 100} className="h-full">
+                <ServiceCard service={s} locale={locale} className={cardClass} />
+              </Reveal>
+            </li>
+          ))}
         </ul>
       </Container>
     </section>

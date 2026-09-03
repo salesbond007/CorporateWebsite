@@ -85,12 +85,19 @@ export function NewsSection({ locale, dict }: Props) {
           </div>
         </div>
 
-        {/* スマホ: 横スクロール/スワイプ */}
-        <div className="mt-10 -mx-6 overflow-x-auto px-6 md:hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-          <div className="flex w-max gap-5 pr-6">
-            {latestNews.map((item, i) => (
-              <NewsCard key={`${item.title}-m-${i}`} item={item} locale={locale} />
-            ))}
+        {/* スマホ: 自動的にゆっくり横スライドし続ける */}
+        <div
+          className="relative mt-10 overflow-hidden md:hidden"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent, black 4%, black 96%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 4%, black 96%, transparent)",
+          }}
+        >
+          <div className="flex w-max animate-marquee-slow">
+            <NewsStrip locale={locale} />
+            <NewsStrip locale={locale} ariaHidden />
           </div>
         </div>
       </Container>
