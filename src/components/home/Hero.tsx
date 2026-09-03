@@ -56,12 +56,18 @@ export function Hero({ locale, dict }: Props) {
       />
 
       <Container className="relative py-24 md:py-32">
-        <div className="max-w-2xl animate-fade-up">
-          <h1 className="text-display-2 text-white font-extrabold leading-[1.1]">
-            {dict.hero.titleLine1}
+        <div className="max-w-none animate-fade-up">
+          <p className="eyebrow flex items-center gap-2 !text-brand-200">
+            <span aria-hidden="true" className="h-px w-8 bg-brand-200/70" />
+            {dict.hero.eyebrow}
+          </p>
+          <h1 className="mt-5 text-[clamp(1.5rem,4vw,3.75rem)] text-white font-extrabold leading-[1.15] tracking-tight">
+            <span className="whitespace-nowrap">{dict.hero.titleLine1}</span>
             <br />
-            <span className="text-brand-200">{dict.hero.titleHighlight}</span>
-            {dict.hero.titleSuffix}
+            <span className="whitespace-nowrap">
+              <span className="text-brand-200">{dict.hero.titleHighlight}</span>
+              {dict.hero.titleSuffix}
+            </span>
           </h1>
           <div className="mt-10 flex flex-wrap gap-3">
             <Button href={localePath("/services", locale)} size="lg">
@@ -71,7 +77,7 @@ export function Hero({ locale, dict }: Props) {
               href={localePath("/contact", locale)}
               size="lg"
               variant="secondary"
-              className="!border-white !text-white hover:!bg-white hover:!text-ink"
+              className="!border-white/70 !bg-white/10 !text-white backdrop-blur-sm hover:!bg-white hover:!text-ink"
             >
               {dict.buttons.contact}
             </Button>

@@ -1,38 +1,44 @@
 import { Container } from "@/components/ui/Container";
 
-type Cell = {
+type Node = {
   label: string;
   en: string;
-  bg: string;
-  text: string;
+  /** グリッド上の位置 (3x3) */
+  position: "top" | "left" | "right" | "bottom";
 };
 
-const cells: Cell[] = [
-  { label: "フィジカルAI", en: "Physical AI", bg: "bg-brand-600", text: "text-white" },
-  { label: "プロ人材", en: "Talent", bg: "bg-brand-800", text: "text-white" },
-  { label: "新しい顧客", en: "New Customers", bg: "bg-brand-500", text: "text-white" },
-  { label: "世界", en: "Global", bg: "bg-brand-700", text: "text-white" },
+const nodes: Node[] = [
+  { label: "フィジカルAI", en: "Physical AI", position: "top" },
+  { label: "プロ人材", en: "Talent", position: "left" },
+  { label: "新しい顧客", en: "New Customers", position: "right" },
+  { label: "世界", en: "Global", position: "bottom" },
 ];
 
-function CrossCell({
-  cell,
-  className,
-}: {
-  cell: Cell;
-  className: string;
-}) {
+const positionClass: Record<Node["position"], string> = {
+  top: "col-start-2 row-start-1",
+  left: "col-start-1 row-start-2",
+  right: "col-start-3 row-start-2",
+  bottom: "col-start-2 row-start-3",
+};
+
+function NetworkNode({ node }: { node: Node }) {
   return (
     <div
-      className={`${className} ${cell.bg} ${cell.text} flex flex-col items-center justify-center rounded-md p-3 shadow-card md:p-4`}
+      className={`${positionClass[node.position]} flex flex-col items-center justify-center gap-1 rounded-2xl border border-brand-200/70 bg-white/80 p-3 text-center shadow-soft backdrop-blur-sm md:p-4`}
     >
-      <p className="text-[10px] font-extrabold uppercase tracking-[0.18em] opacity-90 md:text-xs">
-        {cell.en}
+      <span aria-hidden="true" className="h-1.5 w-1.5 rounded-full bg-brand-500" />
+      <p className="mt-1 text-[10px] font-extrabold uppercase tracking-[0.18em] text-brand-600 md:text-xs">
+        {node.en}
       </p>
-      <p className="mt-1 text-center text-sm font-black leading-tight md:mt-1.5 md:text-base">
-        {cell.label}
+      <p className="text-sm font-black leading-tight text-ink md:text-base">
+        {node.label}
       </p>
     </div>
   );
+}
+
+function Emphasis({ children }: { children: React.ReactNode }) {
+  return <span className="font-black text-brand-600">{children}</span>;
 }
 
 export function MissionSection() {
@@ -52,14 +58,9 @@ export function MissionSection() {
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
           {/* Left: heading + copy */}
           <div className="lg:col-span-7">
-            <div className="flex items-center gap-4">
-              <span aria-hidden="true" className="block h-10 w-10 bg-ink md:h-12 md:w-12" />
-              <h2 className="font-display font-black leading-none tracking-tight text-ink text-[clamp(3rem,8vw,6rem)] uppercase">
-                Mission
-              </h2>
-            </div>
+            <p className="section-label">Mission</p>
 
-            <p className="mt-10 text-xl md:text-2xl lg:text-3xl font-black leading-snug text-ink">
+            <p className="mt-6 text-xl md:text-2xl lg:text-3xl font-black leading-snug text-ink">
               日本経済を支えてきた産業に
               <br />
               <span className="text-brand-500">新しい選択肢</span>を
@@ -71,19 +72,20 @@ export function MissionSection() {
                 <br />
                 製造、建設、物流、医療、小売、宿泊をはじめとする企業。
                 <br />
-                私たちは、その可能性を新しい力とつないでいきます。
+                私たちは、その可能性を<Emphasis>新しい力とつないでいきます</Emphasis>。
               </p>
               <p>
-                現場と、フィジカルAIを。
+                現場と、<Emphasis>フィジカルAI</Emphasis>を。
                 <br />
-                企業と、プロ人材を。
+                企業と、<Emphasis>プロ人材</Emphasis>を。
                 <br />
-                サービスと、新しい顧客を。
+                サービスと、<Emphasis>新しい顧客</Emphasis>を。
                 <br />
-                日本企業と、世界を。
+                日本企業と、<Emphasis>世界</Emphasis>を。
               </p>
               <p>
-                一つひとつの出会いが、企業の新しい一歩になり、これまでになかった選択肢を生み出します。
+                一つひとつの出会いが、企業の新しい一歩になり、
+                <Emphasis>これまでになかった選択肢を生み出します</Emphasis>。
               </p>
               <p>
                 私たちは、企業がこれまで培ってきた強みを大切にしながら、
@@ -100,17 +102,30 @@ export function MissionSection() {
             </div>
           </div>
 
-          {/* Right: cross composition */}
+          {/* Right: hub & spoke network diagram */}
           <div className="lg:col-span-5">
-            <div className="relative mx-auto grid aspect-square w-full max-w-md grid-cols-3 grid-rows-3 gap-2 md:gap-3">
-              <CrossCell cell={cells[0]} className="col-start-2 row-start-1" />
-              <CrossCell cell={cells[1]} className="col-start-1 row-start-2" />
+            <div className="relative mx-auto grid aspect-square w-full max-w-md grid-cols-3 grid-rows-3 gap-3 md:gap-4">
+              {/* 接続ライン */}
+              <svg
+                viewBox="0 0 100 100"
+                className="pointer-events-none absolute inset-0 h-full w-full text-brand-300"
+                aria-hidden="true"
+              >
+                <line x1="50" y1="16.5" x2="50" y2="50" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2.5 2.5" />
+                <line x1="16.5" y1="50" x2="50" y2="50" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2.5 2.5" />
+                <line x1="83.5" y1="50" x2="50" y2="50" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2.5 2.5" />
+                <line x1="50" y1="83.5" x2="50" y2="50" stroke="currentColor" strokeWidth="0.6" strokeDasharray="2.5 2.5" />
+              </svg>
 
-              {/* Center — Sales Bond mark */}
-              <div className="col-start-2 row-start-2 flex flex-col items-center justify-center rounded-md bg-ink p-3 text-white shadow-[0_20px_50px_-15px_rgba(0,0,0,0.55)] md:p-4">
+              {nodes.map((node) => (
+                <NetworkNode key={node.label} node={node} />
+              ))}
+
+              {/* Center — Sales Bond hub */}
+              <div className="relative col-start-2 row-start-2 flex flex-col items-center justify-center gap-1 rounded-full bg-gradient-to-br from-ink to-brand-900 p-3 text-white shadow-[0_24px_60px_-18px_rgba(29,5,11,0.65)] md:p-4">
                 <span
                   aria-hidden="true"
-                  className="block h-1.5 w-8 rounded-full bg-brand-500"
+                  className="h-1.5 w-8 rounded-full bg-brand-300"
                 />
                 <p className="mt-2 font-display text-base font-black leading-none md:text-lg">
                   Sales
@@ -119,9 +134,6 @@ export function MissionSection() {
                   Bond
                 </p>
               </div>
-
-              <CrossCell cell={cells[2]} className="col-start-3 row-start-2" />
-              <CrossCell cell={cells[3]} className="col-start-2 row-start-3" />
             </div>
           </div>
         </div>
