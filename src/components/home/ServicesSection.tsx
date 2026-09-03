@@ -12,43 +12,8 @@ type Props = {
   dict: Dictionary;
 };
 
-const iconProps = {
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.6,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-  "aria-hidden": true,
-  className: "h-6 w-6",
-};
-
-const icons: Record<string, React.ReactNode> = {
-  "ai-solutions": (
-    <svg {...iconProps}>
-      <rect x="7" y="7" width="10" height="10" rx="2" />
-      <path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3" />
-    </svg>
-  ),
-  "ai-media": (
-    <svg {...iconProps}>
-      <path d="M4 10v4a2 2 0 0 0 2 2h2l5 4V4L8 8H6a2 2 0 0 0-2 2Z" />
-      <path d="M17 9a4 4 0 0 1 0 6" />
-      <path d="M20 6a8.5 8.5 0 0 1 0 12" />
-    </svg>
-  ),
-  talent: (
-    <svg {...iconProps}>
-      <circle cx="9" cy="8" r="3.2" />
-      <circle cx="17" cy="10" r="2.6" />
-      <path d="M3 20c0-3.6 2.7-6.2 6-6.2s6 2.6 6 6.2" />
-      <path d="M15 20c0-2.6 1.7-4.6 4-4.6s4 2 4 4.6" />
-    </svg>
-  ),
-};
-
 const cardClass =
-  "group relative isolate flex aspect-square h-full flex-col overflow-hidden rounded-none border border-white/10 bg-ink p-8 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
+  "group relative isolate flex aspect-square h-full flex-col justify-between overflow-hidden rounded-none border-2 border-ink bg-white p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
 
 export function ServicesSection({ locale, dict }: Props) {
   return (
@@ -80,49 +45,34 @@ export function ServicesSection({ locale, dict }: Props) {
                     className="absolute inset-0 z-0 object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                   />
                 ) : null}
-                {/* 常時のダークオーバーレイ(写真が出てもテキストが読める濃さ) */}
+                {/* ホバー時のみのダークオーバーレイ(写真の上でテキストを読ませる) */}
                 <div
                   aria-hidden="true"
-                  className="absolute inset-0 z-0 bg-gradient-to-t from-ink via-ink/90 to-ink/70"
-                />
-                {/* コーナーのグロー装飾 */}
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -top-16 -right-16 z-0 h-40 w-40 rounded-full bg-brand-600/40 blur-3xl transition-opacity duration-300 group-hover:opacity-0"
-                />
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 z-0 opacity-[0.07] [background-image:radial-gradient(currentColor_1px,transparent_1px)] [background-size:16px_16px] text-white transition-opacity duration-300 group-hover:opacity-0"
+                  className="absolute inset-0 z-0 bg-gradient-to-t from-ink via-ink/85 to-ink/60 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
                 />
 
-                <div className="relative z-10 flex items-start justify-between">
-                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-white/10 text-brand-300 ring-1 ring-white/15 transition-colors group-hover:bg-brand-500 group-hover:text-white">
-                    {icons[s.slug]}
-                  </span>
-                  <span className="font-display text-xs font-bold tracking-[0.18em] text-white/40">
-                    No.{s.number}
-                  </span>
-                </div>
-
-                <div className="relative z-10 mt-auto">
+                <div className="relative z-10">
                   {s.subtitle ? (
-                    <p className="mb-2 text-xs font-bold uppercase tracking-[0.1em] text-brand-300">
+                    <p className="mb-2 text-xs font-bold uppercase tracking-[0.1em] text-brand-600 transition-colors duration-300 group-hover:text-brand-200">
                       {s.subtitle}
                     </p>
                   ) : null}
-                  <h3 className="text-2xl md:text-3xl font-black text-white leading-tight">
+                  <h3 className="text-2xl md:text-3xl font-black text-ink leading-tight transition-colors duration-300 group-hover:text-white">
                     {s.title}
                   </h3>
                   <div
-                    className="mt-4 h-1 w-12 rounded-full bg-brand-400 transition-all duration-300 group-hover:w-20"
+                    className="mt-4 h-1 w-12 rounded-full bg-brand-500 transition-all duration-300 group-hover:w-20"
                     aria-hidden="true"
                   />
-                  <p className="mt-5 text-sm leading-relaxed text-white/70 font-medium">
+                </div>
+
+                <div className="relative z-10">
+                  <p className="text-sm leading-relaxed text-ink-soft font-medium transition-colors duration-300 group-hover:text-white/80">
                     {s.summary}
                   </p>
 
                   {s.href ? (
-                    <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-brand-300 transition-all group-hover:gap-2.5">
+                    <span className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 transition-all duration-300 group-hover:gap-2.5 group-hover:text-brand-200">
                       詳しく見る
                       <span aria-hidden="true">→</span>
                     </span>
