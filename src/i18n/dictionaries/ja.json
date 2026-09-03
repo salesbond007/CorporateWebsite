@@ -33,12 +33,9 @@
   },
   "hero": {
     "eyebrow": "B to B Sales Support",
-    "titleLine1": "挑む企業に最短で、",
-    "titleHighlight": "確実な解",
-    "titleSuffix": "を。",
-    "subtitlePrefix": "セールスボンド株式会社は、",
-    "subtitleHighlight": "大手決裁者紹介・プロ人材/顧問マッチング・BtoB営業支援・AI顧問ボンド",
-    "subtitleSuffix": "のサービスで、確実な事業成長を実現します。"
+    "titleLine1": "日本企業に、",
+    "titleHighlight": "まだない選択肢",
+    "titleSuffix": "を。"
   },
   "blog": {
     "search": "キーワードで記事を検索",
