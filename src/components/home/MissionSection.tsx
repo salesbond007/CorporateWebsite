@@ -58,9 +58,7 @@ export function MissionSection() {
         <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
           {/* Left: heading + copy */}
           <div className="lg:col-span-7">
-            <p className="section-label">Mission</p>
-
-            <p className="mt-6 text-xl md:text-2xl lg:text-3xl font-black leading-snug text-ink">
+            <p className="text-xl md:text-2xl lg:text-3xl font-black leading-snug text-ink">
               日本経済を支えてきた産業に
               <br />
               <span className="text-brand-500">新しい選択肢</span>を
