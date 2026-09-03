@@ -6,7 +6,7 @@ function Emphasis({ children }: { children: React.ReactNode }) {
 
 export function MissionSection() {
   return (
-    <section id="mission" className="relative scroll-mt-20 overflow-hidden bg-cream py-16 md:py-24">
+    <section id="mission" className="relative scroll-mt-20 overflow-hidden bg-white py-16 md:py-24">
       {/* Faded huge watermark text */}
       <div
         aria-hidden="true"
