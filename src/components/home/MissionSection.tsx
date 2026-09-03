@@ -8,10 +8,10 @@ type Cell = {
 };
 
 const cells: Cell[] = [
-  { label: "売上拡大", en: "Revenue", bg: "bg-brand-500", text: "text-white" },
-  { label: "決裁者紹介", en: "Enterprise", bg: "bg-emerald-500", text: "text-white" },
-  { label: "プロ人材/顧問紹介", en: "Talent", bg: "bg-rose-700", text: "text-white" },
-  { label: "営業代行", en: "Sales", bg: "bg-sky-500", text: "text-white" },
+  { label: "フィジカルAI", en: "Physical AI", bg: "bg-brand-600", text: "text-white" },
+  { label: "プロ人材", en: "Talent", bg: "bg-brand-800", text: "text-white" },
+  { label: "新しい顧客", en: "New Customers", bg: "bg-brand-500", text: "text-white" },
+  { label: "世界", en: "Global", bg: "bg-brand-700", text: "text-white" },
 ];
 
 function CrossCell({
