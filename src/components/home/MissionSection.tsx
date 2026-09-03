@@ -25,36 +25,36 @@ export function MissionSection() {
       </div>
 
       <Container className="relative">
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-2xl text-center">
           <span
             aria-hidden="true"
             className="mx-auto block h-1 w-14 rounded-full bg-brand-500"
           />
 
-          <p className="mt-8 text-2xl md:text-3xl lg:text-4xl font-black leading-snug text-ink">
+          <p className="mt-10 text-2xl md:text-3xl lg:text-4xl font-black leading-snug text-ink">
             日本経済を支えてきた産業に
             <br />
             <span className="text-brand-500">新しい選択肢</span>を
           </p>
 
-          <p className="mx-auto mt-8 max-w-xl text-sm md:text-base text-ink-soft leading-[1.95] font-medium">
+          <p className="mx-auto mt-10 max-w-md text-sm md:text-base text-ink-soft leading-[2] font-medium">
             日本経済を支えてきた、
             製造、建設、物流、医療、小売、宿泊をはじめとする企業。
             私たちは、その可能性を
             <Emphasis>新しい力とつないでいきます</Emphasis>。
           </p>
 
-          <ul className="mx-auto mt-10 flex max-w-2xl flex-wrap items-center justify-center gap-3">
+          <ul className="mx-auto mt-12 flex max-w-xl flex-wrap items-center justify-center gap-2.5">
             {pairs.map((p) => (
               <li
                 key={p.to}
-                className="flex items-center gap-2 rounded-full border border-ink-line bg-white px-5 py-2.5 shadow-soft"
+                className="flex items-center gap-2 rounded-full border border-ink-line bg-white px-4 py-2 shadow-soft md:px-5 md:py-2.5"
               >
                 <span className="text-xs font-bold text-ink-muted md:text-sm">
                   {p.from}
                 </span>
                 <span aria-hidden="true" className="text-brand-300">
-                  ×
+                  →
                 </span>
                 <span className="text-xs font-black text-brand-600 md:text-sm">
                   {p.to}
@@ -63,13 +63,13 @@ export function MissionSection() {
             ))}
           </ul>
 
-          <p className="mx-auto mt-10 max-w-xl text-sm md:text-base text-ink-soft leading-[1.95] font-medium">
+          <p className="mx-auto mt-12 max-w-md text-sm md:text-base text-ink-soft leading-[2] font-medium">
             一つひとつの出会いが、企業の新しい一歩になり、
             <Emphasis>これまでになかった選択肢を生み出します</Emphasis>。
           </p>
 
-          <div className="mx-auto mt-12 max-w-xl border-t border-ink-line pt-8">
-            <p className="text-base md:text-lg font-black leading-relaxed text-ink">
+          <div className="mx-auto mt-14 max-w-md border-t border-ink-line pt-9">
+            <p className="text-base md:text-lg font-black leading-[1.9] text-ink">
               私たちは、企業がこれまで培ってきた強みを大切にしながら、
               日本企業の可能性を広げ、
               <span className="relative inline-block text-brand-600">
