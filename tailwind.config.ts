@@ -95,6 +95,7 @@ const config: Config = {
       animation: {
         "fade-up": "fadeUp 0.7s ease-out both",
         marquee: "marquee 45s linear infinite",
+        "marquee-slow": "marquee 70s linear infinite",
         wiggle: "wiggle 1.6s ease-in-out infinite",
         "float-y": "floatY 3s ease-in-out infinite",
         "hero-pan": "heroPan 16s ease-in-out infinite alternate",

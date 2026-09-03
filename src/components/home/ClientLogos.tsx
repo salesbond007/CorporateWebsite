@@ -41,23 +41,43 @@ function LogoStrip({ ariaHidden }: { ariaHidden?: boolean }) {
   );
 }
 
+function MobileLogoStrip({ ariaHidden }: { ariaHidden?: boolean }) {
+  return (
+    <div
+      className="grid shrink-0 auto-cols-max grid-flow-col grid-rows-2 gap-x-10 gap-y-5 pr-10"
+      aria-hidden={ariaHidden}
+    >
+      {clients.map((c) => (
+        <div key={c.name} className="flex h-6 items-center justify-center">
+          <Image
+            src={c.src}
+            alt={c.name}
+            width={c.width}
+            height={28}
+            className="h-full w-auto object-contain"
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export function ClientLogos() {
   return (
     <section className="border-y border-ink-line bg-white py-8 md:py-14">
-      {/* スマホ: 横2列を横スクロール/スワイプで見せる */}
-      <div className="overflow-x-auto px-6 md:hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-        <div className="grid w-max auto-cols-max grid-flow-col grid-rows-2 gap-x-10 gap-y-5 pr-6">
-          {clients.map((c) => (
-            <div key={c.name} className="flex h-6 items-center justify-center">
-              <Image
-                src={c.src}
-                alt={c.name}
-                width={c.width}
-                height={28}
-                className="h-full w-auto object-contain"
-              />
-            </div>
-          ))}
+      {/* スマホ: 横2列を自動的に横スライドし続ける */}
+      <div
+        className="relative overflow-hidden md:hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+        }}
+      >
+        <div className="flex w-max animate-marquee">
+          <MobileLogoStrip />
+          <MobileLogoStrip ariaHidden />
         </div>
       </div>
 
