@@ -11,8 +11,8 @@ type Props = {
 };
 
 /**
- * 背景に敷く3枚の画像。/public/hero/slide-1.jpg 〜 slide-3.jpg を置き換えるだけで
- * 差し替え可能。約6秒ごとにゆっくりクロスフェードする(hero-crossfade アニメーション、
+ * 背景に敷く3枚の画像。/public/hero/slide-1.png 〜 slide-3.png を置き換えるだけで
+ * 差し替え可能。4秒ごとに永続的にクロスフェードする(hero-crossfade アニメーション、
  * tailwind.config.ts 参照)。
  */
 const HERO_SLIDES = ["/hero/slide-1.png", "/hero/slide-2.png", "/hero/slide-3.png"];
@@ -31,7 +31,7 @@ export function Hero({ locale, dict }: Props) {
             priority={i === 0}
             sizes="100vw"
             className="animate-hero-crossfade object-cover"
-            style={{ animationDelay: `${i * 6}s` }}
+            style={{ animationDelay: `${i * 4}s` }}
           />
         ))}
       </div>

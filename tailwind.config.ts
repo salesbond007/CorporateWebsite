@@ -116,7 +116,7 @@ const config: Config = {
         "float-y": "floatY 3s ease-in-out infinite",
         "hero-pan": "heroPan 16s ease-in-out infinite alternate",
         "hero-pan-fast": "heroPan 7s ease-in-out infinite alternate",
-        "hero-crossfade": "heroCrossfade 18s ease-in-out infinite",
+        "hero-crossfade": "heroCrossfade 12s ease-in-out infinite",
       },
     },
   },
