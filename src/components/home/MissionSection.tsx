@@ -27,9 +27,16 @@ export function MissionSection() {
 
           <div className="mx-auto mt-10 space-y-6 text-sm md:text-base text-ink-soft leading-[1.9] font-medium">
             <p>
-              日本経済を支えてきた、
+              <span className="font-black text-ink">
+                製造、建設、物流、医療、小売、宿泊
+              </span>
+              など
               <br />
-              製造、建設、物流、医療、小売、宿泊をはじめとする企業。
+              古くから
+              <span className="underline decoration-brand-500 decoration-2 underline-offset-4">
+                日本経済を支えてきた
+              </span>
+              企業。
               <br />
               私たちは、その可能性を<Emphasis>新しい力とつないでいきます</Emphasis>。
             </p>
