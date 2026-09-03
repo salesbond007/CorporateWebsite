@@ -69,6 +69,11 @@ export function Header({ locale, dict }: Props) {
             {dict.nav.company}
           </Link>
 
+          {/* リンクは後日追加予定。現時点ではテキストのみ表示 */}
+          <span className="text-sm font-bold text-ink-muted">
+            AI専門メディア
+          </span>
+
           <NavDropdown
             label={dict.nav.contact.replace(/\(.*\)$/, "")}
             items={contactItems}
