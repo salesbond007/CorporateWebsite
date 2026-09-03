@@ -40,25 +40,8 @@ const config: Config = {
         cream: "#FAF7F2",
       },
       fontFamily: {
-        sans: [
-          "var(--font-noto-sans-jp)",
-          "Hiragino Kaku Gothic ProN",
-          "Hiragino Sans",
-          "Yu Gothic",
-          "YuGothic",
-          "Meiryo",
-          "system-ui",
-          "sans-serif",
-        ],
-        display: [
-          "var(--font-noto-sans-jp)",
-          "Hiragino Kaku Gothic ProN",
-          "Hiragino Sans",
-          "Yu Gothic",
-          "YuGothic",
-          "system-ui",
-          "sans-serif",
-        ],
+        sans: ["var(--font-noto-sans-jp)", "sans-serif"],
+        display: ["var(--font-noto-sans-jp)", "sans-serif"],
       },
       fontSize: {
         "display-1": ["clamp(3rem, 7vw, 5.5rem)", { lineHeight: "1.05", letterSpacing: "-0.03em" }],
