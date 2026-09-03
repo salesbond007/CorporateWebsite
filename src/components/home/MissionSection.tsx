@@ -50,7 +50,7 @@ export function MissionSection() {
               日本企業と、<Emphasis>世界</Emphasis>を。
             </p>
             <p>
-              一つひとつの出会いが、企業の新しい一歩になり、
+              ひとつひとつの出会いが、企業の新しい一歩になり、
               <br />
               <Emphasis>これまでになかった選択肢を生み出します</Emphasis>。
             </p>
