@@ -59,26 +59,38 @@ export function MissionSection() {
               </h2>
             </div>
 
-            <div className="mt-10 max-w-xl space-y-5 text-sm md:text-base text-ink-soft leading-[1.95] font-medium">
+            <p className="mt-10 text-xl md:text-2xl lg:text-3xl font-black leading-snug text-ink">
+              日本経済を支えてきた産業に
+              <br />
+              <span className="text-brand-500">新しい選択肢</span>を
+            </p>
+
+            <div className="mt-8 max-w-xl space-y-5 text-sm md:text-base text-ink-soft leading-[1.95] font-medium">
               <p>
-                AIと現場。
+                日本経済を支えてきた、
                 <br />
-                現場と人材。
+                製造、建設、物流、医療、小売、宿泊をはじめとする企業。
                 <br />
-                サービスと顧客。
-                <br />
-                日本企業と世界。
+                私たちは、その可能性を新しい力とつないでいきます。
               </p>
               <p>
-                一つひとつの出会いが、企業の新しい一歩になる。
+                現場と、フィジカルAIを。
                 <br />
-                一つひとつのつながりが、これまで選べなかった未来を選べるようにする。
+                企業と、プロ人材を。
+                <br />
+                サービスと、新しい顧客を。
+                <br />
+                日本企業と、世界を。
               </p>
               <p>
-                私たちは、つながりによって日本企業の可能性を広げ、
+                一つひとつの出会いが、企業の新しい一歩になり、これまでになかった選択肢を生み出します。
+              </p>
+              <p>
+                私たちは、企業がこれまで培ってきた強みを大切にしながら、
                 <br />
+                日本企業の可能性を広げ、
                 <span className="relative inline-block font-black text-brand-600">
-                  次の選択肢をつくり続けます。
+                  次の成長の選択肢をつくり続けます。
                   <span
                     aria-hidden="true"
                     className="absolute inset-x-0 -bottom-0.5 h-[3px] bg-amber-300"
