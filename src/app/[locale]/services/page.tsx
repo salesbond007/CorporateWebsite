@@ -31,11 +31,22 @@ export default function ServicesPage({
         ])}
       />
 
-      {/* Hero with company logo on the left */}
-      <section className="relative overflow-hidden border-b-2 border-ink-line bg-white">
-        <div className="absolute inset-0 dot-bg opacity-60" aria-hidden="true" />
+      {/* Hero: 写真背景+タイトル */}
+      <section className="relative overflow-hidden border-b-2 border-ink-line bg-ink">
+        <Image
+          src="/services/cards/ai-solutions.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
         <div
-          className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-brand-200/50 blur-3xl"
+          className="absolute inset-0 bg-brand-900/45 mix-blend-multiply"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 bg-[linear-gradient(to_right,rgba(29,5,11,0.85)_0%,rgba(29,5,11,0.55)_45%,rgba(29,5,11,0.15)_75%,rgba(29,5,11,0)_95%)]"
           aria-hidden="true"
         />
         <Container className="relative py-20 md:py-28">
@@ -49,8 +60,8 @@ export default function ServicesPage({
               priority
             />
             <div>
-              <p className="section-label !text-brand-500">Services</p>
-              <h1 className="mt-3 text-display-2 text-ink font-black">
+              <p className="section-label !text-brand-200">Services</p>
+              <h1 className="mt-3 text-display-2 text-white font-black">
                 サービス案内
               </h1>
             </div>

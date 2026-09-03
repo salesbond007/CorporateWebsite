@@ -54,7 +54,15 @@ const rows: { label: string; value: React.ReactNode }[] = [
       </ul>
     ),
   },
-  { label: "取引銀行", value: "三井住友銀行 渋谷駅前支店" },
+  {
+    label: "取引銀行",
+    value: (
+      <ul className="space-y-1.5">
+        <li>三井住友銀行</li>
+        <li>東京スター銀行</li>
+      </ul>
+    ),
+  },
 ];
 
 export function CompanySection() {
