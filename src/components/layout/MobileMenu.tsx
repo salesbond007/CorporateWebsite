@@ -39,6 +39,11 @@ export function MobileMenu({ locale, dict }: Props) {
       label: dict.nav.contact,
       className: "bg-brand-500 text-white hover:bg-brand-600",
     },
+    {
+      href: "/contact/partner",
+      label: "個人の方はこちら",
+      className: "bg-ink text-white hover:bg-ink-soft",
+    },
   ];
 
   return (
@@ -100,14 +105,14 @@ export function MobileMenu({ locale, dict }: Props) {
                   >
                     {dict.nav[item.key]}
                   </Link>
+                  {/* AI専門メディア: リンクは後日追加予定。現時点ではテキストのみ表示 */}
+                  {item.key === "services" ? (
+                    <span className="block rounded-lg px-3 py-3 text-base font-medium text-ink-muted">
+                      AI専門メディア
+                    </span>
+                  ) : null}
                 </li>
               ))}
-              {/* リンクは後日追加予定。現時点ではテキストのみ表示 */}
-              <li>
-                <span className="block rounded-lg px-3 py-3 text-base font-medium text-ink-muted">
-                  AI専門メディア
-                </span>
-              </li>
             </ul>
 
             <div className="mt-8 pt-6 border-t border-ink-line space-y-3">

@@ -28,14 +28,6 @@ export function Header({ locale, dict }: Props) {
   // サービスは一旦データ削除。ナビゲーションは空欄で表示。
   const serviceItems: { href: string; label: string; sub?: string }[] = [];
 
-  const contactItems = [
-    {
-      href: localePath("/contact", locale),
-      label: dict.nav.contact,
-      sub: "サービス・お見積もりはこちら",
-    },
-  ];
-
   return (
     <header
       className={cn(
@@ -62,22 +54,17 @@ export function Header({ locale, dict }: Props) {
             items={serviceItems}
           />
 
+          {/* リンクは後日追加予定。現時点ではテキストのみ表示 */}
+          <span className="text-sm font-bold text-ink-muted">
+            AI専門メディア
+          </span>
+
           <Link
             href={localePath("/company", locale)}
             className="text-sm font-bold text-ink hover:text-brand-600"
           >
             {dict.nav.company}
           </Link>
-
-          {/* リンクは後日追加予定。現時点ではテキストのみ表示 */}
-          <span className="text-sm font-bold text-ink-muted">
-            AI専門メディア
-          </span>
-
-          <NavDropdown
-            label={dict.nav.contact.replace(/\(.*\)$/, "")}
-            items={contactItems}
-          />
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
@@ -87,6 +74,13 @@ export function Header({ locale, dict }: Props) {
             className="hidden md:inline-flex shadow-[0_8px_24px_-8px_rgba(122,30,53,0.6)]"
           >
             {dict.nav.contact}
+          </Button>
+          <Button
+            href={localePath("/contact/partner", locale)}
+            size="md"
+            className="hidden md:inline-flex !bg-ink !text-white hover:!bg-ink-soft shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)]"
+          >
+            個人の方はこちら
           </Button>
           <MobileMenu locale={locale} dict={dict} />
         </div>
