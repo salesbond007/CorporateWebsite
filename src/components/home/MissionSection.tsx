@@ -28,7 +28,7 @@ export function MissionSection() {
             </p>
           </Reveal>
 
-          <div className="mx-auto mt-10 space-y-6 text-sm md:text-base text-ink-soft leading-[1.9] font-medium">
+          <div className="mx-auto mt-10 space-y-6 text-base md:text-lg text-ink-soft leading-[2] tracking-[0.04em] font-medium">
             <Reveal variant="fade" delay={100}>
               <p>
                 <span className="font-black text-ink">
