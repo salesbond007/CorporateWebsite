@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "./Logo";
 import { navigation, services } from "@/lib/site";
@@ -16,20 +15,10 @@ type Props = {
 
 export function Footer({ locale, dict }: Props) {
   const year = new Date().getFullYear();
-  const pathname = usePathname() ?? "";
-  const footerBg = pathname.includes("/services/sales-bond")
-    ? "bg-emerald-500"
-    : pathname.includes("/services/lead-bond")
-      ? "bg-sky-500"
-      : pathname.includes("/services/keyman-bond")
-        ? "bg-rose-700"
-        : pathname.includes("/services/ai-komon")
-          ? "bg-[#4c0519]"
-          : "bg-brand-500";
+  const footerBg = "bg-brand-500";
 
   const contactLinks = [
     { href: "/contact", label: dict.nav.contact },
-    { href: "/contact/partner", label: "個人の方はこちら" },
   ];
 
   const legalLinks =
@@ -67,7 +56,7 @@ export function Footer({ locale, dict }: Props) {
               {services.map((s) => (
                 <FooterLink
                   key={s.slug}
-                  href={localePath(s.href, locale)}
+                  href={`${localePath("/services", locale)}#${s.slug}`}
                 >
                   {s.title}
                 </FooterLink>

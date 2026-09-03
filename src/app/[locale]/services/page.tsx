@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { CTASection } from "@/components/home/CTASection";
@@ -189,9 +188,8 @@ export default function ServicesPage({
               const theme = themeBySlug[s.slug] ?? fallbackTheme;
               return (
               <li key={s.slug} id={s.slug} className="scroll-mt-24 md:scroll-mt-28">
-                <Link
-                  href={localePath(s.href, locale)}
-                  className={`group block rounded-xl2 border border-ink-line bg-white p-8 md:p-10 transition-all ${theme.hoverBorder} hover:shadow-card`}
+                <div
+                  className={`rounded-xl2 border border-ink-line bg-white p-8 md:p-10 transition-all ${theme.hoverBorder} hover:shadow-card`}
                 >
                   <div className="grid gap-6 md:grid-cols-12 md:items-center">
                     {/* Number */}
@@ -235,21 +233,8 @@ export default function ServicesPage({
                         ))}
                       </ul>
                     </div>
-
-                    {/* Arrow */}
-                    <div className="md:col-span-2 md:text-right">
-                      <span className={`inline-flex items-center gap-2 text-sm font-semibold ${theme.arrow}`}>
-                        詳しく見る
-                        <span
-                          aria-hidden="true"
-                          className="transition-transform group-hover:translate-x-1"
-                        >
-                          →
-                        </span>
-                      </span>
-                    </div>
                   </div>
-                </Link>
+                </div>
               </li>
               );
             })}

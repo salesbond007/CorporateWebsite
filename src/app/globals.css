@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --color-brand: #f58220;
-  --color-brand-soft: #fff5ec;
+  --color-brand: #7a1e35;
+  --color-brand-soft: #fbeaee;
   --color-ink: #1a1a1a;
   --color-cream: #fef9f1;
 }
@@ -26,7 +26,7 @@
   }
 
   ::selection {
-    background-color: rgba(245, 130, 32, 0.3);
+    background-color: rgba(122, 30, 53, 0.3);
     color: #1a1a1a;
   }
 
@@ -83,7 +83,7 @@
   /* やわらかいドット背景 */
   .dot-bg {
     background-image: radial-gradient(
-      rgba(245, 130, 32, 0.18) 1.5px,
+      rgba(122, 30, 53, 0.18) 1.5px,
       transparent 1.5px
     );
     background-size: 24px 24px;
@@ -104,7 +104,7 @@
 
   /* マーカー風ハイライト */
   .marker {
-    background: linear-gradient(transparent 65%, rgba(245, 130, 32, 0.35) 65%);
+    background: linear-gradient(transparent 65%, rgba(122, 30, 53, 0.35) 65%);
     padding: 0 4px;
   }
 

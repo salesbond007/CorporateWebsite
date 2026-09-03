@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { site, services } from "@/lib/site";
+import { site } from "@/lib/site";
 import { getArticles } from "@/lib/microcms";
 import { locales } from "@/i18n/config";
 
@@ -17,7 +17,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/services", priority: 0.9, changeFrequency: "monthly" },
     { path: "/blog", priority: 0.8, changeFrequency: "daily" },
     { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
-    { path: "/contact/partner", priority: 0.7, changeFrequency: "monthly" },
     { path: "/company", priority: 0.7, changeFrequency: "monthly" },
     { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
     { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
@@ -32,20 +31,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       alternates: {
         languages: Object.fromEntries(
           locales.map((l) => [l, `${base}/${l}${path}`]),
-        ),
-      },
-    })),
-  );
-
-  const serviceEntries: MetadataRoute.Sitemap = locales.flatMap((locale) =>
-    services.map((s) => ({
-      url: `${base}/${locale}${s.href}`,
-      lastModified: now,
-      changeFrequency: "monthly" as const,
-      priority: 0.9,
-      alternates: {
-        languages: Object.fromEntries(
-          locales.map((l) => [l, `${base}/${l}${s.href}`]),
         ),
       },
     })),
@@ -66,5 +51,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   );
 
-  return [...staticEntries, ...serviceEntries, ...articleEntries];
+  return [...staticEntries, ...articleEntries];
 }

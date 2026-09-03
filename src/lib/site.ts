@@ -59,7 +59,6 @@ export type NavKey =
 export const navigation: { key: NavKey; href: string }[] = [
   { key: "top", href: "/" },
   { key: "services", href: "/services" },
-  { key: "blog", href: "/blog" },
   { key: "company", href: "/company" },
 ];
 
@@ -78,7 +77,6 @@ export const services = [
     ],
     image: "/logo-square.jpg",
     illustrationVariant: "abstract" as const,
-    href: "/services/sales-bond",
   },
   {
     slug: "keyman-bond",
@@ -93,7 +91,6 @@ export const services = [
     ],
     image: "/logo-square.jpg",
     illustrationVariant: "grid" as const,
-    href: "/services/keyman-bond",
   },
   {
     slug: "lead-bond",
@@ -108,7 +105,6 @@ export const services = [
     ],
     image: "/logo-square.jpg",
     illustrationVariant: "blob" as const,
-    href: "/services/lead-bond",
   },
   // AI顧問ボンド は現在非公開 (下記コメント解除で復活)
   // {

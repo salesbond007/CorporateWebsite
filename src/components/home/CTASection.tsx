@@ -30,7 +30,6 @@ export function CTASection({ locale, dict }: Props) {
               </h2>
               <p className="mt-7 max-w-xl text-white/90 leading-relaxed font-medium">
                 サービスの詳細・お見積もり・導入事例など、貴社の課題に合わせてご提案します。
-                知見や人脈を活かしてご活躍いただける個人の方も歓迎しています。
               </p>
             </div>
 
@@ -41,14 +40,6 @@ export function CTASection({ locale, dict }: Props) {
                 className="bg-white !text-brand-600 hover:!bg-brand-50 md:w-72"
               >
                 {dict.nav.contact}
-              </Button>
-              <Button
-                href={localePath("/contact/partner", locale)}
-                size="lg"
-                variant="ghost"
-                className="!text-white border-2 border-white/60 hover:!bg-white/15 md:w-72"
-              >
-                個人の方はこちら
               </Button>
             </div>
           </div>
