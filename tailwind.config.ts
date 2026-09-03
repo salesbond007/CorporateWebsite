@@ -101,6 +101,13 @@ const config: Config = {
           "0%": { transform: "translateX(-3%) scale(1.12)" },
           "100%": { transform: "translateX(3%) scale(1.12)" },
         },
+        heroCrossfade: {
+          "0%": { opacity: "1" },
+          "17%": { opacity: "1" },
+          "25%": { opacity: "0" },
+          "92%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
       },
       animation: {
         "fade-up": "fadeUp 0.7s ease-out both",
@@ -109,6 +116,7 @@ const config: Config = {
         "float-y": "floatY 3s ease-in-out infinite",
         "hero-pan": "heroPan 16s ease-in-out infinite alternate",
         "hero-pan-fast": "heroPan 7s ease-in-out infinite alternate",
+        "hero-crossfade": "heroCrossfade 18s ease-in-out infinite",
       },
     },
   },
