@@ -32,7 +32,7 @@ export default function ServicesPage({
       />
 
       {/* Hero with company logo on the left */}
-      <section className="relative overflow-hidden border-b-2 border-ink-line bg-cream">
+      <section className="relative overflow-hidden border-b-2 border-ink-line bg-white">
         <div className="absolute inset-0 dot-bg opacity-60" aria-hidden="true" />
         <div
           className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-brand-200/50 blur-3xl"

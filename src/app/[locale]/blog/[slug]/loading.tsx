@@ -3,11 +3,11 @@ import { Container } from "@/components/ui/Container";
 export default function ArticleLoading() {
   return (
     <article>
-      <header className="border-b border-ink-line bg-cream">
+      <header className="border-b border-ink-line bg-white">
         <Container className="py-16 md:py-24">
-          <div className="h-3 w-40 rounded bg-white/80 animate-pulse" />
-          <div className="mt-6 h-10 w-3/4 rounded bg-white/80 animate-pulse" />
-          <div className="mt-3 h-10 w-1/2 rounded bg-white/80 animate-pulse" />
+          <div className="h-3 w-40 rounded bg-ink-line/40 animate-pulse" />
+          <div className="mt-6 h-10 w-3/4 rounded bg-ink-line/40 animate-pulse" />
+          <div className="mt-3 h-10 w-1/2 rounded bg-ink-line/40 animate-pulse" />
         </Container>
       </header>
       <Container className="py-16 md:py-24">
@@ -15,7 +15,7 @@ export default function ArticleLoading() {
           {Array.from({ length: 8 }).map((_, i) => (
             <div
               key={i}
-              className="h-4 rounded bg-cream animate-pulse"
+              className="h-4 rounded bg-ink-line/40 animate-pulse"
               style={{ width: `${60 + ((i * 7) % 30)}%` }}
             />
           ))}

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Noto_Sans_JP } from "next/font/google";
+import { Noto_Serif_JP } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/layout/Header";
@@ -13,10 +13,10 @@ import { isLocale, locales, ogLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import "../globals.css";
 
-const notoSansJp = Noto_Sans_JP({
+const notoSerifJp = Noto_Serif_JP({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800", "900"],
-  variable: "--font-noto-sans-jp",
+  weight: ["400", "500", "600", "700", "900"],
+  variable: "--font-noto-serif-jp",
   display: "swap",
 });
 
@@ -98,7 +98,7 @@ export default function LocaleLayout({
   const dict = getDictionary(locale);
 
   return (
-    <html lang={locale} className={notoSansJp.variable}>
+    <html lang={locale} className={notoSerifJp.variable}>
       <body>
         <a
           href="#main"
@@ -118,6 +118,7 @@ export default function LocaleLayout({
               { name: "ホーム", url: `/${locale}` },
               { name: "サービス案内", url: `/${locale}/services` },
               { name: "フィジカルAI研修", url: `/${locale}/services/physical-ai-training` },
+              { name: "お知らせ", url: `/${locale}/news` },
               { name: "会社概要", url: `/${locale}/company` },
               { name: "お問い合わせ", url: `/${locale}/contact` },
             ]),

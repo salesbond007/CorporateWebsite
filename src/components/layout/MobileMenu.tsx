@@ -51,7 +51,7 @@ export function MobileMenu({ locale, dict }: Props) {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="lg:hidden grid h-10 w-10 place-items-center rounded-full border border-ink-line text-ink hover:bg-cream"
+        className="lg:hidden grid h-10 w-10 place-items-center rounded-full border border-ink-line text-ink hover:bg-ink-line/30"
         aria-label={dict.nav.openMenu}
         aria-expanded={open}
       >
@@ -101,7 +101,7 @@ export function MobileMenu({ locale, dict }: Props) {
                   <Link
                     href={localePath(item.href, locale)}
                     onClick={() => setOpen(false)}
-                    className="block rounded-lg px-3 py-3 text-base font-medium hover:bg-cream"
+                    className="block rounded-lg px-3 py-3 text-base font-medium hover:bg-ink-line/30"
                   >
                     {dict.nav[item.key]}
                   </Link>

@@ -19,7 +19,7 @@ export function ArticleCard({ article, locale, priority }: Props) {
   return (
     <article className="group">
       <Link href={localePath(`/blog/${article.slug}`, locale)} className="block">
-        <div className="relative aspect-[16/10] overflow-hidden rounded-none bg-cream">
+        <div className="relative aspect-[16/10] overflow-hidden rounded-none bg-ink-line/30">
           {article.thumbnail ? (
             <Image
               src={article.thumbnail.url}
@@ -61,11 +61,11 @@ export function ArticleCard({ article, locale, priority }: Props) {
 export function ArticleCardSkeleton() {
   return (
     <div className="group" aria-hidden="true">
-      <div className="aspect-[16/10] rounded-none bg-cream" />
+      <div className="aspect-[16/10] rounded-none bg-ink-line/30" />
       <div className="mt-5 space-y-2">
-        <div className="h-3 w-20 rounded bg-cream" />
-        <div className="h-5 w-4/5 rounded bg-cream" />
-        <div className="h-4 w-full rounded bg-cream" />
+        <div className="h-3 w-20 rounded bg-ink-line/30" />
+        <div className="h-5 w-4/5 rounded bg-ink-line/30" />
+        <div className="h-4 w-full rounded bg-ink-line/30" />
       </div>
     </div>
   );
