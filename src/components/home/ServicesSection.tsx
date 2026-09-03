@@ -192,7 +192,7 @@ export function ServicesSection({ locale, dict }: Props) {
             <li key={s.slug}>
               <Reveal delay={i * 100} className="h-full">
                 <Link
-                  href={localePath(s.href, locale)}
+                  href={`${localePath("/services", locale)}#${s.slug}`}
                   className={`group block h-full rounded-none border-2 border-ink-line bg-white p-8 transition-all duration-300 hover:-translate-y-1 ${theme.hoverBorder} hover:shadow-card`}
                 >
                   <div className="flex items-start justify-between">

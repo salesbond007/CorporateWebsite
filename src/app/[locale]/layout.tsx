@@ -80,7 +80,7 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
-  themeColor: "#F58220",
+  themeColor: "#7A1E35",
   width: "device-width",
   initialScale: 1,
 };
@@ -115,13 +115,8 @@ export default function LocaleLayout({
             siteNavigationJsonLd([
               { name: "ホーム", url: `/${locale}` },
               { name: "サービス案内", url: `/${locale}/services` },
-              { name: "リファボンド（大手決裁者紹介）", url: `/${locale}/services/sales-bond` },
-              { name: "キーマンボンド（プロ人材/顧問マッチング）", url: `/${locale}/services/keyman-bond` },
-              { name: "セルボンド（BtoB営業支援）", url: `/${locale}/services/lead-bond` },
-              { name: "メディア", url: `/${locale}/blog` },
               { name: "会社概要", url: `/${locale}/company` },
               { name: "お問い合わせ", url: `/${locale}/contact` },
-              { name: "個人の方はこちら", url: `/${locale}/contact/partner` },
             ]),
           ]}
         />

@@ -39,11 +39,6 @@ export function MobileMenu({ locale, dict }: Props) {
       label: dict.nav.contact,
       className: "bg-brand-500 text-white hover:bg-brand-600",
     },
-    {
-      href: "/contact/partner",
-      label: "個人の方はこちら",
-      className: "bg-ink text-white hover:bg-ink-soft",
-    },
   ];
 
   return (

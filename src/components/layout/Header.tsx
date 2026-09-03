@@ -27,7 +27,7 @@ export function Header({ locale, dict }: Props) {
   }, []);
 
   const serviceItems = services.map((s) => ({
-    href: localePath(s.href, locale),
+    href: `${localePath("/services", locale)}#${s.slug}`,
     label: s.subtitle.replace(/サービス$/, ""),
     sub: s.title,
   }));
@@ -37,11 +37,6 @@ export function Header({ locale, dict }: Props) {
       href: localePath("/contact", locale),
       label: dict.nav.contact,
       sub: "サービス・お見積もりはこちら",
-    },
-    {
-      href: localePath("/contact/partner", locale),
-      label: "個人の方はこちら",
-      sub: "人脈・知見を活かしてご協力いただける方",
     },
   ];
 
@@ -72,13 +67,6 @@ export function Header({ locale, dict }: Props) {
           />
 
           <Link
-            href={localePath("/blog", locale)}
-            className="text-sm font-bold text-ink hover:text-brand-600"
-          >
-            {dict.nav.blog}
-          </Link>
-
-          <Link
             href={localePath("/company", locale)}
             className="text-sm font-bold text-ink hover:text-brand-600"
           >
@@ -95,16 +83,9 @@ export function Header({ locale, dict }: Props) {
           <Button
             href={localePath("/contact", locale)}
             size="md"
-            className="hidden md:inline-flex shadow-[0_8px_24px_-8px_rgba(245,130,32,0.6)]"
+            className="hidden md:inline-flex shadow-[0_8px_24px_-8px_rgba(122,30,53,0.6)]"
           >
             {dict.nav.contact}
-          </Button>
-          <Button
-            href={localePath("/contact/partner", locale)}
-            size="md"
-            className="hidden md:inline-flex !bg-ink !text-white hover:!bg-ink-soft shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)]"
-          >
-            個人の方はこちら
           </Button>
           <MobileMenu locale={locale} dict={dict} />
         </div>

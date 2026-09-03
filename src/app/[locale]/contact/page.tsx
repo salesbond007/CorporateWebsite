@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { PageHero } from "@/components/ui/PageHero";
 import { SimpleContactForm } from "@/components/contact/SimpleContactForm";
@@ -67,23 +66,6 @@ export default function ContactPage({
                     </dd>
                   </div>
                 </dl>
-              </div>
-
-              <div className="mt-6 rounded-xl2 bg-cream p-8">
-                <h3 className="text-sm font-semibold text-ink-muted">
-                  個人の方へ
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed">
-                  お持ちの人脈や知見を活かして当社にご協力いただける方は、こちらをご覧ください。
-                </p>
-                <div className="mt-4">
-                  <Link
-                    href={localePath("/contact/partner", locale)}
-                    className="link-arrow"
-                  >
-                    個人の方はこちら
-                  </Link>
-                </div>
               </div>
             </aside>
           </div>

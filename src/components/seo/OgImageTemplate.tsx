@@ -20,7 +20,7 @@ export function OgImageTemplate({ eyebrow, title, subtitle }: Props) {
         flexDirection: "column",
         justifyContent: "space-between",
         background:
-          "linear-gradient(135deg, #FFF5EC 0%, #FFE7D1 60%, #FFCEA3 100%)",
+          "linear-gradient(135deg, #FBEAEE 0%, #F3CDD6 60%, #E4A0B0 100%)",
         padding: 80,
         fontFamily: "sans-serif",
         position: "relative",
@@ -34,7 +34,7 @@ export function OgImageTemplate({ eyebrow, title, subtitle }: Props) {
           width: 480,
           height: 480,
           borderRadius: 9999,
-          background: "rgba(245,130,32,0.18)",
+          background: "rgba(122,30,53,0.18)",
         }}
       />
       <div
@@ -45,7 +45,7 @@ export function OgImageTemplate({ eyebrow, title, subtitle }: Props) {
           width: 420,
           height: 420,
           borderRadius: 9999,
-          background: "rgba(245,130,32,0.12)",
+          background: "rgba(122,30,53,0.12)",
         }}
       />
 
@@ -76,7 +76,7 @@ export function OgImageTemplate({ eyebrow, title, subtitle }: Props) {
             style={{
               fontSize: 20,
               fontWeight: 700,
-              color: "#D86C12",
+              color: "#61162A",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
               marginBottom: 24,
@@ -127,7 +127,7 @@ export function OgImageTemplate({ eyebrow, title, subtitle }: Props) {
             display: "flex",
             alignItems: "center",
             gap: 8,
-            color: "#F58220",
+            color: "#7A1E35",
             fontWeight: 700,
           }}
         >

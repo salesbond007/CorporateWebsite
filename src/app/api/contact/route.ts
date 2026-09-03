@@ -193,7 +193,7 @@ function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
 
   return `<!doctype html>
   <html><body style="font-family:-apple-system,'Segoe UI',sans-serif;color:#1A1A1A;">
-    <h2 style="border-left:4px solid #F58220;padding-left:10px;">${heading}</h2>
+    <h2 style="border-left:4px solid #7A1E35;padding-left:10px;">${heading}</h2>
     <table cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%;max-width:640px;">
       ${rows}
     </table>
