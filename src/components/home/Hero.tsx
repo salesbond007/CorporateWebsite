@@ -36,13 +36,22 @@ export function Hero({ locale, dict }: Props) {
         ))}
       </div>
 
-      {/* ブランドカラー(ワインレッド)のグラデーションオーバーレイ: テキストの視認性を確保 */}
+      {/*
+       * オーバーレイは3枚重ね:
+       * 1. ワインレッドの色被せ(multiply) — 写真全体をブランドカラーに馴染ませる「かすみ」
+       * 2. 左側の濃いスクリム — コピー部分の可読性を確保(写真が明るく情報量が多いため強めに)
+       * 3. 下部の淡いグラデーション — ボタン周りを浮かせて地面に馴染ませる
+       */}
       <div
-        className="absolute inset-0 bg-gradient-to-r from-brand-900/85 via-brand-900/55 to-brand-900/20"
+        className="absolute inset-0 bg-brand-900/45 mix-blend-multiply"
         aria-hidden="true"
       />
       <div
-        className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent"
+        className="absolute inset-0 bg-[linear-gradient(to_right,rgba(29,5,11,0.92)_0%,rgba(29,5,11,0.72)_38%,rgba(29,5,11,0.25)_65%,rgba(29,5,11,0)_85%)]"
+        aria-hidden="true"
+      />
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-ink/55 via-transparent to-transparent"
         aria-hidden="true"
       />
 
