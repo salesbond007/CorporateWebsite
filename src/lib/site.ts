@@ -64,109 +64,129 @@ export const navigation: { key: NavKey; href: string }[] = [
   { key: "company", href: "/company" },
 ];
 
-export const services = [
-  {
-    slug: "ai-solutions",
-    number: "01",
-    title: "AIソリューション",
-    subtitle: "生成AI・フィジカルAI・開発・研修",
-    summary:
-      "生成AIの業務活用からフィジカルAI導入まで、企画・開発・研修をワンストップで支援します。",
-    features: ["生成AI活用", "フィジカルAI導入", "研修・開発支援"],
-    href: "/services/physical-ai-training",
-    image: "/services/cards/ai-solutions.jpg",
-  },
-  {
-    slug: "ai-media",
-    number: "02",
-    title: "AI専門メディア",
-    subtitle: "BondAI",
-    summary: "AI活用のリアルな知見を発信するオウンドメディア。",
-    features: ["AI活用ノウハウを発信", "事例・トレンドを解説"],
-    href: undefined,
-    image: "/services/cards/ai-media.jpg",
-  },
-  {
-    slug: "talent",
-    number: "03",
-    title: "人材ソリューション",
-    subtitle: "営業BPO・エンジニア紹介・顧問紹介",
-    summary:
-      "営業BPO事業、エンジニア紹介、顧問紹介まで、貴社に必要な人材・実行力を提供します。",
-    features: ["営業BPO事業", "エンジニア紹介", "顧問紹介"],
-    href: undefined,
-    image: "/services/cards/talent.jpg",
-  },
-  // 以下は現在非公開 (下記コメント解除で復活)
-  // {
-  //   slug: "sales-bond",
-  //   number: "02",
-  //   title: "リファボンド",
-  //   subtitle: "大手決裁者紹介サービス",
-  //   summary:
-  //     "人脈紹介を活用した、決裁者開拓サービス。ベンチャーから大企業、地方企業まで、幅広い開拓が可能です。完全成果報酬でご提供します。",
-  //   features: [
-  //     "人脈紹介を活用したキーマン開拓",
-  //     "完全成果報酬制",
-  //     "大手企業からベンチャー企業まで開拓可能",
-  //   ],
-  //   image: "/logo-square.jpg",
-  //   illustrationVariant: "abstract" as const,
-  // },
-  // {
-  //   slug: "keyman-bond",
-  //   number: "03",
-  //   title: "キーマンボンド",
-  //   subtitle: "プロ人材/顧問マッチングサービス",
-  //   summary:
-  //     "高度な経営課題を、その道のプロと共に解決する経営支援サービス。営業・マーケ・DX・人事・財務など多彩な領域に精通した経営層・CxO・エキスパートクラスの実力者が伴走します。",
-  //   features: [
-  //     "プロ人材が企業の経営課題を解決",
-  //     "事業フェーズに合わせて最適な人材を配置",
-  //   ],
-  //   image: "/logo-square.jpg",
-  //   illustrationVariant: "grid" as const,
-  // },
-  // {
-  //   slug: "lead-bond",
-  //   number: "04",
-  //   title: "セルボンド",
-  //   subtitle: "BtoB営業支援サービス",
-  //   summary:
-  //     "営業戦略の策定からアポ獲得・商談・成約、そして営業DX・人材紹介まで。BtoBに特化し、必要な営業ソリューションをワンストップで提供。自走できる営業組織づくりまで伴走します。",
-  //   features: [
-  //     "戦略策定〜成約まで一気通貫で伴走",
-  //     "足りない営業リソースを提供",
-  //   ],
-  //   image: "/logo-square.jpg",
-  //   illustrationVariant: "blob" as const,
-  // },
-  // {
-  //   slug: "ai-komon",
-  //   number: "05",
-  //   title: "AI顧問ボンド",
-  //   subtitle: "AI顧問サービス",
-  //   summary:
-  //     "AI活用の相談ならAI顧問ボンド。大手企業技術開発部やIT企業代表などハイクラス層が顧問として伴走。無料相談でロードマップを提示し、月額10万円〜の伴走支援で実装まで導きます。",
-  //   features: [
-  //     "ハイクラスAIプロフェッショナル 100人＋",
-  //     "ロードマップ提示型の伴走支援",
-  //     "月額10万円〜、無理な縛りなし",
-  //   ],
-  //   image: "/logo-square.jpg",
-  //   illustrationVariant: "abstract" as const,
-  //   href: "/services/ai-komon",
-  // },
-] as const;
-
-// Each service entry can optionally include an `image` path (shown as a
-// background photo on hover in ServicesSection) and/or an `href` that
-// links to a dedicated LP instead of an anchor on /services.
-// e.g. `image: "/services/cards/ai-solutions.jpg"`
-export type Service = (typeof services)[number] & {
-  image?: string;
+export type Service = {
+  slug: string;
+  number: string;
+  title: string;
+  subtitle?: string;
+  summary: string;
+  features: string[];
+  /** 設定時は専用LPへ、未設定時は/servicesの該当カードへのアンカーリンクになる */
   href?: string;
+  /** ServicesSectionでhover時に浮かび上がる背景写真 */
+  image?: string;
 };
+
+export type ServiceCategory = {
+  key: string;
+  title: string;
+  services: Service[];
+};
+
+export const serviceCategories: ServiceCategory[] = [
+  {
+    key: "ai-solutions",
+    title: "AIソリューション",
+    services: [
+      {
+        slug: "physical-ai-training",
+        number: "01",
+        title: "フィジカルAI研修",
+        subtitle: "生成AI・AIエージェント・フィジカルAI研修",
+        summary:
+          "生成AIからフィジカルAIまでを体系的に学び、自社・自部署でAI活用を企画できる人材を育成する法人向け研修です。",
+        features: [
+          "生成AI・AIエージェント・フィジカルAIを体系的に学習",
+          "全社員からAI活用の種を発掘",
+          "研修後のAI導入コンサルティング",
+        ],
+        href: "/services/physical-ai-training",
+        image: "/services/physical-ai-training/hero.png",
+      },
+      {
+        slug: "ai-advisor",
+        number: "02",
+        title: "経営者向けAIアドバイザー",
+        subtitle: "AI活用の意思決定を伴走支援",
+        summary:
+          "経営者に伴走し、AI活用の意思決定や投資判断、社内体制づくりを支援するアドバイザリーサービスです。",
+        features: [
+          "経営視点でのAI活用戦略策定",
+          "投資判断・社内体制づくりの伴走支援",
+          "最新AIトレンドのキャッチアップ支援",
+        ],
+        image: "/services/cards/ai-solutions.jpg",
+      },
+      {
+        slug: "ai-development",
+        number: "03",
+        title: "AI受託開発",
+        subtitle: "生成AI・業務システム開発",
+        summary:
+          "生成AIを活用した業務システムやプロダクトの企画・開発を、要件定義から実装まで一気通貫で支援します。",
+        features: [
+          "要件定義〜実装までワンストップ",
+          "生成AI・フィジカルAIの実装支援",
+          "既存システムとの連携開発",
+        ],
+        image: "/services/cards/ai-solutions.jpg",
+      },
+    ],
+  },
+  {
+    key: "talent-solutions",
+    title: "人材ソリューション",
+    services: [
+      {
+        slug: "sales-agency",
+        number: "01",
+        title: "営業代行事業",
+        subtitle: "インサイドセールス・営業BPO",
+        summary:
+          "営業戦略の立案からアポイント獲得、商談まで、貴社の営業活動を代行します。",
+        features: [
+          "営業戦略の立案・実行",
+          "インサイドセールス代行",
+          "アポイント獲得〜商談支援",
+        ],
+        image: "/services/cards/talent.jpg",
+      },
+      {
+        slug: "executive-referral",
+        number: "02",
+        title: "決裁者紹介サービス",
+        subtitle: "人脈紹介型の商談創出",
+        summary:
+          "人脈紹介を活用し、大手企業をはじめとした決裁者へつながる商談機会を創出する完全成果報酬型サービスです。",
+        features: [
+          "人脈紹介による決裁者開拓",
+          "完全成果報酬制",
+          "大手企業からベンチャー企業まで対応",
+        ],
+        image: "/services/cards/talent.jpg",
+      },
+      {
+        slug: "ai-engineer-referral",
+        number: "03",
+        title: "AIエンジニア紹介事業",
+        subtitle: "AI・機械学習領域の人材紹介",
+        summary:
+          "生成AI・機械学習・データ分析領域に強みを持つエンジニア人材をご紹介します。",
+        features: [
+          "AI・機械学習領域に特化した人材紹介",
+          "貴社の開発フェーズに合わせた提案",
+          "業務委託・正社員紹介に対応",
+        ],
+        image: "/services/cards/talent.jpg",
+      },
+    ],
+  },
+];
+
+/** カテゴリを問わず全サービスを横断的に扱いたい場合(Footer等)用のフラット配列 */
+export const services: Service[] = serviceCategories.flatMap(
+  (c) => c.services,
+);
 
 export function navLabel(dict: Dictionary, key: NavKey): string {
   return dict.nav[key];

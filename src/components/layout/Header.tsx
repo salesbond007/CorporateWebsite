@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/Button";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { localePath } from "@/i18n/path";
-import { services } from "@/lib/site";
+import { serviceCategories } from "@/lib/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 
@@ -32,15 +32,16 @@ export function Header({ locale, dict }: Props) {
       label: "サービス一覧",
       highlight: true,
     },
-    ...services
-      .filter((s) => s.slug !== "ai-media")
-      .map((s) => ({
+    ...serviceCategories.flatMap((category) =>
+      category.services.map((s, i) => ({
         href: s.href
           ? localePath(s.href, locale)
           : `${localePath("/services", locale)}#${s.slug}`,
         label: s.title,
         sub: s.subtitle,
+        heading: i === 0 ? category.title : undefined,
       })),
+    ),
   ];
 
   return (
@@ -117,6 +118,8 @@ type NavDropdownItem = {
   sub?: string;
   /** 「サービス一覧」など一覧リンクをテキスト色で軽く区別する */
   highlight?: boolean;
+  /** 設定時、このアイテムの直前にカテゴリ見出しを挿入する */
+  heading?: string;
 };
 
 type NavDropdownProps = {
@@ -174,10 +177,20 @@ function NavDropdown({ label, href, items }: NavDropdownProps) {
       >
         <ul
           role="menu"
-          className="min-w-[280px] rounded-xl2 border border-ink-line bg-white p-2 shadow-card"
+          className="min-w-[300px] rounded-xl2 border border-ink-line bg-white p-2 shadow-card"
         >
           {items.map((item) => (
             <li key={item.href} role="none">
+              {item.heading ? (
+                <p
+                  className={cn(
+                    "px-4 pb-1 text-[11px] font-bold uppercase tracking-[0.1em] text-ink-muted",
+                    item !== items[0] ? "mt-2 pt-3 border-t border-ink-line" : "",
+                  )}
+                >
+                  {item.heading}
+                </p>
+              ) : null}
               <Link
                 role="menuitem"
                 href={item.href}
