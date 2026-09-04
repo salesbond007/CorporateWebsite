@@ -73,7 +73,11 @@ export default function ServicesPage({
         <Container>
           <div className="space-y-20">
             {serviceCategories.map((category) => (
-              <div key={category.key}>
+              <div
+                key={category.key}
+                id={category.key}
+                className="scroll-mt-24 md:scroll-mt-28"
+              >
                 <p className="text-xl md:text-2xl font-black text-ink">
                   {category.title}
                 </p>

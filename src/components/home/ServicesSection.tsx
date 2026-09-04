@@ -2,10 +2,10 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/home/ServiceCard";
-import { serviceCategories } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
+import type { Service } from "@/lib/site";
 
 type Props = {
   locale: Locale;
@@ -14,6 +14,32 @@ type Props = {
 
 const cardClass =
   "group relative isolate flex aspect-square h-full flex-col justify-center overflow-hidden rounded-none border-2 border-ink bg-white p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
+
+/** トップページはカテゴリ単位の2枚のみ表示。内訳(6サービス)は/servicesページで確認できる */
+const categoryCards: Service[] = [
+  {
+    slug: "ai-solutions",
+    number: "01",
+    title: "AIソリューション",
+    subtitle: "研修・アドバイザリー・受託開発",
+    summary:
+      "フィジカルAI研修から経営者向けAIアドバイザー、AI受託開発まで、AI活用をワンストップで支援します。",
+    features: [],
+    href: "/services#ai-solutions",
+    image: "/services/cards/ai-solutions.jpg",
+  },
+  {
+    slug: "talent-solutions",
+    number: "02",
+    title: "人材ソリューション",
+    subtitle: "営業代行・決裁者紹介・エンジニア紹介",
+    summary:
+      "営業代行事業、決裁者紹介サービス、AIエンジニア紹介まで、貴社に必要な人材・実行力を提供します。",
+    features: [],
+    href: "/services#talent-solutions",
+    image: "/services/cards/talent.jpg",
+  },
+];
 
 export function ServicesSection({ locale, dict }: Props) {
   return (
@@ -31,28 +57,15 @@ export function ServicesSection({ locale, dict }: Props) {
           </Link>
         </div>
 
-        <div className="mt-14 space-y-16">
-          {serviceCategories.map((category) => (
-            <div key={category.key}>
-              <p className="text-lg font-black text-brand-600 md:text-xl">
-                {category.title}
-              </p>
-              <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {category.services.map((s, i) => (
-                  <li key={s.slug}>
-                    <Reveal delay={i * 100} className="h-full">
-                      <ServiceCard
-                        service={s}
-                        locale={locale}
-                        className={cardClass}
-                      />
-                    </Reveal>
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2">
+          {categoryCards.map((s, i) => (
+            <li key={s.slug}>
+              <Reveal delay={i * 100} className="h-full">
+                <ServiceCard service={s} locale={locale} className={cardClass} />
+              </Reveal>
+            </li>
           ))}
-        </div>
+        </ul>
       </Container>
     </section>
   );
