@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Noto_Serif_JP } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/layout/Header";
@@ -13,10 +13,10 @@ import { isLocale, locales, ogLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 import "../globals.css";
 
-const notoSerifJp = Noto_Serif_JP({
+const notoSansJp = Noto_Sans_JP({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "900"],
-  variable: "--font-noto-serif-jp",
+  weight: ["400", "500", "600", "700", "800", "900"],
+  variable: "--font-noto-sans-jp",
   display: "swap",
 });
 
@@ -98,7 +98,7 @@ export default function LocaleLayout({
   const dict = getDictionary(locale);
 
   return (
-    <html lang={locale} className={notoSerifJp.variable}>
+    <html lang={locale} className={notoSansJp.variable}>
       <body>
         <a
           href="#main"
