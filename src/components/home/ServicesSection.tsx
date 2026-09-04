@@ -39,6 +39,15 @@ const categoryCards: Service[] = [
     href: "/services#talent-solutions",
     image: "/services/cards/talent.jpg",
   },
+  {
+    slug: "ai-media",
+    number: "03",
+    title: "AI専門メディア",
+    subtitle: "BondAI",
+    summary: "AI活用のリアルな知見を発信するオウンドメディア。",
+    features: [],
+    image: "/services/cards/ai-media.jpg",
+  },
 ];
 
 export function ServicesSection({ locale, dict }: Props) {
@@ -57,7 +66,7 @@ export function ServicesSection({ locale, dict }: Props) {
           </Link>
         </div>
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2">
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {categoryCards.map((s, i) => (
             <li key={s.slug}>
               <Reveal delay={i * 100} className="h-full">
