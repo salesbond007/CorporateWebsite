@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { ServiceCard } from "@/components/home/ServiceCard";
-import { services } from "@/lib/site";
+import { serviceCategories } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
@@ -31,15 +31,28 @@ export function ServicesSection({ locale, dict }: Props) {
           </Link>
         </div>
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, i) => (
-            <li key={s.slug}>
-              <Reveal delay={i * 100} className="h-full">
-                <ServiceCard service={s} locale={locale} className={cardClass} />
-              </Reveal>
-            </li>
+        <div className="mt-14 space-y-16">
+          {serviceCategories.map((category) => (
+            <div key={category.key}>
+              <p className="text-lg font-black text-brand-600 md:text-xl">
+                {category.title}
+              </p>
+              <ul className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {category.services.map((s, i) => (
+                  <li key={s.slug}>
+                    <Reveal delay={i * 100} className="h-full">
+                      <ServiceCard
+                        service={s}
+                        locale={locale}
+                        className={cardClass}
+                      />
+                    </Reveal>
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       </Container>
     </section>
   );

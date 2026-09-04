@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
-import { services } from "@/lib/site";
+import { serviceCategories } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
@@ -71,49 +71,58 @@ export default function ServicesPage({
 
       <section className="bg-white py-24 md:py-32">
         <Container>
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => {
-              const cardContent = (
-                <>
-                  <span className="font-display text-3xl font-bold text-brand-500 transition-colors group-hover:text-white">
-                    {s.number}
-                  </span>
-                  {s.subtitle ? (
-                    <p className="mt-6 mb-1 text-sm font-bold text-brand-600 transition-colors group-hover:text-brand-100">
-                      {s.subtitle}
-                    </p>
-                  ) : null}
-                  <h2 className="text-xl md:text-2xl font-black text-ink leading-tight transition-colors group-hover:text-white">
-                    {s.title}
-                  </h2>
-                  <p className="mt-4 text-sm text-ink leading-relaxed font-medium transition-colors group-hover:text-white/90">
-                    {s.summary}
-                  </p>
-                  {s.href ? (
-                    <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 transition-colors group-hover:text-white">
-                      詳しく見る
-                      <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
-                        →
-                      </span>
-                    </span>
-                  ) : null}
-                </>
-              );
-              const className =
-                "group block h-full rounded-none border border-ink-line bg-white p-8 transition-all duration-300 hover:border-brand-500 hover:bg-brand-500 hover:shadow-card";
-              return (
-                <li key={s.slug} id={s.slug} className="scroll-mt-24 md:scroll-mt-28">
-                  {s.href ? (
-                    <Link href={localePath(s.href, locale)} className={className}>
-                      {cardContent}
-                    </Link>
-                  ) : (
-                    <div className={className}>{cardContent}</div>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+          <div className="space-y-20">
+            {serviceCategories.map((category) => (
+              <div key={category.key}>
+                <p className="text-xl md:text-2xl font-black text-ink">
+                  {category.title}
+                </p>
+                <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {category.services.map((s) => {
+                    const cardContent = (
+                      <>
+                        <span className="font-display text-3xl font-bold text-brand-500 transition-colors group-hover:text-white">
+                          {s.number}
+                        </span>
+                        {s.subtitle ? (
+                          <p className="mt-6 mb-1 text-sm font-bold text-brand-600 transition-colors group-hover:text-brand-100">
+                            {s.subtitle}
+                          </p>
+                        ) : null}
+                        <h2 className="text-xl md:text-2xl font-black text-ink leading-tight transition-colors group-hover:text-white">
+                          {s.title}
+                        </h2>
+                        <p className="mt-4 text-sm text-ink leading-relaxed font-medium transition-colors group-hover:text-white/90">
+                          {s.summary}
+                        </p>
+                        {s.href ? (
+                          <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 transition-colors group-hover:text-white">
+                            詳しく見る
+                            <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                              →
+                            </span>
+                          </span>
+                        ) : null}
+                      </>
+                    );
+                    const className =
+                      "group block h-full rounded-none border border-ink-line bg-white p-8 transition-all duration-300 hover:border-brand-500 hover:bg-brand-500 hover:shadow-card";
+                    return (
+                      <li key={s.slug} id={s.slug} className="scroll-mt-24 md:scroll-mt-28">
+                        {s.href ? (
+                          <Link href={localePath(s.href, locale)} className={className}>
+                            {cardContent}
+                          </Link>
+                        ) : (
+                          <div className={className}>{cardContent}</div>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
         </Container>
       </section>
     </>
