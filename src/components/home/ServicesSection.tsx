@@ -21,9 +21,9 @@ const categoryCards: Service[] = [
     slug: "ai-solutions",
     number: "01",
     title: "AIソリューション",
-    subtitle: "研修・アドバイザリー・受託開発",
+    subtitle: "研修・アドバイザリー・AI顧問",
     summary:
-      "フィジカルAI研修から経営者向けAIアドバイザー、AI受託開発まで、AI活用をワンストップで支援します。",
+      "フィジカルAI研修から経営者向けAIアドバイザー、AI顧問まで、AI活用をワンストップで支援します。",
     features: [],
     href: "/services#ai-solutions",
     image: "/services/cards/ai-solutions.jpg",
@@ -32,9 +32,9 @@ const categoryCards: Service[] = [
     slug: "talent-solutions",
     number: "02",
     title: "人材ソリューション",
-    subtitle: "営業代行・決裁者紹介・エンジニア紹介",
+    subtitle: "ハードウェア開発支援・インサイドセールス支援",
     summary:
-      "営業代行事業、決裁者紹介サービス、AIエンジニア紹介まで、貴社に必要な人材・実行力を提供します。",
+      "ハードウェア開発支援からインサイドセールス支援まで、貴社に必要な人材・実行力を提供します。",
     features: [],
     href: "/services#talent-solutions",
     image: "/services/cards/talent.jpg",
@@ -47,16 +47,6 @@ const categoryCards: Service[] = [
     summary: "AI活用のリアルな知見を発信するオウンドメディア。",
     features: [],
     image: "/services/cards/ai-media.jpg",
-  },
-  {
-    slug: "hardware-development",
-    number: "04",
-    title: "ハードウェア開発",
-    subtitle: "エンジニア・PM・技術顧問",
-    summary:
-      "機構から組込み、無線、AI、制御、品質・安全まで。開発の即戦力を、必要な期間だけご提供します。",
-    features: [],
-    href: "/services/hardware-development",
   },
 ];
 
@@ -76,7 +66,7 @@ export function ServicesSection({ locale, dict }: Props) {
           </Link>
         </div>
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {categoryCards.map((s, i) => (
             <li key={s.slug}>
               <Reveal delay={i * 100} className="h-full">

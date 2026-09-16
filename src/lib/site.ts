@@ -100,7 +100,7 @@ export const serviceCategories: ServiceCategory[] = [
           "全社員からAI活用の種を発掘",
           "研修後のAI導入コンサルティング",
         ],
-        href: "/services/physical-ai-training",
+        // 専用LPは削除。項目自体は掲載を継続(hrefなし)
         image: "/services/physical-ai-training/hero.png",
       },
       {
@@ -118,16 +118,16 @@ export const serviceCategories: ServiceCategory[] = [
         image: "/services/cards/ai-solutions.jpg",
       },
       {
-        slug: "ai-development",
+        slug: "ai-komon",
         number: "03",
-        title: "AI受託開発",
-        subtitle: "生成AI・業務システム開発",
+        title: "AI顧問",
+        subtitle: "AI活用の相談窓口",
         summary:
-          "生成AIを活用した業務システムやプロダクトの企画・開発を、要件定義から実装まで一気通貫で支援します。",
+          "AI活用に関する相談ならAI顧問。技術・業務の両面に精通した顧問が伴走し、活用の方向性から実装判断まで支援します。",
         features: [
-          "要件定義〜実装までワンストップ",
-          "生成AI・フィジカルAIの実装支援",
-          "既存システムとの連携開発",
+          "AI活用に関する継続的な相談窓口",
+          "技術・業務両面からのアドバイス",
+          "実装判断・体制づくりの伴走支援",
         ],
         image: "/services/cards/ai-solutions.jpg",
       },
@@ -138,44 +138,30 @@ export const serviceCategories: ServiceCategory[] = [
     title: "人材ソリューション",
     services: [
       {
-        slug: "sales-agency",
+        slug: "hardware-development",
         number: "01",
-        title: "営業代行事業",
-        subtitle: "インサイドセールス・営業BPO",
+        title: "ハードウェア開発支援",
+        subtitle: "エンジニア・PM・技術顧問",
         summary:
-          "営業戦略の立案からアポイント獲得、商談まで、貴社の営業活動を代行します。",
+          "機構から組込み、無線、AI、制御、品質・安全まで。開発の即戦力を、必要な期間だけご提供します。",
         features: [
-          "営業戦略の立案・実行",
-          "インサイドセールス代行",
-          "アポイント獲得〜商談支援",
+          "ハードウェア領域のエンジニア・PM・技術顧問を業務委託で提供",
+          "機構・電気・組込み・無線・制御・品質安全まで幅広く対応",
+          "技術顧問(月1〜2回)からPM参画まで柔軟に対応",
         ],
-        image: "/services/cards/talent.jpg",
+        href: "/services/hardware-development",
       },
       {
-        slug: "executive-referral",
+        slug: "sales-support",
         number: "02",
-        title: "決裁者紹介サービス",
-        subtitle: "人脈紹介型の商談創出",
+        title: "インサイドセールス支援",
+        subtitle: "アポイント獲得・商談化の支援",
         summary:
-          "人脈紹介を活用し、大手企業をはじめとした決裁者へつながる商談機会を創出する完全成果報酬型サービスです。",
+          "戦略設計から実行まで、アポイント獲得・商談化に向けたインサイドセールス業務を支援します。",
         features: [
-          "人脈紹介による決裁者開拓",
-          "完全成果報酬制",
-          "大手企業からベンチャー企業まで対応",
-        ],
-        image: "/services/cards/talent.jpg",
-      },
-      {
-        slug: "ai-engineer-referral",
-        number: "03",
-        title: "AIエンジニア紹介事業",
-        subtitle: "AI・機械学習領域の人材紹介",
-        summary:
-          "生成AI・機械学習・データ分析領域に強みを持つエンジニア人材をご紹介します。",
-        features: [
-          "AI・機械学習領域に特化した人材紹介",
-          "貴社の開発フェーズに合わせた提案",
-          "業務委託・正社員紹介に対応",
+          "架電・メール等によるアポイント獲得",
+          "商談化率向上のための設計・運用",
+          "営業ツール活用支援",
         ],
         image: "/services/cards/talent.jpg",
       },
