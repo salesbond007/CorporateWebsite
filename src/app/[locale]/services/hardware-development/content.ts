@@ -327,6 +327,17 @@ p{margin:0;}
 .area-list .area-title{display:block;font-weight:700;font-size:0.9375rem;}
 .area-list .area-body{display:block;font-size:0.8125rem;color:var(--ink-600);margin-top:2px;}
 
+.skill-chart-wrap{display:flex;flex-direction:column;align-items:center;gap:var(--space-3);}
+.skill-chart{width:180px;height:180px;}
+.skill-legend{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:10px;width:100%;}
+@media (min-width:480px){
+  .skill-legend{grid-template-columns:1fr 1fr;}
+}
+.skill-legend li{display:flex;align-items:flex-start;gap:8px;}
+.legend-swatch{flex-shrink:0;width:12px;height:12px;border-radius:3px;margin-top:4px;}
+.legend-title{display:block;font-weight:700;font-size:0.8125rem;}
+.legend-body{display:block;font-size:0.75rem;color:var(--ink-600);margin-top:1px;}
+
 /* ---------- ⑤ 頼み方の5段階 ---------- */
 .engage-grid{
   display:grid;
@@ -787,16 +798,34 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         <span class="eyebrow">ENGINEER</span>
         <h3 class="pillar-title">エンジニア｜手を動かす</h3>
         <p class="pillar-desc body-text">実装・設計・立上げを担います。</p>
-        <ul class="area-list">
-          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">機構・機械設計</span><span class="area-body">機構、筐体、治具</span></li>
-          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">電気・回路</span><span class="area-body">回路設計、基板設計</span></li>
-          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">組込み</span><span class="area-body">C/C++、マイコン、組込みLinux</span></li>
-          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">無線・通信</span><span class="area-body">Wi-Fi、BLE、電波法認証、EMC</span></li>
-          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">エッジAI</span><span class="area-body">機器上でのAI実装、異常検知</span></li>
-          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">組込みセキュリティ</span><span class="area-body">改ざん検知、暗号</span></li>
-          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">制御</span><span class="area-body">PLC、ライン立上げ</span></li>
-          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">品質・安全</span><span class="area-body">評価試験、規格対応</span></li>
-        </ul>
+        <div class="skill-chart-wrap">
+          <svg class="skill-chart" viewBox="0 0 200 200" role="img" aria-label="対応領域: 機構・機械設計、電気・回路、組込み、無線・通信、エッジAI、組込みセキュリティ、制御、品質・安全の8領域">
+            <g transform="rotate(-90 100 100)">
+              <circle cx="100" cy="100" r="70" fill="none" stroke="#4A1024" stroke-width="40" stroke-dasharray="54.98 384.84" stroke-dashoffset="0"></circle>
+              <circle cx="100" cy="100" r="70" fill="none" stroke="#5C1530" stroke-width="40" stroke-dasharray="54.98 384.84" stroke-dashoffset="-54.98"></circle>
+              <circle cx="100" cy="100" r="70" fill="none" stroke="#6B1730" stroke-width="40" stroke-dasharray="54.98 384.84" stroke-dashoffset="-109.96"></circle>
+              <circle cx="100" cy="100" r="70" fill="none" stroke="#7C1F3B" stroke-width="40" stroke-dasharray="54.98 384.84" stroke-dashoffset="-164.93"></circle>
+              <circle cx="100" cy="100" r="70" fill="none" stroke="#8B2242" stroke-width="40" stroke-dasharray="54.98 384.84" stroke-dashoffset="-219.91"></circle>
+              <circle cx="100" cy="100" r="70" fill="none" stroke="#A8496A" stroke-width="40" stroke-dasharray="54.98 384.84" stroke-dashoffset="-274.89"></circle>
+              <circle cx="100" cy="100" r="70" fill="none" stroke="#D98CA3" stroke-width="40" stroke-dasharray="54.98 384.84" stroke-dashoffset="-329.87"></circle>
+              <circle cx="100" cy="100" r="70" fill="none" stroke="#E8B9C7" stroke-width="40" stroke-dasharray="54.98 384.84" stroke-dashoffset="-384.85"></circle>
+            </g>
+            <circle cx="100" cy="100" r="48" fill="var(--paper)"></circle>
+            <text x="100" y="97" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" font-weight="800" fill="#6B1730">8</text>
+            <text x="100" y="116" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#63616B">対応領域</text>
+          </svg>
+
+          <ul class="skill-legend">
+            <li><span class="legend-swatch" style="background:#4A1024;"></span><span class="legend-text"><span class="legend-title">機構・機械設計</span><span class="legend-body">機構、筐体、治具</span></span></li>
+            <li><span class="legend-swatch" style="background:#5C1530;"></span><span class="legend-text"><span class="legend-title">電気・回路</span><span class="legend-body">回路設計、基板設計</span></span></li>
+            <li><span class="legend-swatch" style="background:#6B1730;"></span><span class="legend-text"><span class="legend-title">組込み</span><span class="legend-body">C/C++、マイコン、組込みLinux</span></span></li>
+            <li><span class="legend-swatch" style="background:#7C1F3B;"></span><span class="legend-text"><span class="legend-title">無線・通信</span><span class="legend-body">Wi-Fi、BLE、電波法認証、EMC</span></span></li>
+            <li><span class="legend-swatch" style="background:#8B2242;"></span><span class="legend-text"><span class="legend-title">エッジAI</span><span class="legend-body">機器上でのAI実装、異常検知</span></span></li>
+            <li><span class="legend-swatch" style="background:#A8496A;"></span><span class="legend-text"><span class="legend-title">組込みセキュリティ</span><span class="legend-body">改ざん検知、暗号</span></span></li>
+            <li><span class="legend-swatch" style="background:#D98CA3;"></span><span class="legend-text"><span class="legend-title">制御</span><span class="legend-body">PLC、ライン立上げ</span></span></li>
+            <li><span class="legend-swatch" style="background:#E8B9C7;"></span><span class="legend-text"><span class="legend-title">品質・安全</span><span class="legend-body">評価試験、規格対応</span></span></li>
+          </ul>
+        </div>
       </div>
 
       <div class="pillar reveal">
