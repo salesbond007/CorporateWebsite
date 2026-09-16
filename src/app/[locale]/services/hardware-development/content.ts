@@ -306,10 +306,23 @@ p{margin:0;}
 .pillar-desc{color:var(--ink-600);margin-bottom:var(--space-4);}
 .area-list{list-style:none;margin:0;padding:0;}
 .area-list li{
-  background:var(--paper-2);
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  background:var(--paper);
+  border:1px solid var(--ink-300);
   border-radius:var(--radius-sm);
   padding:12px 16px;
   margin-bottom:8px;
+  transition:border-color .2s ease,background-color .2s ease;
+}
+.area-list li:hover{border-color:var(--wine-300);background:var(--wine-50);}
+.area-bullet{
+  flex-shrink:0;
+  width:8px;height:8px;
+  margin-top:8px;
+  border-radius:50%;
+  background:var(--wine-700);
 }
 .area-list .area-title{display:block;font-weight:700;font-size:0.9375rem;}
 .area-list .area-body{display:block;font-size:0.8125rem;color:var(--ink-600);margin-top:2px;}
@@ -775,14 +788,14 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         <h3 class="pillar-title">エンジニア｜手を動かす</h3>
         <p class="pillar-desc body-text">実装・設計・立上げを担います。</p>
         <ul class="area-list">
-          <li><span class="area-title">機構・機械設計</span><span class="area-body">機構、筐体、治具</span></li>
-          <li><span class="area-title">電気・回路</span><span class="area-body">回路設計、基板設計</span></li>
-          <li><span class="area-title">組込み</span><span class="area-body">C/C++、マイコン、組込みLinux</span></li>
-          <li><span class="area-title">無線・通信</span><span class="area-body">Wi-Fi、BLE、電波法認証、EMC</span></li>
-          <li><span class="area-title">エッジAI</span><span class="area-body">機器上でのAI実装、異常検知</span></li>
-          <li><span class="area-title">組込みセキュリティ</span><span class="area-body">改ざん検知、暗号</span></li>
-          <li><span class="area-title">制御</span><span class="area-body">PLC、ライン立上げ</span></li>
-          <li><span class="area-title">品質・安全</span><span class="area-body">評価試験、規格対応</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">機構・機械設計</span><span class="area-body">機構、筐体、治具</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">電気・回路</span><span class="area-body">回路設計、基板設計</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">組込み</span><span class="area-body">C/C++、マイコン、組込みLinux</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">無線・通信</span><span class="area-body">Wi-Fi、BLE、電波法認証、EMC</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">エッジAI</span><span class="area-body">機器上でのAI実装、異常検知</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">組込みセキュリティ</span><span class="area-body">改ざん検知、暗号</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">制御</span><span class="area-body">PLC、ライン立上げ</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">品質・安全</span><span class="area-body">評価試験、規格対応</span></li>
         </ul>
       </div>
 
@@ -792,10 +805,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         <p class="pillar-desc body-text">要件定義、開発推進、ベンダー調整、量産移行、技術判断を担います。</p>
         <p class="note-text" style="margin-bottom:12px;">こんなときに</p>
         <ul class="area-list">
-          <li><span class="area-title">何を作るかが決まらない</span></li>
-          <li><span class="area-title">開発が遅れているが、原因も打ち手も分からない</span></li>
-          <li><span class="area-title">試作から量産に進められない</span></li>
-          <li><span class="area-title">社内に技術を判断できる人がいない</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">何を作るかが決まらない</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">開発が遅れているが、原因も打ち手も分からない</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">試作から量産に進められない</span></li>
+          <li><span class="area-bullet" aria-hidden="true"></span><span class="area-title">社内に技術を判断できる人がいない</span></li>
         </ul>
       </div>
     </div>
