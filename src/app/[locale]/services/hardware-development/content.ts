@@ -155,6 +155,14 @@ p{margin:0;}
 }
 .btn-invert:hover{background:var(--wine-50);border-color:var(--wine-50);color:var(--wine-700);}
 
+.btn-outline{
+  background:transparent;
+  color:var(--wine-700);
+  border-color:var(--wine-300);
+  box-shadow:none;
+}
+.btn-outline:hover{background:var(--wine-50);border-color:var(--wine-500);color:var(--wine-700);}
+
 .bg-2{background:var(--paper-2);}
 
 /* ---------- reveal(スクロールフェードイン) ---------- */
@@ -185,20 +193,17 @@ p{margin:0;}
 
 /* ---------- ① hero ---------- */
 .hero{position:relative;overflow:hidden;}
-.hero-blob{
-  position:absolute;
-  border-radius:50%;
-  background:var(--wine-100);
-  z-index:0;
-}
-.hero-blob.b1{width:420px;height:420px;top:-180px;right:-140px;}
-.hero-blob.b2{width:260px;height:260px;bottom:-140px;left:-100px;background:var(--peach);}
-.hero .wrap{position:relative;z-index:1;padding-top:80px;padding-bottom:80px;}
+.hero{background:var(--wine-700);padding-bottom:0;}
+.hero .wrap{position:relative;z-index:1;padding-top:80px;padding-bottom:96px;}
 @media (min-width:1024px){
-  .hero .wrap{padding-top:112px;padding-bottom:112px;}
+  .hero .wrap{padding-top:112px;padding-bottom:128px;}
 }
-.hero h1{margin-top:var(--space-3);margin-bottom:var(--space-3);color:var(--wine-900);}
-.hero .lead{max-width:var(--text-max);margin-bottom:var(--space-4);}
+.hero .eyebrow{background:rgba(255,255,255,0.16);color:#fff;}
+.hero h1{margin-top:var(--space-3);margin-bottom:var(--space-3);color:#fff;}
+.hero .lead{max-width:var(--text-max);margin-bottom:var(--space-4);color:rgba(255,255,255,0.85);}
+.hero .btn-invert{margin-right:12px;}
+.wave-divider{display:block;width:100%;height:auto;margin-top:-2px;}
+.wave-divider path{fill:var(--paper-2);}
 
 /* ---------- ② 課題提起 ---------- */
 .problem-grid{
@@ -211,11 +216,24 @@ p{margin:0;}
   .problem-grid{grid-template-columns:repeat(3,1fr);}
 }
 .problem-card{
+  position:relative;
   background:var(--paper);
   border:1px solid var(--ink-300);
   border-radius:var(--radius-md);
   padding:var(--space-3);
+  padding-top:var(--space-4);
   box-shadow:0 6px 18px -14px rgba(74,16,36,0.35);
+}
+.check-badge{
+  position:absolute;
+  top:-14px;
+  left:20px;
+  width:32px;height:32px;
+  border-radius:10px;
+  background:var(--wine-700);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 14px -6px rgba(74,16,36,0.55);
 }
 .icon-badge{
   width:52px;height:52px;
@@ -224,6 +242,12 @@ p{margin:0;}
   display:flex;align-items:center;justify-content:center;
   margin-bottom:var(--space-2);
   color:var(--wine-700);
+}
+.problem-arrow{
+  display:flex;
+  justify-content:center;
+  color:var(--wine-500);
+  margin-top:var(--space-2);
 }
 .problem-card h3{margin-bottom:8px;color:var(--ink-900);}
 .problem-card p{color:var(--ink-600);font-size:0.9375rem;}
@@ -431,42 +455,67 @@ p{margin:0;}
   .flow{grid-template-columns:repeat(4,1fr);}
 }
 .flow-step{
+  position:relative;
   background:var(--paper);
   border:1px solid var(--ink-300);
   border-radius:var(--radius-md);
   padding:var(--space-3);
 }
+@media (min-width:768px){
+  .flow-step:not(:first-child)::before{
+    content:"";
+    position:absolute;
+    left:-13px;
+    top:50%;
+    transform:translateY(-50%);
+    width:0;height:0;
+    border-top:7px solid transparent;
+    border-bottom:7px solid transparent;
+    border-left:9px solid var(--wine-300);
+    z-index:1;
+  }
+}
 .flow-num{
-  width:36px;height:36px;
+  width:52px;height:52px;
   border-radius:50%;
-  background:var(--wine-700);
-  color:#fff;
+  background:var(--wine-100);
+  color:var(--wine-700);
   display:flex;align-items:center;justify-content:center;
-  font-family:'Inter',sans-serif;
-  font-size:0.9375rem;
-  font-weight:800;
   margin-bottom:var(--space-2);
 }
 .flow-step h3{margin-bottom:6px;}
 .flow-step p{color:var(--ink-600);font-size:0.875rem;}
 
 /* ---------- ⑩ フォーム ---------- */
+.contact-section{background:var(--wine-700);}
+.contact-section .eyebrow{background:rgba(255,255,255,0.16);color:#fff;}
+.contact-section h2{color:#fff;}
 .form-card{
   max-width:560px;
   margin:var(--space-5) auto 0;
-  background:var(--paper);
-  border:1px solid var(--ink-300);
+  background:#fff;
   border-radius:var(--radius-lg);
   padding:var(--space-4);
+  box-shadow:0 20px 44px -20px rgba(0,0,0,0.35);
 }
 .field{margin-bottom:var(--space-3);}
 .field label{
-  display:block;
+  display:flex;
+  align-items:center;
+  gap:8px;
   font-size:0.8125rem;
   font-weight:700;
   color:var(--ink-600);
   margin-bottom:8px;
 }
+.field-tag{
+  font-size:0.6875rem;
+  font-weight:700;
+  padding:2px 8px;
+  border-radius:999px;
+}
+.field-tag.required{background:var(--wine-100);color:var(--wine-700);}
+.field-tag.optional{background:var(--ink-300);color:var(--ink-600);}
 .field input,.field textarea{
   width:100%;
   border:1px solid var(--ink-300);
@@ -522,7 +571,24 @@ p{margin:0;}
 @media (prefers-reduced-motion: reduce){
   .faq-a-wrap{transition:none;}
 }
-.faq-a{padding:0 20px 18px 56px;font-size:0.9375rem;color:var(--ink-600);}
+.faq-a{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:0 20px 18px 20px;
+  font-size:0.9375rem;
+  color:var(--ink-600);
+}
+.faq-a .a-mark{
+  flex-shrink:0;
+  color:#fff;
+  font-weight:800;
+  background:var(--wine-300);
+  border-radius:50%;
+  width:24px;height:24px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.8125rem;
+}
 
 /* ---------- ⑫ 最後のCTA ---------- */
 .final-cta{background:var(--wine-700);color:#fff;text-align:center;border-radius:var(--radius-lg);}
@@ -545,6 +611,39 @@ footer .foot-links{display:flex;gap:var(--space-3);font-size:0.8125rem;}
 footer a{text-decoration:none;}
 footer a:hover{color:#fff;}
 
+/* ---------- フローティングお問い合わせウィジェット ---------- */
+.float-contact{
+  position:fixed;
+  right:16px;
+  bottom:16px;
+  z-index:20;
+  width:168px;
+  background:var(--wine-50);
+  border:1px solid var(--wine-100);
+  border-radius:var(--radius-md);
+  padding:14px;
+  box-shadow:0 12px 28px -12px rgba(74,16,36,0.35);
+  opacity:0;
+  transform:translateY(12px);
+  pointer-events:none;
+  transition:opacity .3s ease,transform .3s ease;
+}
+.float-contact.is-shown{opacity:1;transform:translateY(0);pointer-events:auto;}
+.float-contact-text{
+  font-size:0.75rem;
+  line-height:1.6;
+  color:var(--wine-900);
+  font-weight:700;
+  margin-bottom:10px;
+}
+@media (max-width:640px){
+  .float-contact{width:auto;left:16px;padding:10px 14px;display:flex;align-items:center;gap:12px;}
+  .float-contact-text{margin-bottom:0;}
+}
+@media (prefers-reduced-motion: reduce){
+  .float-contact{transition:none;}
+}
+
 /* focus visibility全体 */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   outline:2px solid var(--wine-700);
@@ -557,14 +656,15 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <header class="site-header">
   <div class="wrap">
     <span class="logo-placeholder">SERVICE NAME</span>
-    <a href="#contact" class="btn" style="height:40px;padding:0 20px;font-size:0.8125rem;box-shadow:none;">相談する</a>
+    <div style="display:flex;gap:10px;">
+      <a href="#contact" class="btn btn-outline" style="height:40px;padding:0 18px;font-size:0.8125rem;box-shadow:none;">資料請求</a>
+      <a href="#contact" class="btn" style="height:40px;padding:0 18px;font-size:0.8125rem;box-shadow:none;">相談する</a>
+    </div>
   </div>
 </header>
 
 <!-- ① ファーストビュー -->
 <section class="hero">
-  <div class="hero-blob b1" aria-hidden="true"></div>
-  <div class="hero-blob b2" aria-hidden="true"></div>
   <div class="wrap">
     <div class="text-block reveal">
       <span class="eyebrow">HARDWARE DEVELOPMENT</span>
@@ -574,8 +674,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         機構から組込み、無線、AI、制御、品質・安全まで。
       </p>
       <a href="#contact" class="btn">相談する(無料)</a>
+      <a href="#contact" class="btn btn-invert">資料請求</a>
     </div>
   </div>
+  <svg class="wave-divider" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,32 C240,68 480,-4 720,20 C960,44 1200,68 1440,28 L1440,60 L0,60 Z"></path>
+  </svg>
 </section>
 
 <!-- ② 課題提起 -->
@@ -588,35 +692,45 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 
     <div class="problem-grid">
       <div class="problem-card reveal">
+        <span class="check-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="4" stroke="currentColor" stroke-width="2"/><path d="M14 3v3M14 22v3M25 14h-3M6 14H3M21.6 6.4l-2.1 2.1M8.5 19.5l-2.1 2.1M21.6 21.6l-2.1-2.1M8.5 8.5L6.4 6.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <h3>機構設計ができる人がいない</h3>
         <p>筐体・治具まで踏み込んで設計できる人材が社内にいない。</p>
       </div>
       <div class="problem-card reveal">
+        <span class="check-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><rect x="6" y="6" width="16" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M11 6V3M17 6V3M11 25v-3M17 25v-3M6 11H3M6 17H3M25 11h-3M25 17h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <h3>試作から量産に進められない</h3>
         <p>プロトタイプはできても、量産設計・立上げの知見が不足している。</p>
       </div>
       <div class="problem-card reveal">
+        <span class="check-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M6 20a11 11 0 0116 0M9.5 16.5a6.5 6.5 0 019 0M14 21v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <h3>無線・法規対応の知見がない</h3>
         <p>Wi-Fi/BLE実装や電波法認証、EMC対応をどこから進めればよいか分からない。</p>
       </div>
       <div class="problem-card reveal">
+        <span class="check-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><rect x="9" y="9" width="10" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M14 4v3M14 21v3M4 14h3M21 14h3M6.5 6.5l2 2M19.5 6.5l-2 2M6.5 21.5l2-2M19.5 21.5l-2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <h3>エッジAI実装まで手が回らない</h3>
         <p>機器上でのAI推論・異常検知の実装を担える人材がいない。</p>
       </div>
       <div class="problem-card reveal">
+        <span class="check-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="2"/><path d="M14 8v6l4 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <h3>開発が遅れているが原因が分からない</h3>
         <p>スケジュールが遅延しているが、どこがボトルネックか整理できていない。</p>
       </div>
       <div class="problem-card reveal">
+        <span class="check-badge" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8.5l3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="4" stroke="currentColor" stroke-width="2"/><path d="M5 24c1.5-5 5-7.5 9-7.5s7.5 2.5 9 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <h3>社内に技術を判断できる人がいない</h3>
         <p>提案や見積りの妥当性を、社内だけでは判断しきれない。</p>
       </div>
+    </div>
+
+    <div class="problem-arrow reveal" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M7 11l7 7 7-7" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </div>
   </div>
 </section>
@@ -848,22 +962,22 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 
     <div class="flow reveal">
       <div class="flow-step">
-        <span class="flow-num num">01</span>
+        <span class="flow-num"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><rect x="4" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M5 8l9 7 9-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <h3>お問い合わせ</h3>
         <p>フォームより、課題やご相談内容をお送りください。</p>
       </div>
       <div class="flow-step">
-        <span class="flow-num num">02</span>
+        <span class="flow-num"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M4 8a2 2 0 012-2h9a2 2 0 012 2v6a2 2 0 01-2 2h-6l-5 4v-4H6a2 2 0 01-2-2V8z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M17 11h5a2 2 0 012 2v6a2 2 0 01-2 2h-1v3l-4-3h-4a2 2 0 01-2-2v-1" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
         <h3>ヒアリング・ご提案</h3>
         <p>現状の課題を伺い、適した頼み方と技術者をご提案します。</p>
       </div>
       <div class="flow-step">
-        <span class="flow-num num">03</span>
+        <span class="flow-num"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M3 14l5-5 4 4 3-3M15 10h5v5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h20M9 20v-5M19 20v-5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <h3>契約・アサイン</h3>
         <p>業務範囲・成果物を取り決め、準委任契約を締結します。</p>
       </div>
       <div class="flow-step">
-        <span class="flow-num num">04</span>
+        <span class="flow-num"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M14 4l3 6 6.5 1-4.7 4.6L20 22l-6-3.4L8 22l1.2-6.4L4.5 11l6.5-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
         <h3>稼働開始</h3>
         <p>技術者が稼働を開始します。進行状況は弊社が窓口となり管理します。</p>
       </div>
@@ -872,7 +986,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 </section>
 
 <!-- ⑩ お問い合わせフォーム(見た目のみ。送信処理は未実装) -->
-<section id="contact" class="bg-2">
+<section id="contact" class="contact-section">
   <div class="wrap">
     <div class="reveal center text-block">
       <span class="eyebrow">CONTACT</span>
@@ -881,19 +995,19 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 
     <form class="form-card reveal" onsubmit="return false;">
       <div class="field">
-        <label for="hw-company">会社名</label>
+        <label for="hw-company">会社名<span class="field-tag required">必須</span></label>
         <input type="text" id="hw-company" name="company" autocomplete="organization">
       </div>
       <div class="field">
-        <label for="hw-name">お名前</label>
+        <label for="hw-name">お名前<span class="field-tag required">必須</span></label>
         <input type="text" id="hw-name" name="name" autocomplete="name">
       </div>
       <div class="field">
-        <label for="hw-email">メールアドレス</label>
+        <label for="hw-email">メールアドレス<span class="field-tag required">必須</span></label>
         <input type="email" id="hw-email" name="email" autocomplete="email">
       </div>
       <div class="field">
-        <label for="hw-message">ご相談内容</label>
+        <label for="hw-message">ご相談内容<span class="field-tag optional">任意</span></label>
         <textarea id="hw-message" name="message" rows="5"></textarea>
       </div>
       <button type="button" class="btn form-submit">送信する</button>
@@ -915,28 +1029,28 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           <span class="q-text"><span class="q-mark">Q</span>契約形態は？</span>
           <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a">準委任契約です(成果物のある診断は請負となります)。</div></div>
+        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A</span>準委任契約です(成果物のある診断は請負となります)。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
           <span class="q-text"><span class="q-mark">Q</span>派遣や人材紹介ですか？</span>
           <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a">いずれも異なります。</div></div>
+        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A</span>いずれも異なります。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
           <span class="q-text"><span class="q-mark">Q</span>二次受けはありますか？</span>
           <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a">ありません。弊社から直接技術者に依頼します。</div></div>
+        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A</span>ありません。弊社から直接技術者に依頼します。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
           <span class="q-text"><span class="q-mark">Q</span>偽装請負にならないか？</span>
           <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a">業務範囲と成果物を事前に定め、指示は弊社を通す運用です。</div></div>
+        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A</span>業務範囲と成果物を事前に定め、指示は弊社を通す運用です。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
@@ -944,28 +1058,28 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <!-- TODO: 費用の提示方法が決定次第、本文を差し替える -->
-        <div class="faq-a-wrap"><div class="faq-a">要相談です。貴社の課題・期間に応じてお見積りします。</div></div>
+        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A</span>要相談です。貴社の課題・期間に応じてお見積りします。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
           <span class="q-text"><span class="q-mark">Q</span>直接契約したくなったら？</span>
           <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a">事前協議のうえ、移行手数料で対応します。</div></div>
+        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A</span>事前協議のうえ、移行手数料で対応します。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
           <span class="q-text"><span class="q-mark">Q</span>秘密保持は？</span>
           <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a">NDAを締結します。技術者とも個別に締結しています。</div></div>
+        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A</span>NDAを締結します。技術者とも個別に締結しています。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
           <span class="q-text"><span class="q-mark">Q</span>賠償責任は？</span>
           <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a">賠償責任保険に加入しています。</div></div>
+        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A</span>賠償責任保険に加入しています。</div></div>
       </div>
     </div>
   </div>
@@ -997,6 +1111,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
     </div>
   </div>
 </footer>
+
+<!-- フローティングお問い合わせウィジェット -->
+<div class="float-contact" id="float-contact">
+  <p class="float-contact-text">ご相談・ご質問は<br>お気軽にどうぞ</p>
+  <a href="#contact" class="btn" style="width:100%;height:44px;font-size:0.8125rem;">相談する(無料)</a>
+</div>
 
 <script>
 (function () {
@@ -1043,6 +1163,22 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       }
     });
   });
+
+  // フローティングお問い合わせウィジェット(ファーストビューを過ぎたら表示、
+  // フォームやフッター付近では邪魔にならないよう非表示にする)
+  var floatContact = document.getElementById("float-contact");
+  var contactSection = document.getElementById("contact");
+  if (floatContact && contactSection) {
+    var updateFloatContact = function () {
+      var scrollY = window.scrollY || window.pageYOffset;
+      var contactTop = contactSection.getBoundingClientRect().top + scrollY;
+      var shouldShow = scrollY > window.innerHeight * 0.6 && scrollY < contactTop - 200;
+      floatContact.classList.toggle("is-shown", shouldShow);
+    };
+    updateFloatContact();
+    window.addEventListener("scroll", updateFloatContact, { passive: true });
+    window.addEventListener("resize", updateFloatContact);
+  }
 })();
 </script>
 </body>
