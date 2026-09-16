@@ -229,63 +229,32 @@ p{margin:0;}
 .problem-card p{color:var(--ink-600);font-size:0.9375rem;}
 
 /* ---------- ③ 構造の説明 ---------- */
-.structure-stats{
-  display:flex;
-  flex-direction:column;
-  gap:var(--space-2);
+.structure-explain{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--space-4);
   margin-top:var(--space-5);
+  align-items:center;
 }
 @media (min-width:768px){
-  .structure-stats{flex-direction:row;}
+  .structure-explain{grid-template-columns:auto 1fr;gap:var(--space-6);}
 }
-.stat{
-  flex:1;
-  padding:var(--space-3);
-  background:var(--paper);
-  border:1px solid var(--ink-300);
-  border-radius:var(--radius-md);
-  text-align:center;
-}
-.stat.stat-highlight{background:var(--wine-700);border-color:var(--wine-700);}
-.stat.stat-highlight .stat-value,.stat.stat-highlight .stat-unit{color:#fff;}
-.stat.stat-highlight .stat-label{color:rgba(255,255,255,0.85);}
-.stat-value{
-  font-size:clamp(2.5rem,6vw,4rem);
-  font-weight:800;
+.structure-number{text-align:left;}
+.structure-number-value{
+  font-size:clamp(3rem,8vw,5rem);
+  font-weight:700;
   color:var(--wine-700);
   line-height:1;
   letter-spacing:-0.02em;
 }
-.stat-unit{font-size:1.125rem;font-weight:700;margin-left:4px;color:var(--wine-700);}
-.stat-label{margin-top:var(--space-2);font-size:0.875rem;color:var(--ink-600);}
-
-.compare{
-  display:grid;
-  grid-template-columns:1fr;
-  gap:var(--space-2);
-  margin-top:var(--space-4);
-}
-@media (min-width:768px){
-  .compare{grid-template-columns:1fr 1fr;}
-}
-.compare-col{
-  padding:var(--space-3);
-  border-radius:var(--radius-md);
-  background:var(--paper);
-  border:1px solid var(--ink-300);
-}
-.compare-col .eyebrow{margin-bottom:var(--space-2);}
-
-.structure-conclusion{
-  margin-top:var(--space-4);
-  padding:var(--space-3);
-  background:var(--wine-50);
-  border-radius:var(--radius-md);
-  color:var(--wine-900);
+.structure-number-suffix{
+  font-size:1.125rem;
   font-weight:700;
-  font-size:1.0625rem;
-  line-height:1.9;
+  color:var(--wine-700);
+  margin-left:6px;
 }
+.structure-explain-text p{margin-bottom:var(--space-2);}
+.structure-explain-text p:last-child{margin-bottom:0;}
 
 /* ---------- ④ 2つの柱 ---------- */
 .pillars{
@@ -653,50 +622,28 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 </section>
 
 <!-- ③ 構造の説明 -->
-<section>
+<section class="bg-2">
   <div class="wrap">
     <div class="text-block reveal center" style="margin-left:auto;margin-right:auto;">
       <span class="eyebrow">STRUCTURE</span>
-      <h2 style="margin-top:16px;">なぜ「今」ハードウェア人材が足りないのか</h2>
+      <h2 style="margin-top:16px;">採用で解決しようとすると、<br>時間がかかります</h2>
     </div>
 
-    <div class="structure-stats reveal">
-      <div class="stat">
-        <div><span class="stat-value num">1.2</span><span class="stat-unit">倍</span></div>
-        <p class="stat-label">全職種平均の有効求人倍率(目安)</p>
+    <div class="structure-explain reveal">
+      <div class="structure-number">
+        <span class="structure-number-value num">約32万人</span><span class="structure-number-suffix">減少</span>
+        <!-- TODO: 出典・数値の最終確認が済み次第、本文と合わせて差し替える -->
+        <p class="note-text" style="margin-top:8px;">※製造業の就業者数(国勢調査 2015年→2020年)</p>
       </div>
-      <div class="stat">
-        <div><span class="stat-value num">3.0</span><span class="stat-unit">倍</span></div>
-        <p class="stat-label">IT人材の有効求人倍率(目安)</p>
-      </div>
-      <div class="stat stat-highlight">
-        <div><span class="stat-value num">6.00</span><span class="stat-unit">倍</span></div>
-        <p class="stat-label">ハードウェア技術者の有効求人倍率(目安)</p>
-      </div>
-    </div>
-    <p class="note-text" style="margin-top:12px;">
-      <!-- TODO: 正式な数値・出典が確定次第、実データに差し替える -->
-      ※各種公開統計をもとにした目安値です。正式な数値は別途ご確認ください。
-    </p>
-
-    <div class="compare reveal">
-      <div class="compare-col">
-        <span class="eyebrow">IT人材</span>
-        <p class="body-text" style="margin-top:12px;">
-          採用競争は激しいものの、母数自体は大きく、業務委託・副業など調達手段も多様化しています。
+      <div class="structure-explain-text">
+        <p class="body-text">
+          ハードウェアの技術は、現場で実物を扱いながら何年もかけて身につきます。未経験者を採用して育てる場合、ひとりで判断できるようになるまでに数年かかります。
         </p>
-      </div>
-      <div class="compare-col">
-        <span class="eyebrow">ハードウェア人材</span>
-        <p class="body-text" style="margin-top:12px;">
-          機構・電気・組込みを横断できる人材はもともと母数が少なく、育成にも時間がかかるため、代替が利きません。
+        <p class="body-text">
+          開発には期限があります。間に合わせるには、すでに経験を積んだ人に入ってもらうのが最も速い選択です。
         </p>
       </div>
     </div>
-
-    <p class="structure-conclusion reveal text-block center">
-      だからこそ、必要な期間だけ、必要な技術者に、直接依頼できる仕組みが必要です。
-    </p>
   </div>
 </section>
 
@@ -806,8 +753,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       </div>
       <div class="reason reveal">
         <span class="reason-num num">02</span>
-        <h3>準委任契約、指示系統も明確</h3>
-        <p>業務範囲と成果物を事前に定め、指示は弊社を通す運用のため、契約上の位置づけが明確です。</p>
+        <h3>責任の所在が明確</h3>
+        <p>弊社が契約の主体となり、業務の遂行に責任を持ちます。間に複数の会社が入る形にはしません。窓口は一つ、確認先も一つです。</p>
       </div>
       <div class="reason reveal">
         <span class="reason-num num">03</span>
