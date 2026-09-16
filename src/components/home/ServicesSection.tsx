@@ -48,6 +48,16 @@ const categoryCards: Service[] = [
     features: [],
     image: "/services/cards/ai-media.jpg",
   },
+  {
+    slug: "hardware-development",
+    number: "04",
+    title: "ハードウェア開発",
+    subtitle: "エンジニア・PM・技術顧問",
+    summary:
+      "機構から組込み、無線、AI、制御、品質・安全まで。開発の即戦力を、必要な期間だけご提供します。",
+    features: [],
+    href: "/services/hardware-development",
+  },
 ];
 
 export function ServicesSection({ locale, dict }: Props) {
@@ -66,7 +76,7 @@ export function ServicesSection({ locale, dict }: Props) {
           </Link>
         </div>
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {categoryCards.map((s, i) => (
             <li key={s.slug}>
               <Reveal delay={i * 100} className="h-full">

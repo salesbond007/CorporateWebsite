@@ -120,6 +120,7 @@ export default function LocaleLayout({
               { name: "ホーム", url: `/${locale}` },
               { name: "サービス案内", url: `/${locale}/services` },
               { name: "フィジカルAI研修", url: `/${locale}/services/physical-ai-training` },
+              { name: "ハードウェア開発", url: `/${locale}/services/hardware-development` },
               { name: "お知らせ", url: `/${locale}/news` },
               { name: "会社概要", url: `/${locale}/company` },
               { name: "お問い合わせ", url: `/${locale}/contact` },
