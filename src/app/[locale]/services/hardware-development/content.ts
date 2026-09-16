@@ -11,18 +11,21 @@ export const hardwareDevelopmentHtml = String.raw`<!DOCTYPE html>
 <meta name="description" content="製造業向けに、ハードウェア領域のエンジニア・PM・技術顧問を業務委託(準委任)で提供します。機構から組込み、無線、AI、制御、品質・安全まで。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
   --wine-900:#4A1024;
   --wine-700:#6B1730;
   --wine-500:#8B2242;
+  --wine-300:#D98CA3;
   --wine-100:#F5EBEE;
+  --wine-50:#FBF3F5;
+  --peach:#FFF4EC;
   --ink-900:#1A1A1C;
-  --ink-600:#5A5A60;
-  --ink-300:#C8C8CC;
-  --paper:#FCFBFA;
-  --paper-2:#F4F2F0;
+  --ink-600:#63616B;
+  --ink-300:#E3DEDF;
+  --paper:#FFFDFB;
+  --paper-2:#FBF1F0;
 
   --space-1:8px;
   --space-2:16px;
@@ -30,10 +33,12 @@ export const hardwareDevelopmentHtml = String.raw`<!DOCTYPE html>
   --space-4:40px;
   --space-5:64px;
   --space-6:96px;
-  --space-7:128px;
 
   --content-max:1080px;
-  --text-max:720px;
+  --text-max:680px;
+  --radius-lg:28px;
+  --radius-md:20px;
+  --radius-sm:14px;
 }
 
 *,*::before,*::after{box-sizing:border-box;}
@@ -65,10 +70,11 @@ button{font:inherit;}
 }
 
 .text-block{max-width:var(--text-max);}
+.center{text-align:center;margin-left:auto;margin-right:auto;}
 
-section{padding-top:72px;padding-bottom:72px;}
+section{padding-top:64px;padding-bottom:64px;}
 @media (min-width:1024px){
-  section{padding-top:128px;padding-bottom:128px;}
+  section{padding-top:108px;padding-bottom:108px;}
 }
 
 h1,h2,h3{
@@ -76,19 +82,21 @@ h1,h2,h3{
   margin:0;
 }
 h1{
-  font-size:clamp(1.75rem,4.5vw,3.25rem);
-  line-height:1.25;
-  letter-spacing:-0.02em;
+  font-size:clamp(1.875rem,4.8vw,3.25rem);
+  line-height:1.3;
+  letter-spacing:-0.01em;
+  font-weight:900;
 }
 h2{
-  font-size:clamp(1.375rem,3vw,2.125rem);
-  line-height:1.35;
+  font-size:clamp(1.5rem,3.4vw,2.25rem);
+  line-height:1.4;
+  font-weight:900;
   letter-spacing:-0.01em;
 }
 h3{
   font-size:clamp(1.0625rem,2vw,1.25rem);
-  font-weight:500;
-  line-height:1.4;
+  font-weight:700;
+  line-height:1.5;
 }
 p{margin:0;}
 .body-text{
@@ -101,23 +109,19 @@ p{margin:0;}
   .body-text{font-size:1.0625rem;}
 }
 .sub-text{font-size:0.875rem;color:var(--ink-600);line-height:1.8;}
-.note-text{font-size:0.75rem;color:var(--ink-600);line-height:1.7;}
+.note-text{font-size:0.8125rem;color:var(--ink-600);line-height:1.8;}
 
 .eyebrow{
-  display:inline-block;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
   font-size:0.75rem;
   font-weight:700;
-  letter-spacing:0.15em;
-  text-transform:uppercase;
+  letter-spacing:0.12em;
   color:var(--wine-700);
-}
-
-.rule-short{
-  width:48px;
-  height:3px;
-  background:var(--wine-700);
-  border:0;
-  margin:0 0 var(--space-3);
+  background:var(--wine-100);
+  padding:6px 14px;
+  border-radius:999px;
 }
 
 .hr{border:0;border-top:1px solid var(--ink-300);}
@@ -126,32 +130,35 @@ p{margin:0;}
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  height:52px;
+  gap:8px;
+  height:56px;
   padding:0 32px;
   background:var(--wine-700);
   color:#fff;
   text-decoration:none;
-  font-weight:500;
+  font-weight:700;
   font-size:0.9375rem;
-  border-radius:4px;
+  border-radius:999px;
   border:1px solid var(--wine-700);
   cursor:pointer;
-  transition:background-color .2s ease,border-color .2s ease;
+  box-shadow:0 10px 24px -10px rgba(107,23,48,0.55);
+  transition:background-color .2s ease,border-color .2s ease,transform .2s ease;
 }
-.btn:hover{background:var(--wine-500);border-color:var(--wine-500);}
-.btn:focus-visible{outline:2px solid var(--wine-700);outline-offset:2px;}
+.btn:hover{background:var(--wine-500);border-color:var(--wine-500);transform:translateY(-2px);}
+.btn:focus-visible{outline:2px solid var(--wine-700);outline-offset:3px;}
 
 .btn-invert{
   background:#fff;
   color:var(--wine-700);
   border-color:#fff;
+  box-shadow:0 10px 24px -10px rgba(0,0,0,0.25);
 }
-.btn-invert:hover{background:var(--paper-2);border-color:var(--paper-2);color:var(--wine-700);}
+.btn-invert:hover{background:var(--wine-50);border-color:var(--wine-50);color:var(--wine-700);}
 
 .bg-2{background:var(--paper-2);}
 
 /* ---------- reveal(スクロールフェードイン) ---------- */
-.reveal{opacity:0;transform:translateY(12px);transition:opacity .5s ease-out,transform .5s ease-out;}
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease-out,transform .5s ease-out;}
 .reveal.is-visible{opacity:1;transform:translateY(0);}
 @media (prefers-reduced-motion: reduce){
   .reveal{opacity:1;transform:none;transition:none;}
@@ -159,38 +166,45 @@ p{margin:0;}
 
 /* ---------- header ---------- */
 .site-header{
-  border-bottom:1px solid var(--ink-300);
   background:var(--paper);
+  border-bottom:1px solid var(--ink-300);
 }
 .site-header .wrap{
-  height:64px;
+  height:68px;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
 .logo-placeholder{
   font-family:'Inter',sans-serif;
-  font-weight:700;
+  font-weight:800;
   font-size:0.9375rem;
-  letter-spacing:0.08em;
+  letter-spacing:0.06em;
   color:var(--wine-900);
 }
 
 /* ---------- ① hero ---------- */
-.hero .wrap{padding-top:96px;padding-bottom:96px;}
-@media (min-width:1024px){
-  .hero .wrap{padding-top:128px;padding-bottom:128px;}
+.hero{position:relative;overflow:hidden;}
+.hero-blob{
+  position:absolute;
+  border-radius:50%;
+  background:var(--wine-100);
+  z-index:0;
 }
-.hero h1{margin-top:var(--space-2);margin-bottom:var(--space-3);color:var(--wine-900);}
+.hero-blob.b1{width:420px;height:420px;top:-180px;right:-140px;}
+.hero-blob.b2{width:260px;height:260px;bottom:-140px;left:-100px;background:var(--peach);}
+.hero .wrap{position:relative;z-index:1;padding-top:80px;padding-bottom:80px;}
+@media (min-width:1024px){
+  .hero .wrap{padding-top:112px;padding-bottom:112px;}
+}
+.hero h1{margin-top:var(--space-3);margin-bottom:var(--space-3);color:var(--wine-900);}
 .hero .lead{max-width:var(--text-max);margin-bottom:var(--space-4);}
 
 /* ---------- ② 課題提起 ---------- */
 .problem-grid{
   display:grid;
   grid-template-columns:1fr;
-  gap:1px;
-  background:var(--ink-300);
-  border:1px solid var(--ink-300);
+  gap:var(--space-2);
   margin-top:var(--space-5);
 }
 @media (min-width:768px){
@@ -198,9 +212,19 @@ p{margin:0;}
 }
 .problem-card{
   background:var(--paper);
-  padding:var(--space-4) var(--space-3);
+  border:1px solid var(--ink-300);
+  border-radius:var(--radius-md);
+  padding:var(--space-3);
+  box-shadow:0 6px 18px -14px rgba(74,16,36,0.35);
 }
-.problem-card svg{margin-bottom:var(--space-2);color:var(--wine-700);}
+.icon-badge{
+  width:52px;height:52px;
+  border-radius:16px;
+  background:var(--wine-100);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:var(--space-2);
+  color:var(--wine-700);
+}
 .problem-card h3{margin-bottom:8px;color:var(--ink-900);}
 .problem-card p{color:var(--ink-600);font-size:0.9375rem;}
 
@@ -208,52 +232,58 @@ p{margin:0;}
 .structure-stats{
   display:flex;
   flex-direction:column;
+  gap:var(--space-2);
   margin-top:var(--space-5);
-  border-top:1px solid var(--ink-300);
-  border-bottom:1px solid var(--ink-300);
 }
 @media (min-width:768px){
   .structure-stats{flex-direction:row;}
 }
 .stat{
   flex:1;
-  padding:var(--space-4) var(--space-2);
-  border-bottom:1px solid var(--ink-300);
+  padding:var(--space-3);
+  background:var(--paper);
+  border:1px solid var(--ink-300);
+  border-radius:var(--radius-md);
+  text-align:center;
 }
-.stat:last-child{border-bottom:0;}
-@media (min-width:768px){
-  .stat{border-bottom:0;border-right:1px solid var(--ink-300);}
-  .stat:last-child{border-right:0;}
-}
+.stat.stat-highlight{background:var(--wine-700);border-color:var(--wine-700);}
+.stat.stat-highlight .stat-value,.stat.stat-highlight .stat-unit{color:#fff;}
+.stat.stat-highlight .stat-label{color:rgba(255,255,255,0.85);}
 .stat-value{
-  font-size:clamp(3rem,8vw,5.5rem);
-  font-weight:700;
+  font-size:clamp(2.5rem,6vw,4rem);
+  font-weight:800;
   color:var(--wine-700);
   line-height:1;
   letter-spacing:-0.02em;
 }
-.stat-unit{font-size:1.125rem;font-weight:500;margin-left:4px;color:var(--wine-700);}
+.stat-unit{font-size:1.125rem;font-weight:700;margin-left:4px;color:var(--wine-700);}
 .stat-label{margin-top:var(--space-2);font-size:0.875rem;color:var(--ink-600);}
 
 .compare{
   display:grid;
   grid-template-columns:1fr;
-  margin-top:var(--space-5);
+  gap:var(--space-2);
+  margin-top:var(--space-4);
 }
 @media (min-width:768px){
-  .compare{grid-template-columns:1fr 1px 1fr;column-gap:var(--space-4);}
+  .compare{grid-template-columns:1fr 1fr;}
 }
-.compare-col{padding:var(--space-3) 0;}
-.compare-divider{background:var(--ink-300);}
+.compare-col{
+  padding:var(--space-3);
+  border-radius:var(--radius-md);
+  background:var(--paper);
+  border:1px solid var(--ink-300);
+}
 .compare-col .eyebrow{margin-bottom:var(--space-2);}
 
 .structure-conclusion{
-  margin-top:var(--space-6);
-  padding-top:var(--space-5);
-  padding-bottom:var(--space-2);
+  margin-top:var(--space-4);
+  padding:var(--space-3);
+  background:var(--wine-50);
+  border-radius:var(--radius-md);
   color:var(--wine-900);
-  font-weight:500;
-  font-size:1.125rem;
+  font-weight:700;
+  font-size:1.0625rem;
   line-height:1.9;
 }
 
@@ -261,72 +291,74 @@ p{margin:0;}
 .pillars{
   display:grid;
   grid-template-columns:1fr;
+  gap:var(--space-3);
   margin-top:var(--space-5);
 }
 @media (min-width:768px){
-  .pillars{grid-template-columns:1fr 1px 1fr;column-gap:var(--space-5);}
+  .pillars{grid-template-columns:1fr 1fr;}
 }
-.pillar-divider{background:var(--ink-300);}
-.pillar{padding-top:var(--space-3);padding-bottom:var(--space-5);}
-.pillar .eyebrow{letter-spacing:0.15em;}
+.pillar{
+  background:var(--paper);
+  border:1px solid var(--ink-300);
+  border-radius:var(--radius-lg);
+  padding:var(--space-4);
+}
 .pillar h3.pillar-title{
   margin-top:var(--space-2);
   margin-bottom:var(--space-2);
   font-size:1.375rem;
-  font-weight:700;
+  font-weight:800;
   color:var(--ink-900);
 }
 .pillar-desc{color:var(--ink-600);margin-bottom:var(--space-4);}
 .area-list{list-style:none;margin:0;padding:0;}
 .area-list li{
-  border-left:2px solid var(--wine-700);
-  padding:10px 0 10px var(--space-2);
-  margin-bottom:2px;
+  background:var(--paper-2);
+  border-radius:var(--radius-sm);
+  padding:12px 16px;
+  margin-bottom:8px;
 }
-.area-list .area-title{display:block;font-weight:500;font-size:0.9375rem;}
+.area-list .area-title{display:block;font-weight:700;font-size:0.9375rem;}
 .area-list .area-body{display:block;font-size:0.8125rem;color:var(--ink-600);margin-top:2px;}
 
 /* ---------- ⑤ 頼み方の5段階 ---------- */
-.engage-table{
-  width:100%;
-  border-collapse:collapse;
+.engage-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:var(--space-2);
   margin-top:var(--space-5);
-  display:none;
 }
-.engage-table th,.engage-table td{
-  text-align:left;
-  padding:16px 20px;
-  border-bottom:1px solid var(--ink-300);
+@media (min-width:640px){
+  .engage-grid{grid-template-columns:1fr 1fr;}
+}
+.engage-card{
+  display:flex;
+  gap:var(--space-2);
+  align-items:flex-start;
+  background:var(--paper);
+  border:1px solid var(--ink-300);
+  border-radius:var(--radius-md);
+  padding:var(--space-3);
+}
+.engage-card .stage-badge{
+  flex-shrink:0;
+  width:40px;height:40px;
+  border-radius:50%;
+  background:var(--wine-700);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;
   font-size:0.9375rem;
 }
-.engage-table thead th{
-  background:var(--wine-100);
-  font-weight:700;
-  color:var(--wine-900);
-  font-size:0.8125rem;
-  letter-spacing:0.05em;
-}
-.engage-table td.col-duration{font-family:'Inter',sans-serif;font-feature-settings:"tnum" 1;}
-@media (min-width:768px){
-  .engage-table{display:table;}
-  .engage-cards{display:none;}
-}
-.engage-cards{margin-top:var(--space-5);}
-.engage-card{
-  border-top:1px solid var(--ink-300);
-  padding:var(--space-2) 0;
-}
-.engage-card:last-child{border-bottom:1px solid var(--ink-300);}
-.engage-card .stage{font-weight:700;color:var(--wine-900);}
-.engage-card .meta{margin-top:4px;font-size:0.8125rem;color:var(--ink-600);}
+.engage-card .stage{font-weight:800;color:var(--ink-900);}
+.engage-card .meta{margin-top:6px;font-size:0.875rem;color:var(--ink-600);}
+.engage-card .meta .num{color:var(--wine-700);font-weight:700;}
 
 /* ---------- ⑥ 選ばれる理由 ---------- */
 .reasons{
   display:grid;
   grid-template-columns:1fr;
-  gap:1px;
-  background:var(--ink-300);
-  border:1px solid var(--ink-300);
+  gap:var(--space-2);
   margin-top:var(--space-5);
 }
 @media (min-width:640px){
@@ -335,15 +367,17 @@ p{margin:0;}
 .reason{
   position:relative;
   background:var(--paper);
-  padding:var(--space-4) var(--space-3);
+  border:1px solid var(--ink-300);
+  border-radius:var(--radius-lg);
+  padding:var(--space-4);
   overflow:hidden;
 }
 .reason .reason-num{
   position:absolute;
-  top:-0.15em;
+  top:-0.2em;
   right:var(--space-2);
-  font-size:5rem;
-  font-weight:700;
+  font-size:4.5rem;
+  font-weight:800;
   color:var(--wine-100);
   line-height:1;
   user-select:none;
@@ -353,20 +387,32 @@ p{margin:0;}
 .reason p{position:relative;z-index:1;color:var(--ink-600);font-size:0.9375rem;}
 
 /* ---------- ⑦ 規格・規制 ---------- */
-.reg-list{list-style:none;margin:var(--space-5) 0 0;padding:0;}
+.reg-list{list-style:none;margin:var(--space-5) 0 0;padding:0;display:grid;gap:var(--space-2);}
 .reg-item{
-  border-left:2px solid var(--wine-700);
-  padding:var(--space-2) 0 var(--space-2) var(--space-3);
-  margin-bottom:var(--space-2);
+  display:flex;
+  gap:var(--space-3);
+  align-items:flex-start;
+  background:var(--paper);
+  border:1px solid var(--ink-300);
+  border-radius:var(--radius-md);
+  padding:var(--space-3);
+}
+.reg-date-badge{
+  flex-shrink:0;
+  background:var(--wine-100);
+  color:var(--wine-700);
+  border-radius:var(--radius-sm);
+  padding:10px 14px;
+  text-align:center;
+  min-width:104px;
 }
 .reg-date{
   font-family:'Inter',sans-serif;
   font-feature-settings:"tnum" 1;
-  font-weight:700;
-  color:var(--wine-700);
-  font-size:1.0625rem;
+  font-weight:800;
+  font-size:0.9375rem;
 }
-.reg-title{margin-top:4px;font-weight:500;}
+.reg-title{font-weight:700;}
 .reg-desc{margin-top:4px;color:var(--ink-600);font-size:0.9375rem;}
 
 /* ---------- ⑧ 登録技術者 ---------- */
@@ -379,85 +425,110 @@ p{margin:0;}
 @media (min-width:768px){
   .engineers{grid-template-columns:1fr 1fr;}
 }
-.engineer-card{border:1px solid var(--ink-300);}
-.engineer-band{height:4px;background:var(--wine-700);}
-.engineer-body{padding:var(--space-3);}
+.engineer-card{
+  background:var(--paper);
+  border:1px solid var(--ink-300);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+}
+.engineer-band{height:8px;background:linear-gradient(90deg,var(--wine-700),var(--wine-300));}
+.engineer-body{padding:var(--space-4);}
+.engineer-emphasis-wrap{
+  display:inline-flex;
+  align-items:baseline;
+  gap:6px;
+  background:var(--wine-100);
+  border-radius:999px;
+  padding:8px 18px;
+}
 .engineer-emphasis{
   font-family:'Inter',sans-serif;
-  font-size:2.5rem;
-  font-weight:700;
+  font-size:1.75rem;
+  font-weight:800;
   color:var(--wine-700);
   line-height:1;
 }
-.engineer-emphasis-unit{font-size:1rem;font-weight:500;color:var(--wine-700);margin-left:4px;}
-.engineer-text{margin-top:var(--space-2);color:var(--ink-900);}
+.engineer-emphasis-unit{font-size:0.875rem;font-weight:700;color:var(--wine-700);}
+.engineer-text{margin-top:var(--space-3);color:var(--ink-900);}
 
 /* ---------- ⑨ 利用の流れ ---------- */
 .flow{
   display:grid;
   grid-template-columns:1fr;
+  gap:var(--space-2);
   margin-top:var(--space-5);
 }
 @media (min-width:768px){
   .flow{grid-template-columns:repeat(4,1fr);}
 }
 .flow-step{
-  padding:var(--space-3) var(--space-2) var(--space-3) 0;
-  border-top:1px solid var(--ink-300);
-}
-@media (min-width:768px){
-  .flow-step{border-top:none;border-left:1px solid var(--ink-300);padding-left:var(--space-3);}
-  .flow-step:first-child{border-left:none;padding-left:0;}
+  background:var(--paper);
+  border:1px solid var(--ink-300);
+  border-radius:var(--radius-md);
+  padding:var(--space-3);
 }
 .flow-num{
+  width:36px;height:36px;
+  border-radius:50%;
+  background:var(--wine-700);
+  color:#fff;
+  display:flex;align-items:center;justify-content:center;
   font-family:'Inter',sans-serif;
-  font-size:1.5rem;
-  font-weight:700;
-  color:var(--wine-700);
-  display:inline-block;
-  padding-bottom:8px;
-  border-bottom:2px solid var(--wine-700);
+  font-size:0.9375rem;
+  font-weight:800;
   margin-bottom:var(--space-2);
 }
 .flow-step h3{margin-bottom:6px;}
 .flow-step p{color:var(--ink-600);font-size:0.875rem;}
 
 /* ---------- ⑩ フォーム ---------- */
-.form-wrap{max-width:560px;margin:var(--space-5) auto 0;}
-.field{margin-bottom:var(--space-4);}
+.form-card{
+  max-width:560px;
+  margin:var(--space-5) auto 0;
+  background:var(--paper);
+  border:1px solid var(--ink-300);
+  border-radius:var(--radius-lg);
+  padding:var(--space-4);
+}
+.field{margin-bottom:var(--space-3);}
 .field label{
   display:block;
   font-size:0.8125rem;
-  font-weight:500;
+  font-weight:700;
   color:var(--ink-600);
   margin-bottom:8px;
 }
 .field input,.field textarea{
   width:100%;
-  border:0;
-  border-bottom:1px solid var(--ink-300);
-  background:transparent;
-  padding:10px 2px;
+  border:1px solid var(--ink-300);
+  background:var(--paper-2);
+  padding:12px 16px;
   font:inherit;
   color:var(--ink-900);
-  border-radius:0;
+  border-radius:var(--radius-sm);
 }
 .field textarea{resize:vertical;min-height:120px;}
 .field input:focus,.field textarea:focus{
   outline:none;
-  border-bottom-color:var(--wine-700);
+  border-color:var(--wine-700);
+  background:var(--paper);
 }
-.form-submit{width:100%;margin-top:var(--space-2);}
+.form-submit{width:100%;margin-top:var(--space-1);}
 
 /* ---------- FAQ ---------- */
-.faq-list{border-top:1px solid var(--ink-300);margin-top:var(--space-5);}
-.faq-item{border-bottom:1px solid var(--ink-300);}
+.faq-list{margin-top:var(--space-5);display:grid;gap:var(--space-2);}
+.faq-item{
+  background:var(--paper);
+  border:1px solid var(--ink-300);
+  border-radius:var(--radius-md);
+  overflow:hidden;
+}
 .faq-q{
   width:100%;
   background:none;
   border:0;
   text-align:left;
-  padding:20px 0;
+  padding:18px 20px;
   display:flex;
   align-items:flex-start;
   justify-content:space-between;
@@ -465,19 +536,28 @@ p{margin:0;}
   cursor:pointer;
   color:var(--ink-900);
 }
-.faq-q .q-text{font-weight:500;font-size:0.9375rem;display:flex;gap:12px;}
-.faq-q .q-mark{color:var(--wine-700);font-weight:700;}
-.faq-chevron{flex-shrink:0;margin-top:4px;color:var(--ink-600);transition:transform .2s ease;}
+.faq-q .q-text{font-weight:700;font-size:0.9375rem;display:flex;gap:12px;}
+.faq-q .q-mark{
+  color:var(--wine-700);
+  font-weight:800;
+  background:var(--wine-100);
+  border-radius:50%;
+  width:24px;height:24px;
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.8125rem;
+}
+.faq-chevron{flex-shrink:0;margin-top:6px;color:var(--wine-700);transition:transform .2s ease;}
 .faq-item[data-open="true"] .faq-chevron{transform:rotate(180deg);}
 .faq-a-wrap{height:0;overflow:hidden;transition:height .25s ease;}
 @media (prefers-reduced-motion: reduce){
   .faq-a-wrap{transition:none;}
 }
-.faq-a{padding-bottom:20px;font-size:0.9375rem;color:var(--ink-600);display:flex;gap:12px;}
-.faq-a .a-mark{font-weight:700;color:var(--ink-600);}
+.faq-a{padding:0 20px 18px 56px;font-size:0.9375rem;color:var(--ink-600);}
 
 /* ---------- ⑫ 最後のCTA ---------- */
-.final-cta{background:var(--wine-700);color:#fff;text-align:left;}
+.final-cta{background:var(--wine-700);color:#fff;text-align:center;border-radius:var(--radius-lg);}
+.final-cta-inner{padding:var(--space-5) var(--space-3);}
 .final-cta h2{color:#fff;margin-bottom:var(--space-2);}
 .final-cta p{color:rgba(255,255,255,0.85);margin-bottom:var(--space-4);}
 
@@ -495,7 +575,6 @@ footer .foot-info{font-size:0.8125rem;line-height:1.9;}
 footer .foot-links{display:flex;gap:var(--space-3);font-size:0.8125rem;}
 footer a{text-decoration:none;}
 footer a:hover{color:#fff;}
-.foot-divider{border-top:1px solid rgba(255,255,255,0.15);margin-top:var(--space-3);padding-top:var(--space-3);font-size:0.75rem;}
 
 /* focus visibility全体 */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
@@ -509,15 +588,17 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <header class="site-header">
   <div class="wrap">
     <span class="logo-placeholder">SERVICE NAME</span>
-    <a href="#contact" class="btn" style="height:40px;padding:0 20px;font-size:0.8125rem;">相談する</a>
+    <a href="#contact" class="btn" style="height:40px;padding:0 20px;font-size:0.8125rem;box-shadow:none;">相談する</a>
   </div>
 </header>
 
 <!-- ① ファーストビュー -->
 <section class="hero">
+  <div class="hero-blob b1" aria-hidden="true"></div>
+  <div class="hero-blob b2" aria-hidden="true"></div>
   <div class="wrap">
     <div class="text-block reveal">
-      <hr class="rule-short">
+      <span class="eyebrow">HARDWARE DEVELOPMENT</span>
       <h1>ハードウェア開発の即戦力を、<br>必要な期間だけ</h1>
       <p class="body-text lead">
         開発の一線で判断してきたエンジニア・PM・技術顧問が入ります。<br>
@@ -531,39 +612,39 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <!-- ② 課題提起 -->
 <section class="bg-2">
   <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow">Problem</span>
-      <h2 style="margin-top:12px;">こんな課題は<br class="mobile-break">ありませんか</h2>
+    <div class="reveal center text-block">
+      <span class="eyebrow">PROBLEM</span>
+      <h2 style="margin-top:16px;">こんな課題はありませんか？</h2>
     </div>
 
     <div class="problem-grid">
       <div class="problem-card reveal">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M14 3v3M14 22v3M25 14h-3M6 14H3M21.6 6.4l-2.1 2.1M8.5 19.5l-2.1 2.1M21.6 21.6l-2.1-2.1M8.5 8.5L6.4 6.4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="4" stroke="currentColor" stroke-width="2"/><path d="M14 3v3M14 22v3M25 14h-3M6 14H3M21.6 6.4l-2.1 2.1M8.5 19.5l-2.1 2.1M21.6 21.6l-2.1-2.1M8.5 8.5L6.4 6.4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <h3>機構設計ができる人がいない</h3>
         <p>筐体・治具まで踏み込んで設計できる人材が社内にいない。</p>
       </div>
       <div class="problem-card reveal">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="6" y="6" width="16" height="16" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M11 6V3M17 6V3M11 25v-3M17 25v-3M6 11H3M6 17H3M25 11h-3M25 17h-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><rect x="6" y="6" width="16" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M11 6V3M17 6V3M11 25v-3M17 25v-3M6 11H3M6 17H3M25 11h-3M25 17h-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <h3>試作から量産に進められない</h3>
         <p>プロトタイプはできても、量産設計・立上げの知見が不足している。</p>
       </div>
       <div class="problem-card reveal">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M6 20a11 11 0 0116 0M9.5 16.5a6.5 6.5 0 019 0M14 21v.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><path d="M6 20a11 11 0 0116 0M9.5 16.5a6.5 6.5 0 019 0M14 21v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <h3>無線・法規対応の知見がない</h3>
         <p>Wi-Fi/BLE実装や電波法認証、EMC対応をどこから進めればよいか分からない。</p>
       </div>
       <div class="problem-card reveal">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="9" y="9" width="10" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M14 4v3M14 21v3M4 14h3M21 14h3M6.5 6.5l2 2M19.5 6.5l-2 2M6.5 21.5l2-2M19.5 21.5l-2-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><rect x="9" y="9" width="10" height="10" rx="2" stroke="currentColor" stroke-width="2"/><path d="M14 4v3M14 21v3M4 14h3M21 14h3M6.5 6.5l2 2M19.5 6.5l-2 2M6.5 21.5l2-2M19.5 21.5l-2-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <h3>エッジAI実装まで手が回らない</h3>
         <p>機器上でのAI推論・異常検知の実装を担える人材がいない。</p>
       </div>
       <div class="problem-card reveal">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M14 8v6l4 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="currentColor" stroke-width="2"/><path d="M14 8v6l4 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <h3>開発が遅れているが原因が分からない</h3>
         <p>スケジュールが遅延しているが、どこがボトルネックか整理できていない。</p>
       </div>
       <div class="problem-card reveal">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="4" stroke="currentColor" stroke-width="1.5"/><path d="M5 24c1.5-5 5-7.5 9-7.5s7.5 2.5 9 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <span class="icon-badge"><svg width="24" height="24" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="4" stroke="currentColor" stroke-width="2"/><path d="M5 24c1.5-5 5-7.5 9-7.5s7.5 2.5 9 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <h3>社内に技術を判断できる人がいない</h3>
         <p>提案や見積りの妥当性を、社内だけでは判断しきれない。</p>
       </div>
@@ -571,12 +652,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
   </div>
 </section>
 
-<!-- ③ 構造の説明(最重要) -->
+<!-- ③ 構造の説明 -->
 <section>
   <div class="wrap">
-    <div class="text-block reveal">
-      <span class="eyebrow">Structure</span>
-      <h2 style="margin-top:12px;">なぜ「今」<br class="mobile-break">ハードウェア人材が足りないのか</h2>
+    <div class="text-block reveal center" style="margin-left:auto;margin-right:auto;">
+      <span class="eyebrow">STRUCTURE</span>
+      <h2 style="margin-top:16px;">なぜ「今」ハードウェア人材が足りないのか</h2>
     </div>
 
     <div class="structure-stats reveal">
@@ -588,7 +669,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
         <div><span class="stat-value num">3.0</span><span class="stat-unit">倍</span></div>
         <p class="stat-label">IT人材の有効求人倍率(目安)</p>
       </div>
-      <div class="stat">
+      <div class="stat stat-highlight">
         <div><span class="stat-value num">6.00</span><span class="stat-unit">倍</span></div>
         <p class="stat-label">ハードウェア技術者の有効求人倍率(目安)</p>
       </div>
@@ -605,7 +686,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           採用競争は激しいものの、母数自体は大きく、業務委託・副業など調達手段も多様化しています。
         </p>
       </div>
-      <div class="compare-divider"></div>
       <div class="compare-col">
         <span class="eyebrow">ハードウェア人材</span>
         <p class="body-text" style="margin-top:12px;">
@@ -614,7 +694,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       </div>
     </div>
 
-    <p class="structure-conclusion reveal text-block">
+    <p class="structure-conclusion reveal text-block center">
       だからこそ、必要な期間だけ、必要な技術者に、直接依頼できる仕組みが必要です。
     </p>
   </div>
@@ -623,9 +703,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <!-- ④ 2つの柱 -->
 <section class="bg-2">
   <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow">Team</span>
-      <h2 style="margin-top:12px;">2つの柱</h2>
+    <div class="reveal center text-block">
+      <span class="eyebrow">TEAM</span>
+      <h2 style="margin-top:16px;">2つの柱</h2>
     </div>
 
     <div class="pillars">
@@ -644,8 +724,6 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
           <li><span class="area-title">品質・安全</span><span class="area-body">評価試験、規格対応</span></li>
         </ul>
       </div>
-
-      <div class="pillar-divider"></div>
 
       <div class="pillar reveal">
         <span class="eyebrow">PM / ADVISOR</span>
@@ -666,75 +744,47 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <!-- ⑤ 頼み方の5段階 -->
 <section>
   <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow">How to ask</span>
-      <h2 style="margin-top:12px;">頼み方の5段階</h2>
+    <div class="reveal center text-block">
+      <span class="eyebrow">HOW TO ASK</span>
+      <h2 style="margin-top:16px;">頼み方の5段階</h2>
       <p class="body-text" style="margin-top:16px;">小さな相談から、開発への参画まで。必要な段階だけご利用いただけます。</p>
     </div>
 
-    <table class="engage-table reveal">
-      <thead>
-        <tr>
-          <th>段階</th>
-          <th>内容</th>
-          <th>期間の目安</th>
-          <th>頻度</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>技術相談</td>
-          <td>課題の整理、技術的な妥当性の確認</td>
-          <td class="col-duration num">1〜2時間</td>
-          <td>単発</td>
-        </tr>
-        <tr>
-          <td>診断・レビュー</td>
-          <td>設計・仕様・進行中プロジェクトのレビュー</td>
-          <td class="col-duration num">1日〜</td>
-          <td>単発</td>
-        </tr>
-        <tr>
-          <td>技術顧問</td>
-          <td>継続的な技術判断・意思決定の伴走</td>
-          <td class="col-duration num">月1〜2回</td>
-          <td>継続</td>
-        </tr>
-        <tr>
-          <td>PM参画</td>
-          <td>要件定義からベンダー調整、量産移行までの推進</td>
-          <td class="col-duration num">開発期間中</td>
-          <td>継続</td>
-        </tr>
-        <tr>
-          <td>開発参画</td>
-          <td>設計・実装・立上げの実務そのものを担当</td>
-          <td class="col-duration num">数ヶ月〜</td>
-          <td>継続</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <div class="engage-cards reveal">
+    <div class="engage-grid reveal">
       <div class="engage-card">
-        <p class="stage">技術相談</p>
-        <p class="meta">課題の整理、技術的な妥当性の確認 ／ <span class="num">1〜2時間</span> ／ 単発</p>
+        <span class="stage-badge num">01</span>
+        <div>
+          <p class="stage">技術相談</p>
+          <p class="meta">課題の整理、技術的な妥当性の確認 ／ <span class="num">1〜2時間</span> ／ 単発</p>
+        </div>
       </div>
       <div class="engage-card">
-        <p class="stage">診断・レビュー</p>
-        <p class="meta">設計・仕様・進行中プロジェクトのレビュー ／ <span class="num">1日〜</span> ／ 単発</p>
+        <span class="stage-badge num">02</span>
+        <div>
+          <p class="stage">診断・レビュー</p>
+          <p class="meta">設計・仕様・進行中プロジェクトのレビュー ／ <span class="num">1日〜</span> ／ 単発</p>
+        </div>
       </div>
       <div class="engage-card">
-        <p class="stage">技術顧問</p>
-        <p class="meta">継続的な技術判断・意思決定の伴走 ／ <span class="num">月1〜2回</span> ／ 継続</p>
+        <span class="stage-badge num">03</span>
+        <div>
+          <p class="stage">技術顧問</p>
+          <p class="meta">継続的な技術判断・意思決定の伴走 ／ <span class="num">月1〜2回</span> ／ 継続</p>
+        </div>
       </div>
       <div class="engage-card">
-        <p class="stage">PM参画</p>
-        <p class="meta">要件定義からベンダー調整、量産移行までの推進 ／ <span class="num">開発期間中</span> ／ 継続</p>
+        <span class="stage-badge num">04</span>
+        <div>
+          <p class="stage">PM参画</p>
+          <p class="meta">要件定義からベンダー調整、量産移行までの推進 ／ <span class="num">開発期間中</span> ／ 継続</p>
+        </div>
       </div>
       <div class="engage-card">
-        <p class="stage">開発参画</p>
-        <p class="meta">設計・実装・立上げの実務そのものを担当 ／ <span class="num">数ヶ月〜</span> ／ 継続</p>
+        <span class="stage-badge num">05</span>
+        <div>
+          <p class="stage">開発参画</p>
+          <p class="meta">設計・実装・立上げの実務そのものを担当 ／ <span class="num">数ヶ月〜</span> ／ 継続</p>
+        </div>
       </div>
     </div>
   </div>
@@ -743,9 +793,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <!-- ⑥ 選ばれる理由 -->
 <section class="bg-2">
   <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow">Why us</span>
-      <h2 style="margin-top:12px;">選ばれる理由</h2>
+    <div class="reveal center text-block">
+      <span class="eyebrow">WHY US</span>
+      <h2 style="margin-top:16px;">選ばれる理由</h2>
     </div>
 
     <div class="reasons">
@@ -776,22 +826,26 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <!-- ⑦ 規格・規制 -->
 <section>
   <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow">Regulation</span>
-      <h2 style="margin-top:12px;">押さえておきたい規格・規制</h2>
+    <div class="reveal center text-block">
+      <span class="eyebrow">REGULATION</span>
+      <h2 style="margin-top:16px;">押さえておきたい規格・規制</h2>
       <p class="body-text" style="margin-top:16px;">無線・組込み製品に関わる規制強化が続いています。対応の要否は個別にご相談ください。</p>
     </div>
 
     <ul class="reg-list reveal">
       <li class="reg-item">
-        <p class="reg-date num">2025年8月〜</p>
-        <p class="reg-title">EU無線機器指令(RED) サイバーセキュリティ要求</p>
-        <p class="reg-desc">無線機能を持つ機器のEU向け出荷において、不正アクセス対策等の要求事項への対応が必要になります。</p>
+        <span class="reg-date-badge"><span class="reg-date num">2025年8月〜</span></span>
+        <div>
+          <p class="reg-title">EU無線機器指令(RED) サイバーセキュリティ要求</p>
+          <p class="reg-desc">無線機能を持つ機器のEU向け出荷において、不正アクセス対策等の要求事項への対応が必要になります。</p>
+        </div>
       </li>
       <li class="reg-item">
-        <p class="reg-date num">2027年〜</p>
-        <p class="reg-title">EUサイバーレジリエンス法(CRA) 本格適用</p>
-        <p class="reg-desc">デジタル要素を含む製品全般に、脆弱性管理・報告義務等が課される見込みです。</p>
+        <span class="reg-date-badge"><span class="reg-date num">2027年〜</span></span>
+        <div>
+          <p class="reg-title">EUサイバーレジリエンス法(CRA) 本格適用</p>
+          <p class="reg-desc">デジタル要素を含む製品全般に、脆弱性管理・報告義務等が課される見込みです。</p>
+        </div>
       </li>
     </ul>
     <p class="note-text" style="margin-top:12px;">
@@ -803,16 +857,16 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <!-- ⑧ 登録している技術者 -->
 <section class="bg-2">
   <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow">Engineers</span>
-      <h2 style="margin-top:12px;">登録している技術者</h2>
+    <div class="reveal center text-block">
+      <span class="eyebrow">ENGINEERS</span>
+      <h2 style="margin-top:16px;">登録している技術者</h2>
     </div>
 
     <div class="engineers">
       <div class="engineer-card reveal">
         <div class="engineer-band"></div>
         <div class="engineer-body">
-          <div><span class="engineer-emphasis num">30</span><span class="engineer-emphasis-unit">年 通信機器開発</span></div>
+          <div class="engineer-emphasis-wrap"><span class="engineer-emphasis num">30</span><span class="engineer-emphasis-unit">年 通信機器開発</span></div>
           <p class="engineer-text body-text">
             大手電機メーカーで通信機器開発30年。無線(Wi-Fi／BLE)、電波法認証、量産立ち上げ、開発責任者、米国駐在。
           </p>
@@ -821,7 +875,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
       <div class="engineer-card reveal">
         <div class="engineer-band"></div>
         <div class="engineer-body">
-          <div><span class="engineer-emphasis num">AI</span><span class="engineer-emphasis-unit">実装の専門家</span></div>
+          <div class="engineer-emphasis-wrap"><span class="engineer-emphasis num">AI</span><span class="engineer-emphasis-unit">実装の専門家</span></div>
           <p class="engineer-text body-text">
             エッジAI、モデル軽量化、異常検知、組込みセキュリティ。組込みエンジニアのチームを保有。
           </p>
@@ -831,7 +885,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 
     <p class="note-text" style="margin-top:16px;">※FA制御・生産技術の領域は拡充中です</p>
 
-    <div class="reveal" style="margin-top:var(--space-5);">
+    <div class="reveal center" style="margin-top:var(--space-5);">
       <a href="#contact" class="btn">相談する(無料)</a>
     </div>
   </div>
@@ -840,9 +894,9 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <!-- ⑨ 利用の流れ -->
 <section>
   <div class="wrap">
-    <div class="reveal">
-      <span class="eyebrow">Flow</span>
-      <h2 style="margin-top:12px;">利用の流れ</h2>
+    <div class="reveal center text-block">
+      <span class="eyebrow">FLOW</span>
+      <h2 style="margin-top:16px;">利用の流れ</h2>
     </div>
 
     <div class="flow reveal">
@@ -873,12 +927,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <!-- ⑩ お問い合わせフォーム(見た目のみ。送信処理は未実装) -->
 <section id="contact" class="bg-2">
   <div class="wrap">
-    <div class="reveal" style="text-align:left;">
-      <span class="eyebrow">Contact</span>
-      <h2 style="margin-top:12px;">まずは技術相談から</h2>
+    <div class="reveal center text-block">
+      <span class="eyebrow">CONTACT</span>
+      <h2 style="margin-top:16px;">まずは技術相談から</h2>
     </div>
 
-    <form class="form-wrap reveal" onsubmit="return false;">
+    <form class="form-card reveal" onsubmit="return false;">
       <div class="field">
         <label for="hw-company">会社名</label>
         <input type="text" id="hw-company" name="company" autocomplete="organization">
@@ -903,80 +957,82 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <!-- FAQ -->
 <section>
   <div class="wrap">
-    <div class="reveal">
+    <div class="reveal center text-block">
       <span class="eyebrow">FAQ</span>
-      <h2 style="margin-top:12px;">よくあるご質問</h2>
+      <h2 style="margin-top:16px;">よくあるご質問</h2>
     </div>
 
     <div class="faq-list reveal" id="faq-list">
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
-          <span class="q-text"><span class="q-mark">Q.</span>契約形態は？</span>
-          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="q-text"><span class="q-mark">Q</span>契約形態は？</span>
+          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A.</span><span>準委任契約です(成果物のある診断は請負となります)。</span></div></div>
+        <div class="faq-a-wrap"><div class="faq-a">準委任契約です(成果物のある診断は請負となります)。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
-          <span class="q-text"><span class="q-mark">Q.</span>派遣や人材紹介ですか？</span>
-          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="q-text"><span class="q-mark">Q</span>派遣や人材紹介ですか？</span>
+          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A.</span><span>いずれも異なります。</span></div></div>
+        <div class="faq-a-wrap"><div class="faq-a">いずれも異なります。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
-          <span class="q-text"><span class="q-mark">Q.</span>二次受けはありますか？</span>
-          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="q-text"><span class="q-mark">Q</span>二次受けはありますか？</span>
+          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A.</span><span>ありません。弊社から直接技術者に依頼します。</span></div></div>
+        <div class="faq-a-wrap"><div class="faq-a">ありません。弊社から直接技術者に依頼します。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
-          <span class="q-text"><span class="q-mark">Q.</span>偽装請負にならないか？</span>
-          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="q-text"><span class="q-mark">Q</span>偽装請負にならないか？</span>
+          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A.</span><span>業務範囲と成果物を事前に定め、指示は弊社を通す運用です。</span></div></div>
+        <div class="faq-a-wrap"><div class="faq-a">業務範囲と成果物を事前に定め、指示は弊社を通す運用です。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
-          <span class="q-text"><span class="q-mark">Q.</span>費用は？</span>
-          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="q-text"><span class="q-mark">Q</span>費用は？</span>
+          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
         <!-- TODO: 費用の提示方法が決定次第、本文を差し替える -->
-        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A.</span><span>要相談です。貴社の課題・期間に応じてお見積りします。</span></div></div>
+        <div class="faq-a-wrap"><div class="faq-a">要相談です。貴社の課題・期間に応じてお見積りします。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
-          <span class="q-text"><span class="q-mark">Q.</span>直接契約したくなったら？</span>
-          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="q-text"><span class="q-mark">Q</span>直接契約したくなったら？</span>
+          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A.</span><span>事前協議のうえ、移行手数料で対応します。</span></div></div>
+        <div class="faq-a-wrap"><div class="faq-a">事前協議のうえ、移行手数料で対応します。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
-          <span class="q-text"><span class="q-mark">Q.</span>秘密保持は？</span>
-          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="q-text"><span class="q-mark">Q</span>秘密保持は？</span>
+          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A.</span><span>NDAを締結します。技術者とも個別に締結しています。</span></div></div>
+        <div class="faq-a-wrap"><div class="faq-a">NDAを締結します。技術者とも個別に締結しています。</div></div>
       </div>
       <div class="faq-item" data-open="false">
         <button class="faq-q" type="button" aria-expanded="false">
-          <span class="q-text"><span class="q-mark">Q.</span>賠償責任は？</span>
-          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span class="q-text"><span class="q-mark">Q</span>賠償責任は？</span>
+          <span class="faq-chevron" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3.5 5.25L7 8.75l3.5-3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </button>
-        <div class="faq-a-wrap"><div class="faq-a"><span class="a-mark">A.</span><span>賠償責任保険に加入しています。</span></div></div>
+        <div class="faq-a-wrap"><div class="faq-a">賠償責任保険に加入しています。</div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ⑫ 最後のCTA -->
-<section class="final-cta">
+<section>
   <div class="wrap">
-    <div class="text-block reveal">
-      <h2>まずは、無料の技術相談から</h2>
-      <p class="body-text">貴社の課題に応じて、適した頼み方と技術者をご提案します。</p>
-      <a href="#contact" class="btn btn-invert">相談する(無料)</a>
+    <div class="final-cta reveal">
+      <div class="final-cta-inner text-block center">
+        <h2>まずは、無料の技術相談から</h2>
+        <p class="body-text">貴社の課題に応じて、適した頼み方と技術者をご提案します。</p>
+        <a href="#contact" class="btn btn-invert">相談する(無料)</a>
+      </div>
     </div>
   </div>
 </section>
