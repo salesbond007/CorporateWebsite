@@ -59,6 +59,12 @@ const registrants = [
   "現在技術顧問をされている方",
 ];
 
+const strengthImages = [
+  "/contact/partner/strengths/strength-1.webp",
+  "/contact/partner/strengths/strength-2.webp",
+  "/contact/partner/strengths/strength-3.webp",
+];
+
 const strengths = [
   <>公開されている案件だけではなく、<span className="text-[#7B2233]">弊社独自の案件</span>もございます。</>,
   <><span className="text-[#7B2233]">週2日から常駐まで</span>。<span className="text-[#7B2233]">手を動かす案件からPMまで</span>、幅広くご紹介できます。</>,
@@ -263,7 +269,15 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           <div className="mt-14 grid gap-10 md:grid-cols-3">
             {strengths.map((text, index) => (
               <div key={index} className="text-center">
-                <div className="mx-auto aspect-[4/3] w-full max-w-xs rounded-md border-2 border-dashed border-[#7B2233]/25 bg-white" />
+                <div className="relative mx-auto aspect-[4/3] w-full max-w-xs overflow-hidden rounded-md bg-white">
+                  <Image
+                    src={strengthImages[index]}
+                    alt=""
+                    fill
+                    sizes="(min-width: 768px) 320px, 80vw"
+                    className="object-contain"
+                  />
+                </div>
                 <p className="mt-6 text-base font-bold leading-relaxed text-[#2B2B2B]">{text}</p>
               </div>
             ))}
