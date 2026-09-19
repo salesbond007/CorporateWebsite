@@ -16,6 +16,13 @@ export const site = {
     "営業代行",
     "インサイドセールス",
     "IS",
+    "SES",
+    "IT人材支援",
+    "業務委託エンジニア",
+    "製造業 エンジニア",
+    "機構設計",
+    "電気設計",
+    "組込み",
     "顧問",
     "顧問紹介",
     "人脈紹介",
@@ -138,8 +145,23 @@ export const serviceCategories: ServiceCategory[] = [
     title: "人材ソリューション",
     services: [
       {
-        slug: "hardware-development",
+        slug: "ses",
         number: "01",
+        title: "SES・IT人材支援",
+        subtitle: "製造業向けエンジニア業務委託",
+        summary:
+          "機構設計、電気設計、組込み、ロボティクス、品質・規格まで。製造業の開発現場に必要な業務委託エンジニアをご紹介します。",
+        features: [
+          "製造業の開発現場に強い技術者をご紹介",
+          "週数日・短期・顧問・PM支援まで柔軟に対応",
+          "要件整理から候補者提案まで伴走",
+        ],
+        href: "/services/ses",
+        image: "/services/cards/talent.jpg",
+      },
+      {
+        slug: "hardware-development",
+        number: "02",
         title: "ハードウェア開発支援",
         subtitle: "エンジニア・PM・技術顧問",
         summary:
@@ -153,7 +175,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "sales-support",
-        number: "02",
+        number: "03",
         title: "インサイドセールス支援",
         subtitle: "アポイント獲得・商談化の支援",
         summary:
