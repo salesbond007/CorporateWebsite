@@ -118,6 +118,8 @@ export const generalContactSchema = z.object({
  */
 export const partnerLeadSchema = z.object({
   website: z.string().max(0).optional().or(z.literal("")),
+  lastName: z.string().trim().min(1, "姓を入力してください").max(100),
+  firstName: z.string().trim().min(1, "名を入力してください").max(100),
   email: z.string().trim().email("正しいメールアドレスを入力してください"),
 });
 
