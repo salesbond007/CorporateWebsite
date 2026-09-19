@@ -111,8 +111,8 @@ export type ServiceCategory = {
 
 export const serviceCategories: ServiceCategory[] = [
   {
-    key: "hardware-ai",
-    title: "ハードウェア/フィジカルAI",
+    key: "services",
+    title: "サービス",
     services: [
       {
         slug: "bondtech",
@@ -130,18 +130,34 @@ export const serviceCategories: ServiceCategory[] = [
         image: "/services/cards/talent.jpg",
       },
       {
-        slug: "hardware-development",
+        slug: "advisory",
         number: "02",
-        title: "ハードウェア/フィジカルAI開発支援",
-        subtitle: "エンジニア・PM・技術顧問",
+        title: "顧問事業",
+        subtitle: "AI化・DX化・海外展開のプロフェッショナル紹介",
         summary:
-          "機構から組込み、無線、AI、制御、品質・安全まで。開発の即戦力を、必要な期間だけご提供します。",
+          "AI化、DX化、海外展開など、あらゆる経営課題におけるプロフェッショナルをご紹介する顧問サービスです。",
         features: [
-          "ハードウェア領域のエンジニア・PM・技術顧問を業務委託で提供",
-          "機構・電気・組込み・無線・制御・品質安全まで幅広く対応",
-          "技術顧問(月1〜2回)からPM参画まで柔軟に対応",
+          "AI化・DX化に精通した顧問のご紹介",
+          "海外展開・グローバル戦略に強い顧問のご紹介",
+          "経営課題に応じて幅広い専門家からマッチング",
         ],
-        href: "/services/hardware-development",
+        href: "/services/advisory",
+        image: "/services/cards/ai-solutions.jpg",
+      },
+      {
+        slug: "physical-ai-training",
+        number: "03",
+        title: "フィジカルAI研修",
+        subtitle: "生成AI・AIエージェント・フィジカルAI研修",
+        summary:
+          "生成AIからフィジカルAIまでを体系的に学び、自社・自部署でAI活用を企画できる人材を育成する法人向け研修です。",
+        features: [
+          "生成AI・AIエージェント・フィジカルAIを体系的に学習",
+          "全社員からAI活用の種を発掘",
+          "研修後のAI導入コンサルティング",
+        ],
+        href: "/services/physical-ai-training",
+        image: "/services/physical-ai-training/hero.png",
       },
     ],
   },

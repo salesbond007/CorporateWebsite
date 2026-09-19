@@ -15,7 +15,7 @@ type Props = {
 const cardClass =
   "group relative isolate flex aspect-square h-full flex-col justify-center overflow-hidden rounded-none border-2 border-ink bg-white p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
 
-/** トップページで表示する2つのサービス */
+/** トップページで表示する3つのサービス */
 const categoryCards: Service[] = [
   {
     slug: "bondtech",
@@ -29,15 +29,26 @@ const categoryCards: Service[] = [
     image: "/services/cards/talent.jpg",
   },
   {
-    slug: "hardware-development",
+    slug: "advisory",
     number: "02",
-    title: "ハードウェア/フィジカルAI開発支援",
-    subtitle: "エンジニア・PM・技術顧問",
+    title: "顧問事業",
+    subtitle: "AI化・DX化・海外展開のプロフェッショナル紹介",
     summary:
-      "機構から組込み、無線、AI、制御、品質・安全まで。開発の即戦力を、必要な期間だけご提供します。",
+      "AI化、DX化、海外展開など、あらゆる経営課題におけるプロフェッショナルをご紹介する顧問サービスです。",
     features: [],
-    href: "/services/hardware-development",
+    href: "/services/advisory",
     image: "/services/cards/ai-solutions.jpg",
+  },
+  {
+    slug: "physical-ai-training",
+    number: "03",
+    title: "フィジカルAI研修",
+    subtitle: "生成AI・AIエージェント・フィジカルAI研修",
+    summary:
+      "生成AIからフィジカルAIまでを体系的に学び、自社・自部署でAI活用を企画できる人材を育成する法人向け研修です。",
+    features: [],
+    href: "/services/physical-ai-training",
+    image: "/services/physical-ai-training/hero.png",
   },
 ];
 
@@ -57,7 +68,7 @@ export function ServicesSection({ locale, dict }: Props) {
           </Link>
         </div>
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2">
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {categoryCards.map((s, i) => (
             <li key={s.slug}>
               <Reveal delay={i * 100} className="h-full">
