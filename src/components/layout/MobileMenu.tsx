@@ -41,7 +41,7 @@ export function MobileMenu({ locale, dict }: Props) {
     },
     {
       href: "/contact/partner",
-      label: "個人の方はこちら",
+      label: "エンジニア募集はこちら",
       className: "bg-ink text-white hover:bg-ink-soft",
     },
   ];

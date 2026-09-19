@@ -108,7 +108,7 @@ export function Header({ locale, dict }: Props) {
             size="md"
             className="hidden md:inline-flex !bg-ink !text-white hover:!bg-ink-soft shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)]"
           >
-            個人の方はこちら
+            エンジニア募集はこちら
           </Button>
           <MobileMenu locale={locale} dict={dict} />
         </div>
