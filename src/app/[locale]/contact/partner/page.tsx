@@ -68,7 +68,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         ])}
       />
 
-      <section className="relative isolate flex min-h-[420px] items-center overflow-hidden bg-[#1B1210] md:min-h-[520px]">
+      <section className="relative isolate flex min-h-[560px] items-center overflow-hidden bg-[#1B1210] md:min-h-[680px]">
         <Image
           src="/contact/partner/hero-engineers.webp"
           alt=""
@@ -77,9 +77,13 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           sizes="100vw"
           className="object-cover"
         />
-        <Container className="relative z-10 py-16 md:py-20">
+        <div
+          className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_18%_38%,rgba(10,6,7,0.72)_0%,rgba(10,6,7,0.25)_55%,rgba(10,6,7,0)_78%)]"
+          aria-hidden="true"
+        />
+        <Container className="relative z-10 py-16 pb-28 md:py-20 md:pb-32">
           <div className="max-w-xl">
-            <h1 className="text-[2.35rem] font-black leading-[1.25] tracking-normal text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.65)] md:text-5xl lg:text-[3.25rem]">
+            <h1 className="text-[2.35rem] font-black leading-[1.25] tracking-normal text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.85)] md:text-5xl lg:text-[3.25rem]">
               ハードウェア/<br />フィジカルAI<br />エンジニア募集
             </h1>
             <div className="mt-10">
@@ -93,21 +97,21 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
             </div>
           </div>
         </Container>
-      </section>
 
-      <div className="relative bg-[#7B2233]/80 py-6 backdrop-blur-sm">
-        <Container className="flex flex-wrap items-center justify-center gap-3">
-          {["シニアエンジニア活躍", "副業/フリーランス活躍", "週２～", "高収入"].map((tag) => (
-            <span
-              key={tag}
-              className="flex items-center gap-2 rounded-none border border-[#7B2233]/25 bg-white px-4 py-2.5 text-sm font-black text-[#7B2233] md:text-base"
-            >
-              <TagIcon />
-              {tag}
-            </span>
-          ))}
-        </Container>
-      </div>
+        <div className="absolute inset-x-0 bottom-0 z-10 bg-[#7B2233]/45 py-6 backdrop-blur-sm">
+          <Container className="flex flex-wrap items-center justify-center gap-3">
+            {["シニアエンジニア活躍", "副業/フリーランス活躍", "週２～", "高収入"].map((tag) => (
+              <span
+                key={tag}
+                className="flex items-center gap-2 rounded-none border border-[#7B2233]/25 bg-white px-4 py-2.5 text-sm font-black text-[#7B2233] md:text-base"
+              >
+                <TagIcon />
+                {tag}
+              </span>
+            ))}
+          </Container>
+        </div>
+      </section>
 
       <LpSection tone="white" label="Occupation" title="募集職種">
         <div className="grid gap-6 md:grid-cols-2">

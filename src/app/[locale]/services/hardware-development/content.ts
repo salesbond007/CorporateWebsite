@@ -7,7 +7,7 @@ export const hardwareDevelopmentHtml = String.raw`<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ハードウェア開発支援 | SERVICE NAME</title>
+<title>ハードウェア開発支援 | ボンドテック</title>
 <meta name="description" content="製造業向けに、ハードウェア領域のエンジニア・PM・技術顧問を業務委託(準委任)で提供します。機構から組込み、無線、AI、制御、品質・安全まで。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -679,7 +679,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 
 <header class="site-header">
   <div class="wrap">
-    <span class="logo-placeholder">SERVICE NAME</span>
+    <span class="logo-placeholder">ボンドテック</span>
     <div style="display:flex;gap:10px;">
       <a href="#contact" class="btn btn-outline" style="height:40px;padding:0 18px;font-size:0.8125rem;box-shadow:none;">資料請求</a>
       <a href="#contact" class="btn" style="height:40px;padding:0 18px;font-size:0.8125rem;box-shadow:none;">相談する</a>
