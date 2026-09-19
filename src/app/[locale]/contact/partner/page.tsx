@@ -51,6 +51,8 @@ const jobGroups = [
 
 const aboutHighlights = ["週2~", "高収入", "専門性を活かせる"];
 
+const registrantImages = ["/contact/partner/recruit/registrant-1.webp", null, null, null, null];
+
 const registrants = [
   ["ハードウェア/フィジカルAIエンジニア・PM経験者", "ロボティクス・機械・電気・組込みなどの開発経験をお持ちの方。"],
   ["引退/退職しても活躍の場を探している技術者", "これまでの豊富な経験を活かし、柔軟な働き方で貢献したい方。"],
@@ -238,7 +240,19 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {registrants.map(([title, body], index) => (
               <div key={title} className="overflow-hidden rounded-md bg-white">
-                <div className="aspect-[4/3] w-full bg-[#EFEAE7]" />
+                {registrantImages[index] ? (
+                  <div className="relative aspect-[4/3] w-full">
+                    <Image
+                      src={registrantImages[index]!}
+                      alt=""
+                      fill
+                      sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <div className="aspect-[4/3] w-full bg-[#EFEAE7]" />
+                )}
                 <div className="p-5">
                   <p className="flex items-center gap-2 text-2xl font-black leading-none text-[#7B2233]">
                     {String(index + 1).padStart(2, "0")}
