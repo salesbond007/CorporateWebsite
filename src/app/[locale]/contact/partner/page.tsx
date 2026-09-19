@@ -52,11 +52,11 @@ const jobGroups = [
 const aboutHighlights = ["週2~", "高収入", "専門性を活かせる"];
 
 const registrants = [
-  "ハードウェア/フィジカルAIエンジニア/PM経験者",
-  "引退/退職しても活躍の場を探している技術者",
-  "副業/フリーランスエンジニア",
-  "エンジニアとして独立したい会社員",
-  "現在技術顧問をされている方",
+  ["ハードウェア/フィジカルAIエンジニア・PM経験者", "ロボティクス・機械・電気・組込みなどの開発経験をお持ちの方。"],
+  ["引退/退職しても活躍の場を探している技術者", "これまでの豊富な経験を活かし、柔軟な働き方で貢献したい方。"],
+  ["副業/フリーランスエンジニア", "複数の案件に関わりながらスキルを活かしたい方。"],
+  ["エンジニアとして独立したい会社員", "独立を視野に入れ、事前に案件やネットワークを確保したい方。"],
+  ["現在技術顧問をされている方", "これまでの知見を活かし、企業の技術支援・アドバイザリーとして貢献したい方。"],
 ];
 
 const strengthImages = [
@@ -213,19 +213,32 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
 
       <section className="bg-[#FAF8F7] py-20 md:py-28">
         <Container>
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-black leading-tight md:text-4xl">こんな方が登録しています</h2>
+          <div className="mb-12">
+            <div className="flex items-center gap-4">
+              <p className="whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] text-[#8B8B8B]">
+                Recruit
+              </p>
+              <div className="h-px w-full max-w-[200px] bg-[#7B2233]/30" />
+            </div>
+            <h2 className="mt-4 text-3xl font-black leading-tight md:text-4xl">
+              こんな方が<span className="text-[#7B2233]">登録</span>しています
+            </h2>
+            <p className="mt-3 text-base font-medium text-[#2B2B2B]/70">
+              これまでの経験やスキルを、次のステージで活かしたい方をお待ちしています。
+            </p>
           </div>
-          <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-5">
-            {registrants.map((item) => (
-              <div
-                key={item}
-                className="flex w-full items-center gap-4 rounded-md border border-[#7B2233]/15 bg-white px-7 py-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]"
-              >
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#7B2233]/10">
-                  <CheckIcon small />
-                </span>
-                <p className="text-base font-bold leading-snug text-[#2B2B2B]">{item}</p>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+            {registrants.map(([title, body], index) => (
+              <div key={title} className="overflow-hidden rounded-md bg-white">
+                <div className="aspect-[4/3] w-full bg-[#EFEAE7]" />
+                <div className="p-5">
+                  <p className="flex items-center gap-2 text-2xl font-black leading-none text-[#7B2233]">
+                    {String(index + 1).padStart(2, "0")}
+                    <span className="h-px w-6 bg-[#7B2233]" />
+                  </p>
+                  <p className="mt-3 text-base font-black leading-snug text-[#2B2B2B]">{title}</p>
+                  <p className="mt-2 text-sm font-medium leading-relaxed text-[#2B2B2B]/70">{body}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -351,23 +364,6 @@ function Cta() {
     <div className="mt-12 text-center">
       <Button href="#entry" className="!bg-[#7B2233] hover:!bg-[#A33A52]">無料登録して案件を探す</Button>
     </div>
-  );
-}
-
-function CheckIcon({ small = false }: { small?: boolean }) {
-  const size = small ? 20 : 28;
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      aria-hidden="true"
-      className="shrink-0 text-[#7B2233]"
-    >
-      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.8" />
-      <path d="M7.5 12.5l2.8 2.8 6.2-6.6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
   );
 }
 
