@@ -65,7 +65,6 @@ const strengths = [
   <><span className="text-[#7B2233]">スキルにマッチした案件</span>を紹介いたします。</>,
 ];
 
-const members = ["機構設計", "電気設計", "組込み", "ロボティクス", "品質・規格"];
 const flow = [
   ["メール登録", "メールアドレスのみで、かんたんに仮登録できます。"],
   ["経験・希望確認", "ご経歴や稼働日数、報酬などのご希望をヒアリングします。"],
@@ -227,20 +226,34 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-      <LpSection tone="white" label="Occupation" title="募集職種">
-        <div className="grid gap-6 md:grid-cols-2">
-          {jobGroups.map((group) => (
-            <div key={group.title} className="rounded-md border border-[#7B2233]/20 bg-white p-8">
-              <h2 className="text-2xl font-black text-[#7B2233]">{group.title}</h2>
-              <ul className="mt-6 space-y-3 text-base font-medium leading-relaxed">
-                {group.items.map((item) => <li key={item} className="border-b border-[#7B2233]/10 pb-3">{item}</li>)}
-              </ul>
-            </div>
-          ))}
-        </div>
-        <p className="mt-6 text-center text-sm font-medium text-[#2B2B2B]/60">※募集職種は一例です。上記以外の職種もお気軽にご相談ください。</p>
-        <Cta />
-      </LpSection>
+      <section className="bg-white py-20 md:py-28">
+        <Container>
+          <div className="mb-14 text-center">
+            <h2 className="text-3xl font-black leading-tight md:text-4xl">支援分野について</h2>
+            <p className="mt-3 text-xs font-black uppercase tracking-[0.18em] text-[#8B8B8B]">Support Fields</p>
+            <div className="mx-auto mt-3 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
+          </div>
+          <div className="mx-auto grid max-w-4xl gap-x-16 gap-y-10 md:grid-cols-2">
+            {jobGroups.map((group) => (
+              <div key={group.title}>
+                <h3 className="border-b-2 border-[#7B2233]/30 pb-3 text-xl font-black text-[#7B2233]">
+                  {group.title}
+                </h3>
+                <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-base font-medium text-[#2B2B2B]/80">
+                  {group.items.map((item) => (
+                    <li key={item} className="flex items-center gap-2">
+                      <span className="h-1 w-1 shrink-0 rounded-full bg-[#7B2233]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+          <p className="mt-10 text-center text-sm font-medium text-[#2B2B2B]/60">※支援分野は一例です。上記以外の分野もお気軽にご相談ください。</p>
+          <Cta />
+        </Container>
+      </section>
 
       <section className="bg-[#FAF8F7] py-20 md:py-28">
         <Container>
@@ -259,19 +272,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-      <LpSection tone="white" label="Members" title="在籍メンバー紹介">
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-          {members.map((member, index) => (
-            <div key={member} className="rounded-md border border-[#7B2233]/20 bg-white p-6 text-center">
-              <PersonIcon index={index} />
-              <p className="mt-5 text-lg font-black">{member}</p>
-              <p className="mt-2 text-sm font-medium leading-relaxed text-[#2B2B2B]/70">経験者登録あり</p>
-            </div>
-          ))}
-        </div>
-      </LpSection>
-
-      <LpSection tone="white" label="Flow" title="登録から案件参画まで">
+<LpSection tone="white" label="Flow" title="登録から案件参画まで">
         <div className="grid gap-6 md:grid-cols-4">
           {flow.map(([title, body], index) => (
             <div key={title} className="relative rounded-md border border-[#7B2233]/20 bg-white p-6">
@@ -380,17 +381,6 @@ function FlowIcon({ index }: { index: number }) {
   return (
     <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="text-[#7B2233]">
       <path d={paths[index % paths.length]} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function PersonIcon({ index }: { index: number }) {
-  return (
-    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" aria-hidden="true" className="mx-auto text-[#7B2233]">
-      <circle cx="32" cy="32" r="30" stroke="currentColor" strokeWidth="2" />
-      <circle cx="32" cy="24" r="8" stroke="currentColor" strokeWidth="2" />
-      <path d="M18 48c3-8 8-12 14-12s11 4 14 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-      <path d={index % 2 === 0 ? "M18 18l-5-5M46 18l5-5" : "M14 32H8M56 32h-6"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
