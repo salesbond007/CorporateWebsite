@@ -28,10 +28,11 @@ const jobGroups = [
 ];
 
 const registrants = [
-  "ハードウェア/フィジカルAIエンジニア・PM経験者",
-  "副業/フリーランス",
-  "引退した技術者",
-  "専門性を活かしたい方",
+  "ハードウェア/フィジカルAIエンジニア/PM経験者",
+  "引退/退職しても活躍の場を探している技術者",
+  "副業/フリーランスエンジニア",
+  "エンジニアとして独立したい会社員",
+  "現在技術顧問をされている方",
 ];
 
 const strengths = [
@@ -69,6 +70,17 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         ])}
       />
 
+      <div className="w-full bg-[#7B2233] py-2.5">
+        <Container className="flex justify-end">
+          <Link
+            href="#entry"
+            className="text-xs font-bold uppercase tracking-[0.08em] text-white hover:text-white/80"
+          >
+            会員登録
+          </Link>
+        </Container>
+      </div>
+
       <section className="relative isolate flex min-h-[560px] items-center overflow-hidden bg-[#1B1210] md:min-h-[680px]">
         <Image
           src="/contact/partner/hero-engineers.webp"
@@ -97,7 +109,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
                 size="lg"
                 className="!h-20 !px-16 !text-xl !bg-[#7B2233] hover:!bg-[#A33A52]"
               >
-                会員登録
+                無料登録して案件を探す
               </Button>
             </div>
           </div>
@@ -152,6 +164,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
               週2日から。シニアの技術者、副業・フリーランスの技術者も歓迎です。
             </p>
           </div>
+          <Cta />
         </Container>
       </section>
 
@@ -160,16 +173,16 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-black leading-tight md:text-4xl">こんな方が登録しています</h2>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-5">
             {registrants.map((item) => (
               <div
                 key={item}
-                className="flex flex-col items-center gap-4 rounded-md border border-[#7B2233]/20 bg-white p-10 text-center"
+                className="flex w-full items-center gap-4 rounded-md border border-[#7B2233]/15 bg-white px-7 py-6 shadow-[0_1px_2px_rgba(0,0,0,0.04)] sm:w-[calc(50%-0.625rem)] lg:w-[calc(33.333%-0.834rem)]"
               >
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#7B2233]/10">
-                  <CheckIcon />
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#7B2233]/10">
+                  <CheckIcon small />
                 </span>
-                <p className="text-lg font-black leading-relaxed text-[#2B2B2B]">{item}</p>
+                <p className="text-base font-bold leading-snug text-[#2B2B2B]">{item}</p>
               </div>
             ))}
           </div>
@@ -191,10 +204,23 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         <Cta />
       </LpSection>
 
-      <LpSection tone="cream" label="Strength" title="サービスの強み">
-        <CardGrid items={strengths} />
-        <Cta />
-      </LpSection>
+      <section className="bg-[#FAF8F7] py-20 md:py-28">
+        <Container>
+          <h2 className="text-center text-3xl font-black leading-tight md:text-4xl">
+            <span className="text-[#7B2233]">ボンドテック</span>が選ばれる3つの理由
+          </h2>
+          <div className="mt-14 grid gap-10 md:grid-cols-3">
+            {strengths.map(([title, body]) => (
+              <div key={title} className="text-center">
+                <div className="mx-auto aspect-[4/3] w-full max-w-xs rounded-md border-2 border-dashed border-[#7B2233]/25 bg-white" />
+                <p className="mt-6 text-lg font-black leading-snug text-[#2B2B2B]">{title}</p>
+                <p className="mt-2 text-sm font-medium leading-relaxed text-[#2B2B2B]/70">{body}</p>
+              </div>
+            ))}
+          </div>
+          <Cta />
+        </Container>
+      </section>
 
       <LpSection tone="white" label="Members" title="在籍メンバー紹介">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
@@ -284,33 +310,20 @@ function LpSection({ label, title, children, tone = "cream" }: { label: string; 
   );
 }
 
-function CardGrid({ items }: { items: string[][] }) {
-  return (
-    <div className="grid gap-6 md:grid-cols-3">
-      {items.map(([title, body], index) => (
-        <div key={title} className="rounded-md border border-[#7B2233]/20 bg-white p-8">
-          <LineIcon index={index} />
-          <h3 className="mt-6 text-xl font-black text-[#2B2B2B]">{title}</h3>
-          <p className="mt-4 text-base font-medium leading-relaxed text-[#2B2B2B]/80">{body}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function Cta() {
   return (
     <div className="mt-12 text-center">
-      <Button href="#entry" className="!bg-[#7B2233] hover:!bg-[#A33A52]">無料で登録する</Button>
+      <Button href="#entry" className="!bg-[#7B2233] hover:!bg-[#A33A52]">無料登録して案件を探す</Button>
     </div>
   );
 }
 
-function CheckIcon() {
+function CheckIcon({ small = false }: { small?: boolean }) {
+  const size = small ? 20 : 28;
   return (
     <svg
-      width="28"
-      height="28"
+      width={size}
+      height={size}
       viewBox="0 0 24 24"
       fill="none"
       aria-hidden="true"
@@ -332,19 +345,6 @@ function TagIcon() {
         strokeLinejoin="round"
       />
       <circle cx="8.2" cy="8.2" r="1.4" stroke="currentColor" strokeWidth="1.6" />
-    </svg>
-  );
-}
-
-function LineIcon({ index }: { index: number }) {
-  const paths = [
-    "M8 20h32M16 12v16M32 12v16M12 8h24v8H12zM18 28h12v8H18z",
-    "M12 10h24v24H12zM20 6v8M28 6v8M20 30v8M28 30v8M8 18h8M8 26h8M32 18h8M32 26h8",
-    "M10 14h28v20H10zM18 22h12M18 28h12M24 8v6M24 34v6",
-  ];
-  return (
-    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true" className="text-[#7B2233]">
-      <path d={paths[index % paths.length]} stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
