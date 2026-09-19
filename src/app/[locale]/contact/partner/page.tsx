@@ -116,9 +116,9 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         />
         <Container className="relative z-10 pb-28 pt-16 md:pb-32 md:pt-20">
           <div className="max-w-2xl">
-            <div className="mb-2">
-              <BrandLogo />
-            </div>
+            <p className="mb-2 text-2xl font-black uppercase tracking-[0.04em] text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_18px_rgba(0,0,0,0.85)] sm:text-3xl md:text-4xl">
+              ボンドテック
+            </p>
             <h1 className="text-lg font-black leading-[1.25] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] sm:text-xl md:text-2xl lg:text-[2rem]">
               ハードウェア/<br />フィジカルAI<br />エンジニア案件紹介サイト
             </h1>
@@ -334,22 +334,6 @@ function Cta() {
   return (
     <div className="mt-12 text-center">
       <Button href="#entry" className="!bg-[#7B2233] hover:!bg-[#A33A52]">無料登録して案件を探す</Button>
-    </div>
-  );
-}
-
-function BrandLogo() {
-  return (
-    <div className="inline-flex items-center gap-2.5 sm:gap-3 md:gap-4">
-      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-[#C6495F] via-[#7B2233] to-[#2A070D] shadow-[0_4px_14px_rgba(0,0,0,0.5)] sm:h-10 sm:w-10 sm:rounded-xl md:h-14 md:w-14">
-        <svg viewBox="0 0 24 24" width="60%" height="60%" fill="none" aria-hidden="true">
-          <circle cx="9" cy="12" r="5.2" stroke="white" strokeWidth="2" />
-          <circle cx="15" cy="12" r="5.2" stroke="white" strokeWidth="2" />
-        </svg>
-      </span>
-      <span className="bg-gradient-to-r from-[#E3AEB8] via-[#B23A52] to-[#5C1522] bg-clip-text text-2xl font-black italic tracking-tight text-transparent [text-shadow:0_1px_0_rgba(255,255,255,0.35),0_2px_14px_rgba(0,0,0,0.55)] sm:text-3xl md:text-5xl lg:text-6xl">
-        ボンドテック
-      </span>
     </div>
   );
 }
