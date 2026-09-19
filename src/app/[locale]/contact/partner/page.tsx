@@ -115,23 +115,23 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           className="object-cover"
         />
         <div className="absolute left-0 top-0 z-20 w-full">
-          <Container className="py-6">
-            <span className="text-3xl font-black uppercase tracking-[0.02em] text-[#B23A52] [text-shadow:1px_1px_0_#fff,-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,0_0_20px_rgba(0,0,0,0.5)] sm:text-4xl md:text-6xl lg:text-7xl">
+          <Container className="pt-6 text-center">
+            <span className="text-2xl font-black uppercase tracking-[0.02em] text-[#B23A52] [text-shadow:1px_1px_0_#fff,-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,0_0_20px_rgba(0,0,0,0.5)] sm:text-3xl md:text-5xl lg:text-6xl">
               ボンドテック
             </span>
           </Container>
         </div>
 
-        <Container className="relative z-10 py-16 pb-28 md:py-20 md:pb-32">
+        <Container className="relative z-10 pb-28 pt-24 md:pb-32 md:pt-28">
           <div className="max-w-2xl">
-            <h1 className="text-[2rem] font-black leading-[1.3] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] md:text-4xl lg:text-[2.75rem]">
+            <h1 className="text-xl font-black leading-[1.3] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] sm:text-2xl md:text-3xl lg:text-[2.25rem]">
               ハードウェア/<br />フィジカルAI<br />エンジニア案件紹介サイト
             </h1>
-            <div className="mt-10">
+            <div className="mt-8">
               <Button
                 href="#entry"
                 size="lg"
-                className="!h-14 !w-full !px-6 !text-sm !bg-[#7B2233] hover:!bg-[#A33A52] sm:!w-auto sm:!h-16 sm:!px-10 sm:!text-base md:!h-20 md:!px-16 md:!text-xl"
+                className="!h-12 !w-full !px-5 !text-xs !bg-[#7B2233] hover:!bg-[#A33A52] sm:!w-auto sm:!h-14 sm:!px-8 sm:!text-sm md:!h-16 md:!px-10 md:!text-base"
               >
                 無料登録して案件を探す
               </Button>
