@@ -116,7 +116,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         />
         <Container className="relative z-10 pb-28 pt-16 md:pb-32 md:pt-20">
           <div className="max-w-2xl">
-            <p className="mb-2 text-2xl font-black uppercase tracking-[0.04em] text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_18px_rgba(0,0,0,0.85)] sm:text-3xl md:text-4xl">
+            <p className="mb-2 bg-gradient-to-r from-[#E38A9B] via-[#B23A52] to-[#7B2233] bg-clip-text text-3xl font-black uppercase tracking-[0.04em] text-transparent [text-shadow:1px_1px_0_#fff,-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,0_0_18px_rgba(0,0,0,0.5)] sm:text-4xl md:text-5xl">
               ボンドテック
             </p>
             <h1 className="text-lg font-black leading-[1.25] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] sm:text-xl md:text-2xl lg:text-[2rem]">
@@ -194,7 +194,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
                   key={item}
                   className={`py-3 ${index > 0 ? "border-t border-[#7B2233]/15" : ""}`}
                 >
-                  <p className="text-xl font-black leading-tight text-[#7B2233] md:text-2xl">{item}</p>
+                  <p className="text-base font-black leading-tight text-[#7B2233] md:text-lg">{item}</p>
                 </div>
               ))}
             </div>
