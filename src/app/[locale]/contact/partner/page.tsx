@@ -7,13 +7,15 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { PartnerLeadForm } from "@/components/contact/PartnerLeadForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { localePath } from "@/i18n/path";
-import { isLocale, type Locale } from "@/i18n/config";
+import { isLocale } from "@/i18n/config";
 
 export const metadata: Metadata = {
   title: "エンジニア・フリーランス登録 | 製造業向け業務委託案件",
   description:
     "機構設計、電気設計、組込み、ロボティクス、センサ・通信、品質・規格など、製造業向け業務委託案件をお探しのエンジニアの方向け登録ページです。",
 };
+
+const heroBackgroundImage = "data:image/jpeg;base64,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";
 
 const jobGroups = [
   {
@@ -67,45 +69,39 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         ])}
       />
 
-      <section className="border-b border-[#7B2233]/15 bg-[#FAF8F7]">
-        <Container className="py-5">
-          <div className="flex items-center justify-between gap-4">
-            <Link href={localePath("/", locale)} className="text-sm font-black tracking-[0.08em] text-[#7B2233]">
-              Sales Bond
-            </Link>
-            <Button href="#entry" className="!bg-[#7B2233] hover:!bg-[#A33A52]">
-              無料登録
-            </Button>
-          </div>
-        </Container>
-      </section>
-
-      <section className="overflow-hidden bg-[#FAF8F7]">
-        <Container className="grid gap-12 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center md:py-24 lg:py-28">
-          <div>
+      <section
+        className="relative isolate min-h-[680px] overflow-hidden bg-[#FAF8F7] bg-cover bg-[center_top] md:min-h-[760px] md:bg-center"
+        style={{
+          backgroundImage: `linear-gradient(90deg, rgba(250,248,247,0.98) 0%, rgba(250,248,247,0.9) 36%, rgba(250,248,247,0.34) 64%, rgba(250,248,247,0.04) 100%), url(${heroBackgroundImage})`,
+        }}
+      >
+        <Container className="flex min-h-[680px] items-center py-16 md:min-h-[760px] md:py-24">
+          <div className="max-w-3xl">
             <div className="flex flex-wrap gap-3">
-              {["製造業案件", "業務委託", "エンジニア登録"].map((tag) => (
-                <span key={tag} className="rounded-md border border-[#7B2233] bg-white px-4 py-2 text-sm font-bold text-[#7B2233]">
+              {["週２～", "シニア活躍中", "副業・フリーランス歓迎"].map((tag) => (
+                <span key={tag} className="rounded-md border border-[#7B2233] bg-white/90 px-4 py-2 text-sm font-black text-[#7B2233] shadow-sm">
                   {tag}
                 </span>
               ))}
             </div>
-            <p className="mt-8 text-base font-bold text-[#7B2233] md:text-lg">
-              製造業の開発経験を、次の現場へ。
+            <p className="mt-8 text-base font-black tracking-[0.18em] text-[#7B2233] md:text-lg">
+              ENGINEER PARTNER
             </p>
-            <h1 className="mt-5 text-4xl font-black leading-[1.25] tracking-normal md:text-5xl lg:text-6xl">
-              技術がわかる企業と、<br />あなたの経験をつなぐ。
+            <h1 className="mt-5 text-4xl font-black leading-[1.2] tracking-normal text-[#2B2B2B] md:text-6xl lg:text-7xl">
+              ハードウェア/<br />フィジカルAI<br className="hidden md:block" />エンジニア募集
             </h1>
-            <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed md:text-xl">
-              機構設計・電気設計・組込み・ロボティクス・品質領域の業務委託案件をご案内します。
+            <p className="mt-7 max-w-2xl text-2xl font-black leading-relaxed text-[#7B2233] md:text-3xl">
+              「週２～」から、経験を活かせる開発案件へ。
             </p>
-            <div className="mt-9">
+            <p className="mt-4 max-w-2xl text-lg font-bold leading-relaxed text-[#2B2B2B] md:text-xl">
+              シニア・副業・フリーランス活躍中。機構設計、電気設計、組込み、ロボティクス、フィジカルAI領域の業務委託案件をご案内します。
+            </p>
+            <div className="mt-10">
               <Button href="#entry" size="lg" className="!bg-[#7B2233] hover:!bg-[#A33A52]">
                 無料で登録する
               </Button>
             </div>
           </div>
-          <HeroObject />
         </Container>
       </section>
 
@@ -276,25 +272,5 @@ function PersonIcon({ index }: { index: number }) {
       <path d="M18 48c3-8 8-12 14-12s11 4 14 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
       <path d={index % 2 === 0 ? "M18 18l-5-5M46 18l5-5" : "M14 32H8M56 32h-6"} stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
-  );
-}
-
-function HeroObject() {
-  return (
-    <div className="relative mx-auto aspect-square w-full max-w-[520px] rounded-md border border-[#7B2233]/15 bg-white p-8">
-      <div className="absolute inset-8 rounded-md border border-[#7B2233]/25" />
-      <div className="absolute left-[18%] top-[22%] h-28 w-44 rounded-md border-2 border-[#7B2233] bg-[#FAF8F7]">
-        <div className="grid h-full grid-cols-4 gap-3 p-4">
-          {Array.from({ length: 8 }).map((_, i) => <span key={i} className="rounded-full border border-[#7B2233]/70" />)}
-        </div>
-      </div>
-      <div className="absolute right-[17%] top-[18%] h-28 w-28 rounded-full border-[10px] border-[#7B2233]/90 bg-[#FAF8F7]">
-        <div className="absolute inset-7 rounded-full border-2 border-[#8B8B8B]" />
-      </div>
-      <div className="absolute bottom-[24%] left-[22%] h-8 w-56 -rotate-12 rounded-md bg-[#8B8B8B]" />
-      <div className="absolute bottom-[18%] right-[22%] h-28 w-10 -rotate-12 rounded-md border-2 border-[#7B2233] bg-white" />
-      <div className="absolute bottom-[33%] right-[18%] h-16 w-16 rounded-md border-2 border-[#A33A52] bg-[#FAF8F7]" />
-      <div className="absolute bottom-[16%] left-[18%] h-16 w-16 rounded-full border-2 border-[#7B2233] bg-white" />
-    </div>
   );
 }
