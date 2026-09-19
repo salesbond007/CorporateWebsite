@@ -116,10 +116,10 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         />
         <Container className="relative z-10 pb-28 pt-16 md:pb-32 md:pt-20">
           <div className="max-w-2xl">
-            <p className="mb-2 bg-gradient-to-r from-[#E38A9B] via-[#B23A52] to-[#7B2233] bg-clip-text text-3xl font-black uppercase tracking-[0.04em] text-transparent [text-shadow:1px_1px_0_#fff,-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,0_0_18px_rgba(0,0,0,0.5)] sm:text-4xl md:text-5xl">
+            <p className="mb-3 bg-gradient-to-r from-[#E38A9B] via-[#B23A52] to-[#7B2233] bg-clip-text text-5xl font-black uppercase tracking-[0.04em] text-transparent [text-shadow:1px_1px_0_#fff,-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,0_0_18px_rgba(0,0,0,0.5)] sm:text-6xl md:text-7xl">
               ボンドテック
             </p>
-            <h1 className="text-lg font-black leading-[1.25] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] sm:text-xl md:text-2xl lg:text-[2rem]">
+            <h1 className="text-lg font-black leading-[1.6] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] sm:text-xl md:text-2xl lg:text-[2rem]">
               ハードウェア/<br />フィジカルAI<br />エンジニア案件紹介サイト
             </h1>
             <div className="mt-8">
@@ -169,7 +169,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           </div>
 
           <div className="mt-6 grid gap-8 text-left lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div className="space-y-2 text-sm font-black leading-[1.6] text-[#2B2B2B]/85">
+            <div className="space-y-4 text-base font-black leading-[1.9] text-[#2B2B2B]/85">
               <p>
                 ボンドテックは、<span className="text-[#7B2233]">ハードウェアとフィジカルAI領域のエンジニア・PM</span>に案件をご紹介するサービスです。
               </p>
