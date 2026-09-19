@@ -211,8 +211,16 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-      <section className="bg-[#FAF8F7] py-20 md:py-28">
-        <Container>
+      <section className="relative isolate overflow-hidden bg-[#FAF8F7] py-20 md:py-28">
+        <Image
+          src="/contact/partner/recruit-bg.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-70"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F7] via-[#FAF8F7]/85 to-transparent" />
+        <Container className="relative z-10">
           <div className="mb-12">
             <div className="flex items-center gap-4">
               <p className="whitespace-nowrap text-xs font-black uppercase tracking-[0.18em] text-[#8B8B8B]">
