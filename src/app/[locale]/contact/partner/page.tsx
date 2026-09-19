@@ -114,15 +114,12 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute left-0 top-0 z-20 w-full">
-          <Container className="flex justify-center pt-6">
-            <BrandLogo />
-          </Container>
-        </div>
-
-        <Container className="relative z-10 pb-28 pt-24 md:pb-32 md:pt-28">
+        <Container className="relative z-10 pb-28 pt-16 md:pb-32 md:pt-20">
           <div className="max-w-2xl">
-            <h1 className="text-xl font-black leading-[1.3] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] sm:text-2xl md:text-3xl lg:text-[2.25rem]">
+            <div className="mb-2">
+              <BrandLogo />
+            </div>
+            <h1 className="text-lg font-black leading-[1.25] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] sm:text-xl md:text-2xl lg:text-[2rem]">
               ハードウェア/<br />フィジカルAI<br />エンジニア案件紹介サイト
             </h1>
             <div className="mt-8">
@@ -137,12 +134,12 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           </div>
         </Container>
 
-        <div className="absolute inset-x-0 bottom-0 z-10 bg-[#7B2233]/45 py-6 backdrop-blur-sm">
-          <Container className="flex flex-wrap items-center justify-center gap-3">
+        <div className="absolute inset-x-0 bottom-0 z-10 bg-[#7B2233]/45 py-4 backdrop-blur-sm">
+          <Container className="flex flex-wrap items-center justify-center gap-2">
             {["シニアエンジニア活躍", "副業/フリーランス活躍", "週２～", "高収入"].map((tag) => (
               <span
                 key={tag}
-                className="flex items-center gap-2 rounded-none border border-[#7B2233]/25 bg-white px-4 py-2.5 text-sm font-black text-[#7B2233] md:text-base"
+                className="flex items-center gap-1.5 rounded-none border border-[#7B2233]/25 bg-white px-3 py-1.5 text-xs font-black text-[#7B2233] md:text-sm"
               >
                 <TagIcon />
                 {tag}
@@ -161,16 +158,18 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           className="object-cover opacity-15"
         />
         <Container className="relative z-10">
-          <h2 className="text-4xl font-black text-[#2B2B2B] md:text-5xl">
-            ボンドテックとは
-          </h2>
-          <p className="mt-4 text-xs font-black uppercase tracking-[0.18em] text-[#8B8B8B]">
-            About BondTech
-          </p>
-          <div className="mt-3 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
+          <div className="text-center">
+            <h2 className="text-4xl font-black text-[#2B2B2B] md:text-5xl">
+              ボンドテックとは
+            </h2>
+            <p className="mt-4 text-xs font-black uppercase tracking-[0.18em] text-[#8B8B8B]">
+              About BondTech
+            </p>
+            <div className="mx-auto mt-3 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
+          </div>
 
-          <div className="mt-8 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div className="space-y-5 text-xl font-black leading-[2.1] text-[#2B2B2B]/85">
+          <div className="mt-8 grid gap-12 text-left lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+            <div className="space-y-4 text-base font-black leading-[1.9] text-[#2B2B2B]/85">
               <p>
                 ボンドテックは、<span className="text-[#7B2233]">ハードウェアとフィジカルAI領域のエンジニア・PM</span>に案件をご紹介するサービスです。
               </p>
