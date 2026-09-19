@@ -7,8 +7,8 @@ export const hardwareDevelopmentHtml = String.raw`<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ハードウェア開発支援 | ボンドテック</title>
-<meta name="description" content="製造業向けに、ハードウェア領域のエンジニア・PM・技術顧問を業務委託(準委任)で提供します。機構から組込み、無線、AI、制御、品質・安全まで。">
+<title>ハードウェア/フィジカルAI開発支援 | ボンドテック</title>
+<meta name="description" content="製造業・フィジカルAI領域向けに、ハードウェア領域のエンジニア・PM・技術顧問を業務委託(準委任)で提供します。機構から組込み、無線、AI、制御、品質・安全まで。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
