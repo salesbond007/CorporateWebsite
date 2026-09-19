@@ -51,7 +51,13 @@ const jobGroups = [
 
 const aboutHighlights = ["週2~", "高収入", "専門性を活かせる"];
 
-const registrantImages = ["/contact/partner/recruit/registrant-1.webp", null, null, null, null];
+const registrantImages = [
+  "/contact/partner/recruit/registrant-1.webp",
+  "/contact/partner/recruit/registrant-2.webp",
+  "/contact/partner/recruit/registrant-3.webp",
+  null,
+  null,
+];
 
 const registrants = [
   ["ハードウェア/フィジカルAIエンジニア・PM経験者", "ロボティクス・機械・電気・組込みなどの開発経験をお持ちの方。"],
