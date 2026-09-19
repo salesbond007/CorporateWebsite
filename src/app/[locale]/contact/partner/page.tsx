@@ -60,9 +60,9 @@ const registrants = [
 ];
 
 const strengths = [
-  ["製造業案件に注力", "開発現場のフェーズや技術要件を理解したうえで、経験に合う案件をご案内します。"],
-  ["無理な紹介をしない", "ご希望の稼働日数、報酬、関わり方を確認し、合わない案件を無理に進めません。"],
-  ["企業との接点づくり", "営業代行・顧問紹介で培った法人接点を活かし、技術者の活躍機会を広げます。"],
+  <>公開されている案件だけではなく、<span className="text-[#7B2233]">弊社独自の案件</span>もございます。</>,
+  <><span className="text-[#7B2233]">週2日から常駐まで</span>。<span className="text-[#7B2233]">手を動かす案件からPMまで</span>、幅広くご紹介できます。</>,
+  <><span className="text-[#7B2233]">スキルにマッチした案件</span>を紹介いたします。</>,
 ];
 
 const members = ["機構設計", "電気設計", "組込み", "ロボティクス", "品質・規格"];
@@ -248,11 +248,10 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
             <span className="text-[#7B2233]">ボンドテック</span>が選ばれる3つの理由
           </h2>
           <div className="mt-14 grid gap-10 md:grid-cols-3">
-            {strengths.map(([title, body]) => (
-              <div key={title} className="text-center">
+            {strengths.map((text, index) => (
+              <div key={index} className="text-center">
                 <div className="mx-auto aspect-[4/3] w-full max-w-xs rounded-md border-2 border-dashed border-[#7B2233]/25 bg-white" />
-                <p className="mt-6 text-lg font-black leading-snug text-[#2B2B2B]">{title}</p>
-                <p className="mt-2 text-sm font-medium leading-relaxed text-[#2B2B2B]/70">{body}</p>
+                <p className="mt-6 text-base font-bold leading-relaxed text-[#2B2B2B]">{text}</p>
               </div>
             ))}
           </div>
