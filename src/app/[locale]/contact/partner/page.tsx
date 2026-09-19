@@ -68,7 +68,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         ])}
       />
 
-      <section className="relative isolate overflow-hidden bg-[#1B1210]">
+      <section className="relative isolate flex min-h-[420px] items-center overflow-hidden bg-[#1B1210] md:min-h-[520px]">
         <Image
           src="/contact/partner/hero-engineers.webp"
           alt=""
@@ -77,26 +77,16 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           sizes="100vw"
           className="object-cover"
         />
-        <Container className="relative z-10 min-h-[640px] py-24 md:min-h-[760px] md:py-32">
+        <Container className="relative z-10 py-16 md:py-20">
           <div className="max-w-xl">
-            <h1 className="text-[2.35rem] font-black leading-[1.25] tracking-normal text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.5)] md:text-5xl lg:text-[3.25rem]">
+            <h1 className="text-[2.35rem] font-black leading-[1.25] tracking-normal text-white [text-shadow:0_2px_18px_rgba(0,0,0,0.65)] md:text-5xl lg:text-[3.25rem]">
               ハードウェア/<br />フィジカルAI<br />エンジニア募集
             </h1>
-            <div className="mt-8 flex flex-wrap gap-3">
-              {["週２～", "シニア活躍中", "副業・フリーランス歓迎"].map((tag) => (
-                <span
-                  key={tag}
-                  className="rounded-none border border-white/40 bg-black/40 px-4 py-2 text-sm font-bold text-white backdrop-blur-sm md:text-[0.9375rem]"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
             <div className="mt-10">
               <Button
                 href="#entry"
                 size="lg"
-                className="!h-16 !px-12 !text-lg !bg-[#7B2233] hover:!bg-[#A33A52]"
+                className="!h-20 !px-16 !text-xl !bg-[#7B2233] hover:!bg-[#A33A52]"
               >
                 会員登録
               </Button>
@@ -104,6 +94,20 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           </div>
         </Container>
       </section>
+
+      <div className="relative bg-[#7B2233]/80 py-6 backdrop-blur-sm">
+        <Container className="flex flex-wrap items-center justify-center gap-3">
+          {["シニアエンジニア活躍", "副業/フリーランス活躍", "週２～", "高収入"].map((tag) => (
+            <span
+              key={tag}
+              className="flex items-center gap-2 rounded-none border border-[#7B2233]/25 bg-white px-4 py-2.5 text-sm font-black text-[#7B2233] md:text-base"
+            >
+              <TagIcon />
+              {tag}
+            </span>
+          ))}
+        </Container>
+      </div>
 
       <LpSection tone="white" label="Occupation" title="募集職種">
         <div className="grid gap-6 md:grid-cols-2">
@@ -248,6 +252,20 @@ function Cta() {
     <div className="mt-12 text-center">
       <Button href="#entry" className="!bg-[#7B2233] hover:!bg-[#A33A52]">無料で登録する</Button>
     </div>
+  );
+}
+
+function TagIcon() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="shrink-0">
+      <path
+        d="M11.2 3.2H6a2.8 2.8 0 00-2.8 2.8v5.2a1 1 0 00.29.7l9.6 9.6a1 1 0 001.42 0l6.6-6.6a1 1 0 000-1.42l-9.6-9.6a1 1 0 00-.71-.29z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+      <circle cx="8.2" cy="8.2" r="1.4" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
   );
 }
 
