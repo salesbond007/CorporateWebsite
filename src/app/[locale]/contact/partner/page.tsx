@@ -121,7 +121,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         />
         <Container className="relative z-10 pb-28 pt-16 md:pb-32 md:pt-20">
           <div className="max-w-2xl">
-            <p className="mb-6 text-5xl font-black uppercase tracking-[0.04em] text-[#B23A52] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_6px_20px_rgba(0,0,0,0.5)] sm:text-6xl md:text-7xl">
+            <p className="mb-6 text-4xl font-black uppercase tracking-[0.04em] text-[#B23A52] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_6px_20px_rgba(0,0,0,0.5)] sm:text-5xl md:text-6xl lg:text-7xl">
               ボンドテック
             </p>
             <h1 className="text-lg font-black leading-[1.6] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] sm:text-xl md:text-2xl lg:text-[2rem]">
@@ -245,7 +245,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
                 <h3 className="border-b-2 border-[#7B2233]/30 pb-3 text-xl font-black text-[#7B2233]">
                   {group.title}
                 </h3>
-                <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 text-base font-medium text-[#2B2B2B]/80">
+                <ul className="mt-5 grid grid-cols-1 gap-x-6 gap-y-3 text-base font-medium text-[#2B2B2B]/80 sm:grid-cols-2">
                   {group.items.map((item) => (
                     <li key={item} className="flex items-center gap-2">
                       <span className="h-1 w-1 shrink-0 rounded-full bg-[#7B2233]" />
@@ -286,7 +286,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-<LpSection tone="white" label="Flow" title="登録から案件参画まで">
+      <LpSection tone="white" label="Flow" title="登録から案件参画まで">
         <div className="grid gap-6 md:grid-cols-4">
           {flow.map(([title, body], index) => (
             <div key={title} className="relative rounded-md border border-[#7B2233]/20 bg-white p-6">
