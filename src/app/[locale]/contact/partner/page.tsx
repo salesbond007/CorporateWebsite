@@ -15,9 +15,6 @@ export const metadata: Metadata = {
     "機構設計、電気設計、組込み、ロボティクス、センサ・通信、品質・規格など、製造業向け業務委託案件をお探しのエンジニアの方向け登録ページです。",
 };
 
-const heroImageSrc =
-  "data:image/jpeg;base64,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";
-
 const jobGroups = [
   {
     title: "設計・開発",
@@ -70,15 +67,10 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         ])}
       />
 
-      <section className="relative isolate min-h-[640px] overflow-hidden bg-[#FAF8F7] md:min-h-[720px]">
-        <img
-          src={heroImageSrc}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full object-cover object-[62%_center] md:object-center"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#FAF8F7] from-0% via-[#FAF8F7]/90 via-35% to-[#FAF8F7]/5" />
-        <Container className="relative z-10 flex min-h-[640px] items-center py-16 md:min-h-[720px] md:py-24">
+      <section className="relative isolate overflow-hidden bg-[#FAF8F7]">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(123,34,51,0.07)_1px,transparent_1px),linear-gradient(180deg,rgba(123,34,51,0.06)_1px,transparent_1px)] bg-[size:64px_64px] opacity-55" />
+        <div className="absolute right-0 top-0 h-full w-1/2 bg-white/65" />
+        <Container className="relative z-10 grid min-h-[680px] items-center gap-12 py-16 md:min-h-[720px] md:py-24 lg:grid-cols-[minmax(0,0.86fr)_minmax(420px,1fr)]">
           <div className="max-w-2xl">
             <h1 className="text-[2.45rem] font-black leading-[1.22] tracking-normal text-[#2B2B2B] md:text-5xl lg:text-[3.55rem]">
               ハードウェア/<br />フィジカルAI<br />エンジニア募集
@@ -102,6 +94,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
               </Button>
             </div>
           </div>
+          <HeroVisual />
         </Container>
       </section>
 
@@ -212,6 +205,70 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </footer>
     </main>
+  );
+}
+
+function HeroVisual() {
+  return (
+    <div className="relative hidden min-h-[520px] lg:block">
+      <div className="absolute inset-x-4 top-8 h-[440px] rounded-md border border-[#7B2233]/15 bg-white shadow-[0_24px_70px_rgba(43,43,43,0.12)]" />
+      <div className="absolute left-0 top-0 w-[86%] rounded-md border border-[#7B2233]/20 bg-white p-8 shadow-[0_18px_54px_rgba(43,43,43,0.12)]">
+        <div className="flex items-start justify-between gap-8 border-b border-[#7B2233]/15 pb-6">
+          <div>
+            <p className="text-xs font-black uppercase tracking-[0.18em] text-[#A33A52]">Project Brief</p>
+            <h2 className="mt-3 text-2xl font-black text-[#2B2B2B]">募集要項サマリー</h2>
+          </div>
+          <div className="rounded-md bg-[#7B2233] px-4 py-3 text-right text-white">
+            <p className="text-xs font-bold opacity-80">稼働</p>
+            <p className="text-xl font-black">週2〜</p>
+          </div>
+        </div>
+        <div className="mt-7 grid gap-4">
+          {[
+            ["領域", "ハードウェア / フィジカルAI"],
+            ["契約", "業務委託・副業・フリーランス"],
+            ["経験", "機構設計・電気設計・組込み"],
+          ].map(([label, value]) => (
+            <div key={label} className="grid grid-cols-[88px_1fr] items-center gap-4 rounded-md border border-[#7B2233]/14 bg-[#FAF8F7] px-5 py-4">
+              <p className="text-sm font-black text-[#7B2233]">{label}</p>
+              <p className="text-base font-black text-[#2B2B2B]">{value}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-7 grid grid-cols-3 gap-4">
+          {[
+            ["01", "希望確認"],
+            ["02", "案件提案"],
+            ["03", "面談調整"],
+          ].map(([number, label]) => (
+            <div key={number} className="rounded-md border border-[#7B2233]/18 bg-white p-4">
+              <p className="text-2xl font-black text-[#7B2233]">{number}</p>
+              <p className="mt-2 text-sm font-black text-[#2B2B2B]">{label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="absolute bottom-6 right-0 w-[54%] rounded-md border border-[#7B2233]/20 bg-[#2B2B2B] p-6 text-white shadow-[0_18px_54px_rgba(43,43,43,0.18)]">
+        <p className="text-xs font-black uppercase tracking-[0.18em] text-white/60">Skill Map</p>
+        <div className="mt-5 space-y-4">
+          {[
+            ["設計", "82%"],
+            ["組込み", "68%"],
+            ["AI実装", "54%"],
+          ].map(([label, width]) => (
+            <div key={label}>
+              <div className="flex justify-between text-sm font-bold">
+                <span>{label}</span>
+                <span>{width}</span>
+              </div>
+              <div className="mt-2 h-2 rounded-full bg-white/15">
+                <div className="h-2 rounded-full bg-[#A33A52]" style={{ width }} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 }
 
