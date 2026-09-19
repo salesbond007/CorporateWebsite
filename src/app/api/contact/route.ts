@@ -243,9 +243,8 @@ export async function POST(req: Request) {
   }
 
   const to = type === "professional" ? toProfessional : toBusiness;
-  // 件名はすべてのフォームで統一(管理画面で並べやすい)。
-  // フォーム種別は本文(renderHtml)の見出しで判別。
-  const subject = "ホームページからの問い合わせ";
+  const subject =
+    type === "partner_lead" ? "ハードエンジニア募集通知" : "ホームページからの問い合わせ";
 
   if (!transporter) {
     console.warn("[contact] GMAIL_USER / GMAIL_APP_PASSWORD is not set. Logging form data instead.");
