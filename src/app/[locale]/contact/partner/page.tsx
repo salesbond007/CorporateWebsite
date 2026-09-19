@@ -77,35 +77,28 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           sizes="100vw"
           className="object-cover"
         />
-        <div
-          className="absolute inset-0 bg-[#7B2233]/25 mix-blend-multiply"
-          aria-hidden="true"
-        />
-        <div
-          className="absolute inset-0 bg-[linear-gradient(100deg,rgba(20,10,12,0.92)_0%,rgba(20,10,12,0.72)_38%,rgba(20,10,12,0.32)_65%,rgba(20,10,12,0.08)_88%)]"
-          aria-hidden="true"
-        />
-        <Container className="relative z-10 min-h-[560px] py-20 md:min-h-[640px] md:py-28">
+        <Container className="relative z-10 min-h-[640px] py-24 md:min-h-[760px] md:py-32">
           <div className="max-w-xl">
-            <span className="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-black uppercase tracking-[0.22em] text-white backdrop-blur-sm">
-              Engineer Recruiting
-            </span>
-            <h1 className="mt-7 text-[2.35rem] font-black leading-[1.25] tracking-normal text-white md:text-5xl lg:text-[3.25rem]">
+            <h1 className="text-[2.35rem] font-black leading-[1.25] tracking-normal text-white [text-shadow:0_2px_16px_rgba(0,0,0,0.5)] md:text-5xl lg:text-[3.25rem]">
               ハードウェア/<br />フィジカルAI<br />エンジニア募集
             </h1>
             <div className="mt-8 flex flex-wrap gap-3">
               {["週２～", "シニア活躍中", "副業・フリーランス歓迎"].map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm font-bold text-white backdrop-blur-sm md:text-[0.9375rem]"
+                  className="rounded-none border border-white/40 bg-black/40 px-4 py-2 text-sm font-bold text-white backdrop-blur-sm md:text-[0.9375rem]"
                 >
                   {tag}
                 </span>
               ))}
             </div>
             <div className="mt-10">
-              <Button href="#entry" size="lg" className="!bg-[#7B2233] hover:!bg-[#A33A52]">
-                無料で登録する
+              <Button
+                href="#entry"
+                size="lg"
+                className="!h-16 !px-12 !text-lg !bg-[#7B2233] hover:!bg-[#A33A52]"
+              >
+                会員登録
               </Button>
             </div>
           </div>
