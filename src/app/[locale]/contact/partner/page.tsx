@@ -158,7 +158,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
             <p className="mb-6 text-4xl font-black uppercase tracking-[0.04em] text-[#B23A52] [text-shadow:0_2px_0_rgba(0,0,0,0.35),0_6px_20px_rgba(0,0,0,0.5)] sm:text-5xl md:text-6xl lg:text-7xl">
               ボンドテック
             </p>
-            <h1 className="text-lg font-black leading-[1.6] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] sm:text-xl md:text-2xl lg:text-[2rem]">
+            <h1 className="text-lg font-black leading-[1.75] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] sm:text-xl md:text-2xl lg:text-[2rem]">
               ハードウェア/<br />フィジカルAI<br />エンジニア案件紹介サイト
             </h1>
             <div className="mt-8">
