@@ -40,7 +40,12 @@ export function Footer({ locale, dict }: Props) {
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/80">
             {legalLinks.map((l) => (
               <li key={l.href}>
-                <Link href={localePath(l.href, locale)} className="hover:text-white">
+                <Link
+                  href={localePath(l.href, locale)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white"
+                >
                   {l.label}
                 </Link>
               </li>

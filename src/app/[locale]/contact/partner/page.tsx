@@ -137,6 +137,8 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
             </Link>
             <Link
               href={localePath("/contact", locale)}
+              target="_blank"
+              rel="noopener noreferrer"
               className="rounded-sm border border-white/70 px-5 py-2 text-sm font-black uppercase tracking-[0.06em] text-white hover:bg-white/10 md:text-base"
             >
               企業の方はこちら
