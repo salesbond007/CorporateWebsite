@@ -80,7 +80,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         />
         <div className="absolute left-0 top-0 z-20 w-full">
           <Container className="py-6">
-            <span className="text-sm font-black uppercase tracking-[0.14em] text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.9),0_0_18px_rgba(0,0,0,0.7)]">
+            <span className="text-2xl font-black uppercase tracking-[0.08em] text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.9),0_0_18px_rgba(0,0,0,0.7)] md:text-3xl">
               ボンドテック
             </span>
           </Container>
@@ -118,7 +118,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </div>
       </section>
 
-      <section className="bg-[#EFF3F6] py-20 md:py-28">
+      <section className="bg-white py-20 md:py-28">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
             <div>
@@ -162,26 +162,28 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section className="bg-[#FAF8F7] py-20 md:py-28">
         <Container>
           <div className="mb-12 text-center">
             <h2 className="text-3xl font-black leading-tight md:text-4xl">こんな方が登録しています</h2>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {registrants.map((item) => (
               <div
                 key={item}
-                className="flex items-start gap-3 rounded-md border border-[#7B2233]/20 bg-[#FAF8F7] p-6"
+                className="flex flex-col items-center gap-4 rounded-md border border-[#7B2233]/20 bg-white p-10 text-center"
               >
-                <CheckIcon />
-                <p className="text-base font-black leading-relaxed text-[#2B2B2B]">{item}</p>
+                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#7B2233]/10">
+                  <CheckIcon />
+                </span>
+                <p className="text-lg font-black leading-relaxed text-[#2B2B2B]">{item}</p>
               </div>
             ))}
           </div>
         </Container>
       </section>
 
-      <LpSection tone="cream" label="Occupation" title="募集職種">
+      <LpSection tone="white" label="Occupation" title="募集職種">
         <div className="grid gap-6 md:grid-cols-2">
           {jobGroups.map((group) => (
             <div key={group.title} className="rounded-md border border-[#7B2233]/20 bg-white p-8">
@@ -195,22 +197,10 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         <Cta />
       </LpSection>
 
-      <LpSection tone="white" label="Strength" title="サービスの強み">
+      <LpSection tone="cream" label="Strength" title="サービスの強み">
         <CardGrid items={strengths} />
         <Cta />
       </LpSection>
-
-      <section className="bg-[#FAF8F7] py-20 md:py-28">
-        <Container className="max-w-4xl text-center">
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-[#A33A52]">Message</p>
-          <h2 className="mt-5 text-3xl font-black leading-relaxed md:text-4xl">
-            経験のある技術者が、必要な場所に届く。<br />それが開発を前に進めます。
-          </h2>
-          <p className="mt-8 text-lg font-medium leading-loose">
-            製造業の現場には、仕様、評価、量産、品質、規格など、言葉にしづらい判断がたくさんあります。私たちは、あなたの経験が正しく伝わるように整理し、必要としている企業との接点をつくります。
-          </p>
-        </Container>
-      </section>
 
       <LpSection tone="white" label="Members" title="在籍メンバー紹介">
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
@@ -325,12 +315,12 @@ function Cta() {
 function CheckIcon() {
   return (
     <svg
-      width="24"
-      height="24"
+      width="28"
+      height="28"
       viewBox="0 0 24 24"
       fill="none"
       aria-hidden="true"
-      className="mt-0.5 shrink-0 text-[#7B2233]"
+      className="shrink-0 text-[#7B2233]"
     >
       <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.8" />
       <path d="M7.5 12.5l2.8 2.8 6.2-6.6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
