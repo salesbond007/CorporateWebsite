@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/Button";
@@ -17,7 +18,9 @@ type Props = {
 };
 
 export function Header({ locale, dict }: Props) {
+  const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const hideCorporateHeader = /^\/(ja|en)\/contact\/partner\/?$/.test(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -25,6 +28,8 @@ export function Header({ locale, dict }: Props) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  if (hideCorporateHeader) return null;
 
   const serviceItems = [
     {
