@@ -118,46 +118,39 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </div>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
-        <Container>
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
-            <div>
-              <h2 className="text-4xl font-black text-[#2B2B2B] md:text-5xl">
-                ボンドテックとは
-              </h2>
-              <p className="mt-4 text-xs font-black uppercase tracking-[0.18em] text-[#8B8B8B]">
-                About BondTech
-              </p>
-              <div className="mt-3 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
-              <div className="mt-8 space-y-5 text-lg font-black leading-loose text-[#2B2B2B]/85">
-                <p>
-                  ボンドテックは、<span className="text-[#7B2233]">ハードウェアとフィジカルAI領域のエンジニア・PM</span>に案件をご紹介するサービスです。
-                </p>
-                <p>
-                  いま、モノづくりの現場は技術者を求めています。
-                  <br />
-                  求人を出しても応募が来ない。育てる時間もない。だから、<span className="text-[#7B2233]">すでに技術を持つ人が必要とされています。</span>
-                </p>
-                <p>
-                  何十年かけて積み上げた技術を、そのままにしておくのはもったいない。
-                  <br />
-                  その経験を、待っている現場へ。
-                </p>
-                <p className="text-[#7B2233]">
-                  週2日から。シニアの技術者、副業・フリーランスの技術者も歓迎です。
-                </p>
-              </div>
-            </div>
-
-            <div className="relative min-h-[320px] w-full">
-              <Image
-                src="/contact/partner/about-illustration.webp"
-                alt="ボンドテック"
-                fill
-                sizes="(min-width: 1024px) 400px, 80vw"
-                className="object-cover"
-              />
-            </div>
+      <section className="relative isolate overflow-hidden bg-white py-20 md:py-28">
+        <Image
+          src="/contact/partner/about-bg.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-15"
+        />
+        <Container className="relative z-10">
+          <h2 className="text-4xl font-black text-[#2B2B2B] md:text-5xl">
+            ボンドテックとは
+          </h2>
+          <p className="mt-4 text-xs font-black uppercase tracking-[0.18em] text-[#8B8B8B]">
+            About BondTech
+          </p>
+          <div className="mt-3 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
+          <div className="mt-8 max-w-3xl space-y-5 text-lg font-black leading-loose text-[#2B2B2B]/85">
+            <p>
+              ボンドテックは、<span className="text-[#7B2233]">ハードウェアとフィジカルAI領域のエンジニア・PM</span>に案件をご紹介するサービスです。
+            </p>
+            <p>
+              いま、モノづくりの現場は技術者を求めています。
+              <br />
+              求人を出しても応募が来ない。育てる時間もない。だから、<span className="text-[#7B2233]">すでに技術を持つ人が必要とされています。</span>
+            </p>
+            <p>
+              何十年かけて積み上げた技術を、そのままにしておくのはもったいない。
+              <br />
+              その経験を、待っている現場へ。
+            </p>
+            <p className="text-[#7B2233]">
+              週2日から。シニアの技術者、副業・フリーランスの技術者も歓迎です。
+            </p>
           </div>
         </Container>
       </section>
@@ -194,6 +187,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
             </div>
           ))}
         </div>
+        <p className="mt-6 text-center text-sm font-medium text-[#2B2B2B]/60">※募集職種は一例です。上記以外の職種もお気軽にご相談ください。</p>
         <Cta />
       </LpSection>
 
