@@ -77,14 +77,18 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           sizes="100vw"
           className="object-cover"
         />
-        <div
-          className="absolute inset-0 bg-[radial-gradient(ellipse_60%_70%_at_18%_38%,rgba(10,6,7,0.72)_0%,rgba(10,6,7,0.25)_55%,rgba(10,6,7,0)_78%)]"
-          aria-hidden="true"
-        />
+        <div className="absolute left-0 top-0 z-20 w-full">
+          <Container className="py-6">
+            <span className="text-sm font-black uppercase tracking-[0.14em] text-white [text-shadow:0_2px_10px_rgba(0,0,0,0.9),0_0_18px_rgba(0,0,0,0.7)]">
+              ボンドテック
+            </span>
+          </Container>
+        </div>
+
         <Container className="relative z-10 py-16 pb-28 md:py-20 md:pb-32">
-          <div className="max-w-xl">
-            <h1 className="text-[2.35rem] font-black leading-[1.25] tracking-normal text-white [text-shadow:0_2px_20px_rgba(0,0,0,0.85)] md:text-5xl lg:text-[3.25rem]">
-              ハードウェア/<br />フィジカルAI<br />エンジニア募集
+          <div className="max-w-2xl">
+            <h1 className="text-[2.75rem] font-black leading-[1.25] tracking-normal text-white [text-shadow:1px_1px_0_#000,-1px_-1px_0_#000,1px_-1px_0_#000,-1px_1px_0_#000,0_0_24px_rgba(0,0,0,0.85),0_4px_18px_rgba(0,0,0,0.9)] md:text-6xl lg:text-[4rem]">
+              ハードウェア/<br />フィジカルAI<br />エンジニア案件紹介サイト
             </h1>
             <div className="mt-10">
               <Button
