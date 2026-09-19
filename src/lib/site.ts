@@ -111,77 +111,28 @@ export type ServiceCategory = {
 
 export const serviceCategories: ServiceCategory[] = [
   {
-    key: "ai-solutions",
-    title: "AIソリューション",
+    key: "hardware-ai",
+    title: "ハードウェア/フィジカルAI",
     services: [
       {
-        slug: "physical-ai-training",
+        slug: "bondtech",
         number: "01",
-        title: "フィジカルAI研修",
-        subtitle: "生成AI・AIエージェント・フィジカルAI研修",
+        title: "ボンドテック",
+        subtitle: "ハードウェア/フィジカルAIプロ人材紹介",
         summary:
-          "生成AIからフィジカルAIまでを体系的に学び、自社・自部署でAI活用を企画できる人材を育成する法人向け研修です。",
+          "ハードウェアとフィジカルAI領域のエンジニア・PMを、必要な期間だけ企業にご紹介するサービスです。",
         features: [
-          "生成AI・AIエージェント・フィジカルAIを体系的に学習",
-          "全社員からAI活用の種を発掘",
-          "研修後のAI導入コンサルティング",
+          "機構・電気・組込み・ロボティクス・AI実装まで幅広く対応",
+          "週数日から常駐まで、柔軟な稼働形態でご紹介",
+          "弊社独自の登録案件・登録人材でマッチング",
         ],
-        // 専用LPは削除。項目自体は掲載を継続(hrefなし)
-        image: "/services/physical-ai-training/hero.png",
-      },
-      {
-        slug: "ai-advisor",
-        number: "02",
-        title: "経営者向けAIアドバイザー",
-        subtitle: "AI活用の意思決定を伴走支援",
-        summary:
-          "経営者に伴走し、AI活用の意思決定や投資判断、社内体制づくりを支援するアドバイザリーサービスです。",
-        features: [
-          "経営視点でのAI活用戦略策定",
-          "投資判断・社内体制づくりの伴走支援",
-          "最新AIトレンドのキャッチアップ支援",
-        ],
-        image: "/services/cards/ai-solutions.jpg",
-      },
-      {
-        slug: "ai-komon",
-        number: "03",
-        title: "AI顧問",
-        subtitle: "AI活用の相談窓口",
-        summary:
-          "AI活用に関する相談ならAI顧問。技術・業務の両面に精通した顧問が伴走し、活用の方向性から実装判断まで支援します。",
-        features: [
-          "AI活用に関する継続的な相談窓口",
-          "技術・業務両面からのアドバイス",
-          "実装判断・体制づくりの伴走支援",
-        ],
-        image: "/services/cards/ai-solutions.jpg",
-      },
-    ],
-  },
-  {
-    key: "talent-solutions",
-    title: "人材ソリューション",
-    services: [
-      {
-        slug: "ses",
-        number: "01",
-        title: "SES・IT人材支援",
-        subtitle: "製造業向けエンジニア業務委託",
-        summary:
-          "機構設計、電気設計、組込み、ロボティクス、品質・規格まで。製造業の開発現場に必要な業務委託エンジニアをご紹介します。",
-        features: [
-          "製造業の開発現場に強い技術者をご紹介",
-          "週数日・短期・顧問・PM支援まで柔軟に対応",
-          "要件整理から候補者提案まで伴走",
-        ],
-        href: "/services/ses",
+        href: "/services/bondtech",
         image: "/services/cards/talent.jpg",
       },
       {
         slug: "hardware-development",
         number: "02",
-        title: "ハードウェア開発支援",
+        title: "ハードウェア/フィジカルAI開発支援",
         subtitle: "エンジニア・PM・技術顧問",
         summary:
           "機構から組込み、無線、AI、制御、品質・安全まで。開発の即戦力を、必要な期間だけご提供します。",
@@ -191,20 +142,6 @@ export const serviceCategories: ServiceCategory[] = [
           "技術顧問(月1〜2回)からPM参画まで柔軟に対応",
         ],
         href: "/services/hardware-development",
-      },
-      {
-        slug: "sales-support",
-        number: "03",
-        title: "インサイドセールス支援",
-        subtitle: "アポイント獲得・商談化の支援",
-        summary:
-          "戦略設計から実行まで、アポイント獲得・商談化に向けたインサイドセールス業務を支援します。",
-        features: [
-          "架電・メール等によるアポイント獲得",
-          "商談化率向上のための設計・運用",
-          "営業ツール活用支援",
-        ],
-        image: "/services/cards/talent.jpg",
       },
     ],
   },

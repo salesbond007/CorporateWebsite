@@ -9,44 +9,44 @@ import { isLocale } from "@/i18n/config";
 import { localePath } from "@/i18n/path";
 
 export const metadata: Metadata = {
-  title: "SES・IT人材支援 | 製造業向けエンジニア業務委託",
+  title: "ボンドテック | ハードウェア/フィジカルAIプロ人材紹介",
   description:
-    "製造業・メーカーの開発現場に、機構設計、電気設計、組込み、ロボティクス、センサ・通信、品質・規格に強い業務委託エンジニアをご紹介します。",
+    "ボンドテックは、ハードウェアとフィジカルAI領域のエンジニア・PMを必要な期間だけ企業にご紹介するサービスです。機構設計、電気設計、組込み、ロボティクス、AI実装まで幅広く対応します。",
 };
 
 const jobGroups = [
   {
-    title: "機械・電気・組込み",
-    items: ["機構設計", "筐体設計", "電気回路設計", "基板設計", "組込みソフト", "ファームウェア"],
+    title: "設計・開発",
+    items: ["機構設計", "筐体設計", "電気設計", "基板設計", "組込みソフト", "制御設計"],
   },
   {
-    title: "先端領域・品質",
-    items: ["ロボティクス", "センサ・通信", "画像認識", "制御設計", "品質保証", "規格・認証対応"],
+    title: "先端・品質領域",
+    items: ["ロボティクス", "センサ・通信", "画像認識", "AI実装", "品質保証", "規格・認証"],
   },
 ];
 
 const targets = [
-  ["開発の山を越えたい", "量産前、試作評価、仕様変更など、一時的に技術者が足りない現場に。"],
+  ["開発の即戦力が足りない", "量産前、試作評価、仕様変更など、一時的に技術者が足りない現場に。"],
   ["専門領域を補いたい", "社内だけでは判断が難しい技術領域に、経験者の知見を加えたい企業に。"],
-  ["採用まで待てない", "正社員採用を進めながら、業務委託で先にプロジェクトを動かしたい場合に。"],
+  ["技術顧問がほしい", "月1〜2回の技術顧問から、PM参画まで柔軟に相談したい企業に。"],
 ];
 
 const strengths = [
-  ["製造業領域に特化", "Web系だけでなく、機械・電気・組込み・品質など製造現場の要件を理解して候補者を探します。"],
-  ["必要な期間だけ参画", "週数日、月単位、技術顧問、PM補佐など、固定採用では重いニーズにも柔軟に対応します。"],
-  ["初回相談から要件整理", "スキル名だけでなく、開発フェーズ、成果物、社内体制まで整理してミスマッチを抑えます。"],
+  ["弊社独自の登録人材", "公開されている案件だけでなく、弊社独自に登録いただいた技術者からご紹介します。"],
+  ["柔軟な稼働形態", "週2日から常駐まで、手を動かす実装から PM まで幅広くご紹介できます。"],
+  ["スキルにマッチした紹介", "開発フェーズや技術要件を整理したうえで、経験に合う人材をご案内します。"],
 ];
 
 const flow = ["ご相談", "要件整理", "候補者提案", "面談・参画"];
 
 const faqs = [
-  ["どのような職種に対応できますか？", "機構設計、電気設計、組込み、ロボティクス、センサ・通信、品質・規格対応など、製造業の開発現場に関わる職種を中心に対応します。"],
+  ["どのような職種に対応できますか？", "機構設計、電気設計、組込み、ロボティクス、センサ・通信、AI実装、品質・規格対応など、ハードウェア/フィジカルAI領域の職種を中心に対応します。"],
   ["短期間の依頼も可能ですか？", "可能です。試作、評価、量産前の立て直し、技術調査など、期間が限られた案件もご相談ください。"],
   ["契約形態は業務委託のみですか？", "まずは業務委託を中心にご提案します。ご要望に応じて顧問、準委任、プロジェクト単位の体制構築もご相談いただけます。"],
   ["相談時に何を準備すればよいですか？", "現状の課題、必要な技術領域、希望開始時期、稼働量、想定業務をお聞かせください。未整理の状態でも一緒に整理します。"],
 ];
 
-export default function SesServicePage({ params }: { params: { locale: string } }) {
+export default function BondtechServicePage({ params }: { params: { locale: string } }) {
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
 
@@ -56,7 +56,7 @@ export default function SesServicePage({ params }: { params: { locale: string } 
         data={breadcrumbJsonLd([
           { name: "ホーム", url: localePath("/", locale) },
           { name: "サービス案内", url: localePath("/services", locale) },
-          { name: "SES・IT人材支援", url: localePath("/services/ses", locale) },
+          { name: "ボンドテック", url: localePath("/services/bondtech", locale) },
         ])}
       />
 
@@ -77,20 +77,20 @@ export default function SesServicePage({ params }: { params: { locale: string } 
         <Container className="grid gap-12 py-16 md:grid-cols-[1.05fr_0.95fr] md:items-center md:py-24 lg:py-28">
           <div>
             <div className="flex flex-wrap gap-3">
-              {["製造業向け", "業務委託", "エンジニア紹介"].map((tag) => (
+              {["ハードウェア", "フィジカルAI", "プロ人材紹介"].map((tag) => (
                 <span key={tag} className="rounded-md border border-[#7B2233] bg-white px-4 py-2 text-sm font-bold text-[#7B2233]">
                   {tag}
                 </span>
               ))}
             </div>
             <p className="mt-8 text-base font-bold text-[#7B2233] md:text-lg">
-              技術者不足で止めたくない開発現場へ。
+              自社にない技術力を、必要な期間だけ。
             </p>
             <h1 className="mt-5 text-4xl font-black leading-[1.25] tracking-normal md:text-5xl lg:text-6xl">
-              製造業に強い<br />エンジニアを、必要な期間だけ。
+              ハードウェア/フィジカルAIの<br />プロ人材を、ボンドテックが紹介。
             </h1>
             <p className="mt-6 max-w-2xl text-lg font-medium leading-relaxed md:text-xl">
-              機構設計・電気設計・組込み・品質まで、開発フェーズに合う業務委託人材をご紹介します。
+              機構設計・電気設計・組込み・ロボティクス・AI実装まで、開発フェーズに合うプロ人材をご紹介します。
             </p>
             <div className="mt-9">
               <Button href={localePath("/contact", locale)} size="lg" className="!bg-[#7B2233] hover:!bg-[#A33A52]">
@@ -102,7 +102,7 @@ export default function SesServicePage({ params }: { params: { locale: string } 
         </Container>
       </section>
 
-      <Section tone="white" label="Occupation" title="募集・紹介可能な職種">
+      <Section tone="white" label="Occupation" title="紹介可能な職種">
         <div className="grid gap-6 md:grid-cols-2">
           {jobGroups.map((group) => (
             <div key={group.title} className="rounded-md border border-[#7B2233]/20 bg-white p-8">
@@ -135,7 +135,7 @@ export default function SesServicePage({ params }: { params: { locale: string } 
             技術を知る人が、現場に入る。<br />それだけで進むプロジェクトがあります。
           </h2>
           <p className="mt-8 text-lg font-medium leading-loose">
-            セールスボンドは、単に人材を紹介するのではなく、現場の課題と開発フェーズを整理したうえで、必要な経験を持つプロ人材との接点をつくります。採用では間に合わない局面でも、開発を止めない選択肢を提供します。
+            ボンドテックは、単に人材を紹介するのではなく、現場の課題と開発フェーズを整理したうえで、必要な経験を持つプロ人材との接点をつくります。採用では間に合わない局面でも、開発を止めない選択肢を提供します。
           </p>
         </Container>
       </section>
@@ -170,7 +170,7 @@ export default function SesServicePage({ params }: { params: { locale: string } 
         <Container className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-center">
           <div>
             <p className="text-sm font-black uppercase tracking-[0.18em] text-white/70">Contact</p>
-            <h2 className="mt-4 text-3xl font-black md:text-4xl">必要な技術者像から一緒に整理します。</h2>
+            <h2 className="mt-4 text-3xl font-black md:text-4xl">必要な人材像から一緒に整理します。</h2>
           </div>
           <Button href={localePath("/contact", locale)} size="lg" className="!bg-white !text-[#7B2233] hover:!bg-[#FAF8F7]">
             無料相談する

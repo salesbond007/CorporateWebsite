@@ -15,38 +15,29 @@ type Props = {
 const cardClass =
   "group relative isolate flex aspect-square h-full flex-col justify-center overflow-hidden rounded-none border-2 border-ink bg-white p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
 
-/** トップページはカテゴリ単位の2枚のみ表示。内訳(6サービス)は/servicesページで確認できる */
+/** トップページで表示する2つのサービス */
 const categoryCards: Service[] = [
   {
-    slug: "ai-solutions",
+    slug: "bondtech",
     number: "01",
-    title: "AIソリューション",
-    subtitle: "研修・アドバイザリー・AI顧問",
+    title: "ボンドテック",
+    subtitle: "ハードウェア/フィジカルAIプロ人材紹介",
     summary:
-      "フィジカルAI研修から経営者向けAIアドバイザー、AI顧問まで、AI活用をワンストップで支援します。",
+      "ハードウェアとフィジカルAI領域のエンジニア・PMを、必要な期間だけ企業にご紹介するサービスです。",
     features: [],
-    href: "/services#ai-solutions",
-    image: "/services/cards/ai-solutions.jpg",
-  },
-  {
-    slug: "talent-solutions",
-    number: "02",
-    title: "人材ソリューション",
-    subtitle: "SES・ハードウェア開発支援・インサイドセールス支援",
-    summary:
-      "製造業向けエンジニアの業務委託紹介からハードウェア開発支援、インサイドセールス支援まで、貴社に必要な人材・実行力を提供します。",
-    features: [],
-    href: "/services#talent-solutions",
+    href: "/services/bondtech",
     image: "/services/cards/talent.jpg",
   },
   {
-    slug: "ai-media",
-    number: "03",
-    title: "AI専門メディア",
-    subtitle: "BondAI",
-    summary: "AI活用のリアルな知見を発信するオウンドメディア。",
+    slug: "hardware-development",
+    number: "02",
+    title: "ハードウェア/フィジカルAI開発支援",
+    subtitle: "エンジニア・PM・技術顧問",
+    summary:
+      "機構から組込み、無線、AI、制御、品質・安全まで。開発の即戦力を、必要な期間だけご提供します。",
     features: [],
-    image: "/services/cards/ai-media.jpg",
+    href: "/services/hardware-development",
+    image: "/services/cards/ai-solutions.jpg",
   },
 ];
 
@@ -66,7 +57,7 @@ export function ServicesSection({ locale, dict }: Props) {
           </Link>
         </div>
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2">
           {categoryCards.map((s, i) => (
             <li key={s.slug}>
               <Reveal delay={i * 100} className="h-full">
