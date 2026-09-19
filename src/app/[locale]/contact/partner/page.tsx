@@ -10,10 +10,32 @@ import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
+const PAGE_TITLE = "ボンドテック | ハードウェア/フィジカルAIエンジニア案件紹介サイト";
+const PAGE_DESCRIPTION =
+  "ボンドテックは、ハードウェアとフィジカルAI領域のエンジニア・PMに案件をご紹介するサービスです。機構設計、電気設計、組込み、ロボティクス、AI実装など、週2日から。シニアの技術者、副業・フリーランスの技術者も歓迎です。";
+
 export const metadata: Metadata = {
-  title: "エンジニア・フリーランス登録 | 製造業向け業務委託案件",
-  description:
-    "機構設計、電気設計、組込み、ロボティクス、センサ・通信、品質・規格など、製造業向け業務委託案件をお探しのエンジニアの方向け登録ページです。",
+  title: PAGE_TITLE,
+  description: PAGE_DESCRIPTION,
+  alternates: {
+    canonical: "/ja/contact/partner",
+    languages: {
+      ja: "/ja/contact/partner",
+      en: "/en/contact/partner",
+      "x-default": "/ja/contact/partner",
+    },
+  },
+  openGraph: {
+    type: "website",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+    images: [{ url: "/contact/partner/hero-engineers.webp" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: PAGE_TITLE,
+    description: PAGE_DESCRIPTION,
+  },
 };
 
 const jobGroups = [
@@ -94,7 +116,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         />
         <div className="absolute left-0 top-0 z-20 w-full">
           <Container className="py-6">
-            <span className="text-5xl font-black uppercase tracking-[0.04em] text-[#B23A52] [text-shadow:1px_1px_0_#fff,-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,0_0_20px_rgba(0,0,0,0.5)] md:text-7xl">
+            <span className="text-3xl font-black uppercase tracking-[0.02em] text-[#B23A52] [text-shadow:1px_1px_0_#fff,-1px_-1px_0_#fff,1px_-1px_0_#fff,-1px_1px_0_#fff,0_0_20px_rgba(0,0,0,0.5)] sm:text-4xl md:text-6xl lg:text-7xl">
               ボンドテック
             </span>
           </Container>
@@ -109,7 +131,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
               <Button
                 href="#entry"
                 size="lg"
-                className="!h-20 !px-16 !text-xl !bg-[#7B2233] hover:!bg-[#A33A52]"
+                className="!h-14 !w-full !px-6 !text-sm !bg-[#7B2233] hover:!bg-[#A33A52] sm:!w-auto sm:!h-16 sm:!px-10 sm:!text-base md:!h-20 md:!px-16 md:!text-xl"
               >
                 無料登録して案件を探す
               </Button>
