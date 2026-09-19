@@ -105,12 +105,6 @@ export function MobileMenu({ locale, dict }: Props) {
                   >
                     {dict.nav[item.key]}
                   </Link>
-                  {/* AI専門メディア: リンクは後日追加予定。現時点ではテキストのみ表示 */}
-                  {item.key === "services" ? (
-                    <span className="block rounded-lg px-3 py-3 text-base font-medium text-ink-muted">
-                      AI専門メディア
-                    </span>
-                  ) : null}
                 </li>
               ))}
             </ul>
