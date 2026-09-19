@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
@@ -67,22 +68,36 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         ])}
       />
 
-      <section className="relative isolate overflow-hidden bg-[#FAF8F7]">
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(123,34,51,0.07)_1px,transparent_1px),linear-gradient(180deg,rgba(123,34,51,0.06)_1px,transparent_1px)] bg-[size:64px_64px] opacity-55" />
-        <div className="absolute right-0 top-0 h-full w-1/2 bg-white/65" />
-        <Container className="relative z-10 grid min-h-[680px] items-center gap-12 py-16 md:min-h-[720px] md:py-24 lg:grid-cols-[minmax(0,0.86fr)_minmax(420px,1fr)]">
-          <div className="max-w-2xl">
-            <h1 className="text-[2.45rem] font-black leading-[1.22] tracking-normal text-[#2B2B2B] md:text-5xl lg:text-[3.55rem]">
+      <section className="relative isolate overflow-hidden bg-[#1B1210]">
+        <Image
+          src="/contact/partner/hero-engineers.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          className="absolute inset-0 bg-[#7B2233]/25 mix-blend-multiply"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 bg-[linear-gradient(100deg,rgba(20,10,12,0.92)_0%,rgba(20,10,12,0.72)_38%,rgba(20,10,12,0.32)_65%,rgba(20,10,12,0.08)_88%)]"
+          aria-hidden="true"
+        />
+        <Container className="relative z-10 min-h-[560px] py-20 md:min-h-[640px] md:py-28">
+          <div className="max-w-xl">
+            <span className="inline-flex items-center rounded-full border border-white/30 bg-white/10 px-4 py-1.5 text-xs font-black uppercase tracking-[0.22em] text-white backdrop-blur-sm">
+              Engineer Recruiting
+            </span>
+            <h1 className="mt-7 text-[2.35rem] font-black leading-[1.25] tracking-normal text-white md:text-5xl lg:text-[3.25rem]">
               ハードウェア/<br />フィジカルAI<br />エンジニア募集
             </h1>
-            <p className="mt-7 max-w-xl text-xl font-black leading-relaxed text-[#7B2233] md:text-2xl">
-              「週２～」から、経験を活かせる開発案件へ。
-            </p>
-            <div className="mt-7 flex max-w-xl flex-wrap gap-3">
+            <div className="mt-8 flex flex-wrap gap-3">
               {["週２～", "シニア活躍中", "副業・フリーランス歓迎"].map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-md border border-[#7B2233] bg-white/95 px-4 py-2.5 text-sm font-black tracking-normal text-[#7B2233] shadow-sm md:text-base"
+                  className="rounded-full border border-white/35 bg-white/10 px-4 py-2 text-sm font-bold text-white backdrop-blur-sm md:text-[0.9375rem]"
                 >
                   {tag}
                 </span>
@@ -94,7 +109,6 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
               </Button>
             </div>
           </div>
-          <HeroVisual />
         </Container>
       </section>
 
@@ -205,70 +219,6 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </footer>
     </main>
-  );
-}
-
-function HeroVisual() {
-  return (
-    <div className="relative hidden min-h-[520px] lg:block">
-      <div className="absolute inset-x-4 top-8 h-[440px] rounded-md border border-[#7B2233]/15 bg-white shadow-[0_24px_70px_rgba(43,43,43,0.12)]" />
-      <div className="absolute left-0 top-0 w-[86%] rounded-md border border-[#7B2233]/20 bg-white p-8 shadow-[0_18px_54px_rgba(43,43,43,0.12)]">
-        <div className="flex items-start justify-between gap-8 border-b border-[#7B2233]/15 pb-6">
-          <div>
-            <p className="text-xs font-black uppercase tracking-[0.18em] text-[#A33A52]">Project Brief</p>
-            <h2 className="mt-3 text-2xl font-black text-[#2B2B2B]">募集要項サマリー</h2>
-          </div>
-          <div className="rounded-md bg-[#7B2233] px-4 py-3 text-right text-white">
-            <p className="text-xs font-bold opacity-80">稼働</p>
-            <p className="text-xl font-black">週2〜</p>
-          </div>
-        </div>
-        <div className="mt-7 grid gap-4">
-          {[
-            ["領域", "ハードウェア / フィジカルAI"],
-            ["契約", "業務委託・副業・フリーランス"],
-            ["経験", "機構設計・電気設計・組込み"],
-          ].map(([label, value]) => (
-            <div key={label} className="grid grid-cols-[88px_1fr] items-center gap-4 rounded-md border border-[#7B2233]/14 bg-[#FAF8F7] px-5 py-4">
-              <p className="text-sm font-black text-[#7B2233]">{label}</p>
-              <p className="text-base font-black text-[#2B2B2B]">{value}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-7 grid grid-cols-3 gap-4">
-          {[
-            ["01", "希望確認"],
-            ["02", "案件提案"],
-            ["03", "面談調整"],
-          ].map(([number, label]) => (
-            <div key={number} className="rounded-md border border-[#7B2233]/18 bg-white p-4">
-              <p className="text-2xl font-black text-[#7B2233]">{number}</p>
-              <p className="mt-2 text-sm font-black text-[#2B2B2B]">{label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="absolute bottom-6 right-0 w-[54%] rounded-md border border-[#7B2233]/20 bg-[#2B2B2B] p-6 text-white shadow-[0_18px_54px_rgba(43,43,43,0.18)]">
-        <p className="text-xs font-black uppercase tracking-[0.18em] text-white/60">Skill Map</p>
-        <div className="mt-5 space-y-4">
-          {[
-            ["設計", "82%"],
-            ["組込み", "68%"],
-            ["AI実装", "54%"],
-          ].map(([label, width]) => (
-            <div key={label}>
-              <div className="flex justify-between text-sm font-bold">
-                <span>{label}</span>
-                <span>{width}</span>
-              </div>
-              <div className="mt-2 h-2 rounded-full bg-white/15">
-                <div className="h-2 rounded-full bg-[#A33A52]" style={{ width }} />
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
   );
 }
 
