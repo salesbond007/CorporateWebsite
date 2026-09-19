@@ -81,9 +81,10 @@ const strengths = [
 
 const flow = [
   ["メール登録", "メールアドレスのみで、かんたんに仮登録できます。"],
-  ["経験・希望確認", "ご経歴や稼働日数、報酬などのご希望をヒアリングします。"],
+  ["経歴書の入力", "ご経歴やスキル、稼働日数、報酬などのご希望をご登録いただきます。"],
+  ["面談", "担当者との面談で、ご経歴やご希望条件をすり合わせます。"],
   ["案件ご案内", "条件に合う案件が見つかり次第、ご案内します。"],
-  ["面談・参画", "企業との面談を経て、案件にご参画いただきます。"],
+  ["参画", "企業との合意を経て、案件にご参画いただきます。"],
 ];
 const faqs = [
   ["登録に費用はかかりますか？", "登録・案件相談に費用はかかりません。"],
@@ -328,7 +329,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
       </section>
 
       <LpSection tone="white" label="Flow" title="登録から案件参画まで">
-        <div className="grid gap-6 md:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {flow.map(([title, body], index) => (
             <div key={title} className="relative rounded-md border border-[#7B2233]/20 bg-white p-6">
               <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#7B2233]/10">
@@ -339,7 +340,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
               </p>
               <h3 className="mt-2 text-xl font-black">{title}</h3>
               <p className="mt-2 text-sm font-medium leading-relaxed text-[#2B2B2B]/70">{body}</p>
-              {index < flow.length - 1 ? <span className="absolute -right-3 top-1/2 hidden text-[#7B2233] md:block">→</span> : null}
+              {index < flow.length - 1 ? <span className="absolute -right-3 top-1/2 hidden text-[#7B2233] lg:block">→</span> : null}
             </div>
           ))}
         </div>
@@ -412,7 +413,8 @@ function TagIcon() {
 function FlowIcon({ index }: { index: number }) {
   const paths = [
     "M4 7l8 6 8-6M4 7v10h16V7M4 7h16",
-    "M6 4h12v16l-6-3-6 3V4z",
+    "M6 4h12v16H6zM9 8h6M9 12h6M9 16h3",
+    "M4 5h16v10H9l-3.5 3.5V15H4z",
     "M4 8h16v11H4zM4 8l8-4 8 4M9 12h6",
     "M8 12l2.5 2.5L16 9",
   ];
