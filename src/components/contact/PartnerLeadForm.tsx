@@ -54,7 +54,7 @@ export function PartnerLeadForm() {
       <div className="rounded-md border border-[#7B2233]/20 bg-white p-8 text-center">
         <p className="text-xl font-black text-[#7B2233]">仮登録を受け付けました</p>
         <p className="mt-3 text-base font-medium leading-relaxed text-[#2B2B2B]/80">
-          ご登録ありがとうございます。担当者より、案件情報や本登録のご案内をお送りします。
+          確認次第スタッフより案内をメールにてお送りします。
         </p>
       </div>
     );

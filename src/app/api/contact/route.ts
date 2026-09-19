@@ -268,12 +268,32 @@ export async function POST(req: Request) {
     console.info("[contact] sent", { messageId: info.messageId, to, type });
     await forwardToCRM(type, parsed.data as Record<string, unknown>);
 
-    if (type === "general") {
+    if (type === "general" || type === "partner_lead") {
       const senderEmail = (parsed.data as { email?: string }).email;
-      const company = String((parsed.data as { company?: string }).company ?? "").trim();
       const lastName = String((parsed.data as { lastName?: string }).lastName ?? "").trim();
+
       if (senderEmail) {
-        const autoReplyText = `${company}
+        const autoReplyText =
+          type === "partner_lead"
+            ? `${lastName} 様
+
+お世話になっております。
+ボンドテック(セールスボンド株式会社)でございます。
+
+この度はご登録いただき、誠にありがとうございます。
+
+いただいた内容を確認のうえ、担当者より案件情報や本登録のご案内をメールにてお送りいたしますので、今しばらくお待ちくださいますようお願いいたします。
+
+何卒よろしくお願い申し上げます。
+
+────────────────────────────
+セールスボンド株式会社
+〒160-0023 東京都新宿区西新宿3丁目3番13号 西新宿水間ビル2F
+Email：info@salesbond.jp
+HP：https://www.salesbond1962.com
+────────────────────────────
+※このメールは自動送信です。ご返信いただいてもお答えできません。`
+            : `${String((parsed.data as { company?: string }).company ?? "").trim()}
 ${lastName} 様
 
 お世話になっております。
@@ -292,11 +312,17 @@ Email：info@salesbond.jp
 HP：https://www.salesbond1962.com
 ────────────────────────────
 ※このメールは自動送信です。ご返信いただいてもお答えできません。`;
+
+        const autoReplySubject =
+          type === "partner_lead"
+            ? "ご登録ありがとうございます(ボンドテック)"
+            : "お問い合わせありがとうございます(セールスボンド株式会社)";
+
         try {
           await transporter.sendMail({
             from: fromAddress,
             to: senderEmail,
-            subject: "お問い合わせありがとうございます(セールスボンド株式会社)",
+            subject: autoReplySubject,
             text: autoReplyText,
           });
           console.info("[contact] auto-reply sent", { to: senderEmail });
