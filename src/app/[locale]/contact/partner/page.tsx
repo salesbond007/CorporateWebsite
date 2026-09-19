@@ -55,8 +55,8 @@ const registrantImages = [
   "/contact/partner/recruit/registrant-1.webp",
   "/contact/partner/recruit/registrant-2.webp",
   "/contact/partner/recruit/registrant-3.webp",
-  null,
-  null,
+  "/contact/partner/recruit/registrant-4.webp",
+  "/contact/partner/recruit/registrant-5.webp",
 ];
 
 const registrants = [
