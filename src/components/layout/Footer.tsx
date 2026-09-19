@@ -32,7 +32,12 @@ export function Footer({ locale, dict }: Props) {
         <div className="flex flex-col-reverse gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-white/80">
             © {year}{" "}
-            <Link href={localePath("/company", locale)} className="hover:text-white">
+            <Link
+              href={localePath("/", locale)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white"
+            >
               {dict.site.name}
             </Link>
             . {dict.footer.rights}
