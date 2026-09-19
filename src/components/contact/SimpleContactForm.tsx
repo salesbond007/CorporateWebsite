@@ -25,9 +25,9 @@ const inquiryTypeLabels: Record<InquiryType, string> = {
 };
 
 const serviceOptions = [
-  { id: "ai-solutions", label: "AIソリューションについて" },
-  { id: "talent", label: "人材ソリューションについて" },
-  { id: "sales-support", label: "営業支援について" },
+  { id: "bondtech", label: "ボンドテック(ハードウェア開発の人材事業)について" },
+  { id: "physical-ai-training", label: "フィジカルAI研修について" },
+  { id: "other-service", label: "その他" },
 ] as const;
 
 type ServiceId = (typeof serviceOptions)[number]["id"];
