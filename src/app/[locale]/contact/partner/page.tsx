@@ -108,13 +108,30 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         ])}
       />
 
-      <div className="w-full bg-[#7B2233] py-4">
-        <Container className="flex justify-end">
+      <div className="sticky top-0 z-30 w-full bg-[#7B2233] py-3">
+        <Container className="flex flex-wrap items-center justify-end gap-x-6 gap-y-2">
+          <nav className="hidden items-center gap-6 lg:flex" aria-label="LPナビゲーション">
+            {[
+              ["ボンドテックとは", "#about"],
+              ["支援分野", "#fields"],
+              ["選ばれる理由", "#reasons"],
+              ["登録の流れ", "#flow"],
+              ["よくある質問", "#faq"],
+            ].map(([label, href]) => (
+              <Link
+                key={href}
+                href={href}
+                className="text-sm font-bold text-white/90 hover:text-white"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
           <Link
             href="#entry"
-            className="text-base font-black uppercase tracking-[0.08em] text-white hover:text-white/80 md:text-lg"
+            className="rounded-sm bg-white px-5 py-2 text-sm font-black uppercase tracking-[0.06em] text-[#7B2233] hover:bg-white/90 md:text-base"
           >
-            会員登録
+            無料会員登録
           </Link>
         </Container>
       </div>
@@ -163,7 +180,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden bg-white py-12 md:py-16">
+      <section id="about" className="relative isolate scroll-mt-16 overflow-hidden bg-white py-12 md:py-16">
         <Image
           src="/contact/partner/about-bg.webp"
           alt=""
@@ -274,7 +291,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-      <section className="bg-white py-20 md:py-28">
+      <section id="fields" className="scroll-mt-16 bg-white py-20 md:py-28">
         <Container>
           <div className="mb-14 text-center">
             <h2 className="text-3xl font-black leading-tight md:text-4xl">支援分野について</h2>
@@ -303,7 +320,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-      <section className="bg-[#FAF8F7] py-20 md:py-28">
+      <section id="reasons" className="scroll-mt-16 bg-[#FAF8F7] py-20 md:py-28">
         <Container>
           <h2 className="text-center text-3xl font-black leading-tight md:text-4xl">
             <span className="text-[#7B2233]">ボンドテック</span>が選ばれる3つの理由
@@ -328,7 +345,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-      <LpSection tone="white" label="Flow" title="登録から案件参画まで">
+      <LpSection id="flow" tone="white" label="Flow" title="登録から案件参画まで">
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
           {flow.map(([title, body], index) => (
             <div key={title} className="relative rounded-md border border-[#7B2233]/20 bg-white p-6">
@@ -347,7 +364,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         <Cta />
       </LpSection>
 
-      <LpSection label="FAQ" title="よくある質問">
+      <LpSection id="faq" label="FAQ" title="よくある質問">
         <div className="mx-auto max-w-4xl divide-y divide-[#7B2233]/15 rounded-md border border-[#7B2233]/20 bg-white">
           {faqs.map(([q, a]) => (
             <details key={q} className="group p-6">
@@ -374,9 +391,24 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
   );
 }
 
-function LpSection({ label, title, children, tone = "cream" }: { label: string; title: string; children: React.ReactNode; tone?: "cream" | "white" }) {
+function LpSection({
+  id,
+  label,
+  title,
+  children,
+  tone = "cream",
+}: {
+  id?: string;
+  label: string;
+  title: string;
+  children: React.ReactNode;
+  tone?: "cream" | "white";
+}) {
   return (
-    <section className={tone === "white" ? "bg-white py-20 md:py-28" : "bg-[#FAF8F7] py-20 md:py-28"}>
+    <section
+      id={id}
+      className={`scroll-mt-16 ${tone === "white" ? "bg-white py-20 md:py-28" : "bg-[#FAF8F7] py-20 md:py-28"}`}
+    >
       <Container>
         <div className="mb-12 text-center">
           <p className="text-sm font-black uppercase tracking-[0.18em] text-[#A33A52]">{label}</p>
