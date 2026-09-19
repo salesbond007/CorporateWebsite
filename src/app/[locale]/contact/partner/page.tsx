@@ -113,6 +113,59 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </div>
       </section>
 
+      <section className="bg-[#EFF3F6] py-20 md:py-28">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+            <div>
+              <h2 className="text-4xl font-black text-[#2B2B2B] md:text-5xl">
+                ボンドテックとは
+              </h2>
+              <p className="mt-4 text-xs font-black uppercase tracking-[0.18em] text-[#8B8B8B]">
+                About BondTech
+              </p>
+              <div className="mt-3 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
+              <div className="mt-8 space-y-5 text-base font-medium leading-loose text-[#2B2B2B]/85">
+                <p>
+                  ボンドテックは、ハードウェアとフィジカルAI領域のエンジニア・PMに案件をご紹介するサービスです。
+                </p>
+                <p>
+                  いま、モノづくりの現場は技術者を求めています。
+                  <br />
+                  求人を出しても応募が来ない。育てる時間もない。だから、すでに技術を持つ人が必要とされています。
+                </p>
+                <p>
+                  何十年かけて積み上げた技術を、そのままにしておくのはもったいない。
+                  <br />
+                  その経験を、待っている現場へ。
+                </p>
+                <p className="font-black text-[#7B2233]">
+                  週2日から。シニアの方、副業・フリーランスの方も歓迎です。
+                </p>
+              </div>
+            </div>
+
+            <div className="lg:pt-2">
+              <div className="pb-8">
+                <p className="text-sm font-black uppercase tracking-[0.1em] text-[#7B2233]">
+                  シニア・副業・フリーランス
+                </p>
+                <p className="mt-3 text-3xl font-black leading-tight text-[#2B2B2B] md:text-4xl">
+                  多数登録中
+                </p>
+              </div>
+              <div className="border-t border-[#7B2233]/20 pt-8">
+                <p className="text-sm font-black uppercase tracking-[0.1em] text-[#7B2233]">
+                  ボンドテックだけの
+                </p>
+                <p className="mt-3 text-3xl font-black leading-tight text-[#2B2B2B] md:text-4xl">
+                  独自案件あり
+                </p>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       <LpSection tone="white" label="Occupation" title="募集職種">
         <div className="grid gap-6 md:grid-cols-2">
           {jobGroups.map((group) => (
