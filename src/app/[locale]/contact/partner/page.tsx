@@ -27,10 +27,11 @@ const jobGroups = [
   },
 ];
 
-const targets = [
-  ["経験を活かしたい", "メーカーや製造業の開発経験を、業務委託案件で活かしたい方。"],
-  ["稼働量を調整したい", "週数日、顧問、スポット支援など、今の働き方に合わせて案件を探したい方。"],
-  ["専門性で選ばれたい", "機械・電気・組込み・品質など、得意領域を軸に案件を選びたい方。"],
+const registrants = [
+  "ハードウェア/フィジカルAIエンジニア・PM経験者",
+  "副業/フリーランス",
+  "引退した技術者",
+  "専門性を活かしたい方",
 ];
 
 const strengths = [
@@ -161,7 +162,26 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-      <LpSection tone="white" label="Occupation" title="募集職種">
+      <section className="bg-white py-20 md:py-28">
+        <Container>
+          <div className="mb-12 text-center">
+            <h2 className="text-3xl font-black leading-tight md:text-4xl">こんな方が登録しています</h2>
+          </div>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {registrants.map((item) => (
+              <div
+                key={item}
+                className="flex items-start gap-3 rounded-md border border-[#7B2233]/20 bg-[#FAF8F7] p-6"
+              >
+                <CheckIcon />
+                <p className="text-base font-black leading-relaxed text-[#2B2B2B]">{item}</p>
+              </div>
+            ))}
+          </div>
+        </Container>
+      </section>
+
+      <LpSection tone="cream" label="Occupation" title="募集職種">
         <div className="grid gap-6 md:grid-cols-2">
           {jobGroups.map((group) => (
             <div key={group.title} className="rounded-md border border-[#7B2233]/20 bg-white p-8">
@@ -172,11 +192,6 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
             </div>
           ))}
         </div>
-        <Cta />
-      </LpSection>
-
-      <LpSection label="Target" title="対象者">
-        <CardGrid items={targets} />
         <Cta />
       </LpSection>
 
@@ -304,6 +319,22 @@ function Cta() {
     <div className="mt-12 text-center">
       <Button href="#entry" className="!bg-[#7B2233] hover:!bg-[#A33A52]">無料で登録する</Button>
     </div>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className="mt-0.5 shrink-0 text-[#7B2233]"
+    >
+      <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="1.8" />
+      <path d="M7.5 12.5l2.8 2.8 6.2-6.6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
 
