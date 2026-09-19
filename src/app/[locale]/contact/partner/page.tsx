@@ -120,7 +120,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
 
       <section className="bg-[#EFF3F6] py-20 md:py-28">
         <Container>
-          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+          <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-stretch">
             <div>
               <h2 className="text-4xl font-black text-[#2B2B2B] md:text-5xl">
                 ボンドテックとは
@@ -129,7 +129,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
                 About BondTech
               </p>
               <div className="mt-3 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
-              <div className="mt-8 space-y-5 text-base font-black leading-loose text-[#2B2B2B]/85">
+              <div className="mt-8 space-y-5 text-lg font-black leading-loose text-[#2B2B2B]/85">
                 <p>
                   ボンドテックは、<span className="text-[#7B2233]">ハードウェアとフィジカルAI領域のエンジニア・PM</span>に案件をご紹介するサービスです。
                 </p>
@@ -144,18 +144,18 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
                   その経験を、待っている現場へ。
                 </p>
                 <p className="text-[#7B2233]">
-                  週2日から。シニアの方、副業・フリーランスの方も歓迎です。
+                  週2日から。シニアの技術者、副業・フリーランスの技術者も歓迎です。
                 </p>
               </div>
             </div>
 
-            <div className="relative aspect-[3/4] w-full max-w-md justify-self-center lg:justify-self-end">
+            <div className="relative min-h-[320px] w-full">
               <Image
                 src="/contact/partner/about-illustration.webp"
                 alt="ボンドテック"
                 fill
                 sizes="(min-width: 1024px) 400px, 80vw"
-                className="object-contain"
+                className="object-cover"
               />
             </div>
           </div>
