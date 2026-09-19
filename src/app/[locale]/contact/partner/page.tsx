@@ -72,6 +72,7 @@ const strengthImages = [
   "/contact/partner/strengths/strength-2.webp",
   "/contact/partner/strengths/strength-3.webp",
 ];
+const strengthAlts = ["弊社独自の案件紹介", "週2日から常駐まで幅広い案件", "スキルにマッチした案件紹介"];
 
 const strengths = [
   <>公開されている案件だけではなく、<span className="text-[#7B2233]">弊社独自の案件</span>もございます。</>,
@@ -276,7 +277,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
                   <div className="relative aspect-[4/3] w-full">
                     <Image
                       src={registrantImages[index]!}
-                      alt=""
+                      alt={title}
                       fill
                       sizes="(min-width: 1024px) 20vw, (min-width: 640px) 50vw, 100vw"
                       className="object-cover"
@@ -339,7 +340,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
                 <div className="relative mx-auto aspect-[4/3] w-full max-w-xs overflow-hidden rounded-md bg-white">
                   <Image
                     src={strengthImages[index]}
-                    alt=""
+                    alt={strengthAlts[index]}
                     fill
                     sizes="(min-width: 768px) 320px, 80vw"
                     className="object-contain"
