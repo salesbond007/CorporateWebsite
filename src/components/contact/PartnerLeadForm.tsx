@@ -4,6 +4,8 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 
 export function PartnerLeadForm() {
+  const [lastName, setLastName] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [website, setWebsite] = useState("");
   const [sending, setSending] = useState(false);
@@ -21,6 +23,8 @@ export function PartnerLeadForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           type: "partner_lead",
+          lastName,
+          firstName,
           email,
           website,
         }),
@@ -35,6 +39,8 @@ export function PartnerLeadForm() {
       }
 
       setSent(true);
+      setLastName("");
+      setFirstName("");
       setEmail("");
     } catch {
       setError("通信エラーが発生しました。時間をおいて再度お試しください。");
@@ -56,6 +62,40 @@ export function PartnerLeadForm() {
 
   return (
     <form onSubmit={onSubmit} className="mx-auto max-w-xl" noValidate>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <div>
+          <label htmlFor="partner-last-name" className="sr-only">
+            姓
+          </label>
+          <input
+            id="partner-last-name"
+            name="lastName"
+            type="text"
+            required
+            autoComplete="family-name"
+            placeholder="姓"
+            value={lastName}
+            onChange={(event) => setLastName(event.target.value)}
+            className="h-14 w-full rounded-md border border-[#7B2233]/25 bg-white px-5 text-base font-medium text-[#2B2B2B] outline-none transition focus:border-[#7B2233]"
+          />
+        </div>
+        <div>
+          <label htmlFor="partner-first-name" className="sr-only">
+            名
+          </label>
+          <input
+            id="partner-first-name"
+            name="firstName"
+            type="text"
+            required
+            autoComplete="given-name"
+            placeholder="名"
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value)}
+            className="h-14 w-full rounded-md border border-[#7B2233]/25 bg-white px-5 text-base font-medium text-[#2B2B2B] outline-none transition focus:border-[#7B2233]"
+          />
+        </div>
+      </div>
       <label htmlFor="partner-email" className="sr-only">
         メールアドレス
       </label>
@@ -68,7 +108,7 @@ export function PartnerLeadForm() {
         placeholder="メールアドレス"
         value={email}
         onChange={(event) => setEmail(event.target.value)}
-        className="h-14 w-full rounded-md border border-[#7B2233]/25 bg-white px-5 text-base font-medium text-[#2B2B2B] outline-none transition focus:border-[#7B2233]"
+        className="mt-4 h-14 w-full rounded-md border border-[#7B2233]/25 bg-white px-5 text-base font-medium text-[#2B2B2B] outline-none transition focus:border-[#7B2233]"
       />
       <label className="sr-only" htmlFor="partner-website">
         Website
