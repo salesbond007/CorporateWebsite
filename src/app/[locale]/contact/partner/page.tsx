@@ -127,12 +127,20 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
               </Link>
             ))}
           </nav>
-          <Link
-            href="#entry"
-            className="rounded-sm bg-white px-5 py-2 text-sm font-black uppercase tracking-[0.06em] text-[#7B2233] hover:bg-white/90 md:text-base"
-          >
-            無料会員登録
-          </Link>
+          <div className="flex items-center gap-3">
+            <Link
+              href="#entry"
+              className="rounded-sm bg-white px-5 py-2 text-sm font-black uppercase tracking-[0.06em] text-[#7B2233] hover:bg-white/90 md:text-base"
+            >
+              無料会員登録
+            </Link>
+            <Link
+              href={localePath("/contact", locale)}
+              className="rounded-sm border border-white/70 px-5 py-2 text-sm font-black uppercase tracking-[0.06em] text-white hover:bg-white/10 md:text-base"
+            >
+              企業の方はこちら
+            </Link>
+          </div>
         </Container>
       </div>
 
