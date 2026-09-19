@@ -149,7 +149,7 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </div>
       </section>
 
-      <section className="relative isolate overflow-hidden bg-white py-20 md:py-28">
+      <section className="relative isolate overflow-hidden bg-white py-12 md:py-16">
         <Image
           src="/contact/partner/about-bg.webp"
           alt=""
@@ -159,17 +159,17 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         />
         <Container className="relative z-10">
           <div className="text-center">
-            <h2 className="text-4xl font-black text-[#2B2B2B] md:text-5xl">
+            <h2 className="text-3xl font-black text-[#2B2B2B] md:text-4xl">
               ボンドテックとは
             </h2>
-            <p className="mt-4 text-xs font-black uppercase tracking-[0.18em] text-[#8B8B8B]">
+            <p className="mt-3 text-xs font-black uppercase tracking-[0.18em] text-[#8B8B8B]">
               About BondTech
             </p>
-            <div className="mx-auto mt-3 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
+            <div className="mx-auto mt-2 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
           </div>
 
-          <div className="mt-8 grid gap-12 text-left lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-            <div className="space-y-4 text-base font-black leading-[1.9] text-[#2B2B2B]/85">
+          <div className="mt-6 grid gap-8 text-left lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+            <div className="space-y-2 text-sm font-black leading-[1.6] text-[#2B2B2B]/85">
               <p>
                 ボンドテックは、<span className="text-[#7B2233]">ハードウェアとフィジカルAI領域のエンジニア・PM</span>に案件をご紹介するサービスです。
               </p>
@@ -188,19 +188,21 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
               </p>
             </div>
 
-            <div className="lg:pt-2">
+            <div className="lg:pt-1">
               {aboutHighlights.map((item, index) => (
                 <div
                   key={item}
-                  className={`py-7 ${index > 0 ? "border-t border-[#7B2233]/15" : ""}`}
+                  className={`py-3 ${index > 0 ? "border-t border-[#7B2233]/15" : ""}`}
                 >
-                  <p className="text-3xl font-black leading-tight text-[#7B2233] md:text-4xl">{item}</p>
+                  <p className="text-xl font-black leading-tight text-[#7B2233] md:text-2xl">{item}</p>
                 </div>
               ))}
             </div>
           </div>
 
-          <Cta />
+          <div className="mt-6 text-center">
+            <Button href="#entry" className="!bg-[#7B2233] hover:!bg-[#A33A52]">無料登録して案件を探す</Button>
+          </div>
         </Container>
       </section>
 
