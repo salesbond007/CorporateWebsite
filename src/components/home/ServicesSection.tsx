@@ -32,9 +32,9 @@ const categoryCards: Service[] = [
     slug: "talent-solutions",
     number: "02",
     title: "人材ソリューション",
-    subtitle: "ハードウェア開発支援・インサイドセールス支援",
+    subtitle: "SES・ハードウェア開発支援・インサイドセールス支援",
     summary:
-      "ハードウェア開発支援からインサイドセールス支援まで、貴社に必要な人材・実行力を提供します。",
+      "製造業向けエンジニアの業務委託紹介からハードウェア開発支援、インサイドセールス支援まで、貴社に必要な人材・実行力を提供します。",
     features: [],
     href: "/services#talent-solutions",
     image: "/services/cards/talent.jpg",
