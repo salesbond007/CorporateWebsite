@@ -27,6 +27,8 @@ const jobGroups = [
   },
 ];
 
+const aboutHighlights = ["週2~", "高収入", "専門性を活かせる"];
+
 const registrants = [
   "ハードウェア/フィジカルAIエンジニア/PM経験者",
   "引退/退職しても活躍の場を探している技術者",
@@ -42,12 +44,12 @@ const strengths = [
 ];
 
 const members = ["機構設計", "電気設計", "組込み", "ロボティクス", "品質・規格"];
-const workStyles = [
-  ["週2〜5日", "副業、複業、フル稼働まで希望に応じて相談可能です。"],
-  ["リモート/出社", "案件特性に応じて、リモート中心、現場訪問あり、常駐型を整理します。"],
-  ["顧問・PM支援", "実装だけでなく、レビュー、技術調査、開発体制づくりの案件も扱います。"],
+const flow = [
+  ["メール登録", "メールアドレスのみで、かんたんに仮登録できます。"],
+  ["経験・希望確認", "ご経歴や稼働日数、報酬などのご希望をヒアリングします。"],
+  ["案件ご案内", "条件に合う案件が見つかり次第、ご案内します。"],
+  ["面談・参画", "企業との面談を経て、案件にご参画いただきます。"],
 ];
-const flow = ["メール登録", "経験・希望確認", "案件ご案内", "面談・参画"];
 const faqs = [
   ["登録に費用はかかりますか？", "登録・案件相談に費用はかかりません。"],
   ["すぐ稼働できなくても登録できますか？", "可能です。稼働可能時期や希望条件を確認したうえで、合う案件が出た際にご案内します。"],
@@ -146,24 +148,39 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
             About BondTech
           </p>
           <div className="mt-3 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
-          <div className="mt-8 max-w-3xl space-y-5 text-lg font-black leading-loose text-[#2B2B2B]/85">
-            <p>
-              ボンドテックは、<span className="text-[#7B2233]">ハードウェアとフィジカルAI領域のエンジニア・PM</span>に案件をご紹介するサービスです。
-            </p>
-            <p>
-              いま、モノづくりの現場は技術者を求めています。
-              <br />
-              求人を出しても応募が来ない。育てる時間もない。だから、<span className="text-[#7B2233]">すでに技術を持つ人が必要とされています。</span>
-            </p>
-            <p>
-              何十年かけて積み上げた技術を、そのままにしておくのはもったいない。
-              <br />
-              その経験を、待っている現場へ。
-            </p>
-            <p className="text-[#7B2233]">
-              週2日から。シニアの技術者、副業・フリーランスの技術者も歓迎です。
-            </p>
+
+          <div className="mt-8 grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+            <div className="space-y-5 text-xl font-black leading-[2.1] text-[#2B2B2B]/85">
+              <p>
+                ボンドテックは、<span className="text-[#7B2233]">ハードウェアとフィジカルAI領域のエンジニア・PM</span>に案件をご紹介するサービスです。
+              </p>
+              <p>
+                いま、モノづくりの現場は技術者を求めています。
+                <br />
+                求人を出しても応募が来ない。育てる時間もない。だから、<span className="text-[#7B2233]">すでに技術を持つ人が必要とされています。</span>
+              </p>
+              <p>
+                何十年かけて積み上げた技術を、そのままにしておくのはもったいない。
+                <br />
+                その経験を、待っている現場へ。
+              </p>
+              <p className="text-[#7B2233]">
+                週2日から。シニアの技術者、副業・フリーランスの技術者も歓迎です。
+              </p>
+            </div>
+
+            <div className="lg:pt-2">
+              {aboutHighlights.map((item, index) => (
+                <div
+                  key={item}
+                  className={`py-7 ${index > 0 ? "border-t border-[#7B2233]/15" : ""}`}
+                >
+                  <p className="text-3xl font-black leading-tight text-[#7B2233] md:text-4xl">{item}</p>
+                </div>
+              ))}
+            </div>
           </div>
+
           <Cta />
         </Container>
       </section>
@@ -234,31 +251,23 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
         </div>
       </LpSection>
 
-      <LpSection label="Work Style" title="働き方">
-        <div className="mx-auto max-w-4xl space-y-5">
-          {workStyles.map(([title, body], index) => (
-            <div key={title} className="grid gap-4 rounded-md border border-[#7B2233]/20 bg-white p-6 md:grid-cols-[120px_1fr] md:items-center">
-              <p className="text-3xl font-black text-[#7B2233]">{String(index + 1).padStart(2, "0")}</p>
-              <div>
-                <h3 className="text-xl font-black">{title}</h3>
-                <p className="mt-2 text-base font-medium leading-relaxed text-[#2B2B2B]/80">{body}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <Cta />
-      </LpSection>
-
       <LpSection tone="white" label="Flow" title="登録から案件参画まで">
-        <div className="grid gap-4 md:grid-cols-4">
-          {flow.map((step, index) => (
-            <div key={step} className="relative rounded-md border border-[#7B2233]/20 bg-white p-6">
-              <p className="text-3xl font-black text-[#7B2233]">{String(index + 1).padStart(2, "0")}</p>
-              <h3 className="mt-5 text-xl font-black">{step}</h3>
+        <div className="grid gap-6 md:grid-cols-4">
+          {flow.map(([title, body], index) => (
+            <div key={title} className="relative rounded-md border border-[#7B2233]/20 bg-white p-6">
+              <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#7B2233]/10">
+                <FlowIcon index={index} />
+              </span>
+              <p className="mt-4 text-xs font-black uppercase tracking-[0.14em] text-[#A33A52]">
+                STEP {String(index + 1).padStart(2, "0")}
+              </p>
+              <h3 className="mt-2 text-xl font-black">{title}</h3>
+              <p className="mt-2 text-sm font-medium leading-relaxed text-[#2B2B2B]/70">{body}</p>
               {index < flow.length - 1 ? <span className="absolute -right-3 top-1/2 hidden text-[#7B2233] md:block">→</span> : null}
             </div>
           ))}
         </div>
+        <Cta />
       </LpSection>
 
       <LpSection label="FAQ" title="よくある質問">
@@ -284,14 +293,6 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
           </div>
         </Container>
       </section>
-
-      <footer className="bg-[#FAF8F7] py-10">
-        <Container className="flex justify-center">
-          <Link href={localePath("/privacy", locale)} className="text-sm font-bold text-[#7B2233] underline underline-offset-4">
-            プライバシーポリシー
-          </Link>
-        </Container>
-      </footer>
     </main>
   );
 }
@@ -345,6 +346,20 @@ function TagIcon() {
         strokeLinejoin="round"
       />
       <circle cx="8.2" cy="8.2" r="1.4" stroke="currentColor" strokeWidth="1.6" />
+    </svg>
+  );
+}
+
+function FlowIcon({ index }: { index: number }) {
+  const paths = [
+    "M4 7l8 6 8-6M4 7v10h16V7M4 7h16",
+    "M6 4h12v16l-6-3-6 3V4z",
+    "M4 8h16v11H4zM4 8l8-4 8 4M9 12h6",
+    "M8 12l2.5 2.5L16 9",
+  ];
+  return (
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="text-[#7B2233]">
+      <path d={paths[index % paths.length]} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
