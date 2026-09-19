@@ -75,11 +75,6 @@ export function Header({ locale, dict }: Props) {
             items={serviceItems}
           />
 
-          {/* リンクは後日追加予定。現時点ではテキストのみ表示 */}
-          <span className="text-sm font-bold text-ink-muted">
-            AI専門メディア
-          </span>
-
           <Link
             href={localePath("/news", locale)}
             className="text-sm font-bold text-ink hover:text-brand-600"
