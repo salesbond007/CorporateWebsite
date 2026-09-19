@@ -128,21 +128,21 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
                 About BondTech
               </p>
               <div className="mt-3 h-1 w-16 bg-gradient-to-r from-[#7B2233] to-[#A33A52]" />
-              <div className="mt-8 space-y-5 text-base font-medium leading-loose text-[#2B2B2B]/85">
+              <div className="mt-8 space-y-5 text-base font-black leading-loose text-[#2B2B2B]/85">
                 <p>
-                  ボンドテックは、<span className="font-black text-[#7B2233]">ハードウェアとフィジカルAI領域のエンジニア・PM</span>に案件をご紹介するサービスです。
+                  ボンドテックは、<span className="text-[#7B2233]">ハードウェアとフィジカルAI領域のエンジニア・PM</span>に案件をご紹介するサービスです。
                 </p>
                 <p>
                   いま、モノづくりの現場は技術者を求めています。
                   <br />
-                  求人を出しても応募が来ない。育てる時間もない。だから、<span className="font-black text-[#7B2233]">すでに技術を持つ人が必要とされています。</span>
+                  求人を出しても応募が来ない。育てる時間もない。だから、<span className="text-[#7B2233]">すでに技術を持つ人が必要とされています。</span>
                 </p>
                 <p>
                   何十年かけて積み上げた技術を、そのままにしておくのはもったいない。
                   <br />
                   その経験を、待っている現場へ。
                 </p>
-                <p className="font-black text-[#7B2233]">
+                <p className="text-[#7B2233]">
                   週2日から。シニアの方、副業・フリーランスの方も歓迎です。
                 </p>
               </div>
