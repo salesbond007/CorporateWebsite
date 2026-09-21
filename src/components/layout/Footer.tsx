@@ -43,6 +43,16 @@ export function Footer({ locale, dict }: Props) {
             . {dict.footer.rights}
           </p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/80">
+            <li>
+              <Link
+                href={localePath("/", locale)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white"
+              >
+                運営会社
+              </Link>
+            </li>
             {legalLinks.map((l) => (
               <li key={l.href}>
                 <Link
