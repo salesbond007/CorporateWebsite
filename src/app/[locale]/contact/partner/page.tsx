@@ -272,7 +272,20 @@ export default function PartnerContactPage({ params }: { params: { locale: strin
               これまでの経験やスキルを、次のステージで活かしたい方をお待ちしています。
             </p>
           </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="flex flex-col gap-3 sm:hidden">
+            {registrants.map(([title], index) => (
+              <div
+                key={title}
+                className="flex items-center gap-3 rounded-md border border-[#7B2233]/15 bg-white px-4 py-3"
+              >
+                <span className="shrink-0 text-lg font-black leading-none text-[#7B2233]">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+                <p className="text-sm font-black leading-snug text-[#2B2B2B]">{title}</p>
+              </div>
+            ))}
+          </div>
+          <div className="hidden gap-6 sm:grid sm:grid-cols-2 lg:grid-cols-5">
             {registrants.map(([title, body], index) => (
               <div key={title} className="overflow-hidden rounded-md bg-white">
                 {registrantImages[index] ? (
