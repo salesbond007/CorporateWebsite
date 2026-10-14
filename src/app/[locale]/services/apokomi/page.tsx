@@ -114,18 +114,33 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
         ])}
       />
 
-      <section className="border-b border-[#7B2233]/15 bg-[#FAF8F7]">
-        <Container className="py-5">
-          <div className="flex items-center justify-between gap-4">
-            <Link href={localePath("/", locale)} className="text-sm font-black tracking-[0.08em] text-[#7B2233]">
-              アポコミ by Sales Bond
-            </Link>
-            <Button href="#entry" className="!rounded-full !bg-[#7B2233] hover:!bg-[#A33A52]">
-              無料相談する
-            </Button>
-          </div>
+      <section className="sticky top-0 z-30 border-b border-[#7B2233]/15 bg-white/95 backdrop-blur-sm">
+        <Container className="py-4">
+          <Link
+            href={localePath("/", locale)}
+            className="text-2xl font-black tracking-[0.04em] text-[#7B2233] md:text-3xl"
+          >
+            アポコミ
+          </Link>
         </Container>
       </section>
+
+      {/* 常に右下に表示するフローティングCTA */}
+      <a
+        href="#entry"
+        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-[#7B2233] px-6 py-4 text-sm font-black text-white shadow-[0_14px_32px_-8px_rgba(123,34,51,0.6)] transition-transform hover:-translate-y-0.5 hover:bg-[#A33A52] md:px-7 md:py-4 md:text-base"
+      >
+        無料相談はこちら
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path
+            d="M2.5 7H11.5M11.5 7L7.5 3M11.5 7L7.5 11"
+            stroke="currentColor"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </a>
 
       {/* ① ファーストビュー */}
       <section className="relative overflow-hidden bg-gradient-to-b from-[#FBEFEF] via-[#FAF8F7] to-[#FAF8F7]">
