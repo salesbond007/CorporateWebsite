@@ -120,7 +120,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
             <Link href={localePath("/", locale)} className="text-sm font-black tracking-[0.08em] text-[#7B2233]">
               アポコミ by Sales Bond
             </Link>
-            <Button href="#entry" className="!bg-[#7B2233] hover:!bg-[#A33A52]">
+            <Button href="#entry" className="!rounded-full !bg-[#7B2233] hover:!bg-[#A33A52]">
               無料相談する
             </Button>
           </div>
@@ -128,34 +128,56 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       </section>
 
       {/* ① ファーストビュー */}
-      <section className="overflow-hidden bg-[#FAF8F7]">
-        <Container className="py-16 text-center md:py-24 lg:py-28">
-          <span className="inline-block rounded-md border border-[#7B2233] bg-white px-4 py-2 text-sm font-bold text-[#7B2233]">
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#FBEFEF] via-[#FAF8F7] to-[#FAF8F7]">
+        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#7B2233]/10 blur-3xl md:h-96 md:w-96" />
+        <div className="pointer-events-none absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-[#A33A52]/10 blur-3xl" />
+        <Container className="relative py-16 text-center md:py-24 lg:py-28">
+          <span className="inline-block rounded-full border border-[#7B2233] bg-white px-5 py-2 text-sm font-bold text-[#7B2233] shadow-sm">
             成果連動型インサイドセールス代行
           </span>
-          <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-black leading-[1.3] tracking-normal md:text-5xl lg:text-6xl">
-            成果が出ない月に、<br />高い固定費は払わなくていい。
-          </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-lg font-medium leading-relaxed md:text-xl">
-            稼働費はフリーランス並み。成果報酬は、アポが生まれたときだけ。
-            <br />
-            戦略立案からアポイント獲得まで、アポコミが商談の入口をつくりきります。
-          </p>
 
-          <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-3">
-            {heroStats.map(([label, value]) => (
-              <div key={label} className="rounded-md border border-[#7B2233]/20 bg-white p-5">
-                <p className="text-xs font-black uppercase tracking-[0.1em] text-[#A33A52]">{label}</p>
-                <p className="mt-2 text-xl font-black text-[#2B2233]">{value}</p>
-              </div>
-            ))}
+          <div className="relative mx-auto mt-8 max-w-3xl rounded-3xl border border-[#7B2233]/15 bg-white px-6 py-10 shadow-[0_20px_60px_-20px_rgba(123,34,51,0.25)] md:px-10 md:py-12">
+            <span
+              aria-hidden
+              className="absolute left-1/2 top-full h-6 w-6 -translate-x-1/2 -translate-y-3 rotate-45 border-b border-r border-[#7B2233]/15 bg-white"
+            />
+            <h1 className="text-4xl font-black leading-[1.3] tracking-normal md:text-5xl lg:text-6xl">
+              成果が出ない月に、
+              <br />
+              <Highlight>高い固定費は払わなくていい。</Highlight>
+            </h1>
+            <p className="mx-auto mt-6 max-w-2xl text-lg font-medium leading-relaxed md:text-xl">
+              稼働費はフリーランス並み。成果報酬は、アポが生まれたときだけ。
+              <br />
+              戦略立案からアポイント獲得まで、アポコミが商談の入口をつくりきります。
+            </p>
           </div>
 
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button href="#entry" size="lg" className="!bg-[#7B2233] hover:!bg-[#A33A52]">
+          <div className="relative mx-auto mt-14 max-w-2xl">
+            <span className="absolute -right-2 -top-8 hidden rotate-6 rounded-full bg-[#7B2233] px-4 py-2 text-xs font-black text-white shadow-lg md:inline-block">
+              成果報酬は1アポ1万円〜
+            </span>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {heroStats.map(([label, value], index) => (
+                <div
+                  key={label}
+                  className="rounded-2xl border border-[#7B2233]/15 bg-white p-5 shadow-[0_10px_30px_-15px_rgba(123,34,51,0.35)] transition-transform hover:-translate-y-1"
+                >
+                  <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233]">
+                    <StatIcon index={index} />
+                  </span>
+                  <p className="mt-3 text-xs font-black uppercase tracking-[0.1em] text-[#A33A52]">{label}</p>
+                  <p className="mt-1 text-xl font-black text-[#2B2233]">{value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
+            <Button href="#entry" size="lg" className="!rounded-full !bg-[#7B2233] hover:!bg-[#A33A52]">
               無料で相談する
             </Button>
-            <Button href="#entry" size="lg" variant="secondary">
+            <Button href="#entry" size="lg" variant="secondary" className="!rounded-full">
               サービス資料をダウンロード
             </Button>
           </div>
@@ -193,9 +215,22 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
 
       {/* ③ 悩み */}
       <Section label="Problem" title="その営業代行、成果が出ない月も満額払っていませんか？">
-        <CardGrid items={problems} />
+        <div className="grid gap-6 sm:grid-cols-2">
+          {problems.map(([title, body]) => (
+            <div
+              key={title}
+              className="relative rounded-3xl border border-[#7B2233]/15 bg-white p-8 pt-10 shadow-[0_14px_40px_-20px_rgba(123,34,51,0.3)] transition-transform hover:-translate-y-1"
+            >
+              <span className="absolute -top-5 left-8 flex h-10 w-10 items-center justify-center rounded-full bg-[#7B2233] text-lg font-black text-white shadow-md">
+                !
+              </span>
+              <h3 className="text-xl font-black text-[#2B2B2B]">{title}</h3>
+              <p className="mt-4 text-base font-medium leading-relaxed text-[#2B2B2B]/80">{body}</p>
+            </div>
+          ))}
+        </div>
         <p className="mt-10 text-center text-xl font-black text-[#7B2233]">
-          そのすべてに答えるのが、アポコミです。
+          そのすべてに答えるのが、<Highlight>アポコミ</Highlight>です。
         </p>
       </Section>
 
@@ -205,7 +240,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
           アポコミは、アポ獲得にコミットする準成果報酬型のインサイドセールス代行です。戦略設計から担当者の教育、アポイント獲得までを担い、必要に応じて初回商談の代行にも対応します。
         </p>
         <div className="mt-10 overflow-x-auto">
-          <table className="w-full min-w-[640px] border-collapse overflow-hidden rounded-md border border-[#7B2233]/20 bg-white text-left text-sm">
+          <table className="w-full min-w-[640px] border-collapse overflow-hidden rounded-2xl border border-[#7B2233]/20 bg-white text-left text-sm">
             <thead>
               <tr className="bg-[#7B2233] text-white">
                 <th className="p-4 font-black">ステップ</th>
@@ -235,7 +270,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
           固定費はフリーランス並みの稼働費に絞り、アポイントが生まれたときにだけ成果報酬をいただきます。成果が出ない月の負担を、最小限に抑える料金設計です。
         </p>
         <div className="mt-10 overflow-x-auto">
-          <table className="w-full min-w-[720px] border-collapse overflow-hidden rounded-md border border-[#7B2233]/20 bg-white text-left text-sm">
+          <table className="w-full min-w-[720px] border-collapse overflow-hidden rounded-2xl border border-[#7B2233]/20 bg-white text-left text-sm">
             <thead>
               <tr className="bg-[#FAF8F7]">
                 <th className="p-4 font-black" />
@@ -269,7 +304,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
         </p>
         <div className="mx-auto mt-10 max-w-3xl space-y-5">
           {reason02Steps.map(([title, body], index) => (
-            <div key={title} className="grid gap-4 rounded-md border border-[#7B2233]/20 bg-[#FAF8F7] p-6 md:grid-cols-[140px_1fr] md:items-center">
+            <div key={title} className="grid gap-4 rounded-2xl border border-[#7B2233]/20 bg-[#FAF8F7] p-6 shadow-sm md:grid-cols-[140px_1fr] md:items-center">
               <p className="text-sm font-black uppercase tracking-[0.08em] text-[#A33A52]">
                 STEP {index + 1}
               </p>
@@ -280,7 +315,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
             </div>
           ))}
         </div>
-        <div className="mx-auto mt-10 max-w-3xl rounded-md border-2 border-[#7B2233] bg-white p-8 text-center">
+        <div className="mx-auto mt-10 max-w-3xl rounded-3xl border-2 border-[#7B2233] bg-white p-8 text-center shadow-[0_14px_40px_-20px_rgba(123,34,51,0.3)]">
           <p className="text-xs font-black uppercase tracking-[0.18em] text-[#A33A52]">Goal</p>
           <p className="mt-3 text-lg font-black leading-relaxed">
             半年〜1年で、代行に頼らずアポを生み出せる、自走可能な営業組織をつくる。
@@ -292,7 +327,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
           </p>
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             {retainedAssets.map((item) => (
-              <div key={item} className="rounded-md border border-[#7B2233]/20 bg-[#FAF8F7] px-5 py-4 text-sm font-black text-[#2B2B2B]">
+              <div key={item} className="rounded-2xl border border-[#7B2233]/20 bg-[#FAF8F7] px-5 py-4 text-sm font-black text-[#2B2B2B]">
                 {item}
               </div>
             ))}
@@ -307,7 +342,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
           運用PM 5万円／月 ＋ 稼働費＋成果報酬 15万円〜／月
         </p>
         <div className="mt-10 overflow-x-auto">
-          <table className="w-full min-w-[640px] border-collapse overflow-hidden rounded-md border border-[#7B2233]/20 bg-white text-left text-sm">
+          <table className="w-full min-w-[640px] border-collapse overflow-hidden rounded-2xl border border-[#7B2233]/20 bg-white text-left text-sm">
             <thead>
               <tr className="bg-[#7B2233] text-white">
                 <th className="p-4 font-black">項目</th>
@@ -336,7 +371,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       <Section tone="white" label="Flow" title="ご相談から稼働開始まで">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {flow.map((item, index) => (
-            <div key={item} className="relative rounded-md border border-[#7B2233]/20 bg-white p-6">
+            <div key={item} className="relative rounded-2xl border border-[#7B2233]/20 bg-white p-6 shadow-sm transition-transform hover:-translate-y-1">
               <p className="text-3xl font-black text-[#7B2233]">{String(index + 1).padStart(2, "0")}</p>
               <h3 className="mt-5 text-xl font-black">{item}</h3>
             </div>
@@ -347,11 +382,17 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
 
       {/* ⑨ FAQ */}
       <Section label="FAQ" title="よくあるご質問">
-        <div className="mx-auto max-w-4xl divide-y divide-[#7B2233]/15 rounded-md border border-[#7B2233]/20 bg-white">
+        <div className="mx-auto max-w-4xl divide-y divide-[#7B2233]/15 overflow-hidden rounded-3xl border border-[#7B2233]/20 bg-white shadow-[0_14px_40px_-24px_rgba(123,34,51,0.3)]">
           {faqs.map(([q, a]) => (
             <details key={q} className="group p-6">
-              <summary className="cursor-pointer list-none text-lg font-black text-[#2B2B2B]">
-                {q}
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-black text-[#2B2B2B]">
+                <span className="flex items-center gap-3">
+                  <span className="shrink-0 text-[#7B2233]">Q</span>
+                  {q}
+                </span>
+                <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233] transition-transform group-open:rotate-45">
+                  +
+                </span>
               </summary>
               <p className="mt-4 text-base font-medium leading-relaxed text-[#2B2B2B]/80">{a}</p>
             </details>
@@ -363,14 +404,14 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       <Section tone="white" label="Company" title="営業の戦略から実行、組織づくりまで、売上拡大を一気通貫で支援します。">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {companyPillars.map(([title, body], index) => (
-            <div key={title} className="rounded-md border border-[#7B2233]/20 bg-[#FAF8F7] p-6">
+            <div key={title} className="rounded-2xl border border-[#7B2233]/20 bg-[#FAF8F7] p-6 shadow-sm">
               <p className="text-2xl font-black text-[#7B2233]">{String(index + 1).padStart(2, "0")}</p>
               <h3 className="mt-3 text-lg font-black">{title}</h3>
               <p className="mt-2 text-sm font-medium leading-relaxed text-[#2B2B2B]/70">{body}</p>
             </div>
           ))}
         </div>
-        <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-md border border-[#7B2233]/20 bg-white">
+        <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-[#7B2233]/20 bg-white">
           {companyTable.map(([label, value]) => (
             <div key={label} className="grid grid-cols-[120px_1fr] gap-4 border-b border-[#7B2233]/10 p-4 text-sm last:border-b-0 sm:grid-cols-[160px_1fr]">
               <p className="font-black text-[#7B2233]">{label}</p>
@@ -393,7 +434,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
             <span>メール：info@salesbond.jp</span>
             <span>担当：飯住・藤田</span>
           </div>
-          <div className="mt-10 rounded-md bg-white p-6 md:p-10">
+          <div className="mt-10 rounded-3xl bg-white p-6 shadow-xl md:p-10">
             <ApokomiLeadForm />
           </div>
         </Container>
@@ -418,7 +459,7 @@ function LogoStrip({
             alt={logo.name}
             width={logo.width}
             height={80}
-            className="h-full w-auto object-contain"
+            className="h-full w-auto object-contain opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
           />
         </div>
       ))}
@@ -440,23 +481,35 @@ function Section({ label, title, children, tone = "cream" }: { label: string; ti
   );
 }
 
-function CardGrid({ items }: { items: string[][] }) {
+function Highlight({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid gap-6 sm:grid-cols-2">
-      {items.map(([title, body]) => (
-        <div key={title} className="rounded-md border border-[#7B2233]/20 bg-white p-8">
-          <h3 className="text-xl font-black text-[#2B2B2B]">{title}</h3>
-          <p className="mt-4 text-base font-medium leading-relaxed text-[#2B2B2B]/80">{body}</p>
-        </div>
-      ))}
-    </div>
+    <span
+      className="bg-gradient-to-t from-[#F5D54A] from-[38%] to-transparent to-[38%] px-0.5"
+    >
+      {children}
+    </span>
+  );
+}
+
+function StatIcon({ index }: { index: number }) {
+  const icons = [
+    <path key="yen" d="M6 3l6 7 6-7M12 10v9M8 14h8M8 17h8" />,
+    <path key="clock" d="M12 7v5l3.5 2M20 12a8 8 0 11-16 0 8 8 0 0116 0z" />,
+    <path key="target" d="M12 2v3M12 19v3M2 12h3M19 12h3M12 7a5 5 0 100 10 5 5 0 000-10z" />,
+  ];
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <g stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        {icons[index % icons.length]}
+      </g>
+    </svg>
   );
 }
 
 function SectionCta() {
   return (
     <div className="mt-12 text-center">
-      <Button href="#entry" className="!bg-[#7B2233] hover:!bg-[#A33A52]">
+      <Button href="#entry" className="!rounded-full !bg-[#7B2233] hover:!bg-[#A33A52]">
         無料で相談する
       </Button>
     </div>
