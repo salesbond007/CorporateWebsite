@@ -29,6 +29,15 @@ const clientLogos = [
   { name: "OKAN", src: "/clients/okan.png", width: 186 },
 ];
 
+const problems = [
+  { lines: ["成果が出ない月も、", "営業代行に高額な費用を払っている"], keyword: "高額な費用" },
+  { lines: ["営業活動を外注しても、", "社内にノウハウが蓄積されない"], keyword: "ノウハウ" },
+  { lines: ["フリーランスに依頼したいが、", "稼働管理や品質に不安がある"], keyword: "品質" },
+  { lines: ["新規開拓を始めたいが、", "何から手をつければよいか分からない"], keyword: "何から" },
+  { lines: ["営業人材が不足しており、", "新規開拓に手が回らない"], keyword: "人材" },
+  { lines: ["アポイント数を増やしたいが、", "有効な打ち手が見つからない"], keyword: "打ち手" },
+];
+
 const serviceSteps = [
   ["01", "戦略立案", "市場・顧客分析から、狙うべき業界・役職・訴求を設計", "アポコミ"],
   ["02", "アサイン・教育", "商材に合う担当者を選び、トークと運用ルールを研修", "アポコミ"],
@@ -206,17 +215,43 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
 
       {/* ③ 悩み */}
       <Section title="よくある課題">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-[#7B2233]/15 shadow-[0_20px_60px_-24px_rgba(123,34,51,0.3)]">
-          <Image
-            src="/services/apokomi/problems.webp"
-            alt="課題1 成果が出ない月も、営業代行に高額な費用を払っている / 課題2 営業活動を外注しても、社内にノウハウが蓄積されない / 課題3 フリーランスに依頼したいが、稼働管理や品質に不安がある / 課題4 新規開拓を始めたいが、何から手をつければよいか分からない / 課題5 営業人材が不足しており、新規開拓に手が回らない / 課題6 アポイント数を増やしたいが、有効な打ち手が見つからない"
-            width={1672}
-            height={941}
-            sizes="(min-width: 1024px) 960px, 100vw"
-            className="h-auto w-full"
-          />
+        <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {problems.map((problem, index) => (
+            <div
+              key={problem.keyword}
+              className="relative rounded-2xl border border-[#7B2233]/15 bg-white p-6 pt-9 text-center shadow-[0_14px_36px_-22px_rgba(123,34,51,0.35)] transition-transform hover:-translate-y-1"
+            >
+              <span className="absolute -top-6 left-1/2 flex h-12 w-12 -translate-x-1/2 flex-col items-center justify-center rounded-full bg-[#7B2233] text-white shadow-md">
+                <span className="text-[9px] font-bold leading-none">課題</span>
+                <span className="text-lg font-black leading-none">{index + 1}</span>
+                <span
+                  aria-hidden
+                  className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 rounded-[2px] bg-[#7B2233]"
+                />
+              </span>
+              <div className="mx-auto mt-3 flex h-16 w-16 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233]">
+                <ProblemIcon index={index} />
+              </div>
+              <p className="mt-4 text-base font-bold leading-relaxed text-[#2B2B2B]">
+                {problem.lines.map((line, lineIndex) => (
+                  <span key={line} className="block">
+                    {line.includes(problem.keyword)
+                      ? line.split(problem.keyword).map((part, i, arr) => (
+                          <span key={`${line}-${i}`}>
+                            {part}
+                            {i < arr.length - 1 ? (
+                              <span className="text-[#7B2233]">{problem.keyword}</span>
+                            ) : null}
+                          </span>
+                        ))
+                      : line}
+                  </span>
+                ))}
+              </p>
+            </div>
+          ))}
         </div>
-        <p className="mt-10 text-center text-xl font-black text-[#7B2233]">
+        <p className="mt-12 text-center text-xl font-black text-[#7B2233]">
           その課題<Highlight>アポコミ</Highlight>が解決します！
         </p>
       </Section>
@@ -475,6 +510,53 @@ function Highlight({ children }: { children: React.ReactNode }) {
     >
       {children}
     </span>
+  );
+}
+
+function ProblemIcon({ index }: { index: number }) {
+  const icons = [
+    // 高額な費用: コイン
+    <g key="cost">
+      <circle cx="12" cy="12" r="8" />
+      <path d="M12 8v8M9.5 10a2 2 0 0 1 2-1.5h1a1.8 1.8 0 0 1 0 3.5h-1a1.8 1.8 0 0 0 0 3.5h1a2 2 0 0 0 2-1.5" />
+    </g>,
+    // ノウハウが蓄積されない: 書類の受け渡し
+    <g key="knowledge">
+      <rect x="3" y="5" width="9" height="12" rx="1.2" />
+      <rect x="12" y="7" width="9" height="12" rx="1.2" />
+      <path d="M6 9h3M6 12h3M15 11h3M15 14h3" />
+    </g>,
+    // 品質に不安: 虫眼鏡+チェック
+    <g key="quality">
+      <circle cx="10" cy="10" r="6" />
+      <path d="M14.5 14.5 20 20M8 10l1.3 1.3L12.5 8" />
+    </g>,
+    // 何から手をつければ: 道標
+    <g key="signpost">
+      <path d="M12 3v18" />
+      <path d="M12 7h6l-1.5 2L18 11h-6" />
+      <path d="M12 13H6l1.5 2L6 17h6" />
+    </g>,
+    // 人材不足: 人のアイコン+マイナス
+    <g key="people">
+      <circle cx="9" cy="8" r="3" />
+      <path d="M3 20a6 6 0 0 1 12 0" />
+      <path d="M17 11h4" />
+    </g>,
+    // 打ち手が見つからない: グラフ+?
+    <g key="chart">
+      <path d="M4 20V10M10 20V6M16 20v-4" />
+      <circle cx="19" cy="7" r="2.6" />
+      <path d="M18.2 6.2a.9.9 0 0 1 1.6.5c0 .7-.9.7-.9 1.4" />
+      <path d="M19 9.6v.1" />
+    </g>,
+  ];
+  return (
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <g stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        {icons[index % icons.length]}
+      </g>
+    </svg>
   );
 }
 
