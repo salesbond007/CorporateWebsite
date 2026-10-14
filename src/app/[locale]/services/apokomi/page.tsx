@@ -215,43 +215,47 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
 
       {/* ③ 悩み */}
       <Section title="よくある課題">
-        <div className="grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
-          {problems.map((problem, index) => (
-            <div
-              key={problem.keyword}
-              className="relative rounded-2xl border border-[#7B2233]/15 bg-white p-6 pt-9 text-center shadow-[0_14px_36px_-22px_rgba(123,34,51,0.35)] transition-transform hover:-translate-y-1"
-            >
-              <span className="absolute -top-6 left-1/2 flex h-12 w-12 -translate-x-1/2 flex-col items-center justify-center rounded-full bg-[#7B2233] text-white shadow-md">
-                <span className="text-[9px] font-bold leading-none">課題</span>
-                <span className="text-lg font-black leading-none">{index + 1}</span>
-                <span
-                  aria-hidden
-                  className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 rounded-[2px] bg-[#7B2233]"
-                />
-              </span>
-              <div className="mx-auto mt-3 flex h-16 w-16 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233]">
-                <ProblemIcon index={index} />
-              </div>
-              <p className="mt-4 text-base font-bold leading-relaxed text-[#2B2B2B]">
-                {problem.lines.map((line, lineIndex) => (
-                  <span key={line} className="block">
-                    {line.includes(problem.keyword)
-                      ? line.split(problem.keyword).map((part, i, arr) => (
-                          <span key={`${line}-${i}`}>
-                            {part}
-                            {i < arr.length - 1 ? (
-                              <span className="text-[#7B2233]">{problem.keyword}</span>
-                            ) : null}
-                          </span>
-                        ))
-                      : line}
+        <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:overflow-visible sm:px-0">
+          <div className="grid w-max grid-flow-col gap-5 sm:w-full sm:grid-flow-row sm:grid-cols-6">
+            {problems.map((problem, index) => (
+              <div key={problem.keyword} className="flex w-40 flex-col items-center sm:w-auto">
+                <div className="relative flex min-h-[220px] w-full flex-col items-center rounded-2xl border border-[#7B2233]/15 bg-white p-5 pt-9 text-center shadow-[0_14px_36px_-22px_rgba(123,34,51,0.35)] transition-transform hover:-translate-y-1">
+                  <span className="absolute -top-6 left-1/2 flex h-12 w-12 -translate-x-1/2 flex-col items-center justify-center rounded-full bg-[#7B2233] text-white shadow-md">
+                    <span className="text-[9px] font-bold leading-none">課題</span>
+                    <span className="text-lg font-black leading-none">{index + 1}</span>
+                    <span
+                      aria-hidden
+                      className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 rounded-[2px] bg-[#7B2233]"
+                    />
                   </span>
-                ))}
-              </p>
-            </div>
-          ))}
+                  <div className="mt-3 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233]">
+                    <ProblemIcon index={index} />
+                  </div>
+                  <p className="mt-4 text-sm font-bold leading-relaxed text-[#2B2B2B]">
+                    {problem.lines.map((line) => (
+                      <span key={line} className="block">
+                        {line.includes(problem.keyword)
+                          ? line.split(problem.keyword).map((part, i, arr) => (
+                              <span key={`${line}-${i}`}>
+                                {part}
+                                {i < arr.length - 1 ? (
+                                  <span className="text-[#7B2233]">{problem.keyword}</span>
+                                ) : null}
+                              </span>
+                            ))
+                          : line}
+                      </span>
+                    ))}
+                  </p>
+                </div>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" className="mt-2 shrink-0 text-[#7B2233]/40">
+                  <path d="M4 7l6 6 6-6M4 11l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+            ))}
+          </div>
         </div>
-        <p className="mt-12 text-center text-xl font-black text-[#7B2233]">
+        <p className="mt-6 text-center text-xl font-black text-[#7B2233]">
           その課題<Highlight>アポコミ</Highlight>が解決します！
         </p>
       </Section>
