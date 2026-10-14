@@ -29,13 +29,6 @@ const clientLogos = [
   { name: "OKAN", src: "/clients/okan.png", width: 186 },
 ];
 
-const problems = [
-  ["営業人材が採れない", "採用しても立ち上がりに時間がかかり、新規開拓が止まったまま。"],
-  ["代行会社は高すぎる", "1人あたり月50万円以上。アポが0件でも請求は変わらない。"],
-  ["フリーランスは管理が不安", "安く頼めても、進捗管理も改善も自社で抱えることに。"],
-  ["ノウハウが残らない", "契約が終わった瞬間、何が刺さったのかが社内に何も残らない。"],
-];
-
 const serviceSteps = [
   ["01", "戦略立案", "市場・顧客分析から、狙うべき業界・役職・訴求を設計", "アポコミ"],
   ["02", "アサイン・教育", "商材に合う担当者を選び、トークと運用ルールを研修", "アポコミ"],
@@ -212,23 +205,19 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       </section>
 
       {/* ③ 悩み */}
-      <Section title="その営業代行、成果が出ない月も満額払っていませんか？">
-        <div className="grid gap-6 sm:grid-cols-2">
-          {problems.map(([title, body]) => (
-            <div
-              key={title}
-              className="relative rounded-3xl border border-[#7B2233]/15 bg-white p-8 pt-10 shadow-[0_14px_40px_-20px_rgba(123,34,51,0.3)] transition-transform hover:-translate-y-1"
-            >
-              <span className="absolute -top-5 left-8 flex h-10 w-10 items-center justify-center rounded-full bg-[#7B2233] text-lg font-black text-white shadow-md">
-                !
-              </span>
-              <h3 className="text-xl font-black text-[#2B2B2B]">{title}</h3>
-              <p className="mt-4 text-base font-medium leading-relaxed text-[#2B2B2B]/80">{body}</p>
-            </div>
-          ))}
+      <Section title="よくある課題">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-3xl border border-[#7B2233]/15 shadow-[0_20px_60px_-24px_rgba(123,34,51,0.3)]">
+          <Image
+            src="/services/apokomi/problems.webp"
+            alt="課題1 成果が出ない月も、営業代行に高額な費用を払っている / 課題2 営業活動を外注しても、社内にノウハウが蓄積されない / 課題3 フリーランスに依頼したいが、稼働管理や品質に不安がある / 課題4 新規開拓を始めたいが、何から手をつければよいか分からない / 課題5 営業人材が不足しており、新規開拓に手が回らない / 課題6 アポイント数を増やしたいが、有効な打ち手が見つからない"
+            width={1672}
+            height={941}
+            sizes="(min-width: 1024px) 960px, 100vw"
+            className="h-auto w-full"
+          />
         </div>
         <p className="mt-10 text-center text-xl font-black text-[#7B2233]">
-          そのすべてに答えるのが、<Highlight>アポコミ</Highlight>です。
+          その課題<Highlight>アポコミ</Highlight>が解決します！
         </p>
       </Section>
 
