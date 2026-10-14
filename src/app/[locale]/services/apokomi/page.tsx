@@ -155,7 +155,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
             <h1 className="mt-4 text-4xl font-black leading-[1.3] tracking-normal drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] md:text-5xl">
               アポ獲得から、アポを生み出す仕組みづくりまで。
             </h1>
-            <p className="mt-6 max-w-lg text-lg font-black leading-relaxed text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] md:text-xl">
+            <p className="mt-6 inline-block max-w-lg rounded-xl border-2 border-white/80 px-5 py-3 text-lg font-black leading-relaxed text-white md:text-xl">
               アポ数を生み出す、余計な固定費0の設計！
             </p>
 
@@ -413,7 +413,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       </Section>
 
       {/* ⑩ 運営会社 */}
-      <Section tone="white" label="Company" title="営業の戦略から実行、組織づくりまで、売上拡大を一気通貫で支援します。">
+      <Section tone="white" title="営業の戦略から実行、組織づくりまで、売上拡大を一気通貫で支援します。">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {companyPillars.map(([title, body], index) => (
             <div key={title} className="rounded-2xl border border-[#7B2233]/20 bg-[#FAF8F7] p-6 shadow-sm">
