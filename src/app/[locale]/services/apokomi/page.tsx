@@ -17,16 +17,16 @@ export const metadata: Metadata = {
 };
 
 const clientLogos = [
-  { name: "Fixx", src: "/clients/fixx.png", width: 116 },
-  { name: "JAPAN AI株式会社", src: "/clients/japan-ai.webp", width: 208 },
-  { name: "LegalOn Technologies", src: "/clients/legalontechnology.jpg", width: 196 },
-  { name: "TOPPANコスモ", src: "/clients/toppan-cosmo.png", width: 162 },
-  { name: "kubell", src: "/clients/kubell.jpeg", width: 128 },
-  { name: "uluru", src: "/clients/ururu.png", width: 150 },
-  { name: "And L.", src: "/clients/andoeru.png", width: 138 },
-  { name: "三省堂書店", src: "/clients/sanseido.png", width: 174 },
-  { name: "KOMPEITO", src: "/clients/kompeito.png", width: 174 },
-  { name: "OKAN", src: "/clients/okan.png", width: 128 },
+  { name: "Fixx", src: "/clients/fixx.png", width: 168 },
+  { name: "JAPAN AI株式会社", src: "/clients/japan-ai.webp", width: 302 },
+  { name: "LegalOn Technologies", src: "/clients/legalontechnology.jpg", width: 284 },
+  { name: "TOPPANコスモ", src: "/clients/toppan-cosmo.png", width: 235 },
+  { name: "kubell", src: "/clients/kubell.jpeg", width: 186 },
+  { name: "uluru", src: "/clients/ururu.png", width: 218 },
+  { name: "And L.", src: "/clients/andoeru.png", width: 200 },
+  { name: "三省堂書店", src: "/clients/sanseido.png", width: 252 },
+  { name: "KOMPEITO", src: "/clients/kompeito.png", width: 252 },
+  { name: "OKAN", src: "/clients/okan.png", width: 186 },
 ];
 
 const heroStats = [
@@ -410,14 +410,14 @@ function LogoStrip({
   ariaHidden?: boolean;
 }) {
   return (
-    <div className="flex shrink-0 items-center gap-10 pr-10 md:gap-16 md:pr-16" aria-hidden={ariaHidden}>
+    <div className="flex shrink-0 items-center gap-12 pr-12 md:gap-20 md:pr-20" aria-hidden={ariaHidden}>
       {logos.map((logo) => (
-        <div key={logo.name} className="flex h-8 shrink-0 items-center md:h-14">
+        <div key={logo.name} className="flex h-12 shrink-0 items-center md:h-20">
           <Image
             src={logo.src}
             alt={logo.name}
             width={logo.width}
-            height={56}
+            height={80}
             className="h-full w-auto object-contain"
           />
         </div>
