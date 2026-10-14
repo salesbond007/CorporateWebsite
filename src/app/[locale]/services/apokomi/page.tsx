@@ -38,14 +38,6 @@ const problems = [
   { lines: ["アポイント数を増やしたいが、", "有効な打ち手が見つからない"], keyword: "打ち手", image: "/services/apokomi/problems/06-growth.png" },
 ];
 
-const serviceSteps = [
-  ["01", "戦略立案", "市場・顧客分析から、狙うべき業界・役職・訴求を設計", "アポコミ"],
-  ["02", "アサイン・教育", "商材に合う担当者を選び、トークと運用ルールを研修", "アポコミ"],
-  ["03", "アポイント獲得", "ターゲット企業へアプローチし、商談機会を創出", "アポコミ"],
-  ["04", "商談", "獲得したアポイントで初回商談を実施", "貴社／アポコミ(オプション)"],
-  ["05", "成約", "商談から契約・取引開始へ", "貴社"],
-];
-
 const reasonTableRows = [
   ["稼働の費用", "1人あたり月50万〜60万円", "なし", "時給2,000円〜"],
   ["成果の費用", "なし", "アポ1件 1.5万〜2万円", "アポ1件 1万円"],
@@ -271,27 +263,15 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
         <p className="mx-auto max-w-3xl text-center text-base font-medium leading-relaxed text-[#2B2B2B]/80">
           アポコミは、アポ獲得にコミットする準成果報酬型のインサイドセールス代行です。戦略設計から担当者の教育、アポイント獲得までを担い、必要に応じて初回商談の代行にも対応します。
         </p>
-        <div className="mt-10 overflow-x-auto">
-          <table className="w-full min-w-[640px] border-collapse overflow-hidden rounded-2xl border border-[#7B2233]/20 bg-white text-left text-sm">
-            <thead>
-              <tr className="bg-[#7B2233] text-white">
-                <th className="p-4 font-black">ステップ</th>
-                <th className="p-4 font-black">内容</th>
-                <th className="p-4 font-black">担当</th>
-              </tr>
-            </thead>
-            <tbody>
-              {serviceSteps.map(([number, title, content, owner]) => (
-                <tr key={number} className="border-t border-[#7B2233]/10">
-                  <td className="p-4 align-top font-black text-[#7B2233]">
-                    {number}<br />{title}
-                  </td>
-                  <td className="p-4 align-top font-medium">{content}</td>
-                  <td className="p-4 align-top font-medium text-[#2B2B2B]/70">{owner}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-3xl border border-[#7B2233]/15 shadow-[0_20px_60px_-24px_rgba(123,34,51,0.3)]">
+          <Image
+            src="/services/apokomi/service-flow.webp"
+            alt="アポコミの担当範囲 ステップ1 戦略立案(担当:アポコミ) 市場・顧客分析をもとに、最適な営業方針を設計 / ステップ2 営業担当のアサイン・教育(担当:アポコミ) 実行担当を配置し、トーク・運用ルールを共有 / ステップ3 アポイント獲得(担当:アポコミ) ターゲット企業へアプローチし、商談機会を創出 / ステップ4 商談(担当:貴社、オプションでアポコミが代行) 獲得したアポイントをもとに、商談を実施 / ステップ5 成約(担当:貴社) 商談を経て、ご契約・取引開始へ"
+            width={1672}
+            height={941}
+            sizes="(min-width: 1024px) 960px, 100vw"
+            className="h-auto w-full"
+          />
         </div>
         <SectionCta />
       </Section>
