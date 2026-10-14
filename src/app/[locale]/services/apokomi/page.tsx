@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
@@ -14,6 +15,19 @@ export const metadata: Metadata = {
   description:
     "稼働費はフリーランス並み、成果報酬はアポが生まれたときだけ。戦略立案からアポイント獲得まで、アポコミが商談の入口をつくりきります。",
 };
+
+const clientLogos = [
+  { name: "Fixx", src: "/clients/fixx.png", width: 116 },
+  { name: "JAPAN AI株式会社", src: "/clients/japan-ai.webp", width: 208 },
+  { name: "LegalOn Technologies", src: "/clients/legalontechnology.jpg", width: 196 },
+  { name: "TOPPANコスモ", src: "/clients/toppan-cosmo.png", width: 162 },
+  { name: "kubell", src: "/clients/kubell.jpeg", width: 128 },
+  { name: "uluru", src: "/clients/ururu.png", width: 150 },
+  { name: "And L.", src: "/clients/andoeru.png", width: 138 },
+  { name: "三省堂書店", src: "/clients/sanseido.png", width: 174 },
+  { name: "KOMPEITO", src: "/clients/kompeito.png", width: 174 },
+  { name: "OKAN", src: "/clients/okan.png", width: 128 },
+];
 
 const heroStats = [
   ["最低ご利用予算", "月額20万円〜"],
@@ -152,18 +166,30 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       </section>
 
       {/* ② 取引実績 */}
-      <Section tone="white" label="Track Record" title="ベンチャーから大手まで、取引実績のある企業">
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <div
-              key={i}
-              className="flex aspect-[3/2] items-center justify-center rounded-md border-2 border-dashed border-[#7B2233]/25 bg-[#FAF8F7] text-xs font-bold text-[#2B2B2B]/40"
-            >
-              LOGO
-            </div>
-          ))}
+      <section className="bg-white py-20 md:py-28">
+        <Container>
+          <div className="mb-12 text-center">
+            <p className="text-sm font-black uppercase tracking-[0.18em] text-[#A33A52]">Track Record</p>
+            <h2 className="mx-auto mt-4 max-w-3xl text-3xl font-black leading-tight md:text-4xl">
+              ベンチャーから大手まで、取引実績のある企業
+            </h2>
+          </div>
+        </Container>
+        <div
+          className="relative mx-auto max-w-6xl overflow-hidden"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+          }}
+        >
+          <div className="flex w-max animate-marquee">
+            <LogoStrip logos={clientLogos} />
+            <LogoStrip logos={clientLogos} ariaHidden />
+          </div>
         </div>
-      </Section>
+      </section>
 
       {/* ③ 悩み */}
       <Section label="Problem" title="その営業代行、成果が出ない月も満額払っていませんか？">
@@ -373,6 +399,30 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
         </Container>
       </section>
     </main>
+  );
+}
+
+function LogoStrip({
+  logos,
+  ariaHidden,
+}: {
+  logos: { name: string; src: string; width: number }[];
+  ariaHidden?: boolean;
+}) {
+  return (
+    <div className="flex shrink-0 items-center gap-10 pr-10 md:gap-16 md:pr-16" aria-hidden={ariaHidden}>
+      {logos.map((logo) => (
+        <div key={logo.name} className="flex h-8 shrink-0 items-center md:h-14">
+          <Image
+            src={logo.src}
+            alt={logo.name}
+            width={logo.width}
+            height={56}
+            className="h-full w-auto object-contain"
+          />
+        </div>
+      ))}
+    </div>
   );
 }
 
