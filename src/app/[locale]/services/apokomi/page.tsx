@@ -119,21 +119,25 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-      {/* 常に右下に表示するフローティングCTA */}
+      {/* 常に右下に表示するフローティングCTA(吹き出し型) */}
       <a
         href="#entry"
-        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-[#7B2233] px-6 py-4 text-sm font-black text-white shadow-[0_14px_32px_-8px_rgba(123,34,51,0.6)] transition-transform hover:-translate-y-0.5 hover:bg-[#A33A52] md:px-7 md:py-4 md:text-base"
+        className="group fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-[22px] bg-[#7B2233] px-7 py-5 text-base font-black text-white shadow-[0_14px_32px_-8px_rgba(123,34,51,0.6)] transition-transform hover:-translate-y-0.5 hover:bg-[#A33A52] md:px-8 md:py-5 md:text-lg"
       >
-        無料相談はこちら
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="shrink-0">
           <path
-            d="M2.5 7H11.5M11.5 7L7.5 3M11.5 7L7.5 11"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            d="M4 5h16a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4.5 3.8c-.4.3-1-.1-1-.6V6a1 1 0 0 1 1-1Z"
+            fill="currentColor"
           />
+          <circle cx="9" cy="10.5" r="1.1" fill="#7B2233" />
+          <circle cx="13" cy="10.5" r="1.1" fill="#7B2233" />
+          <circle cx="17" cy="10.5" r="1.1" fill="#7B2233" />
         </svg>
+        無料相談はこちら
+        <span
+          aria-hidden
+          className="absolute -bottom-1.5 right-10 h-4 w-4 rotate-45 rounded-[4px] bg-[#7B2233] transition-colors group-hover:bg-[#A33A52]"
+        />
       </a>
 
       {/* ① ファーストビュー */}
