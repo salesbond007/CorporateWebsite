@@ -30,12 +30,12 @@ const clientLogos = [
 ];
 
 const problems = [
-  { lines: ["成果が出ない月も、", "営業代行に高額な費用を払っている"], keyword: "高額な費用" },
-  { lines: ["営業活動を外注しても、", "社内にノウハウが蓄積されない"], keyword: "ノウハウ" },
-  { lines: ["フリーランスに依頼したいが、", "稼働管理や品質に不安がある"], keyword: "品質" },
-  { lines: ["新規開拓を始めたいが、", "何から手をつければよいか分からない"], keyword: "何から" },
-  { lines: ["営業人材が不足しており、", "新規開拓に手が回らない"], keyword: "人材" },
-  { lines: ["アポイント数を増やしたいが、", "有効な打ち手が見つからない"], keyword: "打ち手" },
+  { lines: ["成果が出ない月も、", "営業代行に高額な費用を払っている"], keyword: "高額な費用", image: "/services/apokomi/problems/01-cost.png" },
+  { lines: ["営業活動を外注しても、", "社内にノウハウが蓄積されない"], keyword: "ノウハウ", image: "/services/apokomi/problems/02-knowledge.png" },
+  { lines: ["フリーランスに依頼したいが、", "稼働管理や品質に不安がある"], keyword: "品質", image: "/services/apokomi/problems/03-quality.png" },
+  { lines: ["新規開拓を始めたいが、", "何から手をつければよいか分からない"], keyword: "何から", image: "/services/apokomi/problems/04-signpost.png" },
+  { lines: ["営業人材が不足しており、", "新規開拓に手が回らない"], keyword: "人材", image: "/services/apokomi/problems/05-people.png" },
+  { lines: ["アポイント数を増やしたいが、", "有効な打ち手が見つからない"], keyword: "打ち手", image: "" },
 ];
 
 const serviceSteps = [
@@ -215,10 +215,10 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
 
       {/* ③ 悩み */}
       <Section title="よくある課題">
-        <div className="-mx-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:overflow-visible sm:px-0">
-          <div className="grid w-max grid-flow-col gap-5 sm:w-full sm:grid-flow-row sm:grid-cols-6">
+        <div className="-mx-4 overflow-x-auto px-4 pb-2 lg:mx-0 lg:overflow-visible lg:px-0">
+          <div className="grid w-max grid-flow-col gap-4 sm:gap-5 lg:w-full lg:grid-flow-row lg:grid-cols-6">
             {problems.map((problem, index) => (
-              <div key={problem.keyword} className="flex w-40 flex-col items-center sm:w-auto">
+              <div key={problem.keyword} className="flex w-36 flex-col items-center sm:w-44 lg:w-auto">
                 <div className="relative flex min-h-[220px] w-full flex-col items-center rounded-2xl border border-[#7B2233]/15 bg-white p-5 pt-9 text-center shadow-[0_14px_36px_-22px_rgba(123,34,51,0.35)] transition-transform hover:-translate-y-1">
                   <span className="absolute -top-6 left-1/2 flex h-12 w-12 -translate-x-1/2 flex-col items-center justify-center rounded-full bg-[#7B2233] text-white shadow-md">
                     <span className="text-[9px] font-bold leading-none">課題</span>
@@ -228,8 +228,14 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
                       className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 rounded-[2px] bg-[#7B2233]"
                     />
                   </span>
-                  <div className="mt-3 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233]">
-                    <ProblemIcon index={index} />
+                  <div className="mt-3 flex h-20 w-20 shrink-0 items-center justify-center">
+                    {problem.image ? (
+                      <Image src={problem.image} alt="" width={96} height={96} className="h-full w-full object-contain" />
+                    ) : (
+                      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233]">
+                        <ProblemIcon index={index} />
+                      </div>
+                    )}
                   </div>
                   <p className="mt-4 text-sm font-bold leading-relaxed text-[#2B2B2B]">
                     {problem.lines.map((line) => (
@@ -255,7 +261,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
             ))}
           </div>
         </div>
-        <p className="mt-6 text-center text-xl font-black text-[#7B2233]">
+        <p className="mt-6 text-center text-2xl font-black text-[#7B2233] md:text-3xl">
           その課題<Highlight>アポコミ</Highlight>が解決します！
         </p>
       </Section>
