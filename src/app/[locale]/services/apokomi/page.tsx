@@ -483,7 +483,7 @@ function LogoStrip({
             alt={logo.name}
             width={logo.width}
             height={80}
-            className="h-full w-auto object-contain opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+            className="h-full w-auto object-contain"
           />
         </div>
       ))}
