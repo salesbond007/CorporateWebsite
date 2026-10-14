@@ -150,23 +150,18 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
           <div className="absolute inset-0 bg-gradient-to-r from-[#430f1b] via-[#5c1726]/75 to-transparent md:from-[#430f1b]/95 md:via-[#5c1726]/55 md:to-transparent/10" />
         </div>
         <Container className="relative py-20 text-left text-white md:py-28 lg:py-32">
-          <div className="max-w-xl">
-            <p className="text-lg font-black leading-relaxed md:text-xl">
+          <div className="max-w-xl rounded-3xl bg-black/25 p-6 backdrop-blur-[2px] md:bg-transparent md:p-0 md:backdrop-blur-0">
+            <p className="text-lg font-black leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] md:text-xl">
               <Highlight>成果が出ない月は、高い固定費は不要。</Highlight>
             </p>
-            <h1 className="mt-4 text-4xl font-black leading-[1.3] tracking-normal md:text-5xl">
-              アポ獲得から、アポ数を3倍にする仕組みづくりまで。
+            <h1 className="mt-4 text-4xl font-black leading-[1.3] tracking-normal drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] md:text-5xl">
+              アポ獲得から、アポを生み出す仕組みづくりまで。
             </h1>
-            <p className="mt-6 max-w-lg text-lg font-medium leading-relaxed text-white/90 md:text-xl">
-              稼働費はフリーランス並み。成果報酬は、アポが生まれたときだけ。
-              <br />
-              戦略立案からアポイント獲得まで、アポコミが商談の入口をつくりきります。
+            <p className="mt-6 max-w-lg text-lg font-black leading-relaxed text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] md:text-xl">
+              アポ数を生み出す、余計な固定費0の設計！
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Button href="#entry" size="lg" className="!rounded-full !bg-white !text-[#7B2233] hover:!bg-white/90">
-                無料で相談する
-              </Button>
               <Button href="#entry" size="lg" variant="secondary" className="!rounded-full !border-white !text-white hover:!bg-white hover:!text-[#7B2233]">
                 サービス資料をダウンロード
               </Button>
@@ -178,9 +173,11 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       {/* 料金サマリー */}
       <section className="relative bg-[#FAF8F7] py-14 md:py-16">
         <Container>
-          <div className="relative mx-auto -mt-24 max-w-md rounded-3xl border border-[#7B2233]/15 bg-white p-6 text-center shadow-[0_20px_60px_-20px_rgba(123,34,51,0.3)] md:-mt-28 md:p-8">
-            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#A33A52]">最低ご利用予算</p>
-            <p className="mt-2 text-4xl font-black text-[#2B2233] md:text-5xl">月額20万円〜</p>
+          <div className="relative mx-auto -mt-24 flex max-w-md flex-col items-center gap-5 rounded-3xl border border-[#7B2233]/15 bg-white p-6 text-center shadow-[0_20px_60px_-20px_rgba(123,34,51,0.3)] md:-mt-28 md:flex-row md:justify-between md:p-8 md:text-left">
+            <p className="text-4xl font-black text-[#2B2233] md:text-5xl">月額20万円〜</p>
+            <Button href="#entry" size="lg" className="!rounded-full !bg-[#7B2233] hover:!bg-[#A33A52]">
+              無料で相談する
+            </Button>
           </div>
         </Container>
       </section>
