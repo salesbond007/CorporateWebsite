@@ -143,42 +143,60 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       </a>
 
       {/* ① ファーストビュー */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#FBEFEF] via-[#FAF8F7] to-[#FAF8F7]">
-        <div className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full bg-[#7B2233]/10 blur-3xl md:h-96 md:w-96" />
-        <div className="pointer-events-none absolute -left-20 bottom-0 h-56 w-56 rounded-full bg-[#A33A52]/10 blur-3xl" />
-        <Container className="relative py-16 text-center md:py-24 lg:py-28">
-          <span className="inline-block rounded-full border border-[#7B2233] bg-white px-5 py-2 text-sm font-bold text-[#7B2233] shadow-sm">
-            成果連動型インサイドセールス代行
-          </span>
-
-          <div className="relative mx-auto mt-8 max-w-3xl rounded-3xl border border-[#7B2233]/15 bg-white px-6 py-10 shadow-[0_20px_60px_-20px_rgba(123,34,51,0.25)] md:px-10 md:py-12">
-            <span
-              aria-hidden
-              className="absolute left-1/2 top-full h-6 w-6 -translate-x-1/2 -translate-y-3 rotate-45 border-b border-r border-[#7B2233]/15 bg-white"
-            />
-            <h1 className="text-4xl font-black leading-[1.3] tracking-normal md:text-5xl lg:text-6xl">
+      <section className="relative isolate min-h-[520px] overflow-hidden bg-[#5c1726] md:min-h-[620px]">
+        <div className="absolute inset-0">
+          <Image
+            src="/services/apokomi/hero.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[78%_center] md:object-[70%_center]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#430f1b] via-[#5c1726]/75 to-transparent md:from-[#430f1b]/95 md:via-[#5c1726]/55 md:to-transparent/10" />
+        </div>
+        <Container className="relative py-20 text-left text-white md:py-28 lg:py-32">
+          <div className="max-w-xl">
+            <span className="inline-block rounded-full border border-white/40 bg-white/10 px-5 py-2 text-sm font-bold backdrop-blur-sm">
+              成果連動型インサイドセールス代行
+            </span>
+            <h1 className="mt-6 text-4xl font-black leading-[1.3] tracking-normal md:text-5xl">
               成果が出ない月に、
               <br />
               <Highlight>高い固定費は払わなくていい。</Highlight>
             </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg font-medium leading-relaxed md:text-xl">
+            <p className="mt-6 max-w-lg text-lg font-medium leading-relaxed text-white/90 md:text-xl">
               稼働費はフリーランス並み。成果報酬は、アポが生まれたときだけ。
               <br />
               戦略立案からアポイント獲得まで、アポコミが商談の入口をつくりきります。
             </p>
-          </div>
 
-          <div className="relative mx-auto mt-14 max-w-2xl">
-            <span className="absolute -right-2 -top-8 hidden rotate-6 rounded-full bg-[#7B2233] px-4 py-2 text-xs font-black text-white shadow-lg md:inline-block">
+            <div className="mt-10 flex flex-wrap items-center gap-4">
+              <Button href="#entry" size="lg" className="!rounded-full !bg-white !text-[#7B2233] hover:!bg-white/90">
+                無料で相談する
+              </Button>
+              <Button href="#entry" size="lg" variant="secondary" className="!rounded-full !border-white !text-white hover:!bg-white hover:!text-[#7B2233]">
+                サービス資料をダウンロード
+              </Button>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* 料金サマリー */}
+      <section className="relative bg-[#FAF8F7] py-14 md:py-16">
+        <Container>
+          <div className="relative mx-auto -mt-24 max-w-2xl rounded-3xl border border-[#7B2233]/15 bg-white p-6 shadow-[0_20px_60px_-20px_rgba(123,34,51,0.3)] md:-mt-28 md:p-8">
+            <span className="absolute -right-2 -top-6 hidden rotate-6 rounded-full bg-[#7B2233] px-4 py-2 text-xs font-black text-white shadow-lg md:inline-block">
               成果報酬は1アポ1万円〜
             </span>
             <div className="grid gap-4 sm:grid-cols-3">
               {heroStats.map(([label, value], index) => (
                 <div
                   key={label}
-                  className="rounded-2xl border border-[#7B2233]/15 bg-white p-5 shadow-[0_10px_30px_-15px_rgba(123,34,51,0.35)] transition-transform hover:-translate-y-1"
+                  className="rounded-2xl border border-[#7B2233]/15 bg-[#FAF8F7] p-5 text-center transition-transform hover:-translate-y-1 sm:text-left"
                 >
-                  <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233]">
+                  <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233] sm:mx-0">
                     <StatIcon index={index} />
                   </span>
                   <p className="mt-3 text-xs font-black uppercase tracking-[0.1em] text-[#A33A52]">{label}</p>
@@ -187,16 +205,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
               ))}
             </div>
           </div>
-
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <Button href="#entry" size="lg" className="!rounded-full !bg-[#7B2233] hover:!bg-[#A33A52]">
-              無料で相談する
-            </Button>
-            <Button href="#entry" size="lg" variant="secondary" className="!rounded-full">
-              サービス資料をダウンロード
-            </Button>
-          </div>
-          <p className="mt-6 text-xs font-medium text-[#2B2B2B]/60">
+          <p className="mt-6 text-center text-xs font-medium text-[#2B2B2B]/60">
             ※表示価格はすべて税別です。別途、初期費用10万円がかかります。
           </p>
         </Container>
@@ -474,7 +483,7 @@ function LogoStrip({
             alt={logo.name}
             width={logo.width}
             height={80}
-            className="h-full w-auto object-contain opacity-70 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+            className="h-full w-auto object-contain"
           />
         </div>
       ))}
