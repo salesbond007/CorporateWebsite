@@ -20,7 +20,7 @@ type Props = {
 export function Header({ locale, dict }: Props) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const hideCorporateHeader = /^\/(ja|en)\/contact\/partner\/?$/.test(pathname);
+  const hideCorporateHeader = /^\/(ja|en)\/(contact\/partner|services\/apokomi)\/?$/.test(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
