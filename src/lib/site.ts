@@ -159,6 +159,21 @@ export const serviceCategories: ServiceCategory[] = [
         href: "/services/physical-ai-training",
         image: "/services/physical-ai-training/hero.png",
       },
+      {
+        slug: "apokomi",
+        number: "04",
+        title: "アポコミ",
+        subtitle: "成果連動型インサイドセールス代行",
+        summary:
+          "稼働費はフリーランス並み、成果報酬はアポが生まれたときだけ。戦略立案からアポイント獲得まで、商談の入口をつくりきります。",
+        features: [
+          "成果が出ない月の固定費負担を最小限に",
+          "戦略設計・担当者教育・アポ獲得まで一気通貫",
+          "半年〜1年で代行に頼らない営業組織へ",
+        ],
+        href: "/services/apokomi",
+        image: "/services/cards/talent.jpg",
+      },
     ],
   },
 ];
