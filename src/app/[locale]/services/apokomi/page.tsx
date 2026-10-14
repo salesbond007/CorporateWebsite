@@ -119,21 +119,25 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
         </Container>
       </section>
 
-      {/* 常に右下に表示するフローティングCTA */}
+      {/* 常に右下に表示するフローティングCTA(吹き出し型) */}
       <a
         href="#entry"
-        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 rounded-full bg-[#7B2233] px-6 py-4 text-sm font-black text-white shadow-[0_14px_32px_-8px_rgba(123,34,51,0.6)] transition-transform hover:-translate-y-0.5 hover:bg-[#A33A52] md:px-7 md:py-4 md:text-base"
+        className="group fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-[22px] bg-[#7B2233] px-7 py-5 text-base font-black text-white shadow-[0_14px_32px_-8px_rgba(123,34,51,0.6)] transition-transform hover:-translate-y-0.5 hover:bg-[#A33A52] md:px-8 md:py-5 md:text-lg"
       >
-        無料相談はこちら
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="shrink-0">
           <path
-            d="M2.5 7H11.5M11.5 7L7.5 3M11.5 7L7.5 11"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            d="M4 5h16a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4.5 3.8c-.4.3-1-.1-1-.6V6a1 1 0 0 1 1-1Z"
+            fill="currentColor"
           />
+          <circle cx="9" cy="10.5" r="1.1" fill="#7B2233" />
+          <circle cx="13" cy="10.5" r="1.1" fill="#7B2233" />
+          <circle cx="17" cy="10.5" r="1.1" fill="#7B2233" />
         </svg>
+        無料相談はこちら
+        <span
+          aria-hidden
+          className="absolute -bottom-1.5 right-10 h-4 w-4 rotate-45 rounded-[4px] bg-[#7B2233] transition-colors group-hover:bg-[#A33A52]"
+        />
       </a>
 
       {/* ① ファーストビュー */}
@@ -150,23 +154,18 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
           <div className="absolute inset-0 bg-gradient-to-r from-[#430f1b] via-[#5c1726]/75 to-transparent md:from-[#430f1b]/95 md:via-[#5c1726]/55 md:to-transparent/10" />
         </div>
         <Container className="relative py-20 text-left text-white md:py-28 lg:py-32">
-          <div className="max-w-xl">
-            <p className="text-lg font-black leading-relaxed md:text-xl">
+          <div className="max-w-xl rounded-3xl bg-black/25 p-6 backdrop-blur-[2px] md:bg-transparent md:p-0 md:backdrop-blur-0">
+            <p className="text-lg font-black leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] md:text-xl">
               <Highlight>成果が出ない月は、高い固定費は不要。</Highlight>
             </p>
-            <h1 className="mt-4 text-4xl font-black leading-[1.3] tracking-normal md:text-5xl">
-              アポ獲得から、アポ数を3倍にする仕組みづくりまで。
+            <h1 className="mt-4 text-4xl font-black leading-[1.3] tracking-normal drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] md:text-5xl">
+              アポ獲得から、アポを生み出す仕組みづくりまで。
             </h1>
-            <p className="mt-6 max-w-lg text-lg font-medium leading-relaxed text-white/90 md:text-xl">
-              稼働費はフリーランス並み。成果報酬は、アポが生まれたときだけ。
-              <br />
-              戦略立案からアポイント獲得まで、アポコミが商談の入口をつくりきります。
+            <p className="mt-6 max-w-lg text-lg font-black leading-relaxed text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] md:text-xl">
+              アポ数を生み出す、余計な固定費0の設計！
             </p>
 
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Button href="#entry" size="lg" className="!rounded-full !bg-white !text-[#7B2233] hover:!bg-white/90">
-                無料で相談する
-              </Button>
               <Button href="#entry" size="lg" variant="secondary" className="!rounded-full !border-white !text-white hover:!bg-white hover:!text-[#7B2233]">
                 サービス資料をダウンロード
               </Button>
@@ -178,9 +177,11 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       {/* 料金サマリー */}
       <section className="relative bg-[#FAF8F7] py-14 md:py-16">
         <Container>
-          <div className="relative mx-auto -mt-24 max-w-md rounded-3xl border border-[#7B2233]/15 bg-white p-6 text-center shadow-[0_20px_60px_-20px_rgba(123,34,51,0.3)] md:-mt-28 md:p-8">
-            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#A33A52]">最低ご利用予算</p>
-            <p className="mt-2 text-4xl font-black text-[#2B2233] md:text-5xl">月額20万円〜</p>
+          <div className="relative mx-auto -mt-24 flex max-w-md flex-col items-center gap-5 rounded-3xl border border-[#7B2233]/15 bg-white p-6 text-center shadow-[0_20px_60px_-20px_rgba(123,34,51,0.3)] md:-mt-28 md:flex-row md:justify-between md:p-8 md:text-left">
+            <p className="text-4xl font-black text-[#2B2233] md:text-5xl">月額20万円〜</p>
+            <Button href="#entry" size="lg" className="!rounded-full !bg-[#7B2233] hover:!bg-[#A33A52]">
+              無料で相談する
+            </Button>
           </div>
         </Container>
       </section>
