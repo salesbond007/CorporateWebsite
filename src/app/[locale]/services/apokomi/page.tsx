@@ -35,7 +35,7 @@ const problems = [
   { lines: ["フリーランスに依頼したいが、", "稼働管理や品質に不安がある"], keyword: "品質", image: "/services/apokomi/problems/03-quality.png" },
   { lines: ["新規開拓を始めたいが、", "何から手をつければよいか分からない"], keyword: "何から", image: "/services/apokomi/problems/04-signpost.png" },
   { lines: ["営業人材が不足しており、", "新規開拓に手が回らない"], keyword: "人材", image: "/services/apokomi/problems/05-people.png" },
-  { lines: ["アポイント数を増やしたいが、", "有効な打ち手が見つからない"], keyword: "打ち手", image: "" },
+  { lines: ["アポイント数を増やしたいが、", "有効な打ち手が見つからない"], keyword: "打ち手", image: "/services/apokomi/problems/06-growth.png" },
 ];
 
 const serviceSteps = [
