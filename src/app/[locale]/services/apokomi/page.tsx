@@ -29,12 +29,6 @@ const clientLogos = [
   { name: "OKAN", src: "/clients/okan.png", width: 186 },
 ];
 
-const heroStats = [
-  ["最低ご利用予算", "月額20万円〜"],
-  ["稼働費", "2,000円〜／時"],
-  ["成果報酬", "1万円／アポ"],
-];
-
 const problems = [
   ["営業人材が採れない", "採用しても立ち上がりに時間がかかり、新規開拓が止まったまま。"],
   ["代行会社は高すぎる", "1人あたり月50万円以上。アポが0件でも請求は変わらない。"],
@@ -151,19 +145,17 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
             fill
             priority
             sizes="100vw"
-            className="object-cover object-[78%_center] md:object-[70%_center]"
+            className="object-contain object-right md:object-right"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#430f1b] via-[#5c1726]/75 to-transparent md:from-[#430f1b]/95 md:via-[#5c1726]/55 md:to-transparent/10" />
         </div>
         <Container className="relative py-20 text-left text-white md:py-28 lg:py-32">
           <div className="max-w-xl">
-            <span className="inline-block rounded-full border border-white/40 bg-white/10 px-5 py-2 text-sm font-bold backdrop-blur-sm">
-              成果連動型インサイドセールス代行
-            </span>
-            <h1 className="mt-6 text-4xl font-black leading-[1.3] tracking-normal md:text-5xl">
-              成果が出ない月に、
-              <br />
-              <Highlight>高い固定費は払わなくていい。</Highlight>
+            <p className="text-lg font-black leading-relaxed md:text-xl">
+              <Highlight>成果が出ない月は、高い固定費は不要。</Highlight>
+            </p>
+            <h1 className="mt-4 text-4xl font-black leading-[1.3] tracking-normal md:text-5xl">
+              アポ獲得から、アポ数を3倍にする仕組みづくりまで。
             </h1>
             <p className="mt-6 max-w-lg text-lg font-medium leading-relaxed text-white/90 md:text-xl">
               稼働費はフリーランス並み。成果報酬は、アポが生まれたときだけ。
@@ -186,28 +178,10 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       {/* 料金サマリー */}
       <section className="relative bg-[#FAF8F7] py-14 md:py-16">
         <Container>
-          <div className="relative mx-auto -mt-24 max-w-2xl rounded-3xl border border-[#7B2233]/15 bg-white p-6 shadow-[0_20px_60px_-20px_rgba(123,34,51,0.3)] md:-mt-28 md:p-8">
-            <span className="absolute -right-2 -top-6 hidden rotate-6 rounded-full bg-[#7B2233] px-4 py-2 text-xs font-black text-white shadow-lg md:inline-block">
-              成果報酬は1アポ1万円〜
-            </span>
-            <div className="grid gap-4 sm:grid-cols-3">
-              {heroStats.map(([label, value], index) => (
-                <div
-                  key={label}
-                  className="rounded-2xl border border-[#7B2233]/15 bg-[#FAF8F7] p-5 text-center transition-transform hover:-translate-y-1 sm:text-left"
-                >
-                  <span className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233] sm:mx-0">
-                    <StatIcon index={index} />
-                  </span>
-                  <p className="mt-3 text-xs font-black uppercase tracking-[0.1em] text-[#A33A52]">{label}</p>
-                  <p className="mt-1 text-xl font-black text-[#2B2233]">{value}</p>
-                </div>
-              ))}
-            </div>
+          <div className="relative mx-auto -mt-24 max-w-md rounded-3xl border border-[#7B2233]/15 bg-white p-6 text-center shadow-[0_20px_60px_-20px_rgba(123,34,51,0.3)] md:-mt-28 md:p-8">
+            <p className="text-xs font-black uppercase tracking-[0.1em] text-[#A33A52]">最低ご利用予算</p>
+            <p className="mt-2 text-4xl font-black text-[#2B2233] md:text-5xl">月額20万円〜</p>
           </div>
-          <p className="mt-6 text-center text-xs font-medium text-[#2B2B2B]/60">
-            ※表示価格はすべて税別です。別途、初期費用10万円がかかります。
-          </p>
         </Container>
       </section>
 
@@ -215,9 +189,8 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       <section className="bg-white py-20 md:py-28">
         <Container>
           <div className="mb-12 text-center">
-            <p className="text-sm font-black uppercase tracking-[0.18em] text-[#A33A52]">Track Record</p>
-            <h2 className="mx-auto mt-4 max-w-3xl text-3xl font-black leading-tight md:text-4xl">
-              ベンチャーから大手まで、取引実績のある企業
+            <h2 className="mx-auto max-w-3xl text-xl font-black leading-tight md:text-2xl">
+              ベンチャーから大手まで支援実績があります
             </h2>
           </div>
         </Container>
@@ -238,7 +211,7 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
       </section>
 
       {/* ③ 悩み */}
-      <Section label="Problem" title="その営業代行、成果が出ない月も満額払っていませんか？">
+      <Section title="その営業代行、成果が出ない月も満額払っていませんか？">
         <div className="grid gap-6 sm:grid-cols-2">
           {problems.map(([title, body]) => (
             <div
@@ -491,13 +464,13 @@ function LogoStrip({
   );
 }
 
-function Section({ label, title, children, tone = "cream" }: { label: string; title: string; children: React.ReactNode; tone?: "cream" | "white" }) {
+function Section({ label, title, children, tone = "cream" }: { label?: string; title: string; children: React.ReactNode; tone?: "cream" | "white" }) {
   return (
     <section className={tone === "white" ? "bg-white py-20 md:py-28" : "bg-[#FAF8F7] py-20 md:py-28"}>
       <Container>
         <div className="mb-12 text-center">
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-[#A33A52]">{label}</p>
-          <h2 className="mx-auto mt-4 max-w-3xl text-3xl font-black leading-tight md:text-4xl">{title}</h2>
+          {label ? <p className="text-sm font-black uppercase tracking-[0.18em] text-[#A33A52]">{label}</p> : null}
+          <h2 className={`mx-auto max-w-3xl text-3xl font-black leading-tight md:text-4xl ${label ? "mt-4" : ""}`}>{title}</h2>
         </div>
         {children}
       </Container>
@@ -512,21 +485,6 @@ function Highlight({ children }: { children: React.ReactNode }) {
     >
       {children}
     </span>
-  );
-}
-
-function StatIcon({ index }: { index: number }) {
-  const icons = [
-    <path key="yen" d="M6 3l6 7 6-7M12 10v9M8 14h8M8 17h8" />,
-    <path key="clock" d="M12 7v5l3.5 2M20 12a8 8 0 11-16 0 8 8 0 0116 0z" />,
-    <path key="target" d="M12 2v3M12 19v3M2 12h3M19 12h3M12 7a5 5 0 100 10 5 5 0 000-10z" />,
-  ];
-  return (
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <g stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        {icons[index % icons.length]}
-      </g>
-    </svg>
   );
 }
 
