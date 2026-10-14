@@ -130,23 +130,8 @@ export const serviceCategories: ServiceCategory[] = [
         image: "/services/cards/talent.jpg",
       },
       {
-        slug: "advisory",
-        number: "02",
-        title: "顧問事業",
-        subtitle: "AI化・DX化・海外展開のプロフェッショナル紹介",
-        summary:
-          "AI化、DX化、海外展開など、あらゆる経営課題におけるプロフェッショナルをご紹介する顧問サービスです。",
-        features: [
-          "AI化・DX化に精通した顧問のご紹介",
-          "海外展開・グローバル戦略に強い顧問のご紹介",
-          "経営課題に応じて幅広い専門家からマッチング",
-        ],
-        href: "/services/advisory",
-        image: "/services/cards/ai-solutions.jpg",
-      },
-      {
         slug: "physical-ai-training",
-        number: "03",
+        number: "02",
         title: "フィジカルAI研修",
         subtitle: "生成AI・AIエージェント・フィジカルAI研修",
         summary:
@@ -161,7 +146,7 @@ export const serviceCategories: ServiceCategory[] = [
       },
       {
         slug: "apokomi",
-        number: "04",
+        number: "03",
         title: "アポコミ",
         subtitle: "成果連動型インサイドセールス代行",
         summary:

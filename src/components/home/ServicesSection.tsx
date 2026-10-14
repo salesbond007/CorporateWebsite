@@ -15,7 +15,7 @@ type Props = {
 const cardClass =
   "group relative isolate flex aspect-square h-full flex-col justify-center overflow-hidden rounded-none border-2 border-ink bg-white p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
 
-/** トップページで表示する4つのサービス */
+/** トップページで表示する3つのサービス */
 const categoryCards: Service[] = [
   {
     slug: "bondtech",
@@ -29,19 +29,8 @@ const categoryCards: Service[] = [
     image: "/services/cards/talent.jpg",
   },
   {
-    slug: "advisory",
-    number: "02",
-    title: "顧問事業",
-    subtitle: "AI化・DX化・海外展開のプロフェッショナル紹介",
-    summary:
-      "AI化、DX化、海外展開など、あらゆる経営課題におけるプロフェッショナルをご紹介する顧問サービスです。",
-    features: [],
-    href: "/services/advisory",
-    image: "/services/cards/ai-solutions.jpg",
-  },
-  {
     slug: "physical-ai-training",
-    number: "03",
+    number: "02",
     title: "フィジカルAI研修",
     subtitle: "生成AI・AIエージェント・フィジカルAI研修",
     summary:
@@ -52,7 +41,7 @@ const categoryCards: Service[] = [
   },
   {
     slug: "apokomi",
-    number: "04",
+    number: "03",
     title: "アポコミ",
     subtitle: "成果連動型インサイドセールス代行",
     summary:
@@ -79,7 +68,7 @@ export function ServicesSection({ locale, dict }: Props) {
           </Link>
         </div>
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {categoryCards.map((s, i) => (
             <li key={s.slug}>
               <Reveal delay={i * 100} className="h-full">
