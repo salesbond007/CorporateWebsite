@@ -123,8 +123,29 @@ export const partnerLeadSchema = z.object({
   email: z.string().trim().email("正しいメールアドレスを入力してください"),
 });
 
+/**
+ * /services/apokomi LP の無料相談フォーム。
+ * 5項目: 会社名 / お名前 / メールアドレス / 電話番号 / ご相談内容
+ */
+export const apokomiLeadSchema = z.object({
+  website: z.string().max(0).optional().or(z.literal("")),
+  company: z.string().trim().min(1, "会社名を入力してください").max(200),
+  name: z.string().trim().min(1, "お名前を入力してください").max(100),
+  email: z.string().trim().email("正しいメールアドレスを入力してください"),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "電話番号を入力してください")
+    .max(40)
+    .refine(isValidPhone, {
+      message: "正しい電話番号をご入力ください",
+    }),
+  message: z.string().trim().max(5000).optional().or(z.literal("")),
+});
+
 export type ProfessionalContactInput = z.infer<typeof professionalContactSchema>;
 export type GeneralContactInput = z.infer<typeof generalContactSchema>;
 export type PartnerLeadInput = z.infer<typeof partnerLeadSchema>;
+export type ApokomiLeadInput = z.infer<typeof apokomiLeadSchema>;
 
-export type ContactFormType = "professional" | "general" | "partner_lead";
+export type ContactFormType = "professional" | "general" | "partner_lead" | "apokomi_lead";

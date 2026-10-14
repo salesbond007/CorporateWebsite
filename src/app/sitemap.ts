@@ -18,6 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/services/bondtech", priority: 0.9, changeFrequency: "monthly" },
     { path: "/services/advisory", priority: 0.9, changeFrequency: "monthly" },
     { path: "/services/physical-ai-training", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/services/apokomi", priority: 0.9, changeFrequency: "monthly" },
     { path: "/blog", priority: 0.8, changeFrequency: "daily" },
     { path: "/news", priority: 0.7, changeFrequency: "weekly" },
     { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
