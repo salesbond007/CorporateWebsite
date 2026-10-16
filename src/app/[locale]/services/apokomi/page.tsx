@@ -91,6 +91,8 @@ const companyTable = [
 export default function ApokomiServicePage({ params }: { params: { locale: string } }) {
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
+  // 一旦非公開: 公開再開時はこの行を削除
+  notFound();
 
   return (
     <main className="bg-[#FAF8F7] text-[#2B2B2B]">
