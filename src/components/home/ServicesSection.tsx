@@ -15,7 +15,7 @@ type Props = {
 const cardClass =
   "group relative isolate flex aspect-square h-full flex-col justify-center overflow-hidden rounded-none border-2 border-ink bg-white p-8 transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
 
-/** トップページで表示する3つのサービス */
+/** トップページで表示する2つのサービス */
 const categoryCards: Service[] = [
   {
     slug: "bondtech",
@@ -39,17 +39,6 @@ const categoryCards: Service[] = [
     href: "/services/physical-ai-training",
     image: "/services/physical-ai-training/hero.png",
   },
-  {
-    slug: "apokomi",
-    number: "03",
-    title: "アポコミ",
-    subtitle: "成果連動型インサイドセールス代行",
-    summary:
-      "稼働費はフリーランス並み、成果報酬はアポが生まれたときだけ。戦略立案からアポイント獲得まで、商談の入口をつくりきります。",
-    features: [],
-    href: "/services/apokomi",
-    image: "/services/cards/talent.jpg",
-  },
 ];
 
 export function ServicesSection({ locale, dict }: Props) {
@@ -68,7 +57,7 @@ export function ServicesSection({ locale, dict }: Props) {
           </Link>
         </div>
 
-        <ul className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-14 grid gap-6 sm:grid-cols-2">
           {categoryCards.map((s, i) => (
             <li key={s.slug}>
               <Reveal delay={i * 100} className="h-full">
