@@ -20,9 +20,26 @@ const offices: Office[] = [
 const rows: { label: string; value: React.ReactNode }[] = [
   { label: "会社名", value: "セールスボンド株式会社（Sales Bond Co., Ltd.）" },
   { label: "代表取締役", value: "飯住 孝裕" },
+  {
+    label: "共同創業者",
+    value: (
+      <span className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+        <span>柴田 泰成</span>
+        <a
+          href="https://sora-seed.jp/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-baseline gap-1 border-b border-ink pb-0.5 text-ink transition-colors hover:border-brand-500 hover:text-brand-600"
+        >
+          ソラシードスタートアップスタジオ/ソラシード3
+          <span aria-hidden="true">↗</span>
+          <span className="sr-only">(新しいタブで開く)</span>
+        </a>
+      </span>
+    ),
+  },
   { label: "設立", value: "2024年7月" },
   { label: "資本金", value: "41,002,000円" },
-  { label: "従業員数", value: "34名(業務委託を含む)" },
   { label: "登録番号", value: "T8012801023311" },
   {
     label: "住所",
@@ -46,11 +63,8 @@ const rows: { label: string; value: React.ReactNode }[] = [
     label: "事業内容",
     value: (
       <ul className="space-y-1.5">
-        <li>AI開発</li>
-        <li>AI研修</li>
-        <li>人材マッチング</li>
-        <li>営業BPO事業</li>
-        <li>地方創生</li>
+        <li>AIセキュリティ対策事業</li>
+        <li>新規開拓支援事業(営業BPO)</li>
       </ul>
     ),
   },

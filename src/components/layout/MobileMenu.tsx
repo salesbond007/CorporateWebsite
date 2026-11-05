@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { navigation } from "@/lib/site";
+import { navigation, navHref } from "@/lib/site";
 import { cn } from "@/lib/cn";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
@@ -97,9 +97,9 @@ export function MobileMenu({ locale, dict }: Props) {
           <nav className="flex-1 overflow-y-auto px-5 py-6">
             <ul className="space-y-1">
               {navigation.map((item) => (
-                <li key={item.href}>
+                <li key={item.key}>
                   <Link
-                    href={localePath(item.href, locale)}
+                    href={navHref(item, localePath("/", locale))}
                     onClick={() => setOpen(false)}
                     className="block rounded-lg px-3 py-3 text-base font-medium hover:bg-ink-line/30"
                   >

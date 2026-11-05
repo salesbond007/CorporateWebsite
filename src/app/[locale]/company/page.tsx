@@ -9,7 +9,7 @@ import { isLocale } from "@/i18n/config";
 export const metadata: Metadata = {
   title: "会社概要",
   description:
-    "セールスボンド株式会社（Sales Bond Co., Ltd.）の会社概要。本社所在地、代表者、事業内容（大手決裁者紹介サービス・プロ人材/顧問マッチングサービス・営業BPO事業）など。",
+    "セールスボンド株式会社（Sales Bond Co., Ltd.）の会社概要。本社所在地、代表者、事業内容（AIセキュリティ対策事業・新規開拓支援事業(営業BPO)）など。",
 };
 
 export default function CompanyPage({

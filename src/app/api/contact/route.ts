@@ -154,8 +154,8 @@ const enumLabels: Record<string, Record<string, string>> = {
     estimate: "お見積り依頼",
   },
   serviceTypes: {
-    bondtech: "ボンドテック(ハードウェア開発の人材事業)",
-    "physical-ai-training": "フィジカルAI研修",
+    "ai-security": "AIセキュリティソリューション",
+    "new-business-development": "新規開拓営業支援ソリューション",
     "other-service": "その他",
   },
 };
