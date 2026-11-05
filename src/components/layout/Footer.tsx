@@ -26,7 +26,7 @@ export function Footer({ locale, dict }: Props) {
     {
       title: "セールスボンドについて",
       links: [
-        { label: "ミッション", href: `${home}#mission` },
+        { label: dict.nav.about, href: `${home}#mission` },
         { label: "会社概要", href: `${home}#company` },
       ],
     },
@@ -36,12 +36,19 @@ export function Footer({ locale, dict }: Props) {
         .flatMap((c) => c.services)
         .map((s) => ({ label: s.title, href: `${home}#services` })),
     },
+    {
+      title: "採用・パートナー",
+      links: [
+        { label: dict.nav.recruit, href: localePath("/recruit", locale) },
+        { label: dict.nav.partner, href: localePath("/partner", locale) },
+      ],
+    },
   ];
 
   // 見出しだけで並べる単独リンク
   const singles: FooterLink[] = [
+    { label: dict.nav.top, href: home },
     { label: dict.nav.news, href: localePath("/news", locale) },
-    { label: dict.nav.recruit, href: localePath("/recruit", locale) },
     { label: dict.nav.contact, href: localePath("/contact", locale) },
   ];
 
@@ -61,12 +68,12 @@ export function Footer({ locale, dict }: Props) {
       <Container className="pt-16 pb-8 md:pt-20">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           {/* 会社情報 */}
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <Link href={home} className="inline-flex items-center gap-3" aria-label={dict.site.name}>
               <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-lg bg-white">
                 <Image src="/logo-square.png" alt="" width={48} height={48} className="h-full w-full object-contain" />
               </span>
-              <span className="text-lg font-bold tracking-[0.08em]">{site.legalName}</span>
+              <span className="whitespace-nowrap text-base font-bold tracking-[0.08em] sm:text-lg lg:text-base xl:text-lg">{site.legalName}</span>
             </Link>
             <address className="mt-8 not-italic text-[15px] leading-relaxed text-white/85">
               〒{site.address.postalCode}
@@ -89,7 +96,7 @@ export function Footer({ locale, dict }: Props) {
           {/* リンク列 */}
           <nav
             aria-label="フッター"
-            className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3 lg:col-span-8"
+            className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-9 lg:gap-x-10"
           >
             {columns.map((col) => (
               <div key={col.title}>
