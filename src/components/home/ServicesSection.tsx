@@ -29,7 +29,7 @@ export function ServicesSection({ locale }: Props) {
 
       <Container>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionTitle en="Services" ja="サービス一覧" />
+          <SectionTitle en="Services" ja="サービス" />
           <Reveal variant="fade" delay={300}>
             <p className="max-w-sm text-sm leading-relaxed text-ink-soft">
               攻めの「新規開拓」と、守りの「AIセキュリティ」。

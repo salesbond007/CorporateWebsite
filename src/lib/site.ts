@@ -79,22 +79,36 @@ export type NavKey =
   | "services"
   | "blog"
   | "news"
-  | "company";
+  | "company"
+  | "recruit"
+  | "contact";
 
 /**
  * トップページ内のセクションへのナビゲーション。
  * サービス一覧・お知らせ・会社概要はトップページ内に集約し、LPのみ別ページとする。
  */
-export const navigation: { key: NavKey; hash?: string }[] = [
+export type NavItem = {
+  key: NavKey;
+  /** トップページ内のセクションへ移動する場合のアンカー */
+  hash?: string;
+  /** 別ページへ移動する場合のパス(ロケール接頭辞なし) */
+  href?: string;
+};
+
+export const navigation: NavItem[] = [
   { key: "top" },
   { key: "services", hash: "services" },
   { key: "news", hash: "news" },
   { key: "company", hash: "company" },
+  { key: "recruit", href: "/recruit" },
+  { key: "contact", href: "/contact" },
 ];
 
-/** ナビゲーション項目のリンク先(トップページ + アンカー)を組み立てる */
-export function navHref(item: { hash?: string }, homePath: string): string {
-  return item.hash ? `${homePath}#${item.hash}` : homePath;
+/** ナビゲーション項目のリンク先を組み立てる */
+export function navHref(item: NavItem, locale: string): string {
+  const home = `/${locale}`;
+  if (item.href) return `${home}${item.href}`;
+  return item.hash ? `${home}#${item.hash}` : home;
 }
 
 export type Service = {

@@ -24,7 +24,7 @@ export function NewsSection({ locale, dict }: Props) {
     >
       <Container>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionTitle en="News" ja="お知らせ" />
+          <SectionTitle en="News" ja="ニュース" />
           <Link
             href={localePath("/news", locale)}
             className="link-arrow hover-underline shrink-0"
