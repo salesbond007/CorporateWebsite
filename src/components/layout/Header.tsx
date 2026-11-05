@@ -43,7 +43,7 @@ export function Header({ locale, dict }: Props) {
       <div className="container flex h-16 md:h-20 items-center justify-between gap-6">
         <Logo locale={locale} dict={dict} />
 
-        <nav className="hidden lg:flex items-center gap-8" aria-label="メイン">
+        <nav className="ml-auto mr-4 hidden lg:flex items-center gap-8" aria-label="メイン">
           {navigation
             .filter((item) => item.key !== "contact")
             .map((item) => (
