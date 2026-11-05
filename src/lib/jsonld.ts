@@ -13,7 +13,6 @@ export function organizationJsonLd() {
     url: base,
     logo: `${base}/logo-square.png`,
     image: `${base}/logo-square.png`,
-    description: site.description,
     slogan: site.slogan,
     keywords: site.keywords.join(", "),
     knowsAbout: [
@@ -66,7 +65,6 @@ export function websiteJsonLd() {
     alternateName: ["Sales Bond", "セールスボンド"],
     url: base,
     inLanguage: "ja",
-    description: site.description,
     keywords: site.keywords.join(", "),
     publisher: {
       "@type": "Organization",

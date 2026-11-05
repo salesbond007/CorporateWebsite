@@ -39,7 +39,6 @@ export async function generateMetadata({
       default: dict.site.name,
       template: `%s | ${dict.site.name}`,
     },
-    description: dict.site.description,
     keywords: [...site.keywords],
     authors: [{ name: site.legalName, url: site.url }],
     creator: site.legalName,
@@ -59,12 +58,10 @@ export async function generateMetadata({
       url: `${site.url}/${params.locale}`,
       siteName: dict.site.name,
       title: dict.site.name,
-      description: dict.site.description,
     },
     twitter: {
       card: "summary_large_image",
       title: dict.site.name,
-      description: dict.site.description,
     },
     robots: {
       index: true,

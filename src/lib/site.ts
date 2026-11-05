@@ -6,8 +6,6 @@ export const site = {
   name: "セールスボンド株式会社",
   legalName: "セールスボンド株式会社",
   legalNameEn: "Sales Bond Co., Ltd.",
-  description:
-    "セールスボンド株式会社は、人脈紹介(リファラル)を起点とした営業代行・インサイドセールス・顧問紹介・アポイント獲得を提供。大手企業の決裁者へつながる完全成果報酬型のBtoB営業支援で、挑む企業に確実な成果を届けます。",
   /** SEO で狙うキーワード群 — Organization JSON-LD と meta keywords に展開 */
   keywords: [
     "セールスボンド",
