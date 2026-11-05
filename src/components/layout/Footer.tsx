@@ -63,70 +63,70 @@ export function Footer({ locale, dict }: Props) {
           { href: localePath("/terms", locale), label: "Terms of Service" },
         ];
 
+  // 見出し行・各リンク行の高さを全列で揃え、横のラインを通す
+  const headRow = "flex h-8 items-center whitespace-nowrap";
+  const linkRow = "flex h-12 items-center";
+
   return (
-    <footer className="mt-32 bg-[#111] text-white">
-      <Container className="pt-16 pb-8 md:pt-20">
+    <footer className="mt-32 bg-black text-white">
+      <Container className="pb-10 pt-16 md:pt-20">
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           {/* 会社情報 */}
           <div className="lg:col-span-3">
             <Link href={home} className="inline-flex items-center gap-3" aria-label={dict.site.name}>
-              <span className="grid h-12 w-12 place-items-center overflow-hidden rounded-lg bg-white">
-                <Image src="/logo-square.png" alt="" width={48} height={48} className="h-full w-full object-contain" />
+              <span className="grid h-11 w-11 place-items-center overflow-hidden rounded-md bg-white">
+                <Image src="/logo-square.png" alt="" width={44} height={44} className="h-full w-full object-contain" />
               </span>
-              <span className="whitespace-nowrap text-base font-bold tracking-[0.08em] sm:text-lg lg:text-base xl:text-lg">{site.legalName}</span>
+              <span className="whitespace-nowrap text-lg font-bold tracking-[0.06em]">{site.legalName}</span>
             </Link>
-            <address className="mt-8 not-italic text-[15px] leading-relaxed text-white/85">
+            <address className="mt-10 not-italic text-base leading-[1.75] tracking-[0.04em]">
               〒{site.address.postalCode}
               <br />
               東京都新宿区西新宿3-3-13
               <br />
               西新宿水間ビル2F
             </address>
-            <a
-              href={MAP_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-1 text-[15px] text-brand-200 transition-colors hover:text-white"
-            >
-              Google Maps
-              <span aria-hidden="true">↗</span>
-            </a>
-
-            <div className="mt-8">
-              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-white/50">Media</p>
-              <ul className="mt-3 flex flex-wrap gap-2">
-                {site.media.map((m) => (
-                  <li key={m.url}>
-                    <a
-                      href={m.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-4 py-1.5 text-sm font-bold tracking-[0.06em] transition-colors hover:border-white hover:bg-white hover:text-ink"
-                    >
-                      {m.name}
-                      <span aria-hidden="true">↗</span>
-                      <span className="sr-only">(新しいタブで開く)</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-base">
+              <li>
+                <a
+                  href={MAP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-200 transition-colors hover:text-white"
+                >
+                  Google Maps
+                </a>
+              </li>
+              {site.media.map((m) => (
+                <li key={m.url}>
+                  <a
+                    href={m.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brand-200 transition-colors hover:text-white"
+                  >
+                    {m.name}
+                    <span className="sr-only">(新しいタブで開く)</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* リンク列 */}
           <nav
             aria-label="フッター"
-            className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-9 lg:gap-x-10"
+            className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:col-span-9 lg:flex lg:justify-between lg:gap-10 lg:pl-10"
           >
             {columns.map((col) => (
               <div key={col.title}>
-                <p className="whitespace-nowrap text-sm font-bold tracking-[0.04em] sm:text-[15px] sm:tracking-[0.08em]">{col.title}</p>
-                <ul className="mt-5 space-y-4">
+                <p className={`${headRow} text-[15px] font-bold tracking-[0.04em] sm:text-base sm:tracking-[0.06em]`}>{col.title}</p>
+                <ul className="mt-3">
                   {col.links.map((l) => (
-                    <li key={l.label}>
+                    <li key={l.label} className={linkRow}>
                       <Link
                         href={l.href}
-                        className="group inline-flex items-center gap-3 text-[15px] tracking-[0.06em] text-white/85 transition-colors hover:text-white"
+                        className="group inline-flex items-center gap-3 text-base tracking-[0.04em] transition-colors hover:text-brand-200"
                       >
                         <Chevron />
                         {l.label}
@@ -137,12 +137,13 @@ export function Footer({ locale, dict }: Props) {
               </div>
             ))}
 
-            <ul className="space-y-5">
-              {singles.map((l) => (
-                <li key={l.label}>
+            {/* 単独リンク: 1つ目は見出し行、以降はリンク行に揃える */}
+            <ul>
+              {singles.map((l, i) => (
+                <li key={l.label} className={i === 0 ? headRow : linkRow + (i === 1 ? " mt-3" : "")}>
                   <Link
                     href={l.href}
-                    className="text-[15px] font-bold tracking-[0.08em] transition-colors hover:text-brand-200"
+                    className="text-base font-bold tracking-[0.06em] transition-colors hover:text-brand-200"
                   >
                     {l.label}
                   </Link>
@@ -152,7 +153,7 @@ export function Footer({ locale, dict }: Props) {
           </nav>
         </div>
 
-        <div className="mt-14 flex flex-col-reverse gap-4 border-t border-white/15 pt-6 text-sm text-white/55 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col-reverse gap-4 border-t border-white/20 pt-7 text-sm tracking-[0.04em] text-white/55 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {year} {dict.site.name}. {dict.footer.rights}
           </p>
