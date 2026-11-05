@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Logo } from "./Logo";
 import { MobileMenu } from "./MobileMenu";
 import { localePath } from "@/i18n/path";
-import { serviceCategories } from "@/lib/site";
+import { navigation, navHref } from "@/lib/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 
@@ -20,7 +20,7 @@ type Props = {
 export function Header({ locale, dict }: Props) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const hideCorporateHeader = /^\/(ja|en)\/(contact\/partner|services\/apokomi)\/?$/.test(pathname);
+  const hideCorporateHeader = /^\/(ja|en)\/services\/apokomi\/?$/.test(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -30,24 +30,6 @@ export function Header({ locale, dict }: Props) {
   }, []);
 
   if (hideCorporateHeader) return null;
-
-  const serviceItems = [
-    {
-      href: localePath("/services", locale),
-      label: "サービス一覧",
-      highlight: true,
-    },
-    ...serviceCategories.flatMap((category) =>
-      category.services.map((s, i) => ({
-        href: s.href
-          ? localePath(s.href, locale)
-          : `${localePath("/services", locale)}#${s.slug}`,
-        label: s.title,
-        sub: s.subtitle,
-        heading: i === 0 ? category.title : undefined,
-      })),
-    ),
-  ];
 
   return (
     <header
@@ -62,32 +44,15 @@ export function Header({ locale, dict }: Props) {
         <Logo locale={locale} dict={dict} />
 
         <nav className="hidden lg:flex items-center gap-8" aria-label="メイン">
-          <Link
-            href={localePath("/", locale)}
-            className="text-sm font-bold text-ink hover:text-brand-600"
-          >
-            {dict.nav.top}
-          </Link>
-
-          <NavDropdown
-            label={dict.nav.services}
-            href={localePath("/services", locale)}
-            items={serviceItems}
-          />
-
-          <Link
-            href={localePath("/news", locale)}
-            className="text-sm font-bold text-ink hover:text-brand-600"
-          >
-            {dict.nav.news}
-          </Link>
-
-          <Link
-            href={localePath("/company", locale)}
-            className="text-sm font-bold text-ink hover:text-brand-600"
-          >
-            {dict.nav.company}
-          </Link>
+          {navigation.map((item) => (
+            <Link
+              key={item.key}
+              href={navHref(item, localePath("/", locale))}
+              className="text-sm font-bold text-ink hover:text-brand-600"
+            >
+              {dict.nav[item.key]}
+            </Link>
+          ))}
         </nav>
 
         <div className="flex items-center gap-2 md:gap-3">
@@ -98,147 +63,9 @@ export function Header({ locale, dict }: Props) {
           >
             {dict.nav.contact}
           </Button>
-          <Button
-            href={localePath("/contact/partner", locale)}
-            size="md"
-            className="hidden md:inline-flex !bg-ink !text-white hover:!bg-ink-soft shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)]"
-          >
-            エンジニア募集はこちら
-          </Button>
           <MobileMenu locale={locale} dict={dict} />
         </div>
       </div>
     </header>
-  );
-}
-
-type NavDropdownItem = {
-  href: string;
-  label: string;
-  sub?: string;
-  /** 「サービス一覧」など一覧リンクをテキスト色で軽く区別する */
-  highlight?: boolean;
-  /** 設定時、このアイテムの直前にカテゴリ見出しを挿入する */
-  heading?: string;
-};
-
-type NavDropdownProps = {
-  label: string;
-  /** If set, the trigger label itself navigates here on click */
-  href?: string;
-  items: NavDropdownItem[];
-};
-
-function NavDropdown({ label, href, items }: NavDropdownProps) {
-  const [open, setOpen] = useState(false);
-
-  const triggerClass =
-    "inline-flex items-center gap-1 text-sm font-bold text-ink hover:text-brand-600";
-
-  return (
-    <div
-      className="relative"
-      onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
-      onFocus={() => setOpen(true)}
-      onBlur={(e) => {
-        if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
-      }}
-    >
-      {href ? (
-        <Link
-          href={href}
-          aria-haspopup="menu"
-          aria-expanded={open}
-          className={triggerClass}
-        >
-          {label}
-          <Chevron open={open} />
-        </Link>
-      ) : (
-        <button
-          type="button"
-          aria-haspopup="menu"
-          aria-expanded={open}
-          className={triggerClass}
-        >
-          {label}
-          <Chevron open={open} />
-        </button>
-      )}
-
-      <div
-        className={cn(
-          "absolute left-1/2 -translate-x-1/2 top-full pt-3 transition-opacity duration-150",
-          open
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none",
-        )}
-      >
-        <ul
-          role="menu"
-          className="min-w-[300px] rounded-xl2 border border-ink-line bg-white p-2 shadow-card"
-        >
-          {items.map((item) => (
-            <li key={item.href} role="none">
-              {item.heading ? (
-                <p
-                  className={cn(
-                    "px-4 pb-1 text-[11px] font-bold uppercase tracking-[0.1em] text-ink-muted",
-                    item !== items[0] ? "mt-2 pt-3 border-t border-ink-line" : "",
-                  )}
-                >
-                  {item.heading}
-                </p>
-              ) : null}
-              <Link
-                role="menuitem"
-                href={item.href}
-                className="block rounded-lg px-4 py-3 transition hover:bg-ink-line/30"
-                onClick={() => setOpen(false)}
-              >
-                <span
-                  className={cn(
-                    "block text-sm font-bold",
-                    item.highlight ? "text-brand-600" : "text-ink",
-                  )}
-                >
-                  {item.label}
-                </span>
-                {item.sub ? (
-                  <span className="mt-0.5 block text-xs text-ink-muted">
-                    {item.sub}
-                  </span>
-                ) : null}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
-}
-
-function Chevron({ open }: { open: boolean }) {
-  return (
-    <svg
-      width="12"
-      height="12"
-      viewBox="0 0 12 12"
-      fill="none"
-      aria-hidden="true"
-      className={cn(
-        "transition-transform duration-200",
-        open && "rotate-180",
-      )}
-    >
-      <path
-        d="M3 4.5L6 7.5L9 4.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

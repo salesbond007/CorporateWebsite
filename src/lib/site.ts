@@ -6,8 +6,6 @@ export const site = {
   name: "セールスボンド株式会社",
   legalName: "セールスボンド株式会社",
   legalNameEn: "Sales Bond Co., Ltd.",
-  description:
-    "セールスボンド株式会社は、人脈紹介(リファラル)を起点とした営業代行・インサイドセールス・顧問紹介・アポイント獲得を提供。大手企業の決裁者へつながる完全成果報酬型のBtoB営業支援で、挑む企業に確実な成果を届けます。",
   /** SEO で狙うキーワード群 — Organization JSON-LD と meta keywords に展開 */
   keywords: [
     "セールスボンド",
@@ -39,8 +37,8 @@ export const site = {
     "営業BPO",
     "飯住",
     "イイズミ",
-    "ボンドテック",
-    "フィジカルAI",
+    "AIセキュリティ",
+    "新規開拓",
     "ハード",
     "ハードウェア",
     "ハードウェアエンジニア",
@@ -83,12 +81,21 @@ export type NavKey =
   | "news"
   | "company";
 
-export const navigation: { key: NavKey; href: string }[] = [
-  { key: "top", href: "/" },
-  { key: "services", href: "/services" },
-  { key: "news", href: "/news" },
-  { key: "company", href: "/company" },
+/**
+ * トップページ内のセクションへのナビゲーション。
+ * サービス一覧・お知らせ・会社概要はトップページ内に集約し、LPのみ別ページとする。
+ */
+export const navigation: { key: NavKey; hash?: string }[] = [
+  { key: "top" },
+  { key: "services", hash: "services" },
+  { key: "news", hash: "news" },
+  { key: "company", hash: "company" },
 ];
+
+/** ナビゲーション項目のリンク先(トップページ + アンカー)を組み立てる */
+export function navHref(item: { hash?: string }, homePath: string): string {
+  return item.hash ? `${homePath}#${item.hash}` : homePath;
+}
 
 export type Service = {
   slug: string;
@@ -115,34 +122,24 @@ export const serviceCategories: ServiceCategory[] = [
     title: "サービス",
     services: [
       {
-        slug: "bondtech",
+        slug: "ai-security",
         number: "01",
-        title: "ボンドテック",
-        subtitle: "ハードウェア/フィジカルAIプロ人材紹介",
+        title: "AIセキュリティソリューション",
+        subtitle: "AI Security Solution",
         summary:
-          "ハードウェアとフィジカルAI領域のエンジニア・PMを、必要な期間だけ企業にご紹介するサービスです。",
-        features: [
-          "機構・電気・組込み・ロボティクス・AI実装まで幅広く対応",
-          "週数日から常駐まで、柔軟な稼働形態でご紹介",
-          "弊社独自の登録案件・登録人材でマッチング",
-        ],
-        href: "/services/bondtech",
-        image: "/services/cards/talent.jpg",
+          "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、企業の安全なAI活用を支援するソリューションです。",
+        features: [],
+        image: "/services/cards/ai-solutions.jpg",
       },
       {
-        slug: "physical-ai-training",
+        slug: "new-business-development",
         number: "02",
-        title: "フィジカルAI研修",
-        subtitle: "生成AI・AIエージェント・フィジカルAI研修",
+        title: "新規開拓営業支援ソリューション",
+        subtitle: "New Business Development",
         summary:
-          "生成AIからフィジカルAIまでを体系的に学び、自社・自部署でAI活用を企画できる人材を育成する法人向け研修です。",
-        features: [
-          "生成AI・AIエージェント・フィジカルAIを体系的に学習",
-          "全社員からAI活用の種を発掘",
-          "研修後のAI導入コンサルティング",
-        ],
-        href: "/services/physical-ai-training",
-        image: "/services/physical-ai-training/hero.png",
+          "ターゲット選定からアポイント獲得まで、新規顧客の開拓に必要な営業活動をワンストップで支援するソリューションです。",
+        features: [],
+        image: "/services/cards/talent.jpg",
       },
     ],
   },

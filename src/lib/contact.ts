@@ -112,18 +112,6 @@ export const generalContactSchema = z.object({
 });
 
 /**
- * /contact/partner LP のメール 1 項目フォーム。
- * ご経歴等は後送の本登録メール内のフォームで受け取るため、ここでは
- * 連絡先取得が目的(同意は本登録時に取得)。
- */
-export const partnerLeadSchema = z.object({
-  website: z.string().max(0).optional().or(z.literal("")),
-  lastName: z.string().trim().min(1, "姓を入力してください").max(100),
-  firstName: z.string().trim().min(1, "名を入力してください").max(100),
-  email: z.string().trim().email("正しいメールアドレスを入力してください"),
-});
-
-/**
  * /services/apokomi LP の無料相談フォーム。
  * 5項目: 会社名 / お名前 / メールアドレス / 電話番号 / ご相談内容
  */
@@ -145,7 +133,6 @@ export const apokomiLeadSchema = z.object({
 
 export type ProfessionalContactInput = z.infer<typeof professionalContactSchema>;
 export type GeneralContactInput = z.infer<typeof generalContactSchema>;
-export type PartnerLeadInput = z.infer<typeof partnerLeadSchema>;
 export type ApokomiLeadInput = z.infer<typeof apokomiLeadSchema>;
 
-export type ContactFormType = "professional" | "general" | "partner_lead" | "apokomi_lead";
+export type ContactFormType = "professional" | "general" | "apokomi_lead";

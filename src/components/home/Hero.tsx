@@ -66,7 +66,7 @@ export function Hero({ locale, dict }: Props) {
             </span>
           </h1>
           <div className="mt-10 flex flex-wrap gap-3">
-            <Button href={localePath("/services", locale)} size="lg">
+            <Button href={`${localePath("/", locale)}#services`} size="lg">
               {dict.buttons.viewServices}
             </Button>
             <Button

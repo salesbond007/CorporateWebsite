@@ -25,8 +25,8 @@ const inquiryTypeLabels: Record<InquiryType, string> = {
 };
 
 const serviceOptions = [
-  { id: "bondtech", label: "ボンドテック(ハードウェア開発の人材事業)について" },
-  { id: "physical-ai-training", label: "フィジカルAI研修について" },
+  { id: "ai-security", label: "AIセキュリティソリューションについて" },
+  { id: "new-business-development", label: "新規開拓営業支援ソリューションについて" },
   { id: "other-service", label: "その他" },
 ] as const;
 

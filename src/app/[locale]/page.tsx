@@ -4,6 +4,7 @@ import { ClientLogos } from "@/components/home/ClientLogos";
 import { MissionSection } from "@/components/home/MissionSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { NewsSection } from "@/components/home/NewsSection";
+import { CompanySection } from "@/components/company/CompanySection";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 
@@ -23,6 +24,9 @@ export default function HomePage({
       <MissionSection />
       <ServicesSection locale={locale} dict={dict} />
       <NewsSection locale={locale} dict={dict} />
+      <div className="border-t border-ink-line">
+        <CompanySection />
+      </div>
     </>
   );
 }

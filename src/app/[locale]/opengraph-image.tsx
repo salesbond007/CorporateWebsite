@@ -17,7 +17,6 @@ export default async function OgImage() {
       <OgImageTemplate
         eyebrow="Corporate Site"
         title={site.name}
-        subtitle={site.description}
       />
     ),
     OG_SIZE,
