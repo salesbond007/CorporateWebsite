@@ -44,10 +44,12 @@ export function Header({ locale, dict }: Props) {
         <Logo locale={locale} dict={dict} />
 
         <nav className="hidden lg:flex items-center gap-8" aria-label="メイン">
-          {navigation.map((item) => (
+          {navigation
+            .filter((item) => item.key !== "contact")
+            .map((item) => (
             <Link
               key={item.key}
-              href={navHref(item, localePath("/", locale))}
+              href={navHref(item, locale)}
               className="hover-underline text-sm font-bold text-ink hover:text-brand-600"
             >
               {dict.nav[item.key]}

@@ -91,10 +91,12 @@ export function MobileMenu({ locale, dict }: Props) {
 
           <nav className="flex-1 overflow-y-auto px-5 py-6">
             <ul className="space-y-1">
-              {navigation.map((item) => (
+              {navigation
+                .filter((item) => item.key !== "contact")
+                .map((item) => (
                 <li key={item.key}>
                   <Link
-                    href={navHref(item, localePath("/", locale))}
+                    href={navHref(item, locale)}
                     onClick={() => setOpen(false)}
                     className="block rounded-lg px-3 py-3 text-base font-medium hover:bg-ink-line/30"
                   >

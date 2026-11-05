@@ -116,11 +116,12 @@ export default function LocaleLayout({
             organizationJsonLd(),
             websiteJsonLd(),
             siteNavigationJsonLd([
-              { name: "ホーム", url: `/${locale}` },
-              { name: "サービス案内", url: `/${locale}/services` },
-              { name: "お知らせ", url: `/${locale}/news` },
-              { name: "会社概要", url: `/${locale}/company` },
-              { name: "お問い合わせ", url: `/${locale}/contact` },
+              { name: "トップ", url: `/${locale}` },
+              { name: "サービス", url: `/${locale}#services` },
+              { name: "ニュース", url: `/${locale}#news` },
+              { name: "会社概要", url: `/${locale}#company` },
+              { name: "採用情報", url: `/${locale}/recruit` },
+              { name: "問い合わせ", url: `/${locale}/contact` },
             ]),
           ]}
         />

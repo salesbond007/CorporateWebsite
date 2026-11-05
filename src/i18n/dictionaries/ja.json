@@ -4,12 +4,13 @@
     "tagline": "挑む企業に最短で、確実な解を。"
   },
   "nav": {
-    "top": "トップページ",
-    "services": "サービス一覧",
+    "top": "トップ",
+    "services": "サービス",
     "blog": "メディア",
-    "news": "お知らせ",
+    "news": "ニュース",
     "company": "会社概要",
-    "contact": "問い合わせ(企業)",
+    "recruit": "採用情報",
+    "contact": "問い合わせ",
     "contactProfessional": "プロ人材の方",
     "menu": "メニュー",
     "openMenu": "メニューを開く",
