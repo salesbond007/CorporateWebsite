@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/Button";
 import { Logo } from "./Logo";
-import { MobileMenu } from "./MobileMenu";
+import { SiteMenu } from "./SiteMenu";
 import { localePath } from "@/i18n/path";
 import { navigation, navHref } from "@/lib/site";
 import type { Locale } from "@/i18n/config";
@@ -65,7 +65,7 @@ export function Header({ locale, dict }: Props) {
           >
             {dict.nav.contact}
           </Button>
-          <MobileMenu locale={locale} dict={dict} />
+          <SiteMenu locale={locale} dict={dict} />
         </div>
       </div>
     </header>

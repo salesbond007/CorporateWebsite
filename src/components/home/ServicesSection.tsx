@@ -1,6 +1,9 @@
+import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import { serviceCategories } from "@/lib/site";
@@ -15,179 +18,172 @@ const bySlug = Object.fromEntries(
   serviceCategories.flatMap((c) => c.services).map((s) => [s.slug, s]),
 );
 
-type Layer = {
-  /** ピラミッド内に表示するラベル */
-  label: string;
+type Pillar = {
+  slug: string;
+  role: string;
   en: string;
-  title: string;
-  summary: string;
-  /** 段の塗り・文字色 */
-  fill: string;
-  text: string;
-  /** 右側の丸印の色 */
-  dot: string;
+  image: string;
+  /** カードの配色。攻め=白、守り=濃色 */
+  tone: "light" | "dark";
 };
 
-/**
- * 上から 成長(頂点) / 攻め / 守り(土台) の3段。
- * 「守りが固まるから、迷わず攻められる」を、土台から積み上がる図で表現する。
- */
-const layers: Layer[] = [
+const pillars: Pillar[] = [
   {
-    label: "成長",
-    en: "Growth",
-    title: "企業の持続的な成長",
-    summary: "守りを固め、攻めに集中する。その積み重ねが、企業の次の成長をつくります。",
-    fill: "bg-brand-900",
-    text: "text-white",
-    dot: "bg-brand-900",
-  },
-  {
-    label: "攻め",
+    slug: "new-business-development",
+    role: "攻め",
     en: "Offense",
-    title: bySlug["new-business-development"]?.title ?? "新規開拓支援",
-    summary: bySlug["new-business-development"]?.summary ?? "",
-    fill: "bg-brand-500",
-    text: "text-white",
-    dot: "bg-brand-500",
+    image: "/services/cards/talent.jpg",
+    tone: "light",
   },
   {
-    label: "守り",
+    slug: "ai-security",
+    role: "守り",
     en: "Defense",
-    title: bySlug["ai-security"]?.title ?? "AIセキュリティ対策",
-    summary: bySlug["ai-security"]?.summary ?? "",
-    fill: "bg-brand-200",
-    text: "text-brand-900",
-    dot: "bg-brand-300",
+    image: "/services/cards/ai-solutions.jpg",
+    tone: "dark",
   },
 ];
 
-const ROWS = layers.length;
-
-/** k段目(0=頂点)の台形を、全体で1つの三角形になるよう切り出す */
-function slicePolygon(k: number) {
-  const top = k / ROWS;
-  const bottom = (k + 1) / ROWS;
-  const l = (w: number) => `${((1 - w) / 2) * 100}%`;
-  const r = (w: number) => `${((1 + w) / 2) * 100}%`;
-  return `polygon(${l(top)} 0, ${r(top)} 0, ${r(bottom)} 100%, ${l(bottom)} 100%)`;
-}
-
-/** 段の右辺の中点(引き出し線の起点)。左カラム幅に対する割合 */
-function edgeX(k: number) {
-  return ((1 + (k + 0.5) / ROWS) / 2) * 100;
-}
-
-/** 下の段から順に積み上がるよう、表示の遅延を逆順にする */
-const delayOf = (k: number) => (ROWS - 1 - k) * 220;
-
-function Slice({ k, layer }: { k: number; layer: Layer }) {
-  return (
-    <div
-      style={{ clipPath: slicePolygon(k), transitionDelay: `${delayOf(k)}ms` }}
-      className={cn(
-        "flex h-[calc(100%-6px)] translate-y-6 items-end justify-center opacity-0 transition-all duration-1000 ease-expo group-hover/row:brightness-110 group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100",
-        layer.fill,
-      )}
-    >
-      <span
-        className={cn(
-          "pb-[12%] pl-[0.3em] text-sm font-bold tracking-[0.3em] md:text-base",
-          k === 0 && "pb-[8%] text-xs md:text-sm",
-          layer.text,
-        )}
-      >
-        {layer.label}
-      </span>
-    </div>
-  );
-}
-
-export function ServicesSection(_props: Props) {
+/**
+ * 2つのサービス(攻め・守り)を対等な2枚のカードで見せ、
+ * その結果として「企業の持続的な成長」が生まれることを下の合流線で示す。
+ */
+export function ServicesSection({ locale }: Props) {
   return (
     <section
       id="services"
       className="relative isolate scroll-mt-20 overflow-hidden bg-cream py-20 md:py-32"
     >
       <div aria-hidden="true" className="dot-bg-soft absolute inset-0 -z-10" />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-24 -top-24 -z-10 h-96 w-96 animate-blob rounded-full bg-brand-200/40 blur-[110px]"
-      />
 
       <Container>
-        <SectionTitle en="Services" ja="サービス" />
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <SectionTitle en="Services" ja="サービス" />
+          <Reveal variant="fade" delay={300}>
+            <p className="text-lg font-bold tracking-[0.06em] text-ink md:text-right md:text-xl">
+              守りが固まるから、
+              <br className="hidden md:block" />
+              迷わず攻められる。
+            </p>
+          </Reveal>
+        </div>
 
-        {/* PC・タブレット: 各段から右へ引き出し線を伸ばして説明を並べる */}
-        <Reveal variant="none" className="mt-14 hidden md:block">
-          <ol className="mx-auto max-w-5xl">
-            {layers.map((layer, k) => (
-              <li
-                key={layer.label}
-                className="group/row grid h-36 grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] gap-12 lg:h-40"
-              >
-                <div className="relative">
-                  <Slice k={k} layer={layer} />
-                  {/* 引き出し線: 段の右辺から右カラムの丸印まで伸びる */}
-                  <span
-                    aria-hidden="true"
-                    style={{
-                      left: `${edgeX(k)}%`,
-                      transitionDelay: `${delayOf(k) + 500}ms`,
-                    }}
-                    className="absolute -right-12 top-1/2 h-px origin-left scale-x-0 bg-ink/25 transition-transform duration-700 ease-expo group-hover/row:bg-brand-500 group-data-[visible=true]/reveal:scale-x-100"
-                  />
-                </div>
-
-                <div
-                  style={{ transitionDelay: `${delayOf(k) + 700}ms` }}
-                  className="relative flex translate-x-4 flex-col justify-center pl-6 opacity-0 transition-all duration-700 ease-expo group-data-[visible=true]/reveal:translate-x-0 group-data-[visible=true]/reveal:opacity-100"
+        <div className="relative mt-12 grid gap-5 md:mt-16 md:grid-cols-2 md:gap-8">
+          {pillars.map((p, i) => {
+            const s = bySlug[p.slug];
+            if (!s) return null;
+            const dark = p.tone === "dark";
+            return (
+              <Reveal key={p.slug} variant="up" delay={i * 150} className="h-full">
+                <article
+                  className={cn(
+                    "group relative flex h-full flex-col overflow-hidden transition-shadow duration-500 hover:shadow-[0_30px_60px_-25px_rgba(29,5,11,0.45)]",
+                    dark ? "bg-brand-900 text-white" : "border border-ink/10 bg-white text-ink",
+                  )}
                 >
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "absolute -left-1.5 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full ring-4 ring-cream transition-transform duration-300 group-hover/row:scale-150",
-                      layer.dot,
-                    )}
-                  />
-                  <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-brand-500">
-                    {layer.en} ／ {layer.label}
-                  </p>
-                  <h3 className="mt-1.5 text-xl font-black text-ink lg:text-2xl">{layer.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-soft">{layer.summary}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Reveal>
+                  {/* 写真 + 役割ラベル */}
+                  <div className="relative aspect-[16/9] overflow-hidden">
+                    <Image
+                      src={p.image}
+                      alt=""
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-1000 ease-expo group-hover:scale-105"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className={cn(
+                        "absolute inset-0",
+                        dark
+                          ? "bg-gradient-to-t from-brand-900 via-brand-900/40 to-brand-900/10"
+                          : "bg-gradient-to-t from-white via-white/10 to-transparent",
+                      )}
+                    />
+                    <span
+                      className={cn(
+                        "absolute left-5 top-5 inline-flex items-center gap-2 px-3 py-1.5 text-xs font-bold tracking-[0.2em] md:left-6 md:top-6",
+                        dark ? "bg-white text-brand-900" : "bg-brand-500 text-white",
+                      )}
+                    >
+                      {p.role}
+                      <span className="font-medium opacity-70">/ {p.en.toUpperCase()}</span>
+                    </span>
+                    {/* 大きな英字の透かし */}
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "absolute -bottom-3 right-4 font-display text-6xl font-black leading-none tracking-tight md:text-7xl",
+                        dark ? "text-white/15" : "text-brand-500/10",
+                      )}
+                    >
+                      {p.en}
+                    </span>
+                  </div>
 
-        {/* スマホ: ピラミッドを上に、説明を下に並べる */}
-        <Reveal variant="none" className="mt-10 md:hidden">
-          <div className="mx-auto w-full max-w-[18rem]">
-            {layers.map((layer, k) => (
-              <div key={layer.label} className="h-24">
-                <Slice k={k} layer={layer} />
-              </div>
-            ))}
+                  <div className="flex flex-1 flex-col px-6 pb-7 pt-2 md:px-8 md:pb-9">
+                    <p
+                      className={cn(
+                        "text-[11px] font-bold uppercase tracking-[0.25em]",
+                        dark ? "text-brand-200" : "text-brand-500",
+                      )}
+                    >
+                      Solution {String(i + 1).padStart(2, "0")}
+                    </p>
+                    <h3 className="mt-2 text-2xl font-black tracking-[0.04em] md:text-3xl">{s.title}</h3>
+                    <p
+                      className={cn(
+                        "mt-4 text-sm leading-[1.9] md:text-[15px]",
+                        dark ? "text-white/75" : "text-ink-soft",
+                      )}
+                    >
+                      {s.summary}
+                    </p>
+                    <Link
+                      href={localePath("/contact", locale)}
+                      className={cn(
+                        "mt-auto inline-flex items-center gap-2 self-start border-b pb-1 pt-6 text-sm font-bold tracking-[0.08em] transition-colors",
+                        dark
+                          ? "border-white/40 hover:border-brand-200 hover:text-brand-200"
+                          : "border-ink/30 hover:border-brand-500 hover:text-brand-500",
+                      )}
+                    >
+                      相談する
+                      <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                        →
+                      </span>
+                    </Link>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
+
+          {/* 2枚の間をつなぐ「×」 */}
+          <span
+            aria-hidden="true"
+            className="absolute left-1/2 top-1/2 z-10 hidden h-12 w-12 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-cream font-display text-xl font-black text-brand-500 shadow-[0_0_0_6px_rgba(250,247,242,1)] md:grid"
+          >
+            ×
+          </span>
+        </div>
+
+        {/* 2つが合流して「成長」へ */}
+        <Reveal variant="none" className="mt-2">
+          <div aria-hidden="true" className="relative mx-auto hidden h-12 w-1/2 md:block">
+            <span className="absolute inset-x-0 bottom-0 h-px origin-center scale-x-0 bg-ink/25 transition-transform delay-300 duration-1000 ease-expo group-data-[visible=true]/reveal:scale-x-100" />
+            <span className="absolute bottom-0 left-0 h-full w-px origin-top scale-y-0 bg-ink/25 transition-transform duration-700 ease-expo group-data-[visible=true]/reveal:scale-y-100" />
+            <span className="absolute bottom-0 right-0 h-full w-px origin-top scale-y-0 bg-ink/25 transition-transform duration-700 ease-expo group-data-[visible=true]/reveal:scale-y-100" />
           </div>
-          <ol className="mt-10 space-y-6">
-            {layers.map((layer, k) => (
-              <li
-                key={layer.label}
-                style={{ transitionDelay: `${delayOf(k) + 500}ms` }}
-                className="flex translate-y-3 gap-4 opacity-0 transition-all duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100"
-              >
-                <span aria-hidden="true" className={cn("mt-1.5 h-3 w-3 shrink-0 rounded-full", layer.dot)} />
-                <div>
-                  <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-brand-500">
-                    {layer.en} ／ {layer.label}
-                  </p>
-                  <h3 className="mt-1 text-lg font-black text-ink">{layer.title}</h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-ink-soft">{layer.summary}</p>
-                </div>
-              </li>
-            ))}
-          </ol>
+          <span
+            aria-hidden="true"
+            className="mx-auto block h-10 w-px origin-top scale-y-0 bg-ink/25 transition-transform delay-700 duration-700 ease-expo group-data-[visible=true]/reveal:scale-y-100"
+          />
+          <div className="mx-auto flex w-fit translate-y-3 flex-col items-center opacity-0 transition-all delay-1000 duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100">
+            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand-500">Growth</span>
+            <p className="mt-2 border border-ink/15 bg-white px-6 py-3 text-sm font-bold tracking-[0.1em] text-ink md:text-base">
+              企業の持続的な成長へ
+            </p>
+          </div>
         </Reveal>
       </Container>
     </section>

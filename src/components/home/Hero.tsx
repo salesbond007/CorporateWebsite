@@ -19,7 +19,7 @@ const HERO_SLIDES = ["/hero/slide-1.png", "/hero/slide-2.png", "/hero/slide-3.pn
 
 export function Hero({ locale, dict }: Props) {
   return (
-    <section className="relative isolate flex min-h-[600px] items-center overflow-hidden bg-ink md:min-h-[calc(100svh-5rem)]">
+    <section className="relative isolate flex min-h-[calc(100svh-4rem)] items-center overflow-hidden bg-ink md:min-h-[calc(100svh-5rem)]">
       {/* 背景: 3枚をクロスフェード + ゆっくりズーム */}
       <div className="absolute inset-0 animate-ken-burns" aria-hidden="true">
         {HERO_SLIDES.map((src, i) => (
@@ -65,7 +65,7 @@ export function Hero({ locale, dict }: Props) {
           Offense &amp; Defense, by Professionals
         </p>
 
-        <h1 className="mt-6 text-[clamp(1.25rem,4.2vw,3.75rem)] font-black leading-[1.2] tracking-tight text-white">
+        <h1 className="mt-6 text-[clamp(1.375rem,5.6vw,3.75rem)] font-black leading-[1.3] md:leading-[1.2] tracking-tight text-white">
           <span className="line-mask">
             <span style={{ animationDelay: "0.25s" }}>
               {dict.hero.line1Prefix}
@@ -82,14 +82,14 @@ export function Hero({ locale, dict }: Props) {
           </span>
         </h1>
         <p
-          className="mt-6 text-base font-bold tracking-[0.06em] text-white/85 animate-fade-up md:text-xl"
+          className="mt-5 text-sm font-bold leading-relaxed tracking-[0.06em] text-white/85 animate-fade-up md:mt-6 md:text-xl"
           style={{ animationDelay: "0.65s" }}
         >
           {dict.hero.lead}
         </p>
 
         <div
-          className="mt-10 flex flex-wrap gap-3 animate-fade-up"
+          className="mt-8 grid gap-3 animate-fade-up sm:flex sm:flex-wrap md:mt-10"
           style={{ animationDelay: "0.85s" }}
         >
           <Button href={`${localePath("/", locale)}#services`} size="lg">
