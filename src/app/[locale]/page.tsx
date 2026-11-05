@@ -26,9 +26,7 @@ export default function HomePage({
       <ServicesSection locale={locale} dict={dict} />
       <MarqueeBand />
       <NewsSection locale={locale} dict={dict} />
-      <div className="border-t border-ink-line bg-cream/60">
-        <CompanySection />
-      </div>
+      <CompanySection />
     </>
   );
 }
