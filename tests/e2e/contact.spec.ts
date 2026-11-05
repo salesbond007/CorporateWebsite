@@ -43,40 +43,32 @@ test.describe("Contact form (general)", () => {
     const serviceRadio = page.locator("input[name='inquiryType'][value='service']");
     await serviceRadio.check();
 
-    await expect(
-      page.getByText("セールスボンド（紹介営業サービス）について"),
-    ).toBeVisible();
-    await expect(
-      page.getByText("リードボンド（営業代行サービス）について"),
-    ).toBeVisible();
-    await expect(page.getByText("プロ人材サービスについて")).toBeVisible();
+    await expect(page.getByText("セキュリティ対策事業", { exact: true })).toBeVisible();
+    await expect(page.getByText("新規開拓支援事業", { exact: true })).toBeVisible();
   });
 
-  test("hides service sub-options when 協業について is selected", async ({
+  test("hides service sub-options when パートナーについて is selected", async ({
     page,
   }) => {
     await page.goto("/ja/contact");
 
     await page.locator("input[name='inquiryType'][value='service']").check();
-    await expect(
-      page.getByText("セールスボンド（紹介営業サービス）について"),
-    ).toBeVisible();
+    await expect(page.getByText("セキュリティ対策事業", { exact: true })).toBeVisible();
 
     await page.locator("input[name='inquiryType'][value='partnership']").check();
-    await expect(
-      page.getByText("セールスボンド（紹介営業サービス）について"),
-    ).toHaveCount(0);
+    await expect(page.getByText("セキュリティ対策事業", { exact: true })).toHaveCount(0);
+    await expect(page.getByText("セキュリティ対策事業のパートナー")).toBeVisible();
   });
 });
 
 test.describe("Coming-soon pages", () => {
-  test("/contact/professional shows Coming Soon", async ({ page }) => {
-    await page.goto("/ja/contact/professional");
+  test("/recruit shows Coming Soon", async ({ page }) => {
+    await page.goto("/ja/recruit");
     await expect(page.getByText("Coming Soon")).toBeVisible();
   });
 
-  test("/contact/partner shows Coming Soon", async ({ page }) => {
-    await page.goto("/ja/contact/partner");
+  test("/partner shows Coming Soon", async ({ page }) => {
+    await page.goto("/ja/partner");
     await expect(page.getByText("Coming Soon")).toBeVisible();
   });
 });

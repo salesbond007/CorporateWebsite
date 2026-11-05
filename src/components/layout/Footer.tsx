@@ -13,10 +13,6 @@ type Props = {
 
 type FooterLink = { label: string; href: string };
 
-const MAP_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-  "東京都新宿区西新宿3-3-13 西新宿水間ビル",
-)}`;
-
 export function Footer({ locale, dict }: Props) {
   const year = new Date().getFullYear();
   const home = localePath("/", locale);
@@ -93,16 +89,6 @@ export function Footer({ locale, dict }: Props) {
               西新宿水間ビル2F
             </address>
             <ul className="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-base">
-              <li>
-                <a
-                  href={MAP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-brand-200 transition-colors hover:text-white"
-                >
-                  Google Maps
-                </a>
-              </li>
               {site.media.map((m) => (
                 <li key={m.url}>
                   <a

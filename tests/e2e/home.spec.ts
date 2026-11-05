@@ -13,9 +13,8 @@ test.describe("Home page", () => {
     await expect(page.locator("h1")).toBeVisible();
     await expect(page.getByRole("link", { name: "サービスを見る" })).toBeVisible();
 
-    // One service card (フィジカルAI研修), linking to its dedicated LP
-    const cards = page.locator("ul li a[href*='/ja/services/']");
-    await expect(cards).toHaveCount(1);
+    // 攻め(新規開拓支援)・守り(セキュリティ対策)の2枚のサービスカード
+    await expect(page.locator("#services article")).toHaveCount(2);
   });
 
   test("en home renders translated CTA labels", async ({ page }) => {

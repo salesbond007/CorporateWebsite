@@ -13,7 +13,6 @@
     "about": "私たちについて",
     "partner": "パートナー募集",
     "contact": "問い合わせ",
-    "contactProfessional": "プロ人材の方",
     "menu": "メニュー",
     "openMenu": "メニューを開く",
     "closeMenu": "メニューを閉じる",
@@ -61,7 +60,6 @@
   },
   "contact": {
     "businessTitle": "企業様のお問い合わせ",
-    "professionalTitle": "プロ人材の方のお問い合わせ",
     "successTitle": "送信が完了しました",
     "successBody": "お問い合わせありがとうございます。内容を確認のうえ、担当者よりご連絡いたします。",
     "required": "必須",

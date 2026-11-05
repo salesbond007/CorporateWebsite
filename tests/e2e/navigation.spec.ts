@@ -1,11 +1,11 @@
 import { test, expect } from "@playwright/test";
 
 const PAGES = [
-  { path: "/ja/services", title: /サービス/ },
-  { path: "/ja/services/physical-ai-training", title: /フィジカルAI研修/ },
+  { path: "/ja/services", title: /サービス一覧/ },
+  { path: "/ja/services/security", title: /セキュリティ対策事業/ },
+  { path: "/ja/services/sales", title: /新規開拓支援事業/ },
   { path: "/ja/company", title: /会社概要/ },
   { path: "/ja/contact", title: /お問い合わせ/ },
-  { path: "/ja/contact/professional", title: /プロ人材の方のお問い合わせ/ },
   { path: "/ja/blog", title: /記事|お知らせ/ },
   { path: "/ja/privacy", title: /プライバシーポリシー/ },
   { path: "/ja/terms", title: /利用規約/ },
