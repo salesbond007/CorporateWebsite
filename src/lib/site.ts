@@ -59,6 +59,8 @@ export const site = {
   ],
   slogan: "挑む企業に最短で、確実な解を。",
   email: "info@salesbond.jp",
+  /** 外部メディア(フッター・メニュー・JSON-LDのsameAsに使用) */
+  media: [{ name: "note", url: "https://note.com/bondai1962" }],
   address: {
     postalCode: "160-0023",
     addressJa: "東京都新宿区西新宿3-3-13 西新宿水間ビル2F",

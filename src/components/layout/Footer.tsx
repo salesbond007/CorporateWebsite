@@ -91,6 +91,26 @@ export function Footer({ locale, dict }: Props) {
               Google Maps
               <span aria-hidden="true">↗</span>
             </a>
+
+            <div className="mt-8">
+              <p className="text-[11px] font-bold uppercase tracking-[0.25em] text-white/50">Media</p>
+              <ul className="mt-3 flex flex-wrap gap-2">
+                {site.media.map((m) => (
+                  <li key={m.url}>
+                    <a
+                      href={m.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-full border border-white/25 px-4 py-1.5 text-sm font-bold tracking-[0.06em] transition-colors hover:border-white hover:bg-white hover:text-ink"
+                    >
+                      {m.name}
+                      <span aria-hidden="true">↗</span>
+                      <span className="sr-only">(新しいタブで開く)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
 
           {/* リンク列 */}

@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { cn } from "@/lib/cn";
 import { localePath } from "@/i18n/path";
+import { site } from "@/lib/site";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 
@@ -214,7 +215,22 @@ export function SiteMenu({ locale, dict }: Props) {
                           </Link>
                         </li>
                       ))}
-                    </ul>
+                      {site.media.map((m, i) => (
+                  <li key={m.url} style={stagger(navItems.length + i + 2)} className={itemAnim}>
+                    <a
+                      href={m.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={close}
+                      className="flex items-center gap-2 border-l-2 border-transparent py-2 pl-4 text-base font-bold tracking-[0.08em] text-white/70 transition-colors hover:border-white hover:text-white md:text-lg"
+                    >
+                      {m.name}
+                      <span aria-hidden="true" className="text-xs text-brand-200">↗</span>
+                      <span className="sr-only">(新しいタブで開く)</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
                   </nav>
 
                   {/* 右: 写真付きカード */}

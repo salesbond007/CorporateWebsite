@@ -52,8 +52,7 @@ export function organizationJsonLd() {
         availableLanguage: ["Japanese"],
       },
     ],
-    // TODO: SNSアカウントが決まったら sameAs に列挙
-    sameAs: [],
+    sameAs: site.media.map((m) => m.url),
   };
 }
 
