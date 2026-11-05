@@ -51,18 +51,20 @@ export function MissionSection() {
             </p>
             <p className="mt-5 text-xl font-black leading-snug text-ink sm:text-2xl md:text-3xl lg:text-4xl">
               <span className="block overflow-hidden pb-[0.08em]">
-                <span className="block translate-y-[110%] transition-transform duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
-                  攻めの<span className="text-brand-500">「新規開拓営業支援」</span>と、
+                <span className="block translate-y-[110%] transition-transform delay-0 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
+                  攻め（新規開拓）と
                 </span>
               </span>
               <span className="block overflow-hidden pb-[0.08em]">
                 <span className="block translate-y-[110%] transition-transform delay-150 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
-                  守りの<span className="text-brand-500">「AIセキュリティ」</span>。
+                  守り（情報セキュリティ対策）を
                 </span>
               </span>
-            </p>
-            <p className="mt-5 text-base font-bold text-ink-soft md:text-lg">
-              2つのソリューションで企業の成長を支えます。
+              <span className="block overflow-hidden pb-[0.08em]">
+                <span className="block translate-y-[110%] transition-transform delay-300 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
+                  <span className="text-brand-500">プロの力</span>で。
+                </span>
+              </span>
             </p>
             <span
               aria-hidden="true"
@@ -73,43 +75,32 @@ export function MissionSection() {
           <div className="mx-auto mt-10 space-y-7 text-base font-medium leading-[2.1] tracking-[0.04em] text-ink-soft md:text-lg">
             <Reveal variant="blur" delay={100}>
               <p>
-                <span className="font-black text-ink">製造、建設、物流、医療、小売、宿泊</span>
-                など
+                <Emphasis>新しい市場を切り拓くこと</Emphasis>。
                 <br />
-                古くから
-                <span className="underline decoration-brand-500 decoration-2 underline-offset-4">
-                  日本経済を支えてきた
-                </span>
-                企業。
+                <Emphasis>大切な情報と信頼を守ること</Emphasis>。
                 <br />
-                私たちは、その可能性を<Emphasis>新しい力とつないでいきます</Emphasis>。
+                どちらも、<span className="font-black text-ink">成長する企業に欠かせない力</span>です。
               </p>
             </Reveal>
             <Reveal variant="blur" delay={150}>
               <p>
-                現場と、<Emphasis>フィジカルAI</Emphasis>を。
+                守りには、<Emphasis>セキュリティのプロ</Emphasis>を。
                 <br />
-                企業と、<Emphasis>プロ人材</Emphasis>を。
+                攻めには、<Emphasis>新規開拓のプロ</Emphasis>を。
                 <br />
-                サービスと、<Emphasis>新しい顧客</Emphasis>を。
+                足りない力には、<Emphasis>信頼できる人材</Emphasis>を。
                 <br />
-                日本企業と、<Emphasis>世界</Emphasis>を。
+                そして企業と、<Emphasis>次の顧客</Emphasis>を。
               </p>
             </Reveal>
             <Reveal variant="blur" delay={150}>
               <p>
-                ひとつひとつの出会いが、企業の新しい一歩になり、
+                <span className="font-black text-ink">守りが固まるから、迷わず攻められる。</span>
                 <br />
-                <Emphasis>これまでになかった選択肢を生み出します</Emphasis>。
-              </p>
-            </Reveal>
-            <Reveal variant="blur" delay={150}>
-              <p>
-                私たちは、企業がこれまで培ってきた強みを大切にしながら、
+                私たちは1社1社に本気で向き合い、
                 <br />
-                日本企業の可能性を広げ、
-                <span className="relative inline-block font-black text-brand-600">
-                  次の成長の選択肢をつくり続けます。
+                <span className="relative inline-block whitespace-nowrap text-[15px] font-black text-brand-600 sm:text-base md:text-lg">
+                  企業が安心して挑戦できる土台をつくり続けます。
                   <span
                     aria-hidden="true"
                     className="absolute inset-x-0 -bottom-0.5 h-[3px] origin-left scale-x-0 bg-amber-300 transition-transform delay-500 duration-1000 ease-expo group-data-[visible=true]/reveal:scale-x-100"
