@@ -19,18 +19,25 @@ type InquiryType = "service" | "partnership" | "proposal" | "other";
 
 const inquiryTypeLabels: Record<InquiryType, string> = {
   service: "サービスについて",
-  partnership: "協業について",
+  partnership: "パートナーについて",
   proposal: "ご提案 / 営業",
   other: "その他",
 };
 
 const serviceOptions = [
-  { id: "ai-security", label: "AIセキュリティソリューションについて" },
-  { id: "new-business-development", label: "新規開拓営業支援ソリューションについて" },
+  { id: "ai-security", label: "セキュリティ対策事業" },
+  { id: "new-business-development", label: "新規開拓支援事業" },
   { id: "other-service", label: "その他" },
 ] as const;
 
 type ServiceId = (typeof serviceOptions)[number]["id"];
+
+const partnerOptions = [
+  { id: "security-partner", label: "セキュリティ対策事業のパートナー" },
+  { id: "new-business-partner", label: "新規開拓支援事業のパートナー" },
+] as const;
+
+type PartnerId = (typeof partnerOptions)[number]["id"];
 
 const positionOptions = [
   { value: "executive", label: "経営者・役員" },
@@ -65,6 +72,7 @@ type FormState = {
   phone: string;
   inquiryType: InquiryType | "";
   serviceTypes: ServiceId[];
+  partnerTypes: PartnerId[];
   message: string;
   agreement: boolean;
 };
@@ -82,6 +90,7 @@ const initial: FormState = {
   phone: "",
   inquiryType: "",
   serviceTypes: [],
+  partnerTypes: [],
   message: "",
   agreement: false,
 };
@@ -113,6 +122,15 @@ export function SimpleContactForm({ locale }: Props) {
         : [...s.serviceTypes, id],
     }));
   }
+  function togglePartner(id: PartnerId) {
+    setState((s) => ({
+      ...s,
+      partnerTypes: s.partnerTypes.includes(id)
+        ? s.partnerTypes.filter((v) => v !== id)
+        : [...s.partnerTypes, id],
+    }));
+  }
+
 
   function validate(): FieldErrors {
     const next: FieldErrors = {};
@@ -176,6 +194,8 @@ export function SimpleContactForm({ locale }: Props) {
           inquiryType: state.inquiryType,
           serviceTypes:
             state.inquiryType === "service" ? state.serviceTypes : [],
+          partnerTypes:
+            state.inquiryType === "partnership" ? state.partnerTypes : [],
           message: state.message,
           agreement: state.agreement ? "on" : "",
           website: "",
@@ -404,6 +424,7 @@ export function SimpleContactForm({ locale }: Props) {
                     onChange={() => {
                       update("inquiryType", type);
                       if (type !== "service") update("serviceTypes", []);
+                      if (type !== "partnership") update("partnerTypes", []);
                     }}
                     className="h-4 w-4 text-brand-500 focus:ring-brand-500"
                   />
@@ -424,6 +445,28 @@ export function SimpleContactForm({ locale }: Props) {
                           type="checkbox"
                           checked={state.serviceTypes.includes(opt.id)}
                           onChange={() => toggleService(opt.id)}
+                          className="mt-0.5 h-4 w-4 rounded text-brand-500 focus:ring-brand-500"
+                        />
+                        <span className="leading-relaxed">{opt.label}</span>
+                      </label>
+                    ))}
+                  </div>
+                ) : null}
+
+                {type === "partnership" && checked ? (
+                  <div className="ml-7 mt-3 space-y-2 rounded-lg border border-dashed border-ink-line bg-ink-line/20 p-4">
+                    <p className="text-xs font-semibold text-ink-muted">
+                      該当するパートナーの種類をお選びください（複数選択可）
+                    </p>
+                    {partnerOptions.map((opt) => (
+                      <label
+                        key={opt.id}
+                        className="flex cursor-pointer items-start gap-3 text-sm"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={state.partnerTypes.includes(opt.id)}
+                          onChange={() => togglePartner(opt.id)}
                           className="mt-0.5 h-4 w-4 rounded text-brand-500 focus:ring-brand-500"
                         />
                         <span className="leading-relaxed">{opt.label}</span>

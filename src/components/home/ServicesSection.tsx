@@ -82,13 +82,13 @@ export function ServicesSection({ locale }: Props) {
                   )}
                 >
                   {/* 写真 + 役割ラベル */}
-                  <div className="relative aspect-[16/9] overflow-hidden">
+                  <div className="relative aspect-[21/9] overflow-hidden md:aspect-[5/2]">
                     <Image
                       src={p.image}
                       alt=""
                       fill
                       sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-1000 ease-expo group-hover:scale-105"
+                      className="object-cover opacity-75 transition-transform duration-1000 ease-expo group-hover:scale-105"
                     />
                     <div
                       aria-hidden="true"
@@ -120,7 +120,7 @@ export function ServicesSection({ locale }: Props) {
                     </span>
                   </div>
 
-                  <div className="flex flex-1 flex-col px-6 pb-7 pt-2 md:px-8 md:pb-9">
+                  <div className="flex flex-1 flex-col px-6 pb-6 pt-1 md:px-8 md:pb-7">
                     <p
                       className={cn(
                         "text-[11px] font-bold uppercase tracking-[0.25em]",
@@ -141,7 +141,7 @@ export function ServicesSection({ locale }: Props) {
                     <Link
                       href={localePath("/contact", locale)}
                       className={cn(
-                        "mt-auto inline-flex items-center gap-2 self-start border-b pb-1 pt-6 text-sm font-bold tracking-[0.08em] transition-colors",
+                        "mt-auto inline-flex items-center gap-2 self-start border-b pb-1 pt-4 text-sm font-bold tracking-[0.08em] transition-colors",
                         dark
                           ? "border-white/40 hover:border-brand-200 hover:text-brand-200"
                           : "border-ink/30 hover:border-brand-500 hover:text-brand-500",
@@ -179,8 +179,8 @@ export function ServicesSection({ locale }: Props) {
             className="mx-auto block h-10 w-px origin-top scale-y-0 bg-ink/25 transition-transform delay-700 duration-700 ease-expo group-data-[visible=true]/reveal:scale-y-100"
           />
           <div className="mx-auto flex w-fit translate-y-3 flex-col items-center opacity-0 transition-all delay-1000 duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100">
-            <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand-500">Growth</span>
-            <p className="mt-2 border border-ink/15 bg-white px-6 py-3 text-sm font-bold tracking-[0.1em] text-ink md:text-base">
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">Growth</span>
+            <p className="mt-2 border border-ink/15 bg-white px-8 py-4 text-lg font-black tracking-[0.1em] text-ink md:px-12 md:text-2xl">
               企業の持続的な成長へ
             </p>
           </div>

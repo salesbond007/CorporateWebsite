@@ -118,6 +118,7 @@ const fieldLabels: Record<string, string> = {
   employeeCount: "従業員数",
   inquiryType: "お問い合わせ種別",
   serviceTypes: "対象サービス",
+  partnerTypes: "パートナーの種類",
   message: "お問い合わせ内容",
   expertise: "専門分野",
   experienceYears: "経験年数",
@@ -147,15 +148,19 @@ const enumLabels: Record<string, Record<string, string>> = {
   },
   inquiryType: {
     service: "サービスについて",
-    partnership: "協業について",
+    partnership: "パートナーについて",
     proposal: "ご提案 / 営業",
     other: "その他",
     estimate: "お見積り依頼",
   },
   serviceTypes: {
-    "ai-security": "AIセキュリティソリューション",
-    "new-business-development": "新規開拓営業支援ソリューション",
+    "ai-security": "セキュリティ対策事業",
+    "new-business-development": "新規開拓支援事業",
     "other-service": "その他",
+  },
+  partnerTypes: {
+    "security-partner": "セキュリティ対策事業のパートナー",
+    "new-business-partner": "新規開拓支援事業のパートナー",
   },
 };
 
