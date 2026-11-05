@@ -5,6 +5,7 @@ import { MissionSection } from "@/components/home/MissionSection";
 import { ServicesSection } from "@/components/home/ServicesSection";
 import { NewsSection } from "@/components/home/NewsSection";
 import { CompanySection } from "@/components/company/CompanySection";
+import { MarqueeBand } from "@/components/home/MarqueeBand";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
 
@@ -23,8 +24,9 @@ export default function HomePage({
       <ClientLogos />
       <MissionSection />
       <ServicesSection locale={locale} dict={dict} />
+      <MarqueeBand />
       <NewsSection locale={locale} dict={dict} />
-      <div className="border-t border-ink-line">
+      <div className="border-t border-ink-line bg-cream/60">
         <CompanySection />
       </div>
     </>

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { NewsCarousel } from "@/components/home/NewsCarousel";
+import { Reveal } from "@/components/ui/Reveal";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 import { news } from "@/lib/news";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
@@ -18,20 +20,22 @@ export function NewsSection({ locale, dict }: Props) {
   return (
     <section
       id="news"
-      className="relative scroll-mt-20 border-t border-ink-line bg-white py-16 md:py-24"
+      className="relative scroll-mt-20 bg-white py-20 md:py-28"
     >
       <Container>
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <p className="text-2xl md:text-3xl font-black text-ink">お知らせ</p>
+          <SectionTitle en="News" ja="お知らせ" />
           <Link
             href={localePath("/news", locale)}
-            className="link-arrow shrink-0"
+            className="link-arrow hover-underline shrink-0"
           >
-            {dict.nav.news}
+            {dict.nav.news}一覧
           </Link>
         </div>
 
-        <NewsCarousel items={latestNews} locale={locale} />
+        <Reveal variant="up" delay={200}>
+          <NewsCarousel items={latestNews} locale={locale} />
+        </Reveal>
       </Container>
     </section>
   );

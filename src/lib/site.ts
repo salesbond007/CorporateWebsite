@@ -108,6 +108,8 @@ export type Service = {
   href?: string;
   /** ServicesSectionでhover時に浮かび上がる背景写真 */
   image?: string;
+  /** トップページのサービスカードに表示するアイコン */
+  icon?: "shield" | "target";
 };
 
 export type ServiceCategory = {
@@ -130,6 +132,7 @@ export const serviceCategories: ServiceCategory[] = [
           "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、企業の安全なAI活用を支援するソリューションです。",
         features: [],
         image: "/services/cards/ai-solutions.jpg",
+        icon: "shield",
       },
       {
         slug: "new-business-development",
@@ -140,6 +143,7 @@ export const serviceCategories: ServiceCategory[] = [
           "ターゲット選定からアポイント獲得まで、新規顧客の開拓に必要な営業活動をワンストップで支援するソリューションです。",
         features: [],
         image: "/services/cards/talent.jpg",
+        icon: "target",
       },
     ],
   },

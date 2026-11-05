@@ -12,16 +12,16 @@ type Props = {
 
 /**
  * 背景に敷く3枚の画像。/public/hero/slide-1.png 〜 slide-3.png を置き換えるだけで
- * 差し替え可能。4秒ごとに永続的にクロスフェードする(hero-crossfade アニメーション、
- * tailwind.config.ts 参照)。
+ * 差し替え可能。4秒ごとに永続的にクロスフェードし(hero-crossfade)、
+ * 全体はゆっくりズームし続ける(ken-burns)。tailwind.config.ts 参照。
  */
 const HERO_SLIDES = ["/hero/slide-1.png", "/hero/slide-2.png", "/hero/slide-3.png"];
 
 export function Hero({ locale, dict }: Props) {
   return (
-    <section className="relative isolate flex min-h-[560px] items-center overflow-hidden bg-ink md:min-h-[760px]">
-      {/* 背景: 3枚をクロスフェードでゆっくり切り替え */}
-      <div className="absolute inset-0" aria-hidden="true">
+    <section className="relative isolate flex min-h-[600px] items-center overflow-hidden bg-ink md:min-h-[calc(100svh-5rem)]">
+      {/* 背景: 3枚をクロスフェード + ゆっくりズーム */}
+      <div className="absolute inset-0 animate-ken-burns" aria-hidden="true">
         {HERO_SLIDES.map((src, i) => (
           <Image
             key={src}
@@ -36,50 +36,85 @@ export function Hero({ locale, dict }: Props) {
         ))}
       </div>
 
-      {/*
-       * オーバーレイは3枚重ね:
-       * 1. ワインレッドの色被せ(multiply) — 写真全体をブランドカラーに馴染ませる「かすみ」
-       * 2. 左側の濃いスクリム — コピー部分の可読性を確保(写真が明るく情報量が多いため強めに)
-       * 3. 下部の淡いグラデーション — ボタン周りを浮かせて地面に馴染ませる
-       */}
+      {/* オーバーレイ: ブランド色の被せ / 左側のスクリム / 下部グラデーション */}
+      <div className="absolute inset-0 bg-brand-900/40 mix-blend-multiply" aria-hidden="true" />
       <div
-        className="absolute inset-0 bg-brand-900/35 mix-blend-multiply"
+        className="absolute inset-0 bg-[linear-gradient(to_right,rgba(29,5,11,0.88)_0%,rgba(29,5,11,0.62)_40%,rgba(29,5,11,0.15)_70%,rgba(29,5,11,0)_90%)]"
         aria-hidden="true"
       />
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" aria-hidden="true" />
+
+      {/* ゆっくり漂う光のにじみ */}
       <div
-        className="absolute inset-0 bg-[linear-gradient(to_right,rgba(29,5,11,0.82)_0%,rgba(29,5,11,0.6)_38%,rgba(29,5,11,0.18)_65%,rgba(29,5,11,0)_85%)]"
         aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 bg-gradient-to-t from-ink/40 via-transparent to-transparent"
-        aria-hidden="true"
+        className="pointer-events-none absolute -left-40 top-1/4 h-[28rem] w-[28rem] animate-blob rounded-full bg-brand-500/35 blur-[120px]"
       />
 
-      <Container className="relative py-16 md:py-32">
-        <div className="max-w-none animate-fade-up">
-          <h1 className="text-[clamp(1.5rem,4vw,3.75rem)] text-white font-extrabold leading-[1.15] tracking-tight">
-            <span className="whitespace-nowrap">{dict.hero.titleLine1}</span>
-            <br />
-            <span className="whitespace-nowrap">
-              <span className="text-brand-200">{dict.hero.titleHighlight}</span>
+      {/* 細いグリッド線(奥行きの演出) */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-[0.07] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:96px_96px] [mask-image:linear-gradient(to_right,black,transparent_70%)]"
+      />
+
+      <Container className="relative py-20 md:py-32">
+        <p
+          className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.18em] text-brand-200 animate-fade-up md:gap-4 md:text-xs md:tracking-[0.35em]"
+          style={{ animationDelay: "0.1s" }}
+        >
+          <span aria-hidden="true" className="h-px w-8 origin-left animate-grow-x bg-brand-200 md:w-12" />
+          Offense &amp; Defense, by Professionals
+        </p>
+
+        <h1 className="mt-6 text-[clamp(1.75rem,5vw,4.5rem)] font-black leading-[1.12] tracking-tight text-white">
+          <span className="line-mask">
+            <span className="whitespace-nowrap" style={{ animationDelay: "0.25s" }}>
+              {dict.hero.titleLine1}
+            </span>
+          </span>
+          <span className="line-mask">
+            <span className="whitespace-nowrap" style={{ animationDelay: "0.45s" }}>
+              <span className="text-shimmer">{dict.hero.titleHighlight}</span>
               {dict.hero.titleSuffix}
             </span>
-          </h1>
-          <div className="mt-10 flex flex-wrap gap-3">
-            <Button href={`${localePath("/", locale)}#services`} size="lg">
-              {dict.buttons.viewServices}
-            </Button>
-            <Button
-              href={localePath("/contact", locale)}
-              size="lg"
-              variant="secondary"
-              className="!border-white/70 !bg-white/10 !text-white backdrop-blur-sm hover:!bg-white hover:!text-ink"
-            >
-              {dict.buttons.contact}
-            </Button>
-          </div>
+          </span>
+        </h1>
+
+        <div
+          className="mt-10 flex flex-wrap gap-3 animate-fade-up"
+          style={{ animationDelay: "0.85s" }}
+        >
+          <Button href={`${localePath("/", locale)}#services`} size="lg">
+            {dict.buttons.viewServices}
+          </Button>
+          <Button
+            href={localePath("/contact", locale)}
+            size="lg"
+            variant="secondary"
+            className="!border-white/70 !bg-white/10 !text-white backdrop-blur-sm hover:!bg-white hover:!text-ink"
+          >
+            {dict.buttons.contact}
+          </Button>
         </div>
       </Container>
+
+      {/* 縦書きのサイドラベル */}
+      <p
+        aria-hidden="true"
+        className="absolute right-6 top-1/2 hidden -translate-y-1/2 rotate-90 text-[11px] font-bold uppercase tracking-[0.4em] text-white/50 lg:block"
+      >
+        Sales Bond Co., Ltd. — Since 2024
+      </p>
+
+      {/* スクロールインジケーター */}
+      <div
+        aria-hidden="true"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex"
+      >
+        <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/70">Scroll</span>
+        <span className="relative h-14 w-px overflow-hidden bg-white/25">
+          <span className="absolute inset-x-0 top-0 h-1/3 animate-scroll-dot bg-white" />
+        </span>
+      </div>
     </section>
   );
 }

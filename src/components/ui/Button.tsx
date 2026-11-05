@@ -5,7 +5,9 @@ type Variant = "primary" | "secondary" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-none font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap";
+  "group/btn relative isolate inline-flex items-center justify-center gap-2 overflow-hidden rounded-none font-semibold transition-all duration-300 ease-expo disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap " +
+  // ホバー時に光の帯が左から右へ走る
+  "before:pointer-events-none before:absolute before:inset-y-0 before:left-0 before:-z-0 before:w-1/3 before:-translate-x-[150%] before:skew-x-[-20deg] before:bg-white/25 before:transition-transform before:duration-700 before:ease-expo hover:before:translate-x-[400%]";
 
 const variants: Record<Variant, string> = {
   primary:
@@ -83,6 +85,7 @@ function ArrowIcon() {
       viewBox="0 0 14 14"
       fill="none"
       aria-hidden="true"
+      className="transition-transform duration-300 ease-expo group-hover/btn:translate-x-1"
     >
       <path
         d="M2.5 7H11.5M11.5 7L7.5 3M11.5 7L7.5 11"

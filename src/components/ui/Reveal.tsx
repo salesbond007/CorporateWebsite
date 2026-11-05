@@ -3,13 +3,39 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/cn";
 
+type Variant = "up" | "fade" | "blur" | "left" | "right" | "scale" | "none";
+
 type Props = {
   children: React.ReactNode;
   className?: string;
   delay?: number;
-  /** "up" | "fade" — direction of reveal. Defaults to "up". */
-  variant?: "up" | "fade";
+  /**
+   * 表示時の動き。"none" はラッパー自体は動かさず、子要素が
+   * `group-data-[visible=true]/reveal:` で表示状態を参照するためだけに使う。
+   */
+  variant?: Variant;
   once?: boolean;
+  as?: "div" | "span";
+};
+
+const hidden: Record<Variant, string> = {
+  up: "opacity-0 translate-y-8",
+  fade: "opacity-0",
+  blur: "opacity-0 blur-md translate-y-4",
+  left: "opacity-0 -translate-x-10",
+  right: "opacity-0 translate-x-10",
+  scale: "opacity-0 scale-95",
+  none: "",
+};
+
+const shown: Record<Variant, string> = {
+  up: "opacity-100 translate-y-0",
+  fade: "opacity-100",
+  blur: "opacity-100 blur-0 translate-y-0",
+  left: "opacity-100 translate-x-0",
+  right: "opacity-100 translate-x-0",
+  scale: "opacity-100 scale-100",
+  none: "",
 };
 
 export function Reveal({
@@ -18,8 +44,9 @@ export function Reveal({
   delay = 0,
   variant = "up",
   once = true,
+  as = "div",
 }: Props) {
-  const ref = useRef<HTMLDivElement | null>(null);
+  const ref = useRef<HTMLElement | null>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -48,22 +75,22 @@ export function Reveal({
     return () => observer.disconnect();
   }, [once]);
 
-  const baseHidden =
-    variant === "up" ? "opacity-0 translate-y-4" : "opacity-0";
-  const baseShown =
-    variant === "up" ? "opacity-100 translate-y-0" : "opacity-100";
+  const Tag = as;
 
   return (
-    <div
-      ref={ref}
+    <Tag
+      ref={ref as React.Ref<HTMLDivElement & HTMLSpanElement>}
+      data-visible={visible}
       style={{ transitionDelay: `${delay}ms` }}
       className={cn(
-        "transition-all duration-700 ease-out will-change-transform",
-        visible ? baseShown : baseHidden,
+        "group/reveal",
+        variant !== "none" &&
+          "transition-all duration-1000 ease-expo will-change-transform",
+        visible ? shown[variant] : hidden[variant],
         className,
       )}
     >
       {children}
-    </div>
+    </Tag>
   );
 }

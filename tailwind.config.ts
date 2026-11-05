@@ -58,6 +58,9 @@ const config: Config = {
         soft: "0 8px 30px rgba(20, 20, 20, 0.06)",
         card: "0 1px 2px rgba(0,0,0,0.04), 0 8px 24px rgba(20,20,20,0.06)",
       },
+      transitionTimingFunction: {
+        expo: "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
       borderRadius: {
         xl2: "1.5rem",
         xl3: "2rem",
@@ -84,6 +87,32 @@ const config: Config = {
           "0%": { transform: "translateX(-3%) scale(1.12)" },
           "100%": { transform: "translateX(3%) scale(1.12)" },
         },
+        lineUp: {
+          "0%": { transform: "translateY(110%)" },
+          "100%": { transform: "translateY(0)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "200% 50%" },
+          "100%": { backgroundPosition: "-200% 50%" },
+        },
+        kenBurns: {
+          "0%": { transform: "scale(1.02) translate3d(0,0,0)" },
+          "100%": { transform: "scale(1.14) translate3d(-1.5%,-1%,0)" },
+        },
+        scrollDot: {
+          "0%": { transform: "translateY(-100%)", opacity: "0" },
+          "30%": { opacity: "1" },
+          "100%": { transform: "translateY(300%)", opacity: "0" },
+        },
+        blob: {
+          "0%, 100%": { transform: "translate(0,0) scale(1)" },
+          "33%": { transform: "translate(6%,-8%) scale(1.08)" },
+          "66%": { transform: "translate(-5%,6%) scale(0.95)" },
+        },
+        growX: {
+          "0%": { transform: "scaleX(0)" },
+          "100%": { transform: "scaleX(1)" },
+        },
         heroCrossfade: {
           "0%": { opacity: "1" },
           "17%": { opacity: "1" },
@@ -100,6 +129,14 @@ const config: Config = {
         "hero-pan": "heroPan 16s ease-in-out infinite alternate",
         "hero-pan-fast": "heroPan 7s ease-in-out infinite alternate",
         "hero-crossfade": "heroCrossfade 12s ease-in-out infinite",
+        "line-up": "lineUp 1.1s cubic-bezier(0.22,1,0.36,1) both",
+        shimmer: "shimmer 6s linear infinite",
+        "ken-burns": "kenBurns 22s ease-in-out infinite alternate",
+        "scroll-dot": "scrollDot 2.2s cubic-bezier(0.65,0,0.35,1) infinite",
+        blob: "blob 18s ease-in-out infinite",
+        "grow-x": "growX 1.2s cubic-bezier(0.22,1,0.36,1) both",
+        "marquee-slow": "marquee 60s linear infinite",
+        "marquee-band": "marquee 40s linear infinite",
       },
     },
   },
