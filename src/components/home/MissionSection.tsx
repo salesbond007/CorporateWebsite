@@ -22,9 +22,9 @@ export function MissionSection() {
         <div className="mx-auto max-w-2xl text-center">
           <Reveal variant="fade">
             <p className="text-2xl md:text-3xl lg:text-4xl font-black leading-snug text-ink">
-              日本経済を支えてきた産業に
+              企業の攻めと守りを、
               <br />
-              <span className="text-brand-500">新しい選択肢</span>を
+              <span className="text-brand-500">プロの力</span>で。
             </p>
           </Reveal>
 
