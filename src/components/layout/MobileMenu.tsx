@@ -98,7 +98,7 @@ export function MobileMenu({ locale, dict }: Props) {
                   <Link
                     href={navHref(item, locale)}
                     onClick={() => setOpen(false)}
-                    className="block rounded-lg px-3 py-3 text-base font-normal tracking-[0.08em] text-ink-soft hover:bg-ink-line/30"
+                    className="block rounded-lg px-3 py-3 text-base font-medium tracking-[0.12em] text-ink hover:bg-ink-line/30"
                   >
                     {dict.nav[item.key]}
                   </Link>

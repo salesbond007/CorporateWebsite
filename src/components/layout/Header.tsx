@@ -50,7 +50,7 @@ export function Header({ locale, dict }: Props) {
             <Link
               key={item.key}
               href={navHref(item, locale)}
-              className="hover-underline text-[15px] font-normal tracking-[0.08em] text-ink-soft hover:text-brand-600"
+              className="hover-underline text-base font-medium tracking-[0.12em] text-ink hover:text-brand-600"
             >
               {dict.nav[item.key]}
             </Link>
