@@ -5,12 +5,16 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
+import { pageMeta, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "会社概要",
-  description:
-    "セールスボンド株式会社（Sales Bond Co., Ltd.）の会社概要。本社所在地、代表者、事業内容（AIセキュリティ対策事業・新規開拓支援事業(営業BPO)）など。",
-};
+export function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Metadata {
+  if (!isLocale(params.locale)) return {};
+  return pageMetadata({ ...pageMeta.company, path: "/company", locale: params.locale });
+}
 
 export default function CompanyPage({
   params,

@@ -1,7 +1,9 @@
 import type { Dictionary } from "@/i18n/dictionary";
 
 export const site = {
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://salesbond1962.com",
+  /** 構造化データ(Organization)に出力する公式URL */
+  officialUrl: "https://salesbond1962.com",
   /** Used by site-wide JSON-LD; locale-specific copy comes from the dictionary. */
   name: "セールスボンド株式会社",
   legalName: "セールスボンド株式会社",
@@ -70,6 +72,12 @@ export const site = {
     country: "JP",
   },
   founded: "2024-07",
+  /** 構造化データ用の日本語住所 */
+  addressJaParts: {
+    region: "東京都",
+    locality: "新宿区",
+    street: "西新宿3-3-13 西新宿水間ビル2F",
+  },
   registrationNumber: "T8012801023311",
   /** 代表者名 */
   founderName: "飯住",
@@ -99,9 +107,9 @@ export type NavItem = {
 
 export const navigation: NavItem[] = [
   { key: "top" },
-  { key: "services", hash: "services" },
+  { key: "services", href: "/services" },
   { key: "news", href: "/news" },
-  { key: "company", hash: "company" },
+  { key: "company", href: "/company" },
   { key: "contact", href: "/contact" },
 ];
 
@@ -140,6 +148,7 @@ export const serviceCategories: ServiceCategory[] = [
         slug: "ai-security",
         number: "01",
         title: "AIセキュリティ対策",
+        href: "/services/security",
         subtitle: "AI Security",
         summary:
           "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、企業の安全なAI活用を支援するソリューションです。",
@@ -150,6 +159,7 @@ export const serviceCategories: ServiceCategory[] = [
         slug: "new-business-development",
         number: "02",
         title: "新規開拓支援",
+        href: "/services/sales",
         subtitle: "New Business Development",
         summary:
           "ターゲット選定からアポイント獲得まで、新規顧客の開拓に必要な営業活動をワンストップで支援するソリューションです。",

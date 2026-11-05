@@ -8,11 +8,16 @@ import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { serviceCategories } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
+import { pageMeta, pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "サービス案内",
-  description: "セールスボンド株式会社のサービス案内。",
-};
+export function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Metadata {
+  if (!isLocale(params.locale)) return {};
+  return pageMetadata({ ...pageMeta.services, path: "/services", locale: params.locale });
+}
 
 export default function ServicesPage({
   params,
@@ -27,7 +32,7 @@ export default function ServicesPage({
       <JsonLd
         data={breadcrumbJsonLd([
           { name: "ホーム", url: localePath("/", locale) },
-          { name: "サービス案内", url: localePath("/services", locale) },
+          { name: "サービス一覧", url: localePath("/services", locale) },
         ])}
       />
 
@@ -62,7 +67,7 @@ export default function ServicesPage({
             <div>
               <p className="section-label !text-brand-200">Services</p>
               <h1 className="mt-3 text-display-2 text-white font-black">
-                サービス案内
+                サービス一覧
               </h1>
             </div>
           </div>
