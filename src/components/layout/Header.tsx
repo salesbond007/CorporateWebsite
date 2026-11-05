@@ -43,14 +43,14 @@ export function Header({ locale, dict }: Props) {
       <div className="container flex h-16 md:h-20 items-center justify-between gap-6">
         <Logo locale={locale} dict={dict} />
 
-        <nav className="ml-auto mr-4 hidden lg:flex items-center gap-8" aria-label="メイン">
+        <nav className="ml-auto mr-6 hidden lg:flex items-center gap-9" aria-label="メイン">
           {navigation
             .filter((item) => item.key !== "contact")
             .map((item) => (
             <Link
               key={item.key}
               href={navHref(item, locale)}
-              className="hover-underline text-sm font-bold text-ink hover:text-brand-600"
+              className="hover-underline text-[15px] font-normal tracking-[0.08em] text-ink-soft hover:text-brand-600"
             >
               {dict.nav[item.key]}
             </Link>
@@ -61,7 +61,7 @@ export function Header({ locale, dict }: Props) {
           <Button
             href={localePath("/contact", locale)}
             size="md"
-            className="hidden md:inline-flex shadow-[0_8px_24px_-8px_rgba(122,30,53,0.6)]"
+            className="hidden md:inline-flex !px-8 text-[15px] !font-bold tracking-[0.1em] shadow-[0_8px_24px_-8px_rgba(122,30,53,0.6)]"
           >
             {dict.nav.contact}
           </Button>
