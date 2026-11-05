@@ -49,17 +49,20 @@ export function MissionSection() {
             <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-500 md:text-xs">
               Our Mission
             </p>
-            <p className="mt-5 text-3xl font-black leading-snug text-ink md:text-4xl lg:text-5xl">
+            <p className="mt-5 text-xl font-black leading-snug text-ink sm:text-2xl md:text-3xl lg:text-4xl">
               <span className="block overflow-hidden pb-[0.08em]">
                 <span className="block translate-y-[110%] transition-transform duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
-                  企業の攻めと守りを、
+                  攻めの<span className="text-brand-500">「新規開拓営業支援」</span>と、
                 </span>
               </span>
               <span className="block overflow-hidden pb-[0.08em]">
                 <span className="block translate-y-[110%] transition-transform delay-150 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
-                  <span className="text-brand-500">プロの力</span>で。
+                  守りの<span className="text-brand-500">「AIセキュリティ」</span>。
                 </span>
               </span>
+            </p>
+            <p className="mt-5 text-base font-bold text-ink-soft md:text-lg">
+              2つのソリューションで企業の成長を支えます。
             </p>
             <span
               aria-hidden="true"

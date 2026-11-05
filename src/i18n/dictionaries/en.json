@@ -34,9 +34,13 @@
   },
   "hero": {
     "eyebrow": "B to B Sales Support",
-    "titleLine1": "For the industries that built Japan's economy, ",
-    "titleHighlight": "a new choice",
-    "titleSuffix": "."
+    "line1Prefix": "Offense: ",
+    "line1Highlight": "New Business Development",
+    "line1Suffix": ".",
+    "line2Prefix": "Defense: ",
+    "line2Highlight": "AI Security",
+    "line2Suffix": ".",
+    "lead": "Two solutions that power your company's growth."
   },
   "blog": {
     "search": "Search articles",

@@ -65,19 +65,28 @@ export function Hero({ locale, dict }: Props) {
           Offense &amp; Defense, by Professionals
         </p>
 
-        <h1 className="mt-6 text-[clamp(1.75rem,5vw,4.5rem)] font-black leading-[1.12] tracking-tight text-white">
+        <h1 className="mt-6 text-[clamp(1.25rem,4.2vw,3.75rem)] font-black leading-[1.2] tracking-tight text-white">
           <span className="line-mask">
-            <span className="whitespace-nowrap" style={{ animationDelay: "0.25s" }}>
-              {dict.hero.titleLine1}
+            <span style={{ animationDelay: "0.25s" }}>
+              {dict.hero.line1Prefix}
+              <span className="text-shimmer">{dict.hero.line1Highlight}</span>
+              {dict.hero.line1Suffix}
             </span>
           </span>
           <span className="line-mask">
-            <span className="whitespace-nowrap" style={{ animationDelay: "0.45s" }}>
-              <span className="text-shimmer">{dict.hero.titleHighlight}</span>
-              {dict.hero.titleSuffix}
+            <span style={{ animationDelay: "0.4s" }}>
+              {dict.hero.line2Prefix}
+              <span className="text-shimmer">{dict.hero.line2Highlight}</span>
+              {dict.hero.line2Suffix}
             </span>
           </span>
         </h1>
+        <p
+          className="mt-6 text-base font-bold tracking-[0.06em] text-white/85 animate-fade-up md:text-xl"
+          style={{ animationDelay: "0.65s" }}
+        >
+          {dict.hero.lead}
+        </p>
 
         <div
           className="mt-10 flex flex-wrap gap-3 animate-fade-up"
