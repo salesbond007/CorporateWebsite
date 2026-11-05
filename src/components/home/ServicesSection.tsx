@@ -28,16 +28,7 @@ export function ServicesSection({ locale }: Props) {
       />
 
       <Container>
-        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <SectionTitle en="Services" ja="サービス" />
-          <Reveal variant="fade" delay={300}>
-            <p className="max-w-sm text-sm leading-relaxed text-ink-soft">
-              攻めの「新規開拓」と、守りの「AIセキュリティ」。
-              <br className="hidden md:block" />
-              2つのソリューションで企業の成長を支えます。
-            </p>
-          </Reveal>
-        </div>
+        <SectionTitle en="Services" ja="サービス" />
 
         <ul className="mt-12 grid gap-6 md:mt-16 md:grid-cols-2 md:gap-8">
           {homeServices.map((s, i) => (
