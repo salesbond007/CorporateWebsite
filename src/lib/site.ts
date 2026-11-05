@@ -100,7 +100,6 @@ export const navigation: NavItem[] = [
   { key: "services", hash: "services" },
   { key: "news", href: "/news" },
   { key: "company", hash: "company" },
-  { key: "recruit", href: "/recruit" },
   { key: "contact", href: "/contact" },
 ];
 
