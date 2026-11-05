@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -67,6 +68,33 @@ export function CompanySection() {
         <div className="grid gap-10 lg:grid-cols-12 lg:gap-16">
           <div className="lg:col-span-4">
             <SectionTitle en="Company" ja="会社概要" size="sm" />
+
+            {/* ロゴマーク(PCのみ)。四隅のブランドカラーの飾り + ゆっくり浮遊 */}
+            <Reveal variant="scale" delay={200} className="mt-12 hidden lg:block">
+              <div className="relative aspect-square w-full max-w-[18rem] bg-white">
+                {[
+                  "left-0 top-0 border-l-2 border-t-2",
+                  "right-0 top-0 border-r-2 border-t-2",
+                  "bottom-0 left-0 border-b-2 border-l-2",
+                  "bottom-0 right-0 border-b-2 border-r-2",
+                ].map((pos) => (
+                  <span
+                    key={pos}
+                    aria-hidden="true"
+                    className={`absolute h-6 w-6 border-brand-500 ${pos}`}
+                  />
+                ))}
+                <div className="absolute inset-0 grid place-items-center">
+                  <Image
+                    src="/logo-square.png"
+                    alt="セールスボンド株式会社 ロゴ"
+                    width={200}
+                    height={200}
+                    className="w-3/5 animate-float-y mix-blend-multiply brightness-[1.04] contrast-[1.05]"
+                  />
+                </div>
+              </div>
+            </Reveal>
           </div>
 
           <div className="lg:col-span-8">
