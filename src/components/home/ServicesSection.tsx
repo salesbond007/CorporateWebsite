@@ -1,5 +1,6 @@
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 import { ServiceCard } from "@/components/home/ServiceCard";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
@@ -10,23 +11,39 @@ type Props = {
   dict: Dictionary;
 };
 
-const cardClass =
-  "group relative isolate flex h-full min-h-[15rem] flex-col justify-center overflow-hidden rounded-none border-2 border-ink bg-white px-6 py-8 md:min-h-[17rem] transition-all duration-300 hover:-translate-y-1.5 hover:border-white/20 hover:shadow-[0_24px_60px_-18px_rgba(29,5,11,0.55)]";
-
 /** トップページで表示するサービス一覧(LPは別ページ) */
 const homeServices = serviceCategories.flatMap((c) => c.services);
 
 export function ServicesSection({ locale }: Props) {
   return (
-    <section id="services" className="relative scroll-mt-20 bg-white py-16 md:py-24">
-      <Container>
-        <p className="text-2xl md:text-3xl font-black text-ink">サービス一覧</p>
+    <section
+      id="services"
+      className="relative isolate scroll-mt-20 overflow-hidden bg-cream py-20 md:py-32"
+    >
+      {/* 背景: ドット + 漂う色面 */}
+      <div aria-hidden="true" className="dot-bg-soft absolute inset-0 -z-10" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-24 -top-24 -z-10 h-96 w-96 animate-blob rounded-full bg-brand-200/40 blur-[110px]"
+      />
 
-        <ul className="mx-auto mt-10 grid max-w-5xl gap-6 sm:grid-cols-2">
+      <Container>
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <SectionTitle en="Services" ja="サービス一覧" />
+          <Reveal variant="fade" delay={300}>
+            <p className="max-w-sm text-sm leading-relaxed text-ink-soft">
+              攻めの「新規開拓」と、守りの「AIセキュリティ」。
+              <br className="hidden md:block" />
+              2つのソリューションで企業の成長を支えます。
+            </p>
+          </Reveal>
+        </div>
+
+        <ul className="mt-12 grid gap-6 md:mt-16 md:grid-cols-2 md:gap-8">
           {homeServices.map((s, i) => (
             <li key={s.slug}>
-              <Reveal delay={i * 100} className="h-full">
-                <ServiceCard service={s} locale={locale} className={cardClass} />
+              <Reveal variant="up" delay={i * 150} className="h-full">
+                <ServiceCard service={s} locale={locale} />
               </Reveal>
             </li>
           ))}

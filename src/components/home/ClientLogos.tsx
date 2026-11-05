@@ -27,7 +27,10 @@ function LogoStrip({ ariaHidden }: { ariaHidden?: boolean }) {
       aria-hidden={ariaHidden}
     >
       {clients.map((c) => (
-        <div key={c.name} className="flex h-8 shrink-0 items-center md:h-14">
+        <div
+          key={c.name}
+          className="flex h-8 shrink-0 items-center opacity-70 grayscale transition duration-500 hover:scale-105 hover:opacity-100 hover:grayscale-0 md:h-14"
+        >
           <Image
             src={c.src}
             alt={c.name}
@@ -43,7 +46,10 @@ function LogoStrip({ ariaHidden }: { ariaHidden?: boolean }) {
 
 export function ClientLogos() {
   return (
-    <section className="border-y border-ink-line bg-white py-8 md:py-14">
+    <section className="border-y border-ink-line bg-white py-8 md:py-12">
+      <p className="mb-6 text-center text-[11px] font-bold uppercase tracking-[0.3em] text-ink-muted md:mb-8">
+        Trusted by
+      </p>
       <div
         className="relative overflow-hidden"
         style={{
@@ -53,7 +59,7 @@ export function ClientLogos() {
             "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
         }}
       >
-        <div className="flex w-max animate-marquee">
+        <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
           <LogoStrip />
           <LogoStrip ariaHidden />
         </div>
