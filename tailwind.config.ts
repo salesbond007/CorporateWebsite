@@ -136,7 +136,6 @@ const config: Config = {
         blob: "blob 18s ease-in-out infinite",
         "grow-x": "growX 1.2s cubic-bezier(0.22,1,0.36,1) both",
         "marquee-slow": "marquee 60s linear infinite",
-        "marquee-band": "marquee 40s linear infinite",
       },
     },
   },
