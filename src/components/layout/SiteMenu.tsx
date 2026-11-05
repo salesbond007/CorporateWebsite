@@ -45,9 +45,9 @@ export function SiteMenu({ locale, dict }: Props) {
 
   const navItems = [
     { label: dict.nav.top, href: home },
-    { label: dict.nav.services, href: `${home}#services` },
+    { label: dict.nav.services, href: localePath("/services", locale) },
     { label: dict.nav.news, href: localePath("/news", locale) },
-    { label: dict.nav.company, href: `${home}#company` },
+    { label: dict.nav.company, href: localePath("/company", locale) },
     { label: dict.nav.about, href: `${home}#mission` },
     { label: dict.nav.recruit, href: localePath("/recruit", locale) },
     { label: dict.nav.partner, href: localePath("/partner", locale) },
@@ -58,7 +58,7 @@ export function SiteMenu({ locale, dict }: Props) {
     {
       ja: "サービス一覧",
       en: "Our Service",
-      href: `${home}#services`,
+      href: localePath("/services", locale),
       image: "/services/cards/ai-solutions.jpg",
     },
     {
@@ -84,7 +84,7 @@ export function SiteMenu({ locale, dict }: Props) {
   const pills = [
     {
       label: dict.nav.company,
-      href: `${home}#company`,
+      href: localePath("/company", locale),
       icon: <BuildingIcon />,
     },
     {

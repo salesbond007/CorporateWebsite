@@ -27,14 +27,20 @@ export function Footer({ locale, dict }: Props) {
       title: "セールスボンドについて",
       links: [
         { label: dict.nav.about, href: `${home}#mission` },
-        { label: "会社概要", href: `${home}#company` },
+        { label: "会社概要", href: localePath("/company", locale) },
       ],
     },
     {
       title: "サービス",
-      links: serviceCategories
-        .flatMap((c) => c.services)
-        .map((s) => ({ label: s.title, href: `${home}#services` })),
+      links: [
+        { label: "サービス一覧", href: localePath("/services", locale) },
+        ...serviceCategories
+          .flatMap((c) => c.services)
+          .map((s) => ({
+            label: s.title,
+            href: s.href ? localePath(s.href, locale) : localePath("/services", locale),
+          })),
+      ],
     },
     {
       title: "採用・パートナー",

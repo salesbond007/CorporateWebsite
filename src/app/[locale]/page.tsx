@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Hero } from "@/components/home/Hero";
 import { ClientLogos } from "@/components/home/ClientLogos";
@@ -7,6 +8,16 @@ import { NewsSection } from "@/components/home/NewsSection";
 import { CompanySection } from "@/components/company/CompanySection";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
+import { pageMeta, pageMetadata } from "@/lib/seo";
+
+export function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Metadata {
+  if (!isLocale(params.locale)) return {};
+  return pageMetadata({ ...pageMeta.home, path: "/", locale: params.locale });
+}
 
 export default function HomePage({
   params,

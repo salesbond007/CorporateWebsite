@@ -45,18 +45,11 @@ export async function generateMetadata({
     creator: site.legalName,
     publisher: site.legalName,
     category: "Business Services",
-    alternates: {
-      canonical: `/${params.locale}`,
-      languages: {
-        ja: "/ja",
-        en: "/en",
-        "x-default": "/ja",
-      },
-    },
+    // canonical・og:url は各ページ側(src/lib/seo.ts の pageMetadata)で設定する。
+    // レイアウトで固定すると下層ページまでトップを指してしまうため、ここでは指定しない。
     openGraph: {
       type: "website",
       locale: ogLocale(params.locale),
-      url: `${site.url}/${params.locale}`,
       siteName: dict.site.name,
       title: dict.site.name,
     },
@@ -117,9 +110,9 @@ export default function LocaleLayout({
             websiteJsonLd(),
             siteNavigationJsonLd([
               { name: "トップ", url: `/${locale}` },
-              { name: "サービス", url: `/${locale}#services` },
+              { name: "サービス一覧", url: `/${locale}/services` },
               { name: "ニュース", url: `/${locale}/news` },
-              { name: "会社概要", url: `/${locale}#company` },
+              { name: "会社概要", url: `/${locale}/company` },
               { name: "採用情報", url: `/${locale}/recruit` },
               { name: "問い合わせ", url: `/${locale}/contact` },
             ]),

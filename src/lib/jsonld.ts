@@ -1,4 +1,5 @@
 import { site } from "./site";
+import { pageMeta } from "./seo";
 import type { Article } from "./microcms";
 
 const base = site.url.replace(/\/$/, "");
@@ -10,7 +11,8 @@ export function organizationJsonLd() {
     name: site.legalName,
     legalName: site.legalName,
     alternateName: [site.legalNameEn, "Sales Bond", "セールスボンド"],
-    url: base,
+    url: site.officialUrl,
+    description: pageMeta.home.description,
     logo: `${base}/logo-square.png`,
     image: `${base}/logo-square.png`,
     slogan: site.slogan,
@@ -35,12 +37,13 @@ export function organizationJsonLd() {
       name: site.founderName,
       alternateName: site.founderNameKana,
     },
+    // 〒160-0023 東京都新宿区西新宿3-3-13 西新宿水間ビル2F
     address: {
       "@type": "PostalAddress",
-      streetAddress: site.address.streetAddress,
-      addressLocality: site.address.locality,
-      addressRegion: site.address.region,
       postalCode: site.address.postalCode,
+      addressRegion: site.addressJaParts.region,
+      addressLocality: site.addressJaParts.locality,
+      streetAddress: site.addressJaParts.street,
       addressCountry: site.address.country,
     },
     contactPoint: [
