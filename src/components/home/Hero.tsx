@@ -69,14 +69,14 @@ export function Hero({ locale, dict }: Props) {
           <span className="line-mask">
             <span style={{ animationDelay: "0.25s" }}>
               {dict.hero.line1Prefix}
-              <span className="text-shimmer">{dict.hero.line1Highlight}</span>
+              {dict.hero.line1Highlight}
               {dict.hero.line1Suffix}
             </span>
           </span>
           <span className="line-mask">
             <span style={{ animationDelay: "0.4s" }}>
               {dict.hero.line2Prefix}
-              <span className="text-shimmer">{dict.hero.line2Highlight}</span>
+              {dict.hero.line2Highlight}
               {dict.hero.line2Suffix}
             </span>
           </span>
