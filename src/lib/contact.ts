@@ -108,6 +108,8 @@ export const generalContactSchema = z.object({
   inquiryType: z.enum(["service", "partnership", "proposal", "other"]),
   // サービスについて選択時のみ届く可能性のあるサブ選択
   serviceTypes: z.array(z.string()).optional(),
+  // パートナーについて選択時のみ届く可能性のあるサブ選択
+  partnerTypes: z.array(z.string()).optional(),
   message: z.string().trim().max(5000).optional().or(z.literal("")),
 });
 

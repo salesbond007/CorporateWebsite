@@ -29,7 +29,7 @@ function LogoStrip({ ariaHidden }: { ariaHidden?: boolean }) {
       {clients.map((c) => (
         <div
           key={c.name}
-          className="flex h-8 shrink-0 items-center opacity-70 grayscale transition duration-500 hover:scale-105 hover:opacity-100 hover:grayscale-0 md:h-14"
+          className="flex h-8 shrink-0 items-center transition duration-500 hover:scale-105 md:h-14"
         >
           <Image
             src={c.src}
