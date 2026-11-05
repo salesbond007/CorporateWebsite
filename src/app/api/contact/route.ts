@@ -3,7 +3,6 @@ import nodemailer from "nodemailer";
 import {
   apokomiLeadSchema,
   generalContactSchema,
-  partnerLeadSchema,
   professionalContactSchema,
   type ContactFormType,
 } from "@/lib/contact";
@@ -188,11 +187,9 @@ function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
   const heading =
     type === "professional"
       ? "プロ人材お問い合わせ"
-      : type === "partner_lead"
-        ? "個人パートナー登録(メール仮登録)"
-        : type === "apokomi_lead"
-          ? "アポコミ 無料相談のお申し込み"
-          : "お問い合わせ(企業)";
+      : type === "apokomi_lead"
+        ? "アポコミ 無料相談のお申し込み"
+        : "お問い合わせ(企業)";
 
   return `<!doctype html>
   <html><body style="font-family:-apple-system,'Segoe UI',sans-serif;color:#1A1A1A;">
@@ -217,7 +214,6 @@ export async function POST(req: Request) {
   if (
     type !== "professional" &&
     type !== "general" &&
-    type !== "partner_lead" &&
     type !== "apokomi_lead"
   ) {
     return NextResponse.json({ error: "Invalid form type" }, { status: 400 });
@@ -226,11 +222,9 @@ export async function POST(req: Request) {
   const schema =
     type === "professional"
       ? professionalContactSchema
-      : type === "partner_lead"
-        ? partnerLeadSchema
-        : type === "apokomi_lead"
-          ? apokomiLeadSchema
-          : generalContactSchema;
+      : type === "apokomi_lead"
+        ? apokomiLeadSchema
+        : generalContactSchema;
   const parsed = schema.safeParse(body);
 
   if (!parsed.success) {
@@ -250,11 +244,9 @@ export async function POST(req: Request) {
 
   const to = type === "professional" ? toProfessional : toBusiness;
   const subject =
-    type === "partner_lead"
-      ? "ハードエンジニア募集通知"
-      : type === "apokomi_lead"
-        ? "アポコミ 無料相談のお申し込み"
-        : "ホームページからの問い合わせ";
+    type === "apokomi_lead"
+      ? "アポコミ 無料相談のお申し込み"
+      : "ホームページからの問い合わせ";
 
   if (!transporter) {
     console.warn("[contact] GMAIL_USER / GMAIL_APP_PASSWORD is not set. Logging form data instead.");
@@ -278,7 +270,7 @@ export async function POST(req: Request) {
     console.info("[contact] sent", { messageId: info.messageId, to, type });
     await forwardToCRM(type, parsed.data as Record<string, unknown>);
 
-    if (type === "general" || type === "partner_lead" || type === "apokomi_lead") {
+    if (type === "general" || type === "apokomi_lead") {
       const senderEmail = (parsed.data as { email?: string }).email;
       const lastName = String((parsed.data as { lastName?: string }).lastName ?? "").trim();
       const name = String((parsed.data as { name?: string }).name ?? "").trim();
@@ -286,26 +278,7 @@ export async function POST(req: Request) {
 
       if (senderEmail) {
         const autoReplyText =
-          type === "partner_lead"
-            ? `${addressee} 様
-
-お世話になっております。
-ボンドテック(セールスボンド株式会社)でございます。
-
-この度はご登録いただき、誠にありがとうございます。
-
-いただいた内容を確認のうえ、担当者より案件情報や本登録のご案内をメールにてお送りいたしますので、今しばらくお待ちくださいますようお願いいたします。
-
-何卒よろしくお願い申し上げます。
-
-────────────────────────────
-セールスボンド株式会社
-〒160-0023 東京都新宿区西新宿3丁目3番13号 西新宿水間ビル2F
-Email：info@salesbond.jp
-HP：https://www.salesbond1962.com
-────────────────────────────
-※このメールは自動送信です。ご返信いただいてもお答えできません。`
-            : type === "apokomi_lead"
+          type === "apokomi_lead"
               ? `${String((parsed.data as { company?: string }).company ?? "").trim()}
 ${addressee} 様
 
@@ -346,11 +319,9 @@ HP：https://www.salesbond1962.com
 ※このメールは自動送信です。ご返信いただいてもお答えできません。`;
 
         const autoReplySubject =
-          type === "partner_lead"
-            ? "ご登録ありがとうございます(ボンドテック)"
-            : type === "apokomi_lead"
-              ? "無料相談のお申し込みありがとうございます(アポコミ)"
-              : "お問い合わせありがとうございます(セールスボンド株式会社)";
+          type === "apokomi_lead"
+            ? "無料相談のお申し込みありがとうございます(アポコミ)"
+            : "お問い合わせありがとうございます(セールスボンド株式会社)";
 
         try {
           await transporter.sendMail({

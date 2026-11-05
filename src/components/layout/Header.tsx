@@ -20,7 +20,7 @@ type Props = {
 export function Header({ locale, dict }: Props) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const hideCorporateHeader = /^\/(ja|en)\/(contact\/partner|services\/apokomi)\/?$/.test(pathname);
+  const hideCorporateHeader = /^\/(ja|en)\/services\/apokomi\/?$/.test(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -62,13 +62,6 @@ export function Header({ locale, dict }: Props) {
             className="hidden md:inline-flex shadow-[0_8px_24px_-8px_rgba(122,30,53,0.6)]"
           >
             {dict.nav.contact}
-          </Button>
-          <Button
-            href={localePath("/contact/partner", locale)}
-            size="md"
-            className="hidden md:inline-flex !bg-ink !text-white hover:!bg-ink-soft shadow-[0_8px_24px_-8px_rgba(0,0,0,0.45)]"
-          >
-            エンジニア募集はこちら
           </Button>
           <MobileMenu locale={locale} dict={dict} />
         </div>
