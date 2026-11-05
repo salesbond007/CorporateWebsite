@@ -13,6 +13,8 @@ const linkClass =
 const rows: Row[] = [
   { label: "会社名", value: "セールスボンド株式会社（Sales Bond Co., Ltd.）" },
   { label: "代表取締役", value: "飯住 孝裕" },
+  { label: "設立", value: "2024年7月" },
+  { label: "資本金", value: "41,002,000円" },
   {
     label: "共同創業者",
     value: (
@@ -26,8 +28,6 @@ const rows: Row[] = [
       </span>
     ),
   },
-  { label: "設立", value: "2024年7月" },
-  { label: "資本金", value: "41,002,000円" },
   { label: "登録番号", value: "T8012801023311" },
   {
     label: "住所",
@@ -76,7 +76,7 @@ export function CompanySection() {
                   <div
                     key={row.label}
                     style={{ transitionDelay: `${i * 50}ms` }}
-                    className="grid translate-y-3 grid-cols-1 gap-1 border-b border-ink-line py-4 opacity-0 transition-all duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100 sm:grid-cols-[10rem_1fr] sm:gap-6 sm:py-5"
+                    className="grid translate-y-3 grid-cols-1 gap-1 border-b border-ink-line py-2.5 opacity-0 transition-all duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100 sm:grid-cols-[10rem_1fr] sm:gap-6 sm:py-3"
                   >
                     <dt className="text-sm font-bold tracking-[0.05em] text-ink">{row.label}</dt>
                     <dd className="text-sm leading-relaxed tracking-[0.03em] text-ink-soft">
