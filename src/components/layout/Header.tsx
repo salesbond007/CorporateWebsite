@@ -57,7 +57,7 @@ export function Header({ locale, dict }: Props) {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2 md:gap-3">
+        <div className="flex items-center gap-3 md:gap-6 lg:gap-12">
           <Button
             href={localePath("/contact", locale)}
             size="md"

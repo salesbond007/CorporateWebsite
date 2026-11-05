@@ -13,7 +13,6 @@
     "about": "About us",
     "partner": "Partners",
     "contact": "Contact",
-    "contactProfessional": "For professionals",
     "menu": "Menu",
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
@@ -61,7 +60,6 @@
   },
   "contact": {
     "businessTitle": "Contact (Business)",
-    "professionalTitle": "Contact (Professionals)",
     "successTitle": "Thank you — your message has been sent",
     "successBody": "We received your inquiry and will be in touch shortly.",
     "required": "required",
