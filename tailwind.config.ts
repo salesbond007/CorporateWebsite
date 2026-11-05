@@ -91,10 +91,6 @@ const config: Config = {
           "0%": { transform: "translateY(110%)" },
           "100%": { transform: "translateY(0)" },
         },
-        shimmer: {
-          "0%": { backgroundPosition: "200% 50%" },
-          "100%": { backgroundPosition: "-200% 50%" },
-        },
         kenBurns: {
           "0%": { transform: "scale(1.02) translate3d(0,0,0)" },
           "100%": { transform: "scale(1.14) translate3d(-1.5%,-1%,0)" },
@@ -130,7 +126,6 @@ const config: Config = {
         "hero-pan-fast": "heroPan 7s ease-in-out infinite alternate",
         "hero-crossfade": "heroCrossfade 12s ease-in-out infinite",
         "line-up": "lineUp 1.1s cubic-bezier(0.22,1,0.36,1) both",
-        shimmer: "shimmer 6s linear infinite",
         "ken-burns": "kenBurns 22s ease-in-out infinite alternate",
         "scroll-dot": "scrollDot 2.2s cubic-bezier(0.65,0,0.35,1) infinite",
         blob: "blob 18s ease-in-out infinite",

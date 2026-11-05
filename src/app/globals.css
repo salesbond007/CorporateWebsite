@@ -70,23 +70,6 @@
     letter-spacing: -0.03em;
   }
 
-  /* 白→ブランドピンクが流れるグラデーション文字 */
-  .text-shimmer {
-    background-image: linear-gradient(
-      100deg,
-      #e4a0b0 0%,
-      #e4a0b0 35%,
-      #ffffff 50%,
-      #e4a0b0 65%,
-      #e4a0b0 100%
-    );
-    background-size: 200% 100%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    @apply animate-shimmer;
-  }
-
   /* マスクからせり上がる1行。親の .line-mask が overflow を隠す */
   .line-mask {
     @apply block overflow-hidden pb-[0.08em];
