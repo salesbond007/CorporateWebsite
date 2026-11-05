@@ -98,7 +98,7 @@ export type NavItem = {
 export const navigation: NavItem[] = [
   { key: "top" },
   { key: "services", hash: "services" },
-  { key: "news", hash: "news" },
+  { key: "news", href: "/news" },
   { key: "company", hash: "company" },
   { key: "recruit", href: "/recruit" },
   { key: "contact", href: "/contact" },
