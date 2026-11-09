@@ -595,10 +595,7 @@ function MenuSelector() {
   return (
     <div>
       <Reveal variant="none" className="text-center">
-        <p className="text-xs font-bold tracking-[0.25em] text-brand-600 opacity-0 transition-opacity duration-700 group-data-[visible=true]/reveal:opacity-100">
-          WHICH ONE
-        </p>
-        <h3 className="mt-3 text-[clamp(1.4rem,2.6vw,2rem)] font-black text-ink">
+        <h3 className="text-[clamp(1.4rem,2.6vw,2rem)] font-black text-ink">
           状況に合わせて、必要なメニューだけを。
         </h3>
       </Reveal>
@@ -861,24 +858,10 @@ export default function WebSecurityPage({
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_0%,rgba(255,255,255,0.85)_14%,rgba(255,255,255,0)_42%)]" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/70 to-transparent" />
         </div>
-        <Container className="pb-16 pt-10 md:pb-24 md:pt-14 lg:min-h-[640px]">
-          <nav aria-label="パンくず" className="text-xs text-ink-muted">
-            <Link
-              href={localePath("/services", locale)}
-              className="hover:text-ink"
-            >
-              サービス
-            </Link>
-            <span className="mx-2">/</span>
-            <span className="text-ink">{title}</span>
-          </nav>
-
-          <div className="mt-10 grid items-center gap-12 md:mt-14 lg:grid-cols-12 lg:gap-14">
+        <Container className="pb-16 pt-12 md:pb-24 md:pt-20 lg:flex lg:min-h-[640px] lg:flex-col lg:justify-center">
+          <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
-              <p className="text-xs font-bold tracking-[0.25em] text-brand-600 animate-fade-up">
-                WEBSITE SECURITY
-              </p>
-              <h1 className="mt-5 text-[min(2.6rem,9.6vw)] md:text-[clamp(2.4rem,5.6vw,5rem)] font-black leading-[1.15] tracking-[0.01em] text-ink">
+              <h1 className="text-[min(2.6rem,9.6vw)] md:text-[clamp(2.4rem,5.6vw,5rem)] font-black leading-[1.15] tracking-[0.01em] text-ink">
                 <span className="line-mask">
                   <span style={{ animationDelay: "0.1s" }}>ホームページ</span>
                 </span>
@@ -909,13 +892,6 @@ export default function WebSecurityPage({
               >
                 <Button href="#diagnosis" size="lg">
                   無料相談を申し込む
-                </Button>
-                <Button
-                  href={localePath("/contact", locale)}
-                  size="lg"
-                  variant="secondary"
-                >
-                  無料で相談する
                 </Button>
               </div>
             </div>
@@ -999,11 +975,7 @@ export default function WebSecurityPage({
         />
         <Container>
           <Reveal variant="none" className="text-center">
-            <p className="flex translate-y-3 items-center justify-center gap-3 text-xs font-bold tracking-[0.25em] text-ink-muted opacity-0 transition-all duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100">
-              <span className="text-ink">01</span>
-              VALUE
-            </p>
-            <h2 className="mt-3 text-[clamp(1.5rem,3.4vw,2.6rem)] font-black leading-[1.35] tracking-[0.02em] text-ink">
+            <h2 className="text-[clamp(1.5rem,3.4vw,2.6rem)] font-black leading-[1.35] tracking-[0.02em] text-ink">
               <span className="line-mask">
                 <span className="animate-none translate-y-[110%] transition-transform duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
                   今すぐやるべき
@@ -1053,10 +1025,7 @@ export default function WebSecurityPage({
       >
         <Container>
           <Reveal variant="none" className="text-center">
-            <p className="inline-flex items-center gap-2 rounded-full bg-brand-500 px-4 py-1.5 text-xs font-bold tracking-[0.15em] text-white">
-              無料
-            </p>
-            <h2 className="mt-5 text-[clamp(1.6rem,3.6vw,2.75rem)] font-black leading-snug text-ink">
+            <h2 className="text-[clamp(1.6rem,3.6vw,2.75rem)] font-black leading-snug text-ink">
               <span className="text-brand-600">無料相談</span>に申し込む
             </h2>
             <p className="mt-4 text-[15px] text-ink-soft">
@@ -1069,12 +1038,6 @@ export default function WebSecurityPage({
                 aria-hidden="true"
                 className="absolute inset-x-0 top-0 h-1.5 bg-brand-500"
               />
-              <div className="mb-7 flex items-center justify-between gap-4 border-b border-ink/10 pb-5">
-                <p className="text-lg font-black">無料相談フォーム</p>
-                <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-600">
-                  無料
-                </span>
-              </div>
               <SimpleContactForm locale={locale} variant="consult" />
             </div>
           </Reveal>
