@@ -322,9 +322,6 @@ export default function ApokomiPage({
       <div className="sticky top-16 z-30 border-b border-[#F2E3D8] bg-white/95 backdrop-blur md:top-20">
         <Container className="flex h-14 items-center justify-between gap-3">
           <p className="flex items-center gap-3">
-            <span className="text-xl font-black tracking-[0.06em] text-[#F26B1D] md:text-2xl">
-              アポコミ
-            </span>
             <span className="hidden text-sm font-bold text-[#241F20]/70 sm:inline">
               複数チャネルで新規アポイントを創出
             </span>
@@ -349,7 +346,7 @@ export default function ApokomiPage({
           </p>
           <h1 className="mt-5">
             <span
-              className="block animate-fade-up text-[clamp(3.25rem,9vw,6rem)] font-black leading-none tracking-[0.08em] [text-shadow:0_6px_24px_rgba(201,84,15,0.35)]"
+              className="block animate-fade-up text-[clamp(4rem,13vw,8.5rem)] font-black leading-none tracking-[0.08em] [text-shadow:0_6px_24px_rgba(201,84,15,0.35)]"
               style={{ animationDelay: "0.1s" }}
             >
               アポコミ
