@@ -31,14 +31,24 @@ export function generateMetadata({
 
 /* ---------------------------------------------------------------- データ */
 
-const worries = [
-  "問い合わせフォームや採用応募フォームで、個人情報を受け取っている",
-  "サーバー会社から「PHPを更新してください」と通知が来たが、そのままになっている",
-  "サイトを作った制作会社と連絡が取れず、誰も中身が分からない",
-  "採用サイトやキャンペーンサイトが、作ったまま放置されている",
-  "ニュースでPHPの脆弱性を見たが、自社に関係があるのか分からない",
+/** サービスの価値と対応内容(3つのメニューの要約) */
+const values: { name: string; value: string; text: string }[] = [
+  {
+    name: "診断",
+    value: "現状のリスクを知る",
+    text: "WordPress本体・プラグイン・テーマ・PHPのバージョンを外部から診断し、危険度と対策の優先順位をレポートします。",
+  },
+  {
+    name: "保守",
+    value: "安全な状態を保つ",
+    text: "定期更新とバックアップ、ログイン保護・WAFの導入、月次レポートで、今の環境を安全に使い続けられます。",
+  },
+  {
+    name: "移行",
+    value: "攻撃の入口をなくす",
+    text: "WordPressを静的HTMLに移行し、PHP・データベース・管理画面をなくして根本から安全にします。",
+  },
 ];
-
 type Source = { label: string; href: string };
 
 type MeterData = { value: number; label: string; caption: string };
@@ -992,43 +1002,55 @@ export default function WebSecurityPage({
         </Container>
       </section>
 
-      {/* ⑤ お悩み */}
-      <Section no="01" label="Check" title="こんなお悩みはありませんか？">
+      {/* サービスの価値と対応内容 */}
+      <Section
+        no="01"
+        label="Value"
+        title="ホームページを、守りの要に。"
+        lead="個人情報の受付窓口であるホームページを、外からの攻撃から守ります。現状を診断し、必要な対策を行い、安全な状態を保ち続けることで、情報漏洩のリスクを低減します。"
+      >
+        {/* TODO: 本文確定後に差し替え(見出し・リード文・各項目の説明) */}
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
           <div className="order-2 lg:order-1 lg:col-span-4">
             <DefenseDiagram />
           </div>
           <div className="order-1 lg:order-2 lg:col-span-8">
-            <ul className="border-t border-ink/15">
-              {worries.map((w, i) => (
-                <li key={w} className="border-b border-ink/15">
-                  <Reveal variant="fade" delay={i * 60}>
-                    <p className="flex items-start gap-4 py-5 text-[15px] font-bold leading-relaxed text-ink md:text-base">
-                      <span
-                        aria-hidden="true"
-                        className="mt-1 grid h-4 w-4 shrink-0 place-items-center border border-ink/40"
-                      >
-                        <svg
-                          width="10"
-                          height="10"
-                          viewBox="0 0 10 10"
-                          fill="none"
-                        >
-                          <path
-                            d="M1.5 5.2l2.2 2.2L8.5 2.6"
-                            stroke="#7A1E35"
-                            strokeWidth="1.6"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </span>
-                      {w}
-                    </p>
+            <p className="text-xs font-bold tracking-[0.2em] text-ink-muted">
+              対応内容
+            </p>
+            <ol className="mt-4 border-t border-ink/15">
+              {values.map((v, i) => (
+                <li key={v.name} className="border-b border-ink/15">
+                  <Reveal variant="fade" delay={i * 80}>
+                    <div className="grid gap-2 py-6 sm:grid-cols-[9rem_1fr] sm:gap-8">
+                      <p className="flex items-baseline gap-3">
+                        <span className="text-xs font-bold text-brand-600">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="text-2xl font-black text-ink">
+                          {v.name}
+                        </span>
+                      </p>
+                      <div>
+                        <p className="text-base font-black text-ink">
+                          {v.value}
+                        </p>
+                        <p className="mt-1.5 text-sm leading-[1.9] text-ink-soft">
+                          {v.text}
+                        </p>
+                      </div>
+                    </div>
                   </Reveal>
                 </li>
               ))}
-            </ul>
+            </ol>
+            <Link
+              href="#menu"
+              className="mt-6 inline-flex items-center gap-2 border-b border-ink pb-1 text-sm font-bold text-ink transition-colors hover:border-brand-500 hover:text-brand-600"
+            >
+              3つのメニューを詳しく見る
+              <span aria-hidden="true">↓</span>
+            </Link>
           </div>
         </div>
       </Section>
@@ -1162,6 +1184,7 @@ export default function WebSecurityPage({
 
       {/* ⑧ 3つのメニュー */}
       <Section
+        id="menu"
         no="04"
         label="Menu"
         title="3つのメニュー"
