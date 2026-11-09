@@ -8,210 +8,248 @@ const ORANGE_SOFT = "#FFD9BC";
 const CREAM = "#FFF4EA";
 const SKIN = "#FFE2CC";
 const NAVY = "#2F4358";
-const GRAY = "#8C97A3";
 
-type PersonProps = {
+/* ---------------------------------------------------- ファーストビューの会議シーン */
+
+const HAIR = "#3A3536";
+const CHAIR = "#FFC08A";
+const SUIT_GRAY = "#A3A7AD";
+const SW = 3; // 線の太さ
+
+/** 机の手前の縁(左下→右上へゆるやかに上がる曲線)のy座標 */
+function edgeY(x: number) {
+  const t = (x + 20) / 1480;
+  return (1 - t) ** 2 * 506 + 2 * t * (1 - t) * 374 + t ** 2 * 412;
+}
+
+type Seat = {
   x: number;
+  s: number;
+  dir: 1 | -1;
   suit: string;
-  hair?: "short" | "long";
-  tie?: boolean;
+  hair: "short" | "long" | "bob";
+  tie?: string;
+  item: "pen" | "paper" | "laptop" | "talk";
 };
 
-/** 机に向かって座る人物(上半身) */
-function Person({ x, suit, hair = "short", tie }: PersonProps) {
+const seats: Seat[] = [
+  {
+    x: 210,
+    s: 1.32,
+    dir: 1,
+    suit: NAVY,
+    hair: "short",
+    tie: ORANGE,
+    item: "pen",
+  },
+  { x: 470, s: 1.02, dir: 1, suit: SUIT_GRAY, hair: "long", item: "paper" },
+  {
+    x: 650,
+    s: 0.88,
+    dir: 1,
+    suit: NAVY,
+    hair: "short",
+    tie: NAVY,
+    item: "pen",
+  },
+  {
+    x: 930,
+    s: 0.9,
+    dir: -1,
+    suit: SUIT_GRAY,
+    hair: "short",
+    tie: ORANGE,
+    item: "talk",
+  },
+  { x: 1200, s: 1.12, dir: -1, suit: SUIT_GRAY, hair: "bob", item: "laptop" },
+];
+
+function seatTransform(p: Seat) {
+  return `translate(${p.x} ${edgeY(p.x) - 6}) scale(${p.s * p.dir} ${p.s})`;
+}
+
+/** 机の奥側に見える部分(椅子・胴体・頭) */
+function SeatBody({ p }: { p: Seat }) {
   return (
-    <g>
+    <g
+      transform={seatTransform(p)}
+      stroke={INK}
+      strokeWidth={SW}
+      strokeLinejoin="round"
+    >
       {/* 椅子の背もたれ */}
-      <rect
-        x={x - 46}
-        y={150}
-        width={92}
-        height={110}
-        rx={18}
-        fill={ORANGE_SOFT}
-        stroke={INK}
-        strokeWidth={2}
-      />
-      {/* 胴体 */}
       <path
-        d={`M${x - 40} 262 L${x - 36} 196 Q${x} 172 ${x + 36} 196 L${x + 40} 262 Z`}
-        fill={suit}
-        stroke={INK}
-        strokeWidth={2}
-        strokeLinejoin="round"
+        d="M-112 60 L-116 -150 Q-116 -206 -64 -210 L24 -210 Q70 -206 70 -150 L66 60 Z"
+        fill={CHAIR}
       />
-      <path
-        d={`M${x - 12} 182 L${x} 206 L${x + 12} 182 Z`}
-        fill="#fff"
-        stroke={INK}
-        strokeWidth={1.5}
-        strokeLinejoin="round"
-      />
-      {tie ? (
-        <path d={`M${x} 190 l-4 10 l4 14 l4 -14 Z`} fill={ORANGE} />
-      ) : null}
-      {/* 首と頭 */}
-      <rect x={x - 6} y={160} width={12} height={16} fill={SKIN} />
-      {hair === "long" ? (
+      {/* 長い髪(頭の後ろ) */}
+      {p.hair === "long" ? (
         <path
-          d={`M${x - 26} 176 Q${x - 30} 112 ${x} 112 Q${x + 30} 112 ${x + 26} 176 Z`}
-          fill={INK}
+          d="M-46 -236 Q-52 -296 6 -296 Q58 -294 50 -236 L58 -168 Q20 -156 -4 -166 L-52 -164 Z"
+          fill={HAIR}
         />
       ) : null}
-      <circle cx={x} cy={144} r={22} fill={SKIN} stroke={INK} strokeWidth={2} />
+      {/* 胴体 */}
       <path
-        d={
-          hair === "long"
-            ? `M${x - 23} 146 Q${x - 22} 118 ${x} 118 Q${x + 22} 118 ${x + 23} 146 Q${x + 8} 128 ${x - 23} 146 Z`
-            : `M${x - 23} 144 Q${x - 24} 116 ${x} 116 Q${x + 24} 116 ${x + 23} 142 Q${x + 10} 128 ${x - 8} 130 Q${x - 18} 132 ${x - 23} 144 Z`
-        }
-        fill={INK}
+        d="M-82 60 L-78 -108 Q-74 -160 -26 -170 L30 -170 Q76 -160 80 -108 L84 60 Z"
+        fill={p.suit}
       />
-      {/* 腕 */}
+      <path d="M-26 -170 L4 -108 L30 -170 Z" fill="#fff" />
+      {p.tie ? (
+        <path d="M4 -162 L-5 -148 L4 -96 L13 -148 Z" fill={p.tie} />
+      ) : null}
       <path
-        d={`M${x - 32} 204 Q${x - 30} 246 ${x - 4} 250`}
+        d="M-26 -170 L-12 -98 L4 -108 M30 -170 L18 -98 L4 -108"
         fill="none"
-        stroke={suit}
-        strokeWidth={14}
+      />
+      {/* 首と頭 */}
+      <path d="M-14 -200 L-14 -166 L20 -166 L20 -200" fill="#fff" />
+      <ellipse cx="6" cy="-234" rx="38" ry="44" fill="#fff" />
+      {p.hair === "short" ? (
+        <path
+          d="M-33 -220 Q-46 -282 8 -284 Q52 -284 46 -246 Q36 -260 16 -258 Q-2 -257 -12 -248 Q-17 -238 -18 -222 Z"
+          fill={HAIR}
+        />
+      ) : p.hair === "long" ? (
+        <path
+          d="M-34 -226 Q-40 -284 10 -286 Q50 -284 46 -244 Q28 -264 -4 -258 Q-22 -250 -26 -222 Z"
+          fill={HAIR}
+        />
+      ) : (
+        <path
+          d="M-40 -196 Q-52 -286 8 -288 Q56 -286 48 -240 Q30 -262 0 -256 Q-18 -248 -20 -228 Q-22 -206 -14 -196 Z"
+          fill={HAIR}
+        />
+      )}
+      {/* 耳と顔 */}
+      <ellipse cx="-20" cy="-226" rx="8" ry="11" fill="#fff" />
+      <circle cx="24" cy="-234" r="3.4" fill={INK} stroke="none" />
+      <path
+        d="M15 -247 q8 -5 17 -1"
+        fill="none"
+        strokeWidth={2.5}
         strokeLinecap="round"
       />
       <path
-        d={`M${x + 32} 204 Q${x + 30} 246 ${x + 4} 250`}
+        d="M42 -234 q7 9 -2 11"
         fill="none"
-        stroke={suit}
-        strokeWidth={14}
+        strokeWidth={2.5}
+        strokeLinecap="round"
+      />
+      <path
+        d="M24 -208 q7 4 13 -1"
+        fill="none"
+        strokeWidth={2.5}
         strokeLinecap="round"
       />
     </g>
   );
 }
 
-function Headset({ x }: { x: number }) {
-  return (
-    <g fill="none" stroke={INK} strokeWidth={3} strokeLinecap="round">
+/** 机の手前に見える部分(腕・手・持ち物) */
+function SeatArms({ p }: { p: Seat }) {
+  const sleeve = (d: string) => (
+    <>
       <path
-        d={`M${x - 24} 146 Q${x - 26} 114 ${x} 114 Q${x + 26} 114 ${x + 24} 146`}
-      />
-      <rect x={x - 28} y={138} width={8} height={14} rx={3} fill={ORANGE} />
-      <path d={`M${x - 24} 152 Q${x - 20} 166 ${x - 6} 164`} strokeWidth={2} />
-    </g>
-  );
-}
-
-function Laptop({ x }: { x: number }) {
-  return (
-    <g>
-      <path
-        d={`M${x - 34} 254 L${x - 28} 214 L${x + 28} 214 L${x + 34} 254 Z`}
-        fill="#E9EDF1"
-        stroke={INK}
-        strokeWidth={2}
-        strokeLinejoin="round"
-      />
-      <circle cx={x} cy={232} r={5} fill={ORANGE} />
-    </g>
-  );
-}
-
-function Letter({ x }: { x: number }) {
-  return (
-    <g transform={`rotate(-8 ${x} 246)`}>
-      <rect
-        x={x - 24}
-        y={232}
-        width={48}
-        height={30}
-        rx={3}
-        fill="#fff"
-        stroke={INK}
-        strokeWidth={2}
-      />
-      <path
-        d={`M${x - 24} 234 L${x} 250 L${x + 24} 234`}
+        d={d}
         fill="none"
         stroke={INK}
-        strokeWidth={2}
+        strokeWidth={34}
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
-      <rect x={x + 12} y={237} width={8} height={9} fill={ORANGE} />
-    </g>
+      <path
+        d={d}
+        fill="none"
+        stroke={p.suit}
+        strokeWidth={27}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </>
   );
-}
-
-function Phone({ x }: { x: number }) {
+  const hand = (cx: number, cy: number) => (
+    <ellipse
+      cx={cx}
+      cy={cy}
+      rx="15"
+      ry="11"
+      fill="#fff"
+      stroke={INK}
+      strokeWidth={SW}
+    />
+  );
   return (
-    <g transform={`rotate(10 ${x} 240)`}>
-      <rect
-        x={x - 10}
-        y={222}
-        width={20}
-        height={34}
-        rx={4}
-        fill={NAVY}
-        stroke={INK}
-        strokeWidth={2}
-      />
-      <rect
-        x={x - 6}
-        y={227}
-        width={12}
-        height={20}
-        rx={1.5}
-        fill={ORANGE_SOFT}
-      />
+    <g transform={seatTransform(p)}>
+      {/* 書類 */}
+      {p.item !== "laptop" ? (
+        <g stroke={INK} strokeWidth={SW} strokeLinejoin="round">
+          <path d="M10 36 L150 22 L170 92 L24 108 Z" fill="#fff" />
+          <path
+            d="M40 54 L130 45 M44 70 L140 60 M48 86 L110 80"
+            fill="none"
+            stroke="#D8D2CD"
+            strokeWidth={4}
+            strokeLinecap="round"
+          />
+        </g>
+      ) : null}
+      {/* 奥の腕 */}
+      {p.item === "talk"
+        ? sleeve("M58 -120 Q92 -70 96 -30 Q98 -6 112 -40")
+        : sleeve("M58 -120 Q84 -40 96 24 L136 36")}
+      {p.item === "talk" ? hand(116, -48) : hand(146, 38)}
+      {/* 手前の腕 */}
+      {sleeve("M-52 -116 Q-56 -20 -30 44 L64 62")}
+      {hand(76, 62)}
+      {p.item === "pen" ? (
+        <path
+          d="M70 58 L104 18"
+          stroke={INK}
+          strokeWidth={6}
+          strokeLinecap="round"
+        />
+      ) : null}
+      {p.item === "laptop" ? (
+        <g stroke={INK} strokeWidth={SW} strokeLinejoin="round">
+          <path d="M44 -58 L176 -76 L188 52 L56 66 Z" fill="#E7EAEE" />
+          <path d="M40 66 L192 50 L200 66 L44 84 Z" fill="#CDD2D8" />
+          <circle cx="118" cy="-4" r="8" fill={ORANGE} />
+        </g>
+      ) : null}
     </g>
   );
 }
 
-/** ファーストビュー: チームで全チャネルから新規開拓するシーン */
+/** ファーストビュー: 会議テーブルを囲んで新規開拓を進めるチームのイラスト */
 export function ApokomiHeroIllustration({ className }: { className?: string }) {
   return (
     <svg
-      viewBox="0 96 800 234"
+      viewBox="0 60 1440 560"
       className={className}
       role="img"
-      aria-label="チームで複数のチャネルから新規開拓を進めるイラスト"
+      aria-label="会議テーブルを囲んで新規開拓の作戦を立てるチームのイラスト"
     >
-      <Person x={150} suit={NAVY} tie />
-      <Headset x={150} />
-      <Person x={310} suit={GRAY} hair="long" />
-      <Person x={480} suit={NAVY} tie />
-      <Person x={650} suit={GRAY} hair="long" />
-      {/* 机 */}
+      {seats.map((p) => (
+        <SeatBody key={p.x} p={p} />
+      ))}
+      {/* 会議テーブル(白) */}
       <path
-        d="M40 262 Q400 238 760 262 L760 286 Q400 262 40 286 Z"
-        fill={CREAM}
+        d="M-20 640 L-20 506 Q 720 374 1460 412 L1460 640 Z"
+        fill="#fff"
         stroke={INK}
-        strokeWidth={2.5}
+        strokeWidth={SW}
         strokeLinejoin="round"
       />
-      <Phone x={180} />
-      <Laptop x={310} />
-      <Letter x={480} />
-      <Laptop x={650} />
-      {/* 書類 */}
-      <rect
-        x={226}
-        y={258}
-        width={44}
-        height={10}
-        rx={2}
-        fill="#fff"
-        stroke={INK}
-        strokeWidth={1.5}
-        transform="rotate(-4 248 263)"
-      />
-      <rect
-        x={540}
-        y={255}
-        width={40}
-        height={10}
-        rx={2}
-        fill="#fff"
-        stroke={INK}
-        strokeWidth={1.5}
-        transform="rotate(5 560 260)"
-      />
+      {/* コーヒーカップ */}
+      <g stroke={INK} strokeWidth={SW} strokeLinejoin="round">
+        <path d="M774 452 L780 494 Q792 502 806 494 L812 452 Z" fill="#fff" />
+        <ellipse cx="793" cy="452" rx="19" ry="6" fill={CHAIR} />
+        <path d="M811 462 q14 2 6 18 l-8 2" fill="none" />
+      </g>
+      {seats.map((p) => (
+        <SeatArms key={p.x} p={p} />
+      ))}
     </svg>
   );
 }

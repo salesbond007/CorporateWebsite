@@ -9,6 +9,10 @@ import {
   ApokomiHeroIllustration,
   WaveLines,
 } from "@/components/services/ApokomiIllustration";
+import {
+  ApokomiServiceDiagram,
+  ChannelIcon,
+} from "@/components/services/ApokomiServiceDiagram";
 import { ApokomiLeadForm } from "@/components/contact/ApokomiLeadForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { pageMeta, pageMetadata } from "@/lib/seo";
@@ -170,33 +174,6 @@ const logos = [
   { src: "/clients/okan.png", width: 128 },
 ];
 
-const faqs = [
-  {
-    q: "営業リストがなくても依頼できますか？",
-    a: "はい。ターゲットのご要望を伺ったうえで、リスト作成から対応します（内容に応じてお見積もりします）。",
-  },
-  {
-    q: "1つのチャネルだけでも依頼できますか？",
-    a: "可能です。ご相談の内容をもとに、最適なチャネルの組み合わせもご提案します。",
-  },
-  {
-    q: "どのような商材に対応していますか？",
-    a: "BtoB商材であれば、業種・規模を問わず対応します。まずはお気軽にご相談ください。",
-  },
-  {
-    q: "商談の対応もお願いできますか？",
-    a: "アポコミの対応範囲は、アポイントの獲得までです。獲得したアポイントでの商談は、御社にご対応いただきます。",
-  },
-  {
-    q: "契約期間はどのくらいですか？",
-    a: "原則3カ月からのご契約です。勝ち筋を見つけて成果を積み上げるため、一定期間の運用をおすすめしています。",
-  },
-  {
-    q: "進捗はどのように共有されますか？",
-    a: "月2回の定例ミーティングで、チャネルごとの活動量・反応・アポイント獲得状況をレポートで共有します。",
-  },
-];
-
 /* --------------------------------------------------------------- 小さな部品 */
 
 type CtaVariant = "solid" | "white" | "ghost";
@@ -319,49 +296,6 @@ function CheckBox() {
   );
 }
 
-/** チャネルのアイコン(線画) */
-function ChannelIcon({ id }: { id: string }) {
-  const p = {
-    stroke: "currentColor",
-    strokeWidth: 1.7,
-    strokeLinecap: "round" as const,
-    strokeLinejoin: "round" as const,
-    fill: "none",
-  };
-  return (
-    <svg width="30" height="30" viewBox="0 0 24 24" aria-hidden="true">
-      {id === "tele" ? (
-        <path
-          {...p}
-          d="M5 4h3l1.5 4-2 1.2a11 11 0 0 0 5.3 5.3L14 12.5l4 1.5v3a2 2 0 0 1-2 2A13 13 0 0 1 3 6a2 2 0 0 1 2-2Z"
-        />
-      ) : id === "form" ? (
-        <g {...p}>
-          <rect x="3" y="4" width="18" height="16" rx="2" />
-          <path d="M3 8h18M7 12h10M7 15.5h6" />
-        </g>
-      ) : id === "mail" ? (
-        <g {...p}>
-          <rect x="3" y="5.5" width="18" height="13" rx="2" />
-          <path d="m3.5 7 8.5 6 8.5-6" />
-        </g>
-      ) : id === "letter" ? (
-        <g {...p}>
-          <rect x="3" y="6" width="15" height="12" rx="1.5" />
-          <path d="m3.5 7.5 7 5 7-5" />
-          <path d="M21 3.5 15.5 9" />
-          <path d="m20 3 1.5 1.5" />
-        </g>
-      ) : (
-        <g {...p}>
-          <path d="M4 5h16v11H9l-5 4V5Z" />
-          <path d="M8 9.5h8M8 12.5h5" />
-        </g>
-      )}
-    </svg>
-  );
-}
-
 /* ----------------------------------------------------------------- ページ */
 
 export default function ApokomiPage({
@@ -405,15 +339,6 @@ export default function ApokomiPage({
                 "料金は要見積もり（ターゲット・チャネル・目標アポイント数に応じて設計）",
             },
           },
-          {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqs.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
-          },
         ]}
       />
 
@@ -439,11 +364,8 @@ export default function ApokomiPage({
           aria-hidden="true"
           className="pointer-events-none absolute -right-24 top-40 -z-10 h-96 w-96 rounded-full bg-[#FFE0C7]/40 blur-[110px]"
         />
-        <Container className="pt-14 text-center md:pt-20">
-          <p className="inline-flex animate-fade-up rounded-full bg-white px-4 py-1.5 text-xs font-bold tracking-[0.12em] text-[#E05A0C] md:text-sm">
-            インサイドセールス代行
-          </p>
-          <h1 className="mt-5">
+        <Container className="relative z-10 pt-14 text-center md:pt-20">
+          <h1>
             <span
               className="block animate-fade-up text-[clamp(4rem,13vw,8.5rem)] font-black leading-none tracking-[0.08em] [text-shadow:0_6px_24px_rgba(201,84,15,0.35)]"
               style={{ animationDelay: "0.1s" }}
@@ -463,36 +385,11 @@ export default function ApokomiPage({
               className="w-full max-w-xs sm:w-auto"
             />
           </div>
-
-          {/* チャネルの吹き出し */}
-          <ul
-            className="mx-auto mt-12 flex max-w-3xl flex-wrap justify-center gap-2 md:gap-3"
-            aria-label="対応チャネル"
-          >
-            {channels.map((c, i) => (
-              <li key={c.name}>
-                <span
-                  style={{ animationDelay: `${i * 0.35}s` }}
-                  className="block animate-float-y rounded-full bg-white px-4 py-2 text-xs font-bold text-[#241F20] shadow-[0_10px_24px_-12px_rgba(160,60,0,0.6)] md:text-sm"
-                >
-                  {c.name}
-                </span>
-              </li>
-            ))}
-          </ul>
         </Container>
 
-        <div className="relative mt-4 md:mt-2">
-          <ApokomiHeroIllustration className="relative z-10 mx-auto block w-[150%] max-w-none -translate-x-[16.6%] sm:w-full sm:max-w-5xl sm:translate-x-0" />
-          {/* 下端の白いカーブ */}
-          <svg
-            viewBox="0 0 1440 160"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-            className="absolute inset-x-0 bottom-0 h-20 w-full md:h-36"
-          >
-            <path d="M0 160 L0 110 Q 720 -40 1440 90 L1440 160 Z" fill="#fff" />
-          </svg>
+        {/* 会議シーンのイラスト(下端の白いテーブルがそのまま次のセクションへつながる) */}
+        <div className="relative mt-6 overflow-hidden md:-mt-10 lg:-mt-16">
+          <ApokomiHeroIllustration className="relative left-1/2 block w-[220%] max-w-none -translate-x-1/2 sm:w-[140%] lg:w-full" />
         </div>
       </section>
 
@@ -589,27 +486,16 @@ export default function ApokomiPage({
         </Container>
       </section>
 
-      {/* 3. アポコミとは */}
+      {/* 3. サービス概要(図) */}
       <section className="py-20 md:py-28">
         <Container>
-          <Heading en="ABOUT">
-            アポイント創出にコミットする、
-            <br className="hidden md:block" />
-            攻めのインサイドセールス代行
+          <Heading en="SERVICE">
+            商談を創出し、
+            <br className="sm:hidden" />
+            御社へパスします
           </Heading>
-          <Reveal
-            variant="up"
-            className="mx-auto mt-10 max-w-3xl space-y-5 text-center text-[15px] leading-[2.1] text-[#241F20]/80"
-          >
-            <p>
-              アポコミは、新規アポイントの獲得に特化したインサイドセールス代行サービスです。
-            </p>
-            <p>
-              電話だけで終わらせず、フォーム・メール・手紙・SNSまで総動員して、狙った企業に接点をつくりにいきます。
-            </p>
-            <p>
-              準備から実行・改善までまるごと担当し、成果の出るチャネルに一気にリソースを投下します。
-            </p>
+          <Reveal variant="up" className="mt-14">
+            <ApokomiServiceDiagram />
           </Reveal>
           <SectionCta />
         </Container>
@@ -815,44 +701,8 @@ export default function ApokomiPage({
         </Container>
       </section>
 
-      {/* 7. よくあるご質問 */}
-      <section className="py-20 md:py-28">
-        <Container>
-          <Heading en="FAQ">よくあるご質問</Heading>
-          <div className="mx-auto mt-12 max-w-3xl space-y-3">
-            {faqs.map((f, i) => (
-              <Reveal key={f.q} variant="up" delay={i * 60}>
-                <details className="group rounded-xl bg-white shadow-[0_10px_30px_-24px_rgba(242,107,29,0.5)]">
-                  <summary className="flex cursor-pointer list-none items-center gap-4 p-5 md:p-6 [&::-webkit-details-marker]:hidden">
-                    <span className="text-lg font-bold text-[#F26B1D]">Q.</span>
-                    <span className="flex-1 text-[15px] font-bold md:text-base">
-                      {f.q}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#FFF3EA] text-sm text-[#F26B1D] transition-transform group-open:rotate-45"
-                    >
-                      ＋
-                    </span>
-                  </summary>
-                  <div className="flex gap-4 border-t border-[#F2E3D8] px-5 py-5 md:px-6">
-                    <span className="text-lg font-bold text-[#241F20]/40">
-                      A.
-                    </span>
-                    <p className="pt-0.5 text-[15px] leading-relaxed text-[#241F20]/80">
-                      {f.a}
-                    </p>
-                  </div>
-                </details>
-              </Reveal>
-            ))}
-          </div>
-          <SectionCta />
-        </Container>
-      </section>
-
-      {/* 8. 最終CTA */}
-      <section className="relative isolate overflow-hidden bg-[#FFF8F2] py-20 md:py-24">
+      {/* 7. 最終CTA */}
+      <section className="relative isolate overflow-hidden py-20 md:py-24">
         <WaveLines className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-64 w-full" />
         <Container>
           <Reveal
@@ -886,8 +736,11 @@ export default function ApokomiPage({
         </Container>
       </section>
 
-      {/* 9. 問い合わせフォーム */}
-      <section id={FORM_ID} className="scroll-mt-36 bg-white py-20 md:py-28">
+      {/* 8. 問い合わせフォーム */}
+      <section
+        id={FORM_ID}
+        className="scroll-mt-36 bg-[#FFF8F2] py-20 md:py-28"
+      >
         <Container>
           <Heading en="CONTACT">無料相談・見積もり依頼</Heading>
           <Reveal
