@@ -6,7 +6,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   ApokomiFeatureIllustration,
+  ApokomiClientBust,
   ApokomiHeroIllustration,
+  ApokomiStaffBust,
   WaveLines,
 } from "@/components/services/ApokomiIllustration";
 import {
@@ -75,6 +77,72 @@ const channels = [
     en: "SNS",
     scores: [2, 2, 3, 2],
     text: "経営者や担当者個人に直接届くチャネル。スタートアップやIT企業の開拓に",
+  },
+];
+
+/** ファーストビューの吹き出し(位置は図の枠に対する%) */
+const heroBubbles: {
+  label: string;
+  tone: "white" | "deep";
+  size: string;
+  text: string;
+  pos: React.CSSProperties;
+  tail: [React.CSSProperties, React.CSSProperties];
+}[] = [
+  {
+    label: "テレアポ",
+    tone: "white",
+    size: "33%",
+    text: "text-[clamp(1rem,3.4vw,1.9rem)]",
+    pos: { left: "-2%", top: "20%" },
+    tail: [
+      { right: "-2%", bottom: "10%" },
+      { right: "-12%", bottom: "-2%" },
+    ],
+  },
+  {
+    label: "問い合わせ\nフォーム",
+    tone: "deep",
+    size: "22%",
+    text: "px-2 text-[clamp(0.65rem,1.9vw,0.95rem)]",
+    pos: { left: "8%", top: "0%" },
+    tail: [
+      { right: "-4%", bottom: "4%" },
+      { right: "-16%", bottom: "-8%" },
+    ],
+  },
+  {
+    label: "手紙BDR",
+    tone: "white",
+    size: "27%",
+    text: "text-[clamp(0.9rem,2.8vw,1.5rem)]",
+    pos: { right: "-1%", top: "3%" },
+    tail: [
+      { left: "-2%", bottom: "6%" },
+      { left: "-12%", bottom: "-6%" },
+    ],
+  },
+  {
+    label: "SNS（DM）",
+    tone: "deep",
+    size: "22%",
+    text: "text-[clamp(0.75rem,2.2vw,1.1rem)]",
+    pos: { right: "-2%", top: "44%" },
+    tail: [
+      { left: "-4%", top: "18%" },
+      { left: "-16%", top: "6%" },
+    ],
+  },
+  {
+    label: "メール",
+    tone: "deep",
+    size: "23%",
+    text: "text-[clamp(0.8rem,2.4vw,1.25rem)]",
+    pos: { left: "2%", top: "56%" },
+    tail: [
+      { right: "-4%", top: "14%" },
+      { right: "-16%", top: "2%" },
+    ],
   },
 ];
 
@@ -364,33 +432,104 @@ export default function ApokomiPage({
           aria-hidden="true"
           className="pointer-events-none absolute -right-24 top-40 -z-10 h-96 w-96 rounded-full bg-[#FFE0C7]/40 blur-[110px]"
         />
-        <Container className="relative z-10 pt-14 text-center md:pt-20">
-          <h1>
-            <span
-              className="block animate-fade-up text-[clamp(4rem,13vw,8.5rem)] font-black leading-none tracking-[0.08em] [text-shadow:0_6px_24px_rgba(201,84,15,0.35)]"
-              style={{ animationDelay: "0.1s" }}
+        <Container className="relative z-10 grid items-center gap-4 pb-16 pt-12 md:pb-24 lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:pt-16">
+          <div className="text-center lg:text-left">
+            <h1>
+              <span
+                className="block animate-fade-up text-[clamp(4rem,12vw,8rem)] font-black leading-none tracking-[0.08em] [text-shadow:0_6px_24px_rgba(201,84,15,0.35)]"
+                style={{ animationDelay: "0.1s" }}
+              >
+                アポコミ
+              </span>
+            </h1>
+            <p
+              className="mt-5 animate-fade-up text-[clamp(1.25rem,2.6vw,2rem)] font-bold tracking-[0.12em] [text-shadow:0_2px_12px_rgba(201,84,15,0.35)]"
+              style={{ animationDelay: "0.25s" }}
             >
-              アポコミ
-            </span>
-          </h1>
+              アポイント創出に
+              <span className="ml-1 inline-block rounded-lg bg-white px-2.5 py-0.5 text-[#E05A0C] [text-shadow:none]">
+                フルコミット
+              </span>
+            </p>
+            <div
+              className="mt-10 flex animate-fade-up flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start"
+              style={{ animationDelay: "0.55s" }}
+            >
+              <Cta variant="white" className="w-full max-w-xs sm:w-auto" />
+              <Cta
+                label="サービスの特徴を見る"
+                href="#features"
+                variant="ghost"
+                className="w-full max-w-xs sm:w-auto"
+              />
+            </div>
+          </div>
+
+          {/* 複数チャネルの吹き出しと、作戦を話しながら歩く2人 */}
           <div
-            className="mt-10 flex animate-fade-up flex-col items-center justify-center gap-3 sm:flex-row"
-            style={{ animationDelay: "0.55s" }}
+            className="relative mx-auto aspect-[5/6] w-full max-w-[520px] animate-fade-up"
+            style={{ animationDelay: "0.35s" }}
           >
-            <Cta variant="white" className="w-full max-w-xs sm:w-auto" />
-            <Cta
-              label="サービスの特徴を見る"
-              href="#features"
-              variant="ghost"
-              className="w-full max-w-xs sm:w-auto"
+            <div
+              aria-hidden="true"
+              className="absolute inset-[8%] rounded-full bg-white/20"
             />
+            <ApokomiHeroIllustration className="absolute bottom-0 left-1/2 h-[92%] w-auto -translate-x-1/2" />
+            <ul aria-label="対応チャネル">
+              {heroBubbles.map((b, i) => (
+                <li
+                  key={b.label}
+                  className="absolute"
+                  style={{ ...b.pos, width: b.size }}
+                >
+                  <span
+                    className="relative block animate-float-y"
+                    style={{ animationDelay: `${i * 0.45}s` }}
+                  >
+                    <span
+                      className={cn(
+                        "grid aspect-square place-items-center whitespace-pre-line rounded-full text-center font-black leading-tight shadow-[0_14px_30px_-14px_rgba(160,60,0,0.7)]",
+                        b.tone === "white"
+                          ? "bg-white text-[#E05A0C]"
+                          : "bg-[#D9520B] text-white",
+                        b.text,
+                      )}
+                    >
+                      {b.label}
+                    </span>
+                    {/* 吹き出しのしっぽ(小さな丸) */}
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "absolute h-[14%] w-[14%] rounded-full",
+                        b.tone === "white" ? "bg-white" : "bg-[#D9520B]",
+                      )}
+                      style={b.tail[0]}
+                    />
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "absolute h-[8%] w-[8%] rounded-full",
+                        b.tone === "white" ? "bg-white" : "bg-[#D9520B]",
+                      )}
+                      style={b.tail[1]}
+                    />
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
         </Container>
 
-        {/* 会議シーンのイラスト(下端の白いテーブルがそのまま次のセクションへつながる) */}
-        <div className="relative mt-6 overflow-hidden md:-mt-10 lg:-mt-16">
-          <ApokomiHeroIllustration className="relative left-1/2 block w-[220%] max-w-none -translate-x-1/2 sm:w-[140%] lg:w-full" />
-        </div>
+        {/* 下端の白いカーブ */}
+        <svg
+          viewBox="0 0 1440 120"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          className="absolute inset-x-0 bottom-0 h-12 w-full md:h-20"
+        >
+          <path d="M0 120 L0 80 Q 720 -30 1440 70 L1440 120 Z" fill="#fff" />
+        </svg>
       </section>
 
       {/* 実績ロゴ(ファーストビュー直下) */}
@@ -424,7 +563,7 @@ export default function ApokomiPage({
                   {row.map((l) => (
                     <div
                       key={l.src}
-                      className="flex h-9 shrink-0 items-center md:h-12"
+                      className="flex h-10 shrink-0 items-center md:h-14"
                     >
                       <Image
                         src={l.src}
@@ -486,16 +625,154 @@ export default function ApokomiPage({
         </Container>
       </section>
 
-      {/* 3. サービス概要(図) */}
-      <section className="py-20 md:py-28">
+      {/* 3. アポコミとは(図解) */}
+      <section
+        id="about"
+        className="relative isolate overflow-hidden py-20 md:py-28"
+      >
+        <WaveLines className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-72 w-full" />
         <Container>
-          <Heading en="SERVICE">
-            商談を創出し、
-            <br className="sm:hidden" />
-            御社へパスします
-          </Heading>
-          <Reveal variant="up" className="mt-14">
-            <ApokomiServiceDiagram />
+          <Reveal variant="up" className="text-center">
+            <p className="text-lg font-bold tracking-[0.1em] md:text-2xl">
+              そもそも
+            </p>
+            <h2 className="mt-1 font-black leading-tight">
+              <span className="text-[clamp(2.6rem,7vw,4.25rem)] tracking-[0.06em] text-[#F26B1D]">
+                アポコミ
+              </span>
+              <span className="ml-2 text-[clamp(1.6rem,4vw,2.5rem)]">とは</span>
+            </h2>
+            <p className="mx-auto mt-5 max-w-3xl text-[15px] leading-[2] text-[#241F20]/80 [word-break:auto-phrase]">
+              5つのチャネルを総動員して新規アポイントを創出し、獲得した商談を御社へパスする、アポイント創出にフルコミットするインサイドセールス代行サービスです。
+            </p>
+          </Reveal>
+
+          <Reveal
+            variant="up"
+            className="mx-auto mt-12 max-w-5xl rounded-2xl border-2 border-[#FFD9BC] bg-white p-5 shadow-[0_30px_70px_-45px_rgba(242,107,29,0.8)] md:p-10"
+          >
+            {/* 依頼と商談のパス */}
+            <div className="grid items-center gap-4 md:grid-cols-[0.9fr_auto_1.6fr] md:gap-6">
+              <div className="flex flex-col items-center">
+                <ApokomiClientBust className="w-40 md:w-52" />
+                <span className="relative -mt-3 rounded-full bg-[#F3F0ED] px-6 py-2 text-sm font-bold">
+                  御社（クライアント）
+                </span>
+              </div>
+
+              <div className="flex items-center justify-center gap-8 md:flex-col md:gap-6">
+                <div className="flex flex-col items-center gap-1 text-[#241F20]">
+                  <svg
+                    width="96"
+                    height="20"
+                    viewBox="0 0 96 20"
+                    fill="none"
+                    aria-hidden="true"
+                    className="hidden md:block"
+                  >
+                    <path
+                      d="M2 10h84M78 3l10 7-10 7"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <svg
+                    width="20"
+                    height="44"
+                    viewBox="0 0 20 44"
+                    fill="none"
+                    aria-hidden="true"
+                    className="md:hidden"
+                  >
+                    <path
+                      d="M10 2v34M3 28l7 10 7-10"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <span className="text-sm font-bold">業務を依頼</span>
+                </div>
+                <div className="flex flex-col items-center gap-1 text-[#F26B1D] md:flex-col-reverse">
+                  <svg
+                    width="96"
+                    height="20"
+                    viewBox="0 0 96 20"
+                    fill="none"
+                    aria-hidden="true"
+                    className="hidden md:block"
+                  >
+                    <path
+                      d="M94 10H10M18 3L8 10l10 7"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeDasharray="7 6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <svg
+                    width="20"
+                    height="44"
+                    viewBox="0 0 20 44"
+                    fill="none"
+                    aria-hidden="true"
+                    className="md:hidden"
+                  >
+                    <path
+                      d="M10 42V8M3 16l7-10 7 10"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeDasharray="6 5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <span className="text-sm font-black">商談をパス</span>
+                </div>
+              </div>
+
+              <div className="grid items-center gap-4 rounded-xl bg-[#FFF3EA] p-5 sm:grid-cols-[auto_1fr] md:gap-6 md:p-6">
+                <div className="flex flex-col items-center">
+                  <ApokomiStaffBust className="w-36 md:w-44" />
+                  <span className="relative -mt-3 rounded-full bg-white px-6 py-2 text-sm font-black text-[#E05A0C] shadow-[0_8px_20px_-12px_rgba(242,107,29,0.8)]">
+                    アポコミ
+                  </span>
+                </div>
+                <ul className="mx-auto space-y-2.5 sm:mx-0">
+                  {channels.map((c) => (
+                    <li
+                      key={c.id}
+                      className="flex items-center gap-3 text-base font-bold md:text-lg"
+                    >
+                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-[#F26B1D] ring-1 ring-[#FFD9BC]">
+                        <ChannelIcon id={c.id} size={16} />
+                      </span>
+                      {c.name}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {/* 商談が生まれるまでの流れ */}
+            <div className="mt-10 border-t border-dashed border-[#EADBD0] pt-10">
+              <p className="mb-8 text-center text-sm font-bold tracking-[0.15em] text-[#F26B1D]">
+                商談が生まれるまで
+              </p>
+              <ApokomiServiceDiagram />
+            </div>
+
+            <p className="mt-10 text-center text-sm text-[#241F20]/80">
+              リスト作成からアプローチ、アポイント獲得までまるごと担当。
+              <br />
+              <span className="mt-2 inline-block bg-[linear-gradient(transparent_62%,#FFD2B3_62%)] text-xl font-black text-[#241F20] md:text-2xl">
+                御社は、商談に集中できます！
+              </span>
+            </p>
           </Reveal>
           <SectionCta />
         </Container>
@@ -680,29 +957,8 @@ export default function ApokomiPage({
         </Container>
       </section>
 
-      {/* 6. 料金 */}
-      <section className="bg-[#FFF8F2] py-20 md:py-28">
-        <Container>
-          <Heading en="PRICE">料金</Heading>
-          <Reveal
-            variant="up"
-            className="mx-auto mt-10 max-w-3xl rounded-xl border border-[#F2E3D8] bg-white p-8 text-center md:p-12"
-          >
-            <p className="text-4xl font-bold tracking-[0.08em] text-[#F26B1D] md:text-5xl">
-              要見積もり
-            </p>
-            <p className="mt-6 text-[15px] leading-[2] text-[#241F20]/80">
-              アポコミの料金は、ターゲット・チャネル・目標アポイント数に応じてお見積もりします。
-              <br className="hidden md:block" />
-              御社の予算や目標に合わせてプランを設計します。
-            </p>
-          </Reveal>
-          <SectionCta label="無料で見積もりを依頼する" />
-        </Container>
-      </section>
-
-      {/* 7. 最終CTA */}
-      <section className="relative isolate overflow-hidden py-20 md:py-24">
+      {/* 6. 最終CTA */}
+      <section className="relative isolate overflow-hidden bg-[#FFF8F2] py-20 md:py-24">
         <WaveLines className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-64 w-full" />
         <Container>
           <Reveal
@@ -736,10 +992,10 @@ export default function ApokomiPage({
         </Container>
       </section>
 
-      {/* 8. 問い合わせフォーム */}
+      {/* 7. 問い合わせフォーム */}
       <section
         id={FORM_ID}
-        className="scroll-mt-36 bg-[#FFF8F2] py-20 md:py-28"
+        className="scroll-mt-36 bg-white py-20 md:py-28"
       >
         <Container>
           <Heading en="CONTACT">無料相談・見積もり依頼</Heading>

@@ -9,247 +9,170 @@ const CREAM = "#FFF4EA";
 const SKIN = "#FFE2CC";
 const NAVY = "#2F4358";
 
-/* ---------------------------------------------------- ファーストビューの会議シーン */
+/* -------------------------------------------- ファーストビュー: 歩きながら作戦を話す2人 */
 
 const HAIR = "#3A3536";
-const CHAIR = "#FFC08A";
-const SUIT_GRAY = "#A3A7AD";
+const PANTS = "#243446";
+const SUIT_GRAY = "#9EA3A9";
+const SKIRT = "#7F858C";
 const SW = 3; // 線の太さ
 
-/** 机の手前の縁(左下→右上へゆるやかに上がる曲線)のy座標 */
-function edgeY(x: number) {
-  const t = (x + 20) / 1480;
-  return (1 - t) ** 2 * 506 + 2 * t * (1 - t) * 374 + t ** 2 * 412;
-}
-
-type Seat = {
-  x: number;
-  s: number;
-  dir: 1 | -1;
-  suit: string;
-  hair: "short" | "long" | "bob";
-  tie?: string;
-  item: "pen" | "paper" | "laptop" | "talk";
-};
-
-const seats: Seat[] = [
-  {
-    x: 210,
-    s: 1.32,
-    dir: 1,
-    suit: NAVY,
-    hair: "short",
-    tie: ORANGE,
-    item: "pen",
-  },
-  { x: 470, s: 1.02, dir: 1, suit: SUIT_GRAY, hair: "long", item: "paper" },
-  {
-    x: 650,
-    s: 0.88,
-    dir: 1,
-    suit: NAVY,
-    hair: "short",
-    tie: NAVY,
-    item: "pen",
-  },
-  {
-    x: 930,
-    s: 0.9,
-    dir: -1,
-    suit: SUIT_GRAY,
-    hair: "short",
-    tie: ORANGE,
-    item: "talk",
-  },
-  { x: 1200, s: 1.12, dir: -1, suit: SUIT_GRAY, hair: "bob", item: "laptop" },
-];
-
-function seatTransform(p: Seat) {
-  return `translate(${p.x} ${edgeY(p.x) - 6}) scale(${p.s * p.dir} ${p.s})`;
-}
-
-/** 机の奥側に見える部分(椅子・胴体・頭) */
-function SeatBody({ p }: { p: Seat }) {
+/** 輪郭線つきの袖(太い線を2重に描く) */
+function Sleeve({ d, color }: { d: string; color: string }) {
   return (
-    <g
-      transform={seatTransform(p)}
-      stroke={INK}
-      strokeWidth={SW}
-      strokeLinejoin="round"
-    >
-      {/* 椅子の背もたれ */}
-      <path
-        d="M-112 60 L-116 -150 Q-116 -206 -64 -210 L24 -210 Q70 -206 70 -150 L66 60 Z"
-        fill={CHAIR}
-      />
-      {/* 長い髪(頭の後ろ) */}
-      {p.hair === "long" ? (
-        <path
-          d="M-46 -236 Q-52 -296 6 -296 Q58 -294 50 -236 L58 -168 Q20 -156 -4 -166 L-52 -164 Z"
-          fill={HAIR}
-        />
-      ) : null}
-      {/* 胴体 */}
-      <path
-        d="M-82 60 L-78 -108 Q-74 -160 -26 -170 L30 -170 Q76 -160 80 -108 L84 60 Z"
-        fill={p.suit}
-      />
-      <path d="M-26 -170 L4 -108 L30 -170 Z" fill="#fff" />
-      {p.tie ? (
-        <path d="M4 -162 L-5 -148 L4 -96 L13 -148 Z" fill={p.tie} />
-      ) : null}
-      <path
-        d="M-26 -170 L-12 -98 L4 -108 M30 -170 L18 -98 L4 -108"
-        fill="none"
-      />
-      {/* 首と頭 */}
-      <path d="M-14 -200 L-14 -166 L20 -166 L20 -200" fill="#fff" />
-      <ellipse cx="6" cy="-234" rx="38" ry="44" fill="#fff" />
-      {p.hair === "short" ? (
-        <path
-          d="M-33 -220 Q-46 -282 8 -284 Q52 -284 46 -246 Q36 -260 16 -258 Q-2 -257 -12 -248 Q-17 -238 -18 -222 Z"
-          fill={HAIR}
-        />
-      ) : p.hair === "long" ? (
-        <path
-          d="M-34 -226 Q-40 -284 10 -286 Q50 -284 46 -244 Q28 -264 -4 -258 Q-22 -250 -26 -222 Z"
-          fill={HAIR}
-        />
-      ) : (
-        <path
-          d="M-40 -196 Q-52 -286 8 -288 Q56 -286 48 -240 Q30 -262 0 -256 Q-18 -248 -20 -228 Q-22 -206 -14 -196 Z"
-          fill={HAIR}
-        />
-      )}
-      {/* 耳と顔 */}
-      <ellipse cx="-20" cy="-226" rx="8" ry="11" fill="#fff" />
-      <circle cx="24" cy="-234" r="3.4" fill={INK} stroke="none" />
-      <path
-        d="M15 -247 q8 -5 17 -1"
-        fill="none"
-        strokeWidth={2.5}
-        strokeLinecap="round"
-      />
-      <path
-        d="M42 -234 q7 9 -2 11"
-        fill="none"
-        strokeWidth={2.5}
-        strokeLinecap="round"
-      />
-      <path
-        d="M24 -208 q7 4 13 -1"
-        fill="none"
-        strokeWidth={2.5}
-        strokeLinecap="round"
-      />
-    </g>
-  );
-}
-
-/** 机の手前に見える部分(腕・手・持ち物) */
-function SeatArms({ p }: { p: Seat }) {
-  const sleeve = (d: string) => (
     <>
       <path
         d={d}
         fill="none"
         stroke={INK}
-        strokeWidth={34}
+        strokeWidth={30}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d={d}
         fill="none"
-        stroke={p.suit}
-        strokeWidth={27}
+        stroke={color}
+        strokeWidth={24}
         strokeLinecap="round"
         strokeLinejoin="round"
       />
     </>
   );
-  const hand = (cx: number, cy: number) => (
-    <ellipse
-      cx={cx}
-      cy={cy}
-      rx="15"
-      ry="11"
-      fill="#fff"
-      stroke={INK}
-      strokeWidth={SW}
-    />
-  );
-  return (
-    <g transform={seatTransform(p)}>
-      {/* 書類 */}
-      {p.item !== "laptop" ? (
-        <g stroke={INK} strokeWidth={SW} strokeLinejoin="round">
-          <path d="M10 36 L150 22 L170 92 L24 108 Z" fill="#fff" />
-          <path
-            d="M40 54 L130 45 M44 70 L140 60 M48 86 L110 80"
-            fill="none"
-            stroke="#D8D2CD"
-            strokeWidth={4}
-            strokeLinecap="round"
-          />
-        </g>
-      ) : null}
-      {/* 奥の腕 */}
-      {p.item === "talk"
-        ? sleeve("M58 -120 Q92 -70 96 -30 Q98 -6 112 -40")
-        : sleeve("M58 -120 Q84 -40 96 24 L136 36")}
-      {p.item === "talk" ? hand(116, -48) : hand(146, 38)}
-      {/* 手前の腕 */}
-      {sleeve("M-52 -116 Q-56 -20 -30 44 L64 62")}
-      {hand(76, 62)}
-      {p.item === "pen" ? (
-        <path
-          d="M70 58 L104 18"
-          stroke={INK}
-          strokeWidth={6}
-          strokeLinecap="round"
-        />
-      ) : null}
-      {p.item === "laptop" ? (
-        <g stroke={INK} strokeWidth={SW} strokeLinejoin="round">
-          <path d="M44 -58 L176 -76 L188 52 L56 66 Z" fill="#E7EAEE" />
-          <path d="M40 66 L192 50 L200 66 L44 84 Z" fill="#CDD2D8" />
-          <circle cx="118" cy="-4" r="8" fill={ORANGE} />
-        </g>
-      ) : null}
-    </g>
-  );
 }
 
-/** ファーストビュー: 会議テーブルを囲んで新規開拓を進めるチームのイラスト */
+/** ファーストビュー: クリップボードを手に、歩きながら作戦を話すビジネスパーソン2人 */
 export function ApokomiHeroIllustration({ className }: { className?: string }) {
   return (
     <svg
-      viewBox="0 60 1440 560"
+      viewBox="0 0 400 610"
       className={className}
       role="img"
-      aria-label="会議テーブルを囲んで新規開拓の作戦を立てるチームのイラスト"
+      aria-label="クリップボードを手に、歩きながら新規開拓の作戦を話し合うビジネスパーソン2人のイラスト"
     >
-      {seats.map((p) => (
-        <SeatBody key={p.x} p={p} />
-      ))}
-      {/* 会議テーブル(白) */}
-      <path
-        d="M-20 640 L-20 506 Q 720 374 1460 412 L1460 640 Z"
-        fill="#fff"
+      {/* 足元の影 */}
+      <ellipse cx="210" cy="590" rx="170" ry="14" fill={INK} opacity="0.12" />
+
+      <g
         stroke={INK}
         strokeWidth={SW}
         strokeLinejoin="round"
-      />
-      {/* コーヒーカップ */}
-      <g stroke={INK} strokeWidth={SW} strokeLinejoin="round">
-        <path d="M774 452 L780 494 Q792 502 806 494 L812 452 Z" fill="#fff" />
-        <ellipse cx="793" cy="452" rx="19" ry="6" fill={CHAIR} />
-        <path d="M811 462 q14 2 6 18 l-8 2" fill="none" />
+        strokeLinecap="round"
+      >
+        {/* ---------- 女性(右・奥) ---------- */}
+        {/* 脚 */}
+        <path
+          d="M298 386 L316 386 L334 500 L346 566 L334 569 L312 504 Z"
+          fill="#fff"
+        />
+        <path
+          d="M262 386 L280 386 L272 506 L266 572 L254 572 L256 506 Z"
+          fill="#fff"
+        />
+        <path d="M330 566 L350 562 L360 576 L334 578 Z" fill={INK} />
+        <path
+          d="M250 570 L268 570 L270 584 L238 584 Q240 574 250 570 Z"
+          fill={INK}
+        />
+        {/* スカート */}
+        <path d="M246 296 L328 296 L338 392 L238 392 Z" fill={SKIRT} />
+        {/* 奥の腕(下ろしている) */}
+        <Sleeve d="M318 186 Q334 240 330 296" color={SUIT_GRAY} />
+        <ellipse cx="330" cy="306" rx="11" ry="13" fill="#fff" />
+        {/* ジャケット */}
+        <path
+          d="M250 172 Q286 158 322 172 L328 300 L244 300 Z"
+          fill={SUIT_GRAY}
+        />
+        <path d="M272 164 L286 206 L300 164 Z" fill={ORANGE} />
+        <path
+          d="M272 164 L280 230 L286 206 M300 164 L292 230 L286 206"
+          fill="none"
+        />
+        {/* 首・頭 */}
+        <path d="M276 148 L276 168 L296 168 L296 148" fill="#fff" />
+        <path
+          d="M318 126 Q326 74 284 70 Q248 70 250 112 Q252 128 262 134 L314 136 Z"
+          fill={HAIR}
+        />
+        <ellipse cx="280" cy="122" rx="27" ry="32" fill="#fff" />
+        <path
+          d="M254 116 Q252 82 284 82 Q308 84 310 110 Q296 96 274 100 Q262 104 254 116 Z"
+          fill={HAIR}
+        />
+        <ellipse cx="302" cy="124" rx="6" ry="9" fill="#fff" />
+        <circle cx="266" cy="122" r="3" fill={INK} stroke="none" />
+        <path d="M258 112 q7 -4 14 0" fill="none" strokeWidth={2.5} />
+        <path d="M253 124 q-6 8 2 10" fill="none" strokeWidth={2.5} />
+        <path d="M262 140 q6 4 12 0" fill="none" strokeWidth={2.5} />
+        {/* 手前の腕(クリップボードを指さす) */}
+        <Sleeve d="M256 184 Q236 228 226 244 L200 236" color={SUIT_GRAY} />
+        <path d="M196 230 L176 226 Q172 232 178 236 L196 240 Z" fill="#fff" />
+
+        {/* ---------- 男性(左・手前) ---------- */}
+        {/* 脚 */}
+        <path
+          d="M104 296 L152 300 L134 440 L112 566 L86 562 L104 438 Z"
+          fill={PANTS}
+        />
+        <path
+          d="M148 296 L198 300 L212 440 L222 570 L196 572 L182 446 Z"
+          fill={PANTS}
+        />
+        <path
+          d="M84 558 L114 562 L112 582 Q92 586 70 578 Q72 564 84 558 Z"
+          fill={INK}
+        />
+        <path d="M196 568 L224 566 Q246 572 248 584 L196 586 Z" fill={INK} />
+        {/* 奥の腕(手を挙げて話している) */}
+        <Sleeve d="M188 150 Q222 196 226 214 Q232 180 240 150" color={NAVY} />
+        <path
+          d="M232 146 L234 118 M240 144 L246 116 M246 148 L256 124 M232 146 Q236 136 252 140 L250 156 Q240 162 232 156 Z"
+          fill="#fff"
+        />
+        {/* ジャケット */}
+        <path d="M106 136 Q150 120 194 136 L202 304 L98 304 Z" fill={NAVY} />
+        <path d="M136 128 L150 182 L164 128 Z" fill="#fff" />
+        <path d="M150 136 L143 148 L150 190 L157 148 Z" fill={ORANGE} />
+        <path
+          d="M136 128 L144 214 L150 182 M164 128 L156 214 L150 182"
+          fill="none"
+        />
+        {/* 首・頭 */}
+        <path d="M140 108 L140 130 L162 130 L162 108" fill="#fff" />
+        <ellipse cx="154" cy="78" rx="30" ry="36" fill="#fff" />
+        <path
+          d="M124 84 Q114 34 158 36 Q190 38 186 66 Q176 54 160 56 Q144 58 136 68 Q132 76 132 86 Z"
+          fill={HAIR}
+        />
+        <ellipse cx="130" cy="82" rx="7" ry="10" fill="#fff" />
+        <circle cx="168" cy="78" r="3.2" fill={INK} stroke="none" />
+        <path d="M160 66 q8 -4 16 0" fill="none" strokeWidth={2.5} />
+        <path d="M184 78 q6 8 -2 10" fill="none" strokeWidth={2.5} />
+        <ellipse
+          cx="172"
+          cy="100"
+          rx="5"
+          ry="3.5"
+          fill="#fff"
+          strokeWidth={2.5}
+        />
+        {/* クリップボード */}
+        <g transform="rotate(-14 160 236)">
+          <rect x="112" y="200" width="96" height="70" rx="5" fill="#fff" />
+          <rect x="146" y="194" width="28" height="10" rx="2" fill={ORANGE} />
+          <path
+            d="M124 220 h52 M124 234 h70 M124 248 h40"
+            fill="none"
+            stroke="#D8D2CD"
+            strokeWidth={4}
+          />
+          <circle cx="188" cy="252" r="7" fill={ORANGE} stroke="none" />
+        </g>
+        {/* 手前の腕(クリップボードを抱える) */}
+        <Sleeve d="M112 150 Q94 214 106 248 L150 262" color={NAVY} />
+        <ellipse cx="160" cy="262" rx="13" ry="10" fill="#fff" />
       </g>
-      {seats.map((p) => (
-        <SeatArms key={p.x} p={p} />
-      ))}
     </svg>
   );
 }
@@ -554,6 +477,123 @@ export function WaveLines({ className }: { className?: string }) {
           strokeWidth={1.2}
         />
       ))}
+    </svg>
+  );
+}
+
+/** 「アポコミとは」: 悩むクライアント(上半身) */
+export function ApokomiClientBust({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 240 250" className={className} aria-hidden="true">
+      <g
+        stroke={INK}
+        strokeWidth={3}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      >
+        <path
+          d="M30 252 L36 200 Q46 168 92 160 L148 160 Q194 168 204 200 L210 252 Z"
+          fill={SUIT_GRAY}
+        />
+        <path d="M98 160 L120 212 L142 160 Z" fill={ORANGE} />
+        <path
+          d="M98 160 L108 236 L120 212 M142 160 L132 236 L120 212"
+          fill="none"
+        />
+        <path d="M106 128 L106 164 L134 164 L134 128" fill="#fff" />
+        <path
+          d="M66 112 Q58 40 120 38 Q184 40 176 110 Q178 142 158 152 L82 152 Q62 142 66 112 Z"
+          fill={HAIR}
+        />
+        <ellipse cx="120" cy="102" rx="40" ry="48" fill="#fff" />
+        <path
+          d="M80 92 Q82 52 122 50 Q162 52 162 90 Q140 70 116 76 Q96 80 80 92 Z"
+          fill={HAIR}
+        />
+        {/* 落ち込みの線 */}
+        <path
+          d="M108 84 v10 M118 82 v12 M128 84 v10"
+          fill="none"
+          strokeWidth={2}
+        />
+        {/* 困った眉・目・口 */}
+        <path
+          d="M94 100 L110 94 M146 100 L130 94"
+          fill="none"
+          strokeWidth={2.6}
+        />
+        <path
+          d="M98 110 q6 4 12 0 M130 110 q6 4 12 0"
+          fill="none"
+          strokeWidth={2.6}
+        />
+        <path d="M106 132 q7 -6 14 0 q7 6 14 0" fill="none" strokeWidth={2.6} />
+        {/* 汗 */}
+        <path
+          d="M166 104 q8 12 0 16 q-8 -4 0 -16 Z"
+          fill="#CFE6F5"
+          strokeWidth={2}
+        />
+        {/* 頭に手を当てる腕 */}
+        <Sleeve d="M58 214 Q36 156 70 104" color={SUIT_GRAY} />
+        <path
+          d="M66 98 Q70 72 92 70 Q104 72 100 84 Q96 92 84 100 Q74 108 66 98 Z"
+          fill="#fff"
+        />
+        <path d="M80 76 L90 92 M88 72 L98 86" fill="none" strokeWidth={2} />
+      </g>
+    </svg>
+  );
+}
+
+/** 「アポコミとは」: ヘッドセットを付けたアポコミの担当者(上半身) */
+export function ApokomiStaffBust({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 240 250" className={className} aria-hidden="true">
+      <g
+        stroke={INK}
+        strokeWidth={3}
+        strokeLinejoin="round"
+        strokeLinecap="round"
+      >
+        <path
+          d="M30 252 L36 200 Q46 168 92 160 L148 160 Q194 168 204 200 L210 252 Z"
+          fill={NAVY}
+        />
+        <path d="M100 160 L120 218 L140 160 Z" fill="#fff" />
+        <path d="M120 168 L112 180 L120 232 L128 180 Z" fill={ORANGE} />
+        <path
+          d="M100 160 L110 236 L120 218 M140 160 L130 236 L120 218"
+          fill="none"
+        />
+        <path d="M106 128 L106 164 L134 164 L134 128" fill="#fff" />
+        <ellipse cx="80" cy="106" rx="8" ry="12" fill="#fff" />
+        <ellipse cx="160" cy="106" rx="8" ry="12" fill="#fff" />
+        <ellipse cx="120" cy="100" rx="40" ry="48" fill="#fff" />
+        <path
+          d="M78 98 Q68 38 122 40 Q174 40 164 94 Q158 70 136 66 Q118 78 98 72 Q86 80 78 98 Z"
+          fill={HAIR}
+        />
+        {/* 笑顔 */}
+        <path
+          d="M100 92 q7 -4 14 0 M126 92 q7 -4 14 0"
+          fill="none"
+          strokeWidth={2.6}
+        />
+        <circle cx="107" cy="104" r="3.4" fill={INK} stroke="none" />
+        <circle cx="133" cy="104" r="3.4" fill={INK} stroke="none" />
+        <path d="M106 124 q14 12 28 0" fill="none" strokeWidth={2.8} />
+        {/* ヘッドセット */}
+        <path
+          d="M74 106 Q70 44 120 42 Q170 44 166 106"
+          fill="none"
+          strokeWidth={6}
+        />
+        <rect x="66" y="94" width="14" height="24" rx="5" fill={ORANGE} />
+        <rect x="160" y="94" width="14" height="24" rx="5" fill={ORANGE} />
+        <path d="M72 118 Q78 142 104 140" fill="none" strokeWidth={3} />
+        <circle cx="106" cy="140" r="5" fill={INK} stroke="none" />
+      </g>
     </svg>
   );
 }
