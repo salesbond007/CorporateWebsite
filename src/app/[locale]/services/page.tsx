@@ -5,9 +5,10 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
-import { serviceCategories } from "@/lib/site";
+import { serviceCategories, type Service } from "@/lib/site";
+import { cn } from "@/lib/cn";
 import { localePath } from "@/i18n/path";
-import { isLocale } from "@/i18n/config";
+import { isLocale, type Locale } from "@/i18n/config";
 import { pageMeta, pageMetadata } from "@/lib/seo";
 
 export function generateMetadata({
@@ -16,7 +17,11 @@ export function generateMetadata({
   params: { locale: string };
 }): Metadata {
   if (!isLocale(params.locale)) return {};
-  return pageMetadata({ ...pageMeta.services, path: "/services", locale: params.locale });
+  return pageMetadata({
+    ...pageMeta.services,
+    path: "/services",
+    locale: params.locale,
+  });
 }
 
 export default function ServicesPage({
@@ -86,48 +91,39 @@ export default function ServicesPage({
                 <p className="text-xl md:text-2xl font-black text-ink">
                   {category.title}
                 </p>
-                <ul className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                  {category.services.map((s) => {
-                    const cardContent = (
-                      <>
-                        <span className="font-display text-3xl font-bold text-brand-500 transition-colors group-hover:text-white">
-                          {s.number}
-                        </span>
-                        {s.subtitle ? (
-                          <p className="mt-6 mb-1 text-sm font-bold text-brand-600 transition-colors group-hover:text-brand-100">
-                            {s.subtitle}
+                <ul className="mt-8 grid items-start gap-6 md:grid-cols-2">
+                  {category.services.map((s) => (
+                    <li
+                      key={s.slug}
+                      id={s.slug}
+                      className="scroll-mt-24 md:scroll-mt-28"
+                    >
+                      <ServiceCard service={s} locale={locale} />
+                      {/* このサービスに含まれる個別サービス */}
+                      {s.children?.length ? (
+                        <div className="mt-3 border-l-2 border-brand-500/30 pl-5 md:ml-8">
+                          <p className="mb-3 text-xs font-bold tracking-[0.15em] text-brand-600">
+                            {s.title}のサービス
                           </p>
-                        ) : null}
-                        <h2 className="text-xl md:text-2xl font-black text-ink leading-tight transition-colors group-hover:text-white">
-                          {s.title}
-                        </h2>
-                        <p className="mt-4 text-sm text-ink leading-relaxed font-medium transition-colors group-hover:text-white/90">
-                          {s.summary}
-                        </p>
-                        {s.href ? (
-                          <span className="mt-5 inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 transition-colors group-hover:text-white">
-                            詳しく見る
-                            <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
-                              →
-                            </span>
-                          </span>
-                        ) : null}
-                      </>
-                    );
-                    const className =
-                      "group block h-full rounded-none border border-ink-line bg-white p-8 transition-all duration-300 hover:border-brand-500 hover:bg-brand-500 hover:shadow-card";
-                    return (
-                      <li key={s.slug} id={s.slug} className="scroll-mt-24 md:scroll-mt-28">
-                        {s.href ? (
-                          <Link href={localePath(s.href, locale)} className={className}>
-                            {cardContent}
-                          </Link>
-                        ) : (
-                          <div className={className}>{cardContent}</div>
-                        )}
-                      </li>
-                    );
-                  })}
+                          <ul className="space-y-3">
+                            {s.children.map((ch) => (
+                              <li
+                                key={ch.slug}
+                                id={ch.slug}
+                                className="scroll-mt-24 md:scroll-mt-28"
+                              >
+                                <ServiceCard
+                                  service={ch}
+                                  locale={locale}
+                                  compact
+                                />
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : null}
+                    </li>
+                  ))}
                 </ul>
               </div>
             ))}
@@ -135,5 +131,69 @@ export default function ServicesPage({
         </Container>
       </section>
     </>
+  );
+}
+
+function ServiceCard({
+  service: s,
+  locale,
+  compact,
+}: {
+  service: Service;
+  locale: Locale;
+  /** 子サービス用の小さめのカード */
+  compact?: boolean;
+}) {
+  const content = (
+    <>
+      {compact ? null : (
+        <span className="font-display text-3xl font-bold text-brand-500 transition-colors group-hover:text-white">
+          {s.number}
+        </span>
+      )}
+      {s.subtitle ? (
+        <p
+          className={cn(
+            "mb-1 text-sm font-bold text-brand-600 transition-colors group-hover:text-brand-100",
+            compact ? "" : "mt-6",
+          )}
+        >
+          {s.subtitle}
+        </p>
+      ) : null}
+      <h2
+        className={cn(
+          "font-black leading-tight text-ink transition-colors group-hover:text-white",
+          compact ? "text-lg md:text-xl" : "text-xl md:text-2xl",
+        )}
+      >
+        {s.title}
+      </h2>
+      <p className="mt-3 text-sm font-medium leading-relaxed text-ink transition-colors group-hover:text-white/90">
+        {s.summary}
+      </p>
+      {s.href ? (
+        <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 transition-colors group-hover:text-white">
+          詳しく見る
+          <span
+            aria-hidden="true"
+            className="transition-transform group-hover:translate-x-1"
+          >
+            →
+          </span>
+        </span>
+      ) : null}
+    </>
+  );
+  const className = cn(
+    "group block border border-ink-line bg-white transition-all duration-300 hover:border-brand-500 hover:bg-brand-500 hover:shadow-card",
+    compact ? "p-6" : "p-8",
+  );
+  return s.href ? (
+    <Link href={localePath(s.href, locale)} className={className}>
+      {content}
+    </Link>
+  ) : (
+    <div className={className}>{content}</div>
   );
 }
