@@ -917,7 +917,7 @@ export default function WebSecurityPage({
           className="absolute inset-x-0 bottom-0 -z-10 h-[38%] bg-brand-500 md:h-[45%]"
         />
         <Container>
-          <div className="rounded-3xl bg-[#EDEBEA] px-5 py-10 md:px-10 md:py-14">
+          <div>
             <Reveal variant="up">
               <h2 className="text-center text-[clamp(1.3rem,3.2vw,2.4rem)] font-black tracking-[0.02em] text-ink [word-break:auto-phrase] md:tracking-[0.04em]">
                 このようなお悩みはありませんか？
@@ -930,7 +930,7 @@ export default function WebSecurityPage({
                   className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-1rem)]"
                 >
                   <Reveal variant="up" delay={i * 100} className="h-full">
-                    <div className="flex h-full flex-col items-center rounded-2xl bg-white px-5 pb-5 pt-6 text-center shadow-[0_10px_24px_-18px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-expo hover:-translate-y-1">
+                    <div className="flex h-full flex-col items-center rounded-2xl bg-white px-5 pb-5 pt-6 text-center border border-ink/10 shadow-[0_18px_40px_-24px_rgba(29,5,11,0.45)] transition-transform duration-500 ease-expo hover:-translate-y-1">
                       <p className="flex min-h-[3.4em] items-center text-[15px] font-bold leading-relaxed text-ink [text-wrap:balance] [word-break:auto-phrase] md:text-base">
                         {w}
                       </p>
