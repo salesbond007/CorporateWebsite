@@ -8,6 +8,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { FloatingConsultButton } from "@/components/services/FloatingConsultButton";
 import { WorryIllustration } from "@/components/services/WorryIllustration";
+import { MenuIcon } from "@/components/services/MenuIcon";
 import { SimpleContactForm } from "@/components/contact/SimpleContactForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { site } from "@/lib/site";
@@ -595,7 +596,7 @@ function MenuSelector() {
   return (
     <div>
       <Reveal variant="none" className="text-center">
-        <h3 className="text-[clamp(1.4rem,2.6vw,2rem)] font-black text-ink">
+        <h3 className="text-[clamp(1.4rem,2.6vw,2rem)] font-black text-ink [word-break:auto-phrase]">
           状況に合わせて、必要なメニューだけを提供
         </h3>
       </Reveal>
@@ -613,6 +614,9 @@ function MenuSelector() {
 
                 {/* メニュー名(カード上部) */}
                 <div className="relative flex flex-1 flex-col px-6 pb-7 pt-9 md:px-7">
+                  <span className="mx-auto mb-4 grid h-24 w-24 place-items-center rounded-full bg-gradient-to-b from-brand-50 to-white ring-1 ring-brand-500/15 transition-transform duration-500 ease-expo group-hover:-translate-y-1 group-hover:scale-105">
+                    <MenuIcon name={r.menu} />
+                  </span>
                   <p className="text-center text-[2.25rem] font-black leading-none tracking-[0.06em] text-ink">
                     {r.menu}
                   </p>
