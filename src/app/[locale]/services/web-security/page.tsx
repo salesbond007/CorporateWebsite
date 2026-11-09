@@ -1028,11 +1028,8 @@ export default function WebSecurityPage({
             <h2 className="text-[clamp(1.6rem,3.6vw,2.75rem)] font-black leading-snug text-ink">
               <span className="text-brand-600">無料相談</span>に申し込む
             </h2>
-            <p className="mt-4 text-[15px] text-ink-soft">
-              ホームページのセキュリティについて、お気軽にご相談ください。
-            </p>
           </Reveal>
-          <Reveal variant="up" delay={150} className="mx-auto mt-10 max-w-2xl">
+          <Reveal variant="up" delay={150} className="mx-auto mt-10 max-w-4xl">
             <div className="relative overflow-hidden rounded-2xl border-2 border-brand-500/30 bg-white p-6 shadow-[0_30px_70px_-35px_rgba(122,30,53,0.55)] md:p-10">
               <span
                 aria-hidden="true"
