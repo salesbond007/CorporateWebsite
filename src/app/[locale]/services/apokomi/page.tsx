@@ -97,29 +97,6 @@ const features = [
   },
 ];
 
-const steps = [
-  {
-    title: "無料相談・ヒアリング",
-    text: "商材、ターゲット、これまでの営業活動を伺います。",
-  },
-  {
-    title: "ターゲット・チャネル設計",
-    text: "狙う企業や役職、使うチャネル、目標アポイント数を設計し、お見積もりをご提示します。",
-  },
-  {
-    title: "準備",
-    text: "リスト、トークスクリプト、各チャネルの文面を作成します。",
-  },
-  {
-    title: "アプローチ開始",
-    text: "設計したチャネルで開拓を始めます。勝ち筋が未確定の場合は、複数チャネルを並行してテストします。",
-  },
-  {
-    title: "分析・改善",
-    text: "月2回の定例ミーティングで結果を共有し、成果の出るチャネルや訴求に集中していきます。",
-  },
-];
-
 const logos = [
   { src: "/clients/fixx.png", width: 116 },
   { src: "/clients/japan-ai.webp", width: 208 },
@@ -290,41 +267,53 @@ export default function ApokomiPage({
       />
 
       {/* 固定のCTAバー(サイトヘッダーの下に追従) */}
-      <div className="sticky top-16 z-30 border-b border-white/10 bg-[#17120F]/95 backdrop-blur md:top-20">
+      <div className="sticky top-16 z-30 border-b border-[#F2E3D8] bg-white/95 backdrop-blur md:top-20">
         <Container className="flex h-14 items-center justify-between gap-3">
-          <p className="flex items-center gap-2 text-sm font-black text-white">
-            <span className="rounded bg-[#F26B1D] px-2 py-0.5 text-[11px] tracking-[0.1em]">
+          <p className="flex items-center gap-3">
+            <span className="text-xl font-black tracking-[0.06em] text-[#F26B1D] md:text-2xl">
               アポコミ
             </span>
-            <span className="hidden sm:inline">インサイドセールス代行</span>
+            <span className="hidden text-sm font-bold text-[#1A1A1A]/70 sm:inline">
+              複数チャネルで新規アポイントを創出
+            </span>
           </p>
           <Cta size="md" />
         </Container>
       </div>
 
       {/* 1. ファーストビュー */}
-      <section className="relative isolate overflow-hidden bg-[#17120F] text-white">
+      <section className="relative isolate overflow-hidden bg-gradient-to-br from-white via-[#FFF7F0] to-[#FFE9D9] text-[#1A1A1A]">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[38rem] w-[38rem] animate-blob rounded-full bg-[#F26B1D]/35 blur-[130px]"
+          className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[38rem] w-[38rem] animate-blob rounded-full bg-[#FFB07A]/40 blur-[130px]"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -bottom-48 -left-32 -z-10 h-[30rem] w-[30rem] animate-blob rounded-full bg-[#FF9A5C]/20 blur-[120px] [animation-delay:-8s]"
+          className="pointer-events-none absolute -bottom-48 -left-32 -z-10 h-[30rem] w-[30rem] animate-blob rounded-full bg-[#FFD2B3]/50 blur-[120px] [animation-delay:-8s]"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"
+          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.5] [background-image:linear-gradient(to_right,#F2E3D8_1px,transparent_1px),linear-gradient(to_bottom,#F2E3D8_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"
         />
         <Container className="grid items-center gap-12 py-16 md:py-24 lg:grid-cols-12 lg:py-28">
           <div className="lg:col-span-7">
-            <p className="inline-flex items-center gap-2 rounded-full border border-[#F26B1D]/50 bg-[#F26B1D]/10 px-4 py-1.5 text-xs font-black tracking-[0.12em] text-[#FF9A5C] animate-fade-up">
-              インサイドセールス代行｜アポコミ
-            </p>
-            <h1 className="mt-6 text-[clamp(2.2rem,6.2vw,4.6rem)] font-black leading-[1.15] tracking-tight">
+            <div className="animate-fade-up">
+              <p className="flex flex-wrap items-end gap-x-4 gap-y-1">
+                <span className="text-[clamp(2.75rem,6vw,4.25rem)] font-black leading-none tracking-[0.04em] text-[#F26B1D]">
+                  アポコミ
+                </span>
+                <span className="mb-1 rounded-full bg-[#F26B1D] px-3 py-1 text-xs font-black tracking-[0.08em] text-white md:text-sm">
+                  インサイドセールス代行
+                </span>
+              </p>
+              <p className="mt-3 text-base font-black tracking-[0.04em] text-[#1A1A1A] md:text-lg">
+                複数チャネルで新規アポイントを創出
+              </p>
+            </div>
+            <h1 className="mt-8 border-t border-[#F2E3D8] pt-8 text-[clamp(2rem,5.2vw,3.9rem)] font-black leading-[1.15] tracking-tight">
               <span className="line-mask">
                 <span style={{ animationDelay: "0.1s" }}>
-                  <span className="text-[#FF7A2B]">全チャネル</span>で、
+                  <span className="text-[#F26B1D]">全チャネル</span>で、
                 </span>
               </span>
               <span className="line-mask">
@@ -334,7 +323,7 @@ export default function ApokomiPage({
               </span>
             </h1>
             <p
-              className="mt-6 max-w-xl text-[15px] leading-[2] text-white/80 animate-fade-up md:text-base"
+              className="mt-6 max-w-xl text-[15px] leading-[2] text-[#1A1A1A]/75 animate-fade-up md:text-base"
               style={{ animationDelay: "0.45s" }}
             >
               アポコミは、テレアポ・フォーム・メール・手紙・SNSを総動員して、新規アポイントを獲りにいくインサイドセールス代行サービスです。
@@ -346,7 +335,7 @@ export default function ApokomiPage({
               {channels.map((c) => (
                 <li
                   key={c.name}
-                  className="rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-sm font-bold text-white/90"
+                  className="rounded-full border border-[#F2E3D8] bg-white px-3.5 py-1.5 text-sm font-bold text-[#1A1A1A]/80"
                 >
                   #{c.name}
                 </li>
@@ -371,7 +360,7 @@ export default function ApokomiPage({
             />
             <div
               aria-hidden="true"
-              className="absolute inset-[26%] rounded-full border border-white/10"
+              className="absolute inset-[26%] rounded-full border border-[#F26B1D]/15"
             />
             <div className="absolute left-1/2 top-1/2 grid h-[42%] w-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-gradient-to-br from-[#FF8A3D] to-[#E05A0C] text-center shadow-[0_0_80px_-10px_rgba(242,107,29,0.8)]">
               <span
@@ -400,7 +389,7 @@ export default function ApokomiPage({
                 >
                   <span
                     style={{ animationDelay: `${i * 0.4}s` }}
-                    className="block animate-float-y whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-xs font-black text-[#1A1A1A] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] md:px-4 md:py-2 md:text-sm"
+                    className="block animate-float-y whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-xs font-black text-[#1A1A1A] shadow-[0_10px_30px_-12px_rgba(242,107,29,0.6)] ring-1 ring-[#F2E3D8] md:px-4 md:py-2 md:text-sm"
                   >
                     {c.name}
                   </span>
@@ -411,10 +400,7 @@ export default function ApokomiPage({
         </Container>
 
         {/* 流れるチャネル名の帯 */}
-        <div
-          aria-hidden="true"
-          className="overflow-hidden border-t border-white/10 bg-[#F26B1D] py-3"
-        >
+        <div aria-hidden="true" className="overflow-hidden bg-[#F26B1D] py-3">
           <div className="flex w-max animate-marquee-slow">
             {[0, 1].map((k) => (
               <p
@@ -428,6 +414,47 @@ export default function ApokomiPage({
                   </span>
                 ))}
               </p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 実績ロゴ(ファーストビュー直下) */}
+      <section className="border-b border-[#F2E3D8] bg-white py-10 md:py-14">
+        <p className="text-center text-xs font-black tracking-[0.25em] text-[#F26B1D]">
+          支援実績
+        </p>
+        <div
+          className="relative mt-6 md:mt-8 overflow-hidden"
+          style={{
+            maskImage:
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+            WebkitMaskImage:
+              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
+          }}
+        >
+          <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+            {[0, 1].map((k) => (
+              <div
+                key={k}
+                className="flex shrink-0 items-center gap-12 pr-12 md:gap-16 md:pr-16"
+                aria-hidden={k === 1}
+              >
+                {logos.map((l) => (
+                  <div
+                    key={l.src}
+                    className="flex h-10 shrink-0 items-center md:h-14"
+                  >
+                    <Image
+                      src={l.src}
+                      alt=""
+                      width={l.width}
+                      height={56}
+                      className="h-full w-auto object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
             ))}
           </div>
         </div>
@@ -494,22 +521,22 @@ export default function ApokomiPage({
       </section>
 
       {/* 3. アポコミとは */}
-      <section className="relative isolate overflow-hidden bg-[#17120F] py-20 text-white md:py-28">
+      <section className="relative isolate overflow-hidden bg-[#FFF3EA] py-20 text-[#1A1A1A] md:py-28">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-[-10%] top-1/2 -z-10 -translate-y-1/2 select-none text-[clamp(8rem,22vw,18rem)] font-black leading-none text-white/[0.04]"
+          className="pointer-events-none absolute right-[-10%] top-1/2 -z-10 -translate-y-1/2 select-none text-[clamp(8rem,22vw,18rem)] font-black leading-none text-[#F26B1D]/[0.07]"
         >
           APOCOMI
         </div>
         <Container>
-          <Heading en="ABOUT" dark>
+          <Heading en="ABOUT">
             アポイント創出にコミットする、
             <br className="hidden md:block" />
             攻めのインサイドセールス代行
           </Heading>
           <Reveal
             variant="up"
-            className="mx-auto mt-10 max-w-3xl space-y-5 text-center text-[15px] leading-[2.1] text-white/80 md:text-base"
+            className="mx-auto mt-10 max-w-3xl space-y-5 text-center text-[15px] leading-[2.1] text-[#1A1A1A]/80 md:text-base"
           >
             <p>
               アポコミは、新規アポイントの獲得に特化したインサイドセールス代行サービスです。
@@ -557,170 +584,6 @@ export default function ApokomiPage({
               </Reveal>
             ))}
           </div>
-          <SectionCta />
-        </Container>
-      </section>
-
-      {/* 5. 対応チャネル */}
-      <section className="bg-[#FFF3EA] py-20 md:py-28">
-        <Container>
-          <Heading en="CHANNELS">
-            ターゲットに合わせて、最適なチャネルを選びます
-          </Heading>
-          <ol className="mx-auto mt-12 grid max-w-5xl gap-4">
-            {channels.map((c, i) => (
-              <li key={c.name}>
-                <Reveal variant="left" delay={i * 100}>
-                  <div className="group grid items-center gap-3 rounded-2xl bg-white p-6 ring-1 ring-[#F2E3D8] transition hover:ring-[#F26B1D]/50 md:grid-cols-[4rem_14rem_1fr] md:gap-6 md:p-7">
-                    <span className="grid h-14 w-14 place-items-center rounded-xl bg-[#F26B1D] text-xl font-black text-white transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <p>
-                      <span className="block text-[11px] font-black tracking-[0.25em] text-[#F26B1D]">
-                        {c.en}
-                      </span>
-                      <span className="block text-xl font-black">{c.name}</span>
-                    </p>
-                    <p className="text-[15px] leading-relaxed text-[#1A1A1A]/75">
-                      {c.text}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
-          <SectionCta />
-        </Container>
-      </section>
-
-      {/* 6. 支援の流れ */}
-      <section className="py-20 md:py-28">
-        <Container>
-          <Heading en="FLOW">ご相談から開拓開始までの流れ</Heading>
-          <ol className="mt-12 grid gap-4 lg:grid-cols-5 lg:gap-3">
-            {steps.map((s, i) => (
-              <li key={s.title}>
-                <Reveal variant="up" delay={i * 120} className="h-full">
-                  <div className="relative h-full rounded-2xl bg-white p-6 ring-1 ring-[#F2E3D8]">
-                    <p className="text-xs font-black tracking-[0.2em] text-[#F26B1D]">
-                      STEP
-                    </p>
-                    <p className="text-4xl font-black leading-none text-[#F26B1D]">
-                      {String(i + 1).padStart(2, "0")}
-                    </p>
-                    <h3 className="mt-4 text-lg font-black leading-snug">
-                      {s.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-[#1A1A1A]/75">
-                      {s.text}
-                    </p>
-                    {i < steps.length - 1 ? (
-                      <span
-                        aria-hidden="true"
-                        className="absolute -right-2.5 top-1/2 z-10 hidden h-5 w-5 -translate-y-1/2 rotate-45 border-r-2 border-t-2 border-[#F26B1D] bg-[#FFFBF7] lg:block"
-                      />
-                    ) : null}
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
-          <SectionCta />
-        </Container>
-      </section>
-
-      {/* 7. 支援実績 */}
-      <section className="bg-white py-20 md:py-28">
-        <Container>
-          <Heading en="RESULTS">支援実績</Heading>
-        </Container>
-        <div
-          className="relative mt-12 overflow-hidden"
-          style={{
-            maskImage:
-              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
-          }}
-        >
-          <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
-            {[0, 1].map((k) => (
-              <div
-                key={k}
-                className="flex shrink-0 items-center gap-12 pr-12 md:gap-16 md:pr-16"
-                aria-hidden={k === 1}
-              >
-                {logos.map((l) => (
-                  <div
-                    key={l.src}
-                    className="flex h-10 shrink-0 items-center md:h-14"
-                  >
-                    <Image
-                      src={l.src}
-                      alt=""
-                      width={l.width}
-                      height={56}
-                      className="h-full w-auto object-contain"
-                    />
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-        <Container>
-          <Reveal variant="up" className="mx-auto mt-14 max-w-4xl">
-            <article className="overflow-hidden rounded-2xl bg-[#17120F] text-white">
-              <div className="grid md:grid-cols-[1fr_1.1fr]">
-                <div className="flex flex-col justify-center bg-gradient-to-br from-[#FF8A3D] to-[#E05A0C] p-8 md:p-10">
-                  <p className="text-xs font-black tracking-[0.25em] text-white/80">
-                    CASE STUDY
-                  </p>
-                  <p className="mt-4 flex items-end gap-2 font-black leading-none">
-                    <span className="text-sm">月平均</span>
-                    <span className="text-7xl">
-                      <CountUp value="15" />
-                    </span>
-                    <span className="text-2xl">件</span>
-                  </p>
-                  <p className="mt-2 text-sm font-bold">のアポイントを獲得</p>
-                  <p className="mt-6 flex items-end gap-2 font-black leading-none">
-                    <span className="text-sm">年間費用を</span>
-                    <span className="text-5xl">
-                      <CountUp value="4" />
-                    </span>
-                    <span className="text-xl">カ月で回収</span>
-                  </p>
-                </div>
-                <dl className="space-y-5 p-8 text-[15px] md:p-10">
-                  {[
-                    ["業種", "製造業・物流業向け人材サービス"],
-                    [
-                      "課題",
-                      "中堅・大手企業への新規開拓リソースが不足していた",
-                    ],
-                    [
-                      "実施内容",
-                      "従業員100名以上の製造業・物流企業にテレアポを実施",
-                    ],
-                    [
-                      "成果",
-                      "大手物流企業を含め、月平均15件のアポイントを獲得し、年間費用を4カ月で回収",
-                    ],
-                  ].map(([k, v]) => (
-                    <div key={k}>
-                      <dt className="text-xs font-black tracking-[0.15em] text-[#FF9A5C]">
-                        {k}
-                      </dt>
-                      <dd className="mt-1 leading-relaxed text-white/85">
-                        {v}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </article>
-          </Reveal>
           <SectionCta />
         </Container>
       </section>
