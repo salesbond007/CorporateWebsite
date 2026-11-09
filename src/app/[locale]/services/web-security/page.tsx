@@ -351,12 +351,6 @@ const shields = [
   { label: "対策", at: 30 },
   { label: "保守", at: 150 },
 ];
-/** ホームページ上の受付窓口 */
-const gates = [
-  { label: "採用応募", at: -30 },
-  { label: "問い合わせフォーム", at: 90 },
-  { label: "会員登録", at: 210 },
-];
 /** 外から来る攻撃(防御の層で止まる) */
 const attacks = [-130, -50, 70, 190];
 
@@ -442,18 +436,18 @@ function DefenseDiagram() {
                   strokeLinecap="round"
                 />
                 <rect
-                  x={m.x - 30}
-                  y={m.y - 15}
-                  width="60"
-                  height="30"
-                  rx="15"
+                  x={m.x - 44}
+                  y={m.y - 21}
+                  width="88"
+                  height="42"
+                  rx="21"
                   fill="#7A1E35"
                 />
                 <text
                   x={m.x}
-                  y={m.y + 5.5}
+                  y={m.y + 7.5}
                   textAnchor="middle"
-                  fontSize="15"
+                  fontSize="21"
                   fontWeight="900"
                   fill="#fff"
                 >
@@ -484,34 +478,6 @@ function DefenseDiagram() {
             >
               ホームページ
             </text>
-            {gates.map((g) => {
-              const n = polar(R_SITE, g.at);
-              const w = g.label.length * 11 + 16;
-              return (
-                <g key={g.label}>
-                  <rect
-                    x={n.x - w / 2}
-                    y={n.y - 12}
-                    width={w}
-                    height="24"
-                    rx="3"
-                    fill="#fff"
-                    stroke="#1A1A1A"
-                    strokeOpacity="0.35"
-                  />
-                  <text
-                    x={n.x}
-                    y={n.y + 4}
-                    textAnchor="middle"
-                    fontSize="11"
-                    fontWeight="700"
-                    fill="#1A1A1A"
-                  >
-                    {g.label}
-                  </text>
-                </g>
-              );
-            })}
           </g>
 
           {/* 守る対象: 個人情報 */}
@@ -544,32 +510,6 @@ function DefenseDiagram() {
             </text>
           </g>
         </svg>
-
-        <figcaption className="mx-auto mt-4 flex max-w-[460px] flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-ink-soft">
-          <span className="flex items-center gap-2">
-            <span
-              aria-hidden="true"
-              className="h-3 w-3 shrink-0 rounded-full bg-[#1D050B]"
-            />
-            守る対象：個人情報
-          </span>
-          <span className="flex items-center gap-2">
-            <span
-              aria-hidden="true"
-              className="h-1.5 w-4 shrink-0 rounded-full bg-brand-500"
-            />
-            防御の層：診断・対策・保守
-          </span>
-          <span className="flex items-center gap-2">
-            <span
-              aria-hidden="true"
-              className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full border border-[#B42318] text-[8px] leading-none text-[#B42318]"
-            >
-              ×
-            </span>
-            外からの攻撃を防ぐ
-          </span>
-        </figcaption>
       </figure>
     </Reveal>
   );
