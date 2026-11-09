@@ -788,17 +788,17 @@ export default function WebSecurityPage({
         {/* PC: 背景画像を右側に配置し、左側(コピー部分)は白へ溶け込ませる */}
         <div
           aria-hidden="true"
-          className="absolute inset-y-0 right-0 -z-10 hidden w-[64%] overflow-hidden lg:block"
+          className="absolute inset-y-0 right-0 -z-10 hidden w-[58%] overflow-hidden lg:block"
         >
           <Image
-            src="/services/web-security/hero-laptop.webp"
+            src="/services/web-security/hero-v2.webp"
             alt=""
             fill
             priority
             sizes="64vw"
-            className="animate-ken-burns object-cover object-[45%_center]"
+            className="animate-ken-burns object-cover object-[88%_center]"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_0%,rgba(255,255,255,0.85)_14%,rgba(255,255,255,0)_42%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_0%,rgba(255,255,255,0.9)_16%,rgba(255,255,255,0)_40%)]" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/70 to-transparent" />
         </div>
         <Container className="pb-16 pt-12 md:pb-24 md:pt-20 lg:flex lg:min-h-[640px] lg:flex-col lg:justify-center">
@@ -824,7 +824,7 @@ export default function WebSecurityPage({
                 情報漏洩が起きる、その前に。
               </p>
               <p
-                className="mt-6 max-w-xl text-[15px] leading-[2] text-ink-soft animate-fade-up"
+                className="mt-6 max-w-xl lg:max-w-[30rem] text-[15px] leading-[2] text-ink-soft animate-fade-up"
                 style={{ animationDelay: "0.55s" }}
               >
                 問い合わせフォーム、採用応募、会員登録など、ホームページは個人情報の受付窓口であり、同時にサイバー攻撃の標的でもあります。AI時代に求められる水準のセキュリティ対策で、情報漏洩のリスクを低減します。
@@ -840,9 +840,9 @@ export default function WebSecurityPage({
             </div>
           </div>
           {/* スマホ・タブレット: 画像は背景にせず、ボタンの下に表示 */}
-          <div className="relative mt-10 aspect-[1783/882] overflow-hidden rounded-sm lg:hidden">
+          <div className="relative mt-10 aspect-[1672/941] overflow-hidden rounded-sm lg:hidden">
             <Image
-              src="/services/web-security/hero-laptop.webp"
+              src="/services/web-security/hero-v2.webp"
               alt="ホームページのセキュリティ対策のイメージ"
               fill
               sizes="100vw"
