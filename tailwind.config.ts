@@ -105,6 +105,14 @@ const config: Config = {
           "33%": { transform: "translate(6%,-8%) scale(1.08)" },
           "66%": { transform: "translate(-5%,6%) scale(0.95)" },
         },
+        dashFlow: {
+          "0%": { strokeDashoffset: "24" },
+          "100%": { strokeDashoffset: "0" },
+        },
+        pulseRing: {
+          "0%": { transform: "scale(1)", opacity: "0.55" },
+          "100%": { transform: "scale(1.6)", opacity: "0" },
+        },
         growX: {
           "0%": { transform: "scaleX(0)" },
           "100%": { transform: "scaleX(1)" },
@@ -129,6 +137,9 @@ const config: Config = {
         "ken-burns": "kenBurns 22s ease-in-out infinite alternate",
         "scroll-dot": "scrollDot 2.2s cubic-bezier(0.65,0,0.35,1) infinite",
         blob: "blob 18s ease-in-out infinite",
+        "dash-flow": "dashFlow 1.2s linear infinite",
+        "spin-slow": "spin 60s linear infinite",
+        "pulse-ring": "pulseRing 2.6s cubic-bezier(0.22,1,0.36,1) infinite",
         "grow-x": "growX 1.2s cubic-bezier(0.22,1,0.36,1) both",
         "marquee-slow": "marquee 60s linear infinite",
       },
