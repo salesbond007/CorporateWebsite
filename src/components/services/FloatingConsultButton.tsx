@@ -36,8 +36,8 @@ export function FloatingConsultButton({ targetId, label = "無料相談" }: Prop
         "group fixed z-40 transition-all duration-500",
         // スマホ: 画面下の左側に大きめの横長ボタン
         "bottom-5 left-4",
-        // PC: 画面右下に浮遊する丸いボタン(トップへ戻るボタンの上)
-        "md:bottom-20 md:left-auto md:right-6",
+        // PC: 画面右下に浮遊する丸いボタン
+        "md:bottom-8 md:left-auto md:right-6",
         hidden && "pointer-events-none translate-y-6 opacity-0",
       )}
     >
