@@ -16,6 +16,15 @@ import { isLocale } from "@/i18n/config";
 
 const PATH = "/services/web-security";
 
+/** このようなお悩みはありませんか？(文言は指定どおり) */
+const worries = [
+  "WordPressのPHPが、年末でサポート切れになると言われた",
+  "セキュリティ対策を何から始めればいいか分からない",
+  "最低限の対策だけでも、すぐにやっておきたい",
+  "サイトを管理できる人が社内にいない",
+  "自社のサイトが安全なのか、確かめたことがない",
+];
+
 export function generateMetadata({
   params,
 }: {
@@ -920,6 +929,76 @@ export default function WebSecurityPage({
               className="object-cover"
             />
           </div>
+        </Container>
+      </section>
+
+      {/* こんなお悩みはありませんか？ */}
+      <section className="bg-[#F6F5F2] py-16 md:py-24">
+        <Container>
+          <Reveal variant="up" className="text-center">
+            <p className="text-xs font-bold tracking-[0.25em] text-brand-600">
+              CHECK
+            </p>
+            <h2 className="mt-3 text-[clamp(1.5rem,3.2vw,2.4rem)] font-black text-ink">
+              このようなお悩みはありませんか？
+            </h2>
+          </Reveal>
+          <ul className="mx-auto mt-12 flex max-w-5xl flex-wrap justify-center gap-x-6 gap-y-10">
+            {worries.map((w, i) => (
+              <li
+                key={w}
+                className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+              >
+                <Reveal
+                  variant="up"
+                  delay={i * 100}
+                  className="flex h-full flex-col"
+                >
+                  {/* 吹き出し */}
+                  <div className="relative flex flex-1 items-center rounded-2xl border border-ink/10 bg-white px-6 py-5 shadow-[0_18px_40px_-30px_rgba(29,5,11,0.45)]">
+                    <p className="text-[15px] font-bold leading-relaxed text-ink [text-wrap:pretty] [word-break:auto-phrase]">
+                      {w}
+                    </p>
+                    <span
+                      aria-hidden="true"
+                      className="absolute -bottom-[9px] left-9 h-4 w-4 rotate-45 border-b border-r border-ink/10 bg-white"
+                    />
+                  </div>
+                  {/* 人のアイコン */}
+                  <div className="mt-4 flex items-center gap-3 pl-5">
+                    <span
+                      aria-hidden="true"
+                      className="grid h-11 w-11 place-items-center rounded-full bg-white text-brand-500 ring-1 ring-ink/10"
+                    >
+                      <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <circle
+                          cx="12"
+                          cy="8.5"
+                          r="4"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                        />
+                        <path
+                          d="M4.5 20c1-3.6 4-5.5 7.5-5.5s6.5 1.9 7.5 5.5"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </span>
+                    <span className="text-xs font-bold text-ink-muted">
+                      ご担当者さま
+                    </span>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ul>
         </Container>
       </section>
 
