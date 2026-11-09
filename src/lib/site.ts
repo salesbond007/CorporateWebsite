@@ -135,6 +135,17 @@ export const serviceCategories: ServiceCategory[] = [
         features: [],
         image: "/services/cards/talent.jpg",
       },
+      {
+        slug: "web-security",
+        number: "03",
+        title: "ホームページセキュリティ対策",
+        href: "/services/web-security",
+        subtitle: "Website Security",
+        summary:
+          "問い合わせフォームや採用応募など、個人情報の入口になるホームページを守ります。「診断」「保守」「移行」の3つから必要なものだけを選べます。",
+        features: [],
+        image: "/services/cards/ai-solutions.jpg",
+      },
     ],
   },
 ];
