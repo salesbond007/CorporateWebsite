@@ -95,7 +95,7 @@ export function WebSecurityDiagnosisForm({ privacyHref }: Props) {
   );
 
   return (
-    <form onSubmit={onSubmit} noValidate className="border border-ink/10 bg-white p-6 shadow-[0_24px_60px_-30px_rgba(29,5,11,0.35)] md:p-10">
+    <form onSubmit={onSubmit} noValidate className="border border-ink/15 bg-white p-6 md:p-10">
       <div className="space-y-5">
         <label className="block">
           {label("診断するホームページのURL", true)}
