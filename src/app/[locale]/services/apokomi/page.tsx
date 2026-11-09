@@ -6,14 +6,9 @@ import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   ApokomiFeatureIllustration,
-  ApokomiClientBust,
-  ApokomiStaffBust,
   WaveLines,
 } from "@/components/services/ApokomiIllustration";
-import {
-  ApokomiServiceDiagram,
-  ChannelIcon,
-} from "@/components/services/ApokomiServiceDiagram";
+import { ApokomiProcess } from "@/components/services/ApokomiProcess";
 import { ApokomiHeroVisual } from "@/components/services/ApokomiHeroVisual";
 import { ApokomiLeadForm } from "@/components/contact/ApokomiLeadForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -32,6 +27,7 @@ const lpNav = [
   { href: "#problem", label: "課題" },
   { href: "#about", label: "アポコミとは" },
   { href: "#features", label: "特徴" },
+  { href: "#flow", label: "支援の流れ" },
   { href: `#${FORM_ID}`, label: "お問い合わせ" },
 ];
 
@@ -81,6 +77,19 @@ const channels = [
     en: "SNS",
     text: "経営者や担当者個人に直接届くチャネル。スタートアップやIT企業の開拓に",
   },
+];
+
+/** 支援開始までの流れ */
+const flow = [
+  { title: "お問い合わせ", text: "フォームからお気軽にご連絡ください" },
+  { title: "無料相談・ヒアリング", text: "商材・ターゲット・目標を伺います" },
+  {
+    title: "ご提案・お見積もり",
+    text: "チャネル設計と目標アポイント数をご提示",
+  },
+  { title: "ご契約・キックオフ", text: "進め方と最終要件をすり合わせ" },
+  { title: "準備", text: "リスト作成、トークスクリプト・文面づくり" },
+  { title: "稼働開始", text: "アプローチ開始。定例で改善を重ねます" },
 ];
 
 const worries = [
@@ -519,153 +528,43 @@ export default function ApokomiPage({
         </Container>
       </section>
 
-      {/* 3. アポコミとは(図解) */}
-      <section
-        id="about"
-        className="relative isolate overflow-hidden py-20 md:py-28"
-      >
-        <WaveLines className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-72 w-full" />
+      {/* 3. アポコミとは(営業プロセスの中での担当範囲) */}
+      <section id="about" className="scroll-mt-28 py-20 md:py-28">
         <Container>
-          <Reveal variant="up" className="text-center">
-            <p className="text-lg font-bold tracking-[0.1em] md:text-2xl">
-              そもそも
+          <Reveal variant="up" className="mx-auto max-w-3xl text-center">
+            <p className="text-xs font-bold tracking-[0.2em] text-[#F26B1D]">
+              ABOUT
             </p>
-            <h2 className="mt-1 font-black leading-tight">
-              <span className="text-[clamp(2.6rem,7vw,4.25rem)] tracking-[0.06em] text-[#F26B1D]">
+            <h2 className="mt-3 font-black leading-tight">
+              <span className="text-[clamp(2.4rem,6vw,3.75rem)] tracking-[0.06em] text-[#F26B1D]">
                 アポコミ
               </span>
-              <span className="ml-2 text-[clamp(1.6rem,4vw,2.5rem)]">とは</span>
+              <span className="ml-1 text-[clamp(1.5rem,3.5vw,2.25rem)]">
+                とは
+              </span>
             </h2>
-            <p className="mx-auto mt-5 max-w-3xl text-[15px] leading-[2] text-[#241F20]/80 [word-break:auto-phrase]">
-              5つのチャネルを総動員して新規アポイントを創出し、獲得した商談を御社へパスする、アポイント創出にフルコミットするインサイドセールス代行サービスです。
+            <p className="mt-6 text-base leading-[2] text-[#241F20]/80 md:text-[17px] [word-break:auto-phrase]">
+              営業プロセスのうち、
+              <strong className="bg-[linear-gradient(transparent_60%,#FFD2B3_60%)] font-bold text-[#241F20]">
+                商談の手前までを丸ごと代行
+              </strong>
+              するサービスです。
+              <br className="hidden md:block" />
+              獲得した商談を、御社へパスします。
             </p>
           </Reveal>
 
-          <Reveal
-            variant="up"
-            className="mx-auto mt-12 max-w-5xl rounded-2xl border-2 border-[#FFD9BC] bg-white p-5 shadow-[0_30px_70px_-45px_rgba(242,107,29,0.8)] md:p-10"
-          >
-            {/* 依頼と商談のパス */}
-            <div className="grid items-center gap-4 md:grid-cols-[0.9fr_auto_1.6fr] md:gap-6">
-              <div className="flex flex-col items-center">
-                <ApokomiClientBust className="w-40 md:w-52" />
-                <span className="relative -mt-3 rounded-full bg-[#F3F0ED] px-6 py-2 text-sm font-bold">
-                  御社（クライアント）
-                </span>
-              </div>
+          <Reveal variant="up" className="mx-auto mt-14 max-w-6xl">
+            <ApokomiProcess />
+          </Reveal>
 
-              <div className="flex items-center justify-center gap-8 md:flex-col md:gap-6">
-                <div className="flex flex-col items-center gap-1 text-[#241F20]">
-                  <svg
-                    width="96"
-                    height="20"
-                    viewBox="0 0 96 20"
-                    fill="none"
-                    aria-hidden="true"
-                    className="hidden md:block"
-                  >
-                    <path
-                      d="M2 10h84M78 3l10 7-10 7"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <svg
-                    width="20"
-                    height="44"
-                    viewBox="0 0 20 44"
-                    fill="none"
-                    aria-hidden="true"
-                    className="md:hidden"
-                  >
-                    <path
-                      d="M10 2v34M3 28l7 10 7-10"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <span className="text-sm font-bold">業務を依頼</span>
-                </div>
-                <div className="flex flex-col items-center gap-1 text-[#F26B1D] md:flex-col-reverse">
-                  <svg
-                    width="96"
-                    height="20"
-                    viewBox="0 0 96 20"
-                    fill="none"
-                    aria-hidden="true"
-                    className="hidden md:block"
-                  >
-                    <path
-                      d="M94 10H10M18 3L8 10l10 7"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeDasharray="7 6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <svg
-                    width="20"
-                    height="44"
-                    viewBox="0 0 20 44"
-                    fill="none"
-                    aria-hidden="true"
-                    className="md:hidden"
-                  >
-                    <path
-                      d="M10 42V8M3 16l7-10 7 10"
-                      stroke="currentColor"
-                      strokeWidth="3"
-                      strokeDasharray="6 5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <span className="text-sm font-black">商談をパス</span>
-                </div>
-              </div>
-
-              <div className="grid items-center gap-4 rounded-xl bg-[#FFF3EA] p-5 sm:grid-cols-[auto_1fr] md:gap-6 md:p-6">
-                <div className="flex flex-col items-center">
-                  <ApokomiStaffBust className="w-36 md:w-44" />
-                  <span className="relative -mt-3 rounded-full bg-white px-6 py-2 text-sm font-black text-[#E05A0C] shadow-[0_8px_20px_-12px_rgba(242,107,29,0.8)]">
-                    アポコミ
-                  </span>
-                </div>
-                <ul className="mx-auto space-y-2.5 sm:mx-0">
-                  {channels.map((c) => (
-                    <li
-                      key={c.id}
-                      className="flex items-center gap-3 text-base font-bold md:text-lg"
-                    >
-                      <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white text-[#F26B1D] ring-1 ring-[#FFD9BC]">
-                        <ChannelIcon id={c.id} size={16} />
-                      </span>
-                      {c.name}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            {/* 商談が生まれるまでの流れ */}
-            <div className="mt-10 border-t border-dashed border-[#EADBD0] pt-10">
-              <p className="mb-8 text-center text-sm font-bold tracking-[0.15em] text-[#F26B1D]">
-                商談が生まれるまで
-              </p>
-              <ApokomiServiceDiagram />
-            </div>
-
-            <p className="mt-10 text-center text-sm text-[#241F20]/80">
-              リスト作成からアプローチ、アポイント獲得までまるごと担当。
-              <br />
-              <span className="mt-2 inline-block bg-[linear-gradient(transparent_62%,#FFD2B3_62%)] text-xl font-black text-[#241F20] md:text-2xl">
-                御社は、商談に集中できます！
+          <Reveal variant="up" className="mt-14 text-center">
+            <p className="text-[clamp(1.4rem,3.2vw,2.1rem)] font-black leading-[1.6] [word-break:auto-phrase]">
+              御社は、
+              <span className="bg-[linear-gradient(transparent_62%,#FFD2B3_62%)]">
+                商談に集中
               </span>
+              できます。
             </p>
           </Reveal>
           <SectionCta />
@@ -739,46 +638,84 @@ export default function ApokomiPage({
         </Container>
       </section>
 
-      {/* 5. 最終CTA */}
-      <section className="relative isolate overflow-hidden py-20 md:py-24">
-        <WaveLines className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-64 w-full" />
+      {/* 5. 支援開始までの流れ */}
+      <section id="flow" className="scroll-mt-28 py-20 md:py-24">
         <Container>
+          <Heading en="FLOW">支援開始までの流れ</Heading>
+          <Reveal variant="up" className="mt-6 text-center">
+            <p className="inline-flex items-baseline gap-1 rounded-full bg-[#FFF3EA] px-5 py-2 text-sm font-bold text-[#241F20] md:text-base">
+              お問い合わせから
+              <span className="text-2xl font-black text-[#E05A0C] md:text-3xl">
+                最短1週間
+              </span>
+              で稼働開始
+            </p>
+          </Reveal>
+
+          {/* PC: 横のタイムライン */}
           <Reveal
             variant="up"
-            className="mx-auto max-w-4xl rounded-xl bg-gradient-to-br from-[#F26B1D] to-[#FF9D57] px-6 py-12 text-center text-white shadow-[0_24px_60px_-30px_rgba(242,107,29,0.9)] md:px-12 md:py-14"
+            className="mx-auto mt-12 hidden max-w-6xl lg:block"
           >
-            <svg
-              width="52"
-              height="52"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden="true"
-              className="mx-auto"
-            >
-              <path
-                d="M21 3L3 10.5l7 2.5m11-10l-7 18-4-8m11-10L10 13"
-                stroke="currentColor"
-                strokeWidth="1.6"
-                strokeLinecap="round"
-                strokeLinejoin="round"
+            <ol className="relative grid grid-cols-6 gap-4">
+              <span
+                aria-hidden="true"
+                className="absolute left-[8%] right-[8%] top-5 h-0.5 bg-gradient-to-r from-[#FFD2B3] to-[#F26B1D]"
               />
-            </svg>
-            <h2 className="mt-5 text-[clamp(1.4rem,3vw,2rem)] font-bold leading-[1.6] [word-break:auto-phrase]">
-              新規開拓、今日から攻めに転じませんか？
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm leading-[2] text-white/95 md:text-[15px]">
-              「アポイントをもっと増やしたい」「どのチャネルが合うか分からない」——まずはお気軽にご相談ください。御社の商材とターゲットに合わせて、チャネル設計とお見積もりをご提案します。
-            </p>
-            <Cta label="相談してみる" variant="white" className="mt-8" />
+              {flow.map((f, i) => (
+                <li key={f.title} className="relative text-center">
+                  <span
+                    className={cn(
+                      "relative mx-auto grid h-10 w-10 place-items-center rounded-full text-sm font-black ring-4 ring-white",
+                      i === flow.length - 1
+                        ? "bg-[#F26B1D] text-white"
+                        : "bg-[#FFF3EA] text-[#E05A0C]",
+                    )}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="mt-4 text-[15px] font-bold leading-snug">
+                    {f.title}
+                  </p>
+                  <p className="mt-2 text-xs leading-relaxed text-[#241F20]/70">
+                    {f.text}
+                  </p>
+                </li>
+              ))}
+            </ol>
           </Reveal>
+
+          {/* スマホ: 縦のタイムライン */}
+          <Reveal variant="up" className="mx-auto mt-10 max-w-md lg:hidden">
+            <ol className="relative space-y-5 pl-14">
+              <span
+                aria-hidden="true"
+                className="absolute bottom-5 left-5 top-5 w-0.5 bg-gradient-to-b from-[#FFD2B3] to-[#F26B1D]"
+              />
+              {flow.map((f, i) => (
+                <li key={f.title} className="relative">
+                  <span
+                    className={cn(
+                      "absolute -left-14 top-0 grid h-10 w-10 place-items-center rounded-full text-sm font-black ring-4 ring-white",
+                      i === flow.length - 1
+                        ? "bg-[#F26B1D] text-white"
+                        : "bg-[#FFF3EA] text-[#E05A0C]",
+                    )}
+                  >
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="pt-1.5 font-bold">{f.title}</p>
+                  <p className="mt-1 text-sm text-[#241F20]/70">{f.text}</p>
+                </li>
+              ))}
+            </ol>
+          </Reveal>
+          <SectionCta />
         </Container>
       </section>
 
       {/* 6. 問い合わせフォーム */}
-      <section
-        id={FORM_ID}
-        className="scroll-mt-28 bg-[#FFF8F2] py-20 md:py-28"
-      >
+      <section id={FORM_ID} className="scroll-mt-28 bg-white py-20 md:py-28">
         <Container>
           <Heading en="CONTACT">無料相談・見積もり依頼</Heading>
           <Reveal
