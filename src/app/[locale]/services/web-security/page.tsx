@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { WebSecurityDiagnosisForm } from "@/components/contact/WebSecurityDiagnosisForm";
+import { FloatingConsultButton } from "@/components/services/FloatingConsultButton";
+import { SimpleContactForm } from "@/components/contact/SimpleContactForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { site } from "@/lib/site";
 import { pageMeta, pageMetadata } from "@/lib/seo";
@@ -584,7 +585,6 @@ function DefenseDiagram() {
 
 /**
  * どれを選べばいい？: お客様の状況ごとに、おすすめのメニューと主な対応内容を示す。
- * 下部に「迷ったら無料の簡易診断」の導線。
  */
 function MenuSelector() {
   const rows = choices
@@ -733,7 +733,7 @@ function MenuSelector() {
 
 const SITE = site.url.replace(/\/$/, "");
 
-/** Service: 3つのメニューを OfferCatalog、無料簡易診断を 0円の Offer として記述 */
+/** Service: 3つのメニューを OfferCatalog、無料相談を 0円の Offer として記述 */
 function webSecurityServiceJsonLd(path: string) {
   const url = `${SITE}${path}`;
   return {
@@ -767,8 +767,8 @@ function webSecurityServiceJsonLd(path: string) {
     ].join(", "),
     offers: {
       "@type": "Offer",
-      name: "無料簡易診断",
-      description: "URLを入力するだけで申し込める、ホームページの無料簡易診断",
+      name: "無料相談",
+      description: "ホームページのセキュリティ対策に関する無料相談",
       price: "0",
       priceCurrency: "JPY",
       url: `${url}#diagnosis`,
@@ -802,8 +802,8 @@ function faqJsonLd() {
       a: c.highlight ? `${c.menu}。` : `「${c.menu}」がおすすめです。`,
     })),
     {
-      q: "無料簡易診断はどのように申し込めますか？",
-      a: "URLを入力するだけで申し込めます。診断結果の報告とあわせて、最適なメニューをご提案します。",
+      q: "無料相談はどのように申し込めますか？",
+      a: "ページ下部の無料相談フォームからお申し込みいただけます。",
     },
   ];
   return {
@@ -907,7 +907,7 @@ export default function WebSecurityPage({
                 style={{ animationDelay: "0.7s" }}
               >
                 <Button href="#diagnosis" size="lg">
-                  無料で簡易診断を申し込む
+                  無料相談を申し込む
                 </Button>
                 <Button
                   href={localePath("/contact", locale)}
@@ -933,72 +933,98 @@ export default function WebSecurityPage({
       </section>
 
       {/* こんなお悩みはありませんか？ */}
-      <section className="bg-[#F6F5F2] py-16 md:py-24">
+      <section className="relative isolate overflow-hidden bg-[#F6F5F2] py-16 md:py-24">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[34rem] w-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-100/50 blur-[120px]"
+        />
         <Container>
-          <Reveal variant="up" className="text-center">
+          <Reveal variant="none" className="text-center">
             <p className="text-xs font-bold tracking-[0.25em] text-brand-600">
               CHECK
             </p>
             <h2 className="mt-3 text-[clamp(1.5rem,3.2vw,2.4rem)] font-black text-ink">
-              このようなお悩みはありませんか？
+              このような
+              <span className="relative inline-block">
+                <span className="relative z-10">お悩み</span>
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 bottom-1 h-3 origin-left scale-x-0 bg-brand-200/70 transition-transform delay-300 duration-700 ease-expo group-data-[visible=true]/reveal:scale-x-100"
+                />
+              </span>
+              はありませんか？
             </h2>
           </Reveal>
-          <ul className="mx-auto mt-12 flex max-w-5xl flex-wrap justify-center gap-x-6 gap-y-10">
+          <ul className="mx-auto mt-14 flex max-w-5xl flex-wrap justify-center gap-x-6 gap-y-8 md:gap-y-12">
             {worries.map((w, i) => (
               <li
                 key={w}
-                className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]"
+                className={cn(
+                  "w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]",
+                  i % 2 === 1 && "lg:translate-y-6",
+                )}
               >
                 <Reveal
                   variant="up"
                   delay={i * 100}
-                  className="flex h-full flex-col"
+                  className="flex h-full items-end gap-3"
                 >
+                  {/* 人のアイコン */}
+                  <span
+                    aria-hidden="true"
+                    className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-400 to-brand-700 text-white shadow-[0_8px_20px_-8px_rgba(122,30,53,0.7)] ring-4 ring-white"
+                  >
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                      <circle cx="12" cy="8.5" r="4" fill="currentColor" />
+                      <path
+                        d="M4.5 20.5c1-3.8 4-5.8 7.5-5.8s6.5 2 7.5 5.8"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </span>
                   {/* 吹き出し */}
-                  <div className="relative flex flex-1 items-center rounded-2xl border border-ink/10 bg-white px-6 py-5 shadow-[0_18px_40px_-30px_rgba(29,5,11,0.45)]">
-                    <p className="text-[15px] font-bold leading-relaxed text-ink [text-wrap:pretty] [word-break:auto-phrase]">
+                  <div className="group relative mb-5 flex-1 rounded-2xl rounded-bl-sm bg-white px-5 pb-5 pt-6 shadow-[0_22px_45px_-30px_rgba(29,5,11,0.5)] ring-1 ring-ink/5 transition-transform duration-500 ease-expo hover:-translate-y-1">
+                    <span
+                      aria-hidden="true"
+                      className="absolute -top-3 right-4 font-display text-5xl font-black leading-none text-brand-500/15"
+                    >
+                      “
+                    </span>
+                    <span className="text-[10px] font-bold tracking-[0.2em] text-brand-500">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="mt-1 text-[15px] font-bold leading-relaxed text-ink [text-wrap:pretty] [word-break:auto-phrase]">
                       {w}
                     </p>
                     <span
                       aria-hidden="true"
-                      className="absolute -bottom-[9px] left-9 h-4 w-4 rotate-45 border-b border-r border-ink/10 bg-white"
+                      className="absolute -left-2 bottom-0 h-4 w-4 bg-white [clip-path:polygon(100%_0,100%_100%,0_100%)]"
                     />
-                  </div>
-                  {/* 人のアイコン */}
-                  <div className="mt-4 flex items-center gap-3 pl-5">
-                    <span
-                      aria-hidden="true"
-                      className="grid h-11 w-11 place-items-center rounded-full bg-white text-brand-500 ring-1 ring-ink/10"
-                    >
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
-                        <circle
-                          cx="12"
-                          cy="8.5"
-                          r="4"
-                          stroke="currentColor"
-                          strokeWidth="1.6"
-                        />
-                        <path
-                          d="M4.5 20c1-3.6 4-5.5 7.5-5.5s6.5 1.9 7.5 5.5"
-                          stroke="currentColor"
-                          strokeWidth="1.6"
-                          strokeLinecap="round"
-                        />
-                      </svg>
-                    </span>
-                    <span className="text-xs font-bold text-ink-muted">
-                      ご担当者さま
-                    </span>
                   </div>
                 </Reveal>
               </li>
             ))}
           </ul>
+          <div
+            aria-hidden="true"
+            className="mt-14 flex justify-center text-brand-500 md:mt-20"
+          >
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              className="animate-float-y"
+            >
+              <path
+                d="M7 10l7 7 7-7"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
         </Container>
       </section>
 
@@ -1017,14 +1043,20 @@ export default function WebSecurityPage({
             <h2 className="mt-3 text-[clamp(1.5rem,3.4vw,2.6rem)] font-black leading-[1.35] tracking-[0.02em] text-ink">
               <span className="line-mask">
                 <span className="animate-none translate-y-[110%] transition-transform duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
-                  今すぐやるべき必須の
+                  今すぐやるべき
+                  <span className="relative mx-0.5 inline-block text-brand-600">
+                    <span className="relative z-10">必須</span>
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-0 bottom-[0.08em] -z-0 h-[0.32em] bg-brand-100"
+                    />
+                  </span>
+                  の
                 </span>
               </span>
               <span className="line-mask">
                 <span className="animate-none translate-y-[110%] transition-transform delay-150 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
-                  <span className="text-brand-600">HPセキュリティ対策</span>
-                  <br className="sm:hidden" />
-                  に絞って実施
+                  セキュリティ対策に絞って実施
                 </span>
               </span>
             </h2>
@@ -1054,16 +1086,39 @@ export default function WebSecurityPage({
       {/* 申し込みフォーム(ファーストビューのメインCTAの遷移先) */}
       <section
         id="diagnosis"
-        className="relative isolate scroll-mt-20 overflow-hidden border-t border-ink/10 bg-[#F6F5F2] py-20 text-ink md:py-28"
+        className="relative isolate scroll-mt-20 overflow-hidden border-t border-ink/10 bg-gradient-to-b from-white to-brand-50/60 py-20 text-ink md:py-28"
       >
         <Container>
-          <Reveal variant="up" className="mx-auto max-w-2xl">
-            <WebSecurityDiagnosisForm
-              privacyHref={localePath("/privacy", locale)}
-            />
+          <Reveal variant="none" className="text-center">
+            <p className="inline-flex items-center gap-2 rounded-full bg-brand-500 px-4 py-1.5 text-xs font-bold tracking-[0.15em] text-white">
+              無料
+            </p>
+            <h2 className="mt-5 text-[clamp(1.6rem,3.6vw,2.75rem)] font-black leading-snug text-ink">
+              <span className="text-brand-600">無料相談</span>に申し込む
+            </h2>
+            <p className="mt-4 text-[15px] text-ink-soft">
+              ホームページのセキュリティについて、お気軽にご相談ください。
+            </p>
+          </Reveal>
+          <Reveal variant="up" delay={150} className="mx-auto mt-10 max-w-2xl">
+            <div className="relative overflow-hidden rounded-2xl border-2 border-brand-500/30 bg-white p-6 shadow-[0_30px_70px_-35px_rgba(122,30,53,0.55)] md:p-10">
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-1.5 bg-brand-500"
+              />
+              <div className="mb-7 flex items-center justify-between gap-4 border-b border-ink/10 pb-5">
+                <p className="text-lg font-black">無料相談フォーム</p>
+                <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-600">
+                  無料
+                </span>
+              </div>
+              <SimpleContactForm locale={locale} variant="consult" />
+            </div>
           </Reveal>
         </Container>
       </section>
+
+      <FloatingConsultButton targetId="diagnosis" />
     </>
   );
 }
