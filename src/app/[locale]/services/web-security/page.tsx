@@ -7,6 +7,7 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { FloatingConsultButton } from "@/components/services/FloatingConsultButton";
+import { WorryIllustration } from "@/components/services/WorryIllustration";
 import { SimpleContactForm } from "@/components/contact/SimpleContactForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { site } from "@/lib/site";
@@ -932,94 +933,56 @@ export default function WebSecurityPage({
         </Container>
       </section>
 
-      {/* こんなお悩みはありませんか？ */}
-      <section className="relative isolate overflow-hidden bg-[#F6F5F2] py-16 md:py-24">
+      {/* このようなお悩みはありませんか？ */}
+      <section className="relative isolate bg-white pt-16 md:pt-24">
+        {/* 下半分のブランドカラーの帯(グレーの枠が帯にまたがる) */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[34rem] w-[60rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-100/50 blur-[120px]"
+          className="absolute inset-x-0 bottom-0 -z-10 h-[38%] bg-brand-500 md:h-[45%]"
         />
         <Container>
-          <Reveal variant="none" className="text-center">
-            <p className="text-xs font-bold tracking-[0.25em] text-brand-600">
-              CHECK
-            </p>
-            <h2 className="mt-3 text-[clamp(1.5rem,3.2vw,2.4rem)] font-black text-ink">
-              このような
-              <span className="relative inline-block">
-                <span className="relative z-10">お悩み</span>
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-0 bottom-1 h-3 origin-left scale-x-0 bg-brand-200/70 transition-transform delay-300 duration-700 ease-expo group-data-[visible=true]/reveal:scale-x-100"
-                />
-              </span>
-              はありませんか？
-            </h2>
-          </Reveal>
-          <ul className="mx-auto mt-14 flex max-w-5xl flex-wrap justify-center gap-x-6 gap-y-8 md:gap-y-12">
-            {worries.map((w, i) => (
-              <li
-                key={w}
-                className={cn(
-                  "w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)]",
-                  i % 2 === 1 && "lg:translate-y-6",
-                )}
-              >
-                <Reveal
-                  variant="up"
-                  delay={i * 100}
-                  className="flex h-full items-end gap-3"
+          <div className="rounded-3xl bg-[#EDEBEA] px-5 py-10 md:px-10 md:py-14">
+            <Reveal variant="up">
+              <h2 className="text-center text-[clamp(1.3rem,3.2vw,2.4rem)] font-black tracking-[0.02em] text-ink [word-break:auto-phrase] md:tracking-[0.04em]">
+                このようなお悩みはありませんか？
+              </h2>
+            </Reveal>
+            <ul className="mt-10 flex flex-wrap justify-center gap-4 md:gap-6">
+              {worries.map((w, i) => (
+                <li
+                  key={w}
+                  className="w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-1rem)]"
                 >
-                  {/* 人のアイコン */}
-                  <span
-                    aria-hidden="true"
-                    className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-400 to-brand-700 text-white shadow-[0_8px_20px_-8px_rgba(122,30,53,0.7)] ring-4 ring-white"
-                  >
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                      <circle cx="12" cy="8.5" r="4" fill="currentColor" />
-                      <path
-                        d="M4.5 20.5c1-3.8 4-5.8 7.5-5.8s6.5 2 7.5 5.8"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </span>
-                  {/* 吹き出し */}
-                  <div className="group relative mb-5 flex-1 rounded-2xl rounded-bl-sm bg-white px-5 pb-5 pt-6 shadow-[0_22px_45px_-30px_rgba(29,5,11,0.5)] ring-1 ring-ink/5 transition-transform duration-500 ease-expo hover:-translate-y-1">
-                    <span
-                      aria-hidden="true"
-                      className="absolute -top-3 right-4 font-display text-5xl font-black leading-none text-brand-500/15"
-                    >
-                      “
-                    </span>
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-brand-500">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <p className="mt-1 text-[15px] font-bold leading-relaxed text-ink [text-wrap:pretty] [word-break:auto-phrase]">
-                      {w}
-                    </p>
-                    <span
-                      aria-hidden="true"
-                      className="absolute -left-2 bottom-0 h-4 w-4 bg-white [clip-path:polygon(100%_0,100%_100%,0_100%)]"
-                    />
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
+                  <Reveal variant="up" delay={i * 100} className="h-full">
+                    <div className="flex h-full flex-col items-center rounded-2xl bg-white px-5 pb-5 pt-6 text-center shadow-[0_10px_24px_-18px_rgba(0,0,0,0.35)] transition-transform duration-500 ease-expo hover:-translate-y-1">
+                      <p className="flex min-h-[3.4em] items-center text-[15px] font-bold leading-relaxed text-ink [text-wrap:balance] [word-break:auto-phrase] md:text-base">
+                        {w}
+                      </p>
+                      <div className="mt-3 h-28 w-full max-w-[220px] md:h-32">
+                        <WorryIllustration index={i} />
+                      </div>
+                    </div>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* 下向きの矢印 */}
           <div
             aria-hidden="true"
-            className="mt-14 flex justify-center text-brand-500 md:mt-20"
+            className="flex justify-center py-8 text-white md:py-10"
           >
             <svg
-              width="28"
-              height="28"
-              viewBox="0 0 28 28"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
               fill="none"
               className="animate-float-y"
             >
               <path
-                d="M7 10l7 7 7-7"
+                d="M10 10l10 9 10-9M10 21l10 9 10-9"
                 stroke="currentColor"
-                strokeWidth="2"
+                strokeWidth="4"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               />
