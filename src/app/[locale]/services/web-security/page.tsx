@@ -372,6 +372,287 @@ const R_SHIELD = 158;
 const R_SITE = 110;
 const R_CORE = 54;
 
+/**
+ * PC用の大きな防御図。中心「個人情報」を同心円の防御の層(診断・対策・保守)が囲み、
+ * 四方から来る攻撃が防御の層の手前で「ブロック」される様子を示す。
+ */
+const BIG = { w: 880, h: 790, cx: 440, cy: 375 };
+/** 攻撃元(中心からの角度)。防御の層のラベル(-90°/30°/150°)と重ならない向きに配置 */
+const bigAttacks: { lines: [string, string]; at: number }[] = [
+  { lines: ["脆弱性の", "自動探索"], at: -140 },
+  { lines: ["不正", "ログイン"], at: -40 },
+  { lines: ["サポート切れ", "PHP"], at: 70 },
+  { lines: ["プラグインの", "脆弱性"], at: 110 },
+];
+
+function DefenseDiagramLarge() {
+  const { cx, cy } = BIG;
+  const RS = 182; // 防御の層
+  const RH = 122; // ホームページ
+  const RC = 62; // 個人情報
+  const p = (r: number, deg: number) => {
+    const rad = (deg * Math.PI) / 180;
+    return { x: cx + r * Math.cos(rad), y: cy + r * Math.sin(rad) };
+  };
+  const arc = (r: number, a: number, b: number) => {
+    const s = p(r, a);
+    const e = p(r, b);
+    return `M ${s.x.toFixed(1)} ${s.y.toFixed(1)} A ${r} ${r} 0 0 1 ${e.x.toFixed(1)} ${e.y.toFixed(1)}`;
+  };
+  const fade =
+    "opacity-0 transition-opacity duration-700 group-data-[visible=true]/reveal:opacity-100";
+  const center = {
+    transformBox: "fill-box" as const,
+    transformOrigin: "center",
+  };
+
+  return (
+    <Reveal variant="none">
+      <svg
+        viewBox={`0 0 ${BIG.w} ${BIG.h}`}
+        className="mx-auto block w-full max-w-[920px]"
+        role="img"
+        aria-label="個人情報を守るホームページの外側に、診断・対策・保守の防御の層をつくり、脆弱性の自動探索・不正ログイン・プラグインの脆弱性・サポート切れPHPを狙う攻撃をブロックします。"
+      >
+        <defs>
+          <radialGradient id="bigGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#FBEAEE" stopOpacity="1" />
+            <stop offset="70%" stopColor="#FBEAEE" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#FBEAEE" stopOpacity="0" />
+          </radialGradient>
+        </defs>
+
+        {/* 背景のにじみと大きな同心円 */}
+        <circle cx={cx} cy={cy} r={360} fill="url(#bigGlow)" />
+        {[300, 372].map((r) => (
+          <circle
+            key={r}
+            cx={cx}
+            cy={cy}
+            r={r}
+            fill="none"
+            stroke="#7A1E35"
+            strokeOpacity="0.1"
+          />
+        ))}
+        <circle
+          cx={cx}
+          cy={cy}
+          r={228}
+          fill="none"
+          stroke="#7A1E35"
+          strokeOpacity="0.35"
+          strokeDasharray="2 7"
+          className="animate-spin-slow"
+          style={center}
+        />
+
+        {/* 攻撃 → ブロック */}
+        {bigAttacks.map((atk, i) => {
+          const node = p(372, atk.at);
+          const a = { ...node, lines: atk.lines };
+          const s = p(372 - 44, atk.at);
+          const e = p(RS + 22, atk.at);
+          const pill = p(RS + 76, atk.at);
+          return (
+            <g
+              key={a.lines.join("")}
+              className={fade}
+              style={{ transitionDelay: `${700 + i * 150}ms` }}
+            >
+              <line
+                x1={s.x}
+                y1={s.y}
+                x2={e.x}
+                y2={e.y}
+                stroke="#3A3A3A"
+                strokeWidth="1.6"
+                strokeDasharray="4 4"
+                className="animate-dash-flow"
+              />
+              {/* 攻撃元ノード */}
+              <circle cx={a.x} cy={a.y} r={40} fill="#2B2B2B" />
+              <circle
+                cx={a.x}
+                cy={a.y}
+                r={40}
+                fill="none"
+                stroke="#B42318"
+                strokeWidth="2"
+                className="animate-pulse-ring"
+                style={{ ...center, animationDelay: `${i * 0.6}s` }}
+              />
+              {a.lines.map((t, k) => (
+                <text
+                  key={t}
+                  x={a.x}
+                  y={a.y + (k === 0 ? -4 : 14)}
+                  textAnchor="middle"
+                  fontSize="12"
+                  fontWeight="800"
+                  fill="#fff"
+                >
+                  {t}
+                </text>
+              ))}
+              {/* ブロック */}
+              <g transform={`translate(${pill.x} ${pill.y})`}>
+                <rect
+                  x={-50}
+                  y={-17}
+                  width={100}
+                  height={34}
+                  rx={17}
+                  fill="#B42318"
+                />
+                <circle
+                  cx={-28}
+                  cy={0}
+                  r={8}
+                  fill="none"
+                  stroke="#fff"
+                  strokeWidth="1.8"
+                />
+                <path
+                  d="M-33.5 5.5 L-22.5 -5.5"
+                  stroke="#fff"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                />
+                <text
+                  x={8}
+                  y={5}
+                  textAnchor="middle"
+                  fontSize="14"
+                  fontWeight="900"
+                  fill="#fff"
+                >
+                  ブロック
+                </text>
+              </g>
+            </g>
+          );
+        })}
+
+        {/* 防御の層: 診断・対策・保守 */}
+        {shields.map((sh, i) => {
+          const m = p(RS, sh.at);
+          return (
+            <g
+              key={sh.label}
+              className={fade}
+              style={{ transitionDelay: `${250 + i * 150}ms` }}
+            >
+              <path
+                d={arc(RS, sh.at - 55, sh.at + 55)}
+                fill="none"
+                stroke="#7A1E35"
+                strokeWidth="18"
+                strokeLinecap="round"
+              />
+              <rect
+                x={m.x - 52}
+                y={m.y - 24}
+                width="104"
+                height="48"
+                rx="24"
+                fill="#7A1E35"
+                stroke="#fff"
+                strokeWidth="3"
+              />
+              <text
+                x={m.x}
+                y={m.y + 8.5}
+                textAnchor="middle"
+                fontSize="24"
+                fontWeight="900"
+                fill="#fff"
+              >
+                {sh.label}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* ホームページ */}
+        <g className={fade} style={{ transitionDelay: "120ms" }}>
+          <circle
+            cx={cx}
+            cy={cy}
+            r={RH}
+            fill="#fff"
+            stroke="#7A1E35"
+            strokeOpacity="0.25"
+            strokeWidth="1.5"
+          />
+          {[RC + 8, RC + 14].map((r) => (
+            <circle
+              key={r}
+              cx={cx}
+              cy={cy}
+              r={r}
+              fill="none"
+              stroke="#7A1E35"
+              strokeOpacity="0.25"
+            />
+          ))}
+          <text
+            x={cx}
+            y={cy - RC - 28}
+            textAnchor="middle"
+            fontSize="15"
+            fontWeight="800"
+            fill="#6B6B6B"
+            letterSpacing="2"
+          >
+            ホームページ
+          </text>
+        </g>
+
+        {/* 個人情報 */}
+        <g className={fade}>
+          <circle
+            cx={cx}
+            cy={cy}
+            r={RC}
+            fill="none"
+            stroke="#7A1E35"
+            strokeWidth="2.5"
+            className="animate-pulse-ring"
+            style={center}
+          />
+          <circle cx={cx} cy={cy} r={RC} fill="#1D050B" />
+          <path
+            d={`M ${cx - 11} ${cy - 16} v -6 a 11 11 0 0 1 22 0 v 6`}
+            fill="none"
+            stroke="#E4A0B0"
+            strokeWidth="2.6"
+            strokeLinecap="round"
+          />
+          <rect
+            x={cx - 16}
+            y={cy - 16}
+            width="32"
+            height="22"
+            rx="4"
+            fill="#E4A0B0"
+          />
+          <text
+            x={cx}
+            y={cy + 30}
+            textAnchor="middle"
+            fontSize="16"
+            fontWeight="900"
+            fill="#fff"
+          >
+            個人情報
+          </text>
+        </g>
+      </svg>
+    </Reveal>
+  );
+}
+
 function DefenseDiagram() {
   const fade =
     "opacity-0 transition-opacity duration-700 group-data-[visible=true]/reveal:opacity-100";
@@ -1020,57 +1301,87 @@ export default function WebSecurityPage({
       </section>
 
       {/* サービスの価値と対応内容 */}
-      <Section
-        no="01"
-        label="Value"
-        title="必須の対策に、絞って実施します。"
-        lead="個人情報の受付窓口であるホームページを、外からの攻撃から守ります。現状を診断し、必要な対策を行い、安全な状態を保ち続けることで、情報漏洩のリスクを低減します。"
-      >
-        {/* TODO: 本文確定後に差し替え(見出し・リード文・各項目の説明) */}
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="order-2 lg:order-1 lg:col-span-4">
-            <DefenseDiagram />
-          </div>
-          <div className="order-1 lg:order-2 lg:col-span-8">
-            <p className="text-xs font-bold tracking-[0.2em] text-ink-muted">
-              対応内容
+      <section className="relative isolate overflow-hidden bg-white py-20 md:py-28">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute left-1/2 top-40 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 animate-blob rounded-full bg-brand-100/50 blur-[120px]"
+        />
+        <Container>
+          <Reveal variant="none" className="text-center">
+            <p className="flex translate-y-3 items-center justify-center gap-3 text-xs font-bold tracking-[0.25em] text-ink-muted opacity-0 transition-all duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100">
+              <span className="text-ink">01</span>
+              VALUE
             </p>
-            <ol className="mt-4 border-t border-ink/15">
-              {values.map((v, i) => (
-                <li key={v.name} className="border-b border-ink/15">
-                  <Reveal variant="right" delay={i * 120}>
-                    <div className="grid gap-2 py-6 sm:grid-cols-[9rem_1fr] sm:gap-8">
-                      <p className="flex items-baseline gap-3">
-                        <span className="text-xs font-bold text-brand-600">
-                          {String(i + 1).padStart(2, "0")}
-                        </span>
-                        <span className="text-2xl font-black text-ink">
-                          {v.name}
-                        </span>
-                      </p>
-                      <div>
-                        <p className="text-base font-black text-ink">
-                          {v.value}
-                        </p>
-                        <p className="mt-1.5 text-sm leading-[1.9] text-ink-soft">
-                          {v.text}
-                        </p>
-                      </div>
-                    </div>
-                  </Reveal>
-                </li>
-              ))}
-            </ol>
+            <h2 className="mt-5 text-[clamp(1.5rem,4.2vw,3.1rem)] font-black leading-[1.4] tracking-[0.02em] text-ink">
+              <span className="line-mask">
+                <span className="animate-none translate-y-[110%] transition-transform duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
+                  今すぐやるべき必須の
+                </span>
+              </span>
+              <span className="line-mask">
+                <span className="animate-none translate-y-[110%] transition-transform delay-150 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
+                  <span className="text-brand-600">HPセキュリティ対策</span>
+                  <br className="sm:hidden" />
+                  に絞って実施
+                </span>
+              </span>
+            </h2>
+            <p className="mx-auto mt-6 max-w-2xl translate-y-3 text-[15px] leading-[2] text-ink-soft opacity-0 transition-all delay-300 duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100">
+              {/* TODO: 本文確定後に差し替え */}
+              個人情報の受付窓口であるホームページを、外からの攻撃から守ります。現状を診断し、必要な対策を行い、安全な状態を保ち続けることで、情報漏洩のリスクを低減します。
+            </p>
+          </Reveal>
+
+          {/* 図: PCは大きな図、スマホはコンパクトな図 */}
+          <div className="mt-10 md:mt-14">
+            <div className="hidden md:block">
+              <DefenseDiagramLarge />
+            </div>
+            <div className="mx-auto max-w-[420px] md:hidden">
+              <DefenseDiagram />
+            </div>
+          </div>
+
+          {/* 対応内容 */}
+          <ol className="mt-14 grid gap-4 md:mt-16 md:grid-cols-3 md:gap-6">
+            {values.map((v, i) => (
+              <li key={v.name}>
+                <Reveal variant="up" delay={i * 120} className="h-full">
+                  <div className="group relative h-full overflow-hidden border border-ink/10 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-[0_24px_50px_-28px_rgba(122,30,53,0.45)] md:p-8">
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-brand-500 transition-transform duration-500 group-hover:scale-x-100"
+                    />
+                    <p className="flex items-baseline gap-3">
+                      <span className="text-xs font-bold text-brand-600">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className="text-2xl font-black text-ink">
+                        {v.name}
+                      </span>
+                    </p>
+                    <p className="mt-3 text-base font-black text-brand-600">
+                      {v.value}
+                    </p>
+                    <p className="mt-2 text-sm leading-[1.9] text-ink-soft">
+                      {v.text}
+                    </p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+          <div className="mt-8 text-center">
             <Link
               href="#menu"
-              className="mt-6 inline-flex items-center gap-2 border-b border-ink pb-1 text-sm font-bold text-ink transition-colors hover:border-brand-500 hover:text-brand-600"
+              className="inline-flex items-center gap-2 border-b border-ink pb-1 text-sm font-bold text-ink transition-colors hover:border-brand-500 hover:text-brand-600"
             >
               3つのメニューを詳しく見る
               <span aria-hidden="true">↓</span>
             </Link>
           </div>
-        </div>
-      </Section>
+        </Container>
+      </section>
 
       {/* ⑥ なぜ今 */}
       <Section
