@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { CountUp } from "@/components/ui/CountUp";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { WebSecurityDiagnosisForm } from "@/components/contact/WebSecurityDiagnosisForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -293,16 +294,19 @@ function Section({
       )}
     >
       <Container>
-        <Reveal variant="fade">
-          <div
-            className={cn(
-              "grid gap-6 border-t pt-6 lg:grid-cols-12 lg:gap-10",
-              dark ? "border-white/20" : "border-ink",
-            )}
-          >
+        <Reveal variant="none">
+          <div className="relative grid gap-6 pt-6 lg:grid-cols-12 lg:gap-10">
+            {/* 上の罫線: 画面に入ると左から伸びる */}
+            <span
+              aria-hidden="true"
+              className={cn(
+                "absolute inset-x-0 top-0 h-px origin-left scale-x-0 transition-transform duration-[1200ms] ease-expo group-data-[visible=true]/reveal:scale-x-100",
+                dark ? "bg-white/25" : "bg-ink",
+              )}
+            />
             <p
               className={cn(
-                "flex items-baseline gap-3 text-xs font-bold tracking-[0.2em] lg:col-span-4",
+                "flex translate-y-3 items-baseline gap-3 text-xs font-bold tracking-[0.2em] opacity-0 transition-all delay-200 duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100 lg:col-span-4",
                 dark ? "text-white/60" : "text-ink-muted",
               )}
             >
@@ -313,7 +317,7 @@ function Section({
               </span>
               <span className="uppercase">{label}</span>
             </p>
-            <div className="lg:col-span-8">
+            <div className="translate-y-5 opacity-0 transition-all delay-300 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100 lg:col-span-8">
               <h2 className="text-[clamp(1.5rem,3.2vw,2.5rem)] font-black leading-[1.35] tracking-[0.02em]">
                 {title}
               </h2>
@@ -387,8 +391,10 @@ function DefenseDiagram() {
             r={214}
             fill="none"
             stroke="#1A1A1A"
-            strokeOpacity="0.08"
+            strokeOpacity="0.12"
             strokeDasharray="2 6"
+            className="animate-spin-slow"
+            style={{ transformBox: "fill-box", transformOrigin: "center" }}
           />
 
           {/* 外からの攻撃: 矢印が防御の層で止まる */}
@@ -409,7 +415,8 @@ function DefenseDiagram() {
                   y2={e.y}
                   stroke="#6B6B6B"
                   strokeWidth="1.5"
-                  strokeDasharray="3 3"
+                  strokeDasharray="4 4"
+                  className="animate-dash-flow"
                 />
                 <g transform={`translate(${x.x} ${x.y})`}>
                   <circle
@@ -492,6 +499,16 @@ function DefenseDiagram() {
 
           {/* 守る対象: 個人情報 */}
           <g className={fade}>
+            <circle
+              cx={C}
+              cy={C}
+              r={R_CORE}
+              fill="none"
+              stroke="#7A1E35"
+              strokeWidth="2"
+              className="animate-pulse-ring"
+              style={{ transformBox: "fill-box", transformOrigin: "center" }}
+            />
             <circle cx={C} cy={C} r={R_CORE} fill="#1D050B" />
             <path
               d={`M ${C - 9} ${C - 14} v -5 a 9 9 0 0 1 18 0 v 5`}
@@ -556,7 +573,7 @@ function Meter({
               dark ? "text-white" : "text-ink",
             )}
           >
-            {label}
+            <CountUp value={label} />
           </span>
         )}
       </div>
@@ -1021,7 +1038,7 @@ export default function WebSecurityPage({
             <ol className="mt-4 border-t border-ink/15">
               {values.map((v, i) => (
                 <li key={v.name} className="border-b border-ink/15">
-                  <Reveal variant="fade" delay={i * 80}>
+                  <Reveal variant="right" delay={i * 120}>
                     <div className="grid gap-2 py-6 sm:grid-cols-[9rem_1fr] sm:gap-8">
                       <p className="flex items-baseline gap-3">
                         <span className="text-xs font-bold text-brand-600">
@@ -1070,7 +1087,7 @@ export default function WebSecurityPage({
               delay={i * 80}
               className="h-full"
             >
-              <div className="flex h-full flex-col border-b border-r border-ink/15 bg-white/60 p-7 md:p-9">
+              <div className="relative flex h-full flex-col border-b border-r border-ink/15 bg-white/60 p-7 transition-colors duration-500 hover:bg-white md:p-9 before:absolute before:left-0 before:top-0 before:h-[3px] before:w-full before:origin-left before:scale-x-0 before:bg-brand-500 before:transition-transform before:duration-500 hover:before:scale-x-100">
                 <p className="text-xs font-bold tabular-nums tracking-[0.2em] text-brand-600">
                   {String(i + 1).padStart(2, "0")}
                 </p>
@@ -1146,7 +1163,7 @@ export default function WebSecurityPage({
                 >
                   <p className="font-black leading-none tracking-tight">
                     <span className="text-[2.5rem] md:text-5xl lg:text-4xl xl:text-[2.6rem]">
-                      {f.figure}
+                      <CountUp value={f.figure} />
                     </span>
                     {f.unit ? (
                       <span className="ml-1 whitespace-nowrap text-base text-white/80">
@@ -1196,12 +1213,14 @@ export default function WebSecurityPage({
               <Reveal
                 variant="fade"
                 delay={i * 100}
-                className="flex h-full flex-col border-t-2 border-ink pt-6"
+                className="group/menu flex h-full flex-col border-t-2 border-ink pt-6 transition-colors duration-300 hover:border-brand-500"
               >
                 <p className="text-xs font-bold tabular-nums tracking-[0.2em] text-ink-muted">
                   MENU {m.no.padStart(2, "0")}
                 </p>
-                <h3 className="mt-3 text-3xl font-black text-ink">{m.name}</h3>
+                <h3 className="mt-3 text-3xl font-black text-ink transition-transform duration-500 ease-expo group-hover/menu:translate-x-1">
+                  {m.name}
+                </h3>
                 <p className="mt-2 text-sm font-bold text-brand-600">
                   {m.target}
                 </p>
@@ -1253,7 +1272,7 @@ export default function WebSecurityPage({
                 {i < steps.length - 1 ? (
                   <span
                     aria-hidden="true"
-                    className="absolute left-[15px] top-8 h-[calc(100%-2rem)] w-px bg-ink/20 lg:left-8 lg:top-[15px] lg:h-px lg:w-[calc(100%-2rem)]"
+                    className="absolute left-[15px] top-8 h-[calc(100%-2rem)] w-px origin-top-left scale-0 bg-brand-500/50 transition-transform delay-300 duration-700 ease-expo group-data-[visible=true]/reveal:scale-100 lg:left-8 lg:top-[15px] lg:h-px lg:w-[calc(100%-2rem)]"
                   />
                 ) : null}
                 <span className="relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink bg-white text-xs font-bold tabular-nums text-ink">
