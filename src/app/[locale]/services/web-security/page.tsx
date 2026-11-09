@@ -41,7 +41,7 @@ const menus: {
 }[] = [
   {
     no: "1",
-    name: "診断だけ",
+    name: "診断",
     target: "まずは現状を知りたい方へ",
     items: [
       "外部から、WordPress本体・プラグイン・テーマ・PHPのバージョンを診断",
@@ -51,7 +51,7 @@ const menus: {
   },
   {
     no: "2",
-    name: "保守だけ",
+    name: "保守",
     target: "今の環境を安全に使い続けたい方へ",
     items: [
       "WordPress本体・プラグイン・PHPの定期更新",
@@ -76,8 +76,8 @@ const menus: {
 ];
 
 const choices: { when: string; menu: string; highlight?: boolean }[] = [
-  { when: "何が危ないか分からない", menu: "診断だけ" },
-  { when: "今のWordPressを使い続けたい", menu: "保守だけ" },
+  { when: "何が危ないか分からない", menu: "診断" },
+  { when: "今のWordPressを使い続けたい", menu: "保守" },
   { when: "更新はほとんどせず、もう悩みたくない", menu: "移行" },
   {
     when: "迷ったら",
@@ -651,29 +651,29 @@ function MenuSelector() {
                 {/* つなぎの線(下へ流れる点) */}
                 <div
                   aria-hidden="true"
-                  className="relative mx-6 mt-5 h-10 md:mx-7"
+                  className="mt-4 flex flex-col items-center"
                 >
-                  <span className="absolute left-4 top-0 h-full w-px overflow-hidden bg-brand-200">
+                  <span className="relative h-7 w-px overflow-hidden bg-brand-200">
                     <span className="absolute inset-x-0 top-0 h-1/3 animate-scroll-dot bg-brand-500" />
                   </span>
-                  <span className="absolute left-9 top-1/2 -translate-y-1/2 text-[11px] font-bold tracking-[0.2em] text-brand-600">
+                  <span className="mt-2 mb-3 text-[11px] font-bold tracking-[0.2em] text-brand-600">
                     おすすめは
                   </span>
                 </div>
 
                 {/* おすすめのメニュー */}
                 <div className="relative flex flex-1 flex-col px-6 pb-7 md:px-7">
-                  <div className="flex items-end justify-between gap-3">
-                    <p className="text-[1.9rem] font-black leading-none tracking-tight text-ink">
-                      {r.menu}
-                    </p>
-                    <span className="shrink-0 rounded-full border border-brand-500/30 px-2.5 py-1 text-[10px] font-bold tracking-[0.15em] text-brand-600">
+                  <div className="flex flex-col items-center text-center">
+                    <span className="rounded-full border border-brand-500/30 px-2.5 py-1 text-[10px] font-bold tracking-[0.15em] text-brand-600">
                       MENU {r.detail?.no.padStart(2, "0")}
                     </span>
+                    <p className="mt-3 text-[2.25rem] font-black leading-none tracking-[0.06em] text-ink">
+                      {r.menu}
+                    </p>
                   </div>
                   {r.detail ? (
                     <>
-                      <p className="mt-3 inline-flex w-fit rounded-full bg-brand-500 px-3 py-1 text-xs font-bold text-white">
+                      <p className="mx-auto mt-4 inline-flex w-fit rounded-full bg-brand-500 px-3 py-1 text-xs font-bold text-white">
                         {r.detail.target}
                       </p>
                       <ul className="mt-5 space-y-2.5 border-t border-dashed border-ink/15 pt-5">
@@ -784,7 +784,7 @@ function faqJsonLd() {
   const qa: { q: string; a: string }[] = [
     {
       q: "ホームページセキュリティ対策では、どんなメニューを選べますか？",
-      a: "「診断だけ」「保守だけ」「移行」の3つから、必要なものだけを選べます。",
+      a: "「診断」「保守」「移行」の3つから、必要なものだけを選べます。",
     },
     ...choices.map((c) => ({
       q: c.highlight
