@@ -5,7 +5,6 @@ import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { CountUp } from "@/components/ui/CountUp";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { WebSecurityDiagnosisForm } from "@/components/contact/WebSecurityDiagnosisForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -31,67 +30,6 @@ export function generateMetadata({
 }
 
 /* ---------------------------------------------------------------- データ */
-
-type Source = { label: string; href: string };
-
-type MeterData = { value: number; label: string; caption: string };
-
-const IPA_SME =
-  "https://www.ipa.go.jp/security/reports/sme/rcu1hd0000009k82-att/sme-jirei.pdf";
-const ITMEDIA =
-  "https://atmarkit.itmedia.co.jp/ait/articles/2502/18/news065.html";
-
-type FigureViz =
-  | { kind: "meter"; value: number; caption: string }
-  | { kind: "picto"; filled: number; caption: string }
-  | { kind: "timeline" };
-
-const figures: {
-  figure: string;
-  unit?: string;
-  text: string;
-  source: Source;
-  viz?: FigureViz;
-}[] = [
-  {
-    figure: "数千万〜億",
-    unit: "円",
-    text: "中小企業でも、数千万円単位、場合によっては億単位の損害が出る（日本ネットワークセキュリティ協会）",
-    source: {
-      label: "jnsa",
-      href: "https://www.jnsa.org/seminar/2025/cross/data/20250827_02.pdf",
-    },
-  },
-  {
-    figure: "3,900",
-    unit: "万円",
-    viz: { kind: "timeline" },
-    text: "サーバーの管理画面の弱点から侵入された事例では、業務が止まり、完全に復旧するまで2か月かかり、想定被害額は3,900万円でした（IPA 中小企業の事例集、2026年3月）",
-    source: { label: "ipa", href: IPA_SME },
-  },
-  {
-    figure: "35.1",
-    unit: "%",
-    viz: {
-      kind: "meter",
-      value: 35.1,
-      caption: "被害に遭った中小企業のうち、個人情報が漏洩した割合",
-    },
-    text: "サイバー被害に遭った中小企業のうち、35.1%で個人情報が漏洩しています。被害額は最大で1億円、復旧に最も時間がかかったケースは360日でした（IPA 2024年度調査）",
-    source: { label: "itmedia", href: ITMEDIA },
-  },
-  {
-    figure: "約7",
-    unit: "割",
-    viz: {
-      kind: "picto",
-      filled: 7,
-      caption: "取引先にも影響が出た企業（10社中およそ7社）",
-    },
-    text: "被害は自社だけで終わりません。約7割の企業が「取引先にも影響が出た」と回答しています。",
-    source: { label: "itmedia", href: ITMEDIA },
-  },
-];
 
 const menus: {
   no: string;
@@ -143,108 +81,12 @@ const choices: { when: string; menu: string; highlight?: boolean }[] = [
   { when: "更新はほとんどせず、もう悩みたくない", menu: "移行" },
   {
     when: "迷ったら",
-    menu: "無料の簡易診断で、最適なメニューを提案します",
+    menu: "無料相談で、最適なメニューを提案します",
     highlight: true,
   },
 ];
 
 /* ---------------------------------------------------------- 小さな部品 */
-
-function SourceLink({ source, dark }: { source: Source; dark?: boolean }) {
-  return (
-    <a
-      href={source.href}
-      target="_blank"
-      rel="noopener noreferrer"
-      className={cn(
-        "inline-flex items-center gap-1 text-[11px] tracking-[0.04em] underline-offset-2 transition-colors hover:underline",
-        dark
-          ? "text-white/45 hover:text-white"
-          : "text-ink-muted hover:text-brand-600",
-      )}
-    >
-      出典：{source.label}
-      <span aria-hidden="true">↗</span>
-      <span className="sr-only">(新しいタブで開く)</span>
-    </a>
-  );
-}
-
-/** 章見出し: 左に章番号とラベル、右に見出し。上に細い罫線 */
-function Section({
-  no,
-  label,
-  title,
-  lead,
-  dark,
-  className,
-  children,
-  id,
-}: {
-  no: string;
-  label: string;
-  title: React.ReactNode;
-  lead?: React.ReactNode;
-  dark?: boolean;
-  className?: string;
-  children: React.ReactNode;
-  id?: string;
-}) {
-  return (
-    <section
-      id={id}
-      className={cn(
-        "scroll-mt-20 py-20 md:py-28",
-        dark ? "bg-[#111] text-white" : "bg-white",
-        className,
-      )}
-    >
-      <Container>
-        <Reveal variant="none">
-          <div className="relative grid gap-6 pt-6 lg:grid-cols-12 lg:gap-10">
-            {/* 上の罫線: 画面に入ると左から伸びる */}
-            <span
-              aria-hidden="true"
-              className={cn(
-                "absolute inset-x-0 top-0 h-px origin-left scale-x-0 transition-transform duration-[1200ms] ease-expo group-data-[visible=true]/reveal:scale-x-100",
-                dark ? "bg-white/25" : "bg-ink",
-              )}
-            />
-            <p
-              className={cn(
-                "flex translate-y-3 items-baseline gap-3 text-xs font-bold tracking-[0.2em] opacity-0 transition-all delay-200 duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100 lg:col-span-4",
-                dark ? "text-white/60" : "text-ink-muted",
-              )}
-            >
-              <span
-                className={cn("tabular-nums", dark ? "text-white" : "text-ink")}
-              >
-                {no}
-              </span>
-              <span className="uppercase">{label}</span>
-            </p>
-            <div className="translate-y-5 opacity-0 transition-all delay-300 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100 lg:col-span-8">
-              <h2 className="text-[clamp(1.5rem,3.2vw,2.5rem)] font-black leading-[1.35] tracking-[0.02em]">
-                {title}
-              </h2>
-              {lead ? (
-                <p
-                  className={cn(
-                    "mt-4 text-[15px] leading-[1.9]",
-                    dark ? "text-white/70" : "text-ink-soft",
-                  )}
-                >
-                  {lead}
-                </p>
-              ) : null}
-            </div>
-          </div>
-        </Reveal>
-        <div className="mt-12 md:mt-16">{children}</div>
-      </Container>
-    </section>
-  );
-}
 
 /**
  * ファーストビュー右側の図: 「守る対象(個人情報)」を中心に、
@@ -732,134 +574,10 @@ function DefenseDiagram() {
 /* ------------------------------------------------------------ 図・グラフ */
 
 /**
- * メーター: 1つの割合を全体(100%)に対して示す横棒。
- * 塗り=ブランド色、未達部分=同じ色相の淡いトラック。表示時に左から伸びる。
- */
-function Meter({
-  value,
-  label,
-  caption,
-  dark,
-  hideLabel,
-}: MeterData & { dark?: boolean; hideLabel?: boolean }) {
-  return (
-    <figure role="img" aria-label={`${caption}：${label}`} className="w-full">
-      <div className="flex items-baseline justify-between gap-4">
-        <figcaption
-          className={cn(
-            "text-xs leading-relaxed",
-            dark ? "text-white/60" : "text-ink-muted",
-          )}
-        >
-          {caption}
-        </figcaption>
-        {hideLabel ? null : (
-          <span
-            className={cn(
-              "shrink-0 text-sm font-black",
-              dark ? "text-white" : "text-ink",
-            )}
-          >
-            <CountUp value={label} />
-          </span>
-        )}
-      </div>
-      <div
-        className={cn(
-          "mt-2 h-2 overflow-hidden rounded-full",
-          dark ? "bg-white/15" : "bg-brand-100",
-        )}
-      >
-        <div
-          style={{ width: `${value}%` }}
-          className={cn(
-            "h-full origin-left scale-x-0 rounded-full transition-transform delay-300 duration-[1200ms] ease-expo group-data-[visible=true]/reveal:scale-x-100",
-            dark ? "bg-brand-300" : "bg-brand-500",
-          )}
-        />
-      </div>
-      <div
-        className={cn(
-          "mt-1 flex justify-between text-[10px]",
-          dark ? "text-white/35" : "text-ink-muted/70",
-        )}
-      >
-        <span>0%</span>
-        <span>100%</span>
-      </div>
-    </figure>
-  );
-}
-
-/** 10マスのうち filled マスを塗るピクトグラム(「約7割」→ 10社中7社) */
-function Pictogram({ filled, caption }: { filled: number; caption: string }) {
-  return (
-    <figure role="img" aria-label={`${caption}`} className="w-full">
-      <div className="grid grid-cols-10 gap-1">
-        {Array.from({ length: 10 }, (_, i) => (
-          <span
-            key={i}
-            style={{ transitionDelay: `${300 + i * 60}ms` }}
-            className={cn(
-              "aspect-[3/4] rounded-[2px] opacity-0 transition-opacity duration-500 group-data-[visible=true]/reveal:opacity-100",
-              i < filled ? "bg-brand-300" : "bg-white/15",
-            )}
-          />
-        ))}
-      </div>
-      <figcaption className="mt-2 text-xs leading-relaxed text-white/60">
-        {caption}
-      </figcaption>
-    </figure>
-  );
-}
-
-/** 侵入から完全復旧までの時間軸(IPA事例: 復旧まで2か月、想定被害額3,900万円) */
-function RecoveryTimeline() {
-  return (
-    <figure
-      role="img"
-      aria-label="侵入から業務停止を経て、完全復旧まで2か月"
-      className="w-full"
-    >
-      <div className="relative h-8">
-        <span className="absolute inset-x-1 top-1/2 h-0.5 -translate-y-1/2 bg-white/15" />
-        <span className="absolute inset-x-1 top-1/2 h-0.5 origin-left -translate-y-1/2 scale-x-0 bg-brand-300 transition-transform delay-300 duration-[1400ms] ease-expo group-data-[visible=true]/reveal:scale-x-100" />
-        <span className="absolute left-0 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-brand-300 ring-4 ring-[#111]" />
-        <span className="absolute right-0 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-white ring-4 ring-[#111]" />
-        <span className="absolute left-1/2 top-0 -translate-x-1/2 bg-[#111] px-2 text-xs font-black text-white">
-          2か月
-        </span>
-      </div>
-      <figcaption className="mt-1 flex justify-between text-xs text-white/60">
-        <span>侵入・業務停止</span>
-        <span>完全復旧</span>
-      </figcaption>
-    </figure>
-  );
-}
-
-function FigureVisual({ viz }: { viz: FigureViz }) {
-  if (viz.kind === "meter")
-    return (
-      <Meter
-        value={viz.value}
-        label={`${viz.value}%`}
-        caption={viz.caption}
-        dark
-        hideLabel
-      />
-    );
-  if (viz.kind === "picto")
-    return <Pictogram filled={viz.filled} caption={viz.caption} />;
-  return <RecoveryTimeline />;
-}
-
-/**
  * どれを選べばいい？: お客様の状況ごとに、おすすめのメニューと主な対応内容を示す。
  * 下部に「迷ったら無料の簡易診断」の導線。
  */
-function MenuSelector() {
+function MenuSelector({ contactHref }: { contactHref: string }) {
   const rows = choices
     .filter((c) => !c.highlight)
     .map((c) => ({ ...c, detail: menus.find((m) => m.name === c.menu) }));
@@ -876,83 +594,125 @@ function MenuSelector() {
         </h3>
       </Reveal>
 
-      <ol className="mt-10 grid border-l border-t border-ink/15 md:grid-cols-3">
+      <ol className="mt-12 grid gap-6 md:grid-cols-3 md:gap-6 lg:gap-8">
         {rows.map((r, i) => (
-          <li key={r.when} className="border-b border-r border-ink/15">
-            <Reveal
-              variant="up"
-              delay={i * 120}
-              className="flex h-full flex-col"
-            >
-              {/* お客様の状況 */}
-              <div className="bg-[#F6F5F2] px-6 pb-6 pt-5 md:px-7">
-                <p className="text-[11px] font-bold tracking-[0.2em] text-ink-muted">
-                  CASE {String(i + 1).padStart(2, "0")}
-                </p>
-                <p className="mt-2 text-[15px] font-bold leading-relaxed text-ink md:min-h-[3.2em]">
-                  「{r.when}」
-                </p>
-              </div>
-              {/* つなぎ */}
-              <div aria-hidden="true" className="relative h-0">
-                <span className="absolute left-6 top-0 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-brand-500 text-white md:left-7">
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path
-                      d="M6 2v8M2.5 6.5L6 10l3.5-3.5"
-                      stroke="currentColor"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
+          <li key={r.when}>
+            <Reveal variant="up" delay={i * 140} className="h-full">
+              <article className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-ink/10 bg-white shadow-[0_20px_50px_-35px_rgba(29,5,11,0.45)] transition-all duration-500 ease-expo hover:-translate-y-1.5 hover:border-brand-500/30 hover:shadow-[0_34px_70px_-35px_rgba(122,30,53,0.55)]">
+                {/* 上辺のグラデーションライン */}
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-700 via-brand-500 to-brand-300"
+                />
+                {/* 大きな番号の透かし */}
+                <span
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -right-2 -top-6 select-none font-display text-[8rem] font-black leading-none text-brand-500/[0.06] transition-colors duration-500 group-hover:text-brand-500/[0.12]"
+                >
+                  {String(i + 1).padStart(2, "0")}
                 </span>
-              </div>
-              {/* おすすめのメニュー */}
-              <div className="group flex flex-1 flex-col bg-white px-6 pb-7 pt-8 transition-colors duration-500 hover:bg-brand-50/40 md:px-7">
-                <p className="text-[11px] font-bold tracking-[0.2em] text-brand-600">
-                  おすすめ ／ MENU {r.detail?.no.padStart(2, "0")}
-                </p>
-                <p className="mt-2 text-2xl font-black text-ink">{r.menu}</p>
-                {r.detail ? (
-                  <>
-                    <p className="mt-1 text-sm font-bold text-ink-soft">
-                      {r.detail.target}
+
+                {/* お客様の状況: 吹き出し */}
+                <div className="relative px-6 pt-8 md:px-7">
+                  <p className="flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] text-ink-muted">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <circle
+                        cx="7"
+                        cy="4.5"
+                        r="2.6"
+                        stroke="currentColor"
+                        strokeWidth="1.3"
+                      />
+                      <path
+                        d="M2 12.5c.6-2.6 2.6-4 5-4s4.4 1.4 5 4"
+                        stroke="currentColor"
+                        strokeWidth="1.3"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    CASE {String(i + 1).padStart(2, "0")}
+                  </p>
+                  <div className="relative mt-3 flex items-center rounded-xl bg-[#F6F1F2] px-4 py-3.5 md:min-h-[4.25rem]">
+                    <p className="text-[15px] font-bold leading-relaxed text-ink">
+                      {r.when}
                     </p>
-                    <ul className="mt-5 space-y-2 border-t border-ink/10 pt-4">
-                      {r.detail.items.slice(0, 2).map((it) => (
-                        <li
-                          key={it}
-                          className="flex gap-2.5 text-[13px] leading-relaxed text-ink-soft"
-                        >
-                          <svg
-                            width="14"
-                            height="14"
-                            viewBox="0 0 14 14"
-                            fill="none"
-                            aria-hidden="true"
-                            className="mt-0.5 shrink-0"
+                    <span
+                      aria-hidden="true"
+                      className="absolute -bottom-2 left-6 h-4 w-4 rotate-45 bg-[#F6F1F2]"
+                    />
+                  </div>
+                </div>
+
+                {/* つなぎの線(下へ流れる点) */}
+                <div
+                  aria-hidden="true"
+                  className="relative mx-6 mt-5 h-10 md:mx-7"
+                >
+                  <span className="absolute left-4 top-0 h-full w-px overflow-hidden bg-brand-200">
+                    <span className="absolute inset-x-0 top-0 h-1/3 animate-scroll-dot bg-brand-500" />
+                  </span>
+                  <span className="absolute left-9 top-1/2 -translate-y-1/2 text-[11px] font-bold tracking-[0.2em] text-brand-600">
+                    おすすめは
+                  </span>
+                </div>
+
+                {/* おすすめのメニュー */}
+                <div className="relative flex flex-1 flex-col px-6 pb-7 md:px-7">
+                  <div className="flex items-end justify-between gap-3">
+                    <p className="text-[1.9rem] font-black leading-none tracking-tight text-ink">
+                      {r.menu}
+                    </p>
+                    <span className="shrink-0 rounded-full border border-brand-500/30 px-2.5 py-1 text-[10px] font-bold tracking-[0.15em] text-brand-600">
+                      MENU {r.detail?.no.padStart(2, "0")}
+                    </span>
+                  </div>
+                  {r.detail ? (
+                    <>
+                      <p className="mt-3 inline-flex w-fit rounded-full bg-brand-500 px-3 py-1 text-xs font-bold text-white">
+                        {r.detail.target}
+                      </p>
+                      <ul className="mt-5 space-y-2.5 border-t border-dashed border-ink/15 pt-5">
+                        {r.detail.items.slice(0, 3).map((it) => (
+                          <li
+                            key={it}
+                            className="flex gap-2.5 text-[13px] leading-relaxed text-ink-soft"
                           >
-                            <circle
-                              cx="7"
-                              cy="7"
-                              r="6.5"
-                              className="fill-brand-500"
-                            />
-                            <path
-                              d="M4 7.2l2 2 4-4.2"
-                              stroke="#fff"
-                              strokeWidth="1.4"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-                          </svg>
-                          {it}
-                        </li>
-                      ))}
-                    </ul>
-                  </>
-                ) : null}
-              </div>
+                            <svg
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                              fill="none"
+                              aria-hidden="true"
+                              className="mt-0.5 shrink-0"
+                            >
+                              <circle
+                                cx="8"
+                                cy="8"
+                                r="7.5"
+                                className="fill-brand-50"
+                              />
+                              <path
+                                d="M4.6 8.2l2.2 2.2 4.6-4.8"
+                                stroke="#7A1E35"
+                                strokeWidth="1.6"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                            {it}
+                          </li>
+                        ))}
+                      </ul>
+                    </>
+                  ) : null}
+                </div>
+              </article>
             </Reveal>
           </li>
         ))}
@@ -960,7 +720,7 @@ function MenuSelector() {
 
       {fallback ? (
         <Reveal variant="up" className="mt-6">
-          <div className="flex flex-col items-start gap-5 bg-ink px-6 py-6 text-white md:flex-row md:items-center md:justify-between md:px-10 md:py-7">
+          <div className="flex flex-col items-start gap-5 rounded-2xl bg-ink px-6 py-6 text-white md:flex-row md:items-center md:justify-between md:px-10 md:py-7">
             <div>
               <p className="text-[11px] font-bold tracking-[0.2em] text-brand-200">
                 {fallback.when}
@@ -970,11 +730,11 @@ function MenuSelector() {
               </p>
             </div>
             <Button
-              href="#diagnosis"
+              href={contactHref}
               size="lg"
               className="w-full shrink-0 md:w-auto"
             >
-              無料で簡易診断を申し込む
+              無料で相談する
             </Button>
           </div>
         </Reveal>
@@ -1230,126 +990,10 @@ export default function WebSecurityPage({
 
           {/* どれを選べばいい？(状況別のおすすめメニュー) */}
           <div className="mt-16 md:mt-20">
-            <MenuSelector />
-          </div>
-
-          <div className="mt-8 text-center">
-            <Link
-              href="#menu"
-              className="inline-flex items-center gap-2 border-b border-ink pb-1 text-sm font-bold text-ink transition-colors hover:border-brand-500 hover:text-brand-600"
-            >
-              3つのメニューを詳しく見る
-              <span aria-hidden="true">↓</span>
-            </Link>
+            <MenuSelector contactHref={localePath("/contact", locale)} />
           </div>
         </Container>
       </section>
-
-      {/* ⑦ 損害 */}
-      <Section no="02" label="Risk" title="情報漏洩で生まれる損害" dark>
-        <div>
-          <p className="text-xs font-bold tracking-[0.2em] text-white/60">
-            数字で見る損害
-          </p>
-          <ul className="mt-6 grid border-t border-white/20 sm:grid-cols-2 lg:grid-cols-4">
-            {figures.map((f, i) => (
-              <li
-                key={f.text}
-                className={cn(
-                  "border-b border-white/20 py-8 sm:px-6 lg:border-b-0",
-                  i % 2 === 1 && "sm:border-l",
-                  i > 0 && "lg:border-l",
-                  "border-white/20 sm:first:pl-0",
-                )}
-              >
-                <Reveal
-                  variant="fade"
-                  delay={i * 80}
-                  className="flex h-full flex-col"
-                >
-                  <p className="font-black leading-none tracking-tight">
-                    <span className="text-[2.5rem] md:text-5xl lg:text-4xl xl:text-[2.6rem]">
-                      <CountUp value={f.figure} />
-                    </span>
-                    {f.unit ? (
-                      <span className="ml-1 whitespace-nowrap text-base text-white/80">
-                        {f.unit}
-                      </span>
-                    ) : null}
-                  </p>
-                  {f.viz ? (
-                    <div className="mt-6">
-                      <FigureVisual viz={f.viz} />
-                    </div>
-                  ) : null}
-                  <p className="mt-5 flex-1 text-[13px] leading-[1.9] text-white/70">
-                    {f.text}
-                  </p>
-                  <p className="mt-4">
-                    <SourceLink source={f.source} dark />
-                  </p>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <Reveal variant="fade" className="mt-16 border-t border-white/20 pt-10">
-          <p className="max-w-3xl text-[clamp(1.25rem,2.6vw,2rem)] font-black leading-[1.6]">
-            対策の費用は、
-            <br />
-            漏洩した後の損害より
-            <br className="sm:hidden" />
-            <span className="text-brand-200">ずっと小さく</span>済みます。
-          </p>
-        </Reveal>
-      </Section>
-
-      {/* ⑧ 3つのメニュー */}
-      <Section
-        id="menu"
-        no="03"
-        label="Menu"
-        title="3つのメニュー"
-        lead="必要なものだけ選べます"
-      >
-        <ol className="grid gap-12 lg:grid-cols-3 lg:gap-10">
-          {menus.map((m, i) => (
-            <li key={m.name}>
-              <Reveal
-                variant="fade"
-                delay={i * 100}
-                className="group/menu flex h-full flex-col border-t-2 border-ink pt-6 transition-colors duration-300 hover:border-brand-500"
-              >
-                <p className="text-xs font-bold tabular-nums tracking-[0.2em] text-ink-muted">
-                  MENU {m.no.padStart(2, "0")}
-                </p>
-                <h3 className="mt-3 text-3xl font-black text-ink transition-transform duration-500 ease-expo group-hover/menu:translate-x-1">
-                  {m.name}
-                </h3>
-                <p className="mt-2 text-sm font-bold text-brand-600">
-                  {m.target}
-                </p>
-                <ul className="mt-6 flex-1 border-t border-ink/15">
-                  {m.items.map((it) => (
-                    <li
-                      key={it}
-                      className="border-b border-ink/15 py-3.5 text-sm leading-relaxed text-ink-soft"
-                    >
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-                {m.note ? (
-                  <p className="mt-4 text-xs leading-relaxed text-ink-muted">
-                    {m.note}
-                  </p>
-                ) : null}
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-      </Section>
 
       {/* 申し込みフォーム(ファーストビューのメインCTAの遷移先) */}
       <section
