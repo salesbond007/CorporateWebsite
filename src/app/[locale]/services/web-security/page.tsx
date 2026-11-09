@@ -36,71 +36,6 @@ type Source = { label: string; href: string };
 
 type MeterData = { value: number; label: string; caption: string };
 
-const reasons: {
-  title: string;
-  text: string;
-  source?: Source;
-  meter?: MeterData;
-}[] = [
-  {
-    title: "攻撃する側もAIを使う時代",
-    text: "脆弱性を探す作業が自動化され、規模の小さい会社のサイトも、まとめて狙われるようになっています。",
-  },
-  {
-    title: "2026年10月、PHPに深刻な脆弱性",
-    text: "10月21日に深刻な脆弱性が2件公表されました。どちらも、認証なしで外部からサイトに不正な処理をさせられるものです。",
-    source: {
-      label: "gizmodo",
-      href: "https://www.gizmodo.jp/article/2610-php-vulnerability-security-update/",
-    },
-  },
-  {
-    title: "上場企業ですら対策が追いついていない",
-    text: "上場企業のサイトを調べた2026年8月の調査でも、66.7%のサイトがサポート切れのPHPで動いたままです。",
-    source: { label: "dxmagazine", href: "https://dxmagazine.jp/?p=226763" },
-    meter: {
-      value: 66.7,
-      label: "66.7%",
-      caption: "サポート切れのPHPで動く上場企業のサイト",
-    },
-  },
-  {
-    title: "中小企業が狙われている",
-    text: "ランサムウェア被害の約66%は中小企業で起きています。",
-    source: {
-      label: "ipa",
-      href: "https://www.ipa.go.jp/security/reports/sme/rcu1hd0000009k82-att/sme-jirei.pdf",
-    },
-    meter: {
-      value: 66,
-      label: "約66%",
-      caption: "ランサムウェア被害のうち、中小企業で起きたもの",
-    },
-  },
-];
-
-const damages: { title: string; text: string }[] = [
-  {
-    title: "原因の調査費用",
-    text: "侵入経路や漏洩した範囲を、専門会社に調べてもらう費用（フォレンジック調査）",
-  },
-  {
-    title: "報告と通知の対応",
-    text: "個人情報保護委員会への報告、本人への通知、お詫び文の作成と公表",
-  },
-  {
-    title: "問い合わせ対応",
-    text: "お客様からの問い合わせ窓口の設置と、対応にあたる人員",
-  },
-  { title: "損害賠償", text: "漏洩した本人から、慰謝料などを請求されるリスク" },
-  { title: "復旧と再発防止", text: "サイトの作り直し、セキュリティ対策の追加" },
-  {
-    title: "事業の停止",
-    text: "サイトや業務が止まっている間の売上と機会の損失",
-  },
-  { title: "信用の失墜", text: "取引の停止、採用応募の減少、検索順位の低下" },
-];
-
 const IPA_SME =
   "https://www.ipa.go.jp/security/reports/sme/rcu1hd0000009k82-att/sme-jirei.pdf";
 const ITMEDIA =
@@ -1310,76 +1245,9 @@ export default function WebSecurityPage({
         </Container>
       </section>
 
-      {/* ⑥ なぜ今 */}
-      <Section
-        no="02"
-        label="Why Now"
-        title="なぜ今、対策が必要なのか"
-        className="bg-[#F6F5F2]"
-      >
-        <div className="grid border-l border-t border-ink/15 md:grid-cols-2">
-          {reasons.map((r, i) => (
-            <Reveal
-              key={r.title}
-              variant="fade"
-              delay={i * 80}
-              className="h-full"
-            >
-              <div className="relative flex h-full flex-col border-b border-r border-ink/15 bg-white/60 p-7 transition-colors duration-500 hover:bg-white md:p-9 before:absolute before:left-0 before:top-0 before:h-[3px] before:w-full before:origin-left before:scale-x-0 before:bg-brand-500 before:transition-transform before:duration-500 hover:before:scale-x-100">
-                <p className="text-xs font-bold tabular-nums tracking-[0.2em] text-brand-600">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
-                <h3 className="mt-3 text-lg font-black leading-snug text-ink md:text-xl">
-                  {r.title}
-                </h3>
-                <p className="mt-3 flex-1 text-[15px] leading-[1.9] text-ink-soft">
-                  {r.text}
-                </p>
-                {r.meter ? (
-                  <div className="mt-6">
-                    <Meter {...r.meter} />
-                  </div>
-                ) : null}
-                {r.source ? (
-                  <p className="mt-5">
-                    <SourceLink source={r.source} />
-                  </p>
-                ) : null}
-              </div>
-            </Reveal>
-          ))}
-        </div>
-      </Section>
-
       {/* ⑦ 損害 */}
-      <Section
-        no="03"
-        label="Risk"
-        title="情報漏洩で生まれる損害"
-        lead="漏洩すると、これだけの対応と損失が発生します"
-        dark
-      >
-        <ol className="grid border-t border-white/20 md:grid-cols-2 md:gap-x-12">
-          {damages.map((d, i) => (
-            <li key={d.title} className="border-b border-white/20">
-              <Reveal variant="fade" delay={i * 50}>
-                <div className="grid grid-cols-[2.5rem_1fr] gap-x-3 py-5">
-                  <span className="pt-0.5 text-sm font-bold tabular-nums text-white/40">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <p className="text-base font-black">{d.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-white/65">
-                      {d.text}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
-
-        <div className="mt-20">
+      <Section no="02" label="Risk" title="情報漏洩で生まれる損害" dark>
+        <div>
           <p className="text-xs font-bold tracking-[0.2em] text-white/60">
             数字で見る損害
           </p>
@@ -1440,7 +1308,7 @@ export default function WebSecurityPage({
       {/* ⑧ 3つのメニュー */}
       <Section
         id="menu"
-        no="04"
+        no="03"
         label="Menu"
         title="3つのメニュー"
         lead="必要なものだけ選べます"
