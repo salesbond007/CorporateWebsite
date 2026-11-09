@@ -7,7 +7,6 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import {
   ApokomiFeatureIllustration,
   ApokomiClientBust,
-  ApokomiHeroIllustration,
   ApokomiStaffBust,
   WaveLines,
 } from "@/components/services/ApokomiIllustration";
@@ -15,6 +14,7 @@ import {
   ApokomiServiceDiagram,
   ChannelIcon,
 } from "@/components/services/ApokomiServiceDiagram";
+import { ApokomiHeroVisual } from "@/components/services/ApokomiHeroVisual";
 import { ApokomiLeadForm } from "@/components/contact/ApokomiLeadForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { pageMeta, pageMetadata } from "@/lib/seo";
@@ -83,87 +83,21 @@ const channels = [
   },
 ];
 
-/** ファーストビューの吹き出し(位置は図の枠に対する%) */
-const heroBubbles: {
-  label: string;
-  tone: "white" | "deep";
-  size: string;
-  text: string;
-  pos: React.CSSProperties;
-  tail: [React.CSSProperties, React.CSSProperties];
-}[] = [
-  {
-    label: "テレアポ",
-    tone: "white",
-    size: "33%",
-    text: "text-[clamp(1rem,3.4vw,1.9rem)]",
-    pos: { left: "-2%", top: "20%" },
-    tail: [
-      { right: "-2%", bottom: "10%" },
-      { right: "-12%", bottom: "-2%" },
-    ],
-  },
-  {
-    label: "問い合わせ\nフォーム",
-    tone: "deep",
-    size: "22%",
-    text: "px-2 text-[clamp(0.65rem,1.9vw,0.95rem)]",
-    pos: { left: "8%", top: "0%" },
-    tail: [
-      { right: "-4%", bottom: "4%" },
-      { right: "-16%", bottom: "-8%" },
-    ],
-  },
-  {
-    label: "手紙BDR",
-    tone: "white",
-    size: "27%",
-    text: "text-[clamp(0.9rem,2.8vw,1.5rem)]",
-    pos: { right: "-1%", top: "3%" },
-    tail: [
-      { left: "-2%", bottom: "6%" },
-      { left: "-12%", bottom: "-6%" },
-    ],
-  },
-  {
-    label: "SNS（DM）",
-    tone: "deep",
-    size: "22%",
-    text: "text-[clamp(0.75rem,2.2vw,1.1rem)]",
-    pos: { right: "-2%", top: "44%" },
-    tail: [
-      { left: "-4%", top: "18%" },
-      { left: "-16%", top: "6%" },
-    ],
-  },
-  {
-    label: "メール",
-    tone: "deep",
-    size: "23%",
-    text: "text-[clamp(0.8rem,2.4vw,1.25rem)]",
-    pos: { left: "2%", top: "56%" },
-    tail: [
-      { right: "-4%", top: "14%" },
-      { right: "-16%", top: "2%" },
-    ],
-  },
-];
-
 const worries = [
   {
     title: "アポイントを大量に獲得したい",
     items: [
-      "売れる商材はあるのに、商談の数が足りない",
-      "社内に架電の人手がなく、新規開拓が後回しになっている",
-      "テレアポだけでは母数が頭打ちになっている",
+      "売れる商材はあるのに、**商談の数が足りない**",
+      "社内に架電の人手がなく、**新規開拓が後回し**になっている",
+      "テレアポだけでは**母数が頭打ち**になっている",
     ],
   },
   {
     title: "勝ち筋が決まっておらず、複数チャネルで試したい",
     items: [
-      "新規事業・新商材で、どのターゲットに刺さるかまだ分からない",
-      "テレアポ代行やフォーム営業代行に頼んだが、成果が出なかった",
-      "どのチャネルから手をつけるべきか判断できない",
+      "新規事業・新商材で、**どのターゲットに刺さるか**まだ分からない",
+      "テレアポ代行やフォーム営業代行に頼んだが、**成果が出なかった**",
+      "**どのチャネルから手をつけるべきか**判断できない",
     ],
   },
 ];
@@ -308,7 +242,7 @@ function CheckBox() {
       viewBox="0 0 18 18"
       fill="none"
       aria-hidden="true"
-      className="mt-[3px] shrink-0"
+      className="mt-[5px] shrink-0"
     >
       <rect
         x="1"
@@ -457,59 +391,9 @@ export default function ApokomiPage({
             </div>
           </div>
 
-          {/* 複数チャネルの吹き出しと、作戦を話しながら歩く2人 */}
-          <div
-            className="relative mx-auto aspect-[5/6] w-full max-w-[520px] animate-fade-up"
-            style={{ animationDelay: "0.35s" }}
-          >
-            <div
-              aria-hidden="true"
-              className="absolute inset-[8%] rounded-full bg-white/20"
-            />
-            <ApokomiHeroIllustration className="absolute bottom-0 left-1/2 h-[92%] w-auto -translate-x-1/2" />
-            <ul aria-label="対応チャネル">
-              {heroBubbles.map((b, i) => (
-                <li
-                  key={b.label}
-                  className="absolute"
-                  style={{ ...b.pos, width: b.size }}
-                >
-                  <span
-                    className="relative block animate-float-y"
-                    style={{ animationDelay: `${i * 0.45}s` }}
-                  >
-                    <span
-                      className={cn(
-                        "grid aspect-square place-items-center whitespace-pre-line rounded-full text-center font-black leading-tight shadow-[0_14px_30px_-14px_rgba(160,60,0,0.7)]",
-                        b.tone === "white"
-                          ? "bg-white text-[#E05A0C]"
-                          : "bg-[#D9520B] text-white",
-                        b.text,
-                      )}
-                    >
-                      {b.label}
-                    </span>
-                    {/* 吹き出しのしっぽ(小さな丸) */}
-                    <span
-                      aria-hidden="true"
-                      className={cn(
-                        "absolute h-[14%] w-[14%] rounded-full",
-                        b.tone === "white" ? "bg-white" : "bg-[#D9520B]",
-                      )}
-                      style={b.tail[0]}
-                    />
-                    <span
-                      aria-hidden="true"
-                      className={cn(
-                        "absolute h-[8%] w-[8%] rounded-full",
-                        b.tone === "white" ? "bg-white" : "bg-[#D9520B]",
-                      )}
-                      style={b.tail[1]}
-                    />
-                  </span>
-                </li>
-              ))}
-            </ul>
+          {/* 5つのチャネルから商談が集まり、カレンダーが埋まっていくビジュアル */}
+          <div className="animate-fade-up" style={{ animationDelay: "0.35s" }}>
+            <ApokomiHeroVisual />
           </div>
         </Container>
 
@@ -589,15 +473,30 @@ export default function ApokomiPage({
             <div className="space-y-10">
               {worries.map((w, i) => (
                 <Reveal key={w.title} variant="up" delay={i * 120}>
-                  <p className="text-sm font-bold text-[#F26B1D]">{w.title}</p>
+                  <p className="text-base font-bold text-[#F26B1D] md:text-lg">
+                    {w.title}
+                  </p>
                   <ul className="mt-2">
                     {w.items.map((it) => (
                       <li
                         key={it}
-                        className="flex gap-3 border-b border-[#EADBD0] py-4 text-[15px] leading-relaxed"
+                        className="flex gap-3 border-b border-[#EADBD0] py-4 text-base leading-relaxed md:text-[17px]"
                       >
                         <CheckBox />
-                        {it}
+                        <span>
+                          {it.split("**").map((part, k) =>
+                            k % 2 === 1 ? (
+                              <strong
+                                key={k}
+                                className="bg-[linear-gradient(transparent_60%,#FFD2B3_60%)] font-bold text-[#241F20]"
+                              >
+                                {part}
+                              </strong>
+                            ) : (
+                              part
+                            ),
+                          )}
+                        </span>
                       </li>
                     ))}
                   </ul>
