@@ -609,14 +609,14 @@ function MenuSelector() {
                 {/* 上辺のグラデーションライン */}
                 <span
                   aria-hidden="true"
-                  className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-700 via-brand-500 to-brand-300"
+                  className="absolute inset-x-0 top-0 h-1 bg-brand-500"
                 />
 
                 {/* メニュー名(カード上部) */}
                 <div className="relative flex flex-1 flex-col px-6 pb-7 pt-9 md:px-7">
-                  <span className="mx-auto mb-4 grid h-24 w-24 place-items-center rounded-full bg-gradient-to-b from-brand-50 to-white ring-1 ring-brand-500/15 transition-transform duration-500 ease-expo group-hover:-translate-y-1 group-hover:scale-105">
+                  <div className="mx-auto mb-4 h-28 w-full max-w-[220px] transition-transform duration-500 ease-expo group-hover:-translate-y-1">
                     <MenuIcon name={r.menu} />
-                  </span>
+                  </div>
                   <p className="text-center text-[2.25rem] font-black leading-none tracking-[0.06em] text-ink">
                     {r.menu}
                   </p>
@@ -625,16 +625,6 @@ function MenuSelector() {
                       <p className="mx-auto mt-4 inline-flex w-fit rounded-full bg-brand-500 px-3 py-1 text-xs font-bold text-white">
                         {r.detail.target}
                       </p>
-                      {/* お客様の状況: 吹き出し */}
-                      <div className="relative mt-5 flex items-center justify-center rounded-xl bg-[#F6F1F2] px-4 py-3.5 text-center md:min-h-[4.25rem]">
-                        <p className="text-[15px] font-bold leading-relaxed text-ink">
-                          {r.when}
-                        </p>
-                        <span
-                          aria-hidden="true"
-                          className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-[#F6F1F2]"
-                        />
-                      </div>
 
                       <ul className="mt-5 space-y-2.5 border-t border-dashed border-ink/15 pt-5">
                         {r.detail.items.slice(0, 3).map((it) => (
