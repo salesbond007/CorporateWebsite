@@ -949,91 +949,6 @@ function FigureVisual({ viz }: { viz: FigureViz }) {
   return <RecoveryTimeline />;
 }
 
-/** 移行で攻撃の入口がなくなる仕組み(移行前 / 移行後) */
-function MigrationDiagram() {
-  const before = ["PHP", "データベース", "管理画面"];
-  return (
-    <figure className="mt-16 border border-ink/15 bg-[#F6F5F2] p-6 md:p-10">
-      <figcaption className="text-xs font-bold tracking-[0.2em] text-ink-muted">
-        図：「移行」で攻撃の入口をふさぐ
-      </figcaption>
-      <div className="mt-6 grid items-stretch gap-6 md:grid-cols-[1fr_auto_1fr] md:gap-8">
-        <div className="border border-ink/15 bg-white p-5 md:p-6">
-          <p className="text-xs font-bold tracking-[0.15em] text-ink-muted">
-            移行前（WordPress）
-          </p>
-          <p className="mt-1 text-base font-black text-ink">
-            攻撃の入口が3つある
-          </p>
-          <ul className="mt-5 space-y-2">
-            {before.map((b) => (
-              <li
-                key={b}
-                className="flex items-center justify-between border border-[#B42318]/30 bg-[#FDF1F0] px-4 py-3"
-              >
-                <span className="text-sm font-bold text-ink">{b}</span>
-                <span className="text-[11px] font-bold text-[#B42318]">
-                  攻撃の入口
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-4 text-xs leading-relaxed text-ink-muted">
-            サーバーに個人情報が溜まる構成
-          </p>
-        </div>
-
-        <div className="flex items-center justify-center" aria-hidden="true">
-          <span className="grid h-12 w-12 place-items-center rounded-full bg-brand-500 text-white md:rotate-0">
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              className="rotate-90 md:rotate-0"
-            >
-              <path
-                d="M4 10h12M11 5l5 5-5 5"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-        </div>
-
-        <div className="border-2 border-brand-500 bg-white p-5 md:p-6">
-          <p className="text-xs font-bold tracking-[0.15em] text-brand-600">
-            移行後（静的HTML）
-          </p>
-          <p className="mt-1 text-base font-black text-ink">
-            攻撃の入口をふさぐ
-          </p>
-          <ul className="mt-5 space-y-2">
-            {before.map((b) => (
-              <li
-                key={b}
-                className="flex items-center justify-between border border-ink/10 bg-[#F6F5F2] px-4 py-3"
-              >
-                <span className="text-sm font-bold text-ink-muted line-through decoration-ink/40">
-                  {b}
-                </span>
-                <span className="text-[11px] font-bold text-ink-muted">
-                  なし
-                </span>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-4 text-xs leading-relaxed text-ink-muted">
-            サーバーに個人情報を溜めない構成。問い合わせフォームは安全な方式に置き換え
-          </p>
-        </div>
-      </div>
-    </figure>
-  );
-}
-
 /** どれを選べばいい？: 状況 → おすすめメニューの判断フロー図 */
 function DecisionFlow() {
   const branches = choices.filter((c) => !c.highlight);
@@ -1554,9 +1469,6 @@ export default function WebSecurityPage({
             </li>
           ))}
         </ol>
-        <Reveal variant="fade">
-          <MigrationDiagram />
-        </Reveal>
       </Section>
 
       {/* ⑨ どれを選べばいい？ */}
