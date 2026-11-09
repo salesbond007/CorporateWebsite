@@ -231,17 +231,6 @@ const choices: { when: string; menu: string; highlight?: boolean }[] = [
   },
 ];
 
-const steps = [
-  { title: "無料簡易診断の申し込み", text: "URLを入力するだけ" },
-  { title: "診断結果の報告とメニューの提案" },
-  { title: "見積もりと契約" },
-  {
-    title: "作業開始",
-    text: "移行の場合は、確認用サイトでチェックしてから切り替え",
-  },
-  { title: "納品・継続サポート" },
-];
-
 /* ---------------------------------------------------------- 小さな部品 */
 
 function SourceLink({ source, dark }: { source: Source; dark?: boolean }) {
@@ -1479,42 +1468,6 @@ export default function WebSecurityPage({
         className="bg-[#F6F5F2]"
       >
         <DecisionFlow />
-      </Section>
-
-      {/* ⑩ ご利用の流れ */}
-      <Section no="06" label="Flow" title="ご利用の流れ">
-        <ol className="relative grid gap-0 lg:grid-cols-5">
-          {steps.map((s, i) => (
-            <li key={s.title} className="relative">
-              <Reveal
-                variant="fade"
-                delay={i * 80}
-                className="flex gap-5 pb-8 lg:block lg:pb-0 lg:pr-6"
-              >
-                {/* 縦(スマホ)・横(PC)の進行線 */}
-                {i < steps.length - 1 ? (
-                  <span
-                    aria-hidden="true"
-                    className="absolute left-[15px] top-8 h-[calc(100%-2rem)] w-px origin-top-left scale-0 bg-brand-500/50 transition-transform delay-300 duration-700 ease-expo group-data-[visible=true]/reveal:scale-100 lg:left-8 lg:top-[15px] lg:h-px lg:w-[calc(100%-2rem)]"
-                  />
-                ) : null}
-                <span className="relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink bg-white text-xs font-bold tabular-nums text-ink">
-                  {i + 1}
-                </span>
-                <div className="lg:mt-5">
-                  <p className="text-[15px] font-black leading-snug text-ink">
-                    {s.title}
-                  </p>
-                  {s.text ? (
-                    <p className="mt-1.5 text-xs leading-relaxed text-ink-muted">
-                      {s.text}
-                    </p>
-                  ) : null}
-                </div>
-              </Reveal>
-            </li>
-          ))}
-        </ol>
       </Section>
 
       {/* 申し込みフォーム(ファーストビューのメインCTAの遷移先) */}
