@@ -287,8 +287,8 @@ const BIG = { w: 880, h: 790, cx: 440, cy: 375 };
 const bigAttacks: { lines: [string, string]; at: number }[] = [
   { lines: ["脆弱性の", "自動探索"], at: -140 },
   { lines: ["不正", "ログイン"], at: -40 },
-  { lines: ["サポート切れ", "PHP"], at: 70 },
-  { lines: ["プラグインの", "脆弱性"], at: 110 },
+  { lines: ["サポート切れ", "PHP"], at: 40 },
+  { lines: ["プラグインの", "脆弱性"], at: 140 },
 ];
 
 function DefenseDiagramLarge() {
@@ -315,8 +315,8 @@ function DefenseDiagramLarge() {
   return (
     <Reveal variant="none">
       <svg
-        viewBox={`0 80 ${BIG.w} 705`}
-        className="mx-auto block aspect-[880/705] h-auto w-full max-w-full md:h-[clamp(380px,calc(100svh-20rem),700px)] md:w-auto"
+        viewBox={`0 80 ${BIG.w} 600`}
+        className="mx-auto block aspect-[880/600] h-auto w-full max-w-full md:h-[clamp(380px,calc(100svh-20rem),700px)] md:w-auto"
         role="img"
         aria-label="個人情報を守るホームページの外側に、診断・対策・保守の防御の層をつくり、脆弱性の自動探索・不正ログイン・プラグインの脆弱性・サポート切れPHPを狙う攻撃をブロックします。"
       >
