@@ -231,78 +231,138 @@ function Section({
   );
 }
 
-/** ファーストビュー右側の「診断 → 対策 → 保守」の流れ図 */
-const processSteps: { name: string; en: string; tagline: string; text: string }[] = [
-  {
-    name: "診断",
-    en: "Check",
-    tagline: "現状のリスクを知る",
-    text: "WordPress本体・プラグイン・テーマ・PHPのバージョンを外部から診断し、危険度と対策の優先順位を整理します。",
-  },
-  {
-    name: "対策",
-    en: "Fix",
-    tagline: "攻撃の入口をふさぐ",
-    text: "PHP・プラグインの更新、ログイン保護・WAFの導入、必要に応じて静的HTMLへの移行で入口をふさぎます。",
-  },
-  {
-    name: "保守",
-    en: "Keep",
-    tagline: "安全な状態を保つ",
-    text: "定期更新と更新前のバックアップ、月次の状況レポートで、安全な状態を維持します。",
-  },
-];
+/**
+ * ファーストビュー右側の図: 「守る対象(個人情報)」を中心に、
+ * 受付窓口(問い合わせフォーム・採用応募・会員登録)を持つホームページと、
+ * その外側の防御の層(診断・対策・保守)が外からの攻撃を防ぐ同心円の図。
+ */
+const C = 220; // 中心座標(viewBox 440x440)
 
-function ProcessDiagram() {
+function polar(r: number, deg: number) {
+  const rad = (deg * Math.PI) / 180;
+  return { x: C + r * Math.cos(rad), y: C + r * Math.sin(rad) };
+}
+
+function arcPath(r: number, from: number, to: number) {
+  const s = polar(r, from);
+  const e = polar(r, to);
+  const large = to - from > 180 ? 1 : 0;
+  return `M ${s.x.toFixed(1)} ${s.y.toFixed(1)} A ${r} ${r} 0 ${large} 1 ${e.x.toFixed(1)} ${e.y.toFixed(1)}`;
+}
+
+/** 防御の層: 3つの弧(角度は中心) */
+const shields = [
+  { label: "診断", at: -90 },
+  { label: "対策", at: 30 },
+  { label: "保守", at: 150 },
+];
+/** ホームページ上の受付窓口 */
+const gates = [
+  { label: "採用応募", at: -30 },
+  { label: "問い合わせフォーム", at: 90 },
+  { label: "会員登録", at: 210 },
+];
+/** 外から来る攻撃(防御の層で止まる) */
+const attacks = [-130, -50, 70, 190];
+
+const R_SHIELD = 158;
+const R_SITE = 110;
+const R_CORE = 54;
+
+function DefenseDiagram() {
+  const fade = "opacity-0 transition-opacity duration-700 group-data-[visible=true]/reveal:opacity-100";
   return (
-    <figure
-      aria-label="ホームページセキュリティ対策の流れ：診断、対策、保守"
-      className="border border-ink/15 bg-white shadow-[0_30px_60px_-30px_rgba(17,17,17,0.35)]"
-    >
-      <figcaption className="flex items-center justify-between border-b border-ink/10 bg-[#F6F5F2] px-5 py-3">
-        <span className="text-xs font-bold tracking-[0.12em] text-ink">ホームページセキュリティ対策の流れ</span>
-        <span className="text-[11px] font-bold tracking-[0.15em] text-ink-muted">3 STEPS</span>
-      </figcaption>
-      <ol className="px-5 py-6 md:px-7">
-        {processSteps.map((st, i) => (
-          <li key={st.name} className="relative grid grid-cols-[3rem_1fr] gap-x-4 pb-7 last:pb-0">
-            {/* ステップ間をつなぐ線と矢印 */}
-            {i < processSteps.length - 1 ? (
-              <>
-                <span aria-hidden="true" className="absolute bottom-0 left-6 top-12 w-px -translate-x-1/2 bg-brand-500/40" />
-                <span
-                  aria-hidden="true"
-                  className="absolute bottom-1 left-6 h-2 w-2 -translate-x-1/2 rotate-45 border-b border-r border-brand-500/60"
-                />
-              </>
-            ) : null}
-            <span
-              className={cn(
-                "relative z-10 grid h-12 w-12 place-items-center rounded-full text-sm font-black",
-                i === 0 ? "bg-brand-500 text-white" : "border-2 border-brand-500 bg-white text-brand-600",
-              )}
-            >
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            <div className="pt-0.5">
-              <p className="flex flex-wrap items-baseline gap-x-3">
-                <span className="text-2xl font-black text-ink">{st.name}</span>
-                <span className="text-[11px] font-bold tracking-[0.2em] text-ink-muted">{st.en.toUpperCase()}</span>
-              </p>
-              <p className="mt-1 text-sm font-bold text-brand-600">{st.tagline}</p>
-              <p className="mt-2 text-xs leading-relaxed text-ink-soft">{st.text}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-      <p className="flex items-center gap-2 border-t border-ink/10 px-5 py-3 text-[11px] font-bold text-ink-muted md:px-7">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-          <path d="M11.5 4.5A5 5 0 1 0 12 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-          <path d="M12 1.5v3h-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+    <Reveal variant="none">
+      <figure aria-label="ホームページのセキュリティ対策の考え方。個人情報を守るホームページの外側に、診断・対策・保守の防御の層をつくり、外からの攻撃を防ぎます。">
+        <svg viewBox="0 0 440 440" className="mx-auto block w-full max-w-[460px]" role="img" aria-hidden="true">
+          {/* 背景の目盛り円 */}
+          <circle cx={C} cy={C} r={214} fill="none" stroke="#1A1A1A" strokeOpacity="0.08" strokeDasharray="2 6" />
+
+          {/* 外からの攻撃: 矢印が防御の層で止まる */}
+          {attacks.map((deg, i) => {
+            const s = polar(214, deg);
+            const e = polar(R_SHIELD + 27, deg);
+            const x = polar(R_SHIELD + 19, deg);
+            return (
+              <g key={deg} className={fade} style={{ transitionDelay: `${900 + i * 120}ms` }}>
+                <line x1={s.x} y1={s.y} x2={e.x} y2={e.y} stroke="#6B6B6B" strokeWidth="1.5" strokeDasharray="3 3" />
+                <g transform={`translate(${x.x} ${x.y})`}>
+                  <circle r="8" fill="#F6F5F2" stroke="#B42318" strokeWidth="1.5" />
+                  <path d="M-3 -3 L3 3 M3 -3 L-3 3" stroke="#B42318" strokeWidth="1.6" strokeLinecap="round" />
+                </g>
+              </g>
+            );
+          })}
+
+          {/* 防御の層: 診断・対策・保守 */}
+          {shields.map((sh, i) => {
+            const m = polar(R_SHIELD, sh.at);
+            return (
+              <g key={sh.label} className={fade} style={{ transitionDelay: `${300 + i * 150}ms` }}>
+                <path d={arcPath(R_SHIELD, sh.at - 56, sh.at + 56)} fill="none" stroke="#7A1E35" strokeWidth="14" strokeLinecap="round" />
+                <rect x={m.x - 30} y={m.y - 15} width="60" height="30" rx="15" fill="#7A1E35" />
+                <text x={m.x} y={m.y + 5.5} textAnchor="middle" fontSize="15" fontWeight="900" fill="#fff">
+                  {sh.label}
+                </text>
+              </g>
+            );
+          })}
+
+          {/* ホームページ(受付窓口) */}
+          <g className={fade} style={{ transitionDelay: "150ms" }}>
+            <circle cx={C} cy={C} r={R_SITE} fill="#fff" stroke="#1A1A1A" strokeOpacity="0.25" />
+            <text x={C} y={C - R_CORE - 18} textAnchor="middle" fontSize="12" fontWeight="700" fill="#6B6B6B" letterSpacing="1">
+              ホームページ
+            </text>
+            {gates.map((g) => {
+              const n = polar(R_SITE, g.at);
+              const w = g.label.length * 11 + 16;
+              return (
+                <g key={g.label}>
+                  <rect x={n.x - w / 2} y={n.y - 12} width={w} height="24" rx="3" fill="#fff" stroke="#1A1A1A" strokeOpacity="0.35" />
+                  <text x={n.x} y={n.y + 4} textAnchor="middle" fontSize="11" fontWeight="700" fill="#1A1A1A">
+                    {g.label}
+                  </text>
+                </g>
+              );
+            })}
+          </g>
+
+          {/* 守る対象: 個人情報 */}
+          <g className={fade}>
+            <circle cx={C} cy={C} r={R_CORE} fill="#1D050B" />
+            <path
+              d={`M ${C - 9} ${C - 14} v -5 a 9 9 0 0 1 18 0 v 5`}
+              fill="none"
+              stroke="#E4A0B0"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+            />
+            <rect x={C - 13} y={C - 14} width="26" height="18" rx="3" fill="#E4A0B0" />
+            <text x={C} y={C + 24} textAnchor="middle" fontSize="13" fontWeight="900" fill="#fff">
+              個人情報
+            </text>
+          </g>
         </svg>
-        必要なステップだけ選べます。保守は継続してサポートします
-      </p>
-    </figure>
+
+        <figcaption className="mx-auto mt-4 flex max-w-[460px] flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-ink-soft">
+          <span className="flex items-center gap-2">
+            <span aria-hidden="true" className="h-3 w-3 shrink-0 rounded-full bg-[#1D050B]" />
+            守る対象：個人情報
+          </span>
+          <span className="flex items-center gap-2">
+            <span aria-hidden="true" className="h-1.5 w-4 shrink-0 rounded-full bg-brand-500" />
+            防御の層：診断・対策・保守
+          </span>
+          <span className="flex items-center gap-2">
+            <span aria-hidden="true" className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full border border-[#B42318] text-[8px] leading-none text-[#B42318]">
+              ×
+            </span>
+            外からの攻撃を防ぐ
+          </span>
+        </figcaption>
+      </figure>
+    </Reveal>
   );
 }
 
@@ -641,7 +701,7 @@ export default function WebSecurityPage({
                 className="mt-6 max-w-xl text-[15px] leading-[2] text-ink-soft animate-fade-up"
                 style={{ animationDelay: "0.55s" }}
               >
-                問い合わせフォーム、採用応募、会員登録など、ホームページは個人情報の入口です。AI時代のホームページセキュリティ対策として、「診断」「保守」「移行」の3つから必要なものだけを選べます。
+                問い合わせフォーム、採用応募、会員登録など、ホームページは個人情報の受付窓口であり、同時にサイバー攻撃の標的でもあります。AI時代に求められる水準のセキュリティ対策で、情報漏洩のリスクを低減します。
               </p>
               <div
                 className="mt-9 grid gap-3 animate-fade-up sm:flex sm:flex-wrap"
@@ -651,12 +711,12 @@ export default function WebSecurityPage({
                   無料で簡易診断を申し込む
                 </Button>
                 <Button href={localePath("/contact", locale)} size="lg" variant="secondary">
-                  まずは相談する
+                  無料で相談する
                 </Button>
               </div>
             </div>
             <div className="animate-fade-up lg:col-span-5" style={{ animationDelay: "0.5s" }}>
-              <ProcessDiagram />
+              <DefenseDiagram />
             </div>
           </div>
         </Container>
@@ -861,7 +921,7 @@ export default function WebSecurityPage({
                   href={localePath("/contact", locale)}
                   className="mx-1 font-bold text-ink underline underline-offset-4 hover:text-brand-600"
                 >
-                  まずは相談する
+                  無料で相談する
                 </Link>
                 からどうぞ。
               </p>
