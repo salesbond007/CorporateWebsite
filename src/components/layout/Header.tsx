@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui/Button";
@@ -24,6 +25,10 @@ export function Header({ locale, dict }: Props) {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  const pathname = usePathname();
+
+  // LP(アポコミ)では独自の目次ナビゲーションを使うため、サイトのヘッダーは出さない
+  if (/\/services\/apokomi\/?$/.test(pathname ?? "")) return null;
 
   return (
     <header

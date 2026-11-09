@@ -157,7 +157,7 @@ export const serviceCategories: ServiceCategory[] = [
           {
             slug: "apokomi",
             number: "02-1",
-            title: "インサイドセールス代行（アポコミ）",
+            title: "アポコミ（新規開拓支援）",
             href: "/services/apokomi",
             subtitle: "Inside Sales",
             summary:
