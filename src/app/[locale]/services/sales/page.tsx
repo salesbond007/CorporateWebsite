@@ -33,7 +33,7 @@ export default function SalesServicePage({
       image="/services/cards/talent.jpg"
       related={[
         {
-          title: "インサイドセールス代行（アポコミ）",
+          title: "アポコミ（新規開拓支援）",
           text: "テレアポ・フォーム・メール・手紙・SNSを総動員して、新規アポイントを獲りにいくインサイドセールス代行サービスです。",
           href: "/services/apokomi",
         },

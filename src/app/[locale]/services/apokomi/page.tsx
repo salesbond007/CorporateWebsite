@@ -27,6 +27,14 @@ const PATH = "/services/apokomi";
 const FORM_ID = "apokomi-form";
 const CTA_LABEL = "無料相談・見積もり依頼";
 
+/** LPの目次(ヘッダーのナビゲーション) */
+const lpNav = [
+  { href: "#problem", label: "課題" },
+  { href: "#about", label: "アポコミとは" },
+  { href: "#features", label: "特徴" },
+  { href: `#${FORM_ID}`, label: "お問い合わせ" },
+];
+
 export function generateMetadata({
   params,
 }: {
@@ -47,35 +55,30 @@ const channels = [
     name: "テレアポ",
     id: "tele",
     en: "TELE",
-    scores: [3, 1, 2, 2],
     text: "即効性が高く、アポイントの量を確保しやすいチャネル。決裁者や担当者の特定にも使います",
   },
   {
     name: "問い合わせフォーム",
     id: "form",
     en: "FORM",
-    scores: [2, 3, 1, 1],
     text: "低コストで幅広い企業にアプローチできます。検証段階で母数を広げたいときに有効です",
   },
   {
     name: "メール",
     id: "mail",
     en: "MAIL",
-    scores: [1, 3, 1, 3],
     text: "接点を持った企業への追客やフォローに。日程調整までスムーズにつなげます",
   },
   {
     name: "手紙BDR",
     id: "letter",
     en: "LETTER",
-    scores: [1, 1, 3, 1],
     text: "大手企業や決裁者に、印象に残るアプローチを。狙った企業を確実に開拓したいときに",
   },
   {
     name: "SNS（DM）",
     id: "sns",
     en: "SNS",
-    scores: [2, 2, 3, 2],
     text: "経営者や担当者個人に直接届くチャネル。スタートアップやIT企業の開拓に",
   },
 ];
@@ -143,43 +146,6 @@ const heroBubbles: {
       { right: "-4%", top: "14%" },
       { right: "-16%", top: "2%" },
     ],
-  },
-];
-
-/** チャネル比較の観点(scoresの並びと対応) */
-const channelMetrics = [
-  "即効性",
-  "低コスト・量",
-  "決裁者への到達",
-  "追客・フォロー",
-];
-
-/** 商材の特徴ごとのおすすめチャネル */
-const channelMatches = [
-  {
-    feature: "決裁者に直接届けたい、高単価の商材",
-    example: "例：大手企業向けソリューション、コンサルティング",
-    channels: ["手紙BDR", "テレアポ"],
-  },
-  {
-    feature: "まずは幅広い企業に当てて、母数を確保したい",
-    example: "例：中小企業向けSaaS、低単価のサービス",
-    channels: ["問い合わせフォーム", "テレアポ"],
-  },
-  {
-    feature: "刺さるターゲットを、これから見つけたい",
-    example: "例：新規事業・新商材、AIソリューション",
-    channels: ["問い合わせフォーム", "メール", "テレアポ"],
-  },
-  {
-    feature: "経営者や担当者個人に、直接届けたい",
-    example: "例：スタートアップ・IT企業向けのサービス",
-    channels: ["SNS（DM）", "メール"],
-  },
-  {
-    feature: "総務・現場など、担当窓口がはっきりしている",
-    example: "例：人材派遣、制服・ユニフォーム、オフィス用品",
-    channels: ["テレアポ", "手紙BDR"],
   },
 ];
 
@@ -410,17 +376,43 @@ export default function ApokomiPage({
         ]}
       />
 
-      {/* 固定のCTAバー(サイトヘッダーの下に追従) */}
-      <div className="sticky top-16 z-30 border-b border-[#F2E3D8] bg-white/95 backdrop-blur md:top-20">
-        <Container className="flex h-14 items-center justify-between gap-3">
-          <p className="flex items-center gap-3">
-            <span className="hidden text-sm font-bold text-[#241F20]/70 sm:inline">
-              複数チャネルで新規アポイントを創出
-            </span>
-          </p>
-          <Cta size="md" />
+      {/* LPのヘッダー(目次ナビゲーション + CTA) */}
+      <header className="sticky top-0 z-40 border-b border-[#F2E3D8] bg-white/95 backdrop-blur">
+        <Container className="flex h-14 items-center gap-4 md:h-16">
+          <nav aria-label="ページ内目次" className="hidden md:block">
+            <ul className="flex items-center gap-1 lg:gap-2">
+              {lpNav.map((n) => (
+                <li key={n.href}>
+                  <a
+                    href={n.href}
+                    className="rounded-full px-3 py-2 text-sm font-bold text-[#241F20]/80 transition hover:bg-[#FFF3EA] hover:text-[#E05A0C] lg:px-4"
+                  >
+                    {n.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <Cta size="md" className="ml-auto" />
         </Container>
-      </div>
+        <nav
+          aria-label="ページ内目次"
+          className="border-t border-[#F2E3D8] md:hidden"
+        >
+          <ul className="flex gap-1 overflow-x-auto px-3 py-1.5 [scrollbar-width:none]">
+            {lpNav.map((n) => (
+              <li key={n.href} className="shrink-0">
+                <a
+                  href={n.href}
+                  className="block whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-bold text-[#241F20]/80 active:bg-[#FFF3EA]"
+                >
+                  {n.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
 
       {/* 1. ファーストビュー */}
       <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#FFAE72] via-[#FB8E45] to-[#F37A2C] text-white">
@@ -582,7 +574,10 @@ export default function ApokomiPage({
       </section>
 
       {/* 2. お悩み */}
-      <section className="relative isolate overflow-hidden bg-[#FFF8F2] py-20 md:py-28">
+      <section
+        id="problem"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FFF8F2] py-20 md:py-28"
+      >
         <WaveLines className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-72 w-full" />
         <Container>
           <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-[1fr_1.7fr] md:gap-14">
@@ -781,7 +776,7 @@ export default function ApokomiPage({
       {/* 4. 特徴 */}
       <section
         id="features"
-        className="relative isolate scroll-mt-36 overflow-hidden bg-[#FFF8F2] py-20 md:py-28"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FFF8F2] py-20 md:py-28"
       >
         <WaveLines className="pointer-events-none absolute inset-x-0 top-1/3 -z-10 h-80 w-full" />
         <Container>
@@ -845,120 +840,8 @@ export default function ApokomiPage({
         </Container>
       </section>
 
-      {/* 5. 開拓チャネル */}
-      <section id="channels" className="scroll-mt-36 py-20 md:py-28">
-        <Container>
-          <Heading en="CHANNEL">5つの開拓チャネル</Heading>
-          <Reveal variant="up">
-            <p className="mx-auto mt-6 max-w-2xl text-center text-[15px] leading-[2] text-[#241F20]/80">
-              強みの異なる5つのチャネルを、商材やターゲットに合わせて組み合わせます。
-            </p>
-          </Reveal>
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-            {channels.map((c, i) => (
-              <Reveal key={c.id} variant="up" delay={i * 80} className="h-full">
-                <div className="flex h-full flex-col rounded-xl bg-white p-6 shadow-[0_14px_36px_-24px_rgba(242,107,29,0.5)] ring-1 ring-[#F2E3D8]">
-                  <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#FFF3EA] text-[#F26B1D]">
-                    <ChannelIcon id={c.id} />
-                  </div>
-                  <p className="mt-4 text-center text-[11px] font-bold tracking-[0.2em] text-[#F26B1D]">
-                    {c.en}
-                  </p>
-                  <h3 className="mt-1 text-center text-lg font-bold">
-                    {c.name}
-                  </h3>
-                  <p className="mt-3 text-sm leading-[1.85] text-[#241F20]/75">
-                    {c.text}
-                  </p>
-                  <div className="mt-auto pt-5">
-                    <dl className="space-y-2 border-t border-dashed border-[#EADBD0] pt-4">
-                      {channelMetrics.map((m, j) => (
-                        <div
-                          key={m}
-                          className="flex items-center justify-between gap-2 text-xs"
-                        >
-                          <dt className="text-[#241F20]/70">{m}</dt>
-                          <dd
-                            className="flex gap-1"
-                            aria-label={`3段階中${c.scores[j]}`}
-                          >
-                            {[1, 2, 3].map((n) => (
-                              <span
-                                key={n}
-                                className={cn(
-                                  "h-2 w-5 rounded-full",
-                                  n <= c.scores[j]
-                                    ? "bg-[#F26B1D]"
-                                    : "bg-[#F2E3D8]",
-                                )}
-                              />
-                            ))}
-                          </dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
-
-          {/* 商材の特徴に合わせた開拓チャネル */}
-          <Reveal
-            variant="up"
-            className="mx-auto mt-16 max-w-5xl rounded-xl bg-[#FFF8F2] p-5 md:p-10"
-          >
-            <h3 className="text-center text-xl font-bold leading-[1.6] md:text-2xl [word-break:auto-phrase]">
-              商材の特徴に合わせた
-              <span className="text-[#F26B1D]">開拓チャネル</span>
-            </h3>
-            <div className="mt-6 hidden grid-cols-[1fr_auto_1fr] gap-6 px-6 text-xs font-bold tracking-[0.1em] text-[#241F20]/50 md:grid">
-              <p>商材の特徴</p>
-              <span />
-              <p className="text-right">おすすめのチャネル</p>
-            </div>
-            <ul className="mt-6 space-y-3 md:mt-3">
-              {channelMatches.map((m) => (
-                <li
-                  key={m.feature}
-                  className="grid items-center gap-3 rounded-lg bg-white p-5 md:grid-cols-[1fr_auto_1fr] md:gap-6 md:p-6"
-                >
-                  <div>
-                    <p className="font-bold leading-relaxed">{m.feature}</p>
-                    <p className="mt-1 text-xs text-[#241F20]/60">
-                      {m.example}
-                    </p>
-                  </div>
-                  <span
-                    aria-hidden="true"
-                    className="text-[#F26B1D] md:text-xl"
-                  >
-                    <span className="md:hidden">↓</span>
-                    <span className="hidden md:inline">→</span>
-                  </span>
-                  <div className="flex flex-wrap gap-2 md:justify-end">
-                    {m.channels.map((ch) => (
-                      <span
-                        key={ch}
-                        className="rounded-full bg-[#F26B1D] px-3 py-1 text-xs font-bold text-white md:text-sm"
-                      >
-                        {ch}
-                      </span>
-                    ))}
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 text-center text-xs text-[#241F20]/60">
-              ※ 実際の組み合わせは、ヒアリングの内容をもとにご提案します。
-            </p>
-          </Reveal>
-          <SectionCta />
-        </Container>
-      </section>
-
-      {/* 6. 最終CTA */}
-      <section className="relative isolate overflow-hidden bg-[#FFF8F2] py-20 md:py-24">
+      {/* 5. 最終CTA */}
+      <section className="relative isolate overflow-hidden py-20 md:py-24">
         <WaveLines className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-64 w-full" />
         <Container>
           <Reveal
@@ -992,10 +875,10 @@ export default function ApokomiPage({
         </Container>
       </section>
 
-      {/* 7. 問い合わせフォーム */}
+      {/* 6. 問い合わせフォーム */}
       <section
         id={FORM_ID}
-        className="scroll-mt-36 bg-white py-20 md:py-28"
+        className="scroll-mt-28 bg-[#FFF8F2] py-20 md:py-28"
       >
         <Container>
           <Heading en="CONTACT">無料相談・見積もり依頼</Heading>
