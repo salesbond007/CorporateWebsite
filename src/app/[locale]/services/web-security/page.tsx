@@ -785,6 +785,21 @@ export default function WebSecurityPage({
 
       {/* ① ファーストビュー */}
       <section className="relative isolate overflow-hidden border-b border-ink/10 bg-white">
+        {/* スマホ・タブレット: 画像をセクション下部の背景に敷き、上の文字部分へ白のグラデーションで溶け込ませる */}
+        <div
+          aria-hidden="true"
+          className="absolute bottom-0 right-0 -z-10 aspect-[1672/941] w-[135%] overflow-hidden sm:w-[115%] lg:hidden"
+        >
+          <Image
+            src="/services/web-security/hero-v2.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#ffffff_0%,rgba(255,255,255,0.85)_18%,rgba(255,255,255,0)_45%)]" />
+        </div>
         {/* PC: 背景画像を右側に配置し、左側(コピー部分)は白へ溶け込ませる */}
         <div
           aria-hidden="true"
@@ -801,7 +816,7 @@ export default function WebSecurityPage({
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_0%,rgba(255,255,255,0.9)_16%,rgba(255,255,255,0)_40%)]" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/70 to-transparent" />
         </div>
-        <Container className="pb-16 pt-12 md:pb-24 md:pt-20 lg:flex lg:min-h-[640px] lg:flex-col lg:justify-center">
+        <Container className="pb-[66vw] pt-10 sm:pb-[56vw] md:pt-20 lg:flex lg:pb-24 lg:min-h-[640px] lg:flex-col lg:justify-center">
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
               <h1 className="text-[min(2.6rem,9.6vw)] md:text-[clamp(2.4rem,5.6vw,5rem)] font-black leading-[1.15] tracking-[0.01em] text-ink">
@@ -838,16 +853,6 @@ export default function WebSecurityPage({
                 </Button>
               </div>
             </div>
-          </div>
-          {/* スマホ・タブレット: 画像は背景にせず、ボタンの下に表示 */}
-          <div className="relative mt-10 aspect-[1672/941] overflow-hidden rounded-sm lg:hidden">
-            <Image
-              src="/services/web-security/hero-v2.webp"
-              alt="ホームページのセキュリティ対策のイメージ"
-              fill
-              sizes="100vw"
-              className="object-cover"
-            />
           </div>
         </Container>
       </section>
@@ -940,7 +945,7 @@ export default function WebSecurityPage({
             </h2>
             <p className="mx-auto mt-4 max-w-3xl md:text-sm md:leading-[1.9] translate-y-3 text-[15px] leading-[2] text-ink-soft opacity-0 transition-all delay-300 duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100">
               {/* TODO: 本文確定後に差し替え */}
-              個人情報の受付窓口であるホームページを、外からの攻撃から守ります。現状を診断し、必要な対策を行い、安全な状態を保ち続けることで、情報漏洩のリスクを低減します。
+              現状を診断し、必要な対策を行い、安全な状態を保ち続けることで、情報漏洩のリスクを低減します。
             </p>
           </Reveal>
 
