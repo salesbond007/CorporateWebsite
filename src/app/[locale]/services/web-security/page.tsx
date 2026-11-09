@@ -577,11 +577,10 @@ function DefenseDiagram() {
  * どれを選べばいい？: お客様の状況ごとに、おすすめのメニューと主な対応内容を示す。
  * 下部に「迷ったら無料の簡易診断」の導線。
  */
-function MenuSelector({ contactHref }: { contactHref: string }) {
+function MenuSelector() {
   const rows = choices
     .filter((c) => !c.highlight)
     .map((c) => ({ ...c, detail: menus.find((m) => m.name === c.menu) }));
-  const fallback = choices.find((c) => c.highlight);
 
   return (
     <div>
@@ -717,28 +716,6 @@ function MenuSelector({ contactHref }: { contactHref: string }) {
           </li>
         ))}
       </ol>
-
-      {fallback ? (
-        <Reveal variant="up" className="mt-6">
-          <div className="flex flex-col items-start gap-5 rounded-2xl bg-ink px-6 py-6 text-white md:flex-row md:items-center md:justify-between md:px-10 md:py-7">
-            <div>
-              <p className="text-[11px] font-bold tracking-[0.2em] text-brand-200">
-                {fallback.when}
-              </p>
-              <p className="mt-1.5 text-lg font-black leading-snug md:text-xl">
-                {fallback.menu}
-              </p>
-            </div>
-            <Button
-              href={contactHref}
-              size="lg"
-              className="w-full shrink-0 md:w-auto"
-            >
-              無料で相談する
-            </Button>
-          </div>
-        </Reveal>
-      ) : null}
     </div>
   );
 }
@@ -990,7 +967,7 @@ export default function WebSecurityPage({
 
           {/* どれを選べばいい？(状況別のおすすめメニュー) */}
           <div className="mt-16 md:mt-20">
-            <MenuSelector contactHref={localePath("/contact", locale)} />
+            <MenuSelector />
           </div>
         </Container>
       </section>
@@ -998,53 +975,98 @@ export default function WebSecurityPage({
       {/* 申し込みフォーム(ファーストビューのメインCTAの遷移先) */}
       <section
         id="diagnosis"
-        className="scroll-mt-20 border-t border-ink/10 bg-[#F6F5F2] py-20 md:py-28"
+        className="relative isolate scroll-mt-20 overflow-hidden bg-[#140308] py-20 text-white md:py-28"
       >
+        {/* 背景: 深いワインレッドのグラデーション+にじむ光+細いグリッド */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,#5A1426_0%,#140308_55%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-40 top-10 -z-10 h-[30rem] w-[30rem] animate-blob rounded-full bg-brand-500/40 blur-[130px]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-40 right-0 -z-10 h-[26rem] w-[26rem] animate-blob rounded-full bg-brand-300/20 blur-[130px] [animation-delay:-9s]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"
+        />
+
         <Container>
-          <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
-            <div className="lg:col-span-5">
-              <p className="text-xs font-bold tracking-[0.2em] text-brand-600">
+          <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-14">
+            <Reveal variant="left" className="lg:col-span-5 lg:pt-4">
+              <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[11px] font-bold tracking-[0.25em] text-brand-200">
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-300" />
                 FREE CHECK
               </p>
-              <h2 className="mt-4 text-[clamp(1.5rem,3.2vw,2.5rem)] font-black leading-[1.35] text-ink">
+              <h2 className="mt-5 text-[clamp(1.75rem,3.6vw,2.75rem)] font-black leading-[1.3]">
                 無料簡易診断の
                 <br />
                 お申し込み
               </h2>
-              <p className="mt-5 text-[15px] leading-[1.9] text-ink-soft">
+              <p className="mt-5 text-[15px] leading-[1.9] text-white/70">
                 URLを入力するだけで申し込めます。診断結果の報告とあわせて、最適なメニューをご提案します。
               </p>
-              <dl className="mt-8 border-t border-ink/15 text-sm">
+
+              {/* 費用の強調 */}
+              <div className="mt-8 flex items-end gap-4 border-y border-white/15 py-5">
+                <p className="text-sm font-bold text-white/60">費用</p>
+                <p className="text-5xl font-black leading-none tracking-tight">
+                  0<span className="ml-1 text-xl">円</span>
+                </p>
+                <p className="mb-1 text-xs text-white/50">
+                  必要な情報はホームページのURLだけ
+                </p>
+              </div>
+
+              {/* 申し込み後の流れ */}
+              <ol className="mt-8 space-y-0">
                 {[
-                  ["費用", "無料"],
-                  ["必要な情報", "ホームページのURL"],
-                  ["その後の流れ", "診断結果の報告とメニューの提案"],
-                ].map(([k, v]) => (
-                  <div
-                    key={k}
-                    className="grid grid-cols-[7rem_1fr] border-b border-ink/15 py-3.5"
-                  >
-                    <dt className="font-bold text-ink-muted">{k}</dt>
-                    <dd className="font-bold text-ink">{v}</dd>
-                  </div>
+                  ["URLを入力して申し込む", "このフォームから送信"],
+                  ["簡易診断", "外部からホームページの状態を診断"],
+                  [
+                    "結果の報告とメニューの提案",
+                    "診断結果をもとに最適なメニューをご提案",
+                  ],
+                ].map(([t, d], i, arr) => (
+                  <li key={t} className="relative flex gap-4 pb-6 last:pb-0">
+                    {i < arr.length - 1 ? (
+                      <span
+                        aria-hidden="true"
+                        className="absolute left-4 top-9 h-[calc(100%-2.25rem)] w-px bg-gradient-to-b from-brand-300/70 to-white/10"
+                      />
+                    ) : null}
+                    <span className="relative grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-400 to-brand-600 text-xs font-black shadow-[0_0_0_4px_rgba(255,255,255,0.06)]">
+                      {i + 1}
+                    </span>
+                    <div className="pt-0.5">
+                      <p className="text-[15px] font-bold">{t}</p>
+                      <p className="mt-0.5 text-xs text-white/55">{d}</p>
+                    </div>
+                  </li>
                 ))}
-              </dl>
-              <p className="mt-8 text-sm text-ink-soft">
+              </ol>
+
+              <p className="mt-10 text-sm text-white/60">
                 診断の前に相談したい方は
                 <Link
                   href={localePath("/contact", locale)}
-                  className="mx-1 font-bold text-ink underline underline-offset-4 hover:text-brand-600"
+                  className="mx-1 font-bold text-white underline decoration-brand-300 underline-offset-4 hover:text-brand-200"
                 >
                   無料で相談する
                 </Link>
                 からどうぞ。
               </p>
-            </div>
-            <div className="lg:col-span-7">
+            </Reveal>
+
+            <Reveal variant="up" delay={150} className="lg:col-span-7">
               <WebSecurityDiagnosisForm
                 privacyHref={localePath("/privacy", locale)}
               />
-            </div>
+            </Reveal>
           </div>
         </Container>
       </section>

@@ -10,7 +10,7 @@ type Props = {
 };
 
 const inputClass =
-  "w-full border border-ink/20 bg-white px-4 py-3.5 text-base text-ink outline-none transition placeholder:text-ink-muted/70 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/15";
+  "w-full rounded-xl border border-transparent bg-[#F5F2F3] px-4 py-3.5 text-base text-ink outline-none transition placeholder:text-ink-muted/60 hover:bg-[#F1ECEE] focus:border-brand-500 focus:bg-white focus:ring-4 focus:ring-brand-500/10";
 
 /** URLに https:// が無ければ補う(「www.example.com」等の入力を許容するため) */
 function normalizeUrl(value: string) {
@@ -50,12 +50,19 @@ export function WebSecurityDiagnosisForm({ privacyHref }: Props) {
           website,
         }),
       });
-      const json: { ok?: boolean; error?: string; issues?: Record<string, string[]> } =
-        await res.json().catch(() => ({}));
+      const json: {
+        ok?: boolean;
+        error?: string;
+        issues?: Record<string, string[]>;
+      } = await res.json().catch(() => ({}));
 
       if (!res.ok || !json.ok) {
         const issueText = json.issues && Object.values(json.issues).flat()[0];
-        setError(issueText ?? json.error ?? "送信に失敗しました。時間をおいて再度お試しください。");
+        setError(
+          issueText ??
+            json.error ??
+            "送信に失敗しました。時間をおいて再度お試しください。",
+        );
         return;
       }
       setSent(true);
@@ -68,8 +75,13 @@ export function WebSecurityDiagnosisForm({ privacyHref }: Props) {
 
   if (sent) {
     return (
-      <div className="border border-brand-500/25 bg-white p-8 text-center md:p-10" role="status">
-        <p className="text-xl font-black text-brand-600">お申し込みを受け付けました</p>
+      <div
+        className="rounded-3xl bg-white p-8 text-center text-ink shadow-[0_40px_90px_-30px_rgba(0,0,0,0.6)] md:p-10"
+        role="status"
+      >
+        <p className="text-xl font-black text-brand-600">
+          お申し込みを受け付けました
+        </p>
         <p className="mt-3 text-base leading-relaxed text-ink-soft">
           簡易診断を行い、担当者より結果とご提案をご連絡いたします。
           <br className="hidden sm:block" />
@@ -85,8 +97,8 @@ export function WebSecurityDiagnosisForm({ privacyHref }: Props) {
       <span
         className={
           required
-            ? "bg-brand-500 px-1.5 py-0.5 text-[10px] font-bold text-white"
-            : "bg-ink-line px-1.5 py-0.5 text-[10px] font-bold text-ink-muted"
+            ? "rounded-full bg-brand-500 px-2 py-0.5 text-[10px] font-bold text-white"
+            : "rounded-full bg-ink-line px-2 py-0.5 text-[10px] font-bold text-ink-muted"
         }
       >
         {required ? "必須" : "任意"}
@@ -95,7 +107,21 @@ export function WebSecurityDiagnosisForm({ privacyHref }: Props) {
   );
 
   return (
-    <form onSubmit={onSubmit} noValidate className="border border-ink/15 bg-white p-6 md:p-10">
+    <form
+      onSubmit={onSubmit}
+      noValidate
+      className="relative overflow-hidden rounded-3xl bg-white p-6 text-ink shadow-[0_40px_90px_-30px_rgba(0,0,0,0.6)] ring-1 ring-white/10 md:p-10"
+    >
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-brand-700 via-brand-500 to-brand-300"
+      />
+      <div className="mb-7 flex items-center justify-between gap-4 border-b border-ink/10 pb-5">
+        <p className="text-lg font-black">お申し込みフォーム</p>
+        <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-600">
+          無料
+        </span>
+      </div>
       <div className="space-y-5">
         <label className="block">
           {label("診断するホームページのURL", true)}
@@ -185,14 +211,22 @@ export function WebSecurityDiagnosisForm({ privacyHref }: Props) {
 
       <p className="mt-6 text-xs leading-relaxed text-ink-muted">
         送信いただいた情報は、
-        <Link href={privacyHref} className="underline underline-offset-2 hover:text-brand-600">
+        <Link
+          href={privacyHref}
+          className="underline underline-offset-2 hover:text-brand-600"
+        >
           プライバシーポリシー
         </Link>
         に基づき適切に取り扱います。
       </p>
 
       <div className="mt-6">
-        <Button type="submit" size="lg" disabled={sending} className="w-full">
+        <Button
+          type="submit"
+          size="lg"
+          disabled={sending}
+          className="w-full !h-16 !rounded-xl text-base"
+        >
           {sending ? "送信中..." : "無料で簡易診断を申し込む"}
         </Button>
       </div>
