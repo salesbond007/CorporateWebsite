@@ -27,8 +27,9 @@ export function Header({ locale, dict }: Props) {
   }, []);
   const pathname = usePathname();
 
-  // LP(アポコミ)では独自の目次ナビゲーションを使うため、サイトのヘッダーは出さない
-  if (/\/services\/apokomi\/?$/.test(pathname ?? "")) return null;
+  // LP(アポコミ・ホームページセキュリティ対策)では独自の目次ナビゲーションを使うため、サイトのヘッダーは出さない
+  if (/\/services\/(apokomi|web-security)\/?$/.test(pathname ?? ""))
+    return null;
 
   return (
     <header

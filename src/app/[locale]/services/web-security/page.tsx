@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { LpHeader } from "@/components/services/LpHeader";
 import { FloatingConsultButton } from "@/components/services/FloatingConsultButton";
 import { WorryIllustration } from "@/components/services/WorryIllustration";
 import { MenuIcon } from "@/components/services/MenuIcon";
@@ -783,6 +784,18 @@ export default function WebSecurityPage({
         ]}
       />
 
+      {/* LPのヘッダー(目次ナビゲーション) */}
+      <LpHeader
+        items={[
+          { href: "#worries", label: "よくあるお悩み" },
+          { href: "#service", label: "対応内容" },
+          { href: "#menu", label: "メニュー" },
+          { href: "#diagnosis", label: "無料相談" },
+        ]}
+        ctaHref="#diagnosis"
+        ctaLabel="無料相談を申し込む"
+      />
+
       {/* ① ファーストビュー */}
       <section className="relative isolate overflow-hidden border-b border-ink/10 bg-white">
         {/* スマホ・タブレット: 画像をセクション下部の背景に敷き、上の文字部分へ白のグラデーションで溶け込ませる */}
@@ -858,7 +871,10 @@ export default function WebSecurityPage({
       </section>
 
       {/* このようなお悩みはありませんか？ */}
-      <section className="relative isolate bg-white pt-16 md:pt-24">
+      <section
+        id="worries"
+        className="relative isolate scroll-mt-28 bg-white pt-16 md:pt-24"
+      >
         {/* 下半分のブランドカラーの帯(グレーの枠が帯にまたがる) */}
         <div
           aria-hidden="true"
@@ -916,7 +932,10 @@ export default function WebSecurityPage({
       </section>
 
       {/* サービスの価値と対応内容 */}
-      <section className="relative isolate overflow-hidden bg-white py-16 md:py-12 lg:py-14">
+      <section
+        id="service"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-white py-16 md:py-12 lg:py-14"
+      >
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-40 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 animate-blob rounded-full bg-brand-100/50 blur-[120px]"
@@ -960,7 +979,7 @@ export default function WebSecurityPage({
           </div>
 
           {/* どれを選べばいい？(状況別のおすすめメニュー) */}
-          <div className="mt-16 md:mt-20">
+          <div id="menu" className="mt-16 scroll-mt-28 md:mt-20">
             <MenuSelector />
           </div>
         </Container>
@@ -969,7 +988,7 @@ export default function WebSecurityPage({
       {/* 申し込みフォーム(ファーストビューのメインCTAの遷移先) */}
       <section
         id="diagnosis"
-        className="relative isolate scroll-mt-20 overflow-hidden border-t border-ink/10 bg-gradient-to-b from-white to-brand-50/60 py-20 text-ink md:py-28"
+        className="relative isolate scroll-mt-28 overflow-hidden border-t border-ink/10 bg-gradient-to-b from-white to-brand-50/60 py-20 text-ink md:py-28"
       >
         <Container>
           <Reveal variant="none" className="text-center">
