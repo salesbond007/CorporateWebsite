@@ -978,77 +978,11 @@ export default function WebSecurityPage({
         className="relative isolate scroll-mt-20 overflow-hidden border-t border-ink/10 bg-[#F6F5F2] py-20 text-ink md:py-28"
       >
         <Container>
-          <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-14">
-            <Reveal variant="left" className="lg:col-span-5 lg:pt-4">
-              <p className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-brand-600">
-                FREE CHECK
-              </p>
-              <h2 className="mt-5 text-[clamp(1.75rem,3.6vw,2.75rem)] font-black leading-[1.3]">
-                無料簡易診断の
-                <br />
-                お申し込み
-              </h2>
-              <p className="mt-5 text-[15px] leading-[1.9] text-ink-soft">
-                URLを入力するだけで申し込めます。診断結果の報告とあわせて、最適なメニューをご提案します。
-              </p>
-
-              {/* 費用の強調 */}
-              <div className="mt-8 flex items-end gap-4 border-y border-ink/15 py-5">
-                <p className="text-sm font-bold text-ink-muted">費用</p>
-                <p className="text-5xl font-black leading-none tracking-tight text-brand-600">
-                  0<span className="ml-1 text-xl">円</span>
-                </p>
-                <p className="mb-1 text-xs text-ink-muted">
-                  必要な情報はホームページのURLだけ
-                </p>
-              </div>
-
-              {/* 申し込み後の流れ */}
-              <ol className="mt-8 space-y-0">
-                {[
-                  ["URLを入力して申し込む", "このフォームから送信"],
-                  ["簡易診断", "外部からホームページの状態を診断"],
-                  [
-                    "結果の報告とメニューの提案",
-                    "診断結果をもとに最適なメニューをご提案",
-                  ],
-                ].map(([t, d], i, arr) => (
-                  <li key={t} className="relative flex gap-4 pb-6 last:pb-0">
-                    {i < arr.length - 1 ? (
-                      <span
-                        aria-hidden="true"
-                        className="absolute left-4 top-9 h-[calc(100%-2.25rem)] w-px bg-ink/15"
-                      />
-                    ) : null}
-                    <span className="relative grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink bg-white text-xs font-black text-ink">
-                      {i + 1}
-                    </span>
-                    <div className="pt-0.5">
-                      <p className="text-[15px] font-bold text-ink">{t}</p>
-                      <p className="mt-0.5 text-xs text-ink-muted">{d}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-
-              <p className="mt-10 text-sm text-ink-soft">
-                診断の前に相談したい方は
-                <Link
-                  href={localePath("/contact", locale)}
-                  className="mx-1 font-bold text-ink underline underline-offset-4 hover:text-brand-600"
-                >
-                  無料で相談する
-                </Link>
-                からどうぞ。
-              </p>
-            </Reveal>
-
-            <Reveal variant="up" delay={150} className="lg:col-span-7">
-              <WebSecurityDiagnosisForm
-                privacyHref={localePath("/privacy", locale)}
-              />
-            </Reveal>
-          </div>
+          <Reveal variant="up" className="mx-auto max-w-2xl">
+            <WebSecurityDiagnosisForm
+              privacyHref={localePath("/privacy", locale)}
+            />
+          </Reveal>
         </Container>
       </section>
     </>
