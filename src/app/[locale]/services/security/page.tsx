@@ -30,6 +30,13 @@ export default function SecurityServicePage({
       title="セキュリティ対策事業"
       description={pageMeta.security.description}
       image="/services/cards/ai-solutions.jpg"
+      related={[
+        {
+          title: "ホームページセキュリティ対策",
+          text: "問い合わせフォームや採用応募など、個人情報の入口になるホームページを「診断」「保守」「移行」で守ります。無料の簡易診断も受付中です。",
+          href: "/services/web-security",
+        },
+      ]}
       // TODO: 本文確定後に差し替え
       lead="企業の情報と信頼を守り、安心して事業に挑戦できる環境づくりを支援します。"
       // TODO: 本文確定後に差し替え

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -23,6 +24,8 @@ type Props = {
   lead: string;
   /** 本文の段落 */
   body: string[];
+  /** 関連サービスへのリンク(任意) */
+  related?: { title: string; text: string; href: string }[];
 };
 
 /**
@@ -39,6 +42,7 @@ export function ServiceDetail({
   image,
   lead,
   body,
+  related,
 }: Props) {
   return (
     <>
@@ -80,6 +84,31 @@ export function ServiceDetail({
                 <p key={p}>{p}</p>
               ))}
             </div>
+            {related?.length ? (
+              <div className="mt-12 border-t border-ink pt-6">
+                <p className="text-xs font-bold tracking-[0.2em] text-ink-muted">関連サービス</p>
+                <ul className="mt-4 border-t border-ink/15">
+                  {related.map((r) => (
+                    <li key={r.href} className="border-b border-ink/15">
+                      <Link
+                        href={localePath(r.href, locale)}
+                        className="group flex items-center justify-between gap-6 py-5"
+                      >
+                        <span>
+                          <span className="block text-lg font-black text-ink transition-colors group-hover:text-brand-600">
+                            {r.title}
+                          </span>
+                          <span className="mt-1 block text-sm leading-relaxed text-ink-soft">{r.text}</span>
+                        </span>
+                        <span aria-hidden="true" className="text-brand-500 transition-transform group-hover:translate-x-1">
+                          →
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ) : null}
             <div className="mt-12 flex flex-wrap gap-3">
               <Button href={localePath("/contact", locale)} size="lg">
                 お問い合わせ
