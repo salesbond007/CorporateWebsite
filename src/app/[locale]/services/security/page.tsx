@@ -33,7 +33,7 @@ export default function SecurityServicePage({
       related={[
         {
           title: "ホームページセキュリティ対策",
-          text: "問い合わせフォームや採用応募など、個人情報の入口になるホームページを「診断」「保守」「移行」で守ります。無料の簡易診断も受付中です。",
+          text: "問い合わせフォームや採用応募など、個人情報の入口になるホームページを「診断」「保守」「移行」で守ります。無料相談も受け付けています。",
           href: "/services/web-security",
         },
       ]}

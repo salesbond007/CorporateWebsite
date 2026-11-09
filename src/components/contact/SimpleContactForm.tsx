@@ -13,6 +13,11 @@ import type { Locale } from "@/i18n/config";
 
 type Props = {
   locale: Locale;
+  /**
+   * "consult": ホームページセキュリティ対策LPの無料相談フォーム。
+   * お問い合わせ種別を出さず、種別「サービスについて / ホームページセキュリティ対策」として送信する。
+   */
+  variant?: "default" | "consult";
 };
 
 type InquiryType = "service" | "partnership" | "proposal" | "other";
@@ -98,8 +103,12 @@ const initial: FormState = {
 
 type FieldErrors = Partial<Record<keyof FormState | "form", string>>;
 
-export function SimpleContactForm({ locale }: Props) {
-  const [state, setState] = useState<FormState>(initial);
+export function SimpleContactForm({ locale, variant = "default" }: Props) {
+  const consult = variant === "consult";
+  const startState: FormState = consult
+    ? { ...initial, inquiryType: "service", serviceTypes: ["web-security"] }
+    : initial;
+  const [state, setState] = useState<FormState>(startState);
   const [submitted, setSubmitted] = useState(false);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [sending, setSending] = useState(false);
@@ -132,7 +141,6 @@ export function SimpleContactForm({ locale }: Props) {
     }));
   }
 
-
   function validate(): FieldErrors {
     const next: FieldErrors = {};
     if (!state.company.trim()) next.company = "会社名をご入力ください。";
@@ -144,7 +152,8 @@ export function SimpleContactForm({ locale }: Props) {
     } else if (!isEmailFormat(state.email)) {
       next.email = "メールアドレスの形式が正しくありません。";
     } else if (isFreeEmail(state.email)) {
-      next.email = "フリーメール（Gmail / Yahoo 等）はご利用いただけません。勤務先のメールアドレスをご入力ください。";
+      next.email =
+        "フリーメール（Gmail / Yahoo 等）はご利用いただけません。勤務先のメールアドレスをご入力ください。";
     }
 
     if (!state.phone.trim()) {
@@ -155,7 +164,8 @@ export function SimpleContactForm({ locale }: Props) {
     // 部署は任意
     if (!state.position) next.position = "役職をご選択ください。";
     if (!state.employeeCount) next.employeeCount = "従業員数をご選択ください。";
-    if (!state.inquiryType) next.inquiryType = "お問い合わせ種別をご選択ください。";
+    if (!state.inquiryType)
+      next.inquiryType = "お問い合わせ種別をご選択ください。";
     return next;
   }
 
@@ -203,12 +213,14 @@ export function SimpleContactForm({ locale }: Props) {
         }),
       });
 
-      const json: { ok?: boolean; error?: string; issues?: Record<string, string[]> } =
-        await res.json().catch(() => ({}));
+      const json: {
+        ok?: boolean;
+        error?: string;
+        issues?: Record<string, string[]>;
+      } = await res.json().catch(() => ({}));
 
       if (!res.ok || !json.ok) {
-        const issueText =
-          json.issues && Object.values(json.issues).flat()[0];
+        const issueText = json.issues && Object.values(json.issues).flat()[0];
         setSendError(
           issueText ??
             json.error ??
@@ -221,7 +233,9 @@ export function SimpleContactForm({ locale }: Props) {
       setSubmitted(true);
     } catch (err) {
       console.error("[SimpleContactForm] submit failed", err);
-      setSendError("通信エラーが発生しました。時間をおいて再度お試しください。");
+      setSendError(
+        "通信エラーが発生しました。時間をおいて再度お試しください。",
+      );
     } finally {
       setSending(false);
     }
@@ -249,7 +263,9 @@ export function SimpleContactForm({ locale }: Props) {
         </div>
         <h2 className="mt-6 text-h2">送信が完了しました</h2>
         <p className="mt-4 text-ink-soft leading-relaxed">
-          お問い合わせありがとうございます。
+          {consult
+            ? "無料相談のお申し込みありがとうございます。"
+            : "お問い合わせありがとうございます。"}
           <br />
           内容を確認のうえ、担当者よりご連絡いたします。
         </p>
@@ -259,7 +275,7 @@ export function SimpleContactForm({ locale }: Props) {
           </Button>
           <Button
             onClick={() => {
-              setState(initial);
+              setState(startState);
               setSubmitted(false);
             }}
           >
@@ -274,7 +290,11 @@ export function SimpleContactForm({ locale }: Props) {
     <form
       onSubmit={onSubmit}
       noValidate
-      className="space-y-6 rounded-xl2 border border-ink-line bg-white p-8 md:p-10"
+      className={cn(
+        "space-y-6",
+        // 無料相談フォームは外側のカードに入れるため、枠と余白を持たない
+        !consult && "rounded-xl2 border border-ink-line bg-white p-8 md:p-10",
+      )}
     >
       {/* 1. 会社名（法人番号DB連携 オートコンプリート） */}
       <CompanyAutocomplete
@@ -377,7 +397,10 @@ export function SimpleContactForm({ locale }: Props) {
         name="position"
         required
         placeholder="役職を選択"
-        options={positionOptions.map((o) => ({ value: o.value, label: o.label }))}
+        options={positionOptions.map((o) => ({
+          value: o.value,
+          label: o.label,
+        }))}
         value={state.position}
         onChange={(e) => update("position", e.target.value)}
         error={errors.position}
@@ -389,106 +412,117 @@ export function SimpleContactForm({ locale }: Props) {
         name="employeeCount"
         required
         placeholder="従業員数を選択"
-        options={employeeCountOptions.map((o) => ({ value: o.value, label: o.label }))}
+        options={employeeCountOptions.map((o) => ({
+          value: o.value,
+          label: o.label,
+        }))}
         value={state.employeeCount}
         onChange={(e) => update("employeeCount", e.target.value)}
         error={errors.employeeCount}
       />
 
-      {/* 8. お問い合わせ種別 */}
-      <fieldset>
-        <legend className="flex items-center gap-2 text-sm font-semibold text-ink">
-          お問い合わせ種別
-          <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">
-            必須
-          </span>
-        </legend>
+      {/* 8. お問い合わせ種別(無料相談フォームでは非表示) */}
+      {consult ? null : (
+        <fieldset>
+          <legend className="flex items-center gap-2 text-sm font-semibold text-ink">
+            お問い合わせ種別
+            <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">
+              必須
+            </span>
+          </legend>
 
-        <div className="mt-3 space-y-2">
-          {(Object.keys(inquiryTypeLabels) as InquiryType[]).map((type) => {
-            const checked = state.inquiryType === type;
-            return (
-              <div key={type}>
-                <label
-                  className={cn(
-                    "flex cursor-pointer items-center gap-3 rounded-lg border px-4 py-3 text-sm transition",
-                    checked
-                      ? "border-brand-500 bg-brand-50/60"
-                      : "border-ink-line bg-white hover:border-ink",
-                  )}
-                >
-                  <input
-                    type="radio"
-                    name="inquiryType"
-                    value={type}
-                    checked={checked}
-                    onChange={() => {
-                      update("inquiryType", type);
-                      if (type !== "service") update("serviceTypes", []);
-                      if (type !== "partnership") update("partnerTypes", []);
-                    }}
-                    className="h-4 w-4 text-brand-500 focus:ring-brand-500"
-                  />
-                  <span className="font-medium">{inquiryTypeLabels[type]}</span>
-                </label>
+          <div className="mt-3 space-y-2">
+            {(Object.keys(inquiryTypeLabels) as InquiryType[]).map((type) => {
+              const checked = state.inquiryType === type;
+              return (
+                <div key={type}>
+                  <label
+                    className={cn(
+                      "flex cursor-pointer items-center gap-3 rounded-lg border px-4 py-3 text-sm transition",
+                      checked
+                        ? "border-brand-500 bg-brand-50/60"
+                        : "border-ink-line bg-white hover:border-ink",
+                    )}
+                  >
+                    <input
+                      type="radio"
+                      name="inquiryType"
+                      value={type}
+                      checked={checked}
+                      onChange={() => {
+                        update("inquiryType", type);
+                        if (type !== "service") update("serviceTypes", []);
+                        if (type !== "partnership") update("partnerTypes", []);
+                      }}
+                      className="h-4 w-4 text-brand-500 focus:ring-brand-500"
+                    />
+                    <span className="font-medium">
+                      {inquiryTypeLabels[type]}
+                    </span>
+                  </label>
 
-                {type === "service" && checked ? (
-                  <div className="ml-7 mt-3 space-y-2 rounded-lg border border-dashed border-ink-line bg-ink-line/20 p-4">
-                    <p className="text-xs font-semibold text-ink-muted">
-                      該当するサービスをお選びください（複数選択可）
-                    </p>
-                    {serviceOptions.map((opt) => (
-                      <label
-                        key={opt.id}
-                        className="flex cursor-pointer items-start gap-3 text-sm"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={state.serviceTypes.includes(opt.id)}
-                          onChange={() => toggleService(opt.id)}
-                          className="mt-0.5 h-4 w-4 rounded text-brand-500 focus:ring-brand-500"
-                        />
-                        <span className="leading-relaxed">{opt.label}</span>
-                      </label>
-                    ))}
-                  </div>
-                ) : null}
+                  {type === "service" && checked ? (
+                    <div className="ml-7 mt-3 space-y-2 rounded-lg border border-dashed border-ink-line bg-ink-line/20 p-4">
+                      <p className="text-xs font-semibold text-ink-muted">
+                        該当するサービスをお選びください（複数選択可）
+                      </p>
+                      {serviceOptions.map((opt) => (
+                        <label
+                          key={opt.id}
+                          className="flex cursor-pointer items-start gap-3 text-sm"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={state.serviceTypes.includes(opt.id)}
+                            onChange={() => toggleService(opt.id)}
+                            className="mt-0.5 h-4 w-4 rounded text-brand-500 focus:ring-brand-500"
+                          />
+                          <span className="leading-relaxed">{opt.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  ) : null}
 
-                {type === "partnership" && checked ? (
-                  <div className="ml-7 mt-3 space-y-2 rounded-lg border border-dashed border-ink-line bg-ink-line/20 p-4">
-                    <p className="text-xs font-semibold text-ink-muted">
-                      該当するパートナーの種類をお選びください（複数選択可）
-                    </p>
-                    {partnerOptions.map((opt) => (
-                      <label
-                        key={opt.id}
-                        className="flex cursor-pointer items-start gap-3 text-sm"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={state.partnerTypes.includes(opt.id)}
-                          onChange={() => togglePartner(opt.id)}
-                          className="mt-0.5 h-4 w-4 rounded text-brand-500 focus:ring-brand-500"
-                        />
-                        <span className="leading-relaxed">{opt.label}</span>
-                      </label>
-                    ))}
-                  </div>
-                ) : null}
-              </div>
-            );
-          })}
-        </div>
-        {errors.inquiryType ? (
-          <p className="mt-2 text-xs text-red-600">{errors.inquiryType}</p>
-        ) : null}
-      </fieldset>
+                  {type === "partnership" && checked ? (
+                    <div className="ml-7 mt-3 space-y-2 rounded-lg border border-dashed border-ink-line bg-ink-line/20 p-4">
+                      <p className="text-xs font-semibold text-ink-muted">
+                        該当するパートナーの種類をお選びください（複数選択可）
+                      </p>
+                      {partnerOptions.map((opt) => (
+                        <label
+                          key={opt.id}
+                          className="flex cursor-pointer items-start gap-3 text-sm"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={state.partnerTypes.includes(opt.id)}
+                            onChange={() => togglePartner(opt.id)}
+                            className="mt-0.5 h-4 w-4 rounded text-brand-500 focus:ring-brand-500"
+                          />
+                          <span className="leading-relaxed">{opt.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
+          {errors.inquiryType ? (
+            <p className="mt-2 text-xs text-red-600">{errors.inquiryType}</p>
+          ) : null}
+        </fieldset>
+      )}
 
       {/* 9. 問い合わせ内容 */}
       <TextareaField
-        label="問い合わせ内容"
+        label={consult ? "ご相談内容" : "問い合わせ内容"}
         name="message"
-        hint="ご相談内容や検討中のサービスなど、お気軽にご記入ください。"
+        hint={
+          consult
+            ? "気になっていることや、ホームページの状況などをお気軽にご記入ください。"
+            : "ご相談内容や検討中のサービスなど、お気軽にご記入ください。"
+        }
         value={state.message}
         onChange={(e) => update("message", e.target.value)}
       />
@@ -525,8 +559,13 @@ export function SimpleContactForm({ locale }: Props) {
       ) : null}
 
       <div className="flex justify-center">
-        <Button type="submit" size="lg" disabled={sending}>
-          {sending ? "送信中..." : "送信する"}
+        <Button
+          type="submit"
+          size="lg"
+          disabled={sending}
+          className={consult ? "w-full !h-16 !rounded-xl text-base" : undefined}
+        >
+          {sending ? "送信中..." : consult ? "無料相談を申し込む" : "送信する"}
         </Button>
       </div>
     </form>
