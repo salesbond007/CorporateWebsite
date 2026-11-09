@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Button } from "@/components/ui/Button";
@@ -21,7 +22,11 @@ export function generateMetadata({
   params: { locale: string };
 }): Metadata {
   if (!isLocale(params.locale)) return {};
-  return pageMetadata({ ...pageMeta.webSecurity, path: PATH, locale: params.locale });
+  return pageMetadata({
+    ...pageMeta.webSecurity,
+    path: PATH,
+    locale: params.locale,
+  });
 }
 
 /* ---------------------------------------------------------------- データ */
@@ -38,7 +43,12 @@ type Source = { label: string; href: string };
 
 type MeterData = { value: number; label: string; caption: string };
 
-const reasons: { title: string; text: string; source?: Source; meter?: MeterData }[] = [
+const reasons: {
+  title: string;
+  text: string;
+  source?: Source;
+  meter?: MeterData;
+}[] = [
   {
     title: "攻撃する側もAIを使う時代",
     text: "脆弱性を探す作業が自動化され、規模の小さい会社のサイトも、まとめて狙われるようになっています。",
@@ -46,46 +56,83 @@ const reasons: { title: string; text: string; source?: Source; meter?: MeterData
   {
     title: "2026年10月、PHPに深刻な脆弱性",
     text: "10月21日に深刻な脆弱性が2件公表されました。どちらも、認証なしで外部からサイトに不正な処理をさせられるものです。",
-    source: { label: "gizmodo", href: "https://www.gizmodo.jp/article/2610-php-vulnerability-security-update/" },
+    source: {
+      label: "gizmodo",
+      href: "https://www.gizmodo.jp/article/2610-php-vulnerability-security-update/",
+    },
   },
   {
     title: "上場企業ですら対策が追いついていない",
     text: "上場企業のサイトを調べた2026年8月の調査でも、66.7%のサイトがサポート切れのPHPで動いたままです。",
     source: { label: "dxmagazine", href: "https://dxmagazine.jp/?p=226763" },
-    meter: { value: 66.7, label: "66.7%", caption: "サポート切れのPHPで動く上場企業のサイト" },
+    meter: {
+      value: 66.7,
+      label: "66.7%",
+      caption: "サポート切れのPHPで動く上場企業のサイト",
+    },
   },
   {
     title: "中小企業が狙われている",
     text: "ランサムウェア被害の約66%は中小企業で起きています。",
-    source: { label: "ipa", href: "https://www.ipa.go.jp/security/reports/sme/rcu1hd0000009k82-att/sme-jirei.pdf" },
-    meter: { value: 66, label: "約66%", caption: "ランサムウェア被害のうち、中小企業で起きたもの" },
+    source: {
+      label: "ipa",
+      href: "https://www.ipa.go.jp/security/reports/sme/rcu1hd0000009k82-att/sme-jirei.pdf",
+    },
+    meter: {
+      value: 66,
+      label: "約66%",
+      caption: "ランサムウェア被害のうち、中小企業で起きたもの",
+    },
   },
 ];
 
 const damages: { title: string; text: string }[] = [
-  { title: "原因の調査費用", text: "侵入経路や漏洩した範囲を、専門会社に調べてもらう費用（フォレンジック調査）" },
-  { title: "報告と通知の対応", text: "個人情報保護委員会への報告、本人への通知、お詫び文の作成と公表" },
-  { title: "問い合わせ対応", text: "お客様からの問い合わせ窓口の設置と、対応にあたる人員" },
+  {
+    title: "原因の調査費用",
+    text: "侵入経路や漏洩した範囲を、専門会社に調べてもらう費用（フォレンジック調査）",
+  },
+  {
+    title: "報告と通知の対応",
+    text: "個人情報保護委員会への報告、本人への通知、お詫び文の作成と公表",
+  },
+  {
+    title: "問い合わせ対応",
+    text: "お客様からの問い合わせ窓口の設置と、対応にあたる人員",
+  },
   { title: "損害賠償", text: "漏洩した本人から、慰謝料などを請求されるリスク" },
   { title: "復旧と再発防止", text: "サイトの作り直し、セキュリティ対策の追加" },
-  { title: "事業の停止", text: "サイトや業務が止まっている間の売上と機会の損失" },
+  {
+    title: "事業の停止",
+    text: "サイトや業務が止まっている間の売上と機会の損失",
+  },
   { title: "信用の失墜", text: "取引の停止、採用応募の減少、検索順位の低下" },
 ];
 
-const IPA_SME = "https://www.ipa.go.jp/security/reports/sme/rcu1hd0000009k82-att/sme-jirei.pdf";
-const ITMEDIA = "https://atmarkit.itmedia.co.jp/ait/articles/2502/18/news065.html";
+const IPA_SME =
+  "https://www.ipa.go.jp/security/reports/sme/rcu1hd0000009k82-att/sme-jirei.pdf";
+const ITMEDIA =
+  "https://atmarkit.itmedia.co.jp/ait/articles/2502/18/news065.html";
 
 type FigureViz =
   | { kind: "meter"; value: number; caption: string }
   | { kind: "picto"; filled: number; caption: string }
   | { kind: "timeline" };
 
-const figures: { figure: string; unit?: string; text: string; source: Source; viz?: FigureViz }[] = [
+const figures: {
+  figure: string;
+  unit?: string;
+  text: string;
+  source: Source;
+  viz?: FigureViz;
+}[] = [
   {
     figure: "数千万〜億",
     unit: "円",
     text: "中小企業でも、数千万円単位、場合によっては億単位の損害が出る（日本ネットワークセキュリティ協会）",
-    source: { label: "jnsa", href: "https://www.jnsa.org/seminar/2025/cross/data/20250827_02.pdf" },
+    source: {
+      label: "jnsa",
+      href: "https://www.jnsa.org/seminar/2025/cross/data/20250827_02.pdf",
+    },
   },
   {
     figure: "3,900",
@@ -97,20 +144,35 @@ const figures: { figure: string; unit?: string; text: string; source: Source; vi
   {
     figure: "35.1",
     unit: "%",
-    viz: { kind: "meter", value: 35.1, caption: "被害に遭った中小企業のうち、個人情報が漏洩した割合" },
+    viz: {
+      kind: "meter",
+      value: 35.1,
+      caption: "被害に遭った中小企業のうち、個人情報が漏洩した割合",
+    },
     text: "サイバー被害に遭った中小企業のうち、35.1%で個人情報が漏洩しています。被害額は最大で1億円、復旧に最も時間がかかったケースは360日でした（IPA 2024年度調査）",
     source: { label: "itmedia", href: ITMEDIA },
   },
   {
     figure: "約7",
     unit: "割",
-    viz: { kind: "picto", filled: 7, caption: "取引先にも影響が出た企業（10社中およそ7社）" },
+    viz: {
+      kind: "picto",
+      filled: 7,
+      caption: "取引先にも影響が出た企業（10社中およそ7社）",
+    },
     text: "被害は自社だけで終わりません。約7割の企業が「取引先にも影響が出た」と回答しています。",
     source: { label: "itmedia", href: ITMEDIA },
   },
 ];
 
-const menus: { no: string; name: string; target: string; items: string[]; note?: string; featured?: boolean }[] = [
+const menus: {
+  no: string;
+  name: string;
+  target: string;
+  items: string[];
+  note?: string;
+  featured?: boolean;
+}[] = [
   {
     no: "1",
     name: "診断だけ",
@@ -151,17 +213,23 @@ const choices: { when: string; menu: string; highlight?: boolean }[] = [
   { when: "何が危ないか分からない", menu: "診断だけ" },
   { when: "今のWordPressを使い続けたい", menu: "保守だけ" },
   { when: "更新はほとんどせず、もう悩みたくない", menu: "移行" },
-  { when: "迷ったら", menu: "無料の簡易診断で、最適なメニューを提案します", highlight: true },
+  {
+    when: "迷ったら",
+    menu: "無料の簡易診断で、最適なメニューを提案します",
+    highlight: true,
+  },
 ];
 
 const steps = [
   { title: "無料簡易診断の申し込み", text: "URLを入力するだけ" },
   { title: "診断結果の報告とメニューの提案" },
   { title: "見積もりと契約" },
-  { title: "作業開始", text: "移行の場合は、確認用サイトでチェックしてから切り替え" },
+  {
+    title: "作業開始",
+    text: "移行の場合は、確認用サイトでチェックしてから切り替え",
+  },
   { title: "納品・継続サポート" },
 ];
-
 
 /* ---------------------------------------------------------- 小さな部品 */
 
@@ -173,7 +241,9 @@ function SourceLink({ source, dark }: { source: Source; dark?: boolean }) {
       rel="noopener noreferrer"
       className={cn(
         "inline-flex items-center gap-1 text-[11px] tracking-[0.04em] underline-offset-2 transition-colors hover:underline",
-        dark ? "text-white/45 hover:text-white" : "text-ink-muted hover:text-brand-600",
+        dark
+          ? "text-white/45 hover:text-white"
+          : "text-ink-muted hover:text-brand-600",
       )}
     >
       出典：{source.label}
@@ -204,23 +274,48 @@ function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={cn("scroll-mt-20 py-20 md:py-28", dark ? "bg-[#111] text-white" : "bg-white", className)}>
+    <section
+      id={id}
+      className={cn(
+        "scroll-mt-20 py-20 md:py-28",
+        dark ? "bg-[#111] text-white" : "bg-white",
+        className,
+      )}
+    >
       <Container>
         <Reveal variant="fade">
-          <div className={cn("grid gap-6 border-t pt-6 lg:grid-cols-12 lg:gap-10", dark ? "border-white/20" : "border-ink")}>
+          <div
+            className={cn(
+              "grid gap-6 border-t pt-6 lg:grid-cols-12 lg:gap-10",
+              dark ? "border-white/20" : "border-ink",
+            )}
+          >
             <p
               className={cn(
                 "flex items-baseline gap-3 text-xs font-bold tracking-[0.2em] lg:col-span-4",
                 dark ? "text-white/60" : "text-ink-muted",
               )}
             >
-              <span className={cn("tabular-nums", dark ? "text-white" : "text-ink")}>{no}</span>
+              <span
+                className={cn("tabular-nums", dark ? "text-white" : "text-ink")}
+              >
+                {no}
+              </span>
               <span className="uppercase">{label}</span>
             </p>
             <div className="lg:col-span-8">
-              <h2 className="text-[clamp(1.5rem,3.2vw,2.5rem)] font-black leading-[1.35] tracking-[0.02em]">{title}</h2>
+              <h2 className="text-[clamp(1.5rem,3.2vw,2.5rem)] font-black leading-[1.35] tracking-[0.02em]">
+                {title}
+              </h2>
               {lead ? (
-                <p className={cn("mt-4 text-[15px] leading-[1.9]", dark ? "text-white/70" : "text-ink-soft")}>{lead}</p>
+                <p
+                  className={cn(
+                    "mt-4 text-[15px] leading-[1.9]",
+                    dark ? "text-white/70" : "text-ink-soft",
+                  )}
+                >
+                  {lead}
+                </p>
               ) : null}
             </div>
           </div>
@@ -270,13 +365,27 @@ const R_SITE = 110;
 const R_CORE = 54;
 
 function DefenseDiagram() {
-  const fade = "opacity-0 transition-opacity duration-700 group-data-[visible=true]/reveal:opacity-100";
+  const fade =
+    "opacity-0 transition-opacity duration-700 group-data-[visible=true]/reveal:opacity-100";
   return (
     <Reveal variant="none">
       <figure aria-label="ホームページのセキュリティ対策の考え方。個人情報を守るホームページの外側に、診断・対策・保守の防御の層をつくり、外からの攻撃を防ぎます。">
-        <svg viewBox="0 0 440 440" className="mx-auto block w-full max-w-[460px]" role="img" aria-hidden="true">
+        <svg
+          viewBox="0 0 440 440"
+          className="mx-auto block w-full max-w-[460px]"
+          role="img"
+          aria-hidden="true"
+        >
           {/* 背景の目盛り円 */}
-          <circle cx={C} cy={C} r={214} fill="none" stroke="#1A1A1A" strokeOpacity="0.08" strokeDasharray="2 6" />
+          <circle
+            cx={C}
+            cy={C}
+            r={214}
+            fill="none"
+            stroke="#1A1A1A"
+            strokeOpacity="0.08"
+            strokeDasharray="2 6"
+          />
 
           {/* 外からの攻撃: 矢印が防御の層で止まる */}
           {attacks.map((deg, i) => {
@@ -284,11 +393,33 @@ function DefenseDiagram() {
             const e = polar(R_SHIELD + 27, deg);
             const x = polar(R_SHIELD + 19, deg);
             return (
-              <g key={deg} className={fade} style={{ transitionDelay: `${900 + i * 120}ms` }}>
-                <line x1={s.x} y1={s.y} x2={e.x} y2={e.y} stroke="#6B6B6B" strokeWidth="1.5" strokeDasharray="3 3" />
+              <g
+                key={deg}
+                className={fade}
+                style={{ transitionDelay: `${900 + i * 120}ms` }}
+              >
+                <line
+                  x1={s.x}
+                  y1={s.y}
+                  x2={e.x}
+                  y2={e.y}
+                  stroke="#6B6B6B"
+                  strokeWidth="1.5"
+                  strokeDasharray="3 3"
+                />
                 <g transform={`translate(${x.x} ${x.y})`}>
-                  <circle r="8" fill="#F6F5F2" stroke="#B42318" strokeWidth="1.5" />
-                  <path d="M-3 -3 L3 3 M3 -3 L-3 3" stroke="#B42318" strokeWidth="1.6" strokeLinecap="round" />
+                  <circle
+                    r="8"
+                    fill="#F6F5F2"
+                    stroke="#B42318"
+                    strokeWidth="1.5"
+                  />
+                  <path
+                    d="M-3 -3 L3 3 M3 -3 L-3 3"
+                    stroke="#B42318"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                  />
                 </g>
               </g>
             );
@@ -298,10 +429,34 @@ function DefenseDiagram() {
           {shields.map((sh, i) => {
             const m = polar(R_SHIELD, sh.at);
             return (
-              <g key={sh.label} className={fade} style={{ transitionDelay: `${300 + i * 150}ms` }}>
-                <path d={arcPath(R_SHIELD, sh.at - 56, sh.at + 56)} fill="none" stroke="#7A1E35" strokeWidth="14" strokeLinecap="round" />
-                <rect x={m.x - 30} y={m.y - 15} width="60" height="30" rx="15" fill="#7A1E35" />
-                <text x={m.x} y={m.y + 5.5} textAnchor="middle" fontSize="15" fontWeight="900" fill="#fff">
+              <g
+                key={sh.label}
+                className={fade}
+                style={{ transitionDelay: `${300 + i * 150}ms` }}
+              >
+                <path
+                  d={arcPath(R_SHIELD, sh.at - 56, sh.at + 56)}
+                  fill="none"
+                  stroke="#7A1E35"
+                  strokeWidth="14"
+                  strokeLinecap="round"
+                />
+                <rect
+                  x={m.x - 30}
+                  y={m.y - 15}
+                  width="60"
+                  height="30"
+                  rx="15"
+                  fill="#7A1E35"
+                />
+                <text
+                  x={m.x}
+                  y={m.y + 5.5}
+                  textAnchor="middle"
+                  fontSize="15"
+                  fontWeight="900"
+                  fill="#fff"
+                >
                   {sh.label}
                 </text>
               </g>
@@ -310,8 +465,23 @@ function DefenseDiagram() {
 
           {/* ホームページ(受付窓口) */}
           <g className={fade} style={{ transitionDelay: "150ms" }}>
-            <circle cx={C} cy={C} r={R_SITE} fill="#fff" stroke="#1A1A1A" strokeOpacity="0.25" />
-            <text x={C} y={C - R_CORE - 18} textAnchor="middle" fontSize="12" fontWeight="700" fill="#6B6B6B" letterSpacing="1">
+            <circle
+              cx={C}
+              cy={C}
+              r={R_SITE}
+              fill="#fff"
+              stroke="#1A1A1A"
+              strokeOpacity="0.25"
+            />
+            <text
+              x={C}
+              y={C - R_CORE - 18}
+              textAnchor="middle"
+              fontSize="12"
+              fontWeight="700"
+              fill="#6B6B6B"
+              letterSpacing="1"
+            >
               ホームページ
             </text>
             {gates.map((g) => {
@@ -319,8 +489,24 @@ function DefenseDiagram() {
               const w = g.label.length * 11 + 16;
               return (
                 <g key={g.label}>
-                  <rect x={n.x - w / 2} y={n.y - 12} width={w} height="24" rx="3" fill="#fff" stroke="#1A1A1A" strokeOpacity="0.35" />
-                  <text x={n.x} y={n.y + 4} textAnchor="middle" fontSize="11" fontWeight="700" fill="#1A1A1A">
+                  <rect
+                    x={n.x - w / 2}
+                    y={n.y - 12}
+                    width={w}
+                    height="24"
+                    rx="3"
+                    fill="#fff"
+                    stroke="#1A1A1A"
+                    strokeOpacity="0.35"
+                  />
+                  <text
+                    x={n.x}
+                    y={n.y + 4}
+                    textAnchor="middle"
+                    fontSize="11"
+                    fontWeight="700"
+                    fill="#1A1A1A"
+                  >
                     {g.label}
                   </text>
                 </g>
@@ -338,8 +524,22 @@ function DefenseDiagram() {
               strokeWidth="2.2"
               strokeLinecap="round"
             />
-            <rect x={C - 13} y={C - 14} width="26" height="18" rx="3" fill="#E4A0B0" />
-            <text x={C} y={C + 24} textAnchor="middle" fontSize="13" fontWeight="900" fill="#fff">
+            <rect
+              x={C - 13}
+              y={C - 14}
+              width="26"
+              height="18"
+              rx="3"
+              fill="#E4A0B0"
+            />
+            <text
+              x={C}
+              y={C + 24}
+              textAnchor="middle"
+              fontSize="13"
+              fontWeight="900"
+              fill="#fff"
+            >
               個人情報
             </text>
           </g>
@@ -347,15 +547,24 @@ function DefenseDiagram() {
 
         <figcaption className="mx-auto mt-4 flex max-w-[460px] flex-wrap justify-center gap-x-5 gap-y-2 text-xs text-ink-soft">
           <span className="flex items-center gap-2">
-            <span aria-hidden="true" className="h-3 w-3 shrink-0 rounded-full bg-[#1D050B]" />
+            <span
+              aria-hidden="true"
+              className="h-3 w-3 shrink-0 rounded-full bg-[#1D050B]"
+            />
             守る対象：個人情報
           </span>
           <span className="flex items-center gap-2">
-            <span aria-hidden="true" className="h-1.5 w-4 shrink-0 rounded-full bg-brand-500" />
+            <span
+              aria-hidden="true"
+              className="h-1.5 w-4 shrink-0 rounded-full bg-brand-500"
+            />
             防御の層：診断・対策・保守
           </span>
           <span className="flex items-center gap-2">
-            <span aria-hidden="true" className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full border border-[#B42318] text-[8px] leading-none text-[#B42318]">
+            <span
+              aria-hidden="true"
+              className="grid h-3.5 w-3.5 shrink-0 place-items-center rounded-full border border-[#B42318] text-[8px] leading-none text-[#B42318]"
+            >
               ×
             </span>
             外からの攻撃を防ぐ
@@ -382,14 +591,31 @@ function Meter({
   return (
     <figure role="img" aria-label={`${caption}：${label}`} className="w-full">
       <div className="flex items-baseline justify-between gap-4">
-        <figcaption className={cn("text-xs leading-relaxed", dark ? "text-white/60" : "text-ink-muted")}>
+        <figcaption
+          className={cn(
+            "text-xs leading-relaxed",
+            dark ? "text-white/60" : "text-ink-muted",
+          )}
+        >
           {caption}
         </figcaption>
         {hideLabel ? null : (
-          <span className={cn("shrink-0 text-sm font-black", dark ? "text-white" : "text-ink")}>{label}</span>
+          <span
+            className={cn(
+              "shrink-0 text-sm font-black",
+              dark ? "text-white" : "text-ink",
+            )}
+          >
+            {label}
+          </span>
         )}
       </div>
-      <div className={cn("mt-2 h-2 overflow-hidden rounded-full", dark ? "bg-white/15" : "bg-brand-100")}>
+      <div
+        className={cn(
+          "mt-2 h-2 overflow-hidden rounded-full",
+          dark ? "bg-white/15" : "bg-brand-100",
+        )}
+      >
         <div
           style={{ width: `${value}%` }}
           className={cn(
@@ -398,7 +624,12 @@ function Meter({
           )}
         />
       </div>
-      <div className={cn("mt-1 flex justify-between text-[10px]", dark ? "text-white/35" : "text-ink-muted/70")}>
+      <div
+        className={cn(
+          "mt-1 flex justify-between text-[10px]",
+          dark ? "text-white/35" : "text-ink-muted/70",
+        )}
+      >
         <span>0%</span>
         <span>100%</span>
       </div>
@@ -422,7 +653,9 @@ function Pictogram({ filled, caption }: { filled: number; caption: string }) {
           />
         ))}
       </div>
-      <figcaption className="mt-2 text-xs leading-relaxed text-white/60">{caption}</figcaption>
+      <figcaption className="mt-2 text-xs leading-relaxed text-white/60">
+        {caption}
+      </figcaption>
     </figure>
   );
 }
@@ -430,7 +663,11 @@ function Pictogram({ filled, caption }: { filled: number; caption: string }) {
 /** 侵入から完全復旧までの時間軸(IPA事例: 復旧まで2か月、想定被害額3,900万円) */
 function RecoveryTimeline() {
   return (
-    <figure role="img" aria-label="侵入から業務停止を経て、完全復旧まで2か月" className="w-full">
+    <figure
+      role="img"
+      aria-label="侵入から業務停止を経て、完全復旧まで2か月"
+      className="w-full"
+    >
       <div className="relative h-8">
         <span className="absolute inset-x-1 top-1/2 h-0.5 -translate-y-1/2 bg-white/15" />
         <span className="absolute inset-x-1 top-1/2 h-0.5 origin-left -translate-y-1/2 scale-x-0 bg-brand-300 transition-transform delay-300 duration-[1400ms] ease-expo group-data-[visible=true]/reveal:scale-x-100" />
@@ -449,8 +686,18 @@ function RecoveryTimeline() {
 }
 
 function FigureVisual({ viz }: { viz: FigureViz }) {
-  if (viz.kind === "meter") return <Meter value={viz.value} label={`${viz.value}%`} caption={viz.caption} dark hideLabel />;
-  if (viz.kind === "picto") return <Pictogram filled={viz.filled} caption={viz.caption} />;
+  if (viz.kind === "meter")
+    return (
+      <Meter
+        value={viz.value}
+        label={`${viz.value}%`}
+        caption={viz.caption}
+        dark
+        hideLabel
+      />
+    );
+  if (viz.kind === "picto")
+    return <Pictogram filled={viz.filled} caption={viz.caption} />;
   return <RecoveryTimeline />;
 }
 
@@ -459,38 +706,74 @@ function MigrationDiagram() {
   const before = ["PHP", "データベース", "管理画面"];
   return (
     <figure className="mt-16 border border-ink/15 bg-[#F6F5F2] p-6 md:p-10">
-      <figcaption className="text-xs font-bold tracking-[0.2em] text-ink-muted">図：「移行」で攻撃の入口をふさぐ</figcaption>
+      <figcaption className="text-xs font-bold tracking-[0.2em] text-ink-muted">
+        図：「移行」で攻撃の入口をふさぐ
+      </figcaption>
       <div className="mt-6 grid items-stretch gap-6 md:grid-cols-[1fr_auto_1fr] md:gap-8">
         <div className="border border-ink/15 bg-white p-5 md:p-6">
-          <p className="text-xs font-bold tracking-[0.15em] text-ink-muted">移行前（WordPress）</p>
-          <p className="mt-1 text-base font-black text-ink">攻撃の入口が3つある</p>
+          <p className="text-xs font-bold tracking-[0.15em] text-ink-muted">
+            移行前（WordPress）
+          </p>
+          <p className="mt-1 text-base font-black text-ink">
+            攻撃の入口が3つある
+          </p>
           <ul className="mt-5 space-y-2">
             {before.map((b) => (
-              <li key={b} className="flex items-center justify-between border border-[#B42318]/30 bg-[#FDF1F0] px-4 py-3">
+              <li
+                key={b}
+                className="flex items-center justify-between border border-[#B42318]/30 bg-[#FDF1F0] px-4 py-3"
+              >
                 <span className="text-sm font-bold text-ink">{b}</span>
-                <span className="text-[11px] font-bold text-[#B42318]">攻撃の入口</span>
+                <span className="text-[11px] font-bold text-[#B42318]">
+                  攻撃の入口
+                </span>
               </li>
             ))}
           </ul>
-          <p className="mt-4 text-xs leading-relaxed text-ink-muted">サーバーに個人情報が溜まる構成</p>
+          <p className="mt-4 text-xs leading-relaxed text-ink-muted">
+            サーバーに個人情報が溜まる構成
+          </p>
         </div>
 
         <div className="flex items-center justify-center" aria-hidden="true">
           <span className="grid h-12 w-12 place-items-center rounded-full bg-brand-500 text-white md:rotate-0">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="rotate-90 md:rotate-0">
-              <path d="M4 10h12M11 5l5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 20 20"
+              fill="none"
+              className="rotate-90 md:rotate-0"
+            >
+              <path
+                d="M4 10h12M11 5l5 5-5 5"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
             </svg>
           </span>
         </div>
 
         <div className="border-2 border-brand-500 bg-white p-5 md:p-6">
-          <p className="text-xs font-bold tracking-[0.15em] text-brand-600">移行後（静的HTML）</p>
-          <p className="mt-1 text-base font-black text-ink">攻撃の入口をふさぐ</p>
+          <p className="text-xs font-bold tracking-[0.15em] text-brand-600">
+            移行後（静的HTML）
+          </p>
+          <p className="mt-1 text-base font-black text-ink">
+            攻撃の入口をふさぐ
+          </p>
           <ul className="mt-5 space-y-2">
             {before.map((b) => (
-              <li key={b} className="flex items-center justify-between border border-ink/10 bg-[#F6F5F2] px-4 py-3">
-                <span className="text-sm font-bold text-ink-muted line-through decoration-ink/40">{b}</span>
-                <span className="text-[11px] font-bold text-ink-muted">なし</span>
+              <li
+                key={b}
+                className="flex items-center justify-between border border-ink/10 bg-[#F6F5F2] px-4 py-3"
+              >
+                <span className="text-sm font-bold text-ink-muted line-through decoration-ink/40">
+                  {b}
+                </span>
+                <span className="text-[11px] font-bold text-ink-muted">
+                  なし
+                </span>
               </li>
             ))}
           </ul>
@@ -513,23 +796,37 @@ function DecisionFlow() {
         ホームページの状況は？
       </div>
       {/* 分岐線(PC) */}
-      <div aria-hidden="true" className="relative mx-auto hidden h-10 w-2/3 md:block">
+      <div
+        aria-hidden="true"
+        className="relative mx-auto hidden h-10 w-2/3 md:block"
+      >
         <span className="absolute left-1/2 top-0 h-5 w-px bg-ink/40" />
         <span className="absolute inset-x-0 top-5 h-px bg-ink/40" />
         <span className="absolute left-0 top-5 h-5 w-px bg-ink/40" />
         <span className="absolute left-1/2 top-5 h-5 w-px bg-ink/40" />
         <span className="absolute right-0 top-5 h-5 w-px bg-ink/40" />
       </div>
-      <span aria-hidden="true" className="mx-auto block h-6 w-px bg-ink/40 md:hidden" />
+      <span
+        aria-hidden="true"
+        className="mx-auto block h-6 w-px bg-ink/40 md:hidden"
+      />
       <ol className="grid gap-4 md:grid-cols-3 md:gap-6">
         {branches.map((c, i) => (
           <li key={c.when}>
-            <Reveal variant="fade" delay={i * 100} className="flex h-full flex-col items-stretch text-center">
+            <Reveal
+              variant="fade"
+              delay={i * 100}
+              className="flex h-full flex-col items-stretch text-center"
+            >
               <p className="flex flex-1 items-center justify-center border border-ink/15 bg-white px-4 py-4 text-sm font-bold leading-relaxed text-ink">
                 {c.when}
               </p>
-              <span aria-hidden="true" className="mx-auto my-2 text-brand-500">↓</span>
-              <p className="bg-ink px-4 py-3 text-base font-black text-white">{c.menu}</p>
+              <span aria-hidden="true" className="mx-auto my-2 text-brand-500">
+                ↓
+              </span>
+              <p className="bg-ink px-4 py-3 text-base font-black text-white">
+                {c.menu}
+              </p>
             </Reveal>
           </li>
         ))}
@@ -537,7 +834,9 @@ function DecisionFlow() {
       {fallback ? (
         <Reveal variant="fade" className="mt-8">
           <div className="flex flex-col items-center gap-3 border-2 border-brand-500 bg-white px-6 py-5 text-center sm:flex-row sm:justify-center sm:gap-6">
-            <span className="text-[15px] font-black text-ink">{fallback.when}</span>
+            <span className="text-[15px] font-black text-ink">
+              {fallback.when}
+            </span>
             <span aria-hidden="true" className="text-brand-500">
               <span className="sm:hidden">↓</span>
               <span className="hidden sm:inline">→</span>
@@ -577,8 +876,15 @@ function webSecurityServiceJsonLd(path: string) {
     description: pageMeta.webSecurity.description,
     url,
     areaServed: { "@type": "Country", name: "日本" },
-    audience: { "@type": "BusinessAudience", name: "中小企業・コーポレートサイトを運営する企業" },
-    provider: { "@type": "Organization", name: site.legalName, url: site.officialUrl },
+    audience: {
+      "@type": "BusinessAudience",
+      name: "中小企業・コーポレートサイトを運営する企業",
+    },
+    provider: {
+      "@type": "Organization",
+      name: site.legalName,
+      url: site.officialUrl,
+    },
     keywords: [
       "ホームページセキュリティ",
       "情報漏洩対策",
@@ -621,7 +927,9 @@ function faqJsonLd() {
       a: "「診断だけ」「保守だけ」「移行」の3つから、必要なものだけを選べます。",
     },
     ...choices.map((c) => ({
-      q: c.highlight ? "どのメニューを選べばよいか迷ったら？" : `${c.when}場合は、どのメニューがおすすめですか？`,
+      q: c.highlight
+        ? "どのメニューを選べばよいか迷ったら？"
+        : `${c.when}場合は、どのメニューがおすすめですか？`,
       a: c.highlight ? `${c.menu}。` : `「${c.menu}」がおすすめです。`,
     })),
     {
@@ -666,10 +974,28 @@ export default function WebSecurityPage({
       />
 
       {/* ① ファーストビュー */}
-      <section className="relative overflow-hidden border-b border-ink/10 bg-[#F6F5F2]">
-        <Container className="pb-16 pt-10 md:pb-24 md:pt-14">
+      <section className="relative isolate overflow-hidden border-b border-ink/10 bg-[#FBF5F5]">
+        {/* 背景画像: 右側のイラストを見せ、左側(コピー部分)は白で淡くして可読性を確保 */}
+        <div aria-hidden="true" className="absolute inset-0 -z-10">
+          <Image
+            src="/services/web-security/hero.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="animate-ken-burns object-cover object-[78%_center] lg:object-right"
+          />
+          {/* スマホ: 全体を白く被せて文字を読みやすく */}
+          <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px] lg:hidden" />
+          {/* PC: 左から白のグラデーション */}
+          <div className="absolute inset-0 hidden bg-[linear-gradient(to_right,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.75)_38%,rgba(255,255,255,0)_62%)] lg:block" />
+        </div>
+        <Container className="pb-16 pt-10 md:pb-24 md:pt-14 lg:min-h-[640px]">
           <nav aria-label="パンくず" className="text-xs text-ink-muted">
-            <Link href={localePath("/services", locale)} className="hover:text-ink">
+            <Link
+              href={localePath("/services", locale)}
+              className="hover:text-ink"
+            >
               サービス
             </Link>
             <span className="mx-2">/</span>
@@ -686,7 +1012,10 @@ export default function WebSecurityPage({
                   <span style={{ animationDelay: "0.1s" }}>ホームページ</span>
                 </span>
                 <span className="line-mask">
-                  <span className="text-brand-600" style={{ animationDelay: "0.25s" }}>
+                  <span
+                    className="text-brand-600"
+                    style={{ animationDelay: "0.25s" }}
+                  >
                     セキュリティ対策
                   </span>
                 </span>
@@ -710,13 +1039,14 @@ export default function WebSecurityPage({
                 <Button href="#diagnosis" size="lg">
                   無料で簡易診断を申し込む
                 </Button>
-                <Button href={localePath("/contact", locale)} size="lg" variant="secondary">
+                <Button
+                  href={localePath("/contact", locale)}
+                  size="lg"
+                  variant="secondary"
+                >
                   無料で相談する
                 </Button>
               </div>
-            </div>
-            <div className="animate-fade-up lg:col-span-5" style={{ animationDelay: "0.5s" }}>
-              <DefenseDiagram />
             </div>
           </div>
         </Container>
@@ -724,37 +1054,70 @@ export default function WebSecurityPage({
 
       {/* ⑤ お悩み */}
       <Section no="01" label="Check" title="こんなお悩みはありませんか？">
-        <div className="lg:ml-[33.333%] lg:pl-10">
-          <ul className="border-t border-ink/15">
-            {worries.map((w, i) => (
-              <li key={w} className="border-b border-ink/15">
-                <Reveal variant="fade" delay={i * 60}>
-                  <p className="flex items-start gap-4 py-5 text-[15px] font-bold leading-relaxed text-ink md:text-base">
-                    <span aria-hidden="true" className="mt-1 grid h-4 w-4 shrink-0 place-items-center border border-ink/40">
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                        <path d="M1.5 5.2l2.2 2.2L8.5 2.6" stroke="#7A1E35" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    </span>
-                    {w}
-                  </p>
-                </Reveal>
-              </li>
-            ))}
-          </ul>
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="order-2 lg:order-1 lg:col-span-4">
+            <DefenseDiagram />
+          </div>
+          <div className="order-1 lg:order-2 lg:col-span-8">
+            <ul className="border-t border-ink/15">
+              {worries.map((w, i) => (
+                <li key={w} className="border-b border-ink/15">
+                  <Reveal variant="fade" delay={i * 60}>
+                    <p className="flex items-start gap-4 py-5 text-[15px] font-bold leading-relaxed text-ink md:text-base">
+                      <span
+                        aria-hidden="true"
+                        className="mt-1 grid h-4 w-4 shrink-0 place-items-center border border-ink/40"
+                      >
+                        <svg
+                          width="10"
+                          height="10"
+                          viewBox="0 0 10 10"
+                          fill="none"
+                        >
+                          <path
+                            d="M1.5 5.2l2.2 2.2L8.5 2.6"
+                            stroke="#7A1E35"
+                            strokeWidth="1.6"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                      {w}
+                    </p>
+                  </Reveal>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </Section>
 
       {/* ⑥ なぜ今 */}
-      <Section no="02" label="Why Now" title="なぜ今、対策が必要なのか" className="bg-[#F6F5F2]">
+      <Section
+        no="02"
+        label="Why Now"
+        title="なぜ今、対策が必要なのか"
+        className="bg-[#F6F5F2]"
+      >
         <div className="grid border-l border-t border-ink/15 md:grid-cols-2">
           {reasons.map((r, i) => (
-            <Reveal key={r.title} variant="fade" delay={i * 80} className="h-full">
+            <Reveal
+              key={r.title}
+              variant="fade"
+              delay={i * 80}
+              className="h-full"
+            >
               <div className="flex h-full flex-col border-b border-r border-ink/15 bg-white/60 p-7 md:p-9">
                 <p className="text-xs font-bold tabular-nums tracking-[0.2em] text-brand-600">
                   {String(i + 1).padStart(2, "0")}
                 </p>
-                <h3 className="mt-3 text-lg font-black leading-snug text-ink md:text-xl">{r.title}</h3>
-                <p className="mt-3 flex-1 text-[15px] leading-[1.9] text-ink-soft">{r.text}</p>
+                <h3 className="mt-3 text-lg font-black leading-snug text-ink md:text-xl">
+                  {r.title}
+                </h3>
+                <p className="mt-3 flex-1 text-[15px] leading-[1.9] text-ink-soft">
+                  {r.text}
+                </p>
                 {r.meter ? (
                   <div className="mt-6">
                     <Meter {...r.meter} />
@@ -772,7 +1135,13 @@ export default function WebSecurityPage({
       </Section>
 
       {/* ⑦ 損害 */}
-      <Section no="03" label="Risk" title="情報漏洩で生まれる損害" lead="漏洩すると、これだけの対応と損失が発生します" dark>
+      <Section
+        no="03"
+        label="Risk"
+        title="情報漏洩で生まれる損害"
+        lead="漏洩すると、これだけの対応と損失が発生します"
+        dark
+      >
         <ol className="grid border-t border-white/20 md:grid-cols-2 md:gap-x-12">
           {damages.map((d, i) => (
             <li key={d.title} className="border-b border-white/20">
@@ -783,7 +1152,9 @@ export default function WebSecurityPage({
                   </span>
                   <div>
                     <p className="text-base font-black">{d.title}</p>
-                    <p className="mt-1 text-sm leading-relaxed text-white/65">{d.text}</p>
+                    <p className="mt-1 text-sm leading-relaxed text-white/65">
+                      {d.text}
+                    </p>
                   </div>
                 </div>
               </Reveal>
@@ -792,7 +1163,9 @@ export default function WebSecurityPage({
         </ol>
 
         <div className="mt-20">
-          <p className="text-xs font-bold tracking-[0.2em] text-white/60">数字で見る損害</p>
+          <p className="text-xs font-bold tracking-[0.2em] text-white/60">
+            数字で見る損害
+          </p>
           <ul className="mt-6 grid border-t border-white/20 sm:grid-cols-2 lg:grid-cols-4">
             {figures.map((f, i) => (
               <li
@@ -804,17 +1177,29 @@ export default function WebSecurityPage({
                   "border-white/20 sm:first:pl-0",
                 )}
               >
-                <Reveal variant="fade" delay={i * 80} className="flex h-full flex-col">
+                <Reveal
+                  variant="fade"
+                  delay={i * 80}
+                  className="flex h-full flex-col"
+                >
                   <p className="font-black leading-none tracking-tight">
-                    <span className="text-[2.5rem] md:text-5xl lg:text-4xl xl:text-[2.6rem]">{f.figure}</span>
-                    {f.unit ? <span className="ml-1 whitespace-nowrap text-base text-white/80">{f.unit}</span> : null}
+                    <span className="text-[2.5rem] md:text-5xl lg:text-4xl xl:text-[2.6rem]">
+                      {f.figure}
+                    </span>
+                    {f.unit ? (
+                      <span className="ml-1 whitespace-nowrap text-base text-white/80">
+                        {f.unit}
+                      </span>
+                    ) : null}
                   </p>
                   {f.viz ? (
                     <div className="mt-6">
                       <FigureVisual viz={f.viz} />
                     </div>
                   ) : null}
-                  <p className="mt-5 flex-1 text-[13px] leading-[1.9] text-white/70">{f.text}</p>
+                  <p className="mt-5 flex-1 text-[13px] leading-[1.9] text-white/70">
+                    {f.text}
+                  </p>
                   <p className="mt-4">
                     <SourceLink source={f.source} dark />
                   </p>
@@ -836,22 +1221,42 @@ export default function WebSecurityPage({
       </Section>
 
       {/* ⑧ 3つのメニュー */}
-      <Section no="04" label="Menu" title="3つのメニュー" lead="必要なものだけ選べます">
+      <Section
+        no="04"
+        label="Menu"
+        title="3つのメニュー"
+        lead="必要なものだけ選べます"
+      >
         <ol className="grid gap-12 lg:grid-cols-3 lg:gap-10">
           {menus.map((m, i) => (
             <li key={m.name}>
-              <Reveal variant="fade" delay={i * 100} className="flex h-full flex-col border-t-2 border-ink pt-6">
-                <p className="text-xs font-bold tabular-nums tracking-[0.2em] text-ink-muted">MENU {m.no.padStart(2, "0")}</p>
+              <Reveal
+                variant="fade"
+                delay={i * 100}
+                className="flex h-full flex-col border-t-2 border-ink pt-6"
+              >
+                <p className="text-xs font-bold tabular-nums tracking-[0.2em] text-ink-muted">
+                  MENU {m.no.padStart(2, "0")}
+                </p>
                 <h3 className="mt-3 text-3xl font-black text-ink">{m.name}</h3>
-                <p className="mt-2 text-sm font-bold text-brand-600">{m.target}</p>
+                <p className="mt-2 text-sm font-bold text-brand-600">
+                  {m.target}
+                </p>
                 <ul className="mt-6 flex-1 border-t border-ink/15">
                   {m.items.map((it) => (
-                    <li key={it} className="border-b border-ink/15 py-3.5 text-sm leading-relaxed text-ink-soft">
+                    <li
+                      key={it}
+                      className="border-b border-ink/15 py-3.5 text-sm leading-relaxed text-ink-soft"
+                    >
                       {it}
                     </li>
                   ))}
                 </ul>
-                {m.note ? <p className="mt-4 text-xs leading-relaxed text-ink-muted">{m.note}</p> : null}
+                {m.note ? (
+                  <p className="mt-4 text-xs leading-relaxed text-ink-muted">
+                    {m.note}
+                  </p>
+                ) : null}
               </Reveal>
             </li>
           ))}
@@ -862,7 +1267,12 @@ export default function WebSecurityPage({
       </Section>
 
       {/* ⑨ どれを選べばいい？ */}
-      <Section no="05" label="Which One" title="どれを選べばいい？" className="bg-[#F6F5F2]">
+      <Section
+        no="05"
+        label="Which One"
+        title="どれを選べばいい？"
+        className="bg-[#F6F5F2]"
+      >
         <DecisionFlow />
       </Section>
 
@@ -871,17 +1281,30 @@ export default function WebSecurityPage({
         <ol className="relative grid gap-0 lg:grid-cols-5">
           {steps.map((s, i) => (
             <li key={s.title} className="relative">
-              <Reveal variant="fade" delay={i * 80} className="flex gap-5 pb-8 lg:block lg:pb-0 lg:pr-6">
+              <Reveal
+                variant="fade"
+                delay={i * 80}
+                className="flex gap-5 pb-8 lg:block lg:pb-0 lg:pr-6"
+              >
                 {/* 縦(スマホ)・横(PC)の進行線 */}
                 {i < steps.length - 1 ? (
-                  <span aria-hidden="true" className="absolute left-[15px] top-8 h-[calc(100%-2rem)] w-px bg-ink/20 lg:left-8 lg:top-[15px] lg:h-px lg:w-[calc(100%-2rem)]" />
+                  <span
+                    aria-hidden="true"
+                    className="absolute left-[15px] top-8 h-[calc(100%-2rem)] w-px bg-ink/20 lg:left-8 lg:top-[15px] lg:h-px lg:w-[calc(100%-2rem)]"
+                  />
                 ) : null}
                 <span className="relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink bg-white text-xs font-bold tabular-nums text-ink">
                   {i + 1}
                 </span>
                 <div className="lg:mt-5">
-                  <p className="text-[15px] font-black leading-snug text-ink">{s.title}</p>
-                  {s.text ? <p className="mt-1.5 text-xs leading-relaxed text-ink-muted">{s.text}</p> : null}
+                  <p className="text-[15px] font-black leading-snug text-ink">
+                    {s.title}
+                  </p>
+                  {s.text ? (
+                    <p className="mt-1.5 text-xs leading-relaxed text-ink-muted">
+                      {s.text}
+                    </p>
+                  ) : null}
                 </div>
               </Reveal>
             </li>
@@ -890,11 +1313,16 @@ export default function WebSecurityPage({
       </Section>
 
       {/* 申し込みフォーム(ファーストビューのメインCTAの遷移先) */}
-      <section id="diagnosis" className="scroll-mt-20 border-t border-ink/10 bg-[#F6F5F2] py-20 md:py-28">
+      <section
+        id="diagnosis"
+        className="scroll-mt-20 border-t border-ink/10 bg-[#F6F5F2] py-20 md:py-28"
+      >
         <Container>
           <div className="grid gap-12 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-5">
-              <p className="text-xs font-bold tracking-[0.2em] text-brand-600">FREE CHECK</p>
+              <p className="text-xs font-bold tracking-[0.2em] text-brand-600">
+                FREE CHECK
+              </p>
               <h2 className="mt-4 text-[clamp(1.5rem,3.2vw,2.5rem)] font-black leading-[1.35] text-ink">
                 無料簡易診断の
                 <br />
@@ -909,7 +1337,10 @@ export default function WebSecurityPage({
                   ["必要な情報", "ホームページのURL"],
                   ["その後の流れ", "診断結果の報告とメニューの提案"],
                 ].map(([k, v]) => (
-                  <div key={k} className="grid grid-cols-[7rem_1fr] border-b border-ink/15 py-3.5">
+                  <div
+                    key={k}
+                    className="grid grid-cols-[7rem_1fr] border-b border-ink/15 py-3.5"
+                  >
                     <dt className="font-bold text-ink-muted">{k}</dt>
                     <dd className="font-bold text-ink">{v}</dd>
                   </div>
@@ -927,7 +1358,9 @@ export default function WebSecurityPage({
               </p>
             </div>
             <div className="lg:col-span-7">
-              <WebSecurityDiagnosisForm privacyHref={localePath("/privacy", locale)} />
+              <WebSecurityDiagnosisForm
+                privacyHref={localePath("/privacy", locale)}
+              />
             </div>
           </div>
         </Container>
