@@ -133,8 +133,34 @@ export const apokomiLeadSchema = z.object({
   message: z.string().trim().max(5000).optional().or(z.literal("")),
 });
 
+/**
+ * /services/web-security LP の無料簡易診断フォーム。
+ * 診断対象のURL / 会社名 / お名前 / メールアドレス / ご相談内容(任意)
+ */
+export const webSecurityDiagnosisSchema = z.object({
+  website: z.string().max(0).optional().or(z.literal("")),
+  siteUrl: z
+    .string()
+    .trim()
+    .min(1, "診断するホームページのURLを入力してください")
+    .max(500)
+    .refine((v) => /^https?:\/\/[^\s.]+\.[^\s]+$/i.test(v), {
+      message: "URLは https:// から始まる形式で入力してください",
+    }),
+  company: z.string().trim().min(1, "会社名を入力してください").max(200),
+  name: z.string().trim().min(1, "お名前を入力してください").max(100),
+  email: z.string().trim().email("正しいメールアドレスを入力してください"),
+  message: z.string().trim().max(5000).optional().or(z.literal("")),
+});
+
 export type ProfessionalContactInput = z.infer<typeof professionalContactSchema>;
 export type GeneralContactInput = z.infer<typeof generalContactSchema>;
 export type ApokomiLeadInput = z.infer<typeof apokomiLeadSchema>;
 
-export type ContactFormType = "professional" | "general" | "apokomi_lead";
+export type WebSecurityDiagnosisInput = z.infer<typeof webSecurityDiagnosisSchema>;
+
+export type ContactFormType =
+  | "professional"
+  | "general"
+  | "apokomi_lead"
+  | "web_security_diagnosis";

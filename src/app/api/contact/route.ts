@@ -4,6 +4,7 @@ import {
   apokomiLeadSchema,
   generalContactSchema,
   professionalContactSchema,
+  webSecurityDiagnosisSchema,
   type ContactFormType,
 } from "@/lib/contact";
 
@@ -117,6 +118,7 @@ const fieldLabels: Record<string, string> = {
   position: "役職",
   employeeCount: "従業員数",
   inquiryType: "お問い合わせ種別",
+  siteUrl: "診断対象のURL",
   serviceTypes: "対象サービス",
   partnerTypes: "パートナーの種類",
   message: "お問い合わせ内容",
@@ -156,6 +158,7 @@ const enumLabels: Record<string, Record<string, string>> = {
   serviceTypes: {
     "ai-security": "セキュリティ対策事業",
     "new-business-development": "新規開拓支援事業",
+    "web-security": "ホームページセキュリティ対策",
     "other-service": "その他",
   },
   partnerTypes: {
@@ -194,7 +197,9 @@ function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
       ? "プロ人材お問い合わせ"
       : type === "apokomi_lead"
         ? "アポコミ 無料相談のお申し込み"
-        : "お問い合わせ(企業)";
+        : type === "web_security_diagnosis"
+          ? "ホームページセキュリティ 無料簡易診断のお申し込み"
+          : "お問い合わせ(企業)";
 
   return `<!doctype html>
   <html><body style="font-family:-apple-system,'Segoe UI',sans-serif;color:#1A1A1A;">
@@ -219,7 +224,8 @@ export async function POST(req: Request) {
   if (
     type !== "professional" &&
     type !== "general" &&
-    type !== "apokomi_lead"
+    type !== "apokomi_lead" &&
+    type !== "web_security_diagnosis"
   ) {
     return NextResponse.json({ error: "Invalid form type" }, { status: 400 });
   }
@@ -229,7 +235,9 @@ export async function POST(req: Request) {
       ? professionalContactSchema
       : type === "apokomi_lead"
         ? apokomiLeadSchema
-        : generalContactSchema;
+        : type === "web_security_diagnosis"
+          ? webSecurityDiagnosisSchema
+          : generalContactSchema;
   const parsed = schema.safeParse(body);
 
   if (!parsed.success) {
@@ -251,7 +259,9 @@ export async function POST(req: Request) {
   const subject =
     type === "apokomi_lead"
       ? "アポコミ 無料相談のお申し込み"
-      : "ホームページからの問い合わせ";
+      : type === "web_security_diagnosis"
+        ? "【無料簡易診断】ホームページセキュリティ対策のお申し込み"
+        : "ホームページからの問い合わせ";
 
   if (!transporter) {
     console.warn("[contact] GMAIL_USER / GMAIL_APP_PASSWORD is not set. Logging form data instead.");
@@ -275,15 +285,35 @@ export async function POST(req: Request) {
     console.info("[contact] sent", { messageId: info.messageId, to, type });
     await forwardToCRM(type, parsed.data as Record<string, unknown>);
 
-    if (type === "general" || type === "apokomi_lead") {
+    if (type === "general" || type === "apokomi_lead" || type === "web_security_diagnosis") {
       const senderEmail = (parsed.data as { email?: string }).email;
       const lastName = String((parsed.data as { lastName?: string }).lastName ?? "").trim();
       const name = String((parsed.data as { name?: string }).name ?? "").trim();
-      const addressee = type === "apokomi_lead" ? name : lastName;
+      const addressee = type === "general" ? lastName : name;
 
       if (senderEmail) {
         const autoReplyText =
-          type === "apokomi_lead"
+          type === "web_security_diagnosis"
+            ? `${String((parsed.data as { company?: string }).company ?? "").trim()}
+${addressee} 様
+
+お世話になっております。
+セールスボンド株式会社でございます。
+
+この度はホームページセキュリティ対策の無料簡易診断にお申し込みいただき、誠にありがとうございます。
+
+いただいたURLをもとに簡易診断を行い、担当者より結果と今後のご提案についてご連絡いたします。今しばらくお待ちくださいますようお願いいたします。
+
+何卒よろしくお願い申し上げます。
+
+────────────────────────────
+セールスボンド株式会社
+〒160-0023 東京都新宿区西新宿3丁目3番13号 西新宿水間ビル2F
+Email：info@salesbond.jp
+HP：https://www.salesbond1962.com
+────────────────────────────
+※このメールは自動送信です。ご返信いただいてもお答えできません。`
+            : type === "apokomi_lead"
               ? `${String((parsed.data as { company?: string }).company ?? "").trim()}
 ${addressee} 様
 
@@ -324,7 +354,9 @@ HP：https://www.salesbond1962.com
 ※このメールは自動送信です。ご返信いただいてもお答えできません。`;
 
         const autoReplySubject =
-          type === "apokomi_lead"
+          type === "web_security_diagnosis"
+            ? "無料簡易診断のお申し込みありがとうございます(セールスボンド株式会社)"
+            : type === "apokomi_lead"
             ? "無料相談のお申し込みありがとうございます(アポコミ)"
             : "お問い合わせありがとうございます(セールスボンド株式会社)";
 
