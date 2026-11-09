@@ -975,31 +975,12 @@ export default function WebSecurityPage({
       {/* 申し込みフォーム(ファーストビューのメインCTAの遷移先) */}
       <section
         id="diagnosis"
-        className="relative isolate scroll-mt-20 overflow-hidden bg-[#140308] py-20 text-white md:py-28"
+        className="relative isolate scroll-mt-20 overflow-hidden border-t border-ink/10 bg-[#F6F5F2] py-20 text-ink md:py-28"
       >
-        {/* 背景: 深いワインレッドのグラデーション+にじむ光+細いグリッド */}
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,#5A1426_0%,#140308_55%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -left-40 top-10 -z-10 h-[30rem] w-[30rem] animate-blob rounded-full bg-brand-500/40 blur-[130px]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-40 right-0 -z-10 h-[26rem] w-[26rem] animate-blob rounded-full bg-brand-300/20 blur-[130px] [animation-delay:-9s]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.06] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"
-        />
-
         <Container>
           <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-14">
             <Reveal variant="left" className="lg:col-span-5 lg:pt-4">
-              <p className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-[11px] font-bold tracking-[0.25em] text-brand-200">
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-brand-300" />
+              <p className="inline-flex items-center gap-2 text-xs font-bold tracking-[0.2em] text-brand-600">
                 FREE CHECK
               </p>
               <h2 className="mt-5 text-[clamp(1.75rem,3.6vw,2.75rem)] font-black leading-[1.3]">
@@ -1007,17 +988,17 @@ export default function WebSecurityPage({
                 <br />
                 お申し込み
               </h2>
-              <p className="mt-5 text-[15px] leading-[1.9] text-white/70">
+              <p className="mt-5 text-[15px] leading-[1.9] text-ink-soft">
                 URLを入力するだけで申し込めます。診断結果の報告とあわせて、最適なメニューをご提案します。
               </p>
 
               {/* 費用の強調 */}
-              <div className="mt-8 flex items-end gap-4 border-y border-white/15 py-5">
-                <p className="text-sm font-bold text-white/60">費用</p>
-                <p className="text-5xl font-black leading-none tracking-tight">
+              <div className="mt-8 flex items-end gap-4 border-y border-ink/15 py-5">
+                <p className="text-sm font-bold text-ink-muted">費用</p>
+                <p className="text-5xl font-black leading-none tracking-tight text-brand-600">
                   0<span className="ml-1 text-xl">円</span>
                 </p>
-                <p className="mb-1 text-xs text-white/50">
+                <p className="mb-1 text-xs text-ink-muted">
                   必要な情報はホームページのURLだけ
                 </p>
               </div>
@@ -1036,25 +1017,25 @@ export default function WebSecurityPage({
                     {i < arr.length - 1 ? (
                       <span
                         aria-hidden="true"
-                        className="absolute left-4 top-9 h-[calc(100%-2.25rem)] w-px bg-gradient-to-b from-brand-300/70 to-white/10"
+                        className="absolute left-4 top-9 h-[calc(100%-2.25rem)] w-px bg-ink/15"
                       />
                     ) : null}
-                    <span className="relative grid h-8 w-8 shrink-0 place-items-center rounded-full bg-gradient-to-br from-brand-400 to-brand-600 text-xs font-black shadow-[0_0_0_4px_rgba(255,255,255,0.06)]">
+                    <span className="relative grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ink bg-white text-xs font-black text-ink">
                       {i + 1}
                     </span>
                     <div className="pt-0.5">
-                      <p className="text-[15px] font-bold">{t}</p>
-                      <p className="mt-0.5 text-xs text-white/55">{d}</p>
+                      <p className="text-[15px] font-bold text-ink">{t}</p>
+                      <p className="mt-0.5 text-xs text-ink-muted">{d}</p>
                     </div>
                   </li>
                 ))}
               </ol>
 
-              <p className="mt-10 text-sm text-white/60">
+              <p className="mt-10 text-sm text-ink-soft">
                 診断の前に相談したい方は
                 <Link
                   href={localePath("/contact", locale)}
-                  className="mx-1 font-bold text-white underline decoration-brand-300 underline-offset-4 hover:text-brand-200"
+                  className="mx-1 font-bold text-ink underline underline-offset-4 hover:text-brand-600"
                 >
                   無料で相談する
                 </Link>

@@ -76,7 +76,7 @@ export function WebSecurityDiagnosisForm({ privacyHref }: Props) {
   if (sent) {
     return (
       <div
-        className="rounded-3xl bg-white p-8 text-center text-ink shadow-[0_40px_90px_-30px_rgba(0,0,0,0.6)] md:p-10"
+        className="rounded-2xl border border-ink/10 bg-white p-8 text-center text-ink md:p-10"
         role="status"
       >
         <p className="text-xl font-black text-brand-600">
@@ -110,11 +110,11 @@ export function WebSecurityDiagnosisForm({ privacyHref }: Props) {
     <form
       onSubmit={onSubmit}
       noValidate
-      className="relative overflow-hidden rounded-3xl bg-white p-6 text-ink shadow-[0_40px_90px_-30px_rgba(0,0,0,0.6)] ring-1 ring-white/10 md:p-10"
+      className="relative overflow-hidden rounded-2xl border border-ink/10 bg-white p-6 text-ink shadow-[0_24px_60px_-40px_rgba(29,5,11,0.35)] md:p-10"
     >
       <span
         aria-hidden="true"
-        className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-brand-700 via-brand-500 to-brand-300"
+        className="absolute inset-x-0 top-0 h-1 bg-brand-500"
       />
       <div className="mb-7 flex items-center justify-between gap-4 border-b border-ink/10 pb-5">
         <p className="text-lg font-black">お申し込みフォーム</p>
