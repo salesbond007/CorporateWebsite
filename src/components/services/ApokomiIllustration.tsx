@@ -221,7 +221,107 @@ export function ApokomiFeatureIllustration({ index }: { index: number }) {
   return (
     <svg viewBox="0 0 240 180" className="h-auto w-full" aria-hidden="true">
       <ellipse cx="120" cy="96" rx="104" ry="76" fill={CREAM} />
-      {index === 0 ? (
+      {index === 3 ? (
+        <g>
+          {/* ホワイトボードを指し示す人物(ナレッジの共有) */}
+          <rect
+            x="22"
+            y="34"
+            width="128"
+            height="84"
+            rx="6"
+            fill="#fff"
+            stroke={INK}
+            strokeWidth="2.2"
+          />
+          {[0, 1, 2, 3].map((n) => (
+            <circle key={n} cx="38" cy={52 + n * 15} r="3.5" fill="#D9D3CE" />
+          ))}
+          {[0, 1, 2].map((n) => (
+            <line
+              key={n}
+              x1="52"
+              y1={60 + n * 17}
+              x2="138"
+              y2={60 + n * 17}
+              stroke="#EFE9E4"
+              strokeWidth="1.5"
+            />
+          ))}
+          {[14, 26, 38, 54].map((h, n) => (
+            <rect
+              key={n}
+              x={58 + n * 20}
+              y={104 - h}
+              width="12"
+              height={h}
+              rx="1.5"
+              fill={n === 3 ? ORANGE : ORANGE_SOFT}
+            />
+          ))}
+          <line
+            x1="52"
+            y1="104"
+            x2="138"
+            y2="104"
+            stroke={INK}
+            strokeWidth="1.8"
+          />
+          {/* 人物 */}
+          <line
+            x1="122"
+            y1="80"
+            x2="170"
+            y2="96"
+            stroke={INK}
+            strokeWidth="3"
+            strokeLinecap="round"
+          />
+          <circle
+            cx="184"
+            cy="58"
+            r="11"
+            fill={SKIN}
+            stroke={INK}
+            strokeWidth="2"
+          />
+          <path
+            d="M173 56 Q174 44 186 45 Q196 46 195 56 Q188 50 180 52 Z"
+            fill={INK}
+          />
+          <path
+            d="M172 76 Q184 68 196 76 L198 120 L170 120 Z"
+            fill={ORANGE}
+            stroke={INK}
+            strokeWidth="2"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M174 80 Q168 92 170 96"
+            fill="none"
+            stroke={ORANGE}
+            strokeWidth="7"
+            strokeLinecap="round"
+          />
+          <rect x="172" y="118" width="11" height="40" fill={NAVY} />
+          <rect x="185" y="118" width="11" height="40" fill={NAVY} />
+          <path
+            d="M168 158 h16 M184 158 h16"
+            stroke={INK}
+            strokeWidth="4"
+            strokeLinecap="round"
+          />
+          <line
+            x1="40"
+            y1="162"
+            x2="220"
+            y2="162"
+            stroke={INK}
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </g>
+      ) : index === 0 ? (
         <g>
           {/* クリップボードのチェックリスト */}
           <rect
