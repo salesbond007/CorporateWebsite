@@ -596,7 +596,7 @@ function MenuSelector() {
     <div>
       <Reveal variant="none" className="text-center">
         <h3 className="text-[clamp(1.4rem,2.6vw,2rem)] font-black text-ink">
-          状況に合わせて、必要なメニューだけを。
+          状況に合わせて、必要なメニューだけを提供
         </h3>
       </Reveal>
 
@@ -610,79 +610,28 @@ function MenuSelector() {
                   aria-hidden="true"
                   className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand-700 via-brand-500 to-brand-300"
                 />
-                {/* 大きな番号の透かし */}
-                <span
-                  aria-hidden="true"
-                  className="pointer-events-none absolute -right-2 -top-6 select-none font-display text-[8rem] font-black leading-none text-brand-500/[0.06] transition-colors duration-500 group-hover:text-brand-500/[0.12]"
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
 
-                {/* お客様の状況: 吹き出し */}
-                <div className="relative px-6 pt-8 md:px-7">
-                  <p className="flex items-center gap-2 text-[11px] font-bold tracking-[0.2em] text-ink-muted">
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      aria-hidden="true"
-                    >
-                      <circle
-                        cx="7"
-                        cy="4.5"
-                        r="2.6"
-                        stroke="currentColor"
-                        strokeWidth="1.3"
-                      />
-                      <path
-                        d="M2 12.5c.6-2.6 2.6-4 5-4s4.4 1.4 5 4"
-                        stroke="currentColor"
-                        strokeWidth="1.3"
-                        strokeLinecap="round"
-                      />
-                    </svg>
-                    CASE {String(i + 1).padStart(2, "0")}
+                {/* メニュー名(カード上部) */}
+                <div className="relative flex flex-1 flex-col px-6 pb-7 pt-9 md:px-7">
+                  <p className="text-center text-[2.25rem] font-black leading-none tracking-[0.06em] text-ink">
+                    {r.menu}
                   </p>
-                  <div className="relative mt-3 flex items-center rounded-xl bg-[#F6F1F2] px-4 py-3.5 md:min-h-[4.25rem]">
-                    <p className="text-[15px] font-bold leading-relaxed text-ink">
-                      {r.when}
-                    </p>
-                    <span
-                      aria-hidden="true"
-                      className="absolute -bottom-2 left-6 h-4 w-4 rotate-45 bg-[#F6F1F2]"
-                    />
-                  </div>
-                </div>
-
-                {/* つなぎの線(下へ流れる点) */}
-                <div
-                  aria-hidden="true"
-                  className="mt-4 flex flex-col items-center"
-                >
-                  <span className="relative h-7 w-px overflow-hidden bg-brand-200">
-                    <span className="absolute inset-x-0 top-0 h-1/3 animate-scroll-dot bg-brand-500" />
-                  </span>
-                  <span className="mt-2 mb-3 text-[11px] font-bold tracking-[0.2em] text-brand-600">
-                    おすすめは
-                  </span>
-                </div>
-
-                {/* おすすめのメニュー */}
-                <div className="relative flex flex-1 flex-col px-6 pb-7 md:px-7">
-                  <div className="flex flex-col items-center text-center">
-                    <span className="rounded-full border border-brand-500/30 px-2.5 py-1 text-[10px] font-bold tracking-[0.15em] text-brand-600">
-                      MENU {r.detail?.no.padStart(2, "0")}
-                    </span>
-                    <p className="mt-3 text-[2.25rem] font-black leading-none tracking-[0.06em] text-ink">
-                      {r.menu}
-                    </p>
-                  </div>
                   {r.detail ? (
                     <>
                       <p className="mx-auto mt-4 inline-flex w-fit rounded-full bg-brand-500 px-3 py-1 text-xs font-bold text-white">
                         {r.detail.target}
                       </p>
+                      {/* お客様の状況: 吹き出し */}
+                      <div className="relative mt-5 flex items-center justify-center rounded-xl bg-[#F6F1F2] px-4 py-3.5 text-center md:min-h-[4.25rem]">
+                        <p className="text-[15px] font-bold leading-relaxed text-ink">
+                          {r.when}
+                        </p>
+                        <span
+                          aria-hidden="true"
+                          className="absolute -top-2 left-1/2 h-4 w-4 -translate-x-1/2 rotate-45 bg-[#F6F1F2]"
+                        />
+                      </div>
+
                       <ul className="mt-5 space-y-2.5 border-t border-dashed border-ink/15 pt-5">
                         {r.detail.items.slice(0, 3).map((it) => (
                           <li

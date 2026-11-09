@@ -11,7 +11,7 @@ type Props = {
 
 /**
  * 常に表示する「無料相談」ボタン。押すとページ内のフォームへスクロールする。
- * PCは画面右端の縦タブ、スマホは画面下の左側に横長の小さなボタン。
+ * PCは画面右下に浮遊する丸いボタン、スマホは画面下の左側に大きめの横長ボタン。
  * フォームが画面内に見えている間は邪魔にならないよう隠す。
  */
 export function FloatingConsultButton({ targetId, label = "無料相談" }: Props) {
@@ -33,29 +33,42 @@ export function FloatingConsultButton({ targetId, label = "無料相談" }: Prop
       href={`#${targetId}`}
       aria-label={`${label}(ページ下部のフォームへ移動)`}
       className={cn(
-        "group fixed z-40 flex items-center text-white transition-all duration-300",
-        "bottom-5 left-4 gap-2 rounded-full bg-brand-500 px-5 py-3 shadow-[0_12px_30px_-10px_rgba(122,30,53,0.8)]",
-        "md:bottom-auto md:left-auto md:right-0 md:top-1/2 md:-translate-y-1/2 md:flex-col md:rounded-none md:rounded-l-xl md:px-3 md:py-6 md:hover:bg-brand-600 md:hover:pr-4",
-        hidden &&
-          "pointer-events-none opacity-0 max-md:translate-y-4 md:translate-x-full",
+        "group fixed z-40 transition-all duration-500",
+        // スマホ: 画面下の左側に大きめの横長ボタン
+        "bottom-5 left-4",
+        // PC: 画面右下に浮遊する丸いボタン(トップへ戻るボタンの上)
+        "md:bottom-20 md:left-auto md:right-6",
+        hidden && "pointer-events-none translate-y-6 opacity-0",
       )}
     >
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-        <path
-          d="M3 4.5A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5v6a1.5 1.5 0 0 1-1.5 1.5H8l-3.5 3v-3h0A1.5 1.5 0 0 1 3 10.5v-6Z"
-          stroke="currentColor"
-          strokeWidth="1.5"
-          strokeLinejoin="round"
+      <span className="relative block animate-float-y">
+        {/* 波紋 */}
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 hidden animate-pulse-ring rounded-full bg-brand-500/40 md:block"
         />
-      </svg>
-      <span className="text-sm font-black tracking-[0.15em] md:text-base md:tracking-[0.25em] md:[writing-mode:vertical-rl]">
-        {label}
-      </span>
-      <span
-        aria-hidden="true"
-        className="text-xs transition-transform duration-300 group-hover:translate-y-0.5"
-      >
-        ↓
+        <span className="relative flex items-center gap-2 rounded-full bg-brand-500 px-6 py-3.5 text-white shadow-[0_16px_36px_-12px_rgba(122,30,53,0.85)] ring-4 ring-white transition-colors group-hover:bg-brand-600 md:h-28 md:w-28 md:flex-col md:justify-center md:gap-1 md:px-0 md:py-0">
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 18 18"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M3 4.5A1.5 1.5 0 0 1 4.5 3h9A1.5 1.5 0 0 1 15 4.5v6a1.5 1.5 0 0 1-1.5 1.5H8l-3.5 3v-3h0A1.5 1.5 0 0 1 3 10.5v-6Z"
+              stroke="currentColor"
+              strokeWidth="1.5"
+              strokeLinejoin="round"
+            />
+          </svg>
+          <span className="text-base font-black tracking-[0.1em] md:text-lg md:leading-tight">
+            {label}
+          </span>
+          <span aria-hidden="true" className="text-xs md:hidden">
+            ↓
+          </span>
+        </span>
       </span>
     </a>
   );
