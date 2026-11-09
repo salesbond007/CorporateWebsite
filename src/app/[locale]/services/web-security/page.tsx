@@ -32,24 +32,6 @@ export function generateMetadata({
 
 /* ---------------------------------------------------------------- データ */
 
-/** サービスの価値と対応内容(3つのメニューの要約) */
-const values: { name: string; value: string; text: string }[] = [
-  {
-    name: "診断",
-    value: "現状のリスクを知る",
-    text: "WordPress本体・プラグイン・テーマ・PHPのバージョンを外部から診断し、危険度と対策の優先順位をレポートします。",
-  },
-  {
-    name: "保守",
-    value: "安全な状態を保つ",
-    text: "定期更新とバックアップ、ログイン保護・WAFの導入、月次レポートで、今の環境を安全に使い続けられます。",
-  },
-  {
-    name: "移行",
-    value: "攻撃の入口をなくす",
-    text: "WordPressを静的HTMLに移行し、PHP・データベース・管理画面をなくして根本から安全にします。",
-  },
-];
 type Source = { label: string; href: string };
 
 type MeterData = { value: number; label: string; caption: string };
@@ -398,8 +380,8 @@ function DefenseDiagramLarge() {
   return (
     <Reveal variant="none">
       <svg
-        viewBox={`0 0 ${BIG.w} ${BIG.h}`}
-        className="mx-auto block w-full max-w-[920px]"
+        viewBox={`0 80 ${BIG.w} 705`}
+        className="mx-auto block aspect-[880/705] h-auto w-full max-w-full md:h-[clamp(380px,calc(100svh-20rem),700px)] md:w-auto"
         role="img"
         aria-label="個人情報を守るホームページの外側に、診断・対策・保守の防御の層をつくり、脆弱性の自動探索・不正ログイン・プラグインの脆弱性・サポート切れPHPを狙う攻撃をブロックします。"
       >
@@ -938,77 +920,131 @@ function FigureVisual({ viz }: { viz: FigureViz }) {
   return <RecoveryTimeline />;
 }
 
-/** どれを選べばいい？: 状況 → おすすめメニューの判断フロー図 */
-function DecisionFlow() {
-  const branches = choices.filter((c) => !c.highlight);
+/**
+ * どれを選べばいい？: お客様の状況ごとに、おすすめのメニューと主な対応内容を示す。
+ * 下部に「迷ったら無料の簡易診断」の導線。
+ */
+function MenuSelector() {
+  const rows = choices
+    .filter((c) => !c.highlight)
+    .map((c) => ({ ...c, detail: menus.find((m) => m.name === c.menu) }));
   const fallback = choices.find((c) => c.highlight);
+
   return (
-    <figure aria-label="状況に応じたおすすめメニューの判断フロー">
-      <div className="mx-auto w-fit border-2 border-ink bg-white px-6 py-3 text-center text-[15px] font-black text-ink">
-        ホームページの状況は？
-      </div>
-      {/* 分岐線(PC) */}
-      <div
-        aria-hidden="true"
-        className="relative mx-auto hidden h-10 w-2/3 md:block"
-      >
-        <span className="absolute left-1/2 top-0 h-5 w-px bg-ink/40" />
-        <span className="absolute inset-x-0 top-5 h-px bg-ink/40" />
-        <span className="absolute left-0 top-5 h-5 w-px bg-ink/40" />
-        <span className="absolute left-1/2 top-5 h-5 w-px bg-ink/40" />
-        <span className="absolute right-0 top-5 h-5 w-px bg-ink/40" />
-      </div>
-      <span
-        aria-hidden="true"
-        className="mx-auto block h-6 w-px bg-ink/40 md:hidden"
-      />
-      <ol className="grid gap-4 md:grid-cols-3 md:gap-6">
-        {branches.map((c, i) => (
-          <li key={c.when}>
+    <div>
+      <Reveal variant="none" className="text-center">
+        <p className="text-xs font-bold tracking-[0.25em] text-brand-600 opacity-0 transition-opacity duration-700 group-data-[visible=true]/reveal:opacity-100">
+          WHICH ONE
+        </p>
+        <h3 className="mt-3 text-[clamp(1.4rem,2.6vw,2rem)] font-black text-ink">
+          状況に合わせて、必要なメニューだけを。
+        </h3>
+      </Reveal>
+
+      <ol className="mt-10 grid border-l border-t border-ink/15 md:grid-cols-3">
+        {rows.map((r, i) => (
+          <li key={r.when} className="border-b border-r border-ink/15">
             <Reveal
-              variant="fade"
-              delay={i * 100}
-              className="flex h-full flex-col items-stretch text-center"
+              variant="up"
+              delay={i * 120}
+              className="flex h-full flex-col"
             >
-              <p className="flex flex-1 items-center justify-center border border-ink/15 bg-white px-4 py-4 text-sm font-bold leading-relaxed text-ink">
-                {c.when}
-              </p>
-              <span aria-hidden="true" className="mx-auto my-2 text-brand-500">
-                ↓
-              </span>
-              <p className="bg-ink px-4 py-3 text-base font-black text-white">
-                {c.menu}
-              </p>
+              {/* お客様の状況 */}
+              <div className="bg-[#F6F5F2] px-6 pb-6 pt-5 md:px-7">
+                <p className="text-[11px] font-bold tracking-[0.2em] text-ink-muted">
+                  CASE {String(i + 1).padStart(2, "0")}
+                </p>
+                <p className="mt-2 text-[15px] font-bold leading-relaxed text-ink md:min-h-[3.2em]">
+                  「{r.when}」
+                </p>
+              </div>
+              {/* つなぎ */}
+              <div aria-hidden="true" className="relative h-0">
+                <span className="absolute left-6 top-0 grid h-8 w-8 -translate-y-1/2 place-items-center rounded-full bg-brand-500 text-white md:left-7">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path
+                      d="M6 2v8M2.5 6.5L6 10l3.5-3.5"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </span>
+              </div>
+              {/* おすすめのメニュー */}
+              <div className="group flex flex-1 flex-col bg-white px-6 pb-7 pt-8 transition-colors duration-500 hover:bg-brand-50/40 md:px-7">
+                <p className="text-[11px] font-bold tracking-[0.2em] text-brand-600">
+                  おすすめ ／ MENU {r.detail?.no.padStart(2, "0")}
+                </p>
+                <p className="mt-2 text-2xl font-black text-ink">{r.menu}</p>
+                {r.detail ? (
+                  <>
+                    <p className="mt-1 text-sm font-bold text-ink-soft">
+                      {r.detail.target}
+                    </p>
+                    <ul className="mt-5 space-y-2 border-t border-ink/10 pt-4">
+                      {r.detail.items.slice(0, 2).map((it) => (
+                        <li
+                          key={it}
+                          className="flex gap-2.5 text-[13px] leading-relaxed text-ink-soft"
+                        >
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            aria-hidden="true"
+                            className="mt-0.5 shrink-0"
+                          >
+                            <circle
+                              cx="7"
+                              cy="7"
+                              r="6.5"
+                              className="fill-brand-500"
+                            />
+                            <path
+                              d="M4 7.2l2 2 4-4.2"
+                              stroke="#fff"
+                              strokeWidth="1.4"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                          {it}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                ) : null}
+              </div>
             </Reveal>
           </li>
         ))}
       </ol>
+
       {fallback ? (
-        <Reveal variant="fade" className="mt-8">
-          <div className="flex flex-col items-center gap-3 border-2 border-brand-500 bg-white px-6 py-5 text-center sm:flex-row sm:justify-center sm:gap-6">
-            <span className="text-[15px] font-black text-ink">
-              {fallback.when}
-            </span>
-            <span aria-hidden="true" className="text-brand-500">
-              <span className="sm:hidden">↓</span>
-              <span className="hidden sm:inline">→</span>
-            </span>
-            <span className="text-[15px] font-black text-brand-600">
-              {fallback.menu.split("、").map((part, i, arr) => (
-                <span key={part}>
-                  {part}
-                  {i < arr.length - 1 ? (
-                    <>
-                      、<br className="sm:hidden" />
-                    </>
-                  ) : null}
-                </span>
-              ))}
-            </span>
+        <Reveal variant="up" className="mt-6">
+          <div className="flex flex-col items-start gap-5 bg-ink px-6 py-6 text-white md:flex-row md:items-center md:justify-between md:px-10 md:py-7">
+            <div>
+              <p className="text-[11px] font-bold tracking-[0.2em] text-brand-200">
+                {fallback.when}
+              </p>
+              <p className="mt-1.5 text-lg font-black leading-snug md:text-xl">
+                {fallback.menu}
+              </p>
+            </div>
+            <Button
+              href="#diagnosis"
+              size="lg"
+              className="w-full shrink-0 md:w-auto"
+            >
+              無料で簡易診断を申し込む
+            </Button>
           </div>
         </Reveal>
       ) : null}
-    </figure>
+    </div>
   );
 }
 
@@ -1126,21 +1162,22 @@ export default function WebSecurityPage({
       />
 
       {/* ① ファーストビュー */}
-      <section className="relative isolate overflow-hidden border-b border-ink/10 bg-[#FBF5F5]">
-        {/* 背景画像: 右側のイラストを見せ、左側(コピー部分)は白で淡くして可読性を確保 */}
-        <div aria-hidden="true" className="absolute inset-0 -z-10">
+      <section className="relative isolate overflow-hidden border-b border-ink/10 bg-white">
+        {/* PC: 背景画像を右側に配置し、左側(コピー部分)は白へ溶け込ませる */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 right-0 -z-10 hidden w-[64%] overflow-hidden lg:block"
+        >
           <Image
-            src="/services/web-security/hero.webp"
+            src="/services/web-security/hero-laptop.webp"
             alt=""
             fill
             priority
-            sizes="100vw"
-            className="animate-ken-burns object-cover object-[78%_center] lg:object-right"
+            sizes="64vw"
+            className="animate-ken-burns object-cover object-[45%_center]"
           />
-          {/* スマホ: 全体を白く被せて文字を読みやすく */}
-          <div className="absolute inset-0 bg-white/70 backdrop-blur-[2px] lg:hidden" />
-          {/* PC: 左から白のグラデーション */}
-          <div className="absolute inset-0 hidden bg-[linear-gradient(to_right,rgba(255,255,255,0.92)_0%,rgba(255,255,255,0.75)_38%,rgba(255,255,255,0)_62%)] lg:block" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_0%,rgba(255,255,255,0.85)_14%,rgba(255,255,255,0)_42%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/70 to-transparent" />
         </div>
         <Container className="pb-16 pt-10 md:pb-24 md:pt-14 lg:min-h-[640px]">
           <nav aria-label="パンくず" className="text-xs text-ink-muted">
@@ -1201,11 +1238,21 @@ export default function WebSecurityPage({
               </div>
             </div>
           </div>
+          {/* スマホ・タブレット: 画像は背景にせず、ボタンの下に表示 */}
+          <div className="relative mt-10 aspect-[1783/882] overflow-hidden rounded-sm lg:hidden">
+            <Image
+              src="/services/web-security/hero-laptop.webp"
+              alt="ホームページのセキュリティ対策のイメージ"
+              fill
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
         </Container>
       </section>
 
       {/* サービスの価値と対応内容 */}
-      <section className="relative isolate overflow-hidden bg-white py-20 md:py-28">
+      <section className="relative isolate overflow-hidden bg-white py-16 md:py-12 lg:py-14">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute left-1/2 top-40 -z-10 h-[40rem] w-[40rem] -translate-x-1/2 animate-blob rounded-full bg-brand-100/50 blur-[120px]"
@@ -1216,7 +1263,7 @@ export default function WebSecurityPage({
               <span className="text-ink">01</span>
               VALUE
             </p>
-            <h2 className="mt-5 text-[clamp(1.5rem,4.2vw,3.1rem)] font-black leading-[1.4] tracking-[0.02em] text-ink">
+            <h2 className="mt-3 text-[clamp(1.5rem,3.4vw,2.6rem)] font-black leading-[1.35] tracking-[0.02em] text-ink">
               <span className="line-mask">
                 <span className="animate-none translate-y-[110%] transition-transform duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
                   今すぐやるべき必須の
@@ -1230,14 +1277,14 @@ export default function WebSecurityPage({
                 </span>
               </span>
             </h2>
-            <p className="mx-auto mt-6 max-w-2xl translate-y-3 text-[15px] leading-[2] text-ink-soft opacity-0 transition-all delay-300 duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100">
+            <p className="mx-auto mt-4 max-w-3xl md:text-sm md:leading-[1.9] translate-y-3 text-[15px] leading-[2] text-ink-soft opacity-0 transition-all delay-300 duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100">
               {/* TODO: 本文確定後に差し替え */}
               個人情報の受付窓口であるホームページを、外からの攻撃から守ります。現状を診断し、必要な対策を行い、安全な状態を保ち続けることで、情報漏洩のリスクを低減します。
             </p>
           </Reveal>
 
           {/* 図: PCは大きな図、スマホはコンパクトな図 */}
-          <div className="mt-10 md:mt-14">
+          <div className="mt-8 md:mt-4">
             <div className="hidden md:block">
               <DefenseDiagramLarge />
             </div>
@@ -1246,35 +1293,11 @@ export default function WebSecurityPage({
             </div>
           </div>
 
-          {/* 対応内容 */}
-          <ol className="mt-14 grid gap-4 md:mt-16 md:grid-cols-3 md:gap-6">
-            {values.map((v, i) => (
-              <li key={v.name}>
-                <Reveal variant="up" delay={i * 120} className="h-full">
-                  <div className="group relative h-full overflow-hidden border border-ink/10 bg-white p-6 transition-all duration-500 hover:-translate-y-1 hover:border-brand-500/40 hover:shadow-[0_24px_50px_-28px_rgba(122,30,53,0.45)] md:p-8">
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-x-0 top-0 h-1 origin-left scale-x-0 bg-brand-500 transition-transform duration-500 group-hover:scale-x-100"
-                    />
-                    <p className="flex items-baseline gap-3">
-                      <span className="text-xs font-bold text-brand-600">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="text-2xl font-black text-ink">
-                        {v.name}
-                      </span>
-                    </p>
-                    <p className="mt-3 text-base font-black text-brand-600">
-                      {v.value}
-                    </p>
-                    <p className="mt-2 text-sm leading-[1.9] text-ink-soft">
-                      {v.text}
-                    </p>
-                  </div>
-                </Reveal>
-              </li>
-            ))}
-          </ol>
+          {/* どれを選べばいい？(状況別のおすすめメニュー) */}
+          <div className="mt-16 md:mt-20">
+            <MenuSelector />
+          </div>
+
           <div className="mt-8 text-center">
             <Link
               href="#menu"
@@ -1458,16 +1481,6 @@ export default function WebSecurityPage({
             </li>
           ))}
         </ol>
-      </Section>
-
-      {/* ⑨ どれを選べばいい？ */}
-      <Section
-        no="05"
-        label="Which One"
-        title="どれを選べばいい？"
-        className="bg-[#F6F5F2]"
-      >
-        <DecisionFlow />
       </Section>
 
       {/* 申し込みフォーム(ファーストビューのメインCTAの遷移先) */}
