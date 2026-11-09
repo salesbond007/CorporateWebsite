@@ -5,7 +5,6 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { BackToTop } from "@/components/ui/BackToTop";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { organizationJsonLd, websiteJsonLd, siteNavigationJsonLd } from "@/lib/jsonld";
@@ -103,7 +102,6 @@ export default function LocaleLayout({
           <Footer locale={locale} dict={dict} />
         </div>
         <ScrollProgress />
-        <BackToTop label={dict.buttons.backToTop} />
         <JsonLd
           data={[
             organizationJsonLd(),
