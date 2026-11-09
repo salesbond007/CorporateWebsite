@@ -11,7 +11,7 @@ type Props = {
   dict: Dictionary;
 };
 
-type FooterLink = { label: string; href: string };
+type FooterLink = { label: string; href: string; child?: boolean };
 
 export function Footer({ locale, dict }: Props) {
   const year = new Date().getFullYear();
@@ -32,10 +32,21 @@ export function Footer({ locale, dict }: Props) {
         { label: "サービス一覧", href: localePath("/services", locale) },
         ...serviceCategories
           .flatMap((c) => c.services)
-          .map((s) => ({
-            label: s.title,
-            href: s.href ? localePath(s.href, locale) : localePath("/services", locale),
-          })),
+          .flatMap((s) => [
+            {
+              label: s.title,
+              href: s.href
+                ? localePath(s.href, locale)
+                : localePath("/services", locale),
+            },
+            ...(s.children ?? []).map((ch) => ({
+              label: ch.title,
+              href: ch.href
+                ? localePath(ch.href, locale)
+                : localePath("/services", locale),
+              child: true,
+            })),
+          ]),
       ],
     },
     {
@@ -57,7 +68,10 @@ export function Footer({ locale, dict }: Props) {
   const legalLinks: FooterLink[] =
     locale === "ja"
       ? [
-          { href: localePath("/privacy", locale), label: "プライバシーポリシー" },
+          {
+            href: localePath("/privacy", locale),
+            label: "プライバシーポリシー",
+          },
           { href: localePath("/terms", locale), label: "利用規約" },
         ]
       : [
@@ -75,11 +89,23 @@ export function Footer({ locale, dict }: Props) {
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           {/* 会社情報 */}
           <div className="lg:col-span-3">
-            <Link href={home} className="inline-flex items-center gap-3" aria-label={dict.site.name}>
+            <Link
+              href={home}
+              className="inline-flex items-center gap-3"
+              aria-label={dict.site.name}
+            >
               <span className="grid h-11 w-11 place-items-center overflow-hidden rounded-md bg-white">
-                <Image src="/logo-square.png" alt="" width={44} height={44} className="h-full w-full object-contain" />
+                <Image
+                  src="/logo-square.png"
+                  alt=""
+                  width={44}
+                  height={44}
+                  className="h-full w-full object-contain"
+                />
               </span>
-              <span className="whitespace-nowrap text-lg font-bold tracking-[0.06em]">{site.legalName}</span>
+              <span className="whitespace-nowrap text-lg font-bold tracking-[0.06em]">
+                {site.legalName}
+              </span>
             </Link>
             <address className="mt-10 not-italic text-base leading-[1.75] tracking-[0.04em]">
               〒{site.address.postalCode}
@@ -112,15 +138,28 @@ export function Footer({ locale, dict }: Props) {
           >
             {columns.map((col) => (
               <div key={col.title}>
-                <p className={`${headRow} text-[15px] font-bold tracking-[0.04em] sm:text-base sm:tracking-[0.06em]`}>{col.title}</p>
+                <p
+                  className={`${headRow} text-[15px] font-bold tracking-[0.04em] sm:text-base sm:tracking-[0.06em]`}
+                >
+                  {col.title}
+                </p>
                 <ul className="mt-3">
                   {col.links.map((l) => (
-                    <li key={l.label} className={linkRow}>
+                    <li
+                      key={l.label}
+                      className={
+                        l.child ? "flex min-h-12 items-center pl-5" : linkRow
+                      }
+                    >
                       <Link
                         href={l.href}
-                        className="group inline-flex items-center gap-3 text-base tracking-[0.04em] transition-colors hover:text-brand-200"
+                        className={
+                          l.child
+                            ? "group inline-flex items-start gap-2 border-l border-white/25 pl-3 text-sm leading-snug tracking-[0.04em] text-white/80 transition-colors hover:text-brand-200"
+                            : "group inline-flex items-center gap-3 text-base tracking-[0.04em] transition-colors hover:text-brand-200"
+                        }
                       >
-                        <Chevron />
+                        {l.child ? null : <Chevron />}
                         {l.label}
                       </Link>
                     </li>
@@ -132,7 +171,12 @@ export function Footer({ locale, dict }: Props) {
             {/* 単独リンク: 1つ目は見出し行、以降はリンク行に揃える */}
             <ul>
               {singles.map((l, i) => (
-                <li key={l.label} className={i === 0 ? headRow : linkRow + (i === 1 ? " mt-3" : "")}>
+                <li
+                  key={l.label}
+                  className={
+                    i === 0 ? headRow : linkRow + (i === 1 ? " mt-3" : "")
+                  }
+                >
                   <Link
                     href={l.href}
                     className="text-base font-bold tracking-[0.06em] transition-colors hover:text-brand-200"
@@ -152,7 +196,10 @@ export function Footer({ locale, dict }: Props) {
           <ul className="flex flex-wrap gap-x-8 gap-y-2">
             {legalLinks.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="transition-colors hover:text-white">
+                <Link
+                  href={l.href}
+                  className="transition-colors hover:text-white"
+                >
                   {l.label}
                 </Link>
               </li>
@@ -174,7 +221,13 @@ function Chevron() {
       aria-hidden="true"
       className="shrink-0 transition-transform duration-300 group-hover:translate-x-1"
     >
-      <path d="M1.5 1.5L6 6l-4.5 4.5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+      <path
+        d="M1.5 1.5L6 6l-4.5 4.5"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     </svg>
   );
 }

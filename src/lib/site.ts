@@ -104,6 +104,8 @@ export type Service = {
   href?: string;
   /** ServicesSectionでhover時に浮かび上がる背景写真 */
   image?: string;
+  /** このサービスに含まれる個別サービス(例: セキュリティ対策 > ホームページセキュリティ対策) */
+  children?: Service[];
 };
 
 export type ServiceCategory = {
@@ -120,13 +122,26 @@ export const serviceCategories: ServiceCategory[] = [
       {
         slug: "ai-security",
         number: "01",
-        title: "AIセキュリティ対策",
+        title: "セキュリティ対策",
         href: "/services/security",
-        subtitle: "AI Security",
+        subtitle: "Security",
         summary:
           "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、企業の安全なAI活用を支援するソリューションです。",
         features: [],
         image: "/services/cards/ai-solutions.jpg",
+        children: [
+          {
+            slug: "web-security",
+            number: "01-1",
+            title: "ホームページセキュリティ対策",
+            href: "/services/web-security",
+            subtitle: "Website Security",
+            summary:
+              "問い合わせフォームや採用応募など、個人情報の入口になるホームページを守ります。「診断」「保守」「移行」の3つから必要なものだけを選べます。",
+            features: [],
+            image: "/services/cards/ai-solutions.jpg",
+          },
+        ],
       },
       {
         slug: "new-business-development",
@@ -139,24 +154,13 @@ export const serviceCategories: ServiceCategory[] = [
         features: [],
         image: "/services/cards/talent.jpg",
       },
-      {
-        slug: "web-security",
-        number: "03",
-        title: "ホームページセキュリティ対策",
-        href: "/services/web-security",
-        subtitle: "Website Security",
-        summary:
-          "問い合わせフォームや採用応募など、個人情報の入口になるホームページを守ります。「診断」「保守」「移行」の3つから必要なものだけを選べます。",
-        features: [],
-        image: "/services/cards/ai-solutions.jpg",
-      },
     ],
   },
 ];
 
-/** カテゴリを問わず全サービスを横断的に扱いたい場合(Footer等)用のフラット配列 */
-export const services: Service[] = serviceCategories.flatMap(
-  (c) => c.services,
+/** カテゴリを問わず全サービスを横断的に扱いたい場合用のフラット配列(子サービスも含む) */
+export const services: Service[] = serviceCategories.flatMap((c) =>
+  c.services.flatMap((s) => [s, ...(s.children ?? [])]),
 );
 
 export function navLabel(dict: Dictionary, key: NavKey): string {

@@ -20,7 +20,9 @@ type Props = {
 export function Header({ locale, dict }: Props) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
-  const hideCorporateHeader = /^\/(ja|en)\/services\/apokomi\/?$/.test(pathname);
+  const hideCorporateHeader = /^\/(ja|en)\/services\/apokomi\/?$/.test(
+    pathname,
+  );
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -43,7 +45,10 @@ export function Header({ locale, dict }: Props) {
       <div className="container flex h-16 md:h-20 items-center justify-between gap-6">
         <Logo locale={locale} dict={dict} />
 
-        <nav className="ml-auto mr-6 hidden lg:flex items-center gap-9" aria-label="メイン">
+        <nav
+          className="ml-auto mr-6 hidden lg:flex items-center gap-9"
+          aria-label="メイン"
+        >
           {navigation
             .filter((item) => item.key !== "contact")
             .map((item) =>
@@ -55,7 +60,16 @@ export function Header({ locale, dict }: Props) {
                   items={serviceCategories
                     .flatMap((c) => c.services)
                     .filter((sv) => sv.href)
-                    .map((sv) => ({ label: sv.title, href: localePath(sv.href!, locale) }))}
+                    .map((sv) => ({
+                      label: sv.title,
+                      href: localePath(sv.href!, locale),
+                      children: (sv.children ?? [])
+                        .filter((ch) => ch.href)
+                        .map((ch) => ({
+                          label: ch.title,
+                          href: localePath(ch.href!, locale),
+                        })),
+                    }))}
                 />
               ) : (
                 <Link
@@ -95,15 +109,24 @@ function ServicesDropdown({
 }: {
   label: string;
   href: string;
-  items: { label: string; href: string }[];
+  items: {
+    label: string;
+    href: string;
+    children?: { label: string; href: string }[];
+  }[];
 }) {
   const [open, setOpen] = useState(false);
+  // 子サービスを持つ項目のうち、展開中のもの
+  const [expanded, setExpanded] = useState<string | null>(null);
 
   return (
     <div
       className="relative"
       onMouseEnter={() => setOpen(true)}
-      onMouseLeave={() => setOpen(false)}
+      onMouseLeave={() => {
+        setOpen(false);
+        setExpanded(null);
+      }}
       onFocus={() => setOpen(true)}
       onBlur={(e) => {
         if (!e.currentTarget.contains(e.relatedTarget as Node)) setOpen(false);
@@ -130,29 +153,103 @@ function ServicesDropdown({
       <div
         className={cn(
           "absolute left-0 top-full pt-5 transition-all duration-200",
-          open ? "visible translate-y-0 opacity-100" : "invisible -translate-y-1 opacity-0",
+          open
+            ? "visible translate-y-0 opacity-100"
+            : "invisible -translate-y-1 opacity-0",
         )}
       >
         <ul className="min-w-[15rem] border border-ink-line bg-white py-2 shadow-[0_16px_40px_-16px_rgba(0,0,0,0.25)]">
-          {items.map((it) => (
-            <li key={it.href}>
-              <Link
-                href={it.href}
-                onClick={() => setOpen(false)}
-                className="group/item flex items-center gap-3 whitespace-nowrap px-5 py-3 text-[15px] font-medium tracking-[0.06em] text-ink transition-colors hover:bg-brand-50/60 hover:text-brand-600"
+          {items.map((it) => {
+            const hasChildren = !!it.children?.length;
+            const isOpen = expanded === it.href;
+            return (
+              <li
+                key={it.href}
+                onMouseEnter={() => hasChildren && setExpanded(it.href)}
               >
-                <CircleChevron direction="right" />
-                {it.label}
-              </Link>
-            </li>
-          ))}
+                <div className="flex items-center">
+                  <Link
+                    href={it.href}
+                    onClick={() => setOpen(false)}
+                    className="group/item flex flex-1 items-center gap-3 whitespace-nowrap py-3 pl-5 pr-3 text-[15px] font-medium tracking-[0.06em] text-ink transition-colors hover:bg-brand-50/60 hover:text-brand-600"
+                  >
+                    <CircleChevron direction="right" />
+                    {it.label}
+                  </Link>
+                  {hasChildren ? (
+                    <button
+                      type="button"
+                      aria-label={`${it.label}のサービスを${isOpen ? "閉じる" : "開く"}`}
+                      aria-expanded={isOpen}
+                      onClick={() => setExpanded(isOpen ? null : it.href)}
+                      className="mr-2 grid h-8 w-8 place-items-center rounded-full text-brand-500 transition-colors hover:bg-brand-50"
+                    >
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        aria-hidden="true"
+                        className={cn(
+                          "transition-transform duration-300",
+                          isOpen && "rotate-180",
+                        )}
+                      >
+                        <path
+                          d="M3 4.5L6 7.5L9 4.5"
+                          stroke="currentColor"
+                          strokeWidth="1.6"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </button>
+                  ) : null}
+                </div>
+                {hasChildren ? (
+                  <div
+                    className={cn(
+                      "grid overflow-hidden transition-all duration-300",
+                      isOpen
+                        ? "grid-rows-[1fr] opacity-100"
+                        : "grid-rows-[0fr] opacity-0",
+                    )}
+                  >
+                    <ul className="min-h-0">
+                      {it.children!.map((ch) => (
+                        <li key={ch.href}>
+                          <Link
+                            href={ch.href}
+                            onClick={() => setOpen(false)}
+                            tabIndex={isOpen ? 0 : -1}
+                            className="ml-8 flex items-center gap-2 whitespace-nowrap border-l border-brand-500/30 py-2.5 pl-4 pr-5 text-sm font-medium text-ink-soft transition-colors hover:text-brand-600"
+                          >
+                            <span aria-hidden="true" className="text-brand-500">
+                              └
+                            </span>
+                            {ch.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ) : null}
+              </li>
+            );
+          })}
         </ul>
       </div>
     </div>
   );
 }
 
-function CircleChevron({ direction, open }: { direction: "down" | "right"; open?: boolean }) {
+function CircleChevron({
+  direction,
+  open,
+}: {
+  direction: "down" | "right";
+  open?: boolean;
+}) {
   return (
     <span
       aria-hidden="true"
@@ -163,7 +260,11 @@ function CircleChevron({ direction, open }: { direction: "down" | "right"; open?
     >
       <svg width="8" height="8" viewBox="0 0 8 8" fill="none">
         <path
-          d={direction === "down" ? "M1.5 3l2.5 2.5L6.5 3" : "M3 1.5l2.5 2.5L3 6.5"}
+          d={
+            direction === "down"
+              ? "M1.5 3l2.5 2.5L6.5 3"
+              : "M3 1.5l2.5 2.5L3 6.5"
+          }
           stroke="currentColor"
           strokeWidth="1.2"
           strokeLinecap="round"
