@@ -18,6 +18,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/services/security", priority: 0.9, changeFrequency: "monthly" },
     { path: "/services/sales", priority: 0.9, changeFrequency: "monthly" },
     { path: "/services/web-security", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/services/apokomi", priority: 0.9, changeFrequency: "monthly" },
     { path: "/blog", priority: 0.8, changeFrequency: "daily" },
     { path: "/news", priority: 0.7, changeFrequency: "weekly" },
     { path: "/contact", priority: 0.8, changeFrequency: "monthly" },

@@ -1,198 +1,641 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
+import { Reveal } from "@/components/ui/Reveal";
+import { CountUp } from "@/components/ui/CountUp";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { ApokomiLeadForm } from "@/components/contact/ApokomiLeadForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
-import { isLocale } from "@/i18n/config";
+import { pageMeta, pageMetadata } from "@/lib/seo";
+import { site } from "@/lib/site";
+import { cn } from "@/lib/cn";
 import { localePath } from "@/i18n/path";
+import { isLocale } from "@/i18n/config";
 
-export const metadata: Metadata = {
-  title: "アポコミ | 成果連動型インサイドセールス代行",
-  description:
-    "稼働費はフリーランス並み、成果報酬はアポが生まれたときだけ。戦略立案からアポイント獲得まで、アポコミが商談の入口をつくりきります。",
-};
+const PATH = "/services/apokomi";
+const FORM_ID = "apokomi-form";
+const CTA_LABEL = "無料相談・見積もり依頼";
 
-const clientLogos = [
-  { name: "Fixx", src: "/clients/fixx.png", width: 168 },
-  { name: "JAPAN AI株式会社", src: "/clients/japan-ai.webp", width: 302 },
-  { name: "LegalOn Technologies", src: "/clients/legalontechnology.jpg", width: 284 },
-  { name: "TOPPANコスモ", src: "/clients/toppan-cosmo.png", width: 235 },
-  { name: "kubell", src: "/clients/kubell.jpeg", width: 186 },
-  { name: "uluru", src: "/clients/ururu.png", width: 218 },
-  { name: "And L.", src: "/clients/andoeru.png", width: 200 },
-  { name: "三省堂書店", src: "/clients/sanseido.png", width: 252 },
-  { name: "KOMPEITO", src: "/clients/kompeito.png", width: 252 },
-  { name: "OKAN", src: "/clients/okan.png", width: 186 },
+export function generateMetadata({
+  params,
+}: {
+  params: { locale: string };
+}): Metadata {
+  if (!isLocale(params.locale)) return {};
+  return pageMetadata({
+    ...pageMeta.apokomi,
+    path: PATH,
+    locale: params.locale,
+  });
+}
+
+/* ------------------------------------------------------------------ データ */
+
+const channels = [
+  {
+    name: "テレアポ",
+    en: "TELE",
+    text: "即効性が高く、アポイントの量を確保しやすいチャネル。決裁者や担当者の特定にも使います",
+  },
+  {
+    name: "問い合わせフォーム",
+    en: "FORM",
+    text: "低コストで幅広い企業にアプローチできます。検証段階で母数を広げたいときに有効です",
+  },
+  {
+    name: "メール",
+    en: "MAIL",
+    text: "接点を持った企業への追客やフォローに。日程調整までスムーズにつなげます",
+  },
+  {
+    name: "手紙BDR",
+    en: "LETTER",
+    text: "大手企業や決裁者に、印象に残るアプローチを。狙った企業を確実に開拓したいときに",
+  },
+  {
+    name: "SNS（DM）",
+    en: "SNS",
+    text: "経営者や担当者個人に直接届くチャネル。スタートアップやIT企業の開拓に",
+  },
 ];
 
-const problems = [
-  { lines: ["成果が出ない月も、", "営業代行に高額な費用を払っている"], keyword: "高額な費用", image: "/services/apokomi/problems/01-cost.png" },
-  { lines: ["営業活動を外注しても、", "社内にノウハウが蓄積されない"], keyword: "ノウハウ", image: "/services/apokomi/problems/02-knowledge.png" },
-  { lines: ["フリーランスに依頼したいが、", "稼働管理や品質に不安がある"], keyword: "品質", image: "/services/apokomi/problems/03-quality.png" },
-  { lines: ["新規開拓を始めたいが、", "何から手をつければよいか分からない"], keyword: "何から", image: "/services/apokomi/problems/04-signpost.png" },
-  { lines: ["営業人材が不足しており、", "新規開拓に手が回らない"], keyword: "人材", image: "/services/apokomi/problems/05-people.png" },
-  { lines: ["アポイント数を増やしたいが、", "有効な打ち手が見つからない"], keyword: "打ち手", image: "/services/apokomi/problems/06-growth.png" },
+const worries = [
+  {
+    title: "アポイントを大量に獲得したい",
+    items: [
+      "売れる商材はあるのに、商談の数が足りない",
+      "社内に架電の人手がなく、新規開拓が後回しになっている",
+      "テレアポだけでは母数が頭打ちになっている",
+    ],
+  },
+  {
+    title: "勝ち筋が決まっておらず、複数チャネルで試したい",
+    items: [
+      "新規事業・新商材で、どのターゲットに刺さるかまだ分からない",
+      "テレアポ代行やフォーム営業代行に頼んだが、成果が出なかった",
+      "どのチャネルから手をつけるべきか判断できない",
+    ],
+  },
 ];
 
-const reasonTableRows = [
-  ["稼働の費用", "1人あたり月50万〜60万円", "なし", "時給2,000円〜"],
-  ["成果の費用", "なし", "アポ1件 1.5万〜2万円", "アポ1件 1万円"],
-  ["成果が出ない月", "固定費が全額かかる", "稼働量が代行会社任せ", "稼働費と運用PM費のみ。品質はPMが管理"],
+const features = [
+  {
+    no: "01",
+    title: "準備から実行まで、まるごとお任せ",
+    text: "リスト作成、トークスクリプト、各チャネルの文面づくりから実行・改善まで一括で担当します。御社は獲得したアポイントでの商談に集中できます。",
+  },
+  {
+    no: "02",
+    title: "5つのチャネルを総動員して開拓",
+    text: "テレアポ・問い合わせフォーム・メール・手紙BDR・SNS（DM）を組み合わせ、1社あたりの接点を最大化します。「手紙を送ってから架電」「フォームの反応先へ即架電」など、チャネルを掛け合わせて、電話だけでは届かない決裁者にもアプローチします。",
+  },
+  {
+    no: "03",
+    title: "勝ち筋を見つけたら、一気に攻める",
+    text: "チャネル・業種・役職・訴求ごとの反応をデータで可視化し、成果の出るパターンに一気にリソースを投下します。蓄積した「勝ち筋」はレポートでお渡しするので、御社の営業資産として残ります。",
+  },
 ];
 
-const reason02Steps = [
-  ["仮説を立てる", "業界・役職・訴求の仮説を立て、複数パターンで同時に検証"],
-  ["成功と失敗を分析する", "アポにつながった会話と断られた理由を、すべてデータ化"],
-  ["徹底的に磨き上げる", "ターゲティングとトークスクリプトを、隔週の定例で改善し続ける"],
-  ["誰でも再現できる型にする", "担当者が変わっても成果が出る、勝ちパターンとして仕組み化"],
+const steps = [
+  {
+    title: "無料相談・ヒアリング",
+    text: "商材、ターゲット、これまでの営業活動を伺います。",
+  },
+  {
+    title: "ターゲット・チャネル設計",
+    text: "狙う企業や役職、使うチャネル、目標アポイント数を設計し、お見積もりをご提示します。",
+  },
+  {
+    title: "準備",
+    text: "リスト、トークスクリプト、各チャネルの文面を作成します。",
+  },
+  {
+    title: "アプローチ開始",
+    text: "設計したチャネルで開拓を始めます。勝ち筋が未確定の場合は、複数チャネルを並行してテストします。",
+  },
+  {
+    title: "分析・改善",
+    text: "月2回の定例ミーティングで結果を共有し、成果の出るチャネルや訴求に集中していきます。",
+  },
 ];
 
-const retainedAssets = ["勝ちパターン(ターゲット×訴求)", "改善を重ねたトークスクリプト", "断られた理由のデータ", "精査済みのリスト"];
-
-const priceRows = [
-  ["稼働費", "時給2,000〜2,500円", "ベース2,000円。担当者の経験・実績により変動"],
-  ["成果報酬", "アポ1件 10,000円", "アポイント獲得時のみ発生"],
-  ["運用PM", "月額50,000円", "隔週の振り返り定例(月2回・各30分)、月次レポート、リスト精査、トーク改善、稼働・品質管理"],
-  ["初期費用", "100,000円(初回のみ)", "ヒアリング、戦略・ターゲット設計、トークスクリプト作成、担当者の選定・事前研修"],
-  ["オプション", "商談代行 1件15,000円", "BANT情報のヒアリング。商談フェーズによってはクロージングまで対応"],
+const logos = [
+  { src: "/clients/fixx.png", width: 116 },
+  { src: "/clients/japan-ai.webp", width: 208 },
+  { src: "/clients/legalontechnology.jpg", width: 196 },
+  { src: "/clients/toppan-cosmo.png", width: 162 },
+  { src: "/clients/kubell.jpeg", width: 128 },
+  { src: "/clients/ururu.png", width: 150 },
+  { src: "/clients/andoeru.png", width: 138 },
+  { src: "/clients/sanseido.png", width: 174 },
+  { src: "/clients/kompeito.png", width: 174 },
+  { src: "/clients/okan.png", width: 128 },
 ];
-
-const flow = ["無料相談", "ヒアリング", "ご提案・ご契約", "立ち上げ", "稼働開始", "定例で改善"];
 
 const faqs = [
-  ["契約期間はどのくらいですか？", "3ヶ月〜のご契約です。勝ちパターンの検証には一定の期間が必要なため、最初の3ヶ月で仮説検証と改善を集中的に回します。"],
-  ["アポイントはどの時点で成果になりますか？", "アポイントの成果は、商談を実施いただいた時点で確定します。"],
-  ["商談まで任せることはできますか？", "はい。オプションの商談代行(1件15,000円)で、BANT情報のヒアリングを行い、商談フェーズによってはクロージングまで対応します。"],
-  ["時給2,000円と2,500円の違いは？", "担当者の経験・実績による違いです。決裁者へのアプローチなど難易度の高い案件では、経験豊富な担当者をアサインします。"],
-  ["申し込みからどのくらいで稼働できますか？", "お申し込みから最短5営業日で稼働を開始できます。"],
+  {
+    q: "営業リストがなくても依頼できますか？",
+    a: "はい。ターゲットのご要望を伺ったうえで、リスト作成から対応します（内容に応じてお見積もりします）。",
+  },
+  {
+    q: "1つのチャネルだけでも依頼できますか？",
+    a: "可能です。ご相談の内容をもとに、最適なチャネルの組み合わせもご提案します。",
+  },
+  {
+    q: "どのような商材に対応していますか？",
+    a: "BtoB商材であれば、業種・規模を問わず対応します。まずはお気軽にご相談ください。",
+  },
+  {
+    q: "商談の対応もお願いできますか？",
+    a: "アポコミの対応範囲は、アポイントの獲得までです。獲得したアポイントでの商談は、御社にご対応いただきます。",
+  },
+  {
+    q: "契約期間はどのくらいですか？",
+    a: "原則3カ月からのご契約です。勝ち筋を見つけて成果を積み上げるため、一定期間の運用をおすすめしています。",
+  },
+  {
+    q: "進捗はどのように共有されますか？",
+    a: "月2回の定例ミーティングで、チャネルごとの活動量・反応・アポイント獲得状況をレポートで共有します。",
+  },
 ];
 
-const companyPillars = [
-  ["営業コンサル", "営業戦略の立案、ツール・集客チャネルの選定、商談改善"],
-  ["BPO", "インサイドセールス代行「アポコミ」"],
-  ["AI化", "営業事務やPM業務をAIで効率化(提供予定)"],
-  ["人材紹介", "営業の型ができた組織への人材紹介(準備中)"],
-];
+/* --------------------------------------------------------------- 小さな部品 */
 
-const companyTable = [
-  ["会社名", "セールスボンド株式会社"],
-  ["代表取締役", "飯住 孝裕"],
-  ["設立", "2024年7月"],
-  ["所在地", "〒160-0023 東京都新宿区西新宿3-3-13 西新宿水間ビル2F"],
-  ["資本金", "41,002,000円"],
-  ["従業員数", "34名(業務委託を含む)"],
-  ["取引銀行", "三井住友銀行、東京スター銀行"],
-];
+/** オレンジのCTAボタン(ページ内フォームへ移動) */
+function Cta({
+  label = CTA_LABEL,
+  size = "lg",
+  className,
+}: {
+  label?: string;
+  size?: "md" | "lg";
+  className?: string;
+}) {
+  return (
+    <a
+      href={`#${FORM_ID}`}
+      className={cn(
+        "group relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full bg-[#F26B1D] font-black text-white shadow-[0_16px_36px_-14px_rgba(242,107,29,0.9)] transition hover:-translate-y-0.5 hover:bg-[#E05A0C]",
+        "before:absolute before:inset-y-0 before:left-0 before:w-1/3 before:-translate-x-[150%] before:skew-x-[-20deg] before:bg-white/30 before:transition-transform before:duration-700 hover:before:translate-x-[400%]",
+        size === "lg" ? "h-16 px-10 text-base md:text-lg" : "h-11 px-6 text-sm",
+        className,
+      )}
+    >
+      {label}
+      <span
+        aria-hidden="true"
+        className="transition-transform group-hover:translate-x-1"
+      >
+        →
+      </span>
+    </a>
+  );
+}
 
-export default function ApokomiServicePage({ params }: { params: { locale: string } }) {
+function SectionCta({ label }: { label?: string }) {
+  return (
+    <Reveal variant="up" className="mt-14 flex justify-center">
+      <Cta label={label} />
+    </Reveal>
+  );
+}
+
+function Heading({
+  en,
+  children,
+  dark,
+  className,
+}: {
+  en: string;
+  children: React.ReactNode;
+  dark?: boolean;
+  className?: string;
+}) {
+  return (
+    <Reveal variant="up" className={cn("text-center", className)}>
+      <p
+        className={cn(
+          "text-xs font-black tracking-[0.3em]",
+          dark ? "text-[#FF9A5C]" : "text-[#F26B1D]",
+        )}
+      >
+        {en}
+      </p>
+      <h2
+        className={cn(
+          "mt-3 text-[clamp(1.6rem,3.6vw,2.75rem)] font-black leading-[1.35] tracking-[0.01em] [word-break:auto-phrase]",
+          dark ? "text-white" : "text-[#1A1A1A]",
+        )}
+      >
+        {children}
+      </h2>
+    </Reveal>
+  );
+}
+
+/* ----------------------------------------------------------------- ページ */
+
+export default function ApokomiPage({
+  params,
+}: {
+  params: { locale: string };
+}) {
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
-  // 一旦非公開: 公開再開時はこの行を削除
-  notFound();
+  const base = site.url.replace(/\/$/, "");
 
   return (
-    <main className="bg-[#FAF8F7] text-[#2B2B2B]">
+    <div className="bg-[#FFFBF7] text-[#1A1A1A]">
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "ホーム", url: localePath("/", locale) },
-          { name: "サービス案内", url: localePath("/services", locale) },
-          { name: "アポコミ", url: localePath("/services/apokomi", locale) },
-        ])}
+        data={[
+          breadcrumbJsonLd([
+            { name: "ホーム", url: localePath("/", locale) },
+            { name: "サービス一覧", url: localePath("/services", locale) },
+            {
+              name: "新規開拓支援事業",
+              url: localePath("/services/sales", locale),
+            },
+            { name: "アポコミ", url: localePath(PATH, locale) },
+          ]),
+          {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            name: "アポコミ（インサイドセールス代行・アポイント獲得代行）",
+            serviceType: "インサイドセールス代行",
+            description: pageMeta.apokomi.description,
+            url: `${base}${localePath(PATH, locale)}`,
+            areaServed: { "@type": "Country", name: "日本" },
+            provider: {
+              "@type": "Organization",
+              name: site.legalName,
+              url: site.officialUrl,
+            },
+            offers: {
+              "@type": "Offer",
+              description:
+                "料金は要見積もり（ターゲット・チャネル・目標アポイント数に応じて設計）",
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: faqs.map((f) => ({
+              "@type": "Question",
+              name: f.q,
+              acceptedAnswer: { "@type": "Answer", text: f.a },
+            })),
+          },
+        ]}
       />
 
-      <section className="sticky top-0 z-30 border-b border-[#7B2233]/15 bg-white/95 backdrop-blur-sm">
-        <Container className="py-4">
-          <Link
-            href={localePath("/", locale)}
-            className="text-2xl font-black tracking-[0.04em] text-[#7B2233] md:text-3xl"
-          >
-            アポコミ
-          </Link>
+      {/* 固定のCTAバー(サイトヘッダーの下に追従) */}
+      <div className="sticky top-16 z-30 border-b border-white/10 bg-[#17120F]/95 backdrop-blur md:top-20">
+        <Container className="flex h-14 items-center justify-between gap-3">
+          <p className="flex items-center gap-2 text-sm font-black text-white">
+            <span className="rounded bg-[#F26B1D] px-2 py-0.5 text-[11px] tracking-[0.1em]">
+              アポコミ
+            </span>
+            <span className="hidden sm:inline">インサイドセールス代行</span>
+          </p>
+          <Cta size="md" />
         </Container>
-      </section>
+      </div>
 
-      {/* 常に右下に表示するフローティングCTA(吹き出し型) */}
-      <a
-        href="#entry"
-        className="group fixed bottom-6 right-6 z-40 inline-flex items-center gap-2 rounded-[22px] bg-[#7B2233] px-7 py-5 text-base font-black text-white shadow-[0_14px_32px_-8px_rgba(123,34,51,0.6)] transition-transform hover:-translate-y-0.5 hover:bg-[#A33A52] md:px-8 md:py-5 md:text-lg"
-      >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true" className="shrink-0">
-          <path
-            d="M4 5h16a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H9l-4.5 3.8c-.4.3-1-.1-1-.6V6a1 1 0 0 1 1-1Z"
-            fill="currentColor"
-          />
-          <circle cx="9" cy="10.5" r="1.1" fill="#7B2233" />
-          <circle cx="13" cy="10.5" r="1.1" fill="#7B2233" />
-          <circle cx="17" cy="10.5" r="1.1" fill="#7B2233" />
-        </svg>
-        無料相談はこちら
-        <span
-          aria-hidden
-          className="absolute -bottom-1.5 right-10 h-4 w-4 rotate-45 rounded-[4px] bg-[#7B2233] transition-colors group-hover:bg-[#A33A52]"
+      {/* 1. ファーストビュー */}
+      <section className="relative isolate overflow-hidden bg-[#17120F] text-white">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[38rem] w-[38rem] animate-blob rounded-full bg-[#F26B1D]/35 blur-[130px]"
         />
-      </a>
-
-      {/* ① ファーストビュー */}
-      <section className="relative isolate min-h-[520px] overflow-hidden bg-[#5c1726] md:min-h-[620px]">
-        <div className="absolute inset-0">
-          <Image
-            src="/services/apokomi/hero.webp"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-contain object-right md:object-right"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#430f1b] via-[#5c1726]/75 to-transparent md:from-[#430f1b]/95 md:via-[#5c1726]/55 md:to-transparent/10" />
-        </div>
-        <Container className="relative py-20 text-left text-white md:py-28 lg:py-32">
-          <div className="max-w-xl rounded-3xl bg-black/25 p-6 backdrop-blur-[2px] md:bg-transparent md:p-0 md:backdrop-blur-0">
-            <p className="text-lg font-black leading-relaxed drop-shadow-[0_2px_8px_rgba(0,0,0,0.5)] md:text-xl">
-              <Highlight>成果が出ない月は、高い固定費は不要。</Highlight>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-48 -left-32 -z-10 h-[30rem] w-[30rem] animate-blob rounded-full bg-[#FF9A5C]/20 blur-[120px] [animation-delay:-8s]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.07] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]"
+        />
+        <Container className="grid items-center gap-12 py-16 md:py-24 lg:grid-cols-12 lg:py-28">
+          <div className="lg:col-span-7">
+            <p className="inline-flex items-center gap-2 rounded-full border border-[#F26B1D]/50 bg-[#F26B1D]/10 px-4 py-1.5 text-xs font-black tracking-[0.12em] text-[#FF9A5C] animate-fade-up">
+              インサイドセールス代行｜アポコミ
             </p>
-            <h1 className="mt-4 text-4xl font-black leading-[1.3] tracking-normal drop-shadow-[0_2px_10px_rgba(0,0,0,0.5)] md:text-5xl">
-              アポ獲得から、アポを生み出す仕組みづくりまで。
+            <h1 className="mt-6 text-[clamp(2.2rem,6.2vw,4.6rem)] font-black leading-[1.15] tracking-tight">
+              <span className="line-mask">
+                <span style={{ animationDelay: "0.1s" }}>
+                  <span className="text-[#FF7A2B]">全チャネル</span>で、
+                </span>
+              </span>
+              <span className="line-mask">
+                <span style={{ animationDelay: "0.25s" }}>
+                  攻めの新規開拓。
+                </span>
+              </span>
             </h1>
-            <p className="mt-6 inline-block max-w-lg rounded-xl border-2 border-white/80 px-5 py-3 text-lg font-black leading-relaxed text-white md:text-xl">
-              アポ数を生み出す、余計な固定費0の設計！
+            <p
+              className="mt-6 max-w-xl text-[15px] leading-[2] text-white/80 animate-fade-up md:text-base"
+              style={{ animationDelay: "0.45s" }}
+            >
+              アポコミは、テレアポ・フォーム・メール・手紙・SNSを総動員して、新規アポイントを獲りにいくインサイドセールス代行サービスです。
             </p>
-
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Button href="#entry" size="lg" variant="secondary" className="!rounded-full !border-white !text-white hover:!bg-white hover:!text-[#7B2233]">
-                サービス資料をダウンロード
-              </Button>
+            <ul
+              className="mt-7 flex flex-wrap gap-2 animate-fade-up"
+              style={{ animationDelay: "0.6s" }}
+            >
+              {channels.map((c) => (
+                <li
+                  key={c.name}
+                  className="rounded-full border border-white/20 bg-white/5 px-3.5 py-1.5 text-sm font-bold text-white/90"
+                >
+                  #{c.name}
+                </li>
+              ))}
+            </ul>
+            <div
+              className="mt-10 animate-fade-up"
+              style={{ animationDelay: "0.75s" }}
+            >
+              <Cta label="無料で相談する" />
             </div>
           </div>
-        </Container>
-      </section>
 
-      {/* 料金サマリー */}
-      <section className="relative bg-[#FAF8F7] py-14 md:py-16">
-        <Container>
-          <div className="relative mx-auto -mt-24 flex max-w-md flex-col items-center gap-5 rounded-3xl border border-[#7B2233]/15 bg-white p-6 text-center shadow-[0_20px_60px_-20px_rgba(123,34,51,0.3)] md:-mt-28 md:flex-row md:justify-between md:p-8 md:text-left">
-            <p className="text-4xl font-black text-[#2B2233] md:text-5xl">月額20万円〜</p>
-            <Button href="#entry" size="lg" className="!rounded-full !bg-[#7B2233] hover:!bg-[#A33A52]">
-              無料で相談する
-            </Button>
+          {/* 5チャネルの図: 中心のアポイントへ全方位から集まる */}
+          <div
+            className="relative mx-auto aspect-square w-[82%] max-w-[460px] sm:w-full animate-fade-up lg:col-span-5"
+            style={{ animationDelay: "0.4s" }}
+          >
+            <div
+              aria-hidden="true"
+              className="absolute inset-[12%] animate-spin-slow rounded-full border border-dashed border-[#F26B1D]/40"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-[26%] rounded-full border border-white/10"
+            />
+            <div className="absolute left-1/2 top-1/2 grid h-[42%] w-[42%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-gradient-to-br from-[#FF8A3D] to-[#E05A0C] text-center shadow-[0_0_80px_-10px_rgba(242,107,29,0.8)]">
+              <span
+                aria-hidden="true"
+                className="absolute inset-0 animate-pulse-ring rounded-full border-2 border-[#FF9A5C]"
+              />
+              <div>
+                <p className="text-[clamp(2.5rem,7vw,4rem)] font-black leading-none">
+                  <CountUp value="5" />
+                </p>
+                <p className="mt-1 text-xs font-black tracking-[0.15em] md:text-sm">
+                  CHANNELS
+                </p>
+              </div>
+            </div>
+            {channels.map((c, i) => {
+              const angle = -90 + i * 72;
+              const r = 40;
+              const x = 50 + r * Math.cos((angle * Math.PI) / 180);
+              const y = 50 + r * Math.sin((angle * Math.PI) / 180);
+              return (
+                <span
+                  key={c.name}
+                  style={{ left: `${x}%`, top: `${y}%` }}
+                  className="absolute -translate-x-1/2 -translate-y-1/2"
+                >
+                  <span
+                    style={{ animationDelay: `${i * 0.4}s` }}
+                    className="block animate-float-y whitespace-nowrap rounded-full bg-white px-3 py-1.5 text-xs font-black text-[#1A1A1A] shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] md:px-4 md:py-2 md:text-sm"
+                  >
+                    {c.name}
+                  </span>
+                </span>
+              );
+            })}
           </div>
         </Container>
+
+        {/* 流れるチャネル名の帯 */}
+        <div
+          aria-hidden="true"
+          className="overflow-hidden border-t border-white/10 bg-[#F26B1D] py-3"
+        >
+          <div className="flex w-max animate-marquee-slow">
+            {[0, 1].map((k) => (
+              <p
+                key={k}
+                className="flex shrink-0 items-center gap-8 pr-8 text-lg font-black tracking-[0.15em] text-white md:text-xl"
+              >
+                {[...channels, ...channels].map((c, i) => (
+                  <span key={`${k}-${i}`} className="flex items-center gap-8">
+                    {c.en}
+                    <span className="text-white/50">／</span>
+                  </span>
+                ))}
+              </p>
+            ))}
+          </div>
+        </div>
       </section>
 
-      {/* ② 取引実績 */}
+      {/* 2. お悩み */}
+      <section className="py-20 md:py-28">
+        <Container>
+          <Heading en="PROBLEM">新規開拓、こんなお悩みはありませんか？</Heading>
+          <div className="mx-auto mt-12 grid max-w-5xl gap-6 md:grid-cols-2">
+            {worries.map((w, i) => (
+              <Reveal
+                key={w.title}
+                variant="up"
+                delay={i * 150}
+                className="h-full"
+              >
+                <div className="h-full rounded-2xl border border-[#F2E3D8] bg-white p-7 shadow-[0_20px_50px_-35px_rgba(242,107,29,0.6)] md:p-9">
+                  <p className="inline-flex rounded-full bg-[#FFF3EA] px-3 py-1 text-xs font-black text-[#E05A0C]">
+                    CASE {String.fromCharCode(65 + i)}
+                  </p>
+                  <h3 className="mt-3 text-xl font-black leading-snug md:text-2xl">
+                    {w.title}
+                  </h3>
+                  <ul className="mt-6 space-y-3 border-t border-dashed border-[#1A1A1A]/15 pt-6">
+                    {w.items.map((it) => (
+                      <li
+                        key={it}
+                        className="flex gap-3 text-[15px] leading-relaxed"
+                      >
+                        <span
+                          aria-hidden="true"
+                          className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#F26B1D] text-[11px] font-black text-white"
+                        >
+                          ✓
+                        </span>
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+          <Reveal variant="up" className="mt-12 text-center">
+            <p
+              aria-hidden="true"
+              className="text-3xl text-[#F26B1D] animate-float-y"
+            >
+              ▼
+            </p>
+            <p className="mt-4 text-xl font-black leading-relaxed md:text-2xl [word-break:auto-phrase]">
+              アポコミなら、使えるチャネルを
+              <span className="bg-[linear-gradient(transparent_60%,#FFD2B3_60%)]">
+                すべて
+              </span>
+              使って、
+              <br className="hidden md:block" />
+              攻めの新規開拓を実現します。
+            </p>
+          </Reveal>
+          <SectionCta />
+        </Container>
+      </section>
+
+      {/* 3. アポコミとは */}
+      <section className="relative isolate overflow-hidden bg-[#17120F] py-20 text-white md:py-28">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute right-[-10%] top-1/2 -z-10 -translate-y-1/2 select-none text-[clamp(8rem,22vw,18rem)] font-black leading-none text-white/[0.04]"
+        >
+          APOCOMI
+        </div>
+        <Container>
+          <Heading en="ABOUT" dark>
+            アポイント創出にコミットする、
+            <br className="hidden md:block" />
+            攻めのインサイドセールス代行
+          </Heading>
+          <Reveal
+            variant="up"
+            className="mx-auto mt-10 max-w-3xl space-y-5 text-center text-[15px] leading-[2.1] text-white/80 md:text-base"
+          >
+            <p>
+              アポコミは、新規アポイントの獲得に特化したインサイドセールス代行サービスです。
+            </p>
+            <p>
+              電話だけで終わらせず、フォーム・メール・手紙・SNSまで総動員して、狙った企業に接点をつくりにいきます。
+            </p>
+            <p>
+              準備から実行・改善までまるごと担当し、成果の出るチャネルに一気にリソースを投下します。
+            </p>
+          </Reveal>
+          <SectionCta />
+        </Container>
+      </section>
+
+      {/* 4. 3つの特徴 */}
+      <section className="py-20 md:py-28">
+        <Container>
+          <Heading en="FEATURES">
+            アポコミの<span className="text-[#F26B1D]">3</span>つの特徴
+          </Heading>
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {features.map((f, i) => (
+              <Reveal
+                key={f.no}
+                variant="up"
+                delay={i * 150}
+                className="h-full"
+              >
+                <article className="group relative h-full overflow-hidden rounded-2xl bg-white p-8 shadow-[0_24px_60px_-40px_rgba(23,18,15,0.6)] ring-1 ring-[#F2E3D8] transition duration-500 hover:-translate-y-1.5 hover:ring-[#F26B1D]/50 md:p-9">
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 top-0 h-1.5 origin-left scale-x-0 bg-[#F26B1D] transition-transform duration-500 group-hover:scale-x-100"
+                  />
+                  <p className="text-6xl font-black leading-none text-[#F26B1D]">
+                    {f.no}
+                  </p>
+                  <h3 className="mt-5 text-xl font-black leading-snug md:text-[1.4rem]">
+                    {f.title}
+                  </h3>
+                  <p className="mt-4 text-[15px] leading-[1.95] text-[#1A1A1A]/75">
+                    {f.text}
+                  </p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+          <SectionCta />
+        </Container>
+      </section>
+
+      {/* 5. 対応チャネル */}
+      <section className="bg-[#FFF3EA] py-20 md:py-28">
+        <Container>
+          <Heading en="CHANNELS">
+            ターゲットに合わせて、最適なチャネルを選びます
+          </Heading>
+          <ol className="mx-auto mt-12 grid max-w-5xl gap-4">
+            {channels.map((c, i) => (
+              <li key={c.name}>
+                <Reveal variant="left" delay={i * 100}>
+                  <div className="group grid items-center gap-3 rounded-2xl bg-white p-6 ring-1 ring-[#F2E3D8] transition hover:ring-[#F26B1D]/50 md:grid-cols-[4rem_14rem_1fr] md:gap-6 md:p-7">
+                    <span className="grid h-14 w-14 place-items-center rounded-xl bg-[#F26B1D] text-xl font-black text-white transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p>
+                      <span className="block text-[11px] font-black tracking-[0.25em] text-[#F26B1D]">
+                        {c.en}
+                      </span>
+                      <span className="block text-xl font-black">{c.name}</span>
+                    </p>
+                    <p className="text-[15px] leading-relaxed text-[#1A1A1A]/75">
+                      {c.text}
+                    </p>
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+          <SectionCta />
+        </Container>
+      </section>
+
+      {/* 6. 支援の流れ */}
+      <section className="py-20 md:py-28">
+        <Container>
+          <Heading en="FLOW">ご相談から開拓開始までの流れ</Heading>
+          <ol className="mt-12 grid gap-4 lg:grid-cols-5 lg:gap-3">
+            {steps.map((s, i) => (
+              <li key={s.title}>
+                <Reveal variant="up" delay={i * 120} className="h-full">
+                  <div className="relative h-full rounded-2xl bg-white p-6 ring-1 ring-[#F2E3D8]">
+                    <p className="text-xs font-black tracking-[0.2em] text-[#F26B1D]">
+                      STEP
+                    </p>
+                    <p className="text-4xl font-black leading-none text-[#F26B1D]">
+                      {String(i + 1).padStart(2, "0")}
+                    </p>
+                    <h3 className="mt-4 text-lg font-black leading-snug">
+                      {s.title}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[#1A1A1A]/75">
+                      {s.text}
+                    </p>
+                    {i < steps.length - 1 ? (
+                      <span
+                        aria-hidden="true"
+                        className="absolute -right-2.5 top-1/2 z-10 hidden h-5 w-5 -translate-y-1/2 rotate-45 border-r-2 border-t-2 border-[#F26B1D] bg-[#FFFBF7] lg:block"
+                      />
+                    ) : null}
+                  </div>
+                </Reveal>
+              </li>
+            ))}
+          </ol>
+          <SectionCta />
+        </Container>
+      </section>
+
+      {/* 7. 支援実績 */}
       <section className="bg-white py-20 md:py-28">
         <Container>
-          <div className="mb-12 text-center">
-            <h2 className="mx-auto max-w-3xl text-xl font-black leading-tight md:text-2xl">
-              ベンチャーから大手まで支援実績があります
-            </h2>
-          </div>
+          <Heading en="RESULTS">支援実績</Heading>
         </Container>
         <div
-          className="relative mx-auto max-w-6xl overflow-hidden"
+          className="relative mt-12 overflow-hidden"
           style={{
             maskImage:
               "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
@@ -200,364 +643,194 @@ export default function ApokomiServicePage({ params }: { params: { locale: strin
               "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
           }}
         >
-          <div className="flex w-max animate-marquee">
-            <LogoStrip logos={clientLogos} />
-            <LogoStrip logos={clientLogos} ariaHidden />
+          <div className="flex w-max animate-marquee hover:[animation-play-state:paused]">
+            {[0, 1].map((k) => (
+              <div
+                key={k}
+                className="flex shrink-0 items-center gap-12 pr-12 md:gap-16 md:pr-16"
+                aria-hidden={k === 1}
+              >
+                {logos.map((l) => (
+                  <div
+                    key={l.src}
+                    className="flex h-10 shrink-0 items-center md:h-14"
+                  >
+                    <Image
+                      src={l.src}
+                      alt=""
+                      width={l.width}
+                      height={56}
+                      className="h-full w-auto object-contain"
+                    />
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
-      </section>
-
-      {/* ③ 悩み */}
-      <Section title="よくある課題">
-        <div className="-mx-4 overflow-x-auto px-4 pb-2 lg:mx-0 lg:overflow-visible lg:px-0">
-          <div className="grid w-max grid-flow-col gap-4 sm:gap-5 lg:w-full lg:grid-flow-row lg:grid-cols-6">
-            {problems.map((problem, index) => (
-              <div key={problem.keyword} className="flex w-36 flex-col items-center sm:w-44 lg:w-auto">
-                <div className="relative flex min-h-[220px] w-full flex-col items-center rounded-2xl border border-[#7B2233]/15 bg-white p-5 pt-9 text-center shadow-[0_14px_36px_-22px_rgba(123,34,51,0.35)] transition-transform hover:-translate-y-1">
-                  <span className="absolute -top-6 left-1/2 flex h-12 w-12 -translate-x-1/2 flex-col items-center justify-center rounded-full bg-[#7B2233] text-white shadow-md">
-                    <span className="text-[9px] font-bold leading-none">課題</span>
-                    <span className="text-lg font-black leading-none">{index + 1}</span>
-                    <span
-                      aria-hidden
-                      className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 rounded-[2px] bg-[#7B2233]"
-                    />
-                  </span>
-                  <div className="mt-3 flex h-20 w-20 shrink-0 items-center justify-center">
-                    {problem.image ? (
-                      <Image src={problem.image} alt="" width={96} height={96} className="h-full w-full object-contain" />
-                    ) : (
-                      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233]">
-                        <ProblemIcon index={index} />
-                      </div>
-                    )}
-                  </div>
-                  <p className="mt-4 text-sm font-bold leading-relaxed text-[#2B2B2B]">
-                    {problem.lines.map((line) => (
-                      <span key={line} className="block">
-                        {line.includes(problem.keyword)
-                          ? line.split(problem.keyword).map((part, i, arr) => (
-                              <span key={`${line}-${i}`}>
-                                {part}
-                                {i < arr.length - 1 ? (
-                                  <span className="text-[#7B2233]">{problem.keyword}</span>
-                                ) : null}
-                              </span>
-                            ))
-                          : line}
-                      </span>
-                    ))}
+        <Container>
+          <Reveal variant="up" className="mx-auto mt-14 max-w-4xl">
+            <article className="overflow-hidden rounded-2xl bg-[#17120F] text-white">
+              <div className="grid md:grid-cols-[1fr_1.1fr]">
+                <div className="flex flex-col justify-center bg-gradient-to-br from-[#FF8A3D] to-[#E05A0C] p-8 md:p-10">
+                  <p className="text-xs font-black tracking-[0.25em] text-white/80">
+                    CASE STUDY
+                  </p>
+                  <p className="mt-4 flex items-end gap-2 font-black leading-none">
+                    <span className="text-sm">月平均</span>
+                    <span className="text-7xl">
+                      <CountUp value="15" />
+                    </span>
+                    <span className="text-2xl">件</span>
+                  </p>
+                  <p className="mt-2 text-sm font-bold">のアポイントを獲得</p>
+                  <p className="mt-6 flex items-end gap-2 font-black leading-none">
+                    <span className="text-sm">年間費用を</span>
+                    <span className="text-5xl">
+                      <CountUp value="4" />
+                    </span>
+                    <span className="text-xl">カ月で回収</span>
                   </p>
                 </div>
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" className="mt-2 shrink-0 text-[#7B2233]/40">
-                  <path d="M4 7l6 6 6-6M4 11l6 6 6-6" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
+                <dl className="space-y-5 p-8 text-[15px] md:p-10">
+                  {[
+                    ["業種", "製造業・物流業向け人材サービス"],
+                    [
+                      "課題",
+                      "中堅・大手企業への新規開拓リソースが不足していた",
+                    ],
+                    [
+                      "実施内容",
+                      "従業員100名以上の製造業・物流企業にテレアポを実施",
+                    ],
+                    [
+                      "成果",
+                      "大手物流企業を含め、月平均15件のアポイントを獲得し、年間費用を4カ月で回収",
+                    ],
+                  ].map(([k, v]) => (
+                    <div key={k}>
+                      <dt className="text-xs font-black tracking-[0.15em] text-[#FF9A5C]">
+                        {k}
+                      </dt>
+                      <dd className="mt-1 leading-relaxed text-white/85">
+                        {v}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
-            ))}
-          </div>
-        </div>
-        <p className="mt-6 text-center text-2xl font-black text-[#7B2233] md:text-3xl">
-          その課題<Highlight>アポコミ</Highlight>が解決します！
-        </p>
-      </Section>
-
-      {/* ④ サービス */}
-      <Section tone="white" label="Service" title="戦略からアポ獲得まで。商談の入口は、すべて任せてください。">
-        <p className="mx-auto max-w-3xl text-center text-base font-medium leading-relaxed text-[#2B2B2B]/80">
-          アポコミは、アポ獲得にコミットする準成果報酬型のインサイドセールス代行です。戦略設計から担当者の教育、アポイント獲得までを担い、必要に応じて初回商談の代行にも対応します。
-        </p>
-        <div className="mx-auto mt-10 max-w-5xl overflow-hidden rounded-3xl border border-[#7B2233]/15 shadow-[0_20px_60px_-24px_rgba(123,34,51,0.3)]">
-          <Image
-            src="/services/apokomi/service-flow.webp"
-            alt="アポコミの担当範囲 ステップ1 戦略立案(担当:アポコミ) 市場・顧客分析をもとに、最適な営業方針を設計 / ステップ2 営業担当のアサイン・教育(担当:アポコミ) 実行担当を配置し、トーク・運用ルールを共有 / ステップ3 アポイント獲得(担当:アポコミ) ターゲット企業へアプローチし、商談機会を創出 / ステップ4 商談(担当:貴社、オプションでアポコミが代行) 獲得したアポイントをもとに、商談を実施 / ステップ5 成約(担当:貴社) 商談を経て、ご契約・取引開始へ"
-            width={1672}
-            height={941}
-            sizes="(min-width: 1024px) 960px, 100vw"
-            className="h-auto w-full"
-          />
-        </div>
-        <SectionCta />
-      </Section>
-
-      {/* ⑤ 選ばれる理由① */}
-      <Section label="Reason 01" title="払うのは、動いた分と取れた分だけ。">
-        <p className="mx-auto max-w-3xl text-center text-base font-medium leading-relaxed text-[#2B2B2B]/80">
-          固定費はフリーランス並みの稼働費に絞り、アポイントが生まれたときにだけ成果報酬をいただきます。成果が出ない月の負担を、最小限に抑える料金設計です。
-        </p>
-        <div className="mt-10 overflow-x-auto">
-          <table className="w-full min-w-[720px] border-collapse overflow-hidden rounded-2xl border border-[#7B2233]/20 bg-white text-left text-sm">
-            <thead>
-              <tr className="bg-[#FAF8F7]">
-                <th className="p-4 font-black" />
-                <th className="p-4 font-black">固定報酬型の代行</th>
-                <th className="p-4 font-black">成果報酬型の代行</th>
-                <th className="p-4 font-black text-[#7B2233]">アポコミ</th>
-              </tr>
-            </thead>
-            <tbody>
-              {reasonTableRows.map(([label, a, b, c]) => (
-                <tr key={label} className="border-t border-[#7B2233]/10">
-                  <td className="p-4 align-top font-black text-[#2B2B2B]">{label}</td>
-                  <td className="p-4 align-top font-medium text-[#2B2B2B]/70">{a}</td>
-                  <td className="p-4 align-top font-medium text-[#2B2B2B]/70">{b}</td>
-                  <td className="p-4 align-top font-black text-[#7B2233]">{c}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="mt-4 text-xs font-medium text-[#2B2B2B]/60">
-          ※アポコミは別途、運用PM費用(月5万円)がかかります。他社の金額は営業代行の一般的な費用相場(PRONIアイミツ「営業代行の費用相場」)をもとにした参考値です。
-        </p>
-        <SectionCta />
-      </Section>
-
-      {/* ⑥ 選ばれる理由② */}
-      <Section tone="white" label="Reason 02" title="半年後、代行に頼らない営業組織へ。">
-        <p className="mx-auto max-w-3xl text-center text-base font-medium leading-relaxed text-[#2B2B2B]/80">
-          私たちのゴールは、ずっと依頼され続けることではありません。勘や経験に頼らない、データに基づいたアポ獲得の型をつくり、貴社に残すことです。
-        </p>
-        <div className="mx-auto mt-10 max-w-3xl space-y-5">
-          {reason02Steps.map(([title, body], index) => (
-            <div key={title} className="grid gap-4 rounded-2xl border border-[#7B2233]/20 bg-[#FAF8F7] p-6 shadow-sm md:grid-cols-[140px_1fr] md:items-center">
-              <p className="text-sm font-black uppercase tracking-[0.08em] text-[#A33A52]">
-                STEP {index + 1}
-              </p>
-              <div>
-                <h3 className="text-lg font-black">{title}</h3>
-                <p className="mt-2 text-sm font-medium leading-relaxed text-[#2B2B2B]/80">{body}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-        <div className="mx-auto mt-10 max-w-3xl rounded-3xl border-2 border-[#7B2233] bg-white p-8 text-center shadow-[0_14px_40px_-20px_rgba(123,34,51,0.3)]">
-          <p className="text-xs font-black uppercase tracking-[0.18em] text-[#A33A52]">Goal</p>
-          <p className="mt-3 text-lg font-black leading-relaxed">
-            半年〜1年で、代行に頼らずアポを生み出せる、自走可能な営業組織をつくる。
-          </p>
-        </div>
-        <div className="mx-auto mt-10 max-w-3xl">
-          <p className="text-center text-sm font-black uppercase tracking-[0.1em] text-[#2B2B2B]/60">
-            伴走を通じて、貴社に残るもの
-          </p>
-          <div className="mt-5 grid gap-3 sm:grid-cols-2">
-            {retainedAssets.map((item) => (
-              <div key={item} className="rounded-2xl border border-[#7B2233]/20 bg-[#FAF8F7] px-5 py-4 text-sm font-black text-[#2B2B2B]">
-                {item}
-              </div>
-            ))}
-          </div>
-        </div>
-        <SectionCta />
-      </Section>
-
-      {/* ⑦ 料金 */}
-      <Section label="Price" title="月額20万円から、ご予算に合わせて稼働量を設計。">
-        <p className="mx-auto max-w-3xl text-center text-lg font-black leading-relaxed text-[#7B2233]">
-          運用PM 5万円／月 ＋ 稼働費＋成果報酬 15万円〜／月
-        </p>
-        <div className="mt-10 overflow-x-auto">
-          <table className="w-full min-w-[640px] border-collapse overflow-hidden rounded-2xl border border-[#7B2233]/20 bg-white text-left text-sm">
-            <thead>
-              <tr className="bg-[#7B2233] text-white">
-                <th className="p-4 font-black">項目</th>
-                <th className="p-4 font-black">料金</th>
-                <th className="p-4 font-black">内容</th>
-              </tr>
-            </thead>
-            <tbody>
-              {priceRows.map(([item, price, content]) => (
-                <tr key={item} className="border-t border-[#7B2233]/10">
-                  <td className="p-4 align-top font-black text-[#7B2233]">{item}</td>
-                  <td className="p-4 align-top font-black">{price}</td>
-                  <td className="p-4 align-top font-medium text-[#2B2B2B]/70">{content}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <p className="mt-4 text-xs font-medium text-[#2B2B2B]/60">
-          ※表示価格はすべて税別。契約期間は3ヶ月〜。ゼロからの営業リスト作成は別途お見積もり。月額20万円は最低ご利用予算であり、稼働時間やアポイント件数を保証するものではありません。
-        </p>
-        <SectionCta />
-      </Section>
-
-      {/* ⑧ 導入の流れ */}
-      <Section tone="white" label="Flow" title="ご相談から稼働開始まで">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {flow.map((item, index) => (
-            <div key={item} className="relative rounded-2xl border border-[#7B2233]/20 bg-white p-6 shadow-sm transition-transform hover:-translate-y-1">
-              <p className="text-3xl font-black text-[#7B2233]">{String(index + 1).padStart(2, "0")}</p>
-              <h3 className="mt-5 text-xl font-black">{item}</h3>
-            </div>
-          ))}
-        </div>
-        <SectionCta />
-      </Section>
-
-      {/* ⑨ FAQ */}
-      <Section label="FAQ" title="よくあるご質問">
-        <div className="mx-auto max-w-4xl divide-y divide-[#7B2233]/15 overflow-hidden rounded-3xl border border-[#7B2233]/20 bg-white shadow-[0_14px_40px_-24px_rgba(123,34,51,0.3)]">
-          {faqs.map(([q, a]) => (
-            <details key={q} className="group p-6">
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-lg font-black text-[#2B2B2B]">
-                <span className="flex items-center gap-3">
-                  <span className="shrink-0 text-[#7B2233]">Q</span>
-                  {q}
-                </span>
-                <span className="relative flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#7B2233]/10 text-[#7B2233] transition-transform group-open:rotate-45">
-                  +
-                </span>
-              </summary>
-              <p className="mt-4 text-base font-medium leading-relaxed text-[#2B2B2B]/80">{a}</p>
-            </details>
-          ))}
-        </div>
-      </Section>
-
-      {/* ⑩ 運営会社 */}
-      <Section tone="white" title="営業の戦略から実行、組織づくりまで、売上拡大を一気通貫で支援します。">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {companyPillars.map(([title, body], index) => (
-            <div key={title} className="rounded-2xl border border-[#7B2233]/20 bg-[#FAF8F7] p-6 shadow-sm">
-              <p className="text-2xl font-black text-[#7B2233]">{String(index + 1).padStart(2, "0")}</p>
-              <h3 className="mt-3 text-lg font-black">{title}</h3>
-              <p className="mt-2 text-sm font-medium leading-relaxed text-[#2B2B2B]/70">{body}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mx-auto mt-10 max-w-3xl overflow-hidden rounded-2xl border border-[#7B2233]/20 bg-white">
-          {companyTable.map(([label, value]) => (
-            <div key={label} className="grid grid-cols-[120px_1fr] gap-4 border-b border-[#7B2233]/10 p-4 text-sm last:border-b-0 sm:grid-cols-[160px_1fr]">
-              <p className="font-black text-[#7B2233]">{label}</p>
-              <p className="font-medium text-[#2B2B2B]/80">{value}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* ⑪ お問い合わせ */}
-      <section id="entry" className="scroll-mt-24 bg-[#7B2233] py-20 text-white md:py-28">
-        <Container className="max-w-3xl text-center">
-          <p className="text-sm font-black uppercase tracking-[0.18em] text-white/70">Contact</p>
-          <h2 className="mt-4 text-3xl font-black leading-tight md:text-4xl">次のアポは、アポコミがつくる。</h2>
-          <p className="mt-5 text-base font-medium leading-relaxed text-white/90">
-            貴社の商材とご予算をお伺いし、最適な体制と稼働量をご提案します。まずはお気軽にご相談ください。
-          </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm font-bold text-white/90">
-            <span>電話：080-4870-1232</span>
-            <span>メール：info@salesbond.jp</span>
-            <span>担当：飯住・藤田</span>
-          </div>
-          <div className="mt-10 rounded-3xl bg-white p-6 shadow-xl md:p-10">
-            <ApokomiLeadForm />
-          </div>
+            </article>
+          </Reveal>
+          <SectionCta />
         </Container>
       </section>
-    </main>
-  );
-}
 
-function LogoStrip({
-  logos,
-  ariaHidden,
-}: {
-  logos: { name: string; src: string; width: number }[];
-  ariaHidden?: boolean;
-}) {
-  return (
-    <div className="flex shrink-0 items-center gap-12 pr-12 md:gap-20 md:pr-20" aria-hidden={ariaHidden}>
-      {logos.map((logo) => (
-        <div key={logo.name} className="flex h-12 shrink-0 items-center md:h-20">
-          <Image
-            src={logo.src}
-            alt={logo.name}
-            width={logo.width}
-            height={80}
-            className="h-full w-auto object-contain"
-          />
-        </div>
-      ))}
-    </div>
-  );
-}
+      {/* 8. 料金 */}
+      <section className="bg-[#FFF3EA] py-20 md:py-28">
+        <Container>
+          <Heading en="PRICE">料金</Heading>
+          <Reveal
+            variant="up"
+            className="mx-auto mt-10 max-w-3xl rounded-2xl bg-white p-8 text-center ring-1 ring-[#F2E3D8] md:p-12"
+          >
+            <p className="text-4xl font-black text-[#F26B1D] md:text-5xl">
+              要見積もり
+            </p>
+            <p className="mt-6 text-[15px] leading-[2] text-[#1A1A1A]/80">
+              アポコミの料金は、ターゲット・チャネル・目標アポイント数に応じてお見積もりします。
+              <br className="hidden md:block" />
+              御社の予算や目標に合わせてプランを設計します。
+            </p>
+          </Reveal>
+          <SectionCta label="無料で見積もりを依頼する" />
+        </Container>
+      </section>
 
-function Section({ label, title, children, tone = "cream" }: { label?: string; title: string; children: React.ReactNode; tone?: "cream" | "white" }) {
-  return (
-    <section className={tone === "white" ? "bg-white py-20 md:py-28" : "bg-[#FAF8F7] py-20 md:py-28"}>
-      <Container>
-        <div className="mb-12 text-center">
-          {label ? <p className="text-sm font-black uppercase tracking-[0.18em] text-[#A33A52]">{label}</p> : null}
-          <h2 className={`mx-auto max-w-3xl text-3xl font-black leading-tight md:text-4xl ${label ? "mt-4" : ""}`}>{title}</h2>
-        </div>
-        {children}
-      </Container>
-    </section>
-  );
-}
+      {/* 9. よくあるご質問 */}
+      <section className="py-20 md:py-28">
+        <Container>
+          <Heading en="FAQ">よくあるご質問</Heading>
+          <div className="mx-auto mt-12 max-w-3xl space-y-3">
+            {faqs.map((f, i) => (
+              <Reveal key={f.q} variant="up" delay={i * 60}>
+                <details className="group rounded-2xl bg-white ring-1 ring-[#F2E3D8] open:ring-[#F26B1D]/50">
+                  <summary className="flex cursor-pointer list-none items-center gap-4 p-5 md:p-6 [&::-webkit-details-marker]:hidden">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#F26B1D] text-sm font-black text-white">
+                      Q
+                    </span>
+                    <span className="flex-1 text-[15px] font-black md:text-base">
+                      {f.q}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="text-xl text-[#F26B1D] transition-transform group-open:rotate-45"
+                    >
+                      ＋
+                    </span>
+                  </summary>
+                  <div className="flex gap-4 px-5 pb-6 md:px-6">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#FFF3EA] text-sm font-black text-[#E05A0C]">
+                      A
+                    </span>
+                    <p className="pt-1.5 text-[15px] leading-relaxed text-[#1A1A1A]/80">
+                      {f.a}
+                    </p>
+                  </div>
+                </details>
+              </Reveal>
+            ))}
+          </div>
+          <SectionCta />
+        </Container>
+      </section>
 
-function Highlight({ children }: { children: React.ReactNode }) {
-  return (
-    <span
-      className="bg-gradient-to-t from-[#F5D54A] from-[38%] to-transparent to-[38%] px-0.5"
-    >
-      {children}
-    </span>
-  );
-}
+      {/* 10. 最終CTA */}
+      <section className="relative isolate overflow-hidden bg-gradient-to-br from-[#FF8A3D] via-[#F26B1D] to-[#C9540F] py-20 text-white md:py-28">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-24 -top-24 -z-10 h-96 w-96 animate-blob rounded-full bg-white/15 blur-[100px]"
+        />
+        <Container className="text-center">
+          <Reveal variant="up">
+            <h2 className="text-[clamp(1.7rem,4vw,3rem)] font-black leading-[1.35] [word-break:auto-phrase]">
+              新規開拓、今日から攻めに転じませんか？
+            </h2>
+            <p className="mx-auto mt-6 max-w-3xl text-[15px] leading-[2] text-white/90 md:text-base">
+              「アポイントをもっと増やしたい」「どのチャネルが合うか分からない」——まずはお気軽にご相談ください。御社の商材とターゲットに合わせて、攻めのチャネル設計とお見積もりをご提案します。
+            </p>
+            <a
+              href={`#${FORM_ID}`}
+              className="group mt-10 inline-flex h-16 items-center justify-center gap-2 rounded-full bg-white px-10 text-base font-black text-[#E05A0C] shadow-[0_16px_40px_-14px_rgba(0,0,0,0.5)] transition hover:-translate-y-0.5 md:text-lg"
+            >
+              無料相談・見積もりを依頼する
+              <span
+                aria-hidden="true"
+                className="transition-transform group-hover:translate-x-1"
+              >
+                →
+              </span>
+            </a>
+          </Reveal>
+        </Container>
+      </section>
 
-function ProblemIcon({ index }: { index: number }) {
-  const icons = [
-    // 高額な費用: コイン
-    <g key="cost">
-      <circle cx="12" cy="12" r="8" />
-      <path d="M12 8v8M9.5 10a2 2 0 0 1 2-1.5h1a1.8 1.8 0 0 1 0 3.5h-1a1.8 1.8 0 0 0 0 3.5h1a2 2 0 0 0 2-1.5" />
-    </g>,
-    // ノウハウが蓄積されない: 書類の受け渡し
-    <g key="knowledge">
-      <rect x="3" y="5" width="9" height="12" rx="1.2" />
-      <rect x="12" y="7" width="9" height="12" rx="1.2" />
-      <path d="M6 9h3M6 12h3M15 11h3M15 14h3" />
-    </g>,
-    // 品質に不安: 虫眼鏡+チェック
-    <g key="quality">
-      <circle cx="10" cy="10" r="6" />
-      <path d="M14.5 14.5 20 20M8 10l1.3 1.3L12.5 8" />
-    </g>,
-    // 何から手をつければ: 道標
-    <g key="signpost">
-      <path d="M12 3v18" />
-      <path d="M12 7h6l-1.5 2L18 11h-6" />
-      <path d="M12 13H6l1.5 2L6 17h6" />
-    </g>,
-    // 人材不足: 人のアイコン+マイナス
-    <g key="people">
-      <circle cx="9" cy="8" r="3" />
-      <path d="M3 20a6 6 0 0 1 12 0" />
-      <path d="M17 11h4" />
-    </g>,
-    // 打ち手が見つからない: グラフ+?
-    <g key="chart">
-      <path d="M4 20V10M10 20V6M16 20v-4" />
-      <circle cx="19" cy="7" r="2.6" />
-      <path d="M18.2 6.2a.9.9 0 0 1 1.6.5c0 .7-.9.7-.9 1.4" />
-      <path d="M19 9.6v.1" />
-    </g>,
-  ];
-  return (
-    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <g stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        {icons[index % icons.length]}
-      </g>
-    </svg>
-  );
-}
-
-function SectionCta() {
-  return (
-    <div className="mt-12 text-center">
-      <Button href="#entry" className="!rounded-full !bg-[#7B2233] hover:!bg-[#A33A52]">
-        無料で相談する
-      </Button>
+      {/* 11. 問い合わせフォーム */}
+      <section id={FORM_ID} className="scroll-mt-36 py-20 md:py-28">
+        <Container>
+          <Heading en="CONTACT">無料相談・見積もり依頼</Heading>
+          <Reveal
+            variant="up"
+            delay={150}
+            className="mx-auto mt-10 max-w-4xl rounded-2xl border-2 border-[#F26B1D]/30 bg-white p-6 shadow-[0_30px_70px_-40px_rgba(242,107,29,0.7)] md:p-10"
+          >
+            <ApokomiLeadForm privacyHref={localePath("/privacy", locale)} />
+          </Reveal>
+          {/* 12. 運営会社 */}
+          <p className="mt-12 text-center text-sm text-[#1A1A1A]/60">
+            運営会社：{site.legalName}
+          </p>
+        </Container>
+      </section>
     </div>
   );
 }

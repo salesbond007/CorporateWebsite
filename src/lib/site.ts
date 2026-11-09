@@ -153,6 +153,19 @@ export const serviceCategories: ServiceCategory[] = [
           "ターゲット選定からアポイント獲得まで、新規顧客の開拓に必要な営業活動をワンストップで支援するソリューションです。",
         features: [],
         image: "/services/cards/talent.jpg",
+        children: [
+          {
+            slug: "apokomi",
+            number: "02-1",
+            title: "インサイドセールス代行（アポコミ）",
+            href: "/services/apokomi",
+            subtitle: "Inside Sales",
+            summary:
+              "テレアポ・フォーム・メール・手紙・SNSを総動員して、新規アポイントを獲りにいくインサイドセールス代行サービスです。",
+            features: [],
+            image: "/services/cards/talent.jpg",
+          },
+        ],
       },
     ],
   },
