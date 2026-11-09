@@ -788,7 +788,7 @@ export default function WebSecurityPage({
         {/* スマホ・タブレット: 画像をセクション下部の背景に敷き、上の文字部分へ白のグラデーションで溶け込ませる */}
         <div
           aria-hidden="true"
-          className="absolute bottom-0 right-0 -z-10 aspect-[1672/941] w-[135%] overflow-hidden sm:w-[115%] lg:hidden"
+          className="absolute inset-0 -z-10 overflow-hidden lg:hidden"
         >
           <Image
             src="/services/web-security/hero-v2.webp"
@@ -796,9 +796,9 @@ export default function WebSecurityPage({
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="animate-ken-burns object-cover object-[72%_60%] scale-110 blur-[3px]"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,#ffffff_0%,rgba(255,255,255,0.85)_18%,rgba(255,255,255,0)_45%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.8)_55%,rgba(255,255,255,0.6)_100%)]" />
         </div>
         {/* PC: 背景画像を右側に配置し、左側(コピー部分)は白へ溶け込ませる */}
         <div
@@ -816,7 +816,7 @@ export default function WebSecurityPage({
           <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_0%,rgba(255,255,255,0.9)_16%,rgba(255,255,255,0)_40%)]" />
           <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/70 to-transparent" />
         </div>
-        <Container className="pb-[66vw] pt-10 sm:pb-[56vw] md:pt-20 lg:flex lg:pb-24 lg:min-h-[640px] lg:flex-col lg:justify-center">
+        <Container className="pb-16 pt-12 sm:pb-20 md:pt-20 lg:flex lg:pb-24 lg:min-h-[640px] lg:flex-col lg:justify-center">
           <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
               <h1 className="text-[min(2.6rem,9.6vw)] md:text-[clamp(2.4rem,5.6vw,5rem)] font-black leading-[1.15] tracking-[0.01em] text-ink">
