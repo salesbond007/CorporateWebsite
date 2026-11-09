@@ -450,25 +450,9 @@ export default function ApokomiPage({
             >
               アポコミ
             </span>
-            <span
-              className="mt-5 block animate-fade-up text-[clamp(1.3rem,3vw,2rem)] font-bold leading-[1.6] tracking-[0.08em] [text-shadow:0_2px_12px_rgba(201,84,15,0.35)]"
-              style={{ animationDelay: "0.25s" }}
-            >
-              複数チャネルで
-              <br className="sm:hidden" />
-              新規アポイントを創出
-            </span>
           </h1>
-          <p
-            className="mx-auto mt-5 max-w-2xl animate-fade-up text-sm leading-[2] text-white md:text-[15px]"
-            style={{ animationDelay: "0.4s" }}
-          >
-            テレアポ・問い合わせフォーム・メール・手紙・SNSを総動員して、
-            <br className="hidden md:block" />
-            狙った企業との接点をつくる、攻めのインサイドセールス代行サービスです。
-          </p>
           <div
-            className="mt-8 flex animate-fade-up flex-col items-center justify-center gap-3 sm:flex-row"
+            className="mt-10 flex animate-fade-up flex-col items-center justify-center gap-3 sm:flex-row"
             style={{ animationDelay: "0.55s" }}
           >
             <Cta variant="white" className="w-full max-w-xs sm:w-auto" />
@@ -526,7 +510,7 @@ export default function ApokomiPage({
               "linear-gradient(to right, transparent, black 6%, black 94%, transparent)",
           }}
         >
-          {[logos, [...logos].reverse()].map((row, r) => (
+          {[logos].map((row, r) => (
             <div
               key={r}
               className={cn(
