@@ -231,63 +231,77 @@ function Section({
   );
 }
 
-type Level = "high" | "mid" | "ok";
-
-const levelStyle: Record<Level, { label: string; className: string }> = {
-  high: { label: "要対策", className: "bg-[#B42318] text-white" },
-  mid: { label: "要確認", className: "bg-[#F5B83D] text-ink" },
-  ok: { label: "問題なし", className: "bg-[#E6F2EA] text-[#1F6B3A]" },
-};
-
-/** ファーストビュー右側の「診断レポート(イメージ)」 */
-const reportRows: { item: string; detail: string; level: Level }[] = [
-  { item: "PHPのバージョン", detail: "7.4（サポート終了）", level: "high" },
-  { item: "プラグイン", detail: "14件中 3件に既知の脆弱性", level: "high" },
-  { item: "WordPress本体", detail: "最新版ではない", level: "mid" },
-  { item: "管理画面", detail: "ログインURLが公開状態", level: "mid" },
-  { item: "SSL/TLS", detail: "有効", level: "ok" },
+/** ファーストビュー右側の「診断 → 対策 → 保守」の流れ図 */
+const processSteps: { name: string; en: string; tagline: string; text: string }[] = [
+  {
+    name: "診断",
+    en: "Check",
+    tagline: "現状のリスクを知る",
+    text: "WordPress本体・プラグイン・テーマ・PHPのバージョンを外部から診断し、危険度と対策の優先順位を整理します。",
+  },
+  {
+    name: "対策",
+    en: "Fix",
+    tagline: "攻撃の入口をふさぐ",
+    text: "PHP・プラグインの更新、ログイン保護・WAFの導入、必要に応じて静的HTMLへの移行で入口をふさぎます。",
+  },
+  {
+    name: "保守",
+    en: "Keep",
+    tagline: "安全な状態を保つ",
+    text: "定期更新と更新前のバックアップ、月次の状況レポートで、安全な状態を維持します。",
+  },
 ];
 
-function ReportMock() {
+function ProcessDiagram() {
   return (
-    <figure className="border border-ink/15 bg-white shadow-[0_30px_60px_-30px_rgba(17,17,17,0.35)]">
-      <div className="flex items-center gap-2 border-b border-ink/10 bg-[#F6F6F4] px-4 py-3">
-        <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
-        <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
-        <span className="h-2.5 w-2.5 rounded-full bg-ink/15" />
-        <span className="ml-3 truncate text-[11px] tracking-[0.04em] text-ink-muted">
-          簡易診断レポート ─ https://www.example.co.jp
-        </span>
-      </div>
-      <div className="px-5 py-5 md:px-6">
-        <div className="flex items-end justify-between border-b border-ink/10 pb-4">
-          <div>
-            <p className="text-[11px] font-bold tracking-[0.15em] text-ink-muted">総合評価</p>
-            <p className="mt-1 text-2xl font-black text-[#B42318]">リスク：高</p>
-          </div>
-          <p className="text-right text-[11px] leading-relaxed text-ink-muted">
-            要対策 2件
-            <br />
-            要確認 2件
-          </p>
-        </div>
-        <ul>
-          {reportRows.map((r) => (
-            <li key={r.item} className="flex items-center justify-between gap-4 border-b border-ink/10 py-3 last:border-b-0">
-              <div className="min-w-0">
-                <p className="text-sm font-bold text-ink">{r.item}</p>
-                <p className="truncate text-xs text-ink-muted">{r.detail}</p>
-              </div>
-              <span className={cn("shrink-0 px-2 py-1 text-[11px] font-bold", levelStyle[r.level].className)}>
-                {levelStyle[r.level].label}
-              </span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <figcaption className="border-t border-ink/10 px-5 py-2.5 text-[10px] text-ink-muted md:px-6">
-        ※ 診断レポートのイメージです。実際の項目・表記とは異なります。
+    <figure
+      aria-label="ホームページセキュリティ対策の流れ：診断、対策、保守"
+      className="border border-ink/15 bg-white shadow-[0_30px_60px_-30px_rgba(17,17,17,0.35)]"
+    >
+      <figcaption className="flex items-center justify-between border-b border-ink/10 bg-[#F6F5F2] px-5 py-3">
+        <span className="text-xs font-bold tracking-[0.12em] text-ink">ホームページセキュリティ対策の流れ</span>
+        <span className="text-[11px] font-bold tracking-[0.15em] text-ink-muted">3 STEPS</span>
       </figcaption>
+      <ol className="px-5 py-6 md:px-7">
+        {processSteps.map((st, i) => (
+          <li key={st.name} className="relative grid grid-cols-[3rem_1fr] gap-x-4 pb-7 last:pb-0">
+            {/* ステップ間をつなぐ線と矢印 */}
+            {i < processSteps.length - 1 ? (
+              <>
+                <span aria-hidden="true" className="absolute bottom-0 left-6 top-12 w-px -translate-x-1/2 bg-brand-500/40" />
+                <span
+                  aria-hidden="true"
+                  className="absolute bottom-1 left-6 h-2 w-2 -translate-x-1/2 rotate-45 border-b border-r border-brand-500/60"
+                />
+              </>
+            ) : null}
+            <span
+              className={cn(
+                "relative z-10 grid h-12 w-12 place-items-center rounded-full text-sm font-black",
+                i === 0 ? "bg-brand-500 text-white" : "border-2 border-brand-500 bg-white text-brand-600",
+              )}
+            >
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <div className="pt-0.5">
+              <p className="flex flex-wrap items-baseline gap-x-3">
+                <span className="text-2xl font-black text-ink">{st.name}</span>
+                <span className="text-[11px] font-bold tracking-[0.2em] text-ink-muted">{st.en.toUpperCase()}</span>
+              </p>
+              <p className="mt-1 text-sm font-bold text-brand-600">{st.tagline}</p>
+              <p className="mt-2 text-xs leading-relaxed text-ink-soft">{st.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+      <p className="flex items-center gap-2 border-t border-ink/10 px-5 py-3 text-[11px] font-bold text-ink-muted md:px-7">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="M11.5 4.5A5 5 0 1 0 12 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M12 1.5v3h-3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
+        必要なステップだけ選べます。保守は継続してサポートします
+      </p>
     </figure>
   );
 }
@@ -605,24 +619,20 @@ export default function WebSecurityPage({
           <div className="mt-10 grid items-center gap-12 md:mt-14 lg:grid-cols-12 lg:gap-14">
             <div className="lg:col-span-7">
               <p className="text-xs font-bold tracking-[0.25em] text-brand-600 animate-fade-up">
-                WEBSITE SECURITY<span className="hidden sm:inline"> ／ {title}</span>
+                WEBSITE SECURITY
               </p>
-              <h1 className="mt-5 text-[clamp(1.75rem,4.6vw,3.6rem)] font-black leading-[1.3] tracking-[0.01em] text-ink">
+              <h1 className="mt-5 text-[min(2.6rem,9.6vw)] md:text-[clamp(2.4rem,5.6vw,5rem)] font-black leading-[1.15] tracking-[0.01em] text-ink">
                 <span className="line-mask">
-                  <span style={{ animationDelay: "0.1s" }}>
-                    <span className="text-brand-600">漏洩の入口</span>は、
-                  </span>
+                  <span style={{ animationDelay: "0.1s" }}>ホームページ</span>
                 </span>
                 <span className="line-mask">
-                  <span style={{ animationDelay: "0.25s" }}>
-                    自社のホームページ
-                    <br />
-                    かもしれない。
+                  <span className="text-brand-600" style={{ animationDelay: "0.25s" }}>
+                    セキュリティ対策
                   </span>
                 </span>
               </h1>
               <p
-                className="mt-6 border-l-2 border-brand-500 pl-4 text-lg font-bold tracking-[0.04em] text-ink animate-fade-up md:text-xl"
+                className="mt-7 border-l-[3px] border-brand-500 pl-4 text-xl font-black tracking-[0.04em] text-ink animate-fade-up md:text-2xl"
                 style={{ animationDelay: "0.45s" }}
               >
                 情報漏洩が起きる、その前に。
@@ -646,7 +656,7 @@ export default function WebSecurityPage({
               </div>
             </div>
             <div className="animate-fade-up lg:col-span-5" style={{ animationDelay: "0.5s" }}>
-              <ReportMock />
+              <ProcessDiagram />
             </div>
           </div>
         </Container>
