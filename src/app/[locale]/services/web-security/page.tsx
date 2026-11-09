@@ -842,7 +842,7 @@ export default function WebSecurityPage({
                 className="mt-6 max-w-xl lg:max-w-[30rem] text-[15px] leading-[2] text-ink-soft animate-fade-up"
                 style={{ animationDelay: "0.55s" }}
               >
-                問い合わせフォーム、採用応募、会員登録など、ホームページは個人情報の受付窓口であり、同時にサイバー攻撃の標的でもあります。AI時代に求められる水準のセキュリティ対策で、情報漏洩のリスクを低減します。
+                ホームページはサイバー攻撃の標的でもあります。AI時代に求められる水準のセキュリティ対策で、情報漏洩のリスクを低減します。
               </p>
               <div
                 className="mt-9 grid gap-3 animate-fade-up sm:flex sm:flex-wrap"
