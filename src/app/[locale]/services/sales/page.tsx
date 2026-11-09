@@ -31,6 +31,13 @@ export default function SalesServicePage({
       subtitle="営業顧問・営業代行"
       description={pageMeta.sales.description}
       image="/services/cards/talent.jpg"
+      related={[
+        {
+          title: "インサイドセールス代行（アポコミ）",
+          text: "テレアポ・フォーム・メール・手紙・SNSを総動員して、新規アポイントを獲りにいくインサイドセールス代行サービスです。",
+          href: "/services/apokomi",
+        },
+      ]}
       // TODO: 本文確定後に差し替え
       lead="営業顧問と営業代行で、新たな顧客の獲得と事業成長を支援します。"
       // TODO: 本文確定後に差し替え

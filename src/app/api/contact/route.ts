@@ -24,9 +24,11 @@ const transporter =
     : null;
 
 const fromAddress =
-  process.env.CONTACT_MAIL_FROM ?? `Sales Bond <${gmailUser ?? "info@salesbond.jp"}>`;
+  process.env.CONTACT_MAIL_FROM ??
+  `Sales Bond <${gmailUser ?? "info@salesbond.jp"}>`;
 const toBusiness = process.env.CONTACT_MAIL_TO_BUSINESS ?? "info@salesbond.jp";
-const toProfessional = process.env.CONTACT_MAIL_TO_PROFESSIONAL ?? "info@salesbond.jp";
+const toProfessional =
+  process.env.CONTACT_MAIL_TO_PROFESSIONAL ?? "info@salesbond.jp";
 
 // ============================================================
 // CRM 連携: 問い合わせを CRM Webhook にも転送する
@@ -44,12 +46,21 @@ function buildCrmPayload(type: ContactFormType, data: Record<string, unknown>) {
   const contactName =
     [lastName, firstName].filter(Boolean).join(" ") || get("name") || "";
 
-  const subject = humanize("inquiryType", d.inquiryType) || "Webサイトからの問い合わせ";
+  const subject =
+    humanize("inquiryType", d.inquiryType) || "Webサイトからの問い合わせ";
   const message = get("message");
 
   const skip = new Set([
-    "website", "agreement", "type",
-    "email", "phone", "company", "lastName", "firstName", "name", "message",
+    "website",
+    "agreement",
+    "type",
+    "email",
+    "phone",
+    "company",
+    "lastName",
+    "firstName",
+    "name",
+    "message",
   ]);
   const detailLines = Object.entries(data)
     .filter(([k, v]) => !skip.has(k) && v !== "" && v != null)
@@ -72,10 +83,15 @@ function buildCrmPayload(type: ContactFormType, data: Record<string, unknown>) {
   };
 }
 
-async function forwardToCRM(type: ContactFormType, data: Record<string, unknown>) {
+async function forwardToCRM(
+  type: ContactFormType,
+  data: Record<string, unknown>,
+) {
   if (!crmWebhookUrl) return;
   try {
-    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
     if (crmWebhookToken) headers["x-webhook-token"] = crmWebhookToken;
 
     const res = await fetch(crmWebhookUrl, {
@@ -86,7 +102,10 @@ async function forwardToCRM(type: ContactFormType, data: Record<string, unknown>
     });
     if (!res.ok) {
       const text = await res.text().catch(() => "");
-      console.error("[contact->crm] forward failed", { status: res.status, text });
+      console.error("[contact->crm] forward failed", {
+        status: res.status,
+        text,
+      });
     } else {
       console.info("[contact->crm] forwarded", { type });
     }
@@ -119,6 +138,8 @@ const fieldLabels: Record<string, string> = {
   employeeCount: "従業員数",
   inquiryType: "お問い合わせ種別",
   siteUrl: "診断対象のURL",
+  channels: "検討中のチャネル",
+  targetApo: "月間の目標アポイント数",
   serviceTypes: "対象サービス",
   partnerTypes: "パートナーの種類",
   message: "お問い合わせ内容",
@@ -161,6 +182,20 @@ const enumLabels: Record<string, Record<string, string>> = {
     "web-security": "ホームページセキュリティ対策",
     "other-service": "その他",
   },
+  channels: {
+    tele: "テレアポ",
+    form: "問い合わせフォーム",
+    email: "メール",
+    letter: "手紙BDR",
+    sns: "SNS（DM）",
+    undecided: "相談して決めたい",
+  },
+  targetApo: {
+    "under-10": "〜10件",
+    "10-30": "10〜30件",
+    "over-30": "30件以上",
+    undecided: "未定",
+  },
   partnerTypes: {
     "security-partner": "セキュリティ対策事業のパートナー",
     "new-business-partner": "新規開拓支援事業のパートナー",
@@ -170,7 +205,7 @@ const enumLabels: Record<string, Record<string, string>> = {
 function humanize(key: string, value: unknown): string {
   if (Array.isArray(value)) {
     const map = enumLabels[key];
-    return value.map((v) => (map?.[String(v)] ?? String(v))).join(" / ");
+    return value.map((v) => map?.[String(v)] ?? String(v)).join(" / ");
   }
   const str = String(value ?? "");
   const map = enumLabels[key];
@@ -179,7 +214,9 @@ function humanize(key: string, value: unknown): string {
 
 function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
   const rows = Object.entries(data)
-    .filter(([key]) => key !== "website" && key !== "agreement" && key !== "type")
+    .filter(
+      ([key]) => key !== "website" && key !== "agreement" && key !== "type",
+    )
     .map(([key, value]) => {
       const label = fieldLabels[key] ?? key;
       const display = humanize(key, value);
@@ -196,7 +233,7 @@ function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
     type === "professional"
       ? "プロ人材お問い合わせ"
       : type === "apokomi_lead"
-        ? "アポコミ 無料相談のお申し込み"
+        ? "【アポコミ】無料相談・見積もり依頼"
         : type === "web_security_diagnosis"
           ? "ホームページセキュリティ 無料簡易診断のお申し込み"
           : "お問い合わせ(企業)";
@@ -218,7 +255,10 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const body = (payload ?? {}) as { type?: ContactFormType } & Record<string, unknown>;
+  const body = (payload ?? {}) as { type?: ContactFormType } & Record<
+    string,
+    unknown
+  >;
   const type = body.type;
 
   if (
@@ -258,13 +298,15 @@ export async function POST(req: Request) {
   const to = type === "professional" ? toProfessional : toBusiness;
   const subject =
     type === "apokomi_lead"
-      ? "アポコミ 無料相談のお申し込み"
+      ? "【アポコミ】無料相談・見積もり依頼"
       : type === "web_security_diagnosis"
         ? "【無料簡易診断】ホームページセキュリティ対策のお申し込み"
         : "ホームページからの問い合わせ";
 
   if (!transporter) {
-    console.warn("[contact] GMAIL_USER / GMAIL_APP_PASSWORD is not set. Logging form data instead.");
+    console.warn(
+      "[contact] GMAIL_USER / GMAIL_APP_PASSWORD is not set. Logging form data instead.",
+    );
     console.info({ type, data: parsed.data });
     return NextResponse.json({ ok: true, dryRun: true });
   }
@@ -285,9 +327,15 @@ export async function POST(req: Request) {
     console.info("[contact] sent", { messageId: info.messageId, to, type });
     await forwardToCRM(type, parsed.data as Record<string, unknown>);
 
-    if (type === "general" || type === "apokomi_lead" || type === "web_security_diagnosis") {
+    if (
+      type === "general" ||
+      type === "apokomi_lead" ||
+      type === "web_security_diagnosis"
+    ) {
       const senderEmail = (parsed.data as { email?: string }).email;
-      const lastName = String((parsed.data as { lastName?: string }).lastName ?? "").trim();
+      const lastName = String(
+        (parsed.data as { lastName?: string }).lastName ?? "",
+      ).trim();
       const name = String((parsed.data as { name?: string }).name ?? "").trim();
       const addressee = type === "general" ? lastName : name;
 
@@ -320,9 +368,9 @@ ${addressee} 様
 お世話になっております。
 アポコミ(セールスボンド株式会社)でございます。
 
-この度は無料相談のお申し込みをいただき、誠にありがとうございます。
+この度はアポコミの無料相談・見積もりのご依頼をいただき、誠にありがとうございます。
 
-いただいた内容を確認のうえ、担当者より改めてご連絡を差し上げますので、今しばらくお待ちくださいますようお願いいたします。
+いただいた内容を確認のうえ、担当者より2営業日以内にご連絡いたします。今しばらくお待ちくださいますようお願いいたします。
 
 何卒よろしくお願い申し上げます。
 
@@ -357,8 +405,8 @@ HP：https://www.salesbond1962.com
           type === "web_security_diagnosis"
             ? "無料簡易診断のお申し込みありがとうございます(セールスボンド株式会社)"
             : type === "apokomi_lead"
-            ? "無料相談のお申し込みありがとうございます(アポコミ)"
-            : "お問い合わせありがとうございます(セールスボンド株式会社)";
+              ? "無料相談・見積もりのご依頼ありがとうございます(アポコミ)"
+              : "お問い合わせありがとうございます(セールスボンド株式会社)";
 
         try {
           await transporter.sendMail({
