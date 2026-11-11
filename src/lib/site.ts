@@ -164,6 +164,17 @@ export const serviceCategories: ServiceCategory[] = [
             features: [],
             image: "/services/cards/ai-solutions.jpg",
           },
+          {
+            slug: "ciso",
+            number: "01-2",
+            title: "CISO・セキュリティ顧問",
+            href: "/services/ciso",
+            subtitle: "CISO / Security Advisor",
+            summary:
+              "AIを使う会社のための社外CISO。AI利用ガイドラインの作成やAIツールの導入前チェック、セキュリティチェックシート対応まで、AI時代のセキュリティ体制づくりを月額で引き受けます。",
+            features: [],
+            image: "/services/cards/ai-solutions.jpg",
+          },
         ],
       },
       {
@@ -196,6 +207,17 @@ export const serviceCategories: ServiceCategory[] = [
             subtitle: "Inside Sales",
             summary:
               "テレアポ・フォーム・メール・手紙・SNSを総動員して、新規アポイントを獲りにいくインサイドセールス代行サービスです。",
+            features: [],
+            image: "/services/cards/talent.jpg",
+          },
+          {
+            slug: "advisory",
+            number: "02-2",
+            title: "顧問・COO紹介",
+            href: "/services/advisory",
+            subtitle: "Executive Advisor / COO",
+            summary:
+              "3年の成長を1年で。元上場企業役員や元メガバンクCOOなど各業界のプロが経営に伴走し、販路開拓・アライアンス開拓・つながりの紹介でベンチャー企業や新規事業の早期グロースを支援します。",
             features: [],
             image: "/services/cards/talent.jpg",
           },

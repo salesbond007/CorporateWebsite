@@ -42,6 +42,11 @@ export default function SalesServicePage({
           text: "テレアポ・フォーム・メール・手紙・SNSを総動員して、新規アポイントを獲りにいくインサイドセールス代行サービスです。",
           href: "/services/apokomi",
         },
+        {
+          title: "顧問・COO紹介",
+          text: "3年の成長を1年で。各業界のプロが経営に伴走し、販路開拓・アライアンス開拓・つながりの紹介で早期グロースを支援します。",
+          href: "/services/advisory",
+        },
       ]}
       // TODO: 本文確定後に差し替え
       lead="事業グロースを担う経営顧問と、新規開拓のプロで、企業の成長を「攻め」から支援します。"
