@@ -189,6 +189,42 @@ export const webSecurityDiagnosisSchema = z.object({
   message: z.string().trim().max(5000).optional().or(z.literal("")),
 });
 
+/** 簡易LP(顧問・COO紹介 / CISO・セキュリティ顧問)の無料相談フォームで扱うサービス */
+export const serviceLeadServices = {
+  advisory: "顧問・COO紹介",
+  ciso: "CISO・セキュリティ顧問",
+} as const;
+
+export type ServiceLeadService = keyof typeof serviceLeadServices;
+
+/**
+ * 簡易LPの「無料相談」フォーム。
+ * 会社名 / 部署・役職(任意) / お名前 / メール / 電話 / ご相談テーマ(任意・複数) / ご相談内容(任意) / 同意
+ */
+export const serviceLeadSchema = z.object({
+  website: z.string().max(0).optional().or(z.literal("")),
+  service: z.enum(["advisory", "ciso"]),
+  company: z.string().trim().min(1, "会社名を入力してください").max(200),
+  department: z.string().trim().max(200).optional().or(z.literal("")),
+  name: z.string().trim().min(1, "お名前を入力してください").max(100),
+  email: z.string().trim().email("正しいメールアドレスを入力してください"),
+  phone: z
+    .string()
+    .trim()
+    .min(1, "電話番号を入力してください")
+    .max(40)
+    .refine(isValidPhone, {
+      message: "正しい電話番号をご入力ください",
+    }),
+  topics: z.array(z.string().trim().max(60)).max(12).optional(),
+  message: z.string().trim().max(5000).optional().or(z.literal("")),
+  agreement: z.literal("on", {
+    errorMap: () => ({ message: "個人情報の取り扱いへの同意が必要です" }),
+  }),
+});
+
+export type ServiceLeadInput = z.infer<typeof serviceLeadSchema>;
+
 export type ProfessionalContactInput = z.infer<
   typeof professionalContactSchema
 >;
@@ -203,4 +239,5 @@ export type ContactFormType =
   | "professional"
   | "general"
   | "apokomi_lead"
+  | "service_lead"
   | "web_security_diagnosis";

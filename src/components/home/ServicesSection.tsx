@@ -74,11 +74,18 @@ export function ServicesSection({ locale }: Props) {
             if (!s) return null;
             const dark = p.tone === "dark";
             return (
-              <Reveal key={p.slug} variant="up" delay={i * 150} className="h-full">
+              <Reveal
+                key={p.slug}
+                variant="up"
+                delay={i * 150}
+                className="h-full"
+              >
                 <article
                   className={cn(
                     "group relative flex h-full flex-col overflow-hidden transition-shadow duration-500 hover:shadow-[0_30px_60px_-25px_rgba(29,5,11,0.45)]",
-                    dark ? "bg-brand-900 text-white" : "border border-ink/10 bg-white text-ink",
+                    dark
+                      ? "bg-brand-900 text-white"
+                      : "border border-ink/10 bg-white text-ink",
                   )}
                 >
                   {/* 写真 + 役割ラベル */}
@@ -102,11 +109,15 @@ export function ServicesSection({ locale }: Props) {
                     <span
                       className={cn(
                         "absolute left-5 top-5 inline-flex items-center gap-2 px-3 py-1.5 text-xs font-bold tracking-[0.2em] md:left-6 md:top-6",
-                        dark ? "bg-white text-brand-900" : "bg-brand-500 text-white",
+                        dark
+                          ? "bg-white text-brand-900"
+                          : "bg-brand-500 text-white",
                       )}
                     >
                       {p.role}
-                      <span className="font-medium opacity-70">/ {p.en.toUpperCase()}</span>
+                      <span className="font-medium opacity-70">
+                        / {p.en.toUpperCase()}
+                      </span>
                     </span>
                     {/* 大きな英字の透かし */}
                     <span
@@ -129,7 +140,9 @@ export function ServicesSection({ locale }: Props) {
                     >
                       Solution {String(i + 1).padStart(2, "0")}
                     </p>
-                    <h3 className="mt-2 text-2xl font-black tracking-[0.04em] md:text-3xl">{s.title}</h3>
+                    <h3 className="mt-2 text-2xl font-black tracking-[0.04em] md:text-3xl">
+                      {s.title}
+                    </h3>
                     <p
                       className={cn(
                         "mt-4 text-sm leading-[1.9] md:text-[15px]",
@@ -138,6 +151,35 @@ export function ServicesSection({ locale }: Props) {
                     >
                       {s.summary}
                     </p>
+                    {s.children?.length ? (
+                      <ul className="mt-5 space-y-2">
+                        {s.children
+                          .filter((ch) => ch.href)
+                          .map((ch) => (
+                            <li key={ch.slug}>
+                              <Link
+                                href={localePath(ch.href!, locale)}
+                                className={cn(
+                                  "inline-flex items-center gap-2 text-sm font-bold transition-colors",
+                                  dark
+                                    ? "text-white hover:text-brand-200"
+                                    : "text-ink hover:text-brand-500",
+                                )}
+                              >
+                                <span
+                                  aria-hidden="true"
+                                  className={
+                                    dark ? "text-brand-200" : "text-brand-500"
+                                  }
+                                >
+                                  ―
+                                </span>
+                                {ch.title}
+                              </Link>
+                            </li>
+                          ))}
+                      </ul>
+                    ) : null}
                     <Link
                       href={localePath("/contact", locale)}
                       className={cn(
@@ -148,7 +190,10 @@ export function ServicesSection({ locale }: Props) {
                       )}
                     >
                       相談する
-                      <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">
+                      <span
+                        aria-hidden="true"
+                        className="transition-transform group-hover:translate-x-1"
+                      >
                         →
                       </span>
                     </Link>
@@ -169,7 +214,10 @@ export function ServicesSection({ locale }: Props) {
 
         {/* 2つが合流して「成長」へ */}
         <Reveal variant="none" className="mt-2">
-          <div aria-hidden="true" className="relative mx-auto hidden h-12 w-1/2 md:block">
+          <div
+            aria-hidden="true"
+            className="relative mx-auto hidden h-12 w-1/2 md:block"
+          >
             <span className="absolute inset-x-0 bottom-0 h-px origin-center scale-x-0 bg-ink/25 transition-transform delay-300 duration-1000 ease-expo group-data-[visible=true]/reveal:scale-x-100" />
             <span className="absolute bottom-0 left-0 h-full w-px origin-top scale-y-0 bg-ink/25 transition-transform duration-700 ease-expo group-data-[visible=true]/reveal:scale-y-100" />
             <span className="absolute bottom-0 right-0 h-full w-px origin-top scale-y-0 bg-ink/25 transition-transform duration-700 ease-expo group-data-[visible=true]/reveal:scale-y-100" />
@@ -179,7 +227,9 @@ export function ServicesSection({ locale }: Props) {
             className="mx-auto block h-10 w-px origin-top scale-y-0 bg-ink/25 transition-transform delay-700 duration-700 ease-expo group-data-[visible=true]/reveal:scale-y-100"
           />
           <div className="mx-auto flex w-fit translate-y-3 flex-col items-center opacity-0 transition-all delay-1000 duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100">
-            <span className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">Growth</span>
+            <span className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">
+              Growth
+            </span>
             <p className="mt-2 border border-ink/15 bg-white px-8 py-4 text-lg font-black tracking-[0.1em] text-ink md:px-12 md:text-2xl">
               企業の持続的な成長へ
             </p>

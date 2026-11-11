@@ -4,10 +4,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
-import {
-  ApokomiFeatureIllustration,
-  WaveLines,
-} from "@/components/services/ApokomiIllustration";
+import { WaveLines } from "@/components/services/ApokomiIllustration";
 import { ApokomiProcess } from "@/components/services/ApokomiProcess";
 import { ApokomiHeroVisual } from "@/components/services/ApokomiHeroVisual";
 import { ApokomiLeadForm } from "@/components/contact/ApokomiLeadForm";
@@ -114,25 +111,25 @@ const worries = [
 const features = [
   {
     no: "01",
-    illus: 3,
+    img: "/illustrations/ld-702-orange.webp",
     title: "幅広い商材で培った、新規開拓のナレッジ",
     text: "ベンチャー企業から大手企業まで、SaaS・AIソリューション・人材派遣・制服など、幅広い業界・商材の新規開拓を支援してきました。商材ごとに蓄積した「刺さるターゲット」「響く訴求」のナレッジを活かし、立ち上がりから成果につなげます。",
   },
   {
     no: "02",
-    illus: 0,
+    img: "/illustrations/ld-737-orange.webp",
     title: "準備から実行まで、まるごとお任せ",
     text: "リスト作成、トークスクリプト、各チャネルの文面づくりから実行・改善まで一括で担当します。御社は獲得したアポイントでの商談に集中できます。",
   },
   {
     no: "03",
-    illus: 1,
+    img: "/illustrations/ld-247-orange.webp",
     title: "5つのチャネルを総動員して開拓",
     text: "テレアポ・問い合わせフォーム・メール・手紙BDR・SNS（DM）を組み合わせ、1社あたりの接点を最大化します。「手紙を送ってから架電」「フォームの反応先へ即架電」など、チャネルを掛け合わせて、電話だけでは届かない決裁者にもアプローチします。",
   },
   {
     no: "04",
-    illus: 2,
+    img: "/illustrations/ld-241-orange.webp",
     title: "勝ち筋を見つけたら、一気に攻める",
     text: "チャネル・業種・役職・訴求ごとの反応をデータで可視化し、成果の出るパターンに一気にリソースを投下します。蓄積した「勝ち筋」はレポートでお渡しするので、御社の営業資産として残ります。",
   },
@@ -474,11 +471,20 @@ export default function ApokomiPage({
         <WaveLines className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-72 w-full" />
         <Container>
           <div className="mx-auto grid max-w-5xl gap-10 md:grid-cols-[1fr_1.7fr] md:gap-14">
-            <Heading en="QUESTION" align="left">
-              こんな課題
-              <br className="hidden md:block" />
-              ありませんか？
-            </Heading>
+            <div>
+              <Heading en="QUESTION" align="left">
+                こんな課題
+                <br className="hidden md:block" />
+                ありませんか？
+              </Heading>
+              <Image
+                src="/illustrations/ld-1528-orange.webp"
+                alt="新規開拓の課題に頭を抱えるビジネスパーソンのイラスト"
+                width={639}
+                height={567}
+                className="mt-8 hidden w-full max-w-[260px] md:block"
+              />
+            </div>
             <div className="space-y-10">
               {worries.map((w, i) => (
                 <Reveal key={w.title} variant="up" delay={i * 120}>
@@ -589,7 +595,13 @@ export default function ApokomiPage({
                       i % 2 === 1 && "md:order-2",
                     )}
                   >
-                    <ApokomiFeatureIllustration index={f.illus} />
+                    <Image
+                      src={f.img}
+                      alt=""
+                      width={600}
+                      height={560}
+                      className="h-auto w-full"
+                    />
                   </div>
                   <article className="rounded-xl bg-white p-7 shadow-[0_16px_40px_-24px_rgba(242,107,29,0.4)] md:col-span-8 md:p-10">
                     <div className="flex items-center gap-4">

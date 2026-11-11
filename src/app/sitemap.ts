@@ -17,8 +17,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: "/services", priority: 0.9, changeFrequency: "monthly" },
     { path: "/services/security", priority: 0.9, changeFrequency: "monthly" },
     { path: "/services/sales", priority: 0.9, changeFrequency: "monthly" },
-    { path: "/services/web-security", priority: 0.9, changeFrequency: "monthly" },
+    {
+      path: "/services/web-security",
+      priority: 0.9,
+      changeFrequency: "monthly",
+    },
+    { path: "/services/ciso", priority: 0.9, changeFrequency: "monthly" },
     { path: "/services/apokomi", priority: 0.9, changeFrequency: "monthly" },
+    { path: "/services/advisory", priority: 0.9, changeFrequency: "monthly" },
     { path: "/blog", priority: 0.8, changeFrequency: "daily" },
     { path: "/news", priority: 0.7, changeFrequency: "weekly" },
     { path: "/contact", priority: 0.8, changeFrequency: "monthly" },
@@ -43,7 +49,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   );
 
-  const { contents } = await getArticles({ limit: 100, fields: "slug,updatedAt" });
+  const { contents } = await getArticles({
+    limit: 100,
+    fields: "slug,updatedAt",
+  });
   const articleEntries: MetadataRoute.Sitemap = locales.flatMap((locale) =>
     contents.map((a) => ({
       url: `${base}/${locale}/blog/${a.slug}`,

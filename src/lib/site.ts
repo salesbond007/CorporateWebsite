@@ -1,9 +1,9 @@
 import type { Dictionary } from "@/i18n/dictionary";
 
 export const site = {
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://salesbond1962.com",
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.salesbond1962.com",
   /** 構造化データ(Organization)に出力する公式URL */
-  officialUrl: "https://salesbond1962.com",
+  officialUrl: "https://www.salesbond1962.com",
   /** Used by site-wide JSON-LD; locale-specific copy comes from the dictionary. */
   name: "セールスボンド株式会社",
   legalName: "セールスボンド株式会社",
@@ -16,6 +16,14 @@ export const site = {
     "セキュリティ対策",
     "情報セキュリティ",
     "AIセキュリティ",
+    "CISO",
+    "社外CISO",
+    "vCISO",
+    "セキュリティ顧問",
+    "AIセキュリティ顧問",
+    "生成AIガイドライン",
+    "AI利用ガイドライン",
+    "セキュリティチェックシート",
     "ホームページセキュリティ",
     "情報漏洩対策",
     "WordPress保守",
@@ -23,6 +31,8 @@ export const site = {
     "新規開拓",
     "新規開拓支援",
     "営業顧問",
+    "顧問紹介",
+    "COO紹介",
     "営業代行",
     "インサイドセールス",
     "アポイント獲得",
@@ -126,7 +136,7 @@ export const serviceCategories: ServiceCategory[] = [
         href: "/services/security",
         subtitle: "Security",
         summary:
-          "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、企業の安全なAI活用を支援するソリューションです。",
+          "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、社外CISO・セキュリティ顧問やホームページのセキュリティ対策で、企業の安全なAI活用を支援するソリューションです。",
         features: [],
         image: "/services/cards/ai-solutions.jpg",
         children: [
@@ -138,6 +148,17 @@ export const serviceCategories: ServiceCategory[] = [
             subtitle: "Website Security",
             summary:
               "問い合わせフォームや採用応募など、個人情報の入口になるホームページを守ります。「診断」「保守」「移行」の3つから必要なものだけを選べます。",
+            features: [],
+            image: "/services/cards/ai-solutions.jpg",
+          },
+          {
+            slug: "ciso",
+            number: "01-2",
+            title: "CISO・セキュリティ顧問",
+            href: "/services/ciso",
+            subtitle: "CISO / Security Advisor",
+            summary:
+              "AIを使う会社のための社外CISO。AI利用ガイドラインの作成やAIツールの導入前チェック、セキュリティチェックシート対応まで、AI時代のセキュリティ体制づくりを月額で引き受けます。",
             features: [],
             image: "/services/cards/ai-solutions.jpg",
           },
@@ -162,6 +183,17 @@ export const serviceCategories: ServiceCategory[] = [
             subtitle: "Inside Sales",
             summary:
               "テレアポ・フォーム・メール・手紙・SNSを総動員して、新規アポイントを獲りにいくインサイドセールス代行サービスです。",
+            features: [],
+            image: "/services/cards/talent.jpg",
+          },
+          {
+            slug: "advisory",
+            number: "02-2",
+            title: "顧問・COO紹介",
+            href: "/services/advisory",
+            subtitle: "Executive Advisor / COO",
+            summary:
+              "3年の成長を1年で。元上場企業役員や元メガバンクCOOなど各業界のプロが経営に伴走し、販路開拓・アライアンス開拓・つながりの紹介でベンチャー企業や新規事業の早期グロースを支援します。",
             features: [],
             image: "/services/cards/talent.jpg",
           },
