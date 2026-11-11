@@ -111,25 +111,25 @@ const worries = [
 const features = [
   {
     no: "01",
-    img: "/illustrations/ld-702-orange.webp",
+    img: "/illustrations/ld-702-blue.webp",
     title: "幅広い商材で培った、新規開拓のナレッジ",
     text: "ベンチャー企業から大手企業まで、SaaS・AIソリューション・人材派遣・制服など、幅広い業界・商材の新規開拓を支援してきました。商材ごとに蓄積した「刺さるターゲット」「響く訴求」のナレッジを活かし、立ち上がりから成果につなげます。",
   },
   {
     no: "02",
-    img: "/illustrations/ld-737-orange.webp",
+    img: "/illustrations/ld-737-blue.webp",
     title: "準備から実行まで、まるごとお任せ",
     text: "リスト作成、トークスクリプト、各チャネルの文面づくりから実行・改善まで一括で担当します。御社は獲得したアポイントでの商談に集中できます。",
   },
   {
     no: "03",
-    img: "/illustrations/ld-247-orange.webp",
+    img: "/illustrations/ld-247-blue.webp",
     title: "5つのチャネルを総動員して開拓",
     text: "テレアポ・問い合わせフォーム・メール・手紙BDR・SNS（DM）を組み合わせ、1社あたりの接点を最大化します。「手紙を送ってから架電」「フォームの反応先へ即架電」など、チャネルを掛け合わせて、電話だけでは届かない決裁者にもアプローチします。",
   },
   {
     no: "04",
-    img: "/illustrations/ld-241-orange.webp",
+    img: "/illustrations/ld-241-blue.webp",
     title: "勝ち筋を見つけたら、一気に攻める",
     text: "チャネル・業種・役職・訴求ごとの反応をデータで可視化し、成果の出るパターンに一気にリソースを投下します。蓄積した「勝ち筋」はレポートでお渡しするので、御社の営業資産として残ります。",
   },
@@ -172,9 +172,9 @@ function Cta({
       className={cn(
         "group inline-flex items-center justify-between gap-4 rounded-full font-bold tracking-[0.05em] transition duration-300 hover:-translate-y-0.5",
         variant === "solid" &&
-          "bg-[#F26B1D] text-white shadow-[0_12px_28px_-14px_rgba(242,107,29,0.9)] hover:bg-[#E05A0C]",
+          "bg-[#0046C8] text-white shadow-[0_12px_28px_-14px_rgba(0,70,200,0.9)] hover:bg-[#0037B9]",
         variant === "white" &&
-          "bg-white text-[#E05A0C] shadow-[0_12px_28px_-14px_rgba(160,60,0,0.6)]",
+          "bg-white text-[#0037B9] shadow-[0_12px_28px_-14px_rgba(0,35,110,0.6)]",
         variant === "ghost" &&
           "border-2 border-white bg-white/10 text-white backdrop-blur-sm hover:bg-white/20",
         size === "lg"
@@ -189,9 +189,9 @@ function Cta({
         className={cn(
           "grid shrink-0 place-items-center rounded-full transition-transform duration-300 group-hover:translate-x-0.5",
           size === "lg" ? "h-10 w-10 md:h-12 md:w-12" : "h-7 w-7 text-xs",
-          variant === "solid" ? "bg-white text-[#F26B1D]" : "",
-          variant === "white" ? "bg-[#F26B1D] text-white" : "",
-          variant === "ghost" ? "bg-white text-[#F26B1D]" : "",
+          variant === "solid" ? "bg-white text-[#0046C8]" : "",
+          variant === "white" ? "bg-[#0046C8] text-white" : "",
+          variant === "ghost" ? "bg-white text-[#0046C8]" : "",
         )}
       >
         →
@@ -225,11 +225,11 @@ function Heading({
       variant="up"
       className={cn(align === "center" && "text-center", className)}
     >
-      <p className="text-xs font-bold tracking-[0.2em] text-[#F26B1D]">{en}</p>
+      <p className="text-xs font-bold tracking-[0.2em] text-[#0046C8]">{en}</p>
       <span
         aria-hidden="true"
         className={cn(
-          "mt-2 block h-0.5 w-8 bg-[#F26B1D]",
+          "mt-2 block h-0.5 w-8 bg-[#0046C8]",
           align === "center" && "mx-auto",
         )}
       />
@@ -256,12 +256,12 @@ function CheckBox() {
         width="16"
         height="16"
         rx="3"
-        stroke="#F26B1D"
+        stroke="#0046C8"
         strokeWidth="1.5"
       />
       <path
         d="M5 9.2l2.6 2.6L13 6.4"
-        stroke="#F26B1D"
+        stroke="#0046C8"
         strokeWidth="1.8"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -282,14 +282,14 @@ export default function ApokomiPage({
   const base = site.url.replace(/\/$/, "");
 
   return (
-    <div className="bg-white tracking-[0.03em] text-[#241F20]">
+    <div className="bg-white tracking-[0.03em] text-[#001432]">
       <JsonLd
         data={[
           breadcrumbJsonLd([
             { name: "ホーム", url: localePath("/", locale) },
             { name: "サービス一覧", url: localePath("/services", locale) },
             {
-              name: "新規開拓支援事業",
+              name: "経営顧問事業",
               url: localePath("/services/sales", locale),
             },
             { name: "アポコミ", url: localePath(PATH, locale) },
@@ -317,7 +317,7 @@ export default function ApokomiPage({
       />
 
       {/* LPのヘッダー(目次ナビゲーション + CTA) */}
-      <header className="sticky top-0 z-40 border-b border-[#F2E3D8] bg-white/95 backdrop-blur">
+      <header className="sticky top-0 z-40 border-b border-[#E4E8F2] bg-white/95 backdrop-blur">
         <Container className="flex h-14 items-center gap-4 md:h-16">
           <nav aria-label="ページ内目次" className="hidden md:block">
             <ul className="flex items-center gap-1 lg:gap-2">
@@ -325,7 +325,7 @@ export default function ApokomiPage({
                 <li key={n.href}>
                   <a
                     href={n.href}
-                    className="rounded-full px-3 py-2 text-sm font-bold text-[#241F20]/80 transition hover:bg-[#FFF3EA] hover:text-[#E05A0C] lg:px-4"
+                    className="rounded-full px-3 py-2 text-sm font-bold text-[#001432]/80 transition hover:bg-[#EEF4FC] hover:text-[#0037B9] lg:px-4"
                   >
                     {n.label}
                   </a>
@@ -337,14 +337,14 @@ export default function ApokomiPage({
         </Container>
         <nav
           aria-label="ページ内目次"
-          className="border-t border-[#F2E3D8] md:hidden"
+          className="border-t border-[#E4E8F2] md:hidden"
         >
           <ul className="flex gap-1 overflow-x-auto px-3 py-1.5 [scrollbar-width:none]">
             {lpNav.map((n) => (
               <li key={n.href} className="shrink-0">
                 <a
                   href={n.href}
-                  className="block whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-bold text-[#241F20]/80 active:bg-[#FFF3EA]"
+                  className="block whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-bold text-[#001432]/80 active:bg-[#EEF4FC]"
                 >
                   {n.label}
                 </a>
@@ -355,31 +355,31 @@ export default function ApokomiPage({
       </header>
 
       {/* 1. ファーストビュー */}
-      <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#FFAE72] via-[#FB8E45] to-[#F37A2C] text-white">
+      <section className="relative isolate overflow-hidden bg-gradient-to-b from-[#3F7FEA] via-[#1F5FD8] to-[#0046C8] text-white">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -left-32 top-10 -z-10 h-80 w-80 rounded-full bg-white/25 blur-[90px]"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-24 top-40 -z-10 h-96 w-96 rounded-full bg-[#FFE0C7]/40 blur-[110px]"
+          className="pointer-events-none absolute -right-24 top-40 -z-10 h-96 w-96 rounded-full bg-[#D6E4FB]/40 blur-[110px]"
         />
         <Container className="relative z-10 grid items-center gap-4 pb-16 pt-12 md:pb-24 lg:grid-cols-[1.05fr_1fr] lg:gap-6 lg:pt-16">
           <div className="text-center lg:text-left">
             <h1>
               <span
-                className="block animate-fade-up text-[clamp(4rem,12vw,8rem)] font-black leading-none tracking-[0.08em] [text-shadow:0_6px_24px_rgba(201,84,15,0.35)]"
+                className="block animate-fade-up text-[clamp(4rem,12vw,8rem)] font-black leading-none tracking-[0.08em] [text-shadow:0_6px_24px_rgba(0,40,140,0.35)]"
                 style={{ animationDelay: "0.1s" }}
               >
                 アポコミ
               </span>
             </h1>
             <p
-              className="mt-5 animate-fade-up text-[clamp(1.25rem,2.6vw,2rem)] font-bold tracking-[0.12em] [text-shadow:0_2px_12px_rgba(201,84,15,0.35)]"
+              className="mt-5 animate-fade-up text-[clamp(1.25rem,2.6vw,2rem)] font-bold tracking-[0.12em] [text-shadow:0_2px_12px_rgba(0,40,140,0.35)]"
               style={{ animationDelay: "0.25s" }}
             >
               アポイント創出に
-              <span className="ml-1 inline-block rounded-lg bg-white px-2.5 py-0.5 text-[#E05A0C] [text-shadow:none]">
+              <span className="ml-1 inline-block rounded-lg bg-white px-2.5 py-0.5 text-[#0037B9] [text-shadow:none]">
                 フルコミット
               </span>
             </p>
@@ -416,7 +416,7 @@ export default function ApokomiPage({
 
       {/* 実績ロゴ(ファーストビュー直下) */}
       <section className="bg-white pb-12 pt-6 md:pb-16">
-        <p className="text-center text-xs font-bold tracking-[0.2em] text-[#241F20]/50">
+        <p className="text-center text-xs font-bold tracking-[0.2em] text-[#001432]/50">
           支援実績のある企業
         </p>
         <div
@@ -466,7 +466,7 @@ export default function ApokomiPage({
       {/* 2. お悩み */}
       <section
         id="problem"
-        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FFF8F2] py-20 md:py-28"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#F2F8FC] py-20 md:py-28"
       >
         <WaveLines className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-72 w-full" />
         <Container>
@@ -478,7 +478,7 @@ export default function ApokomiPage({
                 ありませんか？
               </Heading>
               <Image
-                src="/illustrations/ld-1528-orange.webp"
+                src="/illustrations/ld-1528-blue.webp"
                 alt="新規開拓の課題に頭を抱えるビジネスパーソンのイラスト"
                 width={639}
                 height={567}
@@ -488,14 +488,14 @@ export default function ApokomiPage({
             <div className="space-y-10">
               {worries.map((w, i) => (
                 <Reveal key={w.title} variant="up" delay={i * 120}>
-                  <p className="text-base font-bold text-[#F26B1D] md:text-lg">
+                  <p className="text-base font-bold text-[#0046C8] md:text-lg">
                     {w.title}
                   </p>
                   <ul className="mt-2">
                     {w.items.map((it) => (
                       <li
                         key={it}
-                        className="flex gap-3 border-b border-[#EADBD0] py-4 text-base leading-relaxed md:text-[17px]"
+                        className="flex gap-3 border-b border-[#DCE3EF] py-4 text-base leading-relaxed md:text-[17px]"
                       >
                         <CheckBox />
                         <span>
@@ -503,7 +503,7 @@ export default function ApokomiPage({
                             k % 2 === 1 ? (
                               <strong
                                 key={k}
-                                className="bg-[linear-gradient(transparent_60%,#FFD2B3_60%)] font-bold text-[#241F20]"
+                                className="bg-[linear-gradient(transparent_60%,#C9DAF7_60%)] font-bold text-[#001432]"
                               >
                                 {part}
                               </strong>
@@ -522,7 +522,7 @@ export default function ApokomiPage({
           <Reveal variant="up" className="mt-16 text-center">
             <p className="text-lg font-bold leading-[1.9] md:text-2xl [word-break:auto-phrase]">
               アポコミなら、使えるチャネルを
-              <span className="bg-[linear-gradient(transparent_62%,#FFD2B3_62%)] text-[#E05A0C]">
+              <span className="bg-[linear-gradient(transparent_62%,#C9DAF7_62%)] text-[#0037B9]">
                 すべて
               </span>
               使って、
@@ -538,20 +538,20 @@ export default function ApokomiPage({
       <section id="about" className="scroll-mt-28 py-20 md:py-28">
         <Container>
           <Reveal variant="up" className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-bold tracking-[0.2em] text-[#F26B1D]">
+            <p className="text-xs font-bold tracking-[0.2em] text-[#0046C8]">
               ABOUT
             </p>
             <h2 className="mt-3 font-black leading-tight">
-              <span className="text-[clamp(2.4rem,6vw,3.75rem)] tracking-[0.06em] text-[#F26B1D]">
+              <span className="text-[clamp(2.4rem,6vw,3.75rem)] tracking-[0.06em] text-[#0046C8]">
                 アポコミ
               </span>
               <span className="ml-1 text-[clamp(1.5rem,3.5vw,2.25rem)]">
                 とは
               </span>
             </h2>
-            <p className="mt-6 text-base leading-[2] text-[#241F20]/80 md:text-[17px] [word-break:auto-phrase]">
+            <p className="mt-6 text-base leading-[2] text-[#001432]/80 md:text-[17px] [word-break:auto-phrase]">
               営業プロセスのうち、
-              <strong className="bg-[linear-gradient(transparent_60%,#FFD2B3_60%)] font-bold text-[#241F20]">
+              <strong className="bg-[linear-gradient(transparent_60%,#C9DAF7_60%)] font-bold text-[#001432]">
                 商談の手前までを丸ごと代行
               </strong>
               するサービスです。
@@ -567,7 +567,7 @@ export default function ApokomiPage({
           <Reveal variant="up" className="mt-14 text-center">
             <p className="text-[clamp(1.4rem,3.2vw,2.1rem)] font-black leading-[1.6] [word-break:auto-phrase]">
               御社は、
-              <span className="bg-[linear-gradient(transparent_62%,#FFD2B3_62%)]">
+              <span className="bg-[linear-gradient(transparent_62%,#C9DAF7_62%)]">
                 商談に集中
               </span>
               できます。
@@ -580,7 +580,7 @@ export default function ApokomiPage({
       {/* 4. 特徴 */}
       <section
         id="features"
-        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FFF8F2] py-20 md:py-28"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#F2F8FC] py-20 md:py-28"
       >
         <WaveLines className="pointer-events-none absolute inset-x-0 top-1/3 -z-10 h-80 w-full" />
         <Container>
@@ -603,16 +603,16 @@ export default function ApokomiPage({
                       className="h-auto w-full"
                     />
                   </div>
-                  <article className="rounded-xl bg-white p-7 shadow-[0_16px_40px_-24px_rgba(242,107,29,0.4)] md:col-span-8 md:p-10">
+                  <article className="rounded-xl bg-white p-7 shadow-[0_16px_40px_-24px_rgba(0,70,200,0.4)] md:col-span-8 md:p-10">
                     <div className="flex items-center gap-4">
-                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-[#F26B1D] text-sm font-bold text-[#F26B1D]">
+                      <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full border-2 border-[#0046C8] text-sm font-bold text-[#0046C8]">
                         {f.no}
                       </span>
-                      <h3 className="text-lg font-bold leading-snug text-[#F26B1D] md:text-xl">
+                      <h3 className="text-lg font-bold leading-snug text-[#0046C8] md:text-xl">
                         {f.title}
                       </h3>
                     </div>
-                    <p className="mt-5 text-[15px] leading-[1.95] text-[#241F20]/80">
+                    <p className="mt-5 text-[15px] leading-[1.95] text-[#001432]/80">
                       {f.text}
                     </p>
                   </article>
@@ -625,7 +625,7 @@ export default function ApokomiPage({
           <Reveal variant="up" className="mx-auto mt-16 max-w-5xl">
             <a
               href={`#${FORM_ID}`}
-              className="group grid overflow-hidden rounded-xl bg-gradient-to-r from-[#F26B1D] to-[#FFA562] text-white shadow-[0_20px_44px_-24px_rgba(242,107,29,0.9)] md:grid-cols-[1fr_auto]"
+              className="group grid overflow-hidden rounded-xl bg-gradient-to-r from-[#0046C8] to-[#3C7FEF] text-white shadow-[0_20px_44px_-24px_rgba(0,70,200,0.9)] md:grid-cols-[1fr_auto]"
             >
               <div className="p-8 md:p-10">
                 <p className="text-xl font-bold md:text-2xl">
@@ -638,7 +638,7 @@ export default function ApokomiPage({
                 </p>
               </div>
               <div className="flex items-center justify-center gap-4 border-t border-white/40 p-6 md:flex-col md:gap-2 md:border-l md:border-t-0 md:px-14">
-                <span className="grid h-14 w-14 place-items-center rounded-full border-2 border-white text-xl transition duration-300 group-hover:bg-white group-hover:text-[#F26B1D]">
+                <span className="grid h-14 w-14 place-items-center rounded-full border-2 border-white text-xl transition duration-300 group-hover:bg-white group-hover:text-[#0046C8]">
                   →
                 </span>
                 <span className="text-xs font-bold tracking-[0.2em]">
@@ -655,9 +655,9 @@ export default function ApokomiPage({
         <Container>
           <Heading en="FLOW">支援開始までの流れ</Heading>
           <Reveal variant="up" className="mt-6 text-center">
-            <p className="inline-flex items-baseline gap-1 rounded-full bg-[#FFF3EA] px-5 py-2 text-sm font-bold text-[#241F20] md:text-base">
+            <p className="inline-flex items-baseline gap-1 rounded-full bg-[#EEF4FC] px-5 py-2 text-sm font-bold text-[#001432] md:text-base">
               お問い合わせから
-              <span className="text-2xl font-black text-[#E05A0C] md:text-3xl">
+              <span className="text-2xl font-black text-[#0037B9] md:text-3xl">
                 最短1週間
               </span>
               で稼働開始
@@ -672,7 +672,7 @@ export default function ApokomiPage({
             <ol className="relative grid grid-cols-6 gap-4">
               <span
                 aria-hidden="true"
-                className="absolute left-[8%] right-[8%] top-5 h-0.5 bg-gradient-to-r from-[#FFD2B3] to-[#F26B1D]"
+                className="absolute left-[8%] right-[8%] top-5 h-0.5 bg-gradient-to-r from-[#C9DAF7] to-[#0046C8]"
               />
               {flow.map((f, i) => (
                 <li key={f.title} className="relative text-center">
@@ -680,8 +680,8 @@ export default function ApokomiPage({
                     className={cn(
                       "relative mx-auto grid h-10 w-10 place-items-center rounded-full text-sm font-black ring-4 ring-white",
                       i === flow.length - 1
-                        ? "bg-[#F26B1D] text-white"
-                        : "bg-[#FFF3EA] text-[#E05A0C]",
+                        ? "bg-[#0046C8] text-white"
+                        : "bg-[#EEF4FC] text-[#0037B9]",
                     )}
                   >
                     {String(i + 1).padStart(2, "0")}
@@ -689,7 +689,7 @@ export default function ApokomiPage({
                   <p className="mt-4 text-[15px] font-bold leading-snug">
                     {f.title}
                   </p>
-                  <p className="mt-2 text-xs leading-relaxed text-[#241F20]/70">
+                  <p className="mt-2 text-xs leading-relaxed text-[#001432]/70">
                     {f.text}
                   </p>
                 </li>
@@ -702,7 +702,7 @@ export default function ApokomiPage({
             <ol className="relative space-y-5 pl-14">
               <span
                 aria-hidden="true"
-                className="absolute bottom-5 left-5 top-5 w-0.5 bg-gradient-to-b from-[#FFD2B3] to-[#F26B1D]"
+                className="absolute bottom-5 left-5 top-5 w-0.5 bg-gradient-to-b from-[#C9DAF7] to-[#0046C8]"
               />
               {flow.map((f, i) => (
                 <li key={f.title} className="relative">
@@ -710,14 +710,14 @@ export default function ApokomiPage({
                     className={cn(
                       "absolute -left-14 top-0 grid h-10 w-10 place-items-center rounded-full text-sm font-black ring-4 ring-white",
                       i === flow.length - 1
-                        ? "bg-[#F26B1D] text-white"
-                        : "bg-[#FFF3EA] text-[#E05A0C]",
+                        ? "bg-[#0046C8] text-white"
+                        : "bg-[#EEF4FC] text-[#0037B9]",
                     )}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="pt-1.5 font-bold">{f.title}</p>
-                  <p className="mt-1 text-sm text-[#241F20]/70">{f.text}</p>
+                  <p className="mt-1 text-sm text-[#001432]/70">{f.text}</p>
                 </li>
               ))}
             </ol>
@@ -733,12 +733,12 @@ export default function ApokomiPage({
           <Reveal
             variant="up"
             delay={150}
-            className="mx-auto mt-10 max-w-4xl rounded-xl bg-white p-6 shadow-[0_24px_60px_-36px_rgba(242,107,29,0.6)] md:p-10"
+            className="mx-auto mt-10 max-w-4xl rounded-xl bg-white p-6 shadow-[0_24px_60px_-36px_rgba(0,70,200,0.6)] md:p-10"
           >
             <ApokomiLeadForm privacyHref={localePath("/privacy", locale)} />
           </Reveal>
           {/* 運営会社 */}
-          <p className="mt-12 text-center text-sm text-[#241F20]/60">
+          <p className="mt-12 text-center text-sm text-[#001432]/60">
             運営会社：{site.legalName}
           </p>
         </Container>

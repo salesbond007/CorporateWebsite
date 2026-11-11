@@ -15,7 +15,11 @@ type Props = {
  * 差し替え可能。4秒ごとに永続的にクロスフェードし(hero-crossfade)、
  * 全体はゆっくりズームし続ける(ken-burns)。tailwind.config.ts 参照。
  */
-const HERO_SLIDES = ["/hero/slide-1.png", "/hero/slide-2.png", "/hero/slide-3.png"];
+const HERO_SLIDES = [
+  "/hero/slide-1.png",
+  "/hero/slide-2.png",
+  "/hero/slide-3.png",
+];
 
 export function Hero({ locale, dict }: Props) {
   return (
@@ -37,12 +41,18 @@ export function Hero({ locale, dict }: Props) {
       </div>
 
       {/* オーバーレイ: ブランド色の被せ / 左側のスクリム / 下部グラデーション */}
-      <div className="absolute inset-0 bg-brand-900/40 mix-blend-multiply" aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-brand-900/40 mix-blend-multiply"
+        aria-hidden="true"
+      />
       <div
         className="absolute inset-0 bg-[linear-gradient(to_right,rgba(29,5,11,0.88)_0%,rgba(29,5,11,0.62)_40%,rgba(29,5,11,0.15)_70%,rgba(29,5,11,0)_90%)]"
         aria-hidden="true"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" aria-hidden="true" />
+      <div
+        className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent"
+        aria-hidden="true"
+      />
 
       {/* ゆっくり漂う光のにじみ */}
       <div
@@ -61,11 +71,14 @@ export function Hero({ locale, dict }: Props) {
           className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.18em] text-brand-200 animate-fade-up md:gap-4 md:text-xs md:tracking-[0.35em]"
           style={{ animationDelay: "0.1s" }}
         >
-          <span aria-hidden="true" className="h-px w-8 origin-left animate-grow-x bg-brand-200 md:w-12" />
+          <span
+            aria-hidden="true"
+            className="h-px w-8 origin-left animate-grow-x bg-brand-200 md:w-12"
+          />
           Offense &amp; Defense, by Professionals
         </p>
 
-        <h1 className="mt-6 text-[clamp(1.375rem,5.6vw,3.75rem)] font-black leading-[1.3] md:leading-[1.2] tracking-tight text-white">
+        <h1 className="mt-6 text-[clamp(1.3rem,4.9vw,3.5rem)] font-black leading-[1.3] md:leading-[1.2] tracking-tight text-white">
           <span className="line-mask">
             <span style={{ animationDelay: "0.25s" }}>
               {dict.hero.line1Prefix}
@@ -119,7 +132,9 @@ export function Hero({ locale, dict }: Props) {
         aria-hidden="true"
         className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex"
       >
-        <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/70">Scroll</span>
+        <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-white/70">
+          Scroll
+        </span>
         <span className="relative h-14 w-px overflow-hidden bg-white/25">
           <span className="absolute inset-x-0 top-0 h-1/3 animate-scroll-dot bg-white" />
         </span>

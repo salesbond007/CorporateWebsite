@@ -35,13 +35,13 @@
   },
   "hero": {
     "eyebrow": "B to B Sales Support",
-    "line1Prefix": "攻めの",
-    "line1Highlight": "「新規開拓営業支援」",
-    "line1Suffix": "と、",
-    "line2Prefix": "守りの",
-    "line2Highlight": "「AIセキュリティ」",
-    "line2Suffix": "。",
-    "lead": "2つのソリューションで企業の成長を支えます。"
+    "line1Prefix": "守りの",
+    "line1Highlight": "「AI時代のセキュリティ構築」",
+    "line1Suffix": "と",
+    "line2Prefix": "攻めの",
+    "line2Highlight": "「事業グロースの経営顧問」",
+    "line2Suffix": "を、",
+    "lead": "プロの力で。"
   },
   "blog": {
     "search": "キーワードで記事を検索",

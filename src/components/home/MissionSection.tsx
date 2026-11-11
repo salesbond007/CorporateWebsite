@@ -14,7 +14,10 @@ const WATERMARK = "ONE BOND, EVERY ANSWER. ";
 
 export function MissionSection() {
   return (
-    <section id="mission" className="relative scroll-mt-20 overflow-hidden bg-white py-20 md:py-32">
+    <section
+      id="mission"
+      className="relative scroll-mt-20 overflow-hidden bg-white py-20 md:py-32"
+    >
       {/* 背景をゆっくり横に流れる大きな透かし文字 */}
       <div
         aria-hidden="true"
@@ -44,20 +47,20 @@ export function MissionSection() {
       />
 
       <Container className="relative">
-        <div className="mx-auto max-w-2xl text-center">
+        <div className="mx-auto max-w-3xl text-center">
           <Reveal variant="none">
             <p className="text-[11px] font-bold uppercase tracking-[0.35em] text-brand-500 md:text-xs">
               Our Mission
             </p>
-            <p className="mt-5 text-xl font-black leading-snug text-ink sm:text-2xl md:text-3xl lg:text-4xl">
+            <p className="mt-5 text-xl font-black leading-snug text-ink [word-break:auto-phrase] sm:text-2xl md:text-3xl lg:text-4xl">
               <span className="block overflow-hidden pb-[0.08em]">
                 <span className="block translate-y-[110%] transition-transform delay-0 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
-                  攻め（新規開拓）と
+                  守りの「AI時代のセキュリティ構築」と
                 </span>
               </span>
               <span className="block overflow-hidden pb-[0.08em]">
                 <span className="block translate-y-[110%] transition-transform delay-150 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
-                  守り（情報セキュリティ対策）を
+                  攻めの「事業グロースの経営顧問」を、
                 </span>
               </span>
               <span className="block overflow-hidden pb-[0.08em]">
@@ -75,27 +78,34 @@ export function MissionSection() {
           <div className="mx-auto mt-10 space-y-7 text-base font-medium leading-[2.1] tracking-[0.04em] text-ink-soft md:text-lg">
             <Reveal variant="blur" delay={100}>
               <p>
-                <Emphasis>新しい市場を切り拓くこと</Emphasis>。
-                <br />
                 <Emphasis>大切な情報と信頼を守ること</Emphasis>。
                 <br />
-                どちらも、<span className="font-black text-ink">成長する企業に欠かせない力</span>です。
+                <Emphasis>事業を動かし、新しい市場を切り拓くこと</Emphasis>。
+                <br />
+                どちらも、
+                <span className="font-black text-ink">
+                  成長する企業に欠かせない力
+                </span>
+                です。
               </p>
             </Reveal>
             <Reveal variant="blur" delay={150}>
               <p>
-                守りには、<Emphasis>セキュリティのプロ</Emphasis>を。
+                守りには、<Emphasis>AI時代のセキュリティを築くプロ</Emphasis>
+                を。
                 <br />
-                攻めには、<Emphasis>新規開拓のプロ</Emphasis>を。
+                攻めには、<Emphasis>事業グロースを担う経営顧問</Emphasis>を。
                 <br />
-                足りない力には、<Emphasis>信頼できる人材</Emphasis>を。
+                現場には、<Emphasis>新規開拓のプロ</Emphasis>を。
                 <br />
                 そして企業と、<Emphasis>次の顧客</Emphasis>を。
               </p>
             </Reveal>
             <Reveal variant="blur" delay={150}>
               <p>
-                <span className="font-black text-ink">守りが固まるから、迷わず攻められる。</span>
+                <span className="font-black text-ink">
+                  守りが固まるから、迷わず攻められる。
+                </span>
                 <br />
                 私たちは1社1社に本気で向き合い、
                 <br />

@@ -53,13 +53,27 @@ export function ServiceDetail({
             { name: "サービス一覧", url: localePath("/services", locale) },
             { name: title, url: localePath(path, locale) },
           ]),
-          serviceJsonLd({ name: title, description, url: localePath(path, locale) }),
+          serviceJsonLd({
+            name: title,
+            description,
+            url: localePath(path, locale),
+          }),
         ]}
       />
 
       <section className="relative overflow-hidden border-b-2 border-ink-line bg-ink">
-        <Image src={image} alt="" fill priority sizes="100vw" className="object-cover" />
-        <div className="absolute inset-0 bg-brand-900/45 mix-blend-multiply" aria-hidden="true" />
+        <Image
+          src={image}
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div
+          className="absolute inset-0 bg-brand-900/45 mix-blend-multiply"
+          aria-hidden="true"
+        />
         <div
           className="absolute inset-0 bg-[linear-gradient(to_right,rgba(29,5,11,0.85)_0%,rgba(29,5,11,0.55)_45%,rgba(29,5,11,0.15)_75%,rgba(29,5,11,0)_95%)]"
           aria-hidden="true"
@@ -78,7 +92,9 @@ export function ServiceDetail({
       <section className="bg-white py-20 md:py-28">
         <Container>
           <div className="mx-auto max-w-3xl">
-            <p className="text-xl font-black leading-relaxed text-ink md:text-2xl">{lead}</p>
+            <p className="text-xl font-black leading-relaxed text-ink md:text-2xl">
+              {lead}
+            </p>
             <div className="mt-8 space-y-5 text-base leading-[2] text-ink-soft">
               {body.map((p) => (
                 <p key={p}>{p}</p>
@@ -86,7 +102,9 @@ export function ServiceDetail({
             </div>
             {related?.length ? (
               <div className="mt-12 border-t border-ink pt-6">
-                <p className="text-xs font-bold tracking-[0.2em] text-ink-muted">関連サービス</p>
+                <p className="text-xs font-bold tracking-[0.2em] text-ink-muted">
+                  関連サービス
+                </p>
                 <ul className="mt-4 border-t border-ink/15">
                   {related.map((r) => (
                     <li key={r.href} className="border-b border-ink/15">
@@ -98,9 +116,14 @@ export function ServiceDetail({
                           <span className="block text-lg font-black text-ink transition-colors group-hover:text-brand-600">
                             {r.title}
                           </span>
-                          <span className="mt-1 block text-sm leading-relaxed text-ink-soft">{r.text}</span>
+                          <span className="mt-1 block text-sm leading-relaxed text-ink-soft">
+                            {r.text}
+                          </span>
                         </span>
-                        <span aria-hidden="true" className="text-brand-500 transition-transform group-hover:translate-x-1">
+                        <span
+                          aria-hidden="true"
+                          className="text-brand-500 transition-transform group-hover:translate-x-1"
+                        >
                           →
                         </span>
                       </Link>
@@ -113,7 +136,11 @@ export function ServiceDetail({
               <Button href={localePath("/contact", locale)} size="lg">
                 お問い合わせ
               </Button>
-              <Button href={localePath("/services", locale)} size="lg" variant="secondary">
+              <Button
+                href={localePath("/services", locale)}
+                size="lg"
+                variant="secondary"
+              >
                 サービス一覧へ
               </Button>
             </div>

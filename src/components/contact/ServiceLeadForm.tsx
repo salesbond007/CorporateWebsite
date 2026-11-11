@@ -6,7 +6,7 @@ import type { ServiceLeadService } from "@/lib/contact";
 import { isValidPhone, normalizePhone } from "@/lib/phone";
 import { cn } from "@/lib/cn";
 
-type Accent = "orange" | "wine";
+type Accent = "blue" | "wine";
 
 type Props = {
   /** 送信先で区別するサービス */
@@ -33,15 +33,15 @@ const tone: Record<
     shadow: string;
   }
 > = {
-  orange: {
-    solid: "bg-[#F26B1D]",
-    hover: "hover:bg-[#E05A0C]",
-    soft: "bg-[#FFF3EA]",
-    text: "text-[#C9540F]",
-    focus: "focus:border-[#F26B1D] focus:ring-[#F26B1D]/15",
-    pillOn: "border-[#F26B1D] bg-[#F26B1D] text-white",
-    pillHover: "hover:border-[#F26B1D]",
-    shadow: "shadow-[0_16px_36px_-14px_rgba(242,107,29,0.9)]",
+  blue: {
+    solid: "bg-[#0046C8]",
+    hover: "hover:bg-[#0037B9]",
+    soft: "bg-[#F2F8FC]",
+    text: "text-[#0046C8]",
+    focus: "focus:border-[#0046C8] focus:ring-[#0046C8]/15",
+    pillOn: "border-[#0046C8] bg-[#0046C8] text-white",
+    pillHover: "hover:border-[#0046C8]",
+    shadow: "shadow-[0_16px_36px_-14px_rgba(0,70,200,0.7)]",
   },
   wine: {
     solid: "bg-brand-500",

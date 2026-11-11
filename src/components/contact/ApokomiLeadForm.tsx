@@ -14,18 +14,18 @@ type Props = {
 type ChannelId = (typeof apokomiChannelOptions)[number]["id"];
 
 const inputClass =
-  "w-full rounded-lg border border-[#E7DED7] bg-white px-4 py-3.5 text-base text-[#1A1A1A] outline-none transition placeholder:text-[#1A1A1A]/35 focus:border-[#F26B1D] focus:ring-4 focus:ring-[#F26B1D]/15";
+  "w-full rounded-lg border border-[#DCE3EF] bg-white px-4 py-3.5 text-base text-[#001432] outline-none transition placeholder:text-[#001432]/35 focus:border-[#0046C8] focus:ring-4 focus:ring-[#0046C8]/15";
 
 function Label({ text, required }: { text: string; required?: boolean }) {
   return (
-    <span className="mb-2 flex items-center gap-2 text-sm font-bold text-[#1A1A1A]">
+    <span className="mb-2 flex items-center gap-2 text-sm font-bold text-[#001432]">
       {text}
       <span
         className={cn(
           "rounded px-1.5 py-0.5 text-[10px] font-bold",
           required
-            ? "bg-[#F26B1D] text-white"
-            : "bg-[#EFE9E4] text-[#1A1A1A]/60",
+            ? "bg-[#0046C8] text-white"
+            : "bg-[#E8EDF5] text-[#001432]/60",
         )}
       >
         {required ? "必須" : "任意"}
@@ -115,7 +115,7 @@ export function ApokomiLeadForm({ privacyHref }: Props) {
   if (sent) {
     return (
       <div className="rounded-2xl bg-white p-10 text-center" role="status">
-        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#FFF3EA] text-[#F26B1D]">
+        <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[#EEF4FC] text-[#0046C8]">
           <svg
             width="26"
             height="26"
@@ -132,10 +132,10 @@ export function ApokomiLeadForm({ privacyHref }: Props) {
             />
           </svg>
         </div>
-        <p className="mt-6 text-lg font-black text-[#1A1A1A]">
+        <p className="mt-6 text-lg font-black text-[#001432]">
           送信が完了しました
         </p>
-        <p className="mt-3 leading-relaxed text-[#1A1A1A]/75">
+        <p className="mt-3 leading-relaxed text-[#001432]/75">
           お問い合わせありがとうございます。
           <br />
           内容を確認のうえ、担当者より2営業日以内にご連絡いたします。
@@ -225,8 +225,8 @@ export function ApokomiLeadForm({ privacyHref }: Props) {
                 className={cn(
                   "rounded-full border px-4 py-2 text-sm font-bold transition",
                   on
-                    ? "border-[#F26B1D] bg-[#F26B1D] text-white"
-                    : "border-[#E7DED7] bg-white text-[#1A1A1A] hover:border-[#F26B1D]",
+                    ? "border-[#0046C8] bg-[#0046C8] text-white"
+                    : "border-[#DCE3EF] bg-white text-[#001432] hover:border-[#0046C8]",
                 )}
               >
                 {on ? "✓ " : ""}
@@ -277,23 +277,23 @@ export function ApokomiLeadForm({ privacyHref }: Props) {
         className="hidden"
       />
 
-      <label className="flex items-start gap-3 rounded-lg bg-[#FFF3EA] p-4 text-sm">
+      <label className="flex items-start gap-3 rounded-lg bg-[#EEF4FC] p-4 text-sm">
         <input
           type="checkbox"
           name="agreement"
           checked={agreement}
           onChange={(e) => setAgreement(e.target.checked)}
-          className="mt-0.5 h-4 w-4 rounded border-[#E7DED7] text-[#F26B1D] focus:ring-[#F26B1D]"
+          className="mt-0.5 h-4 w-4 rounded border-[#DCE3EF] text-[#0046C8] focus:ring-[#0046C8]"
         />
-        <span className="leading-relaxed text-[#1A1A1A]/80">
+        <span className="leading-relaxed text-[#001432]/80">
           <Link
             href={privacyHref}
-            className="font-bold text-[#C9540F] underline underline-offset-4"
+            className="font-bold text-[#00309F] underline underline-offset-4"
           >
             個人情報の取り扱い
           </Link>
           に同意します
-          <span className="ml-2 rounded bg-[#F26B1D] px-1.5 py-0.5 text-[10px] font-bold text-white">
+          <span className="ml-2 rounded bg-[#0046C8] px-1.5 py-0.5 text-[10px] font-bold text-white">
             必須
           </span>
         </span>
@@ -311,7 +311,7 @@ export function ApokomiLeadForm({ privacyHref }: Props) {
       <button
         type="submit"
         disabled={sending}
-        className="group flex h-16 w-full items-center justify-center gap-2 rounded-xl bg-[#F26B1D] text-base font-black text-white shadow-[0_16px_36px_-14px_rgba(242,107,29,0.9)] transition hover:-translate-y-0.5 hover:bg-[#E05A0C] disabled:opacity-60"
+        className="group flex h-16 w-full items-center justify-center gap-2 rounded-xl bg-[#0046C8] text-base font-black text-white shadow-[0_16px_36px_-14px_rgba(0,70,200,0.9)] transition hover:-translate-y-0.5 hover:bg-[#0037B9] disabled:opacity-60"
       >
         {sending ? "送信中..." : "この内容で送信する"}
         {sending ? null : (

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { cn } from "@/lib/cn";
 
-const ORANGE = "#F26B1D";
-const NAVY = "#2F4358";
+const ORANGE = "#0046C8";
+const NAVY = "#0B1B36";
 
 type Step = {
   no: string;
@@ -18,14 +18,14 @@ const steps: Step[] = [
     name: "リスト作成",
     note: "狙う企業と役職を選定",
     owner: "apokomi",
-    shade: "#FFA765",
+    shade: "#5A93F0",
   },
   {
     no: "02",
     name: "アプローチ",
     note: "5つのチャネルで接点づくり",
     owner: "apokomi",
-    shade: "#F98A3E",
+    shade: "#2F6FE3",
   },
   {
     no: "03",
@@ -39,7 +39,7 @@ const steps: Step[] = [
     name: "商談",
     note: "御社が提案",
     owner: "client",
-    shade: "#40566D",
+    shade: "#1E2F4F",
   },
   {
     no: "05",
@@ -63,7 +63,7 @@ function chevron(first: boolean) {
 export function BatonPass({ className }: { className?: string }) {
   return (
     <Image
-      src="/illustrations/ld-1500-orange.webp"
+      src="/illustrations/ld-1500-blue.webp"
       alt=""
       width={694}
       height={392}
@@ -80,13 +80,13 @@ export function ApokomiProcess() {
       <div className="hidden lg:block">
         {/* 担当の括り */}
         <div className="grid grid-cols-5 gap-1.5">
-          <div className="col-span-3 mx-3 border-x-2 border-t-2 border-[#F26B1D] pt-0 text-center">
-            <span className="relative -top-3.5 bg-white px-3 text-sm font-black text-[#E05A0C]">
+          <div className="col-span-3 mx-3 border-x-2 border-t-2 border-[#0046C8] pt-0 text-center">
+            <span className="relative -top-3.5 bg-white px-3 text-sm font-black text-[#0037B9]">
               アポコミが担当
             </span>
           </div>
-          <div className="col-span-2 mx-3 border-x-2 border-t-2 border-[#2F4358] text-center">
-            <span className="relative -top-3.5 bg-white px-3 text-sm font-black text-[#2F4358]">
+          <div className="col-span-2 mx-3 border-x-2 border-t-2 border-[#0B1B36] text-center">
+            <span className="relative -top-3.5 bg-white px-3 text-sm font-black text-[#0B1B36]">
               御社が担当
             </span>
           </div>
@@ -108,12 +108,12 @@ export function ApokomiProcess() {
             </li>
           ))}
         </ol>
-        <div className="mt-4 grid grid-cols-5 gap-1.5 text-sm text-[#241F20]/75">
+        <div className="mt-4 grid grid-cols-5 gap-1.5 text-sm text-[#001432]/75">
           {steps.map((s, i) => (
             <div key={s.no} className={i === 0 ? "pl-5" : "pl-8"}>
               <p>{s.note}</p>
               {s.no === "02" ? (
-                <p className="mt-2 text-xs leading-relaxed text-[#E05A0C]">
+                <p className="mt-2 text-xs leading-relaxed text-[#0037B9]">
                   {channelNames.join(" / ")}
                 </p>
               ) : null}
@@ -124,8 +124,8 @@ export function ApokomiProcess() {
         <div className="relative mt-2 grid grid-cols-5">
           <div className="col-start-3 col-end-5 flex items-center justify-center gap-3 pl-16">
             <BatonPass className="w-40" />
-            <p className="text-base font-black text-[#241F20]">
-              ここで<span className="text-[#E05A0C]">商談をパス</span>
+            <p className="text-base font-black text-[#001432]">
+              ここで<span className="text-[#0037B9]">商談をパス</span>
             </p>
           </div>
         </div>
@@ -139,14 +139,14 @@ export function ApokomiProcess() {
               <div className="my-4 flex items-center justify-center gap-2">
                 <BatonPass className="w-24" />
                 <p className="text-sm font-black">
-                  ここで<span className="text-[#E05A0C]">商談をパス</span>
+                  ここで<span className="text-[#0037B9]">商談をパス</span>
                 </p>
               </div>
             ) : null}
             <p
               className={cn(
                 "mb-2 text-sm font-black",
-                owner === "apokomi" ? "text-[#E05A0C]" : "text-[#2F4358]",
+                owner === "apokomi" ? "text-[#0037B9]" : "text-[#0B1B36]",
               )}
             >
               {owner === "apokomi" ? "アポコミが担当" : "御社が担当"}

@@ -30,6 +30,8 @@ export const site = {
     "脆弱性診断",
     "新規開拓",
     "新規開拓支援",
+    "経営顧問",
+    "事業グロース",
     "営業顧問",
     "顧問紹介",
     "COO紹介",
@@ -132,7 +134,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         slug: "ai-security",
         number: "01",
-        title: "セキュリティ対策",
+        title: "セキュリティ対策事業",
         href: "/services/security",
         subtitle: "Security",
         summary:
@@ -141,19 +143,8 @@ export const serviceCategories: ServiceCategory[] = [
         image: "/services/cards/ai-solutions.jpg",
         children: [
           {
-            slug: "web-security",
-            number: "01-1",
-            title: "ホームページセキュリティ対策",
-            href: "/services/web-security",
-            subtitle: "Website Security",
-            summary:
-              "問い合わせフォームや採用応募など、個人情報の入口になるホームページを守ります。「診断」「保守」「移行」の3つから必要なものだけを選べます。",
-            features: [],
-            image: "/services/cards/ai-solutions.jpg",
-          },
-          {
             slug: "ciso",
-            number: "01-2",
+            number: "01-1",
             title: "CISO・セキュリティ顧問",
             href: "/services/ciso",
             subtitle: "CISO / Security Advisor",
@@ -162,38 +153,49 @@ export const serviceCategories: ServiceCategory[] = [
             features: [],
             image: "/services/cards/ai-solutions.jpg",
           },
+          {
+            slug: "web-security",
+            number: "01-2",
+            title: "ホームページセキュリティ対策",
+            href: "/services/web-security",
+            subtitle: "Website Security",
+            summary:
+              "問い合わせフォームや採用応募など、個人情報の入口になるホームページを守ります。「診断」「保守」「移行」の3つから必要なものだけを選べます。",
+            features: [],
+            image: "/services/cards/ai-solutions.jpg",
+          },
         ],
       },
       {
         slug: "new-business-development",
         number: "02",
-        title: "新規開拓支援",
+        title: "経営顧問事業",
         href: "/services/sales",
-        subtitle: "New Business Development",
+        subtitle: "Growth Advisory",
         summary:
-          "ターゲット選定からアポイント獲得まで、新規顧客の開拓に必要な営業活動をワンストップで支援するソリューションです。",
+          "事業グロースを担う経営顧問・COOの紹介と、新規開拓のプロによるアポイント創出で、ベンチャー企業や新規事業の成長を「攻め」の両面から支援するソリューションです。",
         features: [],
         image: "/services/cards/talent.jpg",
         children: [
           {
-            slug: "apokomi",
-            number: "02-1",
-            title: "アポコミ（新規開拓支援）",
-            href: "/services/apokomi",
-            subtitle: "Inside Sales",
-            summary:
-              "テレアポ・フォーム・メール・手紙・SNSを総動員して、新規アポイントを獲りにいくインサイドセールス代行サービスです。",
-            features: [],
-            image: "/services/cards/talent.jpg",
-          },
-          {
             slug: "advisory",
-            number: "02-2",
+            number: "02-1",
             title: "顧問・COO紹介",
             href: "/services/advisory",
             subtitle: "Executive Advisor / COO",
             summary:
               "3年の成長を1年で。元上場企業役員や元メガバンクCOOなど各業界のプロが経営に伴走し、販路開拓・アライアンス開拓・つながりの紹介でベンチャー企業や新規事業の早期グロースを支援します。",
+            features: [],
+            image: "/services/cards/talent.jpg",
+          },
+          {
+            slug: "apokomi",
+            number: "02-2",
+            title: "アポコミ（新規開拓支援）",
+            href: "/services/apokomi",
+            subtitle: "Inside Sales",
+            summary:
+              "テレアポ・フォーム・メール・手紙・SNSを総動員して、新規アポイントを獲りにいくインサイドセールス代行サービスです。",
             features: [],
             image: "/services/cards/talent.jpg",
           },

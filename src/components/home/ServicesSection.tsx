@@ -29,18 +29,18 @@ type Pillar = {
 
 const pillars: Pillar[] = [
   {
-    slug: "new-business-development",
-    role: "攻め",
-    en: "Offense",
-    image: "/services/cards/talent.jpg",
-    tone: "light",
-  },
-  {
     slug: "ai-security",
     role: "守り",
     en: "Defense",
     image: "/services/cards/ai-solutions.jpg",
     tone: "dark",
+  },
+  {
+    slug: "new-business-development",
+    role: "攻め",
+    en: "Offense",
+    image: "/services/cards/talent.jpg",
+    tone: "light",
   },
 ];
 

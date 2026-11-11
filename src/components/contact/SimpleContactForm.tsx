@@ -31,7 +31,7 @@ const inquiryTypeLabels: Record<InquiryType, string> = {
 
 const serviceOptions = [
   { id: "ai-security", label: "セキュリティ対策事業" },
-  { id: "new-business-development", label: "新規開拓支援事業" },
+  { id: "new-business-development", label: "経営顧問事業" },
   { id: "web-security", label: "ホームページセキュリティ対策" },
   { id: "other-service", label: "その他" },
 ] as const;
@@ -40,7 +40,7 @@ type ServiceId = (typeof serviceOptions)[number]["id"];
 
 const partnerOptions = [
   { id: "security-partner", label: "セキュリティ対策事業のパートナー" },
-  { id: "new-business-partner", label: "新規開拓支援事業のパートナー" },
+  { id: "new-business-partner", label: "経営顧問事業のパートナー" },
 ] as const;
 
 type PartnerId = (typeof partnerOptions)[number]["id"];

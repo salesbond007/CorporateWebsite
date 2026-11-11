@@ -1,8 +1,8 @@
 /**
- * アポコミLP用のオリジナルのフラットイラスト(オレンジ基調)。
+ * アポコミLP用のオリジナルのフラットイラスト(青基調)。
  * 背景の波線などの装飾。
  */
-const ORANGE = "#F26B1D";
+const ORANGE = "#0046C8";
 
 /** 背景に流れる細い波線(装飾) */
 export function WaveLines({ className }: { className?: string }) {
