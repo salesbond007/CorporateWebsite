@@ -32,53 +32,105 @@ export function generateMetadata({
 
 /* ------------------------------------------------------------------ データ */
 
-const problems = [
-  "事業は伸びているが、次の成長を担う経営人材がいない",
-  "大手企業との取引や提携の糸口がつかめない",
-  "新規事業を立ち上げたが、販路が広がらない",
-  "経営の意思決定を相談できる相手がいない",
-  "フルタイムの役員を採用するのは、まだ早い",
+const BLUE = "#0046C8";
+
+/** 課題(キーワードを青で強調) */
+const problems: { text: ReactNode; image: string }[] = [
+  {
+    text: (
+      <>
+        次の成長を担う
+        <br />
+        <em>経営人材</em>がいない
+      </>
+    ),
+    image: "/illustrations/ld-1523-blue.webp",
+  },
+  {
+    text: (
+      <>
+        大手企業との
+        <br />
+        <em>取引・提携の糸口</em>が
+        <br />
+        つかめない
+      </>
+    ),
+    image: "/illustrations/ld-1531-blue.webp",
+  },
+  {
+    text: (
+      <>
+        新規事業の
+        <br />
+        <em>販路</em>が広がらない
+      </>
+    ),
+    image: "/illustrations/ld-1528-blue.webp",
+  },
+  {
+    text: (
+      <>
+        経営の意思決定を
+        <br />
+        <em>相談できる相手</em>が
+        <br />
+        いない
+      </>
+    ),
+    image: "/illustrations/ld-1538-blue.webp",
+  },
+  {
+    text: (
+      <>
+        フルタイムの役員を
+        <br />
+        採用するのは
+        <br />
+        <em>まだ早い</em>
+      </>
+    ),
+    image: "/illustrations/ld-742-blue.webp",
+  },
+];
+
+/** 中央の図: 顧問・COOが担う領域 */
+const domains = [
+  "経営戦略",
+  "事業計画",
+  "組織づくり",
+  "KPI管理",
+  "販路開拓",
+  "アライアンス",
+  "人脈紹介",
+  "IPO準備",
 ];
 
 const points = [
   {
-    title: (
-      <>
-        業界のつながりで、
-        <span className="text-[#0046C8]">販路を一気に広げる</span>
-      </>
-    ),
+    lead: "業界のつながりで、",
+    em: "販路を一気に広げる",
     label: "販路開拓",
     text: "顧問・COOが持つ業界のつながりを活かして、見込み顧客や代理店へのルートをつくります。自社だけでは届かなかった企業との商談につなげます。",
     image: "/illustrations/ld-752-blue.webp",
   },
   {
-    title: (
-      <>
-        大手企業・事業会社との
-        <span className="text-[#0046C8]">アライアンスをつくる</span>
-      </>
-    ),
+    lead: "大手企業・事業会社との",
+    em: "アライアンスをつくる",
     label: "アライアンス開拓",
     text: "大手企業や事業会社との提携・協業の機会をつくります。事業を一気に広げるパートナーとの関係を築き、成長の速度を上げます。",
     image: "/illustrations/ld-1498-blue.webp",
   },
   {
-    title: (
-      <>
-        成長に必要な人と、<span className="text-[#0046C8]">つながる</span>
-      </>
-    ),
+    lead: "成長に必要な人と、",
+    em: "確かにつながる",
     label: "つながりの紹介",
     text: "キーパーソン、金融機関、専門家など、次の成長に必要な人との出会いをつなぎます。プロの信用があるからこそ開く扉があります。",
     image: "/illustrations/ld-881-blue.webp",
   },
   {
-    title: (
-      <>
-        COOとして、<span className="text-[#0046C8]">経営の実行を担う</span>
-      </>
-    ),
+    lead: "COOとして、",
+    em: "経営の実行を担う",
     label: "経営への伴走",
     text: "事業計画、組織づくり、KPIの管理まで踏み込み、経営の一員として実行を推進します。戦略を「絵に描いた餅」で終わらせません。",
     image: "/illustrations/ld-736-blue.webp",
@@ -88,17 +140,17 @@ const points = [
 const professionals = [
   {
     role: "元上場企業 役員",
-    area: "経営戦略・組織づくり・IPO準備",
+    tags: ["経営戦略", "組織づくり", "IPO準備"],
     text: "上場企業の経営に携わった経験から、成長フェーズに合った戦略と組織づくりを支援します。",
   },
   {
     role: "元メガバンク COO",
-    area: "事業計画・財務・金融機関とのつながり",
+    tags: ["事業計画", "財務", "金融機関とのつながり"],
     text: "大組織の執行を担った経験と金融のネットワークで、事業計画の実行と資金面の打ち手を支えます。",
   },
   {
     role: "各業界のプロフェッショナル",
-    area: "IT・SaaS／製造／人材など",
+    tags: ["IT・SaaS", "製造", "人材"],
     text: "業界を知り尽くしたプロが、その業界ならではの販路やアライアンスの開拓を後押しします。",
   },
 ];
@@ -158,31 +210,57 @@ const faqs = [
 
 /* --------------------------------------------------------------- 小さな部品 */
 
+/** 2段組みのピル型ボタン(メイン文言 + 小さな補足 + 右端の丸アイコン) */
 function Cta({
-  label = "無料相談を申し込む",
-  variant = "solid",
+  label,
+  sub,
   href = `#${FORM_ID}`,
+  tone = "blue",
+  className,
 }: {
-  label?: string;
-  variant?: "solid" | "outline" | "white";
+  label: string;
+  sub?: string;
   href?: string;
+  tone?: "blue" | "accent" | "white";
+  className?: string;
 }) {
   return (
     <a
       href={href}
       className={cn(
-        "group inline-flex h-14 items-center justify-center gap-3 rounded-full px-8 text-[15px] font-bold transition hover:-translate-y-0.5 md:h-16 md:px-10",
-        variant === "solid" &&
-          "bg-[#0046C8] text-white shadow-[0_16px_36px_-16px_rgba(0,70,200,0.9)] hover:bg-[#0037B9]",
-        variant === "outline" &&
-          "border-2 border-[#0046C8] bg-white text-[#0046C8] hover:bg-[#F2F8FC]",
-        variant === "white" && "bg-white text-[#0046C8] hover:bg-[#F2F8FC]",
+        "group relative inline-flex h-16 min-w-[16rem] items-center justify-center rounded-full pl-8 pr-16 text-center transition duration-300 hover:-translate-y-0.5",
+        tone === "blue" &&
+          "bg-[linear-gradient(100deg,#0037B9,#0A6EF0)] text-white shadow-[0_14px_30px_-12px_rgba(0,70,200,0.8)]",
+        tone === "accent" &&
+          "bg-[linear-gradient(100deg,#FF8C64,#E6320A)] text-white shadow-[0_14px_30px_-12px_rgba(230,50,10,0.7)]",
+        tone === "white" &&
+          "bg-white text-[#0046C8] shadow-[0_14px_30px_-14px_rgba(0,20,50,0.5)]",
+        className,
       )}
     >
-      {label}
+      <span className="leading-tight">
+        <span className="block text-[17px] font-black tracking-[0.04em]">
+          {label}
+        </span>
+        {sub ? (
+          <span
+            className={cn(
+              "mt-0.5 block text-[11px] font-bold",
+              tone === "white" ? "text-[#64788C]" : "text-white/85",
+            )}
+          >
+            {sub}
+          </span>
+        ) : null}
+      </span>
       <span
         aria-hidden="true"
-        className="transition-transform group-hover:translate-x-1"
+        className={cn(
+          "absolute right-2 top-1/2 grid h-12 w-12 -translate-y-1/2 place-items-center rounded-full text-lg transition-transform duration-300 group-hover:translate-x-0.5",
+          tone === "white" ? "bg-[#0046C8] text-white" : "bg-white",
+          tone === "blue" && "text-[#0046C8]",
+          tone === "accent" && "text-[#E6320A]",
+        )}
       >
         →
       </span>
@@ -190,154 +268,209 @@ function Cta({
   );
 }
 
-/** salescore風の見出し: 大きな英字 + 日本語 */
+/** salescore風の見出し: 大きな英字 + 日本語を横並び + 下線(左側だけ青) */
 function Heading({
   en,
   children,
   dark,
-  align = "center",
 }: {
   en: string;
   children: ReactNode;
   dark?: boolean;
-  align?: "center" | "left";
 }) {
   return (
-    <Reveal variant="up" className={align === "center" ? "text-center" : ""}>
-      <p
+    <Reveal variant="up">
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:gap-5">
+        <p
+          className={cn(
+            "font-display text-[clamp(2.6rem,6vw,4rem)] font-black uppercase leading-none tracking-[0.02em]",
+            dark ? "text-white" : "text-[#0046C8]",
+          )}
+        >
+          {en}
+        </p>
+        <h2
+          className={cn(
+            "pb-1 text-lg font-bold tracking-[0.06em] md:text-xl",
+            dark ? "text-white" : "text-[#001432]",
+          )}
+        >
+          {children}
+        </h2>
+      </div>
+      <div
         className={cn(
-          "text-[clamp(2rem,4.4vw,3.25rem)] font-black uppercase leading-none tracking-[0.04em]",
-          dark ? "text-white" : "text-[#0046C8]",
+          "relative mt-5 h-px",
+          dark ? "bg-white/25" : "bg-[#D6DEEB]",
         )}
       >
-        {en}
-      </p>
-      <h2
-        className={cn(
-          "mt-3 text-base font-bold tracking-[0.08em] md:text-lg",
-          dark ? "text-white/80" : "text-[#001432]",
-        )}
-      >
-        {children}
-      </h2>
+        <span
+          className={cn(
+            "absolute inset-y-0 left-0 w-56 -translate-y-px border-b-2",
+            dark ? "border-white" : "border-[#0046C8]",
+          )}
+        />
+      </div>
     </Reveal>
   );
 }
 
-/** 3年かかる成長を1年で実現するイメージのグラフ(ダッシュボード風のカード) */
-function GrowthCard() {
+/** 背景に敷く大きな英字の透かし */
+function Watermark({
+  children,
+  className,
+}: {
+  children: string;
+  className?: string;
+}) {
   return (
-    <div className="relative rounded-2xl bg-white p-5 shadow-[0_40px_80px_-40px_rgba(0,20,50,0.45)] ring-1 ring-[#E4E8F2] md:p-7">
-      <div className="flex items-center justify-between">
-        <span className="flex gap-1.5" aria-hidden="true">
+    <p
+      aria-hidden="true"
+      className={cn(
+        "pointer-events-none absolute select-none font-display text-[clamp(5rem,14vw,12rem)] font-black uppercase leading-none tracking-tight text-[#0046C8]/[0.05]",
+        className,
+      )}
+    >
+      {children}
+    </p>
+  );
+}
+
+/** ファーストビュー右側: 経営ダッシュボード風のビジュアル(イメージ) */
+function DashboardVisual() {
+  const bars = [28, 36, 44, 58, 76, 100];
+  return (
+    <div className="relative">
+      {/* ブラウザ風のウィンドウ */}
+      <div className="overflow-hidden rounded-xl bg-white shadow-[0_40px_90px_-40px_rgba(0,20,50,0.55)] ring-1 ring-[#E4E8F2]">
+        <div className="flex items-center gap-2 border-b border-[#E4E8F2] bg-[#F8FAFE] px-4 py-2.5">
           <span className="h-2.5 w-2.5 rounded-full bg-[#FF5028]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#FFC53D]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#2BC48A]" />
-        </span>
-        <span className="text-xs font-bold tracking-[0.15em] text-[#64788C]">
-          GROWTH
-        </span>
+          <span className="ml-3 h-5 flex-1 rounded bg-white ring-1 ring-[#E4E8F2]" />
+        </div>
+        <div className="grid grid-cols-[4.5rem_1fr] text-[#001432]">
+          {/* サイドメニュー */}
+          <div className="space-y-3 border-r border-[#E4E8F2] bg-[#F8FAFE] p-3">
+            {["戦略", "計画", "組織", "KPI", "開拓"].map((m, i) => (
+              <p
+                key={m}
+                className={cn(
+                  "rounded-md px-2 py-1.5 text-center text-[10px] font-bold",
+                  i === 3 ? "bg-[#0046C8] text-white" : "text-[#64788C]",
+                )}
+              >
+                {m}
+              </p>
+            ))}
+          </div>
+          <div className="p-4 md:p-5">
+            <p className="text-xs font-bold">事業成長ダッシュボード</p>
+            <div className="mt-3 grid grid-cols-3 gap-2">
+              {[
+                { k: "成長スピード", v: "×3", c: "text-[#0046C8]" },
+                { k: "新規アライアンス", v: "UP", c: "text-[#E6320A]" },
+                { k: "商談パイプライン", v: "UP", c: "text-[#2BA36B]" },
+              ].map((x) => (
+                <div key={x.k} className="rounded-lg bg-[#F2F8FC] px-2 py-2">
+                  <p className="text-[9px] font-bold text-[#64788C]">{x.k}</p>
+                  <p
+                    className={cn(
+                      "mt-0.5 text-lg font-black leading-none",
+                      x.c,
+                    )}
+                  >
+                    {x.v}
+                  </p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-4 flex h-28 items-end gap-2 border-b border-[#D6DEEB] px-1">
+              {bars.map((h, i) => (
+                <span
+                  key={i}
+                  className={cn(
+                    "flex-1 rounded-t",
+                    i === bars.length - 1 ? "bg-[#0046C8]" : "bg-[#C9DAF7]",
+                  )}
+                  style={{ height: `${h}%` }}
+                />
+              ))}
+            </div>
+            <div className="mt-1.5 flex justify-between px-1 text-[9px] font-bold text-[#64788C]">
+              <span>開始</span>
+              <span>6カ月</span>
+              <span>1年</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <p className="mt-4 text-sm font-bold text-[#001432]">事業の成長カーブ</p>
-      <svg
-        viewBox="0 0 400 230"
-        className="mt-3 h-auto w-full"
-        role="img"
-        aria-label="プロの伴走で、3年かかる成長を1年で実現するイメージのグラフ"
-      >
-        {[40, 90, 140, 190].map((y) => (
-          <line
-            key={y}
-            x1="40"
-            y1={y}
-            x2="390"
-            y2={y}
-            stroke="#E4E8F2"
-            strokeWidth="1"
-          />
-        ))}
-        <line
-          x1="40"
-          y1="200"
-          x2="390"
-          y2="200"
-          stroke="#B8C3D1"
-          strokeWidth="1.5"
-        />
-        {["1年", "2年", "3年"].map((l, i) => (
-          <text
-            key={l}
-            x={150 + i * 115}
-            y="220"
-            fontSize="12"
-            fill="#64788C"
-            textAnchor="middle"
+
+      {/* 参画したプロのカード */}
+      <div className="absolute -bottom-8 -left-4 w-56 animate-float-y rounded-xl bg-white p-4 shadow-[0_24px_50px_-24px_rgba(0,20,50,0.6)] ring-1 ring-[#E4E8F2] md:-left-10">
+        <p className="text-[10px] font-bold tracking-[0.15em] text-[#0046C8]">
+          NEW MEMBER
+        </p>
+        <div className="mt-2 flex items-center gap-3">
+          <span
+            className="grid h-10 w-10 place-items-center rounded-full bg-[#E4ECFA]"
+            aria-hidden="true"
           >
-            {l}
-          </text>
-        ))}
-        {/* 自社だけの成長(3年) */}
-        <path
-          d="M40 195 C 160 185, 270 120, 380 50"
-          fill="none"
-          stroke="#B8C3D1"
-          strokeWidth="3"
-          strokeDasharray="6 6"
-        />
-        {/* プロが伴走した成長(1年) */}
-        <path
-          d="M40 195 C 90 180, 120 110, 155 50 L 380 40"
-          fill="none"
-          stroke="#0046C8"
-          strokeWidth="4"
-          strokeLinecap="round"
-        />
-        <circle cx="155" cy="50" r="7" fill="#0046C8" />
-        <circle cx="155" cy="50" r="13" fill="#0046C8" opacity="0.15" />
-        <line
-          x1="155"
-          y1="50"
-          x2="155"
-          y2="200"
-          stroke="#0046C8"
-          strokeWidth="1"
-          strokeDasharray="3 4"
-        />
-      </svg>
-      <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 text-xs font-bold">
-        <span className="flex items-center gap-2 text-[#0046C8]">
-          <span className="h-1 w-6 rounded-full bg-[#0046C8]" />
-          プロが伴走：1年
-        </span>
-        <span className="flex items-center gap-2 text-[#64788C]">
-          <span className="h-1 w-6 rounded-full bg-[#B8C3D1]" />
-          自社だけ：3年
-        </span>
+            <svg viewBox="0 0 24 24" className="h-6 w-6" fill={BLUE}>
+              <circle cx="12" cy="8" r="4" />
+              <path d="M4 21c.8-4.4 4-7 8-7s7.2 2.6 8 7z" />
+            </svg>
+          </span>
+          <div className="leading-tight">
+            <p className="text-sm font-black text-[#001432]">元メガバンクCOO</p>
+            <p className="text-[11px] font-bold text-[#64788C]">
+              COOとして参画しました
+            </p>
+          </div>
+        </div>
       </div>
-      {/* 浮かぶバッジ */}
-      <div className="absolute -left-4 -top-5 animate-float-y rounded-xl bg-[#001432] px-4 py-2.5 text-white shadow-lg md:-left-8">
-        <p className="text-[10px] font-bold tracking-[0.2em] text-white/60">
-          SPEED
-        </p>
-        <p className="text-lg font-black leading-tight">
-          ×<span className="text-2xl">3</span> のスピード
-        </p>
+      <div className="absolute -right-3 -top-5 animate-float-y rounded-full bg-[#001432] px-4 py-2 text-xs font-bold text-white shadow-lg [animation-delay:-1.5s] md:-right-6">
+        3年の成長を、<span className="text-[#7FB0FF]">1年</span>で
       </div>
     </div>
   );
 }
 
-function Avatar() {
+/** 中央に「顧問・COO」、周りに担う領域を配した円形の図 */
+function DomainCircle() {
   return (
-    <svg viewBox="0 0 64 64" className="h-16 w-16" aria-hidden="true">
-      <circle cx="32" cy="32" r="32" fill="#E4ECFA" />
-      <circle cx="32" cy="25" r="11" fill="#0046C8" opacity="0.85" />
-      <path
-        d="M12 56c2-11 10-17 20-17s18 6 20 17"
-        fill="#0046C8"
-        opacity="0.85"
+    <div className="relative mx-auto aspect-square w-full max-w-[420px]">
+      <div
+        aria-hidden="true"
+        className="absolute inset-[13%] rounded-full border border-dashed border-white/40"
       />
-    </svg>
+      <div className="absolute left-1/2 top-1/2 grid h-[34%] w-[34%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white text-center text-[#001432] shadow-[0_0_60px_-10px_rgba(127,176,255,0.8)]">
+        <div>
+          <p className="text-[10px] font-bold tracking-[0.2em] text-[#0046C8]">
+            ADVISOR
+          </p>
+          <p className="mt-1 text-base font-black leading-tight md:text-lg">
+            顧問
+            <br />
+            COO
+          </p>
+        </div>
+      </div>
+      {domains.map((d, i) => {
+        const a = ((-90 + (360 / domains.length) * i) * Math.PI) / 180;
+        const x = 50 + 37 * Math.cos(a);
+        const y = 50 + 37 * Math.sin(a);
+        return (
+          <span
+            key={d}
+            className="absolute grid h-[22%] w-[22%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/60 bg-[#001432]/70 text-center text-[11px] font-bold leading-tight text-white backdrop-blur-sm md:text-xs"
+            style={{ left: `${x}%`, top: `${y}%` }}
+          >
+            {d}
+          </span>
+        );
+      })}
+    </div>
   );
 }
 
@@ -353,7 +486,7 @@ export default function AdvisoryPage({
   const base = site.url.replace(/\/$/, "");
 
   return (
-    <div className="bg-white font-medium text-[#001432]">
+    <div className="bg-white font-medium text-[#001432] [&_em]:not-italic [&_em]:text-[#0046C8]">
       <JsonLd
         data={[
           breadcrumbJsonLd([
@@ -402,212 +535,284 @@ export default function AdvisoryPage({
         items={[
           { href: "#problem", label: "課題" },
           { href: "#about", label: "サービス概要" },
-          { href: "#point", label: "選ばれる理由" },
+          { href: "#reason", label: "選ばれる理由" },
           { href: "#professionals", label: "プロフェッショナル" },
           { href: "#flow", label: "ご支援の流れ" },
           { href: "#faq", label: "よくある質問" },
-          { href: `#${FORM_ID}`, label: "無料相談" },
         ]}
       />
 
+      {/* 画面右端に固定の相談ボタン(PC) */}
+      <a
+        href={`#${FORM_ID}`}
+        className="fixed right-0 top-1/2 z-30 hidden -translate-y-1/2 flex-col items-center gap-2 rounded-l-xl bg-[#0046C8] px-3 py-5 text-white shadow-[0_10px_30px_-10px_rgba(0,70,200,0.8)] transition hover:bg-[#0037B9] lg:flex"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          className="h-6 w-6"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          aria-hidden="true"
+        >
+          <path d="M4 5h16v11H9l-5 4z" strokeLinejoin="round" />
+        </svg>
+        <span className="text-sm font-bold [writing-mode:vertical-rl]">
+          無料相談
+        </span>
+      </a>
+
       {/* ファーストビュー */}
-      <section className="relative isolate overflow-hidden bg-white">
+      <section className="relative isolate overflow-hidden bg-[#F8FAFE]">
+        {/* 斜めの光の帯と細いグリッド */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(120deg,#FFFFFF_35%,#F2F8FC_35%,#F2F8FC_62%,#E4ECFA_62%)] opacity-70"
+          className="pointer-events-none absolute -right-40 -top-40 -z-10 h-[46rem] w-[46rem] rotate-12 bg-[linear-gradient(135deg,#E4ECFA_0%,transparent_60%)]"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 opacity-60 [background-image:linear-gradient(to_right,#E4E8F2_1px,transparent_1px),linear-gradient(to_bottom,#E4E8F2_1px,transparent_1px)] [background-size:56px_56px] [mask-image:linear-gradient(to_left,black,transparent_70%)]"
+          className="pointer-events-none absolute inset-0 -z-10 opacity-50 [background-image:linear-gradient(to_right,#E4E8F2_1px,transparent_1px),linear-gradient(to_bottom,#E4E8F2_1px,transparent_1px)] [background-size:48px_48px] [mask-image:linear-gradient(to_left,black,transparent_75%)]"
         />
-        <Container className="grid items-center gap-14 py-16 md:py-24 lg:grid-cols-[1.1fr_1fr]">
+        <Container className="grid items-center gap-16 pb-24 pt-14 md:pb-28 md:pt-20 lg:grid-cols-[1.05fr_1fr]">
           <div>
-            <p className="inline-flex animate-fade-up items-center gap-2 rounded-full bg-[#001432] px-4 py-1.5 text-xs font-bold tracking-[0.15em] text-white">
-              EXECUTIVE ADVISOR / COO
+            <p className="animate-fade-up text-sm font-bold tracking-[0.12em] text-[#0046C8]">
+              経営顧問・COO紹介
             </p>
-            <h1 className="mt-6">
-              <span
-                className="block animate-fade-up text-lg font-bold tracking-[0.1em] text-[#0046C8] md:text-xl"
-                style={{ animationDelay: "0.1s" }}
-              >
-                経営顧問・COO紹介
-              </span>
-              <span
-                className="mt-3 block animate-fade-up text-[clamp(2.4rem,5.6vw,4rem)] font-bold leading-[1.25] tracking-[0.04em] [word-break:auto-phrase]"
-                style={{ animationDelay: "0.2s" }}
-              >
-                3年の成長を、
-                <br />
-                <span className="text-[#0046C8]">1年</span>で実現する。
-              </span>
+            <h1
+              className="mt-4 animate-fade-up text-[clamp(2.3rem,5.4vw,3.9rem)] font-bold leading-[1.3] tracking-[0.06em] [word-break:auto-phrase]"
+              style={{ animationDelay: "0.1s" }}
+            >
+              <span className="text-[#0046C8]">3年</span>の成長を、
+              <br />
+              <span className="text-[#0046C8]">1年</span>で実現する
             </h1>
             <p
-              className="mt-6 max-w-xl animate-fade-up text-[15px] leading-[2] text-[#001432]/80 md:text-base"
-              style={{ animationDelay: "0.35s" }}
+              className="mt-6 max-w-xl animate-fade-up text-[15px] leading-[2] text-[#001432]/85"
+              style={{ animationDelay: "0.25s" }}
             >
-              各業界のプロが、御社の経営に伴走します。元上場企業役員や元メガバンクCOOなど、実績あるプロフェッショナルが、販路開拓・アライアンス開拓・つながりの紹介まで、ベンチャー企業や新規事業の早期グロースを支えます。
+              元上場企業役員や元メガバンクCOOなど、各業界のプロが経営に伴走。
+              <br className="hidden md:block" />
+              販路開拓・アライアンス開拓・つながりの紹介まで、
+              <br className="hidden md:block" />
+              ベンチャー企業や新規事業の
+              <strong className="font-bold text-[#001432]">早期グロース</strong>
+              を支えます。
             </p>
             <div
               className="mt-9 flex animate-fade-up flex-col gap-3 sm:flex-row"
-              style={{ animationDelay: "0.5s" }}
+              style={{ animationDelay: "0.4s" }}
             >
-              <Cta />
-              <Cta label="選ばれる理由を見る" variant="outline" href="#point" />
+              <Cta label="無料相談" sub="まずはお話をお聞かせください" />
+              <Cta
+                label="選ばれる理由"
+                sub="4つのポイントを見る"
+                href="#reason"
+                tone="accent"
+              />
             </div>
           </div>
           <div
-            className="animate-fade-up px-4 sm:px-8 lg:px-0"
+            className="animate-fade-up px-6 sm:px-10 lg:px-0"
             style={{ animationDelay: "0.3s" }}
           >
-            <GrowthCard />
+            <DashboardVisual />
           </div>
         </Container>
       </section>
 
-      {/* 実績のある人材(帯) */}
-      <section className="bg-[#001432] py-8 text-white">
+      {/* 実績のある人材 */}
+      <section className="border-y border-[#E4E8F2] bg-white py-10">
         <Container>
-          <ul className="grid gap-4 text-center sm:grid-cols-3">
+          <p className="text-center text-sm font-bold text-[#001432]">
+            各業界で
+            <span className="text-[#0046C8]">実績を持つプロフェッショナル</span>
+            が参画します
+          </p>
+          <ul className="mx-auto mt-6 grid max-w-4xl grid-cols-1 gap-4 sm:grid-cols-3">
             {[
-              "元上場企業役員",
-              "元メガバンクCOO",
-              "各業界のプロフェッショナル",
-            ].map((t) => (
+              { n: "元上場企業", s: "役員" },
+              { n: "元メガバンク", s: "COO" },
+              { n: "各業界の", s: "プロ" },
+            ].map((x) => (
               <li
-                key={t}
-                className="flex items-center justify-center gap-3 text-base font-bold md:text-lg"
+                key={x.n}
+                className="flex items-baseline justify-center gap-1.5 border-[#E4E8F2] sm:border-l sm:first:border-l-0"
               >
-                <span
-                  aria-hidden="true"
-                  className="grid h-7 w-7 place-items-center rounded-full bg-[#0046C8] text-xs"
-                >
-                  ✓
+                <span className="text-sm font-bold text-[#64788C]">{x.n}</span>
+                <span className="text-2xl font-black text-[#0046C8] md:text-3xl">
+                  {x.s}
                 </span>
-                {t}
               </li>
             ))}
           </ul>
         </Container>
       </section>
 
-      {/* 課題 */}
+      {/* 課題 + 解決(濃紺) */}
       <section
         id="problem"
-        className="scroll-mt-28 bg-[#F2F8FC] py-20 md:py-28"
+        className="relative isolate scroll-mt-28 overflow-hidden pt-20 md:pt-28"
       >
+        {/* 下側の濃紺の斜めの面 */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 top-[22rem] -z-10 bg-[linear-gradient(160deg,#0B2A6B_0%,#001432_55%)] [clip-path:polygon(0_12%,100%_0,100%_100%,0_100%)] md:top-[26rem]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 bottom-0 top-[22rem] -z-10 opacity-[0.08] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:64px_64px] md:top-[26rem]"
+        />
         <Container>
-          <Heading en="Problem">こんな課題はありませんか？</Heading>
-          <ul className="mx-auto mt-12 grid max-w-6xl gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <Reveal variant="up" className="text-center">
+            <p className="text-sm font-bold tracking-[0.1em] text-[#0046C8]">
+              PROBLEM
+            </p>
+            <h2 className="mt-3 text-[clamp(1.5rem,3vw,2.2rem)] font-bold tracking-[0.04em]">
+              こんな<em>課題</em>はありませんか？
+            </h2>
+          </Reveal>
+          <ul className="mx-auto mt-14 grid max-w-6xl grid-cols-2 gap-x-3 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
             {problems.map((p, i) => (
-              <Reveal key={p} variant="up" delay={i * 80} className="h-full">
-                <li className="flex h-full flex-col items-center rounded-2xl bg-white px-5 pb-7 pt-6 text-center shadow-[0_20px_40px_-30px_rgba(0,20,50,0.4)]">
-                  <span className="rounded-full bg-[#0046C8] px-4 py-1 text-xs font-bold text-white">
-                    課題 {i + 1}
+              <Reveal key={i} variant="up" delay={i * 80} className="h-full">
+                <li className="relative flex h-full flex-col items-center rounded-lg bg-[#F2F8FC] px-3 pb-6 pt-10 text-center shadow-[0_18px_36px_-24px_rgba(0,20,50,0.55)] ring-1 ring-white">
+                  {/* 番号の吹き出し */}
+                  <span className="absolute -top-6 left-1/2 grid h-14 w-14 -translate-x-1/2 place-items-center rounded-full bg-[#0046C8] text-white shadow-md">
+                    <span className="text-center leading-none">
+                      <span className="block text-[9px] font-bold">課題</span>
+                      <span className="block text-2xl font-black">{i + 1}</span>
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-[#0046C8]"
+                    />
                   </span>
-                  <p className="mt-5 text-[15px] font-bold leading-[1.8] [word-break:auto-phrase]">
-                    {p}
+                  <Image
+                    src={p.image}
+                    alt=""
+                    width={400}
+                    height={400}
+                    className="h-24 w-auto object-contain md:h-28"
+                  />
+                  <p className="mt-4 text-[15px] font-bold leading-[1.6] md:text-base">
+                    {p.text}
                   </p>
+                  <span
+                    aria-hidden="true"
+                    className="mt-auto pt-4 text-[#9CB3D8]"
+                  >
+                    ︾
+                  </span>
                 </li>
               </Reveal>
             ))}
           </ul>
-        </Container>
-      </section>
 
-      {/* サービス概要(濃紺) */}
-      <section
-        id="about"
-        className="relative isolate scroll-mt-28 overflow-hidden bg-[#001432] py-20 text-white md:py-28"
-      >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-40 top-0 -z-10 h-[30rem] w-[30rem] rounded-full bg-[#0046C8]/40 blur-[120px]"
-        />
-        <Container className="grid items-center gap-12 lg:grid-cols-2">
-          <div>
-            <Heading en="About" dark align="left">
-              顧問・COO紹介とは
-            </Heading>
+          {/* 解決: 図 + コピー */}
+          <div
+            id="about"
+            className="grid scroll-mt-28 items-center gap-12 py-20 text-white md:py-28 lg:grid-cols-2"
+          >
+            <Reveal variant="scale">
+              <DomainCircle />
+            </Reveal>
             <Reveal variant="up">
-              <p className="mt-8 text-[clamp(1.4rem,2.6vw,2rem)] font-bold leading-[1.6] [word-break:auto-phrase]">
-                経営のプロが、
-                <span className="text-[#7FB0FF]">
-                  御社のチームに加わります。
-                </span>
+              <p className="text-xl font-bold">顧問・COO紹介は</p>
+              <p className="mt-3 text-[clamp(1.6rem,3.2vw,2.4rem)] font-bold leading-[1.55] [word-break:auto-phrase]">
+                経営のプロが
+                <span className="text-[#7FB0FF]">戦略から実行まで</span>伴走し、
+                <span className="text-[#7FB0FF]">事業の成長を加速</span>する
               </p>
-              <p className="mt-6 text-[15px] leading-[2.05] text-white/80 md:text-base">
-                顧問・COO紹介は、御社の課題に合った経営のプロフェッショナルを、顧問またはCOO（最高執行責任者）としてご紹介するサービスです。戦略づくりから実行まで伴走し、業界のつながりを活かして販路とアライアンスを広げます。
+              <p className="mt-3 text-xl font-bold">ことで課題を解決します</p>
+              <span
+                aria-hidden="true"
+                className="mt-7 block h-0.5 w-14 bg-white"
+              />
+              <p className="mt-7 text-[15px] leading-[2.05] text-white/85">
+                御社の課題に合った経営のプロフェッショナルを、顧問またはCOO（最高執行責任者）としてご紹介します。業界のつながりを活かして販路とアライアンスを広げ、組織とKPIを動かして計画をやり切ります。
               </p>
-              <p className="mt-4 text-[15px] leading-[2.05] text-white/80 md:text-base">
+              <p className="mt-4 text-[15px] leading-[2.05] text-white/85">
                 正社員として採用するよりも早く、必要な期間だけ経営の力を補えます。
               </p>
             </Reveal>
           </div>
-          <Reveal
-            variant="up"
-            className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1"
-          >
-            {[
-              { k: "戦略", v: "成長フェーズに合った経営戦略と事業計画を描く" },
-              { k: "実行", v: "COOとして組織とKPIを動かし、計画をやり切る" },
-              {
-                k: "つながり",
-                v: "販路・アライアンス・キーパーソンへの扉を開く",
-              },
-            ].map((x) => (
-              <div
-                key={x.k}
-                className="flex items-center gap-5 rounded-2xl border border-white/15 bg-white/5 p-5 backdrop-blur-sm"
-              >
-                <span className="grid h-14 w-[4.5rem] shrink-0 place-items-center rounded-xl bg-[#0046C8] text-sm font-black">
-                  {x.k}
-                </span>
-                <p className="text-[15px] font-bold leading-relaxed text-white/90">
-                  {x.v}
-                </p>
-              </div>
-            ))}
-          </Reveal>
         </Container>
+
+        {/* 2分割のCTA帯 */}
+        <div className="grid text-white md:grid-cols-2">
+          <div className="flex flex-col items-center gap-4 bg-[#002A8C] px-6 py-10">
+            <p className="text-sm font-bold">まずは話を聞いてみたい方は</p>
+            <Cta label="無料相談" sub="オンラインで30分から" tone="accent" />
+          </div>
+          <div className="flex flex-col items-center gap-4 bg-[#0046C8] px-6 py-10">
+            <p className="text-sm font-bold">ご支援の進め方を知りたい方は</p>
+            <Cta
+              label="ご支援の流れ"
+              sub="4つのステップを見る"
+              href="#flow"
+              tone="white"
+            />
+          </div>
+        </div>
       </section>
 
-      {/* 選ばれる理由(POINT) */}
-      <section id="point" className="scroll-mt-28 py-20 md:py-28">
+      {/* 選ばれる理由 */}
+      <section
+        id="reason"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#F2F8FC] py-20 md:py-28"
+      >
+        <Watermark className="-left-4 top-6">Reason</Watermark>
         <Container>
           <Heading en="Reason">顧問・COO紹介が選ばれる4つの理由</Heading>
-          <div className="mx-auto mt-14 max-w-6xl space-y-10 md:space-y-14">
+          <p className="mt-6 max-w-3xl text-[15px] leading-[2] text-[#001432]/80">
+            成長を加速させるには、戦略を描くだけでなく、つながりを活かして実行までやり切ることが欠かせません。顧問・COO紹介は、その両方をプロの力で支えます。
+          </p>
+          <div className="mt-12 space-y-6">
             {points.map((pt, i) => (
               <Reveal key={pt.label} variant="up">
-                <div className="grid items-center gap-8 md:grid-cols-2 md:gap-14">
-                  <div className={cn(i % 2 === 1 && "md:order-2")}>
-                    <p className="flex items-end gap-3 text-[#0046C8]">
-                      <span className="text-sm font-black tracking-[0.15em]">
-                        POINT
-                      </span>
-                      <span className="text-6xl font-black leading-none md:text-7xl">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                    </p>
-                    <p className="mt-4 text-xs font-bold tracking-[0.2em] text-[#64788C]">
-                      {pt.label}
-                    </p>
-                    <h3 className="mt-2 text-[clamp(1.35rem,2.4vw,1.75rem)] font-bold leading-[1.5] [word-break:auto-phrase]">
-                      {pt.title}
-                    </h3>
-                    <p className="mt-4 text-[15px] leading-[2] text-[#001432]/80">
-                      {pt.text}
-                    </p>
-                  </div>
-                  <div className="grid place-items-center rounded-3xl bg-[#F2F8FC] p-8 md:p-10">
+                <article
+                  className={cn(
+                    "relative grid overflow-hidden rounded-xl bg-white shadow-[0_24px_50px_-34px_rgba(0,20,50,0.45)]",
+                    i % 2 === 1
+                      ? "md:grid-cols-[1fr_22rem]"
+                      : "md:grid-cols-[22rem_1fr]",
+                  )}
+                >
+                  <div
+                    className={cn(
+                      "grid place-items-center bg-[#E9F0FB] p-8",
+                      i % 2 === 1 && "md:order-2",
+                    )}
+                  >
                     <Image
                       src={pt.image}
                       alt=""
                       width={600}
                       height={560}
-                      className="h-48 w-auto object-contain md:h-60"
+                      className="h-44 w-auto object-contain md:h-52"
                     />
                   </div>
-                </div>
+                  <div className="relative p-7 md:p-10">
+                    <p className="absolute right-6 top-4 text-right font-display font-black leading-none text-[#0046C8] md:right-10 md:top-6">
+                      <span className="block text-sm tracking-[0.12em] md:text-lg">
+                        POINT
+                      </span>
+                      <span className="block text-5xl md:text-7xl">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </p>
+                    <p className="text-xs font-bold tracking-[0.2em] text-[#64788C]">
+                      {pt.label}
+                    </p>
+                    <h3 className="mt-3 pr-20 text-[clamp(1.3rem,2.4vw,1.75rem)] font-bold leading-[1.5] [word-break:auto-phrase] md:pr-28">
+                      {pt.lead}
+                      <br />
+                      <em>{pt.em}</em>
+                    </h3>
+                    <p className="mt-4 text-[15px] leading-[2] text-[#001432]/80">
+                      {pt.text}
+                    </p>
+                  </div>
+                </article>
               </Reveal>
             ))}
           </div>
@@ -617,11 +822,12 @@ export default function AdvisoryPage({
       {/* プロフェッショナル */}
       <section
         id="professionals"
-        className="scroll-mt-28 bg-[#F2F8FC] py-20 md:py-28"
+        className="relative isolate scroll-mt-28 overflow-hidden py-20 md:py-28"
       >
+        <Watermark className="-right-6 top-10">Members</Watermark>
         <Container>
           <Heading en="Professionals">ご紹介するプロフェッショナル</Heading>
-          <div className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-3">
+          <div className="mt-12 grid gap-6 md:grid-cols-3">
             {professionals.map((p, i) => (
               <Reveal
                 key={p.role}
@@ -629,58 +835,94 @@ export default function AdvisoryPage({
                 delay={i * 100}
                 className="h-full"
               >
-                <article className="flex h-full flex-col rounded-2xl bg-white p-7 shadow-[0_20px_40px_-30px_rgba(0,20,50,0.4)] md:p-8">
-                  <div className="flex items-center gap-4">
-                    <Avatar />
-                    <div>
-                      <p className="text-lg font-black leading-snug">
-                        {p.role}
-                      </p>
-                      <p className="mt-1 text-xs font-bold text-[#0046C8]">
-                        {p.area}
-                      </p>
-                    </div>
+                <article className="flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-[0_24px_50px_-34px_rgba(0,20,50,0.5)] ring-1 ring-[#E4E8F2]">
+                  <div className="relative grid h-40 place-items-center bg-[linear-gradient(135deg,#0037B9,#0A6EF0)]">
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-0 opacity-15 [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:28px_28px]"
+                    />
+                    <span
+                      className="relative grid h-20 w-20 place-items-center rounded-full bg-white/95"
+                      aria-hidden="true"
+                    >
+                      <svg
+                        viewBox="0 0 24 24"
+                        className="h-12 w-12"
+                        fill={BLUE}
+                      >
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 21c.8-4.4 4-7 8-7s7.2 2.6 8 7z" />
+                      </svg>
+                    </span>
+                    <span className="absolute bottom-3 left-4 text-[10px] font-bold tracking-[0.2em] text-white/80">
+                      PROFESSIONAL {String(i + 1).padStart(2, "0")}
+                    </span>
                   </div>
-                  <p className="mt-5 border-t border-[#E4E8F2] pt-5 text-[15px] leading-[1.95] text-[#001432]/80">
-                    {p.text}
-                  </p>
+                  <div className="flex flex-1 flex-col p-6 md:p-7">
+                    <h3 className="text-xl font-black">{p.role}</h3>
+                    <ul className="mt-3 flex flex-wrap gap-1.5">
+                      {p.tags.map((t) => (
+                        <li
+                          key={t}
+                          className="rounded border border-[#0046C8]/30 px-2 py-0.5 text-[11px] font-bold text-[#0046C8]"
+                        >
+                          #{t}
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-4 text-[15px] leading-[1.95] text-[#001432]/80">
+                      {p.text}
+                    </p>
+                  </div>
                 </article>
               </Reveal>
             ))}
           </div>
-          <p className="mt-6 text-center text-xs text-[#64788C]">
+          <p className="mt-6 text-xs text-[#64788C]">
             ※ ご紹介する人材の一例です。御社の課題と業界に合わせてご提案します。
           </p>
-        </Container>
-      </section>
 
-      {/* 対象企業 */}
-      <section className="py-20 md:py-28">
-        <Container>
-          <Heading en="For">こんな企業におすすめです</Heading>
-          <ul className="mx-auto mt-10 grid max-w-4xl gap-3 sm:grid-cols-2">
-            {targets.map((t, i) => (
-              <Reveal key={t} variant="up" delay={i * 70}>
-                <li className="flex h-full items-start gap-3 rounded-xl border border-[#E4E8F2] bg-white px-5 py-4 text-base font-bold leading-relaxed">
-                  <span
-                    aria-hidden="true"
-                    className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#0046C8] text-[11px] text-white"
+          {/* 対象企業 */}
+          <Reveal
+            variant="up"
+            className="mt-16 rounded-xl bg-[#001432] p-7 text-white md:p-10"
+          >
+            <div className="grid gap-6 md:grid-cols-[14rem_1fr] md:items-center">
+              <p className="text-xl font-bold leading-snug">
+                こんな企業に
+                <br className="hidden md:block" />
+                おすすめです
+              </p>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {targets.map((t) => (
+                  <li
+                    key={t}
+                    className="flex items-start gap-3 rounded-lg bg-white/10 px-4 py-3 text-[15px] font-bold leading-relaxed"
                   >
-                    ✓
-                  </span>
-                  {t}
-                </li>
-              </Reveal>
-            ))}
-          </ul>
+                    <span
+                      aria-hidden="true"
+                      className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#0A6EF0] text-[11px]"
+                    >
+                      ✓
+                    </span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Reveal>
         </Container>
       </section>
 
       {/* ご支援の流れ */}
-      <section id="flow" className="scroll-mt-28 bg-[#F2F8FC] py-20 md:py-28">
+      <section
+        id="flow"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#F2F8FC] py-20 md:py-28"
+      >
+        <Watermark className="-left-4 top-6">Flow</Watermark>
         <Container>
           <Heading en="Flow">ご支援の流れ</Heading>
-          <ol className="mx-auto mt-12 grid max-w-5xl gap-4 md:grid-cols-4">
+          <ol className="mt-12 grid gap-4 md:grid-cols-4">
             {flow.map((f, i) => (
               <Reveal
                 key={f.title}
@@ -688,11 +930,14 @@ export default function AdvisoryPage({
                 delay={i * 100}
                 className="h-full"
               >
-                <li className="relative h-full rounded-2xl bg-white p-6">
-                  <p className="text-xs font-black tracking-[0.2em] text-[#0046C8]">
-                    STEP {String(i + 1).padStart(2, "0")}
+                <li className="relative h-full rounded-xl bg-white p-6 shadow-[0_20px_40px_-32px_rgba(0,20,50,0.5)]">
+                  <p className="font-display text-4xl font-black leading-none text-[#0046C8]/20">
+                    {String(i + 1).padStart(2, "0")}
                   </p>
-                  <p className="mt-3 text-base font-bold">{f.title}</p>
+                  <p className="mt-3 text-xs font-black tracking-[0.2em] text-[#0046C8]">
+                    STEP {i + 1}
+                  </p>
+                  <p className="mt-1 text-lg font-bold">{f.title}</p>
                   <p className="mt-2 text-sm leading-relaxed text-[#001432]/70">
                     {f.text}
                   </p>
@@ -715,14 +960,16 @@ export default function AdvisoryPage({
       <section id="faq" className="scroll-mt-28 py-20 md:py-28">
         <Container>
           <Heading en="FAQ">よくある質問</Heading>
-          <div className="mx-auto mt-10 max-w-3xl space-y-3">
+          <div className="mt-10 space-y-3">
             {faqs.map((f) => (
               <details
                 key={f.q}
-                className="group rounded-xl border border-[#E4E8F2] bg-white"
+                className="group rounded-xl border border-[#E4E8F2] bg-white open:shadow-[0_20px_40px_-32px_rgba(0,20,50,0.5)]"
               >
                 <summary className="flex cursor-pointer list-none items-center gap-4 p-5 md:p-6 [&::-webkit-details-marker]:hidden">
-                  <span className="text-lg font-black text-[#0046C8]">Q</span>
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#0046C8] text-sm font-black text-white">
+                    Q
+                  </span>
                   <span className="flex-1 text-[15px] font-bold md:text-base">
                     {f.q}
                   </span>
@@ -734,8 +981,10 @@ export default function AdvisoryPage({
                   </span>
                 </summary>
                 <div className="flex gap-4 border-t border-[#E4E8F2] px-5 py-5 md:px-6">
-                  <span className="text-lg font-black text-[#64788C]">A</span>
-                  <p className="pt-0.5 text-[15px] leading-relaxed text-[#001432]/80">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#E4ECFA] text-sm font-black text-[#0046C8]">
+                    A
+                  </span>
+                  <p className="pt-1.5 text-[15px] leading-relaxed text-[#001432]/80">
                     {f.a}
                   </p>
                 </div>
@@ -745,32 +994,39 @@ export default function AdvisoryPage({
         </Container>
       </section>
 
-      {/* CTA帯 */}
-      <section className="bg-[linear-gradient(110deg,#0046C8,#0A6EF0)] py-14 text-white md:py-16">
-        <Container className="flex flex-col items-center justify-between gap-6 text-center md:flex-row md:text-left">
-          <div>
-            <p className="text-xs font-bold tracking-[0.25em] text-white/70">
-              CONTACT
-            </p>
-            <p className="mt-2 text-xl font-bold md:text-2xl">
-              まずは無料相談で、御社の成長プランをお聞かせください。
-            </p>
-          </div>
-          <Cta variant="white" />
-        </Container>
+      {/* 2分割のCTA帯 */}
+      <section className="grid text-white md:grid-cols-2">
+        <div className="flex flex-col items-center gap-4 bg-[#002A8C] px-6 py-12">
+          <p className="text-sm font-bold">御社に合うプロを知りたい方は</p>
+          <Cta
+            label="無料相談"
+            sub="まずはお話をお聞かせください"
+            tone="accent"
+          />
+        </div>
+        <div className="flex flex-col items-center gap-4 bg-[#0046C8] px-6 py-12">
+          <p className="text-sm font-bold">新規開拓も一緒に強化したい方は</p>
+          <Cta
+            label="アポコミを見る"
+            sub="インサイドセールス代行"
+            href={localePath("/services/apokomi", locale)}
+            tone="white"
+          />
+        </div>
       </section>
 
       {/* 無料相談フォーム */}
       <section
         id={FORM_ID}
-        className="scroll-mt-28 bg-[#F2F8FC] py-20 md:py-28"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#F2F8FC] py-20 md:py-28"
       >
+        <Watermark className="-right-6 top-6">Contact</Watermark>
         <Container>
           <Heading en="Contact">顧問・COO紹介の無料相談</Heading>
           <Reveal
             variant="up"
             delay={150}
-            className="mx-auto mt-10 max-w-4xl rounded-2xl bg-white p-6 shadow-[0_30px_60px_-40px_rgba(0,20,50,0.45)] md:p-10"
+            className="mx-auto mt-10 max-w-4xl rounded-xl bg-white p-6 shadow-[0_30px_60px_-40px_rgba(0,20,50,0.45)] md:p-10"
           >
             <ServiceLeadForm
               service="advisory"
