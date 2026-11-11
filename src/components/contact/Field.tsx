@@ -74,7 +74,10 @@ export function TextField(
 
 export function TextareaField(
   props: BaseProps &
-    Omit<React.TextareaHTMLAttributes<HTMLTextAreaElement>, "name" | "className">,
+    Omit<
+      React.TextareaHTMLAttributes<HTMLTextAreaElement>,
+      "name" | "className"
+    >,
 ) {
   const { label, name, required, hint, error, className, ...rest } = props;
   return (

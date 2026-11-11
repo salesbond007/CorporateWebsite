@@ -125,7 +125,10 @@ export function CompanyAutocomplete({
 
   return (
     <div ref={wrapperRef} className="relative">
-      <label htmlFor={name} className="flex items-center gap-2 text-sm font-semibold text-ink">
+      <label
+        htmlFor={name}
+        className="flex items-center gap-2 text-sm font-semibold text-ink"
+      >
         {label}
         {required ? (
           <span className="rounded bg-brand-500/10 px-1.5 py-0.5 text-[10px] font-bold text-brand-600">

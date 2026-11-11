@@ -10,7 +10,11 @@ type ClientLogo = {
 const clients: ClientLogo[] = [
   { name: "Fixx", src: "/clients/fixx.png", width: 116 },
   { name: "JAPAN AI株式会社", src: "/clients/japan-ai.webp", width: 208 },
-  { name: "LegalOn Technologies", src: "/clients/legalontechnology.jpg", width: 196 },
+  {
+    name: "LegalOn Technologies",
+    src: "/clients/legalontechnology.jpg",
+    width: 196,
+  },
   { name: "TOPPANコスモ", src: "/clients/toppan-cosmo.png", width: 162 },
   { name: "kubell", src: "/clients/kubell.jpeg", width: 128 },
   { name: "uluru", src: "/clients/ururu.png", width: 150 },

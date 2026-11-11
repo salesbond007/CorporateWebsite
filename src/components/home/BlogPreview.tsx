@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/Container";
-import { ArticleCard, ArticleCardSkeleton } from "@/components/blog/ArticleCard";
+import {
+  ArticleCard,
+  ArticleCardSkeleton,
+} from "@/components/blog/ArticleCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { getArticles } from "@/lib/microcms";
 import { localePath } from "@/i18n/path";

@@ -182,7 +182,7 @@ const enumLabels: Record<string, Record<string, string>> = {
   },
   serviceTypes: {
     "ai-security": "セキュリティ対策事業",
-    "new-business-development": "新規開拓支援事業",
+    "new-business-development": "経営顧問事業",
     "web-security": "ホームページセキュリティ対策",
     "other-service": "その他",
   },
@@ -203,7 +203,7 @@ const enumLabels: Record<string, Record<string, string>> = {
   service: serviceLeadServices,
   partnerTypes: {
     "security-partner": "セキュリティ対策事業のパートナー",
-    "new-business-partner": "新規開拓支援事業のパートナー",
+    "new-business-partner": "経営顧問事業のパートナー",
   },
 };
 

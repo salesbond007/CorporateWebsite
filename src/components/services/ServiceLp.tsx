@@ -8,7 +8,7 @@ import type { ServiceLeadService } from "@/lib/contact";
 import { site } from "@/lib/site";
 import { cn } from "@/lib/cn";
 
-type Accent = "orange" | "wine";
+type Accent = "blue" | "wine";
 
 type Img = { src: string; width: number; height: number; alt: string };
 
@@ -50,18 +50,18 @@ export type ServiceLpContent = {
 
 /** アクセントカラーごとのクラス(Tailwindが検出できるよう文字列をそのまま書く) */
 const tone = {
-  orange: {
-    text: "text-[#E05A0C]",
-    solid: "bg-[#F26B1D]",
-    hover: "hover:bg-[#E05A0C]",
-    soft: "bg-[#FFF3EA]",
-    pale: "bg-[#FFF8F2]",
-    ring: "ring-[#FFD9BC]",
-    border: "border-[#FFD9BC]",
-    heroBg: "bg-gradient-to-br from-[#FFF3EA] via-white to-[#FFE6D2]",
-    marker: "bg-[linear-gradient(transparent_62%,#FFD2B3_62%)]",
-    shadow: "shadow-[0_16px_36px_-14px_rgba(242,107,29,0.9)]",
-    cardShadow: "shadow-[0_18px_44px_-30px_rgba(242,107,29,0.6)]",
+  blue: {
+    text: "text-[#0046C8]",
+    solid: "bg-[#0046C8]",
+    hover: "hover:bg-[#0037B9]",
+    soft: "bg-[#EEF4FC]",
+    pale: "bg-[#F2F8FC]",
+    ring: "ring-[#D6E2F5]",
+    border: "border-[#D6E2F5]",
+    heroBg: "bg-gradient-to-br from-[#F2F8FC] via-white to-[#E4ECFA]",
+    marker: "bg-[linear-gradient(transparent_62%,#CFE0FA_62%)]",
+    shadow: "shadow-[0_16px_36px_-14px_rgba(0,70,200,0.7)]",
+    cardShadow: "shadow-[0_18px_44px_-30px_rgba(0,70,200,0.45)]",
     button: "rounded-full",
   },
   wine: {
@@ -151,7 +151,7 @@ function Check({ accent }: { accent: Accent }) {
 }
 
 /**
- * サービス紹介の簡易LP(顧問・COO紹介 / CISO・セキュリティ顧問)の共通レイアウト。
+ * サービス紹介の簡易LP(CISO・セキュリティ顧問など)の共通レイアウト。
  * 課題 → サービス概要 → 特徴 → (プラン) → 対象企業 → 流れ → よくある質問 → 無料相談
  */
 export function ServiceLp({ c }: { c: ServiceLpContent }) {

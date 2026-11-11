@@ -35,13 +35,13 @@
   },
   "hero": {
     "eyebrow": "B to B Sales Support",
-    "line1Prefix": "Offense: ",
-    "line1Highlight": "New Business Development",
+    "line1Prefix": "Defense: ",
+    "line1Highlight": "Security for the AI Era",
     "line1Suffix": ".",
-    "line2Prefix": "Defense: ",
-    "line2Highlight": "AI Security",
+    "line2Prefix": "Offense: ",
+    "line2Highlight": "Growth Advisory",
     "line2Suffix": ".",
-    "lead": "Two solutions that power your company's growth."
+    "lead": "Powered by professionals."
   },
   "blog": {
     "search": "Search articles",

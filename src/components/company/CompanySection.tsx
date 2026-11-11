@@ -11,7 +11,7 @@ type Row = {
 const linkClass =
   "inline-flex items-baseline gap-1 border-b border-ink/30 pb-0.5 text-ink transition-colors hover:border-brand-500 hover:text-brand-600";
 
-const rows: Row[] = [
+export const companyRows: Row[] = [
   { label: "会社名", value: "セールスボンド株式会社（Sales Bond Co., Ltd.）" },
   { label: "代表取締役", value: "飯住 孝裕" },
   { label: "設立", value: "2024年7月" },
@@ -52,9 +52,9 @@ const rows: Row[] = [
     label: "事業内容",
     value: (
       <>
-        AIセキュリティ対策事業
+        セキュリティ対策事業（社外CISO・セキュリティ顧問、ホームページセキュリティ対策）
         <br />
-        新規開拓支援事業(営業BPO)
+        経営顧問事業（顧問・COO紹介、インサイドセールス代行「アポコミ」）
       </>
     ),
   },
@@ -100,7 +100,7 @@ export function CompanySection() {
           <div className="lg:col-span-8">
             <Reveal variant="none">
               <dl className="border-t border-ink">
-                {rows.map((row, i) => (
+                {companyRows.map((row, i) => (
                   <div
                     key={row.label}
                     style={{ transitionDelay: `${i * 50}ms` }}
