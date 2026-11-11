@@ -7,7 +7,11 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { organizationJsonLd, websiteJsonLd, siteNavigationJsonLd } from "@/lib/jsonld";
+import {
+  organizationJsonLd,
+  websiteJsonLd,
+  siteNavigationJsonLd,
+} from "@/lib/jsonld";
 import { site } from "@/lib/site";
 import { isLocale, locales, ogLocale, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionary";
@@ -107,12 +111,10 @@ export default function LocaleLayout({
             organizationJsonLd(),
             websiteJsonLd(),
             siteNavigationJsonLd([
-              { name: "トップ", url: `/${locale}` },
+              { name: "トップページ", url: `/${locale}` },
+              { name: "会社概要", url: `/${locale}/company` },
               { name: "サービス一覧", url: `/${locale}/services` },
               { name: "ニュース", url: `/${locale}/news` },
-              { name: "会社概要", url: `/${locale}/company` },
-              { name: "採用情報", url: `/${locale}/recruit` },
-              { name: "問い合わせ", url: `/${locale}/contact` },
             ]),
           ]}
         />

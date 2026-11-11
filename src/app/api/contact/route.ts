@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import {
   apokomiLeadSchema,
+  serviceLeadSchema,
+  serviceLeadServices,
   generalContactSchema,
   professionalContactSchema,
   webSecurityDiagnosisSchema,
@@ -148,6 +150,8 @@ const fieldLabels: Record<string, string> = {
   workStyle: "希望稼働形態",
   portfolio: "ポートフォリオURL",
   budget: "予算",
+  service: "サービス",
+  topics: "ご相談テーマ",
 };
 
 const enumLabels: Record<string, Record<string, string>> = {
@@ -196,11 +200,18 @@ const enumLabels: Record<string, Record<string, string>> = {
     "over-30": "30件以上",
     undecided: "未定",
   },
+  service: serviceLeadServices,
   partnerTypes: {
     "security-partner": "セキュリティ対策事業のパートナー",
     "new-business-partner": "新規開拓支援事業のパートナー",
   },
 };
+
+/** 簡易LPのフォームで選ばれたサービス名(件名・自動返信用) */
+function serviceLabel(data: Record<string, unknown>): string {
+  const key = String(data.service ?? "") as keyof typeof serviceLeadServices;
+  return serviceLeadServices[key] ?? "お問い合わせ";
+}
 
 function humanize(key: string, value: unknown): string {
   if (Array.isArray(value)) {
@@ -234,9 +245,11 @@ function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
       ? "プロ人材お問い合わせ"
       : type === "apokomi_lead"
         ? "【アポコミ】無料相談・見積もり依頼"
-        : type === "web_security_diagnosis"
-          ? "ホームページセキュリティ 無料簡易診断のお申し込み"
-          : "お問い合わせ(企業)";
+        : type === "service_lead"
+          ? `【${serviceLabel(data)}】無料相談のお申し込み`
+          : type === "web_security_diagnosis"
+            ? "ホームページセキュリティ 無料簡易診断のお申し込み"
+            : "お問い合わせ(企業)";
 
   return `<!doctype html>
   <html><body style="font-family:-apple-system,'Segoe UI',sans-serif;color:#1A1A1A;">
@@ -265,6 +278,7 @@ export async function POST(req: Request) {
     type !== "professional" &&
     type !== "general" &&
     type !== "apokomi_lead" &&
+    type !== "service_lead" &&
     type !== "web_security_diagnosis"
   ) {
     return NextResponse.json({ error: "Invalid form type" }, { status: 400 });
@@ -275,9 +289,11 @@ export async function POST(req: Request) {
       ? professionalContactSchema
       : type === "apokomi_lead"
         ? apokomiLeadSchema
-        : type === "web_security_diagnosis"
-          ? webSecurityDiagnosisSchema
-          : generalContactSchema;
+        : type === "service_lead"
+          ? serviceLeadSchema
+          : type === "web_security_diagnosis"
+            ? webSecurityDiagnosisSchema
+            : generalContactSchema;
   const parsed = schema.safeParse(body);
 
   if (!parsed.success) {
@@ -299,9 +315,11 @@ export async function POST(req: Request) {
   const subject =
     type === "apokomi_lead"
       ? "【アポコミ】無料相談・見積もり依頼"
-      : type === "web_security_diagnosis"
-        ? "【無料簡易診断】ホームページセキュリティ対策のお申し込み"
-        : "ホームページからの問い合わせ";
+      : type === "service_lead"
+        ? `【${serviceLabel(parsed.data as Record<string, unknown>)}】無料相談のお申し込み`
+        : type === "web_security_diagnosis"
+          ? "【無料簡易診断】ホームページセキュリティ対策のお申し込み"
+          : "ホームページからの問い合わせ";
 
   if (!transporter) {
     console.warn(
@@ -330,6 +348,7 @@ export async function POST(req: Request) {
     if (
       type === "general" ||
       type === "apokomi_lead" ||
+      type === "service_lead" ||
       type === "web_security_diagnosis"
     ) {
       const senderEmail = (parsed.data as { email?: string }).email;
@@ -361,8 +380,28 @@ Email：info@salesbond.jp
 HP：https://www.salesbond1962.com
 ────────────────────────────
 ※このメールは自動送信です。ご返信いただいてもお答えできません。`
-            : type === "apokomi_lead"
+            : type === "service_lead"
               ? `${String((parsed.data as { company?: string }).company ?? "").trim()}
+${addressee} 様
+
+お世話になっております。
+セールスボンド株式会社でございます。
+
+この度は「${serviceLabel(parsed.data as Record<string, unknown>)}」の無料相談にお申し込みいただき、誠にありがとうございます。
+
+いただいた内容を確認のうえ、担当者より2営業日以内にご連絡いたします。今しばらくお待ちくださいますようお願いいたします。
+
+何卒よろしくお願い申し上げます。
+
+────────────────────────────
+セールスボンド株式会社
+〒160-0023 東京都新宿区西新宿3丁目3番13号 西新宿水間ビル2F
+Email：info@salesbond.jp
+HP：https://www.salesbond1962.com
+────────────────────────────
+※このメールは自動送信です。ご返信いただいてもお答えできません。`
+              : type === "apokomi_lead"
+                ? `${String((parsed.data as { company?: string }).company ?? "").trim()}
 ${addressee} 様
 
 お世話になっております。
@@ -381,7 +420,7 @@ Email：info@salesbond.jp
 HP：https://www.salesbond1962.com
 ────────────────────────────
 ※このメールは自動送信です。ご返信いただいてもお答えできません。`
-              : `${String((parsed.data as { company?: string }).company ?? "").trim()}
+                : `${String((parsed.data as { company?: string }).company ?? "").trim()}
 ${addressee} 様
 
 お世話になっております。
@@ -404,9 +443,11 @@ HP：https://www.salesbond1962.com
         const autoReplySubject =
           type === "web_security_diagnosis"
             ? "無料簡易診断のお申し込みありがとうございます(セールスボンド株式会社)"
-            : type === "apokomi_lead"
-              ? "無料相談・見積もりのご依頼ありがとうございます(アポコミ)"
-              : "お問い合わせありがとうございます(セールスボンド株式会社)";
+            : type === "service_lead"
+              ? `無料相談のお申し込みありがとうございます(${serviceLabel(parsed.data as Record<string, unknown>)})`
+              : type === "apokomi_lead"
+                ? "無料相談・見積もりのご依頼ありがとうございます(アポコミ)"
+                : "お問い合わせありがとうございます(セールスボンド株式会社)";
 
         try {
           await transporter.sendMail({

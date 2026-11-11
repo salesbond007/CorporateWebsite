@@ -12,7 +12,11 @@ export function generateMetadata({
   params: { locale: string };
 }): Metadata {
   if (!isLocale(params.locale)) return {};
-  return pageMetadata({ ...pageMeta.security, path: PATH, locale: params.locale });
+  return pageMetadata({
+    ...pageMeta.security,
+    path: PATH,
+    locale: params.locale,
+  });
 }
 
 export default function SecurityServicePage({
@@ -31,6 +35,11 @@ export default function SecurityServicePage({
       description={pageMeta.security.description}
       image="/services/cards/ai-solutions.jpg"
       related={[
+        {
+          title: "CISO・セキュリティ顧問",
+          text: "AIを使う会社のための社外CISO。AI利用ガイドラインの作成、AIツールの導入前チェック、セキュリティチェックシート対応まで、AI時代のセキュリティ体制づくりを支援します。",
+          href: "/services/ciso",
+        },
         {
           title: "ホームページセキュリティ対策",
           text: "問い合わせフォームや採用応募など、個人情報の入口になるホームページを「診断」「保守」「移行」で守ります。無料相談も受け付けています。",

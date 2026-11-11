@@ -21,11 +21,20 @@ export function organizationJsonLd() {
       "セキュリティ対策",
       "情報セキュリティ",
       "AIセキュリティ",
+      "CISO",
+      "社外CISO（vCISO）",
+      "セキュリティ顧問",
+      "生成AI利用ガイドライン",
+      "AIガバナンス",
+      "セキュリティチェックシート対応",
+      "上場準備（IPO）のセキュリティ体制整備",
       "ホームページセキュリティ",
       "WordPress保守",
       "脆弱性診断",
       "新規開拓支援",
       "営業顧問",
+      "顧問紹介",
+      "COO紹介",
       "営業代行",
       "インサイドセールス",
       "BtoB営業支援",
@@ -90,9 +99,7 @@ export function websiteJsonLd() {
  * SiteNavigationElement — 主要ナビ項目をクローラに提示し
  * サイトリンク(sitelinks)生成のヒントを与えます。
  */
-export function siteNavigationJsonLd(
-  items: { name: string; url: string }[],
-) {
+export function siteNavigationJsonLd(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -132,9 +139,7 @@ export function serviceJsonLd(service: {
   };
 }
 
-export function breadcrumbJsonLd(
-  items: { name: string; url: string }[],
-) {
+export function breadcrumbJsonLd(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",

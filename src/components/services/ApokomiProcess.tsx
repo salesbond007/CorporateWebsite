@@ -1,8 +1,8 @@
+import Image from "next/image";
 import { cn } from "@/lib/cn";
 
 const ORANGE = "#F26B1D";
 const NAVY = "#2F4358";
-const SKIN = "#FFD8BF";
 
 type Step = {
   no: string;
@@ -59,42 +59,16 @@ function chevron(first: boolean) {
     : "polygon(0 0, calc(100% - 18px) 0, 100% 50%, calc(100% - 18px) 100%, 0 100%, 18px 50%)";
 }
 
-/** バトンを手渡すイラスト(フラット) */
+/** 商談の受け渡し(握手)のイラスト。Loose Drawing の素材を色調整したもの */
 export function BatonPass({ className }: { className?: string }) {
   return (
-    <svg viewBox="0 0 200 90" className={className} aria-hidden="true">
-      <path
-        d="M8 34 h8 M2 44 h12 M8 54 h8"
-        stroke={ORANGE}
-        strokeWidth="3"
-        strokeLinecap="round"
-        opacity="0.5"
-      />
-      <rect x="20" y="33" width="58" height="22" rx="8" fill={ORANGE} />
-      <rect x="72" y="33" width="8" height="22" rx="2" fill="#fff" />
-      <ellipse cx="90" cy="44" rx="13" ry="12" fill={SKIN} />
-      <rect x="122" y="41" width="58" height="22" rx="8" fill={NAVY} />
-      <rect x="120" y="41" width="8" height="22" rx="2" fill="#fff" />
-      <ellipse cx="112" cy="52" rx="13" ry="12" fill={SKIN} />
-      <rect
-        x="74"
-        y="42"
-        width="54"
-        height="11"
-        rx="5.5"
-        fill="#FFB020"
-        transform="rotate(10 101 47)"
-      />
-      <rect
-        x="74"
-        y="42"
-        width="10"
-        height="11"
-        rx="3"
-        fill="#E59400"
-        transform="rotate(10 101 47)"
-      />
-    </svg>
+    <Image
+      src="/illustrations/ld-1500-orange.webp"
+      alt=""
+      width={694}
+      height={392}
+      className={className}
+    />
   );
 }
 
