@@ -110,30 +110,6 @@ const worries: {
   },
 ];
 
-const flow = [
-  {
-    title: "無料のAI利用チェック",
-    text: "オンライン30分で、気になる点を整理します",
-    when: "お申し込み後",
-  },
-  { title: "ご提案", text: "課題と規模に合うプランをご提案します", when: "" },
-  {
-    title: "ご契約",
-    text: "秘密保持と、診断する範囲を書面で決めます",
-    when: "",
-  },
-  {
-    title: "診断",
-    text: "AIの利用状況と弱点を見える化し、優先順位をつけます",
-    when: "1〜2カ月目",
-  },
-  {
-    title: "毎月の改善",
-    text: "定例で一つずつ直し、社員への説明会を経て、取引先に説明できる状態へ",
-    when: "3カ月目〜",
-  },
-];
-
 const faqs = [
   {
     q: "ほかのセキュリティ顧問・社外CISOとの違いは何ですか？",
@@ -387,7 +363,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
 
   const nav = [
     { href: "#service", label: "サービス" },
-    { href: "#flow", label: "導入の流れ" },
     { href: "#faq", label: "よくある質問" },
   ];
 
@@ -761,46 +736,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </p>
             </div>
           </Reveal>
-        </Container>
-      </section>
-
-      {/* ========== 9. 導入の流れ ========== */}
-      <section
-        id="flow"
-        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
-      >
-        <Container>
-          <SectionHead en="">導入の流れ</SectionHead>
-          <ol className="mt-12 grid gap-4 md:grid-cols-5">
-            {flow.map((f, i) => (
-              <Reveal
-                key={f.title}
-                variant="up"
-                delay={i * 80}
-                className="h-full"
-              >
-                <li className="relative h-full rounded-md bg-white p-5 shadow-[0_16px_34px_-28px_rgba(0,0,0,0.45)]">
-                  <p className="text-xs font-black tracking-[0.15em] text-brand-500">
-                    STEP {i + 1}
-                  </p>
-                  <p className="mt-2 text-base font-black leading-snug">
-                    {f.title}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-ink/70">
-                    {f.text}
-                  </p>
-                  {i < flow.length - 1 ? (
-                    <span
-                      aria-hidden="true"
-                      className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 place-items-center rounded-full bg-brand-500 text-xs text-white md:grid"
-                    >
-                      ›
-                    </span>
-                  ) : null}
-                </li>
-              </Reveal>
-            ))}
-          </ol>
         </Container>
       </section>
 
