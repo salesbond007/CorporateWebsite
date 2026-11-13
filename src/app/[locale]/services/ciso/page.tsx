@@ -495,138 +495,103 @@ function Pill({
   );
 }
 
-/* --------------------------------------------- ファーストビューの画面イメージ */
+/* ----------------------------------- ファーストビュー: 体制図と月次報告書 */
 
-function HeroScreen() {
-  const tools = [
-    { name: "ChatGPT Enterprise", dept: "全社", state: "承認済み", tone: "ok" },
-    { name: "議事録作成AI", dept: "営業部", state: "審査中", tone: "wait" },
-    { name: "画像生成AI", dept: "広報", state: "条件付き", tone: "wait" },
-    { name: "無料の翻訳AI", dept: "—", state: "利用禁止", tone: "ng" },
-  ] as const;
+/** 会社の中で、社外CISOがどこに入るかを示す体制図 */
+function HeroVisual() {
   return (
-    <div className="relative">
-      <Window
-        title="Bond AI ｜ AIセキュリティ レポート"
-        className="[transform:perspective(1800px)_rotateY(-9deg)_rotateX(2deg)] lg:origin-left"
-      >
-        <div className="grid grid-cols-[4.75rem_1fr] text-ink">
-          <div className="space-y-2 border-r border-[#EEDFE3] bg-[#FBF6F7] p-3">
-            {[
-              { k: "概要", on: true },
-              { k: "ルール" },
-              { k: "台帳" },
-              { k: "回答" },
-              { k: "報告" },
-            ].map((m) => (
-              <p
-                key={m.k}
-                className={cn(
-                  "rounded-md px-2 py-1.5 text-center text-[10px] font-bold",
-                  m.on ? "bg-brand-500 text-white" : "text-ink/55",
-                )}
-              >
-                {m.k}
-              </p>
-            ))}
-          </div>
-          <div className="p-4">
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                { k: "AIリスク評価", v: "B", d: "C→B に改善" },
-                { k: "承認済みAIツール", v: "12", d: "件" },
-                { k: "チェックシート", v: "回答済", d: "今月 2件" },
-              ].map((x) => (
-                <div
-                  key={x.k}
-                  className="rounded-lg border border-[#EEDFE3] px-2.5 py-2"
-                >
-                  <p className="text-[9px] font-bold text-ink/50">{x.k}</p>
-                  <p className="mt-1 text-lg font-black leading-none text-brand-500">
-                    {x.v}
-                  </p>
-                  <p className="mt-1 text-[9px] font-bold text-[#1E8A57]">
-                    {x.d}
-                  </p>
-                </div>
-              ))}
-            </div>
-            {/* リスクの推移 */}
-            <div className="mt-3 rounded-lg border border-[#EEDFE3] p-2.5">
-              <div className="flex items-center justify-between">
-                <p className="text-[10px] font-bold">リスク項目の推移</p>
-                <p className="text-[9px] font-bold text-ink/45">6カ月</p>
-              </div>
-              <svg
-                viewBox="0 0 260 70"
-                className="mt-1 h-auto w-full"
-                aria-hidden="true"
-              >
-                {[15, 35, 55].map((y) => (
-                  <line
-                    key={y}
-                    x1="0"
-                    y1={y}
-                    x2="260"
-                    y2={y}
-                    stroke={LINE}
-                    strokeWidth="1"
-                  />
-                ))}
-                <path
-                  d="M0 12 L52 18 L104 30 L156 40 L208 50 L260 56 L260 70 L0 70 Z"
-                  fill={W}
-                  opacity="0.08"
-                />
-                <path
-                  d="M0 12 L52 18 L104 30 L156 40 L208 50 L260 56"
-                  fill="none"
-                  stroke={W}
-                  strokeWidth="2.5"
-                />
-                {[0, 52, 104, 156, 208, 260].map((x, i) => (
-                  <circle
-                    key={x}
-                    cx={x}
-                    cy={[12, 18, 30, 40, 50, 56][i]}
-                    r="2.8"
-                    fill="#fff"
-                    stroke={W}
-                    strokeWidth="2"
-                  />
-                ))}
-              </svg>
-            </div>
-            {/* AIツール台帳 */}
-            <ul className="mt-3 divide-y divide-[#EEDFE3] rounded-lg border border-[#EEDFE3] text-[10px] font-bold">
-              {tools.map((t) => (
-                <li
-                  key={t.name}
-                  className="flex items-center gap-2 px-2.5 py-1.5"
-                >
-                  <span className="flex-1 truncate">{t.name}</span>
-                  <span className="w-10 text-ink/50">{t.dept}</span>
-                  <Pill tone={t.tone}>{t.state}</Pill>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </Window>
-      <div className="absolute -bottom-6 left-2 animate-float-y rounded-lg bg-white p-3.5 shadow-[0_24px_50px_-24px_rgba(60,15,25,0.5)] ring-1 ring-[#EEDFE3] md:-left-6">
-        <div className="flex items-center gap-3">
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-brand-50 text-brand-500">
-            <Icon name="person" className="h-5 w-5" />
+    <div className="relative px-2 pb-28 sm:px-6 lg:pr-0">
+      <div className="relative rounded-xl bg-white p-6 shadow-[0_40px_80px_-40px_rgba(60,15,25,0.45)] ring-1 ring-[#EEDFE3] md:p-8">
+        <div className="flex items-center justify-between">
+          <p className="text-sm font-black text-ink">御社のセキュリティ体制</p>
+          <span className="rounded-full bg-brand-50 px-3 py-1 text-[11px] font-bold text-brand-600">
+            Bond AI 導入後
           </span>
-          <div className="leading-tight">
-            <p className="text-[10px] font-bold tracking-[0.15em] text-brand-500">
-              社外CISO
-            </p>
-            <p className="text-sm font-black">
-              セキュリティの責任者がつきました
-            </p>
+        </div>
+
+        {/* 経営者 */}
+        <div className="mt-6 flex justify-center">
+          <div className="flex items-center gap-2 rounded-lg bg-[#F5F2F3] px-5 py-2.5 text-sm font-bold">
+            <Icon name="person" className="h-4 w-4 text-ink/60" />
+            経営者
           </div>
         </div>
+        <div aria-hidden="true" className="mx-auto h-5 w-0.5 bg-[#D9C3C9]" />
+
+        {/* 社外CISO(強調) */}
+        <div className="relative mx-auto max-w-[19rem] rounded-xl bg-[linear-gradient(120deg,#7A1E35,#B4475F)] p-4 text-white shadow-[0_18px_36px_-16px_rgba(122,30,53,0.7)]">
+          <div className="flex items-center gap-3">
+            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/20">
+              <Icon name="shield" className="h-6 w-6" />
+            </span>
+            <div className="leading-tight">
+              <p className="text-[10px] font-bold tracking-[0.15em] text-white/80">
+                社外CISO・セキュリティ顧問
+              </p>
+              <p className="mt-1 text-base font-black">Bond AI の専門家</p>
+              <p className="mt-1 text-[11px] text-white/80">
+                資格を持つセキュリティの責任者
+              </p>
+            </div>
+          </div>
+          <span className="absolute -right-3 -top-3 rounded-full bg-[#F5B82E] px-2.5 py-1 text-[10px] font-black text-ink shadow">
+            責任者
+          </span>
+        </div>
+
+        {/* 枝分かれ */}
+        <div aria-hidden="true" className="mx-auto h-5 w-0.5 bg-[#D9C3C9]" />
+        <div
+          aria-hidden="true"
+          className="mx-auto h-0.5 w-[70%] bg-[#D9C3C9]"
+        />
+        <div className="grid grid-cols-3 gap-2 pt-0">
+          {[
+            { k: "情報システム", v: "導入前チェック" },
+            { k: "総務・人事", v: "AI利用ルール" },
+            { k: "各部門", v: "社員への説明会" },
+          ].map((d) => (
+            <div key={d.k} className="flex flex-col items-center">
+              <span aria-hidden="true" className="h-4 w-0.5 bg-[#D9C3C9]" />
+              <div className="w-full rounded-lg border border-[#EEDFE3] bg-[#FBF6F7] px-2 py-2.5 text-center">
+                <p className="text-[12px] font-bold">{d.k}</p>
+                <p className="mt-1 text-[10px] font-bold text-brand-500">
+                  {d.v}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* 取引先への説明 */}
+        <div className="mt-5 flex items-center gap-3 rounded-lg border border-dashed border-brand-200 px-4 py-3">
+          <Icon name="doc" className="h-5 w-5 shrink-0 text-brand-500" />
+          <p className="text-[12px] font-bold leading-snug">
+            取引先・監査へ「セキュリティの責任者は社外CISOです」と説明できる
+          </p>
+        </div>
+      </div>
+
+      {/* 月次報告書 */}
+      <div className="absolute bottom-0 right-2 w-[15rem] animate-float-y rounded-lg bg-white p-4 shadow-[0_24px_50px_-22px_rgba(60,15,25,0.5)] ring-1 ring-[#EEDFE3] sm:right-6 lg:right-0">
+        <div className="flex items-center justify-between">
+          <p className="text-[12px] font-black">月次報告書</p>
+          <span className="text-[10px] font-bold text-ink/45">社外CISO</span>
+        </div>
+        <ul className="mt-2.5 space-y-1.5 text-[11px] font-bold">
+          {[
+            "AI利用ルールの見直し",
+            "AIツールの導入前チェック",
+            "取引先チェックシート回答",
+          ].map((t) => (
+            <li key={t} className="flex items-center gap-2">
+              <span className="grid h-4 w-4 place-items-center rounded-full bg-[#E3F5EC] text-[9px] text-[#1E8A57]">
+                ✓
+              </span>
+              {t}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
@@ -1195,7 +1160,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </nav>
       </header>
 
-      {/* 2. ファーストビュー: 左に文章、右に画面イメージ */}
+      {/* 2. ファーストビュー: 左に文章、右に体制図 */}
       <section
         id="top"
         className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#FFFFFF_0%,#FBF4F6_100%)]"
@@ -1211,9 +1176,13 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         />
         <Container className="grid items-center gap-14 pb-24 pt-12 md:pt-16 lg:grid-cols-[1fr_1.05fr] lg:pb-28">
           <div>
-            <p className="inline-flex animate-fade-up items-center gap-2 text-sm font-bold text-brand-500">
-              <span aria-hidden="true" className="h-px w-8 bg-brand-500" />
-              中小・中堅企業のための AIセキュリティ
+            <p className="flex animate-fade-up flex-wrap items-center gap-x-3 gap-y-2">
+              <span className="rounded-md bg-brand-500 px-3 py-1.5 text-sm font-black tracking-[0.04em] text-white md:text-base">
+                社外CISO・セキュリティ顧問サービス
+              </span>
+              <span className="text-sm font-bold text-brand-500">
+                中小・中堅企業のための AIセキュリティ
+              </span>
             </p>
             <h1
               className="mt-5 animate-fade-up text-[clamp(1.85rem,3.6vw,2.9rem)] font-bold leading-[1.45] tracking-[0.03em]"
@@ -1233,6 +1202,29 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             >
               社員がAIを安心して使えるルールづくりから、取引先への説明まで。資格を持つセキュリティの専門家が、あなたの会社の責任者として月額でつきます。
             </p>
+            {/* 任せられること */}
+            <ul
+              className="mt-6 grid max-w-xl animate-fade-up grid-cols-2 gap-2 sm:grid-cols-4"
+              style={{ animationDelay: "0.32s" }}
+              aria-label="Bond AI に任せられること"
+            >
+              {[
+                { t: "社外CISO（責任者）", i: "person" },
+                { t: "AI利用ルールづくり", i: "doc" },
+                { t: "チェックシート回答", i: "check" },
+                { t: "脆弱性診断・月次報告", i: "chart" },
+              ].map((x) => (
+                <li
+                  key={x.t}
+                  className="flex flex-col items-center gap-1.5 rounded-lg bg-white px-2 py-3 text-center text-[12px] font-bold leading-snug ring-1 ring-[#EEDFE3]"
+                >
+                  <span className="grid h-8 w-8 place-items-center rounded-full bg-brand-50 text-brand-500">
+                    <Icon name={x.i as "person"} className="h-4 w-4" />
+                  </span>
+                  {x.t}
+                </li>
+              ))}
+            </ul>
             <div
               className="mt-8 flex animate-fade-up flex-col gap-3 sm:flex-row sm:flex-wrap"
               style={{ animationDelay: "0.4s" }}
@@ -1255,10 +1247,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             className="animate-fade-up px-2 sm:px-6 lg:px-0"
             style={{ animationDelay: "0.3s" }}
           >
-            <HeroScreen />
-            <p className="mt-10 text-right text-[10px] text-ink/40">
-              ※ 画面はイメージです
-            </p>
+            <HeroVisual />
           </div>
         </Container>
       </section>
