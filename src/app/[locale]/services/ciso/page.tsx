@@ -14,6 +14,7 @@ import {
 } from "@/components/services/FlatIcons";
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
 import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
+import { CisoPricing } from "@/components/services/CisoPricing";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { pageMeta, pageMetadata } from "@/lib/seo";
@@ -363,6 +364,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
 
   const nav = [
     { href: "#service", label: "サービス" },
+    { href: "#price", label: "料金" },
     { href: "#faq", label: "よくある質問" },
   ];
 
@@ -514,7 +516,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           className="absolute -left-40 top-20 -z-10 h-96 w-96 rounded-full bg-white blur-[80px]"
         />
         <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
-          <div>
+          <div className="text-center lg:text-left">
             <p className="inline-block whitespace-nowrap bg-brand-500 px-4 py-2 text-[clamp(0.95rem,1.8vw,1.3rem)] font-bold tracking-[0.06em] text-white sm:px-5 sm:py-2.5">
               社外CISO・セキュリティ顧問サービス
             </p>
@@ -527,10 +529,10 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               情報漏えいが起きてからでは、
               <span className="text-brand-500">もう遅い。</span>
             </p>
-            <p className="mt-3 max-w-[34rem] text-[15px] font-bold leading-[2] text-ink/80 [word-break:auto-phrase] md:text-base">
+            <p className="mx-auto mt-3 max-w-[34rem] lg:mx-0 text-[15px] font-bold leading-[2] text-ink/80 [word-break:auto-phrase] md:text-base">
               社員が入力したひとつの情報が、取引停止や信用の失墜につながる時代です。資格を持つ専門家が御社の責任者として、事故が起きる前に防ぐ体制をつくります。
             </p>
-            <div className="mt-10">
+            <div className="mt-10 flex justify-center lg:block">
               <BigButton
                 label="無料相談"
                 sub="オンライン30分・売り込みなし"
@@ -789,6 +791,25 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </p>
             </div>
           </Reveal>
+        </Container>
+      </section>
+
+      {/* ========== 9. 料金プラン ========== */}
+      <section
+        id="price"
+        className="relative isolate scroll-mt-28 overflow-x-clip bg-white py-16 md:py-28"
+      >
+        <Watermark className="-left-4 top-4">Price</Watermark>
+        <Container>
+          <SectionHead en="Price">
+            会社の規模と課題に合わせて選べる3つのプラン
+          </SectionHead>
+          <p className="mt-4 text-sm font-bold text-[#5C5458] md:text-[15px]">
+            すべて税別・月額。最低契約期間は6カ月です。
+          </p>
+          <div className="mt-12 md:mt-14">
+            <CisoPricing ctaHref={`#${FORM_ID}`} />
+          </div>
         </Container>
       </section>
 

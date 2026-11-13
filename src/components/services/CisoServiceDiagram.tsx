@@ -12,7 +12,7 @@ import type { ReactNode } from "react";
 const steps = [
   {
     en: "RISK ASSESSMENT",
-    title: "リスクアセスメント",
+    title: "リスクアセスメント・脆弱性診断",
     plain: "弱点を見える化し、優先順位をつける",
     advisor: "外部からの自動診断",
     ciso: "シャドーAIの可視化＋脆弱性診断",
@@ -82,7 +82,7 @@ const icons: ReactNode[] = [
 
 /* 円の中のステップ名の改行位置(文言は steps.title と同じ) */
 const lines = [
-  ["リスク", "アセスメント"],
+  ["リスク", "アセスメント・", "脆弱性診断"],
   ["ポリシー策定・", "AIガバナンス"],
   ["セキュリティ", "教育・啓発"],
   ["サプライチェーン", "セキュリティ対応"],
@@ -109,7 +109,7 @@ function Cycle() {
     <div
       className="relative mx-auto aspect-square w-full max-w-[520px] text-white"
       role="img"
-      aria-label="リスクアセスメント、ポリシー策定・AIガバナンス、セキュリティ教育・啓発、サプライチェーンセキュリティ対応の4ステップを、継続的にまわします"
+      aria-label="リスクアセスメント・脆弱性診断、ポリシー策定・AIガバナンス、セキュリティ教育・啓発、サプライチェーンセキュリティ対応の4ステップを、継続的にまわします"
     >
       <svg
         viewBox="0 0 100 100"

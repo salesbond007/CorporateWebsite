@@ -3,11 +3,8 @@ const nextConfig = {
   reactStrictMode: true,
   /** 削除したページは関連ページへ恒久リダイレクト(検索結果に古いページが残らないように) */
   async redirects() {
-    const toServices = [
-      "physical-ai-training",
-      "bondtech",
-      "hardware-development",
-    ];
+    // physical-ai-training は検索結果から早く消すため、middleware で 410(削除済み)を返す
+    const toServices = ["bondtech", "hardware-development"];
     return [
       ...toServices.map((slug) => ({
         source: `/:locale(ja|en)/services/${slug}`,
