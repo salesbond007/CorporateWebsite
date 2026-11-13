@@ -639,46 +639,69 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </div>
       </section>
 
-      {/* ========== 6. 選ばれる理由(POINT) ========== */}
+      {/* ========== 6. 実現する3つのこと(BENEFIT) ========== */}
       <section className="relative isolate overflow-hidden py-20 md:py-28">
-        <Watermark className="-left-4 top-4">Reason</Watermark>
+        <Watermark className="-left-4 top-4">Benefit</Watermark>
         <Container>
-          <SectionHead en="Reason">Bond AI が選ばれる3つの理由</SectionHead>
+          <SectionHead en="Benefit">実現する3つのこと</SectionHead>
           <div className="mt-12 space-y-8">
             {[
               {
-                lead: "AIを禁止せず、",
-                em: "安全に使えるルール",
-                text: "入力してよい情報・ダメな情報、使ってよいツール、導入時の承認の流れまで。禁止ではなく、社員が安心して使える状態をつくります。",
+                lead: "AI利用による",
+                em: "情報漏洩を防ぐ",
+                text: "社員がAIに入力してよい情報・いけない情報と、使ってよいツールを決め、全社員に周知します。",
+                items: [
+                  "顧客情報や機密情報のAIへの入力を防ぐルールができる",
+                  "新しいAIツールは、専門家の確認を通してから導入できる",
+                  "会社が把握していないAIの利用（シャドーAI）を見つけて、減らせる",
+                ],
+                stat: null,
                 visual: "policy" as const,
               },
               {
-                lead: "契約後すぐに、",
-                em: "診断から始める",
-                text: "最初の1〜2カ月でAIの利用状況と弱点を見える化。年1回の脆弱性診断もプランに含め、結果は専門家が分かりやすく説明します。",
+                lead: "ランサムウェアなどの",
+                em: "サイバー攻撃に対策できる",
+                text: "専門家が自社の弱点を診断し、直すべき点を優先順位つきで示します。",
+                items: [
+                  "外部から狙われやすい弱点が分かり、対策できる",
+                  "なりすましメールやAIを使った詐欺への対策ができる",
+                  "被害にあった時の連絡体制と、初動の手順が決まる",
+                ],
+                stat: {
+                  before: "ランサムウェア被害の",
+                  num: "63.3%",
+                  after: "は中小企業",
+                  source: "2025年、警察白書",
+                },
                 visual: "diagnosis" as const,
               },
               {
-                lead: "取引先に、",
-                em: "責任者として名前を出せる",
-                text: "チェックシートの回答から社外CISOとしての名前の掲載まで。「専門家が責任者としてついています」と取引先に言える状態をつくります。",
+                lead: "取引先や上場審査の",
+                em: "セキュリティ確認に対応できる",
+                text: "審査で問われる「セキュリティの体制」と「責任者」を、専門家が整えます。",
+                items: [
+                  "取引先のセキュリティチェックシートに回答できる",
+                  "社外CISOとして、専門家の名前を記載できる",
+                  "取引先や監査法人に提出できる説明資料がそろう",
+                ],
+                stat: {
+                  before: "発注側の大企業の",
+                  num: "84.4%",
+                  after: "が、取引先のセキュリティを確認",
+                  source: "キヤノンITソリューションズ",
+                },
                 visual: "checksheet" as const,
               },
             ].map((r, i) => (
               <Reveal key={r.em} variant="up">
                 <article className="relative grid items-center gap-8 overflow-hidden rounded-lg bg-white py-8 pl-0 pr-6 shadow-[0_20px_44px_-34px_rgba(0,0,0,0.4)] md:py-10 md:pr-10 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
-                  {/* 背景の大きな丸 */}
-                  <span
-                    aria-hidden="true"
-                    className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full border-[40px] border-brand-500/[0.04]"
-                  />
                   <div className="pl-6 lg:-ml-2 lg:pl-0">
                     <FeatureVisual kind={r.visual} />
                   </div>
                   <div className="relative pl-6 lg:pl-0">
                     <p className="text-right font-black leading-[0.85] text-ink lg:absolute lg:-top-4 lg:right-0">
                       <span className="block text-2xl tracking-[0.02em] md:text-4xl">
-                        POINT
+                        BENEFIT
                       </span>
                       <span className="block text-6xl text-brand-500 md:text-[6.5rem]">
                         {String(i + 1).padStart(2, "0")}
@@ -689,9 +712,34 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                       <br />
                       <span className="text-brand-500">{r.em}</span>
                     </h3>
-                    <p className="mt-5 text-[15px] leading-[2] text-ink/80">
+                    <p className="mt-4 text-[15px] leading-[2] text-ink/80">
                       {r.text}
                     </p>
+                    <ul className="mt-5 space-y-2.5 border-t border-[#EADFE2] pt-5">
+                      {r.items.map((t) => (
+                        <li
+                          key={t}
+                          className="flex gap-2.5 text-[15px] font-bold leading-relaxed text-ink"
+                        >
+                          <Check />
+                          {t}
+                        </li>
+                      ))}
+                    </ul>
+                    {r.stat ? (
+                      <div className="mt-6 border-l-4 border-brand-500 bg-[#FBF6F7] px-5 py-4">
+                        <p className="text-[15px] font-bold leading-relaxed text-ink">
+                          {r.stat.before}
+                          <span className="mx-0.5 text-[1.9rem] font-black leading-none text-brand-500">
+                            {r.stat.num}
+                          </span>
+                          {r.stat.after}
+                        </p>
+                        <p className="mt-1.5 text-xs text-ink/60">
+                          （{r.stat.source}）
+                        </p>
+                      </div>
+                    ) : null}
                   </div>
                 </article>
               </Reveal>
