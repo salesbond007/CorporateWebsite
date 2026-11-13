@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
@@ -42,14 +41,6 @@ const pillars: Record<
     anchor: "advisory",
     tone: "blue",
   },
-};
-
-/** 各サービスの挿絵 */
-const thumbs: Record<string, string> = {
-  ciso: "/illustrations/ld-947-wine.webp",
-  "web-security": "/illustrations/ld-1636-wine.webp",
-  advisory: "/illustrations/ld-949-blue.webp",
-  apokomi: "/illustrations/ld-990-blue.webp",
 };
 
 const toneClass = {
@@ -217,24 +208,8 @@ export default function ServicesPage({
                       <li>
                         <Link
                           href={ch.href ? localePath(ch.href, locale) : "#"}
-                          className="group grid overflow-hidden border border-ink/10 bg-white transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgba(29,5,11,0.35)] sm:grid-cols-[13rem_1fr]"
+                          className="group grid overflow-hidden border border-ink/10 bg-white transition-shadow duration-500 hover:shadow-[0_30px_60px_-30px_rgba(29,5,11,0.35)]"
                         >
-                          <div
-                            className={cn(
-                              "relative grid place-items-center p-6",
-                              t.soft,
-                            )}
-                          >
-                            {thumbs[ch.slug] ? (
-                              <Image
-                                src={thumbs[ch.slug]}
-                                alt=""
-                                width={400}
-                                height={400}
-                                className="h-36 w-auto object-contain transition-transform duration-700 ease-expo group-hover:scale-105 sm:h-40"
-                              />
-                            ) : null}
-                          </div>
                           <div className="flex flex-col p-6 md:p-8">
                             <p
                               className={cn(
