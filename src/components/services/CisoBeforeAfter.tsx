@@ -1,52 +1,141 @@
-import Image from "next/image";
-import type { ReactNode } from "react";
+import type { ComponentType } from "react";
+import { IconChecksheet, IconShadowAi, IconSoloIt } from "./FlatIcons";
 
 /**
- * Bond AI セキュリティ LP: 月額で CISO / セキュリティ顧問に任せると、セキュリティがどう強くなるかを示す図。
- * 導入前(課題) → 月額で任せる(Bond AI セキュリティ) → 導入後(強化された状態) の3列。各列の上に写真。
- * 写真: Unsplash(商用利用可・クレジット不要)と自社素材。人物はイメージ。
+ * Bond AI セキュリティ LP: 月額で CISO / セキュリティ顧問に任せると、何が変わるかを示す図。
+ * 写真は使わず、お悩み欄と同じイラスト + 矢印 + テキストで、
+ * 「いまの課題」→「導入後」を1行ずつ対応させて見せる。
  */
 
-const C = {
-  wine: "#7A1F3D",
-  wineDark: "#5A142C",
-  text: "#1F1A1C",
-  sub: "#5C5458",
-  line: "#E9E1DD",
-  gray: "#F1EFEC",
-};
+const rows: {
+  Icon: ComponentType<{ className?: string }>;
+  before: string;
+  after: string;
+}[] = [
+  {
+    Icon: IconSoloIt,
+    before: "セキュリティの専任者がいない",
+    after: "責任者が決まり、体制が整う",
+  },
+  {
+    Icon: IconShadowAi,
+    before: "AIの使い方にルールがない",
+    after: "AIを安全に使えるルールが浸透",
+  },
+  {
+    Icon: IconChecksheet,
+    before: "取引先・審査に説明できない",
+    after: "取引先・審査に説明できる",
+  },
+];
 
-const before = ["セキュリティの専任者がいない", "AIの使い方にルールがない", "取引先・審査に説明できない"];
-const after = ["責任者が決まり、体制が整う", "AIを安全に使えるルールが浸透", "取引先・審査に説明できる"];
-
-function Arrow() {
+function Mark({ className }: { className?: string }) {
   return (
-    <div aria-hidden="true" className="flex items-center justify-center py-1 md:py-0">
-      <svg viewBox="0 0 24 24" className="h-8 w-8 rotate-90 md:rotate-0" fill="none">
-        <path d="M5 12h12M12 6l6 6-6 6" stroke={C.wine} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+    <span
+      aria-hidden="true"
+      className={`grid place-items-center rounded-lg bg-white text-brand-500 ${className ?? ""}`}
+    >
+      <svg viewBox="0 0 24 24" className="h-[55%] w-[55%]" fill="none">
+        <path
+          d="M12 2.5l8 3v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10v-6z"
+          fill="currentColor"
+        />
+        <path
+          d="M8.2 12l2.6 2.6 5-5"
+          stroke="#fff"
+          strokeWidth="2.2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
       </svg>
-    </div>
+    </span>
   );
 }
 
-function Photo({ src, alt, label, tone }: { src: string; alt: string; label: string; tone: "gray" | "wine" }) {
+function ArrowRight() {
   return (
-    <div className="relative aspect-[16/10] overflow-hidden">
-      <Image src={src} alt={alt} fill sizes="(max-width:768px) 100vw, 33vw" className="object-cover" />
-      <span
-        className="absolute left-0 top-0 px-3 py-1.5 text-xs font-bold text-white"
-        style={{ backgroundColor: tone === "wine" ? C.wine : "#3B3537" }}
-      >
-        {label}
-      </span>
-    </div>
+    <svg
+      aria-hidden="true"
+      viewBox="0 0 24 24"
+      className="h-6 w-6 shrink-0 text-brand-500"
+      fill="none"
+    >
+      <path
+        d="M4 12h14M13 6l6 6-6 6"
+        stroke="currentColor"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
-function Card({ children, border }: { children: ReactNode; border: string }) {
+function CheckBadge() {
   return (
-    <div className="flex flex-col overflow-hidden rounded-[12px] border bg-white" style={{ borderColor: border, borderWidth: border === C.wine ? 2 : 1 }}>
-      {children}
+    <span
+      aria-hidden="true"
+      className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-500 text-white"
+    >
+      <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none">
+        <path
+          d="M3 8.5l3 3 7-7"
+          stroke="currentColor"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
+  );
+}
+
+function CrossBadge() {
+  return (
+    <span
+      aria-hidden="true"
+      className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[#8A8185] text-white"
+    >
+      <svg viewBox="0 0 16 16" className="h-3 w-3" fill="none">
+        <path
+          d="M4 4l8 8M12 4l-8 8"
+          stroke="currentColor"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+        />
+      </svg>
+    </span>
+  );
+}
+
+/** 中央の「月額で任せる」帯 */
+function Bridge({ vertical }: { vertical?: boolean }) {
+  return (
+    <div
+      className={
+        vertical
+          ? "flex h-full flex-col items-center justify-center gap-3 rounded-lg bg-brand-500 px-4 py-6 text-center text-white"
+          : "flex items-center gap-3 rounded-lg bg-brand-500 px-4 py-3.5 text-white"
+      }
+    >
+      <Mark className={vertical ? "h-14 w-14" : "h-11 w-11 shrink-0"} />
+      <div className={vertical ? "" : "min-w-0"}>
+        <p className="text-[11px] font-bold tracking-[0.08em] text-white/80">
+          月額で任せる
+        </p>
+        <p className="mt-0.5 text-[15px] font-black leading-snug md:text-base">
+          CISO／
+          <br className={vertical ? "" : "hidden"} />
+          セキュリティ顧問
+        </p>
+        <p
+          className={`mt-1.5 text-xs leading-relaxed text-white/85 ${vertical ? "" : "hidden"}`}
+        >
+          資格を持つ専門家が
+          <br />
+          担当につきます
+        </p>
+      </div>
     </div>
   );
 }
@@ -54,60 +143,122 @@ function Card({ children, border }: { children: ReactNode; border: string }) {
 export function CisoBeforeAfter() {
   return (
     <div
-      className="grid items-stretch gap-2 md:grid-cols-[1fr_2.5rem_1fr_2.5rem_1fr] md:gap-0"
       role="group"
-      aria-label="月額でCISO・セキュリティ顧問に任せることで、セキュリティが強化される流れ"
+      aria-label="月額でCISO・セキュリティ顧問に任せると、課題がどう変わるか"
     >
-      {/* 導入前 */}
-      <Card border={C.line}>
-        <Photo src="/photos/ciso/before.webp" alt="付箋に埋もれて対応に追われる担当者(イメージ)" label="いまの御社" tone="gray" />
-        <div className="flex-1 p-5 md:p-6" style={{ backgroundColor: C.gray }}>
-          <p className="text-lg font-bold" style={{ color: C.text }}>
-            守りが手薄な状態
-          </p>
-          <ul className="mt-3 space-y-2">
-            {before.map((t) => (
-              <li key={t} className="flex gap-2 text-sm leading-relaxed" style={{ color: "#3B3537" }}>
-                <span aria-hidden="true" className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full" style={{ backgroundColor: C.sub }} />
-                {t}
-              </li>
-            ))}
-          </ul>
+      {/* ===== PC: 左右で1行ずつ対応させる ===== */}
+      <div className="hidden grid-cols-[1fr_auto_11rem_auto_1fr] items-stretch gap-x-3 md:grid">
+        {/* 見出し行 */}
+        <p className="pb-3 text-center text-sm font-bold tracking-[0.06em] text-ink/60">
+          いまの御社
+        </p>
+        <span />
+        <span />
+        <span />
+        <p className="pb-3 text-center text-sm font-bold tracking-[0.06em] text-brand-500">
+          導入後の御社
+        </p>
+
+        {/* 左: 課題 */}
+        <ul className="row-span-1 space-y-3">
+          {rows.map((r) => (
+            <li
+              key={r.before}
+              className="flex h-[5.5rem] items-center gap-3 rounded-lg bg-[#F1EFEC] px-4"
+            >
+              <r.Icon className="h-16 w-20 shrink-0" />
+              <span className="text-[15px] font-bold leading-snug text-ink/80 [word-break:auto-phrase]">
+                {r.before}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <div className="flex flex-col justify-center">
+          <ArrowRight />
         </div>
-      </Card>
-
-      <Arrow />
-
-      {/* 月額で任せる */}
-      <Card border={C.wine}>
-        <Photo src="/services/cards/talent.jpg" alt="セキュリティの専門家が経営者と打ち合わせをしている様子(イメージ)" label="月額で任せる" tone="wine" />
-        <div className="flex-1 p-5 text-white md:p-6" style={{ backgroundColor: C.wine }}>
-          <p className="text-lg font-bold leading-snug">CISO／セキュリティ顧問</p>
-          <p className="mt-3 text-sm leading-relaxed text-white/90">資格を持つ専門家が、御社のセキュリティの担当につきます。</p>
+        <Bridge vertical />
+        <div className="flex flex-col justify-center">
+          <ArrowRight />
         </div>
-      </Card>
+        {/* 右: 導入後 */}
+        <ul className="space-y-3">
+          {rows.map((r) => (
+            <li
+              key={r.after}
+              className="flex h-[5.5rem] items-center gap-3 rounded-lg border-2 border-brand-500 bg-white px-4"
+            >
+              <CheckBadge />
+              <span className="text-[15px] font-black leading-snug text-brand-600 [word-break:auto-phrase]">
+                {r.after}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      <Arrow />
-
-      {/* 導入後 */}
-      <Card border={C.wine}>
-        <Photo src="/photos/ciso/after.webp" alt="体制が整い、安心して仕事を進めるチーム(イメージ)" label="導入後の御社" tone="wine" />
-        <div className="flex-1 p-5 md:p-6">
-          <p className="text-lg font-bold" style={{ color: C.wineDark }}>
-            セキュリティを強化
-          </p>
-          <ul className="mt-3 space-y-2">
-            {after.map((t) => (
-              <li key={t} className="flex gap-2 text-sm font-bold leading-relaxed" style={{ color: C.wineDark }}>
-                <svg viewBox="0 0 16 16" aria-hidden="true" className="mt-[4px] h-3.5 w-3.5 shrink-0">
-                  <path d="M2 8.5l4 4 8-9" fill="none" stroke={C.wine} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-                {t}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Card>
+      {/* ===== スマホ: 縦に 課題 → 任せる → 導入後 ===== */}
+      <div className="md:hidden">
+        <p className="text-sm font-bold text-ink/60">いまの御社</p>
+        <ul className="mt-2 space-y-2">
+          {rows.map((r) => (
+            <li
+              key={r.before}
+              className="flex items-center gap-3 rounded-lg bg-[#F1EFEC] px-3 py-2"
+            >
+              <r.Icon className="h-12 w-14 shrink-0" />
+              <span className="text-[14px] font-bold leading-snug text-ink/80">
+                {r.before}
+              </span>
+              <span className="ml-auto">
+                <CrossBadge />
+              </span>
+            </li>
+          ))}
+        </ul>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          className="mx-auto my-2 h-7 w-7 text-brand-500"
+          fill="none"
+        >
+          <path
+            d="M12 4v14M6 13l6 6 6-6"
+            stroke="currentColor"
+            strokeWidth="2.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <Bridge />
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          className="mx-auto my-2 h-7 w-7 text-brand-500"
+          fill="none"
+        >
+          <path
+            d="M12 4v14M6 13l6 6 6-6"
+            stroke="currentColor"
+            strokeWidth="2.6"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+        <p className="text-sm font-bold text-brand-500">導入後の御社</p>
+        <ul className="mt-2 space-y-2">
+          {rows.map((r) => (
+            <li
+              key={r.after}
+              className="flex items-center gap-3 rounded-lg border-2 border-brand-500 bg-white px-3 py-3"
+            >
+              <CheckBadge />
+              <span className="text-[14px] font-black leading-snug text-brand-600">
+                {r.after}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
