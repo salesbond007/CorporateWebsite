@@ -576,9 +576,9 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </p>
             <div className="mt-10">
               <BigButton
-                label="資料ダウンロード"
-                sub="こちらから無料"
-                icon="doc"
+                label="無料相談"
+                sub="オンライン30分・売り込みなし"
+                icon="check"
                 href="#check"
               />
             </div>
@@ -972,9 +972,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       >
         <Watermark className="-right-6 top-4">Contact</Watermark>
         <Container>
-          <SectionHead en="Contact">
-            資料ダウンロード・無料のAI利用チェック
-          </SectionHead>
+          <SectionHead en="Contact">無料相談・資料請求</SectionHead>
           <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
             <div>
               <dl className="space-y-6 text-[15px] leading-[1.9] text-ink/80">
@@ -1266,12 +1264,12 @@ function SplitCta() {
   return (
     <div className="flex flex-col items-center gap-4 bg-brand-500 px-6 py-12 text-white">
       <p className="text-sm font-bold md:text-base">
-        サービスの内容・導入の流れをまとめた資料をお送りします
+        セキュリティの専門家が、御社の現状と優先して手を打つべき点を無料で整理します
       </p>
       <BigButton
-        label="資料ダウンロード"
-        sub="こちらから無料"
-        icon="doc"
+        label="無料相談"
+        sub="オンライン30分・売り込みなし"
+        icon="check"
         tone="white"
       />
     </div>
