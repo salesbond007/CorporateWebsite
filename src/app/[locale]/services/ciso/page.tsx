@@ -12,6 +12,7 @@ import {
   IconShadowAi,
   IconSoloIt,
 } from "@/components/services/FlatIcons";
+import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { pageMeta, pageMetadata } from "@/lib/seo";
@@ -107,24 +108,6 @@ const worries: {
     Icon: IconAiRush,
   },
 ];
-
-/** サービス概要: プロが代行する仕事 */
-const services = [
-  {
-    t: "責任者（社外CISO）",
-    d: "社外CISOとして、御社の責任者を務めます",
-    i: "person",
-  },
-  { t: "ルールづくり", d: "AIの使い方や社内規程を整えます", i: "doc" },
-  { t: "診断・点検", d: "弱点を見える化し、優先順位をつけます", i: "chart" },
-  {
-    t: "取引先・審査対応",
-    d: "チェックシート回答や説明を引き受けます",
-    i: "check",
-  },
-  { t: "社員への説明", d: "決めたルールを全社員に浸透させます", i: "bell" },
-  { t: "事故の初動", d: "もしもの時の判断と対応を助言します", i: "shield" },
-] as const;
 
 const flow = [
   {
@@ -668,105 +651,20 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <Container>
           <SectionHead en="Service" />
           <Reveal variant="up" className="mt-10 text-center">
-            <p className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
+            <h2 className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
               セキュリティの<span className="text-brand-500">プロ</span>が、
               <br className="hidden sm:block" />
               御社のセキュリティ対策を
               <span className="text-brand-500">まるごと代行</span>します
-            </p>
+            </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
               専任の担当者を雇わなくても大丈夫。資格を持つ専門家が、御社のセキュリティ担当として月額でつき、必要な対策をすべて引き受けます。
             </p>
           </Reveal>
 
-          {/* 図: 中央に CISO / セキュリティ顧問、周りに代行する6つの仕事 */}
-          <Reveal
-            variant="up"
-            className="relative isolate mt-12 overflow-hidden rounded-lg px-4 py-10 text-white md:px-10 md:py-14"
-          >
-            <Image
-              src="/services/cards/ai-solutions.jpg"
-              alt=""
-              fill
-              sizes="100vw"
-              className="-z-20 object-cover"
-            />
-            <div
-              aria-hidden="true"
-              className="absolute inset-0 -z-10 bg-[linear-gradient(120deg,rgba(24,26,38,0.93)_0%,rgba(30,30,46,0.88)_55%,rgba(58,22,36,0.86)_100%)]"
-            />
-            <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
-              <div className="relative mx-auto aspect-square w-full max-w-[480px]">
-                {/* 点線の輪 */}
-                <svg
-                  aria-hidden="true"
-                  viewBox="0 0 100 100"
-                  className="absolute inset-0 h-full w-full"
-                >
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="37"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.55)"
-                    strokeWidth="0.35"
-                    strokeDasharray="1.2 1.4"
-                  />
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="46"
-                    fill="none"
-                    stroke="rgba(255,255,255,0.12)"
-                    strokeWidth="0.3"
-                  />
-                </svg>
-                {/* 中央 */}
-                <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center">
-                  <Icon name="shield" className="h-14 w-14 md:h-20 md:w-20" />
-                  <p className="mt-2 text-[clamp(1rem,2.4vw,1.5rem)] font-black leading-tight tracking-[0.04em]">
-                    CISO
-                    <br />
-                    セキュリティ顧問
-                  </p>
-                </div>
-                {/* 周りの6つ */}
-                {services.map((x, i) => {
-                  const ang = ((-90 + 60 * i) * Math.PI) / 180;
-                  return (
-                    <span
-                      key={x.t}
-                      className="absolute flex h-[27%] w-[27%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-white/70 bg-white/10 px-1 text-center backdrop-blur-sm"
-                      style={{
-                        left: `${50 + 37 * Math.cos(ang)}%`,
-                        top: `${50 + 37 * Math.sin(ang)}%`,
-                      }}
-                    >
-                      <Icon name={x.i} className="h-6 w-6 md:h-8 md:w-8" />
-                      <span className="mt-1 text-[10px] font-bold leading-tight [word-break:auto-phrase] sm:text-xs md:text-[13px]">
-                        {x.t}
-                      </span>
-                    </span>
-                  );
-                })}
-              </div>
-              <ul className="space-y-3">
-                {services.map((x) => (
-                  <li
-                    key={x.t}
-                    className="flex gap-3 border-b border-white/15 pb-3"
-                  >
-                    <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-500">
-                      <Icon name={x.i} className="h-4 w-4" />
-                    </span>
-                    <span>
-                      <span className="block font-black">{x.t}</span>
-                      <span className="block text-sm text-white/75">{x.d}</span>
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {/* 図: サービスの全体像(4ステップ × 2プラン) */}
+          <Reveal variant="up" className="mt-12">
+            <CisoServiceDiagram />
           </Reveal>
         </Container>
         <div className="mt-20 md:mt-24">
