@@ -12,6 +12,7 @@ import {
   IconShadowAi,
   IconSoloIt,
 } from "@/components/services/FlatIcons";
+import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
 import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -537,13 +538,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         />
         <Container className="grid items-center gap-12 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <p className="inline-flex items-stretch overflow-hidden rounded-lg shadow-[0_10px_24px_-14px_rgba(122,30,53,0.8)]">
-              <span className="grid place-items-center bg-[#5A1528] px-3 text-white md:px-3.5">
-                <Icon name="shield" className="h-6 w-6 md:h-7 md:w-7" />
-              </span>
-              <span className="bg-brand-500 whitespace-nowrap px-3 py-2.5 text-[clamp(0.9rem,3.9vw,1.35rem)] font-black tracking-[0.02em] sm:px-4 md:tracking-[0.04em] text-white md:px-5 md:py-3">
-                社外CISO・セキュリティ顧問サービス
-              </span>
+            <p className="border-b-2 border-brand-500 pb-2 text-[clamp(1rem,1.8vw,1.3rem)] font-bold tracking-[0.06em] text-brand-500 sm:inline-block">
+              社外CISO・セキュリティ顧問サービス
             </p>
             <h1 className="mt-6 text-[clamp(2.4rem,5vw,4.1rem)] font-black leading-[1.25] tracking-[0.04em]">
               <span className="text-brand-500">AI時代</span>に必須の
@@ -576,10 +572,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       <section className="bg-white pt-16 md:pt-24">
         <Container>
           <Reveal variant="up" className="text-center">
-            <p className="text-sm font-bold tracking-[0.15em] text-brand-500">
-              PROBLEM
-            </p>
-            <h2 className="mt-2 text-[clamp(1.5rem,3vw,2.2rem)] font-black leading-[1.5]">
+            <h2 className="text-[clamp(1.5rem,3vw,2.2rem)] font-black leading-[1.5]">
               こんな<span className="text-brand-500">お悩み</span>
               はありませんか？
             </h2>
@@ -593,10 +586,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 className={cn("h-full", i === 4 && "col-span-2 lg:col-span-1")}
               >
                 <li className="flex h-full flex-col items-center rounded-md bg-[#F7F2F4] px-4 pb-6 pt-5 text-center">
-                  <span className="text-xs font-black tracking-[0.15em] text-brand-500">
-                    お悩み {i + 1}
-                  </span>
-                  <w.Icon className="mt-3 h-24 w-auto md:h-28" />
+                  <w.Icon className="h-24 w-auto md:h-28" />
                   <p className="mt-4 text-[15px] font-black leading-[1.6] [word-break:auto-phrase]">
                     {w.title}
                   </p>
@@ -613,8 +603,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             className="bg-brand-500 py-8 text-center text-white md:py-10"
           >
             <p className="text-[clamp(1.3rem,2.8vw,2rem)] font-black leading-[1.5]">
-              そのお悩み、
-              <span className="inline-block">Bond AI にお任せください</span>
+              そのお悩み、お任せください
             </p>
             <svg
               aria-hidden="true"
@@ -647,19 +636,22 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         id="service"
         className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] pt-20 md:pt-28"
       >
-        <Watermark className="-right-6 top-4">Service</Watermark>
         <Container>
-          <SectionHead en="Service" />
-          <Reveal variant="up" className="mt-10 text-center">
+          <Reveal variant="up" className="text-center">
             <h2 className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
               セキュリティの<span className="text-brand-500">プロ</span>が、
               <br className="hidden sm:block" />
               御社のセキュリティ対策を
-              <span className="text-brand-500">まるごと代行</span>します
+              <span className="text-brand-500">代行</span>します
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
               専任の担当者を雇わなくても大丈夫。資格を持つ専門家が、御社のセキュリティ担当として月額でつき、必要な対策をすべて引き受けます。
             </p>
+          </Reveal>
+
+          {/* 図: 月額で任せてセキュリティを強化 */}
+          <Reveal variant="up" className="mt-10">
+            <CisoBeforeAfter />
           </Reveal>
 
           {/* 図: サービスの全体像(4ステップ × 2プラン) */}
