@@ -511,7 +511,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           aria-hidden="true"
           className="absolute -left-40 top-20 -z-10 h-96 w-96 rounded-full bg-white blur-[80px]"
         />
-        <Container className="grid items-center gap-12 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
+        <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div>
             <p className="inline-block whitespace-nowrap bg-brand-500 px-4 py-2 text-[clamp(0.95rem,1.8vw,1.3rem)] font-bold tracking-[0.06em] text-white sm:px-5 sm:py-2.5">
               社外CISO・セキュリティ顧問サービス
@@ -537,7 +537,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               />
             </div>
           </div>
-          <div className="lg:-mr-10 xl:-mr-24">
+          <div className="order-first mx-auto w-full max-w-[420px] lg:order-none lg:-mr-10 lg:max-w-none xl:-mr-24">
             <HeroVisual />
           </div>
         </Container>
@@ -552,17 +552,20 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               はありませんか？
             </h2>
           </Reveal>
-          <ul className="mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-3 md:gap-4 lg:grid-cols-5">
+          <ul className="mx-auto mt-8 grid max-w-6xl gap-2 sm:grid-cols-2 md:mt-12 md:gap-4 lg:grid-cols-5">
             {worries.map((w, i) => (
               <Reveal
                 key={i}
                 variant="up"
                 delay={i * 70}
-                className={cn("h-full", i === 4 && "col-span-2 lg:col-span-1")}
+                className={cn(
+                  "h-full",
+                  i === 4 && "sm:col-span-2 lg:col-span-1",
+                )}
               >
-                <li className="flex h-full flex-col items-center rounded-md bg-[#F7F2F4] px-4 pb-6 pt-5 text-center">
-                  <w.Icon className="h-24 w-auto md:h-28" />
-                  <p className="mt-4 text-[15px] font-black leading-[1.6] [word-break:auto-phrase]">
+                <li className="flex h-full items-center gap-3 rounded-md bg-[#F7F2F4] px-3 py-2.5 text-left lg:flex-col lg:gap-0 lg:px-4 lg:pb-6 lg:pt-5 lg:text-center">
+                  <w.Icon className="h-14 w-14 shrink-0 lg:h-28 lg:w-auto" />
+                  <p className="text-[14px] font-black leading-[1.6] [word-break:auto-phrase] lg:mt-4 lg:text-[15px]">
                     {w.title}
                   </p>
                 </li>
@@ -640,11 +643,11 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       </section>
 
       {/* ========== 6. 実現する3つのこと(BENEFIT) ========== */}
-      <section className="relative isolate overflow-hidden py-20 md:py-28">
+      <section className="relative isolate overflow-hidden py-14 md:py-28">
         <Watermark className="-left-4 top-4">Benefit</Watermark>
         <Container>
           <SectionHead en="Benefit">実現する3つのこと</SectionHead>
-          <div className="mt-12 space-y-8">
+          <div className="mt-8 space-y-5 md:mt-12 md:space-y-8">
             {[
               {
                 lead: "AI利用による",
@@ -694,32 +697,32 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               },
             ].map((r, i) => (
               <Reveal key={r.em} variant="up">
-                <article className="relative grid items-center gap-8 overflow-hidden rounded-lg bg-white py-8 pl-0 pr-6 shadow-[0_20px_44px_-34px_rgba(0,0,0,0.4)] md:py-10 md:pr-10 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
-                  <div className="pl-6 lg:-ml-2 lg:pl-0">
+                <article className="relative grid items-center gap-5 overflow-hidden rounded-lg bg-white pb-6 pl-0 pr-5 pt-4 shadow-[0_20px_44px_-34px_rgba(0,0,0,0.4)] md:gap-8 md:py-10 md:pr-10 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
+                  <div className="max-h-[200px] overflow-hidden pr-14 sm:max-h-none sm:pl-6 sm:pr-0 lg:-ml-2 lg:pl-0">
                     <FeatureVisual kind={r.visual} />
                   </div>
-                  <div className="relative pl-6 lg:pl-0">
-                    <p className="text-right font-black leading-[0.85] text-ink lg:absolute lg:-top-4 lg:right-0">
-                      <span className="block text-2xl tracking-[0.02em] md:text-4xl">
+                  <div className="relative pl-5 sm:pl-6 lg:pl-0">
+                    <p className="absolute -top-16 right-0 text-right font-black leading-[0.85] text-ink sm:static lg:absolute lg:-top-4 lg:right-0">
+                      <span className="block text-base tracking-[0.02em] sm:text-2xl md:text-4xl">
                         BENEFIT
                       </span>
-                      <span className="block text-6xl text-brand-500 md:text-[6.5rem]">
+                      <span className="block text-5xl text-brand-500 sm:text-6xl md:text-[6.5rem]">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </p>
-                    <h3 className="mt-4 text-[clamp(1.4rem,2.6vw,2rem)] font-black leading-[1.5] lg:mt-24 lg:pr-4">
+                    <h3 className="text-[clamp(1.2rem,2.6vw,2rem)] font-black leading-[1.5] sm:mt-4 lg:mt-24 lg:pr-4">
                       {r.lead}
                       <br />
                       <span className="text-brand-500">{r.em}</span>
                     </h3>
-                    <p className="mt-4 text-[15px] leading-[2] text-ink/80">
+                    <p className="mt-3 text-[14px] leading-[1.9] text-ink/80 md:mt-4 md:text-[15px] md:leading-[2]">
                       {r.text}
                     </p>
-                    <ul className="mt-5 space-y-2.5 border-t border-[#EADFE2] pt-5">
+                    <ul className="mt-4 space-y-2 border-t border-[#EADFE2] pt-4 md:mt-5 md:space-y-2.5 md:pt-5">
                       {r.items.map((t) => (
                         <li
                           key={t}
-                          className="flex gap-2.5 text-[15px] font-bold leading-relaxed text-ink"
+                          className="flex gap-2.5 text-[14px] font-bold leading-relaxed text-ink md:text-[15px]"
                         >
                           <Check />
                           {t}
@@ -727,10 +730,10 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                       ))}
                     </ul>
                     {r.stat ? (
-                      <div className="mt-6 border-l-4 border-brand-500 bg-[#FBF6F7] px-5 py-4">
-                        <p className="text-[15px] font-bold leading-relaxed text-ink">
+                      <div className="mt-4 border-l-4 border-brand-500 bg-[#FBF6F7] px-4 py-3 md:mt-6 md:px-5 md:py-4">
+                        <p className="text-[14px] font-bold leading-relaxed text-ink md:text-[15px]">
                           {r.stat.before}
-                          <span className="mx-0.5 text-[1.9rem] font-black leading-none text-brand-500">
+                          <span className="mx-0.5 text-[1.6rem] md:text-[1.9rem] font-black leading-none text-brand-500">
                             {r.stat.num}
                           </span>
                           {r.stat.after}
