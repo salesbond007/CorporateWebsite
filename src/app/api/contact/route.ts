@@ -215,7 +215,7 @@ const enumLabels: Record<string, Record<string, string>> = {
   },
 };
 
-/** Bond AI LP のフォームの申し込み種別(件名用) */
+/** Bond AI セキュリティ LP のフォームの申し込み種別(件名用) */
 function aiCheckLabel(data: Record<string, unknown>): string {
   return data.request === "check" ? "無料相談のお申し込み" : "資料請求";
 }
@@ -261,7 +261,7 @@ function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
         : type === "service_lead"
           ? `【${serviceLabel(data)}】無料相談のお申し込み`
           : type === "ai_check"
-            ? `【Bond AI】${aiCheckLabel(data)}`
+            ? `【Bond AI セキュリティ】${aiCheckLabel(data)}`
             : type === "web_security_diagnosis"
               ? "ホームページセキュリティ 無料簡易診断のお申し込み"
               : "お問い合わせ(企業)";
@@ -336,7 +336,7 @@ export async function POST(req: Request) {
       : type === "service_lead"
         ? `【${serviceLabel(parsed.data as Record<string, unknown>)}】無料相談のお申し込み`
         : type === "ai_check"
-          ? `【Bond AI】${aiCheckLabel(parsed.data as Record<string, unknown>)}`
+          ? `【Bond AI セキュリティ】${aiCheckLabel(parsed.data as Record<string, unknown>)}`
           : type === "web_security_diagnosis"
             ? "【無料簡易診断】ホームページセキュリティ対策のお申し込み"
             : "ホームページからの問い合わせ";
@@ -406,16 +406,16 @@ HP：https://www.salesbond1962.com
 ${addressee} 様
 
 お世話になっております。
-Bond AI（運営：セールスボンド株式会社）でございます。
+Bond AI セキュリティ（運営：セールスボンド株式会社）でございます。
 
-この度は${(parsed.data as { request?: string }).request === "check" ? "無料相談にお申し込みいただき" : "Bond AI の資料をご請求いただき"}、誠にありがとうございます。
+この度は${(parsed.data as { request?: string }).request === "check" ? "無料相談にお申し込みいただき" : "Bond AI セキュリティ の資料をご請求いただき"}、誠にありがとうございます。
 
 ${(parsed.data as { request?: string }).request === "check" ? "いただいた内容を確認のうえ、担当者より2営業日以内に日程調整のご連絡をいたします。" : "担当者より2営業日以内に、資料をメールでお送りいたします。"}今しばらくお待ちくださいますようお願いいたします。
 
 何卒よろしくお願い申し上げます。
 
 ────────────────────────────
-Bond AI／セールスボンド株式会社
+Bond AI セキュリティ／セールスボンド株式会社
 〒160-0023 東京都新宿区西新宿3丁目3番13号 西新宿水間ビル2F
 Email：info@salesbond.jp
 HP：https://www.salesbond1962.com/ja/services/ciso
@@ -485,7 +485,7 @@ HP：https://www.salesbond1962.com
           type === "web_security_diagnosis"
             ? "無料簡易診断のお申し込みありがとうございます(セールスボンド株式会社)"
             : type === "ai_check"
-              ? `${(parsed.data as { request?: string }).request === "check" ? "無料相談のお申し込み" : "資料のご請求"}ありがとうございます(Bond AI)`
+              ? `${(parsed.data as { request?: string }).request === "check" ? "無料相談のお申し込み" : "資料のご請求"}ありがとうございます(Bond AI セキュリティ)`
               : type === "service_lead"
                 ? `無料相談のお申し込みありがとうございます(${serviceLabel(parsed.data as Record<string, unknown>)})`
                 : type === "apokomi_lead"
