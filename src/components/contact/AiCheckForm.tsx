@@ -31,7 +31,7 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
   const [email, setEmail] = useState("");
   const [employees, setEmployees] = useState("");
   const [message, setMessage] = useState("");
-  const [request, setRequest] = useState<"document" | "check">("document");
+  const [request, setRequest] = useState<"document" | "check">("check");
   const [website, setWebsite] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -125,8 +125,8 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
         <div className="grid grid-cols-2 gap-2">
           {(
             [
+              { v: "check", l: "無料相談（オンライン30分）" },
               { v: "document", l: "資料請求" },
-              { v: "check", l: "無料のAI利用チェック（30分）" },
             ] as const
           ).map((o) => (
             <label
