@@ -1017,12 +1017,13 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         />
         <Container className="grid items-center gap-12 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <p className="flex items-center gap-3 text-[clamp(1.05rem,1.9vw,1.4rem)] font-black text-brand-500">
-              <span
-                aria-hidden="true"
-                className="h-7 w-1.5 rounded-full bg-brand-500"
-              />
-              社外CISO・セキュリティ顧問サービス
+            <p className="inline-flex items-stretch overflow-hidden rounded-lg shadow-[0_10px_24px_-14px_rgba(122,30,53,0.8)]">
+              <span className="grid place-items-center bg-[#5A1528] px-3 text-white md:px-3.5">
+                <Icon name="shield" className="h-6 w-6 md:h-7 md:w-7" />
+              </span>
+              <span className="bg-brand-500 whitespace-nowrap px-3 py-2.5 text-[clamp(0.9rem,3.9vw,1.35rem)] font-black tracking-[0.02em] sm:px-4 md:tracking-[0.04em] text-white md:px-5 md:py-3">
+                社外CISO・セキュリティ顧問サービス
+              </span>
             </p>
             <h1 className="mt-6 text-[clamp(2.4rem,5vw,4.1rem)] font-black leading-[1.25] tracking-[0.04em]">
               <span className="text-brand-500">AI時代</span>に備える
