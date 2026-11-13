@@ -746,31 +746,26 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             <div className="flex aspect-[4/3] items-center justify-center bg-[#F1ECEE] md:aspect-auto md:min-h-[24rem]">
               <span className="sr-only">岡崎 弘明の写真（準備中）</span>
             </div>
-            <div className="px-6 pb-8 md:py-10 md:pr-10">
-              <p className="inline-block bg-brand-500 px-3 py-1 text-xs font-bold text-white">
-                BondAIセキュリティサービス監修
-              </p>
-              <h3 className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                <span className="text-[clamp(1.6rem,3vw,2.2rem)] font-black tracking-[0.06em]">
-                  岡崎 弘明
-                </span>
-                <span className="text-sm font-bold text-ink/55">
+            <div className="flex flex-col justify-center px-6 pb-9 md:py-12 md:pr-12">
+              <h3>
+                <span className="block text-xs font-bold tracking-[0.2em] text-ink/50">
                   おかざき ひろあき
                 </span>
+                <span className="mt-1 block text-[clamp(1.75rem,3vw,2.25rem)] font-black tracking-[0.08em] text-ink">
+                  岡崎 弘明
+                </span>
               </h3>
-              <p className="mt-2 text-[15px] font-bold text-brand-600">
-                元 株式会社帝国データバンクネットコミュニケーション 代表取締役
+              <p className="mt-5 border-l-[3px] border-brand-500 pl-4 leading-[1.7]">
+                <span className="block text-xs font-bold text-ink/55">元</span>
+                <span className="block text-base font-bold text-ink md:text-lg">
+                  株式会社帝国データバンクネットコミュニケーション
+                </span>
+                <span className="block text-base font-bold text-brand-500 md:text-lg">
+                  代表取締役
+                </span>
               </p>
-              <span
-                aria-hidden="true"
-                className="mt-6 block h-px w-full bg-[#EEE5E8]"
-              />
-              <p className="mt-6 text-[15px] leading-[2] text-ink/80">
+              <p className="mt-7 border-t border-[#EEE5E8] pt-7 text-[15px] leading-[2.05] text-ink/80">
                 帝国データバンクグループで、情報セキュリティのコンサルティングを手がける会社の代表取締役を務める。同社は、ISO27001（ISMS）やプライバシーマークの取得支援、情報セキュリティの意識診断などを通じて、企業の情報管理の体制づくりを支援している。
-              </p>
-              <p className="mt-4 border-l-4 border-brand-500 bg-[#FBF6F7] px-4 py-3 text-[15px] font-bold leading-[1.9]">
-                Bond
-                AIでは、お客様を担当する専門家の面談・選定と、サービス品質の確認を担う。
               </p>
             </div>
           </Reveal>
@@ -782,9 +777,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         id="flow"
         className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
       >
-        <Watermark className="-right-6 top-4">Flow</Watermark>
         <Container>
-          <SectionHead en="Flow">導入の流れ</SectionHead>
+          <SectionHead en="">導入の流れ</SectionHead>
           <ol className="mt-12 grid gap-4 md:grid-cols-5">
             {flow.map((f, i) => (
               <Reveal
@@ -1173,11 +1167,20 @@ function SectionHead({ en, children }: { en: string; children?: ReactNode }) {
   return (
     <Reveal variant="up">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:gap-5">
-        <p className="text-[clamp(2.4rem,5.6vw,3.8rem)] font-black uppercase leading-none tracking-[0.02em] text-brand-500">
-          {en}
-        </p>
+        {en ? (
+          <p className="text-[clamp(2.4rem,5.6vw,3.8rem)] font-black uppercase leading-none tracking-[0.02em] text-brand-500">
+            {en}
+          </p>
+        ) : null}
         {children ? (
-          <h2 className="pb-1 text-lg font-bold tracking-[0.04em] text-ink [word-break:auto-phrase] md:text-xl">
+          <h2
+            className={cn(
+              "pb-1 font-bold tracking-[0.04em] text-ink [word-break:auto-phrase]",
+              en
+                ? "text-lg md:text-xl"
+                : "text-[clamp(1.6rem,3vw,2.2rem)] font-black",
+            )}
+          >
             {children}
           </h2>
         ) : null}
