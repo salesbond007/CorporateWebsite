@@ -7,7 +7,6 @@ import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
   IconAiRush,
-  IconBanned,
   IconChecksheet,
   IconListing,
   IconShadowAi,
@@ -69,56 +68,6 @@ const services = [
   { t: "社員への説明", d: "決めたルールを全社員に浸透させます", i: "bell" },
   { t: "事故の初動", d: "もしもの時の判断と対応を助言します", i: "shield" },
 ] as const;
-
-const plans = [
-  {
-    name: "AIセキュリティ顧問",
-    price: "8",
-    target: "まずは相談相手がほしい会社に",
-    size: "30〜100名",
-    items: [
-      "月1回の定例（60分）",
-      "メール相談（3営業日以内に返答）",
-      "AI利用ルールのひな形と、社員向けの説明資料（ひな形）",
-      "年1回、ホームページなど外から見える部分の自動診断",
-      "社外顧問としての名前の掲載",
-    ],
-  },
-  {
-    name: "AI社外CISO",
-    price: "30",
-    target: "責任者がほしい・取引先への説明が必要な会社に",
-    size: "50〜300名",
-    recommended: true,
-    items: [
-      "月1回の定例（90分）と月次報告",
-      "チャット相談（2営業日以内に返答）",
-      "初月にAI利用の診断",
-      "年1回の簡易な脆弱性診断（AIチャットボットなどを含む）",
-      "自社用のAI利用ルール、AIシステム台帳",
-      "全社員向けのAIルール説明会（年1回・オンライン60分）",
-      "AIツールの導入前チェック・チェックシート回答（各月2件）",
-      "事故時の初動の助言",
-      "社外CISOとしての名前の掲載",
-    ],
-  },
-  {
-    name: "AI社外CISO（経営参画）",
-    price: "50",
-    target: "経営会議まで入ってほしい会社に",
-    size: "100〜1,000名",
-    items: [
-      "月2回の定例＋経営会議に月1回参加",
-      "チャット相談（1営業日以内に返答）",
-      "初月にAI利用の診断",
-      "年1回の標準的な脆弱性診断（Web・AIアプリ）",
-      "AIエージェントの権限設計と定期確認",
-      "チェックシート回答（月5件）",
-      "社員研修（年1回・半日）",
-      "事故時の初動の助言＋緊急訪問（年2回まで）",
-    ],
-  },
-];
 
 const expert = [
   {
@@ -424,7 +373,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
 
   const nav = [
     { href: "#service", label: "サービス" },
-    { href: "#price", label: "料金" },
     { href: "#flow", label: "導入の流れ" },
     { href: "#faq", label: "よくある質問" },
   ];
@@ -469,18 +417,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               "@type": "BusinessAudience",
               audienceType: "中小・中堅企業",
             },
-            offers: plans.map((p) => ({
-              "@type": "Offer",
-              name: p.name,
-              url,
-              priceSpecification: {
-                "@type": "UnitPriceSpecification",
-                price: Number(p.price) * 10000,
-                priceCurrency: "JPY",
-                unitText: "月額（税別）",
-                valueAddedTaxIncluded: false,
-              },
-            })),
           },
           {
             "@context": "https://schema.org",
@@ -795,118 +731,57 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <Watermark className="-left-4 top-4">Reason</Watermark>
         <Container>
           <SectionHead en="Reason">Bond AI が選ばれる3つの理由</SectionHead>
-          <div className="mt-12 space-y-6">
+          <div className="mt-12 space-y-8">
             {[
               {
                 lead: "AIを禁止せず、",
                 em: "安全に使えるルール",
                 text: "入力してよい情報・ダメな情報、使ってよいツール、導入時の承認の流れまで。禁止ではなく、社員が安心して使える状態をつくります。",
-                Visual: IconBanned,
+                visual: "policy" as const,
               },
               {
                 lead: "契約後すぐに、",
                 em: "診断から始める",
                 text: "最初の1〜2カ月でAIの利用状況と弱点を見える化。年1回の脆弱性診断もプランに含め、結果は専門家が分かりやすく説明します。",
-                Visual: IconShadowAi,
+                visual: "diagnosis" as const,
               },
               {
                 lead: "取引先に、",
                 em: "責任者として名前を出せる",
                 text: "チェックシートの回答から社外CISOとしての名前の掲載まで。「専門家が責任者としてついています」と取引先に言える状態をつくります。",
-                Visual: IconChecksheet,
+                visual: "checksheet" as const,
               },
             ].map((r, i) => (
               <Reveal key={r.em} variant="up">
-                <article className="relative grid overflow-hidden rounded-md bg-white shadow-[0_20px_44px_-30px_rgba(0,0,0,0.45)] ring-1 ring-[#EEE5E8] md:grid-cols-[20rem_1fr]">
-                  <div className="grid place-items-center bg-[#F7EAEE] p-8">
-                    <r.Visual className="h-36 w-auto md:h-44" />
+                <article className="relative grid items-center gap-8 overflow-hidden rounded-lg bg-white py-8 pl-0 pr-6 shadow-[0_20px_44px_-34px_rgba(0,0,0,0.4)] md:py-10 md:pr-10 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
+                  {/* 背景の大きな丸 */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full border-[40px] border-brand-500/[0.04]"
+                  />
+                  <div className="pl-6 lg:-ml-2 lg:pl-0">
+                    <FeatureVisual kind={r.visual} />
                   </div>
-                  <div className="relative p-7 md:p-10">
-                    <p className="absolute right-6 top-5 text-right font-black leading-none text-brand-500 md:right-10">
-                      <span className="block text-sm tracking-[0.12em] md:text-lg">
+                  <div className="relative pl-6 lg:pl-0">
+                    <p className="text-right font-black leading-[0.85] text-ink lg:absolute lg:-top-4 lg:right-0">
+                      <span className="block text-2xl tracking-[0.02em] md:text-4xl">
                         POINT
                       </span>
-                      <span className="block text-5xl md:text-7xl">
+                      <span className="block text-6xl text-brand-500 md:text-[6.5rem]">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </p>
-                    <h3 className="pr-24 text-[clamp(1.3rem,2.4vw,1.75rem)] font-black leading-[1.5] md:pr-32">
+                    <h3 className="mt-4 text-[clamp(1.4rem,2.6vw,2rem)] font-black leading-[1.5] lg:mt-24 lg:pr-4">
                       {r.lead}
                       <br />
                       <span className="text-brand-500">{r.em}</span>
                     </h3>
-                    <p className="mt-4 text-[15px] leading-[2] text-ink/80">
+                    <p className="mt-5 text-[15px] leading-[2] text-ink/80">
                       {r.text}
                     </p>
                   </div>
                 </article>
               </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* ========== 7. 料金 ========== */}
-      <section
-        id="price"
-        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
-      >
-        <Watermark className="-right-6 top-4">Price</Watermark>
-        <Container>
-          <SectionHead en="Price">
-            会社の規模と課題に合わせて選べます
-          </SectionHead>
-          <p className="mt-4 text-sm text-ink/60">
-            （税別・月額。最低契約期間は6カ月）
-          </p>
-          <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-3">
-            {plans.map((p) => (
-              <article
-                key={p.name}
-                className={cn(
-                  "relative flex flex-col overflow-hidden rounded-md bg-white",
-                  p.recommended
-                    ? "shadow-[0_30px_60px_-30px_rgba(122,30,53,0.55)] ring-2 ring-brand-500"
-                    : "shadow-[0_18px_40px_-30px_rgba(0,0,0,0.4)] ring-1 ring-[#EEE5E8]",
-                )}
-              >
-                <div
-                  className={cn(
-                    "px-6 py-5",
-                    p.recommended ? "bg-brand-500 text-white" : "bg-[#F4EEF0]",
-                  )}
-                >
-                  {p.recommended ? (
-                    <p className="text-xs font-bold text-white/85">おすすめ</p>
-                  ) : null}
-                  <h3 className="text-lg font-black">{p.name}</h3>
-                </div>
-                <div className="border-b border-[#EEE5E8] px-6 py-6">
-                  <p className="flex items-baseline gap-1">
-                    <span className="text-sm font-bold">月</span>
-                    <span className="text-5xl font-black leading-none text-brand-500">
-                      {p.price}
-                    </span>
-                    <span className="text-lg font-bold">万円</span>
-                    <span className="ml-1 text-xs text-ink/45">（税別）</span>
-                  </p>
-                  <p className="mt-3 text-sm font-bold leading-relaxed">
-                    {p.target}
-                  </p>
-                  <p className="mt-0.5 text-xs text-ink/55">（{p.size}）</p>
-                </div>
-                <ul className="flex-1 space-y-2.5 p-6">
-                  {p.items.map((it) => (
-                    <li
-                      key={it}
-                      className="flex gap-2.5 text-[14px] leading-relaxed"
-                    >
-                      <Check />
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-              </article>
             ))}
           </div>
         </Container>
@@ -1121,6 +996,182 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
   );
 }
 
+/** ブラウザ風の枠 */
+function Window({
+  title,
+  children,
+  className,
+}: {
+  title: string;
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div
+      className={cn(
+        "overflow-hidden rounded-xl bg-white shadow-[0_40px_80px_-40px_rgba(60,15,25,0.45)] ring-1 ring-[#EEDFE3]",
+        className,
+      )}
+    >
+      <div className="flex items-center gap-2 border-b border-[#EEDFE3] bg-[#FBF6F7] px-4 py-2.5">
+        <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
+        <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
+        <span className="ml-3 truncate text-[11px] font-bold text-ink/50">
+          {title}
+        </span>
+      </div>
+      {children}
+    </div>
+  );
+}
+
+function Pill({
+  tone,
+  children,
+}: {
+  tone: "ok" | "wait" | "ng";
+  children: ReactNode;
+}) {
+  return (
+    <span
+      className={cn(
+        "shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold",
+        tone === "ok" && "bg-[#E3F5EC] text-[#1E8A57]",
+        tone === "wait" && "bg-[#FFF3D6] text-[#9A6B00]",
+        tone === "ng" && "bg-[#FBEAEE] text-[#7A1E35]",
+      )}
+    >
+      {children}
+    </span>
+  );
+}
+
+/** 特長ごとの画面イメージ */
+function FeatureVisual({
+  kind,
+}: {
+  kind: "policy" | "diagnosis" | "checksheet";
+}) {
+  if (kind === "policy") {
+    return (
+      <Window title="AI利用ルール（第2版）">
+        <div className="p-5 text-[12px] font-bold">
+          <div className="grid grid-cols-2 gap-3">
+            <div className="rounded-md bg-[#E3F5EC]/70 p-3">
+              <p className="text-[#1E8A57]">○ 入力してよい</p>
+              <ul className="mt-2 space-y-1 text-ink/75">
+                <li>・公開済みの情報</li>
+                <li>・社内向けの文章の下書き</li>
+              </ul>
+            </div>
+            <div className="rounded-md bg-brand-50 p-3">
+              <p className="text-brand-600">× 入力してはダメ</p>
+              <ul className="mt-2 space-y-1 text-ink/75">
+                <li>・お客さまの個人情報</li>
+                <li>・取引先の機密情報</li>
+              </ul>
+            </div>
+          </div>
+          <p className="mt-4 text-ink/60">導入時の承認の流れ</p>
+          <div className="mt-2 flex items-center gap-1.5 text-[11px]">
+            {["社員が申請", "導入前チェック", "責任者が承認"].map((s, i) => (
+              <span key={s} className="flex items-center gap-1.5">
+                <span
+                  className={cn(
+                    "rounded-md px-2 py-1.5",
+                    i === 2
+                      ? "bg-brand-500 text-white"
+                      : "bg-[#FBF6F7] ring-1 ring-[#EEDFE3]",
+                  )}
+                >
+                  {s}
+                </span>
+                {i < 2 ? <span className="text-brand-500">›</span> : null}
+              </span>
+            ))}
+          </div>
+        </div>
+      </Window>
+    );
+  }
+  if (kind === "diagnosis") {
+    const items = [
+      { k: "シャドーAI（無断利用）", v: 82, p: "高" },
+      { k: "入力してよい情報の基準", v: 70, p: "高" },
+      { k: "AIエージェントの権限", v: 48, p: "中" },
+      { k: "外から見える脆弱性", v: 36, p: "中" },
+      { k: "なりすまし詐欺への備え", v: 24, p: "低" },
+    ];
+    return (
+      <Window title="診断レポート ｜ 優先して直す点">
+        <div className="p-5">
+          <ul className="space-y-3">
+            {items.map((it) => (
+              <li key={it.k} className="text-[11px] font-bold">
+                <div className="flex items-center justify-between">
+                  <span>{it.k}</span>
+                  <span
+                    className={cn(
+                      "rounded px-1.5 py-0.5 text-[10px]",
+                      it.p === "高"
+                        ? "bg-brand-500 text-white"
+                        : it.p === "中"
+                          ? "bg-[#E7C4CD] text-brand-600"
+                          : "bg-[#F1ECEE] text-ink/60",
+                    )}
+                  >
+                    優先度 {it.p}
+                  </span>
+                </div>
+                <div className="mt-1.5 h-2 rounded-full bg-[#F1ECEE]">
+                  <div
+                    className="h-2 rounded-full bg-[linear-gradient(90deg,#A83B57,#7A1E35)]"
+                    style={{ width: `${it.v}%` }}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Window>
+    );
+  }
+  const rows = [
+    { q: "AIの利用ルールを定めていますか", s: "回答済" },
+    { q: "情報セキュリティの責任者は誰ですか", s: "回答済" },
+    { q: "委託先のAI利用を管理していますか", s: "回答済" },
+    { q: "事故時の連絡体制はありますか", s: "確認中" },
+  ];
+  return (
+    <Window title="取引先チェックシート ｜ 回答状況">
+      <div className="p-5">
+        <div className="flex items-end justify-between">
+          <p className="text-[11px] font-bold text-ink/55">回答の進み具合</p>
+          <p className="font-display text-2xl font-black leading-none text-brand-500">
+            42<span className="text-sm text-ink/45"> / 45問</span>
+          </p>
+        </div>
+        <div className="mt-2 h-2 rounded-full bg-[#F1ECEE]">
+          <div className="h-2 w-[93%] rounded-full bg-brand-500" />
+        </div>
+        <ul className="mt-4 divide-y divide-[#EEDFE3] rounded-lg border border-[#EEDFE3] text-[11px] font-bold">
+          {rows.map((r) => (
+            <li key={r.q} className="flex items-center gap-2 px-3 py-2">
+              <span className="flex-1">{r.q}</span>
+              <Pill tone={r.s === "回答済" ? "ok" : "wait"}>{r.s}</Pill>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-3 flex items-center gap-2 rounded-md bg-brand-50 px-3 py-2 text-[11px] font-bold text-brand-600">
+          <Icon name="person" className="h-4 w-4" />
+          社外CISOとして名前を掲載
+        </p>
+      </div>
+    </Window>
+  );
+}
+
 /* ================================================== salescore 風の部品 */
 
 /** 2段の文字 + 右端に白い四角のアイコンが付いたボタン */
@@ -1178,29 +1229,19 @@ function BigButton({
   );
 }
 
-/** 2分割のCTA帯 */
+/** 資料請求のCTA帯 */
 function SplitCta() {
   return (
-    <div className="grid md:grid-cols-2">
-      <div className="flex flex-col items-center gap-4 bg-[#5A1528] px-6 py-10 text-white">
-        <p className="text-sm font-bold">まずは現状を相談したい方は</p>
-        <BigButton
-          label="無料のAI利用チェック"
-          sub="オンライン30分・売り込みなし"
-          icon="check"
-          tone="accent"
-        />
-      </div>
-      <div className="flex flex-col items-center gap-4 bg-brand-500 px-6 py-10 text-white">
-        <p className="text-sm font-bold">料金とプランを確かめたい方は</p>
-        <BigButton
-          label="料金プランを見る"
-          sub="月額8万円から"
-          icon="doc"
-          href="#price"
-          tone="white"
-        />
-      </div>
+    <div className="flex flex-col items-center gap-4 bg-brand-500 px-6 py-12 text-white">
+      <p className="text-sm font-bold md:text-base">
+        サービスの内容・導入の流れをまとめた資料をお送りします
+      </p>
+      <BigButton
+        label="資料ダウンロード"
+        sub="こちらから無料"
+        icon="doc"
+        tone="white"
+      />
     </div>
   );
 }
