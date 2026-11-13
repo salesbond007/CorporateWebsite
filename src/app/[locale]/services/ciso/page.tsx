@@ -630,15 +630,15 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           </Reveal>
 
           {/* 図: 月額で任せてセキュリティを強化 */}
-          <Reveal variant="up" className="mt-10">
+          <div className="mt-10">
             <CisoBeforeAfter />
-          </Reveal>
-
-          {/* 図: サービスの全体像(4ステップ × 2プラン) */}
-          <Reveal variant="up" className="mt-12">
-            <CisoServiceDiagram />
-          </Reveal>
+          </div>
         </Container>
+
+        {/* 図: サービスの全体像(4ステップ × 2プラン)。背景は横幅いっぱい */}
+        <Reveal variant="fade" className="mt-14 md:mt-20">
+          <CisoServiceDiagram />
+        </Reveal>
         <div className="mt-20 md:mt-24">
           <SplitCta />
         </div>

@@ -196,14 +196,14 @@ function Cycle() {
 export function CisoServiceDiagram() {
   return (
     <figure
-      className="relative isolate overflow-hidden rounded-[12px] text-white"
+      className="relative isolate overflow-hidden text-white"
       aria-labelledby="ciso-diagram-title"
     >
       <Image
         src="/photos/ciso/governance.webp"
         alt=""
         fill
-        sizes="(max-width:1280px) 100vw, 1200px"
+        sizes="100vw"
         className="-z-10 object-cover"
       />
       <div
@@ -211,7 +211,7 @@ export function CisoServiceDiagram() {
         className="absolute inset-0 -z-10 bg-[#24070F]/[0.88]"
       />
 
-      <div className="grid items-center gap-10 px-5 py-10 md:px-10 md:py-14 lg:grid-cols-[1fr_1.05fr] lg:gap-12 lg:px-12 lg:py-16">
+      <div className="container grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:py-24">
         <Cycle />
 
         <div className="min-w-0">
