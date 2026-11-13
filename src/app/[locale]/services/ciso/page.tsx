@@ -5,6 +5,12 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  IconBanned,
+  IconChecksheet,
+  IconShadowAi,
+  IconSoloIt,
+} from "@/components/services/FlatIcons";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { pageMeta, pageMetadata } from "@/lib/seo";
@@ -56,7 +62,11 @@ const promises = [
   },
 ] as const;
 
-const worries: { title: ReactNode; text: string; image: string }[] = [
+const worries: {
+  title: ReactNode;
+  text: string;
+  Icon: (p: { className?: string }) => ReactNode;
+}[] = [
   {
     title: (
       <>
@@ -64,7 +74,7 @@ const worries: { title: ReactNode; text: string; image: string }[] = [
       </>
     ),
     text: "何を入力してよいか、どのツールなら安全か、ルールがない。",
-    image: "/illustrations/ld-1395-wine.webp",
+    Icon: IconShadowAi,
   },
   {
     title: (
@@ -73,7 +83,7 @@ const worries: { title: ReactNode; text: string; image: string }[] = [
       </>
     ),
     text: "本当は使いたいのに、判断できる人がいない。",
-    image: "/illustrations/ld-1523-wine.webp",
+    Icon: IconBanned,
   },
   {
     title: (
@@ -82,7 +92,7 @@ const worries: { title: ReactNode; text: string; image: string }[] = [
       </>
     ),
     text: "何十問もの設問に、自信を持って答えられる人が社内にいない。",
-    image: "/illustrations/ld-1531-wine.webp",
+    Icon: IconChecksheet,
   },
   {
     title: (
@@ -91,7 +101,7 @@ const worries: { title: ReactNode; text: string; image: string }[] = [
       </>
     ),
     text: "相談相手も、経営に説明するときの後ろ盾もない。",
-    image: "/illustrations/ld-1528-wine.webp",
+    Icon: IconSoloIt,
   },
 ];
 
@@ -1309,13 +1319,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                       className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-brand-500"
                     />
                   </span>
-                  <Image
-                    src={w.image}
-                    alt=""
-                    width={300}
-                    height={300}
-                    className="h-24 w-auto object-contain"
-                  />
+                  <w.Icon className="h-28 w-auto md:h-32" />
                   <p className="mt-4 text-base font-bold leading-[1.6]">
                     {w.title}
                   </p>
