@@ -44,24 +44,6 @@ const W = "#7A1E35"; // メイン(ワインレッド)
 const W2 = "#A83B57"; // やや明るいワインレッド
 const LINE = "#EEDFE3";
 
-const promises = [
-  {
-    title: "漏えいを防ぐ",
-    text: "AIに入れていい情報・ダメな情報を決めて、社員に浸透させます",
-    icon: "shield",
-  },
-  {
-    title: "説明できる",
-    text: "誰が責任を持つかを決めて、取引先や監査に説明できる体制にします",
-    icon: "doc",
-  },
-  {
-    title: "責任者がつく",
-    text: "資格を持つ専門家が、社外の責任者としてつきます",
-    icon: "person",
-  },
-] as const;
-
 const worries: {
   title: ReactNode;
   text: string;
@@ -1067,37 +1049,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </div>
           </div>
         </Container>
-
-        {/* 3つの約束(数字の帯) */}
-        <div className="border-t border-[#EEE5E8] bg-white/80">
-          <Container>
-            <ul className="grid gap-px md:grid-cols-3">
-              {promises.map((p, i) => (
-                <li
-                  key={p.title}
-                  className={cn(
-                    "flex items-center gap-4 py-6 md:px-6",
-                    i > 0 &&
-                      "border-t border-[#EEE5E8] md:border-l md:border-t-0",
-                  )}
-                >
-                  <span className="text-center leading-none text-brand-500">
-                    <span className="block text-[10px] font-bold tracking-[0.15em]">
-                      約束
-                    </span>
-                    <span className="block text-4xl font-black">{i + 1}</span>
-                  </span>
-                  <div>
-                    <p className="text-lg font-black">{p.title}</p>
-                    <p className="mt-1 text-sm leading-[1.75] text-ink/70">
-                      {p.text}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </Container>
-        </div>
       </section>
 
       {/* ========== 3. お悩み + 解決(濃色の帯) ========== */}
