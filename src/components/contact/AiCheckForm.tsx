@@ -6,11 +6,11 @@ import { aiCheckEmployeeOptions } from "@/lib/contact";
 import { cn } from "@/lib/cn";
 
 const inputClass =
-  "w-full rounded-md border border-[#E6D9DD] bg-white px-4 py-3.5 text-base text-ink outline-none transition placeholder:text-ink/35 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15";
+  "w-full rounded-[4px] border border-[#D9D9DE] bg-white px-4 py-3.5 text-base text-ink outline-none transition placeholder:text-ink/35 focus:border-ink/60";
 
 function Label({ text, required }: { text: string; required?: boolean }) {
   return (
-    <span className="mb-2 flex items-center gap-2 text-sm font-bold text-ink">
+    <span className="mb-2 flex items-center gap-2 text-sm font-semibold text-ink">
       {text}
       <span
         className={cn(
@@ -100,7 +100,7 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
             />
           </svg>
         </div>
-        <p className="mt-6 text-lg font-black text-ink">
+        <p className="mt-6 text-lg font-semibold text-ink">
           お申し込みを受け付けました
         </p>
         <p className="mt-3 leading-relaxed text-ink/75">
@@ -162,10 +162,10 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
             <label
               key={o.value}
               className={cn(
-                "flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-bold transition",
+                "flex cursor-pointer items-center justify-center rounded-[4px] border px-3 py-3 text-sm font-bold transition",
                 employees === o.value
                   ? "border-brand-500 bg-brand-500 text-white"
-                  : "border-[#E6D9DD] bg-white text-ink hover:border-brand-500",
+                  : "border-[#D9D9DE] bg-white text-ink hover:border-brand-500",
               )}
             >
               <input
@@ -217,7 +217,7 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
       <button
         type="submit"
         disabled={sending}
-        className="group flex h-16 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(100deg,#61162A,#A83B57)] text-base font-black text-white shadow-[0_16px_36px_-14px_rgba(122,30,53,0.8)] transition hover:-translate-y-0.5 disabled:opacity-60"
+        className="group flex h-14 w-full items-center justify-center gap-2 rounded-[4px] bg-brand-500 text-base font-semibold text-white transition-colors hover:bg-brand-600 disabled:opacity-60"
       >
         {sending ? "送信中..." : "無料で申し込む"}
         {sending ? null : (
