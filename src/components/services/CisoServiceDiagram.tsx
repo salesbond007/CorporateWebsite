@@ -34,7 +34,7 @@ const steps = [
   {
     en: "SUPPLY CHAIN SECURITY",
     title: "サプライチェーンセキュリティ対応",
-    plain: "チェックシート回答と取引先への説明",
+    plain: "チェックシート回答と取引先への説明、制度対応",
     advisor: "回答方法を助言",
     ciso: "チェックシート回答を作成",
   },
@@ -141,7 +141,7 @@ function Cycle() {
 
       {/* 中央 */}
       <div className="absolute left-1/2 top-1/2 flex w-[42%] -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center">
-        <svg viewBox="0 0 48 56" className="h-auto w-[34%]" aria-hidden="true">
+        <svg viewBox="0 0 48 56" className="h-auto w-[28%]" aria-hidden="true">
           <path
             d="M24 3L44 10v15c0 13-8.5 23-20 28C12.5 48 4 38 4 25V10z"
             fill="#fff"
@@ -163,6 +163,9 @@ function Cycle() {
         </p>
         <p className="mt-[5%] whitespace-nowrap text-[clamp(0.6rem,2vw,0.85rem)] font-bold tracking-[0.04em] text-white/85">
           CISO／セキュリティ顧問
+        </p>
+        <p className="mt-[7%] whitespace-nowrap border border-white/70 px-[0.8em] py-[0.35em] text-[clamp(0.55rem,1.8vw,0.78rem)] font-bold tracking-[0.04em]">
+          毎月、経営へ定期レポート
         </p>
       </div>
 
@@ -280,21 +283,35 @@ export function CisoServiceDiagram() {
                   </td>
                 </tr>
               ))}
+              <tr className="border-t-2 border-white/40">
+                <th scope="row" className="py-3 pr-2 align-top font-normal">
+                  <span className="block text-[10px] font-bold tracking-[0.1em] text-white/60">
+                    もしもの時
+                    <span className="hidden md:inline">
+                      ｜INCIDENT RESPONSE
+                    </span>
+                  </span>
+                  <span className="mt-0.5 block font-bold">
+                    インシデント対応体制の構築
+                  </span>
+                </th>
+                <td className="bg-white/[0.06] px-2.5 py-3 align-top text-white/85">
+                  初動対応の手順を助言
+                </td>
+                <td className="bg-[#7A1F3D]/60 px-2.5 py-3 align-top font-bold">
+                  対応体制の構築と、発生時の対応支援
+                </td>
+              </tr>
             </tbody>
           </table>
 
-          <div className="mt-6 border-l-4 border-white px-4 py-1">
-            <p className="text-[11px] font-bold tracking-[0.2em] text-white/70">
-              INCIDENT RESPONSE
-            </p>
-            <p className="mt-1 text-[15px] font-bold leading-snug md:text-base">
-              もしもの時も相談できます（社外CISOは初動を助言）
-            </p>
-          </div>
+          <p className="mt-6 border-l-4 border-white px-4 py-1 text-[14px] font-bold leading-relaxed md:text-[15px]">
+            EDR・バックアップなど、対策ツールやベンダーの選定も相談できます
+          </p>
 
           <figcaption className="mt-5 text-[13px] leading-relaxed text-white/80">
             <span aria-hidden="true">↻ </span>
-            継続的改善：毎月の定例で見直し、年1回もう一度リスクアセスメントを行います
+            継続的改善：毎月の定例で見直して経営へ報告し、年1回もう一度リスクアセスメントを行います
           </figcaption>
         </div>
       </div>
