@@ -118,6 +118,8 @@ export const generalContactSchema = z.object({
   // パートナーについて選択時のみ届く可能性のあるサブ選択
   partnerTypes: z.array(z.string()).optional(),
   message: z.string().trim().max(5000).optional().or(z.literal("")),
+  /** document: 資料請求 / check: 無料のAI利用チェック */
+  request: z.enum(["document", "check"]).default("document"),
 });
 
 /** アポコミLPの選択肢(フォーム・通知メールで共用) */
@@ -187,6 +189,8 @@ export const webSecurityDiagnosisSchema = z.object({
   name: z.string().trim().min(1, "お名前を入力してください").max(100),
   email: z.string().trim().email("正しいメールアドレスを入力してください"),
   message: z.string().trim().max(5000).optional().or(z.literal("")),
+  /** document: 資料請求 / check: 無料のAI利用チェック */
+  request: z.enum(["document", "check"]).default("document"),
 });
 
 /** 簡易LP(顧問・COO紹介 / CISO・セキュリティ顧問)の無料相談フォームで扱うサービス */
@@ -250,6 +254,8 @@ export const aiCheckSchema = z.object({
     },
   ),
   message: z.string().trim().max(5000).optional().or(z.literal("")),
+  /** document: 資料請求 / check: 無料のAI利用チェック */
+  request: z.enum(["document", "check"]).default("document"),
 });
 
 export type ProfessionalContactInput = z.infer<

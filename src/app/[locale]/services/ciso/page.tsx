@@ -424,12 +424,12 @@ function Pill({
   );
 }
 
-/* ----------------------------------- ファーストビュー: 体制図と月次報告書 */
+/* ----------------------------------- ファーストビュー: 体制図 */
 
 /** 会社の中で、社外CISOがどこに入るかを示す体制図 */
 function HeroVisual() {
   return (
-    <div className="relative px-2 pb-28 sm:px-6 lg:pr-0">
+    <div className="relative px-2 sm:px-6 lg:pr-0">
       <div className="relative rounded-xl bg-white p-6 shadow-[0_40px_80px_-40px_rgba(60,15,25,0.45)] ring-1 ring-[#EEDFE3] md:p-8">
         <div className="flex items-center justify-between">
           <p className="text-sm font-black text-ink">御社のセキュリティ体制</p>
@@ -499,28 +499,6 @@ function HeroVisual() {
             取引先・監査へ「セキュリティの責任者は社外CISOです」と説明できる
           </p>
         </div>
-      </div>
-
-      {/* 月次報告書 */}
-      <div className="absolute bottom-0 right-2 w-[15rem] animate-float-y rounded-lg bg-white p-4 shadow-[0_24px_50px_-22px_rgba(60,15,25,0.5)] ring-1 ring-[#EEDFE3] sm:right-6 lg:right-0">
-        <div className="flex items-center justify-between">
-          <p className="text-[12px] font-black">月次報告書</p>
-          <span className="text-[10px] font-bold text-ink/45">社外CISO</span>
-        </div>
-        <ul className="mt-2.5 space-y-1.5 text-[11px] font-bold">
-          {[
-            "AI利用ルールの見直し",
-            "AIツールの導入前チェック",
-            "取引先チェックシート回答",
-          ].map((t) => (
-            <li key={t} className="flex items-center gap-2">
-              <span className="grid h-4 w-4 place-items-center rounded-full bg-[#E3F5EC] text-[9px] text-[#1E8A57]">
-                ✓
-              </span>
-              {t}
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   );
@@ -1057,43 +1035,31 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         />
         <Container className="grid items-center gap-12 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <p className="inline-flex items-center rounded-full border border-brand-500/30 bg-white px-4 py-1.5 text-xs font-bold text-brand-600 md:text-sm">
+            <p className="flex items-center gap-3 text-[clamp(1.05rem,1.9vw,1.4rem)] font-black text-brand-500">
+              <span
+                aria-hidden="true"
+                className="h-7 w-1.5 rounded-full bg-brand-500"
+              />
               社外CISO・セキュリティ顧問サービス
             </p>
-            <p className="mt-5 text-sm font-bold text-ink/70 md:text-base">
-              中小・中堅企業のための AIセキュリティ
-            </p>
-            <h1 className="mt-3 text-[clamp(1.8rem,3.2vw,2.75rem)] font-black leading-[1.45] tracking-[0.03em]">
-              <span className="inline-block">
-                AIを<span className="text-brand-500">禁止しない</span>会社に、
-              </span>
+            <h1 className="mt-6 text-[clamp(2.4rem,5vw,4.1rem)] font-black leading-[1.25] tracking-[0.04em]">
+              <span className="text-brand-500">AI時代</span>に備える
               <br />
-              <span className="inline-block">
-                セキュリティの<span className="text-brand-500">責任者</span>を。
-              </span>
+              セキュリティ対策
             </h1>
-            <p className="mt-6 max-w-xl text-[15px] font-medium leading-[2] text-ink/80">
+            <p className="mt-7 max-w-xl text-[15px] font-bold leading-[2] text-ink/80 md:text-base">
               社員がAIを安心して使えるルールづくりから、取引先への説明まで。
               <br className="hidden md:block" />
-              資格を持つセキュリティの専門家が、あなたの会社の責任者として月額でつきます。
+              資格を持つ専門家が、御社のセキュリティの責任者として月額でつきます。
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="mt-10">
               <BigButton
-                label="無料のAI利用チェック"
-                sub="オンライン30分・無料"
-                icon="check"
-              />
-              <BigButton
-                label="料金を見る"
-                sub="月額8万円から"
+                label="資料ダウンロード"
+                sub="こちらから無料"
                 icon="doc"
-                href="#price"
-                tone="accent"
+                href="#check"
               />
             </div>
-            <p className="mt-4 text-xs leading-relaxed text-ink/60 md:text-[13px]">
-              オンライン30分。社内のAIの使い方とセキュリティ体制の気になる点を、専門家が無料で整理します。
-            </p>
           </div>
           <div className="lg:-mr-10 xl:-mr-24">
             <div className="[transform:perspective(2000px)_rotateY(-10deg)_rotateX(3deg)]">
@@ -1719,13 +1685,24 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <Watermark className="-right-6 top-4">Contact</Watermark>
         <Container>
           <SectionHead en="Contact">
-            まずは無料の「AI利用チェック」から
+            資料ダウンロード・無料のAI利用チェック
           </SectionHead>
           <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
             <div>
-              <p className="text-[15px] leading-[2] text-ink/80">
-                オンライン30分。社内のAIの使い方、取引先から求められていること、今の体制を伺い、優先して手を打つべき点を専門家がお伝えします。売り込みはしません。
-              </p>
+              <dl className="space-y-6 text-[15px] leading-[1.9] text-ink/80">
+                <div>
+                  <dt className="font-black text-ink">資料請求</dt>
+                  <dd className="mt-1">
+                    サービスの内容・料金・導入の流れをまとめた資料を、メールでお送りします。
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-black text-ink">無料のAI利用チェック</dt>
+                  <dd className="mt-1">
+                    オンライン30分。社内のAIの使い方、取引先から求められていること、今の体制を伺い、優先して手を打つべき点を専門家がお伝えします。売り込みはしません。
+                  </dd>
+                </div>
+              </dl>
             </div>
             <div className="rounded-md bg-white p-6 shadow-[0_30px_60px_-40px_rgba(0,0,0,0.45)] md:p-9">
               <AiCheckForm privacyHref={localePath("/privacy", locale)} />
