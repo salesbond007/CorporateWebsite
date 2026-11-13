@@ -31,6 +31,7 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
   const [email, setEmail] = useState("");
   const [employees, setEmployees] = useState("");
   const [message, setMessage] = useState("");
+  const [request, setRequest] = useState<"document" | "check">("document");
   const [website, setWebsite] = useState("");
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
@@ -55,6 +56,7 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
           email,
           employees,
           message,
+          request,
           website,
         }),
       });
@@ -106,7 +108,9 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
         <p className="mt-3 leading-relaxed text-ink/75">
           ありがとうございます。
           <br />
-          担当者より2営業日以内に、日程調整のご連絡をいたします。
+          {request === "check"
+            ? "担当者より2営業日以内に、日程調整のご連絡をいたします。"
+            : "担当者より2営業日以内に、資料をメールでお送りします。"}
         </p>
       </div>
     );
@@ -114,6 +118,39 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-6">
+      <fieldset>
+        <legend>
+          <Label text="お申し込み内容" required />
+        </legend>
+        <div className="grid grid-cols-2 gap-2">
+          {(
+            [
+              { v: "document", l: "資料請求" },
+              { v: "check", l: "無料のAI利用チェック（30分）" },
+            ] as const
+          ).map((o) => (
+            <label
+              key={o.v}
+              className={cn(
+                "flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-center text-sm font-bold transition",
+                request === o.v
+                  ? "border-brand-500 bg-brand-500 text-white"
+                  : "border-[#E6D9DD] bg-white text-ink hover:border-brand-500",
+              )}
+            >
+              <input
+                type="radio"
+                name="request"
+                value={o.v}
+                checked={request === o.v}
+                onChange={() => setRequest(o.v)}
+                className="sr-only"
+              />
+              {o.l}
+            </label>
+          ))}
+        </div>
+      </fieldset>
       <div className="grid gap-6 md:grid-cols-2">
         <label className="block md:col-span-2">
           <Label text="会社名" required />
@@ -219,7 +256,11 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
         disabled={sending}
         className="group flex h-16 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(100deg,#61162A,#A83B57)] text-base font-black text-white shadow-[0_16px_36px_-14px_rgba(122,30,53,0.8)] transition hover:-translate-y-0.5 disabled:opacity-60"
       >
-        {sending ? "送信中..." : "無料で申し込む"}
+        {sending
+          ? "送信中..."
+          : request === "check"
+            ? "無料で申し込む"
+            : "資料を請求する（無料）"}
         {sending ? null : (
           <span
             aria-hidden="true"
