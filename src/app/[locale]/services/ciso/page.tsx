@@ -1026,14 +1026,16 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </span>
             </p>
             <h1 className="mt-6 text-[clamp(2.4rem,5vw,4.1rem)] font-black leading-[1.25] tracking-[0.04em]">
-              <span className="text-brand-500">AI時代</span>に備える
+              <span className="text-brand-500">AI時代</span>に必須な
               <br />
               セキュリティ対策
             </h1>
-            <p className="mt-7 max-w-xl text-[15px] font-bold leading-[2] text-ink/80 md:text-base">
-              社員がAIを安心して使えるルールづくりから、取引先への説明まで。
-              <br className="hidden md:block" />
-              資格を持つ専門家が、御社のセキュリティの責任者として月額でつきます。
+            <p className="mt-7 text-[clamp(1.1rem,1.9vw,1.45rem)] font-black leading-[1.6]">
+              情報漏えいが起きてからでは、
+              <span className="text-brand-500">もう遅い。</span>
+            </p>
+            <p className="mt-3 max-w-[34rem] text-[15px] font-bold leading-[2] text-ink/80 [word-break:auto-phrase] md:text-base">
+              社員が入力したひとつの情報が、取引停止や信用の失墜につながる時代です。資格を持つ専門家が御社の責任者として、事故が起きる前に防ぐ体制をつくります。
             </p>
             <div className="mt-10">
               <BigButton
