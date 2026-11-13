@@ -43,25 +43,82 @@ export function generateMetadata({
 
 const W2 = "#A83B57"; // やや明るいワインレッド
 
-const worries = [
-  { title: "社内にセキュリティ対策の専門家がいない", Icon: IconSoloIt },
-  { title: "生成AIで情報が漏れないか不安", Icon: IconShadowAi },
-  { title: "上場審査で、責任者と体制を問われる", Icon: IconListing },
-  { title: "大手企業と取引したいが、審査が壁になる", Icon: IconChecksheet },
-  { title: "AI活用を進め、セキュリティが後回しに", Icon: IconAiRush },
+const worries: {
+  title: ReactNode;
+  Icon: (p: { className?: string }) => ReactNode;
+}[] = [
+  {
+    title: (
+      <>
+        社内にセキュリティ対策の
+        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
+          専門家がいない
+        </mark>
+      </>
+    ),
+    Icon: IconSoloIt,
+  },
+  {
+    title: (
+      <>
+        生成AIで
+        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
+          情報が漏れないか
+        </mark>
+        不安
+      </>
+    ),
+    Icon: IconShadowAi,
+  },
+  {
+    title: (
+      <>
+        上場審査で、
+        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
+          責任者と体制
+        </mark>
+        を問われる
+      </>
+    ),
+    Icon: IconListing,
+  },
+  {
+    title: (
+      <>
+        大手企業と取引したいが、
+        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
+          審査が壁
+        </mark>
+        になる
+      </>
+    ),
+    Icon: IconChecksheet,
+  },
+  {
+    title: (
+      <>
+        AI活用を進め、
+        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
+          セキュリティが後回し
+        </mark>
+        に
+      </>
+    ),
+    Icon: IconAiRush,
+  },
 ];
 
 /** サービス概要: プロが代行する仕事 */
 const services = [
   {
-    t: "セキュリティの責任者",
+    t: "責任者（社外CISO）",
     d: "社外CISOとして、御社の責任者を務めます",
     i: "person",
   },
   { t: "ルールづくり", d: "AIの使い方や社内規程を整えます", i: "doc" },
   { t: "診断・点検", d: "弱点を見える化し、優先順位をつけます", i: "chart" },
   {
-    t: "取引先・審査への対応",
+    t: "取引先・審査対応",
     d: "チェックシート回答や説明を引き受けます",
     i: "check",
   },
@@ -574,7 +631,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           <ul className="mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-3 md:gap-4 lg:grid-cols-5">
             {worries.map((w, i) => (
               <Reveal
-                key={w.title}
+                key={i}
                 variant="up"
                 delay={i * 70}
                 className={cn("h-full", i === 4 && "col-span-2 lg:col-span-1")}
@@ -649,71 +706,89 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </p>
           </Reveal>
 
-          {/* 図: 御社 → 任せる → Bond AI */}
+          {/* 図: 中央に CISO / セキュリティ顧問、周りに代行する6つの仕事 */}
           <Reveal
             variant="up"
-            className="mx-auto mt-12 grid max-w-5xl items-center gap-4 lg:grid-cols-[13rem_auto_1fr]"
+            className="relative isolate mt-12 overflow-hidden rounded-lg px-4 py-10 text-white md:px-10 md:py-14"
           >
-            <div className="flex flex-col items-center rounded-md bg-white px-6 py-7 text-center shadow-[0_16px_34px_-24px_rgba(0,0,0,0.45)] ring-1 ring-[#EEE5E8]">
-              <span className="grid h-16 w-16 place-items-center rounded-full bg-[#3A3442] text-white">
-                <Icon name="person" className="h-8 w-8" />
-              </span>
-              <p className="mt-3 text-lg font-black">御社</p>
-              <p className="mt-1 text-xs font-bold leading-relaxed text-ink/60">
-                本業に集中できる
-              </p>
-            </div>
-            <div className="flex flex-col items-center gap-1 text-brand-500">
-              <span className="text-xs font-black">まるごと任せる</span>
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 80 24"
-                className="hidden h-6 w-20 lg:block"
-              >
-                <path
-                  d="M2 12h70M62 3l10 9-10 9"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-              <svg
-                aria-hidden="true"
-                viewBox="0 0 24 40"
-                className="h-10 w-6 lg:hidden"
-              >
-                <path
-                  d="M12 2v30M3 24l9 10 9-10"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <div className="overflow-hidden rounded-md bg-white shadow-[0_20px_44px_-26px_rgba(122,30,53,0.5)] ring-2 ring-brand-500">
-              <p className="flex items-center gap-2 bg-brand-500 px-5 py-3 text-white">
-                <Icon name="shield" className="h-5 w-5" />
-                <span className="font-black">
-                  Bond AI のセキュリティ専門家が代行すること
-                </span>
-              </p>
-              <ul className="grid gap-px bg-[#EEE5E8] sm:grid-cols-2 lg:grid-cols-3">
-                {services.map((x) => (
-                  <li key={x.t} className="flex gap-3 bg-white p-4">
-                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[#F4EEF0] text-brand-500">
-                      <Icon name={x.i} className="h-5 w-5" />
-                    </span>
-                    <span>
-                      <span className="block text-[15px] font-black">
+            <Image
+              src="/services/cards/ai-solutions.jpg"
+              alt=""
+              fill
+              sizes="100vw"
+              className="-z-20 object-cover"
+            />
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 -z-10 bg-[linear-gradient(120deg,rgba(24,26,38,0.93)_0%,rgba(30,30,46,0.88)_55%,rgba(58,22,36,0.86)_100%)]"
+            />
+            <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_1fr]">
+              <div className="relative mx-auto aspect-square w-full max-w-[480px]">
+                {/* 点線の輪 */}
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 100 100"
+                  className="absolute inset-0 h-full w-full"
+                >
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="37"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.55)"
+                    strokeWidth="0.35"
+                    strokeDasharray="1.2 1.4"
+                  />
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="46"
+                    fill="none"
+                    stroke="rgba(255,255,255,0.12)"
+                    strokeWidth="0.3"
+                  />
+                </svg>
+                {/* 中央 */}
+                <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center">
+                  <Icon name="shield" className="h-14 w-14 md:h-20 md:w-20" />
+                  <p className="mt-2 text-[clamp(1rem,2.4vw,1.5rem)] font-black leading-tight tracking-[0.04em]">
+                    CISO
+                    <br />
+                    セキュリティ顧問
+                  </p>
+                </div>
+                {/* 周りの6つ */}
+                {services.map((x, i) => {
+                  const ang = ((-90 + 60 * i) * Math.PI) / 180;
+                  return (
+                    <span
+                      key={x.t}
+                      className="absolute flex h-[27%] w-[27%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-white/70 bg-white/10 px-1 text-center backdrop-blur-sm"
+                      style={{
+                        left: `${50 + 37 * Math.cos(ang)}%`,
+                        top: `${50 + 37 * Math.sin(ang)}%`,
+                      }}
+                    >
+                      <Icon name={x.i} className="h-6 w-6 md:h-8 md:w-8" />
+                      <span className="mt-1 text-[10px] font-bold leading-tight [word-break:auto-phrase] sm:text-xs md:text-[13px]">
                         {x.t}
                       </span>
-                      <span className="mt-0.5 block text-xs leading-relaxed text-ink/65">
-                        {x.d}
-                      </span>
+                    </span>
+                  );
+                })}
+              </div>
+              <ul className="space-y-3">
+                {services.map((x) => (
+                  <li
+                    key={x.t}
+                    className="flex gap-3 border-b border-white/15 pb-3"
+                  >
+                    <span className="mt-0.5 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-500">
+                      <Icon name={x.i} className="h-4 w-4" />
+                    </span>
+                    <span>
+                      <span className="block font-black">{x.t}</span>
+                      <span className="block text-sm text-white/75">{x.d}</span>
                     </span>
                   </li>
                 ))}
