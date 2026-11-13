@@ -693,7 +693,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       >
         <Watermark className="-right-6 top-4">Service</Watermark>
         <Container>
-          <SectionHead en="Service">サービス概要</SectionHead>
+          <SectionHead en="Service" />
           <Reveal variant="up" className="mt-10 text-center">
             <p className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
               セキュリティの<span className="text-brand-500">プロ</span>が、
@@ -1322,16 +1322,18 @@ function SplitCta() {
 }
 
 /** 大きな英字 + 日本語(横並び) + 左だけ色の付いた線 */
-function SectionHead({ en, children }: { en: string; children: ReactNode }) {
+function SectionHead({ en, children }: { en: string; children?: ReactNode }) {
   return (
     <Reveal variant="up">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:gap-5">
         <p className="text-[clamp(2.4rem,5.6vw,3.8rem)] font-black uppercase leading-none tracking-[0.02em] text-brand-500">
           {en}
         </p>
-        <h2 className="pb-1 text-lg font-bold tracking-[0.04em] text-ink [word-break:auto-phrase] md:text-xl">
-          {children}
-        </h2>
+        {children ? (
+          <h2 className="pb-1 text-lg font-bold tracking-[0.04em] text-ink [word-break:auto-phrase] md:text-xl">
+            {children}
+          </h2>
+        ) : null}
       </div>
       <div className="relative mt-5 h-px bg-[#E6D9DD]">
         <span className="absolute inset-y-0 left-0 w-56 -translate-y-px border-b-2 border-brand-500" />
