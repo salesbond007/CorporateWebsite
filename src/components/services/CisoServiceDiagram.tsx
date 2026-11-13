@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 
 /**
- * Bond AI LP「サービス概要」の全体像。
+ * Bond AI セキュリティ LP「サービス概要」の全体像。
  * 暗いワイン色を重ねた写真の上に、左: 4ステップが継続的にまわる円の図、
  * 右: 見出しと「セキュリティ顧問／社外CISO」の対応表。
  * 4ステップの順番は両プラン共通で、違うのは「どこまで任せられるか」であることを示す。
@@ -157,6 +157,9 @@ function Cycle() {
         </svg>
         <p className="mt-[6%] text-[clamp(1.1rem,4.4vw,2rem)] font-black leading-none tracking-[0.02em]">
           Bond AI
+          <span className="mt-[0.3em] block text-[0.62em] tracking-[0.06em]">
+            セキュリティ
+          </span>
         </p>
         <p className="mt-[5%] whitespace-nowrap text-[clamp(0.6rem,2vw,0.85rem)] font-bold tracking-[0.04em] text-white/85">
           CISO／セキュリティ顧問

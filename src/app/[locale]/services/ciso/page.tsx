@@ -378,14 +378,14 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               url: localePath("/services/security", locale),
             },
             {
-              name: "Bond AI（CISO・セキュリティ顧問）",
+              name: "Bond AI セキュリティ（CISO・セキュリティ顧問）",
               url: localePath(PATH, locale),
             },
           ]),
           {
             "@context": "https://schema.org",
             "@type": "Service",
-            name: "Bond AI（AI時代のセキュリティ顧問・社外CISO）",
+            name: "Bond AI セキュリティ（AI時代のセキュリティ顧問・社外CISO）",
             alternateName: [
               "社外CISO",
               "vCISO",
@@ -430,7 +430,9 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               <Icon name="shield" className="h-5 w-5" />
             </span>
             <span className="leading-tight">
-              <span className="block text-lg font-black text-ink">Bond AI</span>
+              <span className="block whitespace-nowrap text-base font-black text-ink sm:text-lg">
+                Bond AI セキュリティ
+              </span>
               <span className="hidden text-[10px] font-bold text-ink/55 sm:block">
                 AI時代のセキュリティ顧問・社外CISO
               </span>
@@ -455,7 +457,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           </nav>
           <a
             href={`#${FORM_ID}`}
-            className="ml-auto inline-flex h-10 items-center rounded-full bg-[linear-gradient(100deg,#FF7A55,#E64A2E)] px-5 text-sm font-bold text-white shadow-[0_8px_18px_-10px_rgba(230,74,46,0.9)] md:ml-2"
+            className="ml-auto inline-flex h-10 items-center rounded-none bg-[linear-gradient(100deg,#FF7A55,#E64A2E)] px-5 text-sm font-bold text-white shadow-[0_8px_18px_-10px_rgba(230,74,46,0.9)] md:ml-2"
           >
             無料相談
           </a>
@@ -871,7 +873,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             >
               <Icon name="shield" className="h-4 w-4" />
             </span>
-            <p className="text-base font-black">Bond AI</p>
+            <p className="text-base font-black">Bond AI セキュリティ</p>
             <p className="text-sm text-white/60">／ 運営：{site.legalName}</p>
           </div>
           <div className="mt-6 border-t border-white/15 pt-6 text-[11px] leading-[1.9] text-white/55">

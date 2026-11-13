@@ -24,7 +24,7 @@ function Label({ text, required }: { text: string; required?: boolean }) {
   );
 }
 
-/** Bond AI LP の無料相談・資料請求フォーム(送信先: info@salesbond.jp) */
+/** Bond AI セキュリティ LP の無料相談・資料請求フォーム(送信先: info@salesbond.jp) */
 export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
   const [company, setCompany] = useState("");
   const [name, setName] = useState("");
