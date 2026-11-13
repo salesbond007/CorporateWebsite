@@ -6,9 +6,12 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import {
+  IconAiRush,
   IconBanned,
   IconChecksheet,
+  IconListing,
   IconShadowAi,
+  IconSoloIt,
 } from "@/components/services/FlatIcons";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -39,74 +42,33 @@ export function generateMetadata({
  * 取引先対応向けのサブLPを作るときは、ファーストビューとお悩みだけを差し替える。
  */
 
-const W = "#7A1E35"; // メイン(ワインレッド)
 const W2 = "#A83B57"; // やや明るいワインレッド
-const LINE = "#EEDFE3";
 
 const worries = [
-  {
-    title: "社内にセキュリティ対策の専門家がいない",
-    text: "資格を持つ専門家が、月額で御社の担当につきます",
-  },
-  {
-    title: "生成AIで情報が漏れないか不安",
-    text: "入力してよい情報を決め、全社員に浸透させます",
-  },
-  {
-    title: "上場審査で、責任者と体制を問われる",
-    text: "社外CISOとして、審査で説明できる体制を整えます",
-  },
-  {
-    title: "大手企業と取引したいが、審査が壁になる",
-    text: "チェックシートの回答から取引先への説明まで引き受けます",
-  },
-  {
-    title: "AI活用を進め、セキュリティが後回しに",
-    text: "社内のAIを点検し、データの扱いと権限を整えます",
-  },
+  { title: "社内にセキュリティ対策の専門家がいない", Icon: IconSoloIt },
+  { title: "生成AIで情報が漏れないか不安", Icon: IconShadowAi },
+  { title: "上場審査で、責任者と体制を問われる", Icon: IconListing },
+  { title: "大手企業と取引したいが、審査が壁になる", Icon: IconChecksheet },
+  { title: "AI活用を進め、セキュリティが後回しに", Icon: IconAiRush },
 ];
 
-/** 解決の図: Bond AI が担う役割 */
-const roles = [
-  "AI利用ルール",
-  "導入前チェック",
-  "AIシステム台帳",
-  "チェックシート回答",
-  "脆弱性診断",
-  "社員説明会",
-  "月次報告",
-  "事故の初動",
-];
-
-const features = [
+/** サービス概要: プロが代行する仕事 */
+const services = [
   {
-    title: "AIを止めずに、安全に広げる",
-    text: "禁止するのではなく、安心して使えるルールをつくります。社員のAI利用、社内で使うAIやAIエージェント、AIを使ったなりすまし詐欺。従来のセキュリティに加えて、AIのリスクまで一つの窓口で引き受けます。",
-    visual: "policy",
+    t: "セキュリティの責任者",
+    d: "社外CISOとして、御社の責任者を務めます",
+    i: "person",
   },
+  { t: "ルールづくり", d: "AIの使い方や社内規程を整えます", i: "doc" },
+  { t: "診断・点検", d: "弱点を見える化し、優先順位をつけます", i: "chart" },
   {
-    title: "契約後すぐに、診断から",
-    text: "最初の1〜2カ月で、AIの利用状況と弱点を診断します。年1回の脆弱性診断（提携の診断会社が実施）もプランに含め、結果は専門家が分かりやすく説明します。",
-    visual: "diagnosis",
+    t: "取引先・審査への対応",
+    d: "チェックシート回答や説明を引き受けます",
+    i: "check",
   },
-  {
-    title: "ルールを作って終わりにしない",
-    text: "AI利用ルールの整備、社員への説明会、取引先のチェックシート回答、社外CISOとしての名前の掲載まで行います。「専門家が責任者としてついています」と、取引先に言える状態をつくります。",
-    visual: "checksheet",
-  },
+  { t: "社員への説明", d: "決めたルールを全社員に浸透させます", i: "bell" },
+  { t: "事故の初動", d: "もしもの時の判断と対応を助言します", i: "shield" },
 ] as const;
-
-const monthly = [
-  "月1回の定例（90分）と月次報告",
-  "チャット相談（2営業日以内に返答）",
-  "自社用のAI利用ルールの作成と見直し",
-  "全社員向けのAIルール説明会（年1回・オンライン60分）",
-  "AIツールの導入前チェック（月2件）",
-  "取引先のチェックシート回答（月2件）",
-  "社内で使うAIの一覧（AIシステム台帳）づくり",
-  "事故が起きたときの初動の助言",
-  "社外CISOとしての名前の掲載",
-];
 
 const plans = [
   {
@@ -240,8 +202,6 @@ const faqs = [
   },
 ];
 
-const sources = ["※ アクセルパートナーズの解説記事による目安"];
-
 /* ============================================================ 小さな部品 */
 
 function Icon({
@@ -305,57 +265,6 @@ function Check({ className }: { className?: string }) {
       )}
     >
       ✓
-    </span>
-  );
-}
-
-/** ブラウザ風の枠 */
-function Window({
-  title,
-  children,
-  className,
-}: {
-  title: string;
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "overflow-hidden rounded-xl bg-white shadow-[0_40px_80px_-40px_rgba(60,15,25,0.45)] ring-1 ring-[#EEDFE3]",
-        className,
-      )}
-    >
-      <div className="flex items-center gap-2 border-b border-[#EEDFE3] bg-[#FBF6F7] px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
-        <span className="ml-3 truncate text-[11px] font-bold text-ink/50">
-          {title}
-        </span>
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function Pill({
-  tone,
-  children,
-}: {
-  tone: "ok" | "wait" | "ng";
-  children: ReactNode;
-}) {
-  return (
-    <span
-      className={cn(
-        "shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold",
-        tone === "ok" && "bg-[#E3F5EC] text-[#1E8A57]",
-        tone === "wait" && "bg-[#FFF3D6] text-[#9A6B00]",
-        tone === "ng" && "bg-[#FBEAEE] text-[#7A1E35]",
-      )}
-    >
-      {children}
     </span>
   );
 }
@@ -504,207 +413,6 @@ function HeroVisual() {
 }
 
 /* ------------------------------------------------------------ 図・グラフ */
-
-/** 体制のピラミッド */
-function Pyramid() {
-  const layers = [
-    { k: "経営", v: "責任者を決め、方針を示す", y: 0 },
-    { k: "管理", v: "AI利用ルール・AIシステム台帳・導入前チェック", y: 1 },
-    { k: "現場", v: "社員への説明会・日々の相談", y: 2 },
-  ];
-  return (
-    <div className="grid items-center gap-8 md:grid-cols-[1fr_1.1fr]">
-      <svg
-        viewBox="0 0 300 250"
-        className="mx-auto h-auto w-full max-w-[340px]"
-        role="img"
-        aria-label="経営・管理・現場の3層でAIセキュリティの体制をつくるピラミッド図"
-      >
-        <polygon points="150,10 205,85 95,85" fill={W} />
-        <polygon points="92,90 208,90 250,165 50,165" fill={W2} />
-        <polygon points="46,170 254,170 296,245 4,245" fill="#E7C4CD" />
-        <text
-          x="150"
-          y="68"
-          textAnchor="middle"
-          fontSize="18"
-          fontWeight="900"
-          fill="#fff"
-        >
-          経営
-        </text>
-        <text
-          x="150"
-          y="135"
-          textAnchor="middle"
-          fontSize="18"
-          fontWeight="900"
-          fill="#fff"
-        >
-          管理
-        </text>
-        <text
-          x="150"
-          y="215"
-          textAnchor="middle"
-          fontSize="18"
-          fontWeight="900"
-          fill={W}
-        >
-          現場
-        </text>
-      </svg>
-      <ol className="space-y-3">
-        {layers.map((l) => (
-          <li
-            key={l.k}
-            className="flex items-center gap-4 rounded-lg bg-white p-4 ring-1 ring-[#EEDFE3]"
-          >
-            <span
-              className={cn(
-                "grid h-12 w-12 shrink-0 place-items-center rounded-md text-sm font-black",
-                l.y === 0 && "bg-brand-500 text-white",
-                l.y === 1 && "bg-[#A83B57] text-white",
-                l.y === 2 && "bg-[#E7C4CD] text-brand-600",
-              )}
-            >
-              {l.k}
-            </span>
-            <p className="text-[15px] font-bold leading-relaxed">{l.v}</p>
-          </li>
-        ))}
-        <li className="pl-1 pt-1 text-sm font-bold text-brand-600">
-          → Bond AI は、3つの層をまとめて引き受けます
-        </li>
-      </ol>
-    </div>
-  );
-}
-
-/** 特長ごとの画面イメージ */
-function FeatureVisual({
-  kind,
-}: {
-  kind: "policy" | "diagnosis" | "checksheet";
-}) {
-  if (kind === "policy") {
-    return (
-      <Window title="AI利用ルール（第2版）">
-        <div className="p-5 text-[12px] font-bold">
-          <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-md bg-[#E3F5EC]/70 p-3">
-              <p className="text-[#1E8A57]">○ 入力してよい</p>
-              <ul className="mt-2 space-y-1 text-ink/75">
-                <li>・公開済みの情報</li>
-                <li>・社内向けの文章の下書き</li>
-              </ul>
-            </div>
-            <div className="rounded-md bg-brand-50 p-3">
-              <p className="text-brand-600">× 入力してはダメ</p>
-              <ul className="mt-2 space-y-1 text-ink/75">
-                <li>・お客さまの個人情報</li>
-                <li>・取引先の機密情報</li>
-              </ul>
-            </div>
-          </div>
-          <p className="mt-4 text-ink/60">導入時の承認の流れ</p>
-          <div className="mt-2 flex items-center gap-1.5 text-[11px]">
-            {["社員が申請", "導入前チェック", "責任者が承認"].map((s, i) => (
-              <span key={s} className="flex items-center gap-1.5">
-                <span
-                  className={cn(
-                    "rounded-md px-2 py-1.5",
-                    i === 2
-                      ? "bg-brand-500 text-white"
-                      : "bg-[#FBF6F7] ring-1 ring-[#EEDFE3]",
-                  )}
-                >
-                  {s}
-                </span>
-                {i < 2 ? <span className="text-brand-500">›</span> : null}
-              </span>
-            ))}
-          </div>
-        </div>
-      </Window>
-    );
-  }
-  if (kind === "diagnosis") {
-    const items = [
-      { k: "シャドーAI（無断利用）", v: 82, p: "高" },
-      { k: "入力してよい情報の基準", v: 70, p: "高" },
-      { k: "AIエージェントの権限", v: 48, p: "中" },
-      { k: "外から見える脆弱性", v: 36, p: "中" },
-      { k: "なりすまし詐欺への備え", v: 24, p: "低" },
-    ];
-    return (
-      <Window title="診断レポート ｜ 優先して直す点">
-        <div className="p-5">
-          <ul className="space-y-3">
-            {items.map((it) => (
-              <li key={it.k} className="text-[11px] font-bold">
-                <div className="flex items-center justify-between">
-                  <span>{it.k}</span>
-                  <span
-                    className={cn(
-                      "rounded px-1.5 py-0.5 text-[10px]",
-                      it.p === "高"
-                        ? "bg-brand-500 text-white"
-                        : it.p === "中"
-                          ? "bg-[#E7C4CD] text-brand-600"
-                          : "bg-[#F1ECEE] text-ink/60",
-                    )}
-                  >
-                    優先度 {it.p}
-                  </span>
-                </div>
-                <div className="mt-1.5 h-2 rounded-full bg-[#F1ECEE]">
-                  <div
-                    className="h-2 rounded-full bg-[linear-gradient(90deg,#A83B57,#7A1E35)]"
-                    style={{ width: `${it.v}%` }}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Window>
-    );
-  }
-  const rows = [
-    { q: "AIの利用ルールを定めていますか", s: "回答済" },
-    { q: "情報セキュリティの責任者は誰ですか", s: "回答済" },
-    { q: "委託先のAI利用を管理していますか", s: "回答済" },
-    { q: "事故時の連絡体制はありますか", s: "確認中" },
-  ];
-  return (
-    <Window title="取引先チェックシート ｜ 回答状況">
-      <div className="p-5">
-        <div className="flex items-end justify-between">
-          <p className="text-[11px] font-bold text-ink/55">回答の進み具合</p>
-          <p className="text-2xl font-black leading-none text-brand-500">
-            42<span className="text-sm text-ink/45"> / 45問</span>
-          </p>
-        </div>
-        <div className="mt-2 h-2 rounded-full bg-[#F1ECEE]">
-          <div className="h-2 w-[93%] rounded-full bg-brand-500" />
-        </div>
-        <ul className="mt-4 divide-y divide-[#EEDFE3] rounded-lg border border-[#EEDFE3] text-[11px] font-bold">
-          {rows.map((r) => (
-            <li key={r.q} className="flex items-center gap-2 px-3 py-2">
-              <span className="flex-1">{r.q}</span>
-              <Pill tone={r.s === "回答済" ? "ok" : "wait"}>{r.s}</Pill>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-3 flex items-center gap-2 rounded-md bg-brand-50 px-3 py-2 text-[11px] font-bold text-brand-600">
-          <Icon name="person" className="h-4 w-4" />
-          社外CISOとして名前を掲載
-        </p>
-      </div>
-    </Window>
-  );
-}
 
 /* ================================================================ ページ */
 
@@ -915,22 +623,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </Container>
       </section>
 
-      {/* ========== 3. お悩み + 解決(濃色の帯) ========== */}
-      <section className="relative isolate overflow-hidden pt-16 md:pt-24">
-        {/* 下半分: 写真 + 濃い色の斜めの帯 */}
-        <div className="absolute inset-x-0 bottom-0 top-[21rem] -z-10 [clip-path:polygon(0_8%,100%_0,100%_100%,0_100%)] md:top-[24rem]">
-          <Image
-            src="/services/cards/ai-solutions.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            className="object-cover"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 bg-[linear-gradient(120deg,rgba(28,30,42,0.94)_0%,rgba(28,30,42,0.86)_55%,rgba(60,24,38,0.82)_100%)]"
-          />
-        </div>
+      {/* ========== 3. お悩み ========== */}
+      <section className="bg-white pt-16 md:pt-24">
         <Container>
           <Reveal variant="up" className="text-center">
             <p className="text-sm font-bold tracking-[0.15em] text-brand-500">
@@ -941,198 +635,159 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               はありませんか？
             </h2>
           </Reveal>
-          <ul className="mx-auto mt-14 grid max-w-6xl gap-x-3 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
+          <ul className="mx-auto mt-12 grid max-w-6xl grid-cols-2 gap-3 md:gap-4 lg:grid-cols-5">
             {worries.map((w, i) => (
               <Reveal
                 key={w.title}
                 variant="up"
                 delay={i * 70}
-                className="h-full"
+                className={cn("h-full", i === 4 && "col-span-2 lg:col-span-1")}
               >
-                <li className="relative flex h-full flex-col overflow-hidden rounded-md bg-white text-center shadow-[0_16px_34px_-20px_rgba(0,0,0,0.5)] ring-1 ring-[#EEE5E8]">
-                  {/* お悩み */}
-                  <div className="relative flex flex-1 flex-col items-center bg-[#F4EEF0] px-4 pb-7 pt-5">
-                    <span className="grid h-12 w-12 place-items-center rounded-full bg-[#3A3442] text-white">
-                      <span className="leading-none">
-                        <span className="block text-[9px] font-bold">
-                          お悩み
-                        </span>
-                        <span className="block text-xl font-black">
-                          {i + 1}
-                        </span>
-                      </span>
-                    </span>
-                    <p className="mt-4 flex flex-1 items-center text-[15px] font-black leading-[1.6] [word-break:auto-phrase]">
-                      {w.title}
-                    </p>
-                    <span
-                      aria-hidden="true"
-                      className="absolute -bottom-3 left-1/2 h-0 w-0 -translate-x-1/2 border-x-[14px] border-t-[12px] border-x-transparent border-t-[#F4EEF0]"
-                    />
-                  </div>
-                  {/* 解決 */}
-                  <div className="flex flex-1 flex-col items-center px-4 pb-6 pt-7">
-                    <span className="inline-flex items-center gap-1 bg-brand-500 px-2.5 py-1 text-[11px] font-bold text-white">
-                      <Icon name="shield" className="h-3.5 w-3.5" />
-                      Bond AI なら
-                    </span>
-                    <p className="mt-3 text-sm font-bold leading-[1.75] text-brand-600 [word-break:auto-phrase]">
-                      {w.text}
-                    </p>
-                  </div>
+                <li className="flex h-full flex-col items-center rounded-md bg-[#F7F2F4] px-4 pb-6 pt-5 text-center">
+                  <span className="text-xs font-black tracking-[0.15em] text-brand-500">
+                    お悩み {i + 1}
+                  </span>
+                  <w.Icon className="mt-3 h-24 w-auto md:h-28" />
+                  <p className="mt-4 text-[15px] font-black leading-[1.6] [word-break:auto-phrase]">
+                    {w.title}
+                  </p>
                 </li>
               </Reveal>
             ))}
           </ul>
-
-          {/* 解決: 円形の図 + コピー */}
-          <div className="grid items-center gap-12 py-16 text-white md:py-24 lg:grid-cols-2">
-            <Reveal variant="scale">
-              <div className="relative mx-auto aspect-square w-full max-w-[420px]">
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-[13%] rounded-full border-2 border-dotted border-white/50"
-                />
-                <div className="absolute left-1/2 top-1/2 grid h-[36%] w-[36%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full text-center">
-                  <div>
-                    <span className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white text-brand-500 md:h-20 md:w-20">
-                      <Icon name="shield" className="h-9 w-9 md:h-11 md:w-11" />
-                    </span>
-                    <p className="mt-2 text-lg font-black tracking-[0.04em] md:text-xl">
-                      Bond AI
-                    </p>
-                  </div>
-                </div>
-                {roles.map((d, i) => {
-                  const a = ((-90 + (360 / roles.length) * i) * Math.PI) / 180;
-                  return (
-                    <span
-                      key={d}
-                      className="absolute grid h-[22%] w-[22%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/70 bg-[#1C1E2A]/80 px-1 text-center text-[10px] font-bold leading-tight text-white md:text-[11px]"
-                      style={{
-                        left: `${50 + 37 * Math.cos(a)}%`,
-                        top: `${50 + 37 * Math.sin(a)}%`,
-                      }}
-                    >
-                      {d}
-                    </span>
-                  );
-                })}
-              </div>
-            </Reveal>
-            <Reveal variant="up">
-              <p className="text-xl font-bold">Bond AI は</p>
-              <p className="mt-3 text-[clamp(1.6rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
-                社外の責任者として、AIを安全に使える体制を月額でつくる
-              </p>
-              <p className="mt-3 text-xl font-bold">ことで課題を解決できます</p>
-              <span
-                aria-hidden="true"
-                className="mt-7 block h-0.5 w-14 bg-white"
-              />
-              <p className="mt-7 text-[15px] leading-[2] text-white/85">
-                AIの利用ルール、導入前のチェック、取引先への回答、社員への説明、事故の初動まで。社内に専任者がいなくても、責任の所在がはっきりした体制をつくります。
-              </p>
-            </Reveal>
-          </div>
         </Container>
 
-        {/* 2分割のCTA帯 */}
-        <SplitCta />
+        {/* 下矢印: お任せください */}
+        <div className="relative mt-14 bg-[#FBF6F7]">
+          <Reveal
+            variant="up"
+            className="bg-brand-500 py-8 text-center text-white md:py-10"
+          >
+            <p className="text-[clamp(1.3rem,2.8vw,2rem)] font-black leading-[1.5]">
+              そのお悩み、
+              <span className="inline-block">Bond AI にお任せください</span>
+            </p>
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 40 24"
+              className="mx-auto mt-3 h-6 w-10 animate-bounce text-white"
+            >
+              <path
+                d="M4 4l16 16L36 4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Reveal>
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 1440 90"
+            preserveAspectRatio="none"
+            className="block h-14 w-full md:h-20"
+          >
+            <path d="M0 0H1440L720 90Z" fill="#7A1E35" />
+          </svg>
+        </div>
       </section>
 
-      {/* ========== 5. サービス(製品紹介風) ========== */}
+      {/* ========== 4. サービス概要 ========== */}
       <section
         id="service"
-        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] pt-20 md:pt-28"
       >
         <Watermark className="-right-6 top-4">Service</Watermark>
         <Container>
-          <SectionHead en="Service">
-            AIセキュリティの体制を、
-            <span className="text-brand-500">3つの層</span>でつくります
-          </SectionHead>
-          <p className="mt-6 max-w-3xl text-[15px] leading-[2] text-ink/80">
-            経営が責任者を決め、管理の仕組みを整え、現場に浸透させる。Bond AI
-            はこの3つの層をまとめて引き受け、取引先や監査に説明できる体制をつくります。
-          </p>
-          <div className="mt-12 space-y-16 md:space-y-20">
-            {features.map((f, i) => (
-              <Reveal key={f.title} variant="up">
-                <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-                  <div className={cn(i % 2 === 1 && "lg:order-2")}>
-                    <p className="flex items-center gap-3">
-                      <span className="grid h-10 w-10 place-items-center rounded-lg bg-brand-500 text-white">
-                        <Icon
-                          name={(["doc", "chart", "check"] as const)[i]}
-                          className="h-5 w-5"
-                        />
-                      </span>
-                      <span className="leading-tight">
-                        <span className="block text-xl font-black tracking-[0.04em] text-ink">
-                          Bond AI
-                        </span>
-                        <span className="block text-[11px] font-bold tracking-[0.2em] text-brand-500">
-                          {
-                            (["RULE", "DIAGNOSIS", "ACCOUNTABILITY"] as const)[
-                              i
-                            ]
-                          }
-                        </span>
-                      </span>
-                    </p>
-                    <h3 className="mt-6 text-[clamp(1.45rem,2.6vw,2rem)] font-black leading-[1.5]">
-                      {f.title}
-                    </h3>
-                    <p className="mt-4 text-[15px] leading-[2] text-ink/80">
-                      {f.text}
-                    </p>
-                    <a
-                      href={`#${FORM_ID}`}
-                      className="mt-6 inline-flex items-center gap-3 text-sm font-bold text-ink"
-                    >
-                      <span className="grid h-8 w-8 place-items-center rounded-full border border-brand-500 text-brand-500">
-                        →
-                      </span>
-                      無料で相談する
-                    </a>
-                  </div>
-                  <div
-                    className={cn(
-                      "lg:-mx-6",
-                      i % 2 === 1 ? "lg:-ml-16" : "lg:-mr-16",
-                    )}
-                  >
-                    <FeatureVisual kind={f.visual} />
-                  </div>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <SectionHead en="Service">サービス概要</SectionHead>
+          <Reveal variant="up" className="mt-10 text-center">
+            <p className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
+              セキュリティの<span className="text-brand-500">プロ</span>が、
+              <br className="hidden sm:block" />
+              御社のセキュリティ対策を
+              <span className="text-brand-500">まるごと代行</span>します
+            </p>
+            <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
+              専任の担当者を雇わなくても大丈夫。資格を持つ専門家が、御社のセキュリティ担当として月額でつき、必要な対策をすべて引き受けます。
+            </p>
+          </Reveal>
 
-          {/* 3層の図 + 毎月の支援内容 */}
-          <div className="mt-20 grid gap-6">
-            <div className="rounded-md bg-white p-6 shadow-[0_18px_40px_-30px_rgba(0,0,0,0.45)] md:p-8">
-              <Pyramid />
+          {/* 図: 御社 → 任せる → Bond AI */}
+          <Reveal
+            variant="up"
+            className="mx-auto mt-12 grid max-w-5xl items-center gap-4 lg:grid-cols-[13rem_auto_1fr]"
+          >
+            <div className="flex flex-col items-center rounded-md bg-white px-6 py-7 text-center shadow-[0_16px_34px_-24px_rgba(0,0,0,0.45)] ring-1 ring-[#EEE5E8]">
+              <span className="grid h-16 w-16 place-items-center rounded-full bg-[#3A3442] text-white">
+                <Icon name="person" className="h-8 w-8" />
+              </span>
+              <p className="mt-3 text-lg font-black">御社</p>
+              <p className="mt-1 text-xs font-bold leading-relaxed text-ink/60">
+                本業に集中できる
+              </p>
             </div>
-            <div className="overflow-hidden rounded-md bg-white shadow-[0_18px_40px_-30px_rgba(0,0,0,0.45)]">
-              <p className="flex flex-wrap items-baseline justify-between gap-2 bg-brand-500 px-6 py-4 text-white">
-                <span className="text-lg font-black">毎月の支援内容</span>
-                <span className="text-xs font-bold text-white/80">
-                  社外CISOプランの例
+            <div className="flex flex-col items-center gap-1 text-brand-500">
+              <span className="text-xs font-black">まるごと任せる</span>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 80 24"
+                className="hidden h-6 w-20 lg:block"
+              >
+                <path
+                  d="M2 12h70M62 3l10 9-10 9"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 40"
+                className="h-10 w-6 lg:hidden"
+              >
+                <path
+                  d="M12 2v30M3 24l9 10 9-10"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </div>
+            <div className="overflow-hidden rounded-md bg-white shadow-[0_20px_44px_-26px_rgba(122,30,53,0.5)] ring-2 ring-brand-500">
+              <p className="flex items-center gap-2 bg-brand-500 px-5 py-3 text-white">
+                <Icon name="shield" className="h-5 w-5" />
+                <span className="font-black">
+                  Bond AI のセキュリティ専門家が代行すること
                 </span>
               </p>
-              <ul className="grid gap-x-6 gap-y-3 p-6 sm:grid-cols-2">
-                {monthly.map((m) => (
-                  <li key={m} className="flex gap-2.5 text-sm leading-relaxed">
-                    <Check />
-                    {m}
+              <ul className="grid gap-px bg-[#EEE5E8] sm:grid-cols-2 lg:grid-cols-3">
+                {services.map((x) => (
+                  <li key={x.t} className="flex gap-3 bg-white p-4">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-md bg-[#F4EEF0] text-brand-500">
+                      <Icon name={x.i} className="h-5 w-5" />
+                    </span>
+                    <span>
+                      <span className="block text-[15px] font-black">
+                        {x.t}
+                      </span>
+                      <span className="mt-0.5 block text-xs leading-relaxed text-ink/65">
+                        {x.d}
+                      </span>
+                    </span>
                   </li>
                 ))}
               </ul>
             </div>
-          </div>
+          </Reveal>
         </Container>
+        <div className="mt-20 md:mt-24">
+          <SplitCta />
+        </div>
       </section>
 
       {/* ========== 6. 選ばれる理由(POINT) ========== */}
@@ -1253,43 +908,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 </ul>
               </article>
             ))}
-          </div>
-
-          <div className="mx-auto mt-14 max-w-4xl rounded-md bg-white p-6 shadow-[0_18px_40px_-30px_rgba(0,0,0,0.4)] md:p-9">
-            <p className="text-center text-lg font-black md:text-xl">
-              常勤のCISOを採用するより、
-              <span className="text-brand-500">ずっと始めやすく</span>
-            </p>
-            <div className="mt-7 space-y-5">
-              <div>
-                <div className="flex flex-wrap items-baseline justify-between gap-2 text-sm font-bold">
-                  <span className="text-ink/60">常勤のCISOを採用した場合</span>
-                  <span className="text-ink/70">
-                    年収1,000万円以上
-                    <span className="ml-1 text-[11px] text-ink/45">（※）</span>
-                  </span>
-                </div>
-                <div className="mt-2 h-5 rounded-full bg-[#CFC6C9]" />
-              </div>
-              <div>
-                <div className="flex flex-wrap items-baseline justify-between gap-2 text-sm font-bold">
-                  <span className="text-brand-600">Bond AI の社外CISO</span>
-                  <span className="text-brand-600">年360万円（月30万円）</span>
-                </div>
-                <div className="mt-2 h-5 rounded-full bg-[#F1ECEE]">
-                  <div className="h-5 w-[36%] rounded-full bg-brand-500" />
-                </div>
-              </div>
-            </div>
-            <div className="mt-7 rounded bg-[#FBF6F7] p-5 text-sm leading-[1.9] text-ink/80">
-              <p>
-                稼働時間を超えた分は1時間3万円です。次のメニューは別途ご相談ください。
-              </p>
-              <p>
-                ・半日・1日の社員研修、なりすましメール訓練、事故対応の机上演習
-              </p>
-              <p>・ISO/IEC 42001（AIの国際認証）の取得支援</p>
-            </div>
           </div>
         </Container>
       </section>
@@ -1488,13 +1106,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             <p className="text-sm text-white/60">／ 運営：{site.legalName}</p>
           </div>
           <div className="mt-6 border-t border-white/15 pt-6 text-[11px] leading-[1.9] text-white/55">
-            <p className="font-bold text-white/70">出典</p>
-            <ul>
-              {sources.map((s) => (
-                <li key={s}>{s}</li>
-              ))}
-            </ul>
-            <p className="mt-3">
+            <p>
               注記：ISMSやISO/IEC
               42001などの認証は審査機関が行います。当社は取得の支援を行います。
             </p>

@@ -270,3 +270,117 @@ export function IconSoloIt({ className }: Props) {
     </svg>
   );
 }
+
+/** 上場審査で、責任者と体制を問われる */
+export function IconListing({ className }: Props) {
+  return (
+    <svg viewBox="0 0 200 160" className={className} aria-hidden="true">
+      <ellipse cx="100" cy="146" rx="78" ry="8" fill={GRAY} />
+      {/* 成長グラフのボード */}
+      <rect x="30" y="30" width="104" height="100" rx="8" fill={INK} />
+      <rect x="38" y="38" width="88" height="84" rx="4" fill="#fff" />
+      {[22, 34, 48, 64].map((h, i) => (
+        <rect
+          key={i}
+          x={48 + i * 19}
+          y={112 - h}
+          width="12"
+          height={h}
+          rx="2"
+          fill={i === 3 ? WINE : PINK}
+        />
+      ))}
+      <path
+        d="M50 84 L72 72 L90 76 L118 46"
+        stroke={ROSE}
+        strokeWidth="4"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M108 44 L120 44 L120 56"
+        stroke={ROSE}
+        strokeWidth="4"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* 審査の虫めがね */}
+      <circle
+        cx="146"
+        cy="96"
+        r="24"
+        fill="#fff"
+        stroke={WINE}
+        strokeWidth="9"
+      />
+      <rect
+        x="160"
+        y="112"
+        width="12"
+        height="30"
+        rx="5"
+        fill={WINE}
+        transform="rotate(-40 166 127)"
+      />
+      <path
+        d="M137 96l6 6 11-12"
+        stroke={GOLD}
+        strokeWidth="5"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      {/* 「？」 */}
+      <path
+        d="M166 18c-7 0-12 4-12 10h7c0-2 2-4 5-4s5 2 5 4c0 5-8 5-8 13h7c0-6 8-6 8-14 0-6-5-9-12-9z"
+        fill={GOLD}
+      />
+      <circle cx="165" cy="48" r="3.4" fill={GOLD} />
+    </svg>
+  );
+}
+
+/** AI活用を進め、セキュリティが後回しに */
+export function IconAiRush({ className }: Props) {
+  return (
+    <svg viewBox="0 0 200 160" className={className} aria-hidden="true">
+      <ellipse cx="100" cy="146" rx="78" ry="8" fill={GRAY} />
+      {/* 進むAIのロケット */}
+      <g transform="rotate(35 120 70)">
+        <path
+          d="M120 14c18 14 26 34 26 58v34h-52V72c0-24 8-44 26-58z"
+          fill={ROSE}
+        />
+        <circle cx="120" cy="58" r="14" fill="#fff" />
+        <text
+          x="120"
+          y="64"
+          textAnchor="middle"
+          fontSize="15"
+          fontWeight="900"
+          fill={WINE}
+        >
+          AI
+        </text>
+        <path d="M94 88l-16 20h16zM146 88l16 20h-16z" fill={WINE} />
+        <path d="M104 106h32l-6 20h-20z" fill={GOLD} />
+      </g>
+      {/* 置いていかれる盾 */}
+      <path
+        d="M52 76l30 12v22c0 18-13 30-30 36-17-6-30-18-30-36V88z"
+        fill={INK}
+      />
+      <rect x="49" y="94" width="6" height="22" rx="3" fill={GOLD} />
+      <circle cx="52" cy="124" r="3.6" fill={GOLD} />
+      {/* スピード線 */}
+      <path
+        d="M40 40h22M30 54h20M46 26h14"
+        stroke={GRAY}
+        strokeWidth="5"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
