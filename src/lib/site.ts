@@ -145,7 +145,7 @@ export const serviceCategories: ServiceCategory[] = [
           {
             slug: "ciso",
             number: "01-1",
-            title: "CISO・セキュリティ顧問",
+            title: "CISO・セキュリティ顧問（Bond AI）",
             href: "/services/ciso",
             subtitle: "CISO / Security Advisor",
             summary:

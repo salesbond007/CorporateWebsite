@@ -225,6 +225,33 @@ export const serviceLeadSchema = z.object({
 
 export type ServiceLeadInput = z.infer<typeof serviceLeadSchema>;
 
+/** Bond AI(CISO・セキュリティ顧問)LP の従業員数の選択肢 */
+export const aiCheckEmployeeOptions = [
+  { value: "under-30", label: "〜30名" },
+  { value: "31-100", label: "31〜100名" },
+  { value: "101-300", label: "101〜300名" },
+  { value: "301-1000", label: "301〜1,000名" },
+  { value: "over-1000", label: "1,001名以上" },
+] as const;
+
+/**
+ * Bond AI LP の「無料のAI利用チェック」申し込みフォーム。
+ * 会社名 / お名前 / メールアドレス / 従業員数 / ご相談内容(任意)
+ */
+export const aiCheckSchema = z.object({
+  website: z.string().max(0).optional().or(z.literal("")),
+  company: z.string().trim().min(1, "会社名を入力してください").max(200),
+  name: z.string().trim().min(1, "お名前を入力してください").max(100),
+  email: z.string().trim().email("正しいメールアドレスを入力してください"),
+  employees: z.enum(
+    ["under-30", "31-100", "101-300", "301-1000", "over-1000"],
+    {
+      errorMap: () => ({ message: "従業員数を選択してください" }),
+    },
+  ),
+  message: z.string().trim().max(5000).optional().or(z.literal("")),
+});
+
 export type ProfessionalContactInput = z.infer<
   typeof professionalContactSchema
 >;
@@ -240,4 +267,5 @@ export type ContactFormType =
   | "general"
   | "apokomi_lead"
   | "service_lead"
+  | "ai_check"
   | "web_security_diagnosis";
