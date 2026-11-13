@@ -9,7 +9,6 @@ import {
   IconBanned,
   IconChecksheet,
   IconShadowAi,
-  IconSoloIt,
 } from "@/components/services/FlatIcons";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -44,46 +43,26 @@ const W = "#7A1E35"; // メイン(ワインレッド)
 const W2 = "#A83B57"; // やや明るいワインレッド
 const LINE = "#EEDFE3";
 
-const worries: {
-  title: ReactNode;
-  text: string;
-  Icon: (p: { className?: string }) => ReactNode;
-}[] = [
+const worries = [
   {
-    title: (
-      <>
-        社員が会社の知らないところで<em>AIを使っている</em>
-      </>
-    ),
-    text: "何を入力してよいか、どのツールなら安全か、ルールがない。",
-    Icon: IconShadowAi,
+    title: "社内にセキュリティ対策の専門家がいない",
+    text: "資格を持つ専門家が、月額で御社の担当につきます",
   },
   {
-    title: (
-      <>
-        「AIは危ないから禁止」で、<em>活用が止まっている</em>
-      </>
-    ),
-    text: "本当は使いたいのに、判断できる人がいない。",
-    Icon: IconBanned,
+    title: "生成AIで情報が漏れないか不安",
+    text: "入力してよい情報を決め、全社員に浸透させます",
   },
   {
-    title: (
-      <>
-        取引先から<em>チェックシートや「★3」</em>を求められた
-      </>
-    ),
-    text: "何十問もの設問に、自信を持って答えられる人が社内にいない。",
-    Icon: IconChecksheet,
+    title: "上場審査で、責任者と体制を問われる",
+    text: "社外CISOとして、審査で説明できる体制を整えます",
   },
   {
-    title: (
-      <>
-        情シスが<em>一人、または兼務</em>で回している
-      </>
-    ),
-    text: "相談相手も、経営に説明するときの後ろ盾もない。",
-    Icon: IconSoloIt,
+    title: "大手企業と取引したいが、審査が壁になる",
+    text: "チェックシートの回答から取引先への説明まで引き受けます",
+  },
+  {
+    title: "AI活用を進め、セキュリティが後回しに",
+    text: "社内のAIを点検し、データの扱いと権限を整えます",
   },
 ];
 
@@ -406,82 +385,145 @@ function Pill({
   );
 }
 
-/* ----------------------------------- ファーストビュー: 体制図 */
+/* ------------------------------------- ファーストビュー: 会社を守る盾のビジュアル */
 
-/** 会社の中で、社外CISOがどこに入るかを示す体制図 */
+/** 御社の情報資産を盾と防御の輪で守り、外からの脅威をはね返すビジュアル */
 function HeroVisual() {
+  const assets = [
+    { k: "AI", x: 50, y: 17 },
+    { k: "顧客情報", x: 81, y: 38 },
+    { k: "メール", x: 71, y: 74 },
+    { k: "クラウド", x: 29, y: 74 },
+    { k: "社内データ", x: 19, y: 38 },
+  ];
+  const threats = [
+    { k: "情報漏えい", x: 13, y: 9 },
+    { k: "なりすまし", x: 87, y: 9 },
+    { k: "不正アクセス", x: 85, y: 91 },
+    { k: "ランサムウェア", x: 15, y: 91 },
+  ];
   return (
-    <div className="relative px-2 sm:px-6 lg:pr-0">
-      <div className="relative rounded-xl bg-white p-6 shadow-[0_40px_80px_-40px_rgba(60,15,25,0.45)] ring-1 ring-[#EEDFE3] md:p-8">
-        <div className="flex items-center justify-between">
-          <p className="text-sm font-black text-ink">御社のセキュリティ体制</p>
-          <span className="rounded-full bg-brand-50 px-3 py-1 text-[11px] font-bold text-brand-600">
-            Bond AI 導入後
-          </span>
-        </div>
+    <div className="relative mx-auto aspect-square w-[92%] max-w-[540px] sm:w-full">
+      {/* 防御の輪 */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-[9%] rounded-full bg-[radial-gradient(circle,#FFFFFF_0%,#FBEFF2_60%,#F6E1E7_100%)] shadow-[0_30px_70px_-30px_rgba(122,30,53,0.55)]"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-[9%] rounded-full border-[3px] border-brand-500/80"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-[5%] animate-spin-slow rounded-full border-2 border-dashed border-brand-500/35"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-[24%] rounded-full border border-brand-500/20"
+      />
 
-        {/* 経営者 */}
-        <div className="mt-6 flex justify-center">
-          <div className="flex items-center gap-2 rounded-lg bg-[#F5F2F3] px-5 py-2.5 text-sm font-bold">
-            <Icon name="person" className="h-4 w-4 text-ink/60" />
-            経営者
-          </div>
-        </div>
-        <div aria-hidden="true" className="mx-auto h-5 w-0.5 bg-[#D9C3C9]" />
-
-        {/* 社外CISO(強調) */}
-        <div className="relative mx-auto max-w-[19rem] rounded-xl bg-[linear-gradient(120deg,#7A1E35,#B4475F)] p-4 text-white shadow-[0_18px_36px_-16px_rgba(122,30,53,0.7)]">
-          <div className="flex items-center gap-3">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-white/20">
-              <Icon name="shield" className="h-6 w-6" />
-            </span>
-            <div className="leading-tight">
-              <p className="text-[10px] font-bold tracking-[0.15em] text-white/80">
-                社外CISO・セキュリティ顧問
-              </p>
-              <p className="mt-1 text-base font-black">Bond AI の専門家</p>
-              <p className="mt-1 text-[11px] text-white/80">
-                資格を持つセキュリティの責任者
-              </p>
-            </div>
-          </div>
-          <span className="absolute -right-3 -top-3 rounded-full bg-[#F5B82E] px-2.5 py-1 text-[10px] font-black text-ink shadow">
-            責任者
-          </span>
-        </div>
-
-        {/* 枝分かれ */}
-        <div aria-hidden="true" className="mx-auto h-5 w-0.5 bg-[#D9C3C9]" />
-        <div
-          aria-hidden="true"
-          className="mx-auto h-0.5 w-[70%] bg-[#D9C3C9]"
+      {/* 中央の盾 */}
+      <svg
+        viewBox="0 0 200 230"
+        className="absolute left-1/2 top-1/2 w-[34%] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_18px_24px_rgba(122,30,53,0.45)]"
+        role="img"
+        aria-label="御社を守る盾"
+      >
+        <path
+          d="M100 6l86 32v68c0 60-38 102-86 118C52 208 14 166 14 106V38z"
+          fill="#7A1E35"
         />
-        <div className="grid grid-cols-3 gap-2 pt-0">
-          {[
-            { k: "情報システム", v: "導入前チェック" },
-            { k: "総務・人事", v: "AI利用ルール" },
-            { k: "各部門", v: "社員への説明会" },
-          ].map((d) => (
-            <div key={d.k} className="flex flex-col items-center">
-              <span aria-hidden="true" className="h-4 w-0.5 bg-[#D9C3C9]" />
-              <div className="w-full rounded-lg border border-[#EEDFE3] bg-[#FBF6F7] px-2 py-2.5 text-center">
-                <p className="text-[12px] font-bold">{d.k}</p>
-                <p className="mt-1 text-[10px] font-bold text-brand-500">
-                  {d.v}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        <path d="M100 22l70 26v58c0 50-31 85-70 99V22z" fill="#A83B57" />
+        {/* 会社のビル */}
+        <rect x="70" y="78" width="60" height="78" rx="3" fill="#fff" />
+        {[0, 1, 2].map((r) =>
+          [0, 1, 2].map((c) => (
+            <rect
+              key={`${r}-${c}`}
+              x={79 + c * 16}
+              y={88 + r * 18}
+              width="10"
+              height="10"
+              rx="1.5"
+              fill="#7A1E35"
+              opacity="0.85"
+            />
+          )),
+        )}
+        <rect x="92" y="138" width="16" height="18" fill="#7A1E35" />
+        {/* 鍵 */}
+        <circle cx="146" cy="162" r="24" fill="#fff" />
+        <rect x="134" y="160" width="24" height="18" rx="3" fill="#7A1E35" />
+        <path
+          d="M139 160v-6a7 7 0 0 1 14 0v6"
+          fill="none"
+          stroke="#7A1E35"
+          strokeWidth="4"
+        />
+        <circle cx="146" cy="169" r="2.6" fill="#fff" />
+      </svg>
 
-        {/* 取引先への説明 */}
-        <div className="mt-5 flex items-center gap-3 rounded-lg border border-dashed border-brand-200 px-4 py-3">
-          <Icon name="doc" className="h-5 w-5 shrink-0 text-brand-500" />
-          <p className="text-[12px] font-bold leading-snug">
-            取引先・監査へ「セキュリティの責任者は社外CISOです」と説明できる
-          </p>
-        </div>
-      </div>
+      {/* 守られている情報資産 */}
+      {assets.map((a) => (
+        <span
+          key={a.k}
+          className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 whitespace-nowrap rounded-md bg-white px-2.5 py-1.5 text-[11px] font-bold text-ink shadow-[0_8px_18px_-8px_rgba(60,15,25,0.45)] ring-1 ring-[#EEDFE3] md:text-xs"
+          style={{ left: `${a.x}%`, top: `${a.y}%` }}
+        >
+          <span className="grid h-4 w-4 place-items-center rounded-full bg-[#1E8A57] text-[9px] text-white">
+            ✓
+          </span>
+          {a.k}
+        </span>
+      ))}
+
+      {/* 外からの脅威(輪ではね返される) */}
+      {threats.map((t) => (
+        <span
+          key={t.k}
+          className="absolute -translate-x-1/2 -translate-y-1/2"
+          style={{ left: `${t.x}%`, top: `${t.y}%` }}
+        >
+          <span className="flex items-center gap-1 whitespace-nowrap rounded bg-[#3A3442] px-2 py-1 text-[10px] font-bold text-white md:text-[11px]">
+            <span className="grid h-3.5 w-3.5 place-items-center rounded-full bg-[#E64A2E] text-[9px]">
+              ×
+            </span>
+            {t.k}
+          </span>
+        </span>
+      ))}
+      {threats.map((t) => {
+        const rad = Math.atan2(t.y - 50, t.x - 50);
+        const d = Math.hypot(t.x - 50, t.y - 50) * 0.82;
+        const x1 = 50 + d * Math.cos(rad);
+        const y1 = 50 + d * Math.sin(rad);
+        const x2 = 50 + 42 * Math.cos(rad);
+        const y2 = 50 + 42 * Math.sin(rad);
+        return (
+          <svg
+            key={`l-${t.k}`}
+            aria-hidden="true"
+            viewBox="0 0 100 100"
+            className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+          >
+            <line
+              x1={x1}
+              y1={y1}
+              x2={x2}
+              y2={y2}
+              stroke="#E64A2E"
+              strokeWidth="0.8"
+              strokeDasharray="1.6 1.4"
+            />
+            <circle cx={x2} cy={y2} r="1.6" fill="#E64A2E" />
+          </svg>
+        );
+      })}
+
+      {/* ラベル */}
+      <span className="absolute bottom-[-4%] left-1/2 -translate-x-1/2 whitespace-nowrap bg-brand-500 px-4 py-2 text-xs font-bold text-white shadow-[0_10px_24px_-12px_rgba(122,30,53,0.8)] md:text-sm">
+        社外CISOが、御社の情報を守る体制をつくります
+      </span>
     </div>
   );
 }
@@ -1047,9 +1089,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </div>
           </div>
           <div className="lg:-mr-10 xl:-mr-24">
-            <div className="[transform:perspective(2000px)_rotateY(-10deg)_rotateX(3deg)]">
-              <HeroVisual />
-            </div>
+            <HeroVisual />
           </div>
         </Container>
       </section>
@@ -1072,41 +1112,53 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </div>
         <Container>
           <Reveal variant="up" className="text-center">
-            <p className="text-sm font-bold text-brand-500">
-              こんなお悩みはありませんか？
+            <p className="text-sm font-bold tracking-[0.15em] text-brand-500">
+              PROBLEM
             </p>
             <h2 className="mt-2 text-[clamp(1.5rem,3vw,2.2rem)] font-black leading-[1.5]">
-              AIは使いたい。でも、
-              <span className="text-brand-500">任せられる人</span>がいない。
+              こんな<span className="text-brand-500">お悩み</span>
+              はありませんか？
             </h2>
           </Reveal>
-          <ul className="mx-auto mt-14 grid max-w-6xl grid-cols-2 gap-x-3 gap-y-10 lg:grid-cols-4">
+          <ul className="mx-auto mt-14 grid max-w-6xl gap-x-3 gap-y-10 sm:grid-cols-2 lg:grid-cols-5">
             {worries.map((w, i) => (
-              <Reveal key={i} variant="up" delay={i * 80} className="h-full">
-                <li className="relative flex h-full flex-col items-center rounded-md bg-[#F7F1F3] px-3 pb-4 pt-10 text-center shadow-[0_14px_30px_-18px_rgba(0,0,0,0.45)]">
-                  <span className="absolute -top-7 left-1/2 grid h-14 w-14 -translate-x-1/2 place-items-center rounded-full bg-brand-500 text-white shadow-md">
-                    <span className="leading-none">
-                      <span className="block text-[9px] font-bold">課題</span>
-                      <span className="block text-2xl font-black">{i + 1}</span>
+              <Reveal
+                key={w.title}
+                variant="up"
+                delay={i * 70}
+                className="h-full"
+              >
+                <li className="relative flex h-full flex-col overflow-hidden rounded-md bg-white text-center shadow-[0_16px_34px_-20px_rgba(0,0,0,0.5)] ring-1 ring-[#EEE5E8]">
+                  {/* お悩み */}
+                  <div className="relative flex flex-1 flex-col items-center bg-[#F4EEF0] px-4 pb-7 pt-5">
+                    <span className="grid h-12 w-12 place-items-center rounded-full bg-[#3A3442] text-white">
+                      <span className="leading-none">
+                        <span className="block text-[9px] font-bold">
+                          お悩み
+                        </span>
+                        <span className="block text-xl font-black">
+                          {i + 1}
+                        </span>
+                      </span>
                     </span>
+                    <p className="mt-4 flex flex-1 items-center text-[15px] font-black leading-[1.6] [word-break:auto-phrase]">
+                      {w.title}
+                    </p>
                     <span
                       aria-hidden="true"
-                      className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-brand-500"
+                      className="absolute -bottom-3 left-1/2 h-0 w-0 -translate-x-1/2 border-x-[14px] border-t-[12px] border-x-transparent border-t-[#F4EEF0]"
                     />
-                  </span>
-                  <w.Icon className="h-24 w-auto md:h-28" />
-                  <p className="mt-3 text-[15px] font-bold leading-[1.6] md:text-base">
-                    {w.title}
-                  </p>
-                  <p className="mt-2 text-xs leading-[1.7] text-ink/65 md:text-[13px]">
-                    {w.text}
-                  </p>
-                  <span
-                    aria-hidden="true"
-                    className="mt-auto pt-3 text-lg leading-none text-[#D9B3BE]"
-                  >
-                    ︾
-                  </span>
+                  </div>
+                  {/* 解決 */}
+                  <div className="flex flex-1 flex-col items-center px-4 pb-6 pt-7">
+                    <span className="inline-flex items-center gap-1 bg-brand-500 px-2.5 py-1 text-[11px] font-bold text-white">
+                      <Icon name="shield" className="h-3.5 w-3.5" />
+                      Bond AI なら
+                    </span>
+                    <p className="mt-3 text-sm font-bold leading-[1.75] text-brand-600 [word-break:auto-phrase]">
+                      {w.text}
+                    </p>
+                  </div>
                 </li>
               </Reveal>
             ))}
@@ -1720,7 +1772,7 @@ function BigButton({
     <a
       href={href}
       className={cn(
-        "group relative inline-flex h-16 min-w-[15rem] items-center justify-center rounded-full pl-7 pr-16 transition hover:-translate-y-0.5",
+        "group relative inline-flex h-16 w-full min-w-[20rem] items-center justify-center pl-8 pr-20 transition hover:-translate-y-0.5 sm:w-auto md:min-w-[24rem]",
         tone === "wine" &&
           "bg-[linear-gradient(100deg,#6A1830,#A83B57)] text-white shadow-[0_12px_26px_-12px_rgba(122,30,53,0.8)]",
         tone === "accent" &&
@@ -1745,7 +1797,7 @@ function BigButton({
       <span
         aria-hidden="true"
         className={cn(
-          "absolute right-2 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-xl",
+          "absolute right-2.5 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center",
           tone === "wine" && "bg-white text-brand-500",
           tone === "accent" && "bg-white text-[#E64A2E]",
           tone === "white" && "bg-brand-500 text-white",
