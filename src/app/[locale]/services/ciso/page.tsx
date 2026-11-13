@@ -117,6 +117,25 @@ const roles = [
   "事故の初動",
 ];
 
+const facts = [
+  {
+    text: "「AIの利用をめぐるサイバーリスク」が、組織向けの10大脅威に初めて選ばれ、3位に。",
+    note: "※1",
+  },
+  {
+    text: "取引先のセキュリティを★で評価する国の制度（SCS評価制度）の申請受付が始まる予定。",
+    note: "※2",
+  },
+  {
+    text: "発注側の大企業のうち、取引先のセキュリティを確認している割合。",
+    note: "※3",
+  },
+  {
+    text: "2025年のランサムウェア被害のうち、中小企業が占めた割合。",
+    note: "※4",
+  },
+];
+
 const features = [
   {
     title: "AIを止めずに、安全に広げる",
@@ -288,96 +307,6 @@ const sources = [
 ];
 
 /* ============================================================ 小さな部品 */
-
-function Cta({
-  children,
-  sub,
-  href = `#${FORM_ID}`,
-  tone = "wine",
-  className,
-}: {
-  children: ReactNode;
-  sub?: string;
-  href?: string;
-  tone?: "wine" | "outline";
-  className?: string;
-}) {
-  return (
-    <a
-      href={href}
-      className={cn(
-        "group relative inline-flex h-16 items-center justify-center rounded-full pl-7 pr-16 text-center transition duration-300 hover:-translate-y-0.5",
-        tone === "wine" &&
-          "bg-[linear-gradient(100deg,#7A1E35,#B4475F)] text-white shadow-[0_14px_30px_-12px_rgba(122,30,53,0.7)]",
-        tone === "outline" &&
-          "border-2 border-brand-500 bg-white text-brand-600 hover:bg-brand-50",
-        className,
-      )}
-    >
-      <span className="leading-tight">
-        <span className="block text-[15px] font-bold tracking-[0.03em] md:text-base">
-          {children}
-        </span>
-        {sub ? (
-          <span
-            className={cn(
-              "mt-0.5 block text-[11px] font-bold",
-              tone === "wine" ? "text-white/80" : "text-ink/55",
-            )}
-          >
-            {sub}
-          </span>
-        ) : null}
-      </span>
-      <span
-        aria-hidden="true"
-        className={cn(
-          "absolute right-2 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-full transition-transform duration-300 group-hover:translate-x-0.5",
-          tone === "wine"
-            ? "bg-white text-brand-600"
-            : "bg-brand-500 text-white",
-        )}
-      >
-        →
-      </span>
-    </a>
-  );
-}
-
-/** 見出し: 大きな英字 + 日本語 + 左だけ色の付いた下線 */
-function Heading({
-  en,
-  children,
-  center,
-}: {
-  en: string;
-  children: ReactNode;
-  center?: boolean;
-}) {
-  return (
-    <Reveal variant="up" className={center ? "text-center" : ""}>
-      <p className="font-display text-[clamp(2.2rem,5vw,3.4rem)] font-black uppercase leading-none tracking-[0.02em] text-brand-500">
-        {en}
-      </p>
-      <h2 className="mt-3 text-[clamp(1.35rem,2.6vw,1.9rem)] font-bold leading-[1.5] tracking-[0.04em] text-ink [word-break:auto-phrase]">
-        {children}
-      </h2>
-      <div
-        className={cn(
-          "relative mt-5 h-px bg-[#EEDFE3]",
-          center && "mx-auto max-w-xs",
-        )}
-      >
-        <span
-          className={cn(
-            "absolute inset-y-0 -translate-y-px border-b-2 border-brand-500",
-            center ? "left-1/2 w-16 -translate-x-1/2" : "left-0 w-24",
-          )}
-        />
-      </div>
-    </Reveal>
-  );
-}
 
 function Icon({
   name,
@@ -829,69 +758,6 @@ function Pyramid() {
   );
 }
 
-/** 毎月の改善サイクル */
-function Cycle() {
-  const steps = [
-    "診断する",
-    "ルールを直す",
-    "社員に伝える",
-    "取引先に説明",
-    "報告・見直し",
-  ];
-  return (
-    <div className="relative mx-auto aspect-square w-full max-w-[300px]">
-      <svg
-        viewBox="0 0 200 200"
-        className="absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      >
-        <circle
-          cx="100"
-          cy="100"
-          r="74"
-          fill="none"
-          stroke={LINE}
-          strokeWidth="10"
-        />
-        <circle
-          cx="100"
-          cy="100"
-          r="74"
-          fill="none"
-          stroke={W}
-          strokeWidth="10"
-          strokeDasharray="60 33"
-          strokeLinecap="round"
-        />
-      </svg>
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-        <p className="text-[10px] font-bold tracking-[0.2em] text-brand-500">
-          MONTHLY
-        </p>
-        <p className="mt-1 text-base font-black leading-tight">
-          毎月の
-          <br />
-          改善サイクル
-        </p>
-      </div>
-      {steps.map((s, i) => {
-        const a = ((-90 + (360 / steps.length) * i) * Math.PI) / 180;
-        const x = 50 + 41 * Math.cos(a);
-        const y = 50 + 41 * Math.sin(a);
-        return (
-          <span
-            key={s}
-            className="absolute -translate-x-1/2 -translate-y-1/2 whitespace-nowrap rounded-full bg-white px-2.5 py-1 text-[11px] font-bold shadow-[0_8px_18px_-10px_rgba(60,15,25,0.6)] ring-1 ring-[#EEDFE3]"
-            style={{ left: `${x}%`, top: `${y}%` }}
-          >
-            {s}
-          </span>
-        );
-      })}
-    </div>
-  );
-}
-
 /** 特長ごとの画面イメージ */
 function FeatureVisual({
   kind,
@@ -1097,21 +963,19 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         ]}
       />
 
-      {/* 1. ヘッダー */}
-      <header className="sticky top-0 z-40 border-b border-ink/10 bg-white/95 backdrop-blur">
+      {/* ========== 1. ヘッダー ========== */}
+      <header className="sticky top-0 z-40 border-b border-[#EEE5E8] bg-white/95 backdrop-blur">
         <Container className="flex h-16 items-center gap-6 md:h-[4.5rem]">
-          <a href="#top" className="flex items-center gap-3">
+          <a href="#top" className="flex items-center gap-2.5">
             <span
-              className="grid h-9 w-9 place-items-center rounded-md bg-brand-500 text-white"
+              className="grid h-9 w-9 place-items-center rounded-lg bg-brand-500 text-white"
               aria-hidden="true"
             >
               <Icon name="shield" className="h-5 w-5" />
             </span>
             <span className="leading-tight">
-              <span className="block text-lg font-black tracking-[0.02em] text-ink">
-                Bond AI
-              </span>
-              <span className="hidden text-[10px] font-bold text-ink/60 sm:block">
+              <span className="block text-lg font-black text-ink">Bond AI</span>
+              <span className="hidden text-[10px] font-bold text-ink/55 sm:block">
                 AI時代のセキュリティ顧問・社外CISO
               </span>
             </span>
@@ -1125,7 +989,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 <li key={n.href}>
                   <a
                     href={n.href}
-                    className="px-3 py-2 text-sm font-bold text-ink/75 transition hover:text-brand-600 lg:px-4"
+                    className="px-3 py-2 text-sm font-bold text-ink/80 hover:text-brand-500 lg:px-4"
                   >
                     {n.label}
                   </a>
@@ -1135,22 +999,21 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           </nav>
           <a
             href={`#${FORM_ID}`}
-            className="ml-auto inline-flex h-10 items-center gap-2 rounded-full bg-brand-500 px-5 text-sm font-bold text-white transition hover:bg-brand-600 md:ml-2"
+            className="ml-auto inline-flex h-10 items-center rounded-full bg-[linear-gradient(100deg,#FF7A55,#E64A2E)] px-5 text-sm font-bold text-white shadow-[0_8px_18px_-10px_rgba(230,74,46,0.9)] md:ml-2"
           >
             無料相談
-            <span aria-hidden="true">→</span>
           </a>
         </Container>
         <nav
           aria-label="ページ内メニュー"
-          className="border-t border-ink/10 md:hidden"
+          className="border-t border-[#EEE5E8] md:hidden"
         >
-          <ul className="flex justify-between px-3 py-1.5">
+          <ul className="flex justify-between px-3">
             {nav.map((n) => (
               <li key={n.href}>
                 <a
                   href={n.href}
-                  className="block px-2 py-1.5 text-xs font-bold text-ink/75"
+                  className="block px-2 py-2 text-xs font-bold text-ink/75"
                 >
                   {n.label}
                 </a>
@@ -1160,34 +1023,47 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </nav>
       </header>
 
-      {/* 2. ファーストビュー: 左に文章、右に体制図 */}
+      {/* ========== 2. ファーストビュー ========== */}
       <section
         id="top"
         className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#FFFFFF_0%,#FBF4F6_100%)]"
       >
-        {/* 背景の斜めの面と細い線 */}
-        <div
+        {/* 六角形の模様 */}
+        <svg
           aria-hidden="true"
-          className="pointer-events-none absolute -right-24 top-0 -z-10 h-full w-[55%] bg-[#F7ECEF] [clip-path:polygon(18%_0,100%_0,100%_100%,0_100%)]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 opacity-50 [background-image:linear-gradient(to_right,#EEDFE3_1px,transparent_1px),linear-gradient(to_bottom,#EEDFE3_1px,transparent_1px)] [background-size:44px_44px] [mask-image:linear-gradient(to_left,black,transparent_60%)]"
-        />
-        <Container className="grid items-center gap-14 pb-24 pt-12 md:pt-16 lg:grid-cols-[1fr_1.05fr] lg:pb-28">
-          <div>
-            <p className="flex animate-fade-up flex-wrap items-center gap-x-3 gap-y-2">
-              <span className="rounded-md bg-brand-500 px-3 py-1.5 text-sm font-black tracking-[0.04em] text-white md:text-base">
-                社外CISO・セキュリティ顧問サービス
-              </span>
-              <span className="text-sm font-bold text-brand-500">
-                中小・中堅企業のための AIセキュリティ
-              </span>
-            </p>
-            <h1
-              className="mt-5 animate-fade-up text-[clamp(1.85rem,3.6vw,2.9rem)] font-bold leading-[1.45] tracking-[0.03em]"
-              style={{ animationDelay: "0.1s" }}
+          className="absolute inset-0 -z-10 h-full w-full opacity-[0.35]"
+        >
+          <defs>
+            <pattern
+              id="hex"
+              width="56"
+              height="97"
+              patternUnits="userSpaceOnUse"
+              patternTransform="scale(1.4)"
             >
+              <path
+                d="M28 0l28 16v32L28 64 0 48V16zM28 64l28 16v17M28 64L0 80v17"
+                fill="none"
+                stroke="#EBDCE1"
+                strokeWidth="1"
+              />
+            </pattern>
+          </defs>
+          <rect width="100%" height="100%" fill="url(#hex)" />
+        </svg>
+        <div
+          aria-hidden="true"
+          className="absolute -left-40 top-20 -z-10 h-96 w-96 rounded-full bg-white blur-[80px]"
+        />
+        <Container className="grid items-center gap-12 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
+          <div>
+            <p className="inline-flex items-center rounded-full border border-brand-500/30 bg-white px-4 py-1.5 text-xs font-bold text-brand-600 md:text-sm">
+              社外CISO・セキュリティ顧問サービス
+            </p>
+            <p className="mt-5 text-sm font-bold text-ink/70 md:text-base">
+              中小・中堅企業のための AIセキュリティ
+            </p>
+            <h1 className="mt-3 text-[clamp(1.8rem,3.2vw,2.75rem)] font-black leading-[1.45] tracking-[0.03em]">
               <span className="inline-block">
                 AIを<span className="text-brand-500">禁止しない</span>会社に、
               </span>
@@ -1196,111 +1072,101 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 セキュリティの<span className="text-brand-500">責任者</span>を。
               </span>
             </h1>
-            <p
-              className="mt-6 max-w-xl animate-fade-up text-[15px] leading-[2] text-ink/80"
-              style={{ animationDelay: "0.25s" }}
-            >
-              社員がAIを安心して使えるルールづくりから、取引先への説明まで。資格を持つセキュリティの専門家が、あなたの会社の責任者として月額でつきます。
+            <p className="mt-6 max-w-xl text-[15px] font-medium leading-[2] text-ink/80">
+              社員がAIを安心して使えるルールづくりから、取引先への説明まで。
+              <br className="hidden md:block" />
+              資格を持つセキュリティの専門家が、あなたの会社の責任者として月額でつきます。
             </p>
-            {/* 任せられること */}
-            <ul
-              className="mt-6 grid max-w-xl animate-fade-up grid-cols-2 gap-2 sm:grid-cols-4"
-              style={{ animationDelay: "0.32s" }}
-              aria-label="Bond AI に任せられること"
-            >
-              {[
-                { t: "社外CISO（責任者）", i: "person" },
-                { t: "AI利用ルールづくり", i: "doc" },
-                { t: "チェックシート回答", i: "check" },
-                { t: "脆弱性診断・月次報告", i: "chart" },
-              ].map((x) => (
-                <li
-                  key={x.t}
-                  className="flex flex-col items-center gap-1.5 rounded-lg bg-white px-2 py-3 text-center text-[12px] font-bold leading-snug ring-1 ring-[#EEDFE3]"
-                >
-                  <span className="grid h-8 w-8 place-items-center rounded-full bg-brand-50 text-brand-500">
-                    <Icon name={x.i as "person"} className="h-4 w-4" />
-                  </span>
-                  {x.t}
-                </li>
-              ))}
-            </ul>
-            <div
-              className="mt-8 flex animate-fade-up flex-col gap-3 sm:flex-row sm:flex-wrap"
-              style={{ animationDelay: "0.4s" }}
-            >
-              <Cta sub="オンライン30分・無料">
-                無料の「AI利用チェック」を申し込む
-              </Cta>
-              <Cta href="#price" tone="outline" sub="月8万円から">
-                料金を見る
-              </Cta>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <BigButton
+                label="無料のAI利用チェック"
+                sub="オンライン30分・無料"
+                icon="check"
+              />
+              <BigButton
+                label="料金を見る"
+                sub="月額8万円から"
+                icon="doc"
+                href="#price"
+                tone="accent"
+              />
             </div>
-            <p
-              className="mt-4 max-w-xl animate-fade-up text-xs leading-relaxed text-ink/60 md:text-[13px]"
-              style={{ animationDelay: "0.5s" }}
-            >
+            <p className="mt-4 text-xs leading-relaxed text-ink/60 md:text-[13px]">
               オンライン30分。社内のAIの使い方とセキュリティ体制の気になる点を、専門家が無料で整理します。
             </p>
           </div>
-          <div
-            className="animate-fade-up px-2 sm:px-6 lg:px-0"
-            style={{ animationDelay: "0.3s" }}
-          >
-            <HeroVisual />
+          <div className="lg:-mr-10 xl:-mr-24">
+            <div className="[transform:perspective(2000px)_rotateY(-10deg)_rotateX(3deg)]">
+              <HeroVisual />
+            </div>
           </div>
         </Container>
+
+        {/* 3つの約束(数字の帯) */}
+        <div className="border-t border-[#EEE5E8] bg-white/80">
+          <Container>
+            <ul className="grid gap-px md:grid-cols-3">
+              {promises.map((p, i) => (
+                <li
+                  key={p.title}
+                  className={cn(
+                    "flex items-center gap-4 py-6 md:px-6",
+                    i > 0 &&
+                      "border-t border-[#EEE5E8] md:border-l md:border-t-0",
+                  )}
+                >
+                  <span className="text-center leading-none text-brand-500">
+                    <span className="block text-[10px] font-bold tracking-[0.15em]">
+                      約束
+                    </span>
+                    <span className="block text-4xl font-black">{i + 1}</span>
+                  </span>
+                  <div>
+                    <p className="text-lg font-black">{p.title}</p>
+                    <p className="mt-1 text-sm leading-[1.75] text-ink/70">
+                      {p.text}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </Container>
+        </div>
       </section>
 
-      {/* 3つの約束 */}
-      <section aria-label="3つの約束" className="relative z-10 -mt-12">
-        <Container>
-          <ul className="grid overflow-hidden rounded-xl bg-white shadow-[0_30px_60px_-40px_rgba(60,15,25,0.5)] ring-1 ring-[#EEDFE3] md:grid-cols-3">
-            {promises.map((p, i) => (
-              <li
-                key={p.title}
-                className={cn(
-                  "flex h-full gap-4 p-6 md:p-7",
-                  i > 0 &&
-                    "border-t border-[#EEDFE3] md:border-l md:border-t-0",
-                )}
-              >
-                <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-500">
-                  <Icon name={p.icon} className="h-6 w-6" />
-                </span>
-                <div>
-                  <p className="text-[11px] font-bold tracking-[0.2em] text-brand-500">
-                    PROMISE {String(i + 1).padStart(2, "0")}
-                  </p>
-                  <p className="mt-1 text-lg font-black">{p.title}</p>
-                  <p className="mt-1.5 text-sm leading-[1.8] text-ink/75">
-                    {p.text}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        </Container>
-      </section>
-
-      {/* 3. お悩み + 解決 */}
-      <section className="pt-20 md:pt-28">
+      {/* ========== 3. お悩み + 解決(濃色の帯) ========== */}
+      <section className="relative isolate overflow-hidden pt-16 md:pt-24">
+        {/* 下半分: 写真 + 濃い色の斜めの帯 */}
+        <div className="absolute inset-x-0 bottom-0 top-[21rem] -z-10 [clip-path:polygon(0_8%,100%_0,100%_100%,0_100%)] md:top-[24rem]">
+          <Image
+            src="/services/cards/ai-solutions.jpg"
+            alt=""
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-[linear-gradient(120deg,rgba(28,30,42,0.94)_0%,rgba(28,30,42,0.86)_55%,rgba(60,24,38,0.82)_100%)]"
+          />
+        </div>
         <Container>
           <Reveal variant="up" className="text-center">
-            <p className="text-sm font-bold tracking-[0.15em] text-brand-500">
-              PROBLEM
+            <p className="text-sm font-bold text-brand-500">
+              こんなお悩みはありませんか？
             </p>
-            <h2 className="mt-3 text-[clamp(1.5rem,3vw,2.2rem)] font-bold tracking-[0.04em] [word-break:auto-phrase]">
-              AIは使いたい。でも、<em>任せられる人</em>がいない。
+            <h2 className="mt-2 text-[clamp(1.5rem,3vw,2.2rem)] font-black leading-[1.5]">
+              AIは使いたい。でも、
+              <span className="text-brand-500">任せられる人</span>がいない。
             </h2>
           </Reveal>
-          <ul className="mx-auto mt-14 grid max-w-6xl grid-cols-1 gap-x-4 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mx-auto mt-14 grid max-w-6xl grid-cols-2 gap-x-3 gap-y-10 lg:grid-cols-4">
             {worries.map((w, i) => (
               <Reveal key={i} variant="up" delay={i * 80} className="h-full">
-                <li className="relative flex h-full flex-col items-center rounded-lg bg-[#FBF6F7] px-5 pb-6 pt-10 text-center shadow-[0_18px_36px_-26px_rgba(60,15,25,0.5)]">
-                  <span className="absolute -top-6 left-1/2 grid h-14 w-14 -translate-x-1/2 place-items-center rounded-full bg-brand-500 text-white shadow-md">
+                <li className="relative flex h-full flex-col items-center rounded-md bg-[#F7F1F3] px-3 pb-4 pt-10 text-center shadow-[0_14px_30px_-18px_rgba(0,0,0,0.45)]">
+                  <span className="absolute -top-7 left-1/2 grid h-14 w-14 -translate-x-1/2 place-items-center rounded-full bg-brand-500 text-white shadow-md">
                     <span className="leading-none">
-                      <span className="block text-[9px] font-bold">お悩み</span>
+                      <span className="block text-[9px] font-bold">課題</span>
                       <span className="block text-2xl font-black">{i + 1}</span>
                     </span>
                     <span
@@ -1308,16 +1174,16 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                       className="absolute -bottom-1.5 left-1/2 h-3 w-3 -translate-x-1/2 rotate-45 bg-brand-500"
                     />
                   </span>
-                  <w.Icon className="h-28 w-auto md:h-32" />
-                  <p className="mt-4 text-base font-bold leading-[1.6]">
+                  <w.Icon className="h-24 w-auto md:h-28" />
+                  <p className="mt-3 text-[15px] font-bold leading-[1.6] md:text-base">
                     {w.title}
                   </p>
-                  <p className="mt-2 text-sm leading-[1.8] text-ink/70">
+                  <p className="mt-2 text-xs leading-[1.7] text-ink/65 md:text-[13px]">
                     {w.text}
                   </p>
                   <span
                     aria-hidden="true"
-                    className="mt-auto pt-3 text-[#D9B3BE]"
+                    className="mt-auto pt-3 text-lg leading-none text-[#D9B3BE]"
                   >
                     ︾
                   </span>
@@ -1325,32 +1191,23 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </Reveal>
             ))}
           </ul>
-        </Container>
 
-        {/* 解決: 写真 + 円形の図 */}
-        <div className="relative isolate mt-12 overflow-hidden py-20 md:py-24">
-          <Image
-            src="/services/cards/ai-solutions.jpg"
-            alt=""
-            fill
-            sizes="100vw"
-            className="-z-20 object-cover"
-          />
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(255,255,255,0.97)_0%,rgba(255,255,255,0.93)_50%,rgba(251,244,246,0.86)_100%)]"
-          />
-          <Container className="grid items-center gap-12 lg:grid-cols-2">
+          {/* 解決: 円形の図 + コピー */}
+          <div className="grid items-center gap-12 py-16 text-white md:py-24 lg:grid-cols-2">
             <Reveal variant="scale">
-              <div className="relative mx-auto aspect-square w-full max-w-[400px]">
+              <div className="relative mx-auto aspect-square w-full max-w-[420px]">
                 <div
                   aria-hidden="true"
-                  className="absolute inset-[13%] rounded-full border-2 border-dashed border-brand-200"
+                  className="absolute inset-[13%] rounded-full border-2 border-dotted border-white/50"
                 />
-                <div className="absolute left-1/2 top-1/2 grid h-[34%] w-[34%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-[linear-gradient(135deg,#7A1E35,#B4475F)] text-center text-white shadow-[0_20px_40px_-16px_rgba(122,30,53,0.7)]">
+                <div className="absolute left-1/2 top-1/2 grid h-[36%] w-[36%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full text-center">
                   <div>
-                    <Icon name="shield" className="mx-auto h-7 w-7" />
-                    <p className="mt-1 text-base font-black">Bond AI</p>
+                    <span className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-white text-brand-500 md:h-20 md:w-20">
+                      <Icon name="shield" className="h-9 w-9 md:h-11 md:w-11" />
+                    </span>
+                    <p className="mt-2 text-lg font-black tracking-[0.04em] md:text-xl">
+                      Bond AI
+                    </p>
                   </div>
                 </div>
                 {roles.map((d, i) => {
@@ -1358,7 +1215,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   return (
                     <span
                       key={d}
-                      className="absolute grid h-[22%] w-[22%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full bg-white px-1 text-center text-[10px] font-bold leading-tight text-ink shadow-[0_10px_24px_-12px_rgba(60,15,25,0.5)] ring-1 ring-[#EEDFE3] md:text-[11px]"
+                      className="absolute grid h-[22%] w-[22%] -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-white/70 bg-[#1C1E2A]/80 px-1 text-center text-[10px] font-bold leading-tight text-white md:text-[11px]"
                       style={{
                         left: `${50 + 37 * Math.cos(a)}%`,
                         top: `${50 + 37 * Math.sin(a)}%`,
@@ -1371,97 +1228,78 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </div>
             </Reveal>
             <Reveal variant="up">
-              <p className="text-lg font-bold">Bond AI は</p>
-              <p className="mt-3 text-[clamp(1.5rem,3vw,2.2rem)] font-bold leading-[1.6] [word-break:auto-phrase]">
-                社外の<em>責任者</em>として、AIを<em>安全に使える体制</em>
-                を月額でつくる
+              <p className="text-xl font-bold">Bond AI は</p>
+              <p className="mt-3 text-[clamp(1.6rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
+                社外の責任者として、AIを安全に使える体制を月額でつくる
               </p>
-              <p className="mt-3 text-lg font-bold">
-                ことで、これらのお悩みを解決します。
-              </p>
+              <p className="mt-3 text-xl font-bold">ことで課題を解決できます</p>
               <span
                 aria-hidden="true"
-                className="mt-6 block h-0.5 w-14 bg-brand-500"
+                className="mt-7 block h-0.5 w-14 bg-white"
               />
-              <p className="mt-6 text-[15px] leading-[2] text-ink/80">
+              <p className="mt-7 text-[15px] leading-[2] text-white/85">
                 AIの利用ルール、導入前のチェック、取引先への回答、社員への説明、事故の初動まで。社内に専任者がいなくても、責任の所在がはっきりした体制をつくります。
               </p>
             </Reveal>
-          </Container>
-        </div>
+          </div>
+        </Container>
+
+        {/* 2分割のCTA帯 */}
+        <SplitCta />
       </section>
 
-      {/* 4. なぜ今か: 数字 + グラフ */}
-      <section className="bg-[#FBF6F7] py-20 md:py-28">
+      {/* ========== 4. なぜ今か ========== */}
+      <section className="relative isolate overflow-hidden py-20 md:py-28">
+        <Watermark className="-left-4 top-4">Why now</Watermark>
         <Container>
-          <Heading en="Why now">
+          <SectionHead en="Why now">
             AIの広がりに、守りと説明が追いついていません
-          </Heading>
+          </SectionHead>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
+              { big: "3", unit: "位", chart: <RankChart />, i: 0 },
+              { big: "2027", unit: "年3月", chart: <TimelineChart />, i: 1 },
               {
-                big: (
-                  <>
-                    3<span className="text-xl">位</span>
-                  </>
-                ),
-                chart: <RankChart />,
-                text: "「AIの利用をめぐるサイバーリスク」が、組織向けの10大脅威に初めて選ばれ、3位に。",
-                note: "※1",
-              },
-              {
-                big: (
-                  <>
-                    2027<span className="text-xl">年3月</span>
-                  </>
-                ),
-                chart: <TimelineChart />,
-                text: "取引先のセキュリティを★で評価する国の制度（SCS評価制度）の申請受付が始まる予定。",
-                note: "※2",
-              },
-              {
-                big: (
-                  <>
-                    84.4<span className="text-xl">%</span>
-                  </>
-                ),
+                big: "84.4",
+                unit: "%",
                 chart: (
                   <Donut
                     value={84.4}
                     label="取引先のセキュリティを確認している大企業の割合"
                   />
                 ),
-                text: "発注側の大企業のうち、取引先のセキュリティを確認している割合。",
-                note: "※3",
+                i: 2,
               },
               {
-                big: (
-                  <>
-                    63.3<span className="text-xl">%</span>
-                  </>
-                ),
+                big: "63.3",
+                unit: "%",
                 chart: (
                   <Donut
                     value={63.3}
                     label="ランサムウェア被害のうち中小企業の割合"
                   />
                 ),
-                text: "2025年のランサムウェア被害のうち、中小企業が占めた割合。",
-                note: "※4",
+                i: 3,
               },
-            ].map((f, i) => (
-              <Reveal key={i} variant="up" delay={i * 80} className="h-full">
-                <article className="flex h-full flex-col rounded-xl bg-white p-6 shadow-[0_20px_40px_-32px_rgba(60,15,25,0.5)] ring-1 ring-[#EEDFE3]">
-                  <p className="font-display text-4xl font-black leading-none text-brand-500 md:text-[2.6rem]">
-                    {f.big}
+            ].map((f) => (
+              <Reveal
+                key={f.big}
+                variant="up"
+                delay={f.i * 80}
+                className="h-full"
+              >
+                <article className="flex h-full flex-col rounded-md bg-white p-6 shadow-[0_18px_40px_-28px_rgba(0,0,0,0.45)] ring-1 ring-[#EEE5E8]">
+                  <p className="font-black leading-none text-brand-500">
+                    <span className="text-[2.6rem]">{f.big}</span>
+                    <span className="ml-1 text-lg">{f.unit}</span>
                   </p>
-                  <div className="my-5 grid h-28 place-items-center rounded-lg bg-[#FBF6F7]">
+                  <div className="my-5 grid h-28 place-items-center rounded bg-[#FBF6F7]">
                     {f.chart}
                   </div>
                   <p className="text-sm leading-[1.85] text-ink/80">
-                    {f.text}
+                    {facts[f.i].text}
                     <span className="ml-1 text-[11px] text-ink/45">
-                      （{f.note}）
+                      （{facts[f.i].note}）
                     </span>
                   </p>
                 </article>
@@ -1474,53 +1312,68 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </Container>
       </section>
 
-      {/* 5. サービス: 体制の全体像 + 3つの特長 */}
-      <section id="service" className="scroll-mt-28 py-20 md:py-28">
+      {/* ========== 5. サービス(製品紹介風) ========== */}
+      <section
+        id="service"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
+      >
+        <Watermark className="-right-6 top-4">Service</Watermark>
         <Container>
-          <Heading en="Service">
-            AIセキュリティの体制を、3つの層でつくります
-          </Heading>
-          <Reveal
-            variant="up"
-            className="mt-12 rounded-xl bg-[#FBF6F7] p-6 md:p-10"
-          >
-            <Pyramid />
-          </Reveal>
-
-          <div className="mt-20">
-            <Heading en="Reason">
-              <span className="text-brand-500">Bond AI</span>{" "}
-              が選ばれる3つの理由
-            </Heading>
-          </div>
+          <SectionHead en="Service">
+            AIセキュリティの体制を、
+            <span className="text-brand-500">3つの層</span>でつくります
+          </SectionHead>
+          <p className="mt-6 max-w-3xl text-[15px] leading-[2] text-ink/80">
+            経営が責任者を決め、管理の仕組みを整え、現場に浸透させる。Bond AI
+            はこの3つの層をまとめて引き受け、取引先や監査に説明できる体制をつくります。
+          </p>
           <div className="mt-12 space-y-16 md:space-y-20">
             {features.map((f, i) => (
               <Reveal key={f.title} variant="up">
-                <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+                <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
                   <div className={cn(i % 2 === 1 && "lg:order-2")}>
-                    <p className="flex items-end gap-3 text-brand-500">
-                      <span className="text-sm font-black tracking-[0.15em]">
-                        REASON
+                    <p className="flex items-center gap-3">
+                      <span className="grid h-10 w-10 place-items-center rounded-lg bg-brand-500 text-white">
+                        <Icon
+                          name={(["doc", "chart", "check"] as const)[i]}
+                          className="h-5 w-5"
+                        />
                       </span>
-                      <span className="font-display text-6xl font-black leading-none">
-                        {String(i + 1).padStart(2, "0")}
+                      <span className="leading-tight">
+                        <span className="block text-xl font-black tracking-[0.04em] text-ink">
+                          Bond AI
+                        </span>
+                        <span className="block text-[11px] font-bold tracking-[0.2em] text-brand-500">
+                          {
+                            (["RULE", "DIAGNOSIS", "ACCOUNTABILITY"] as const)[
+                              i
+                            ]
+                          }
+                        </span>
                       </span>
                     </p>
-                    <h3 className="mt-4 text-[clamp(1.4rem,2.6vw,1.9rem)] font-bold leading-[1.5]">
+                    <h3 className="mt-6 text-[clamp(1.45rem,2.6vw,2rem)] font-black leading-[1.5]">
                       {f.title}
                     </h3>
                     <p className="mt-4 text-[15px] leading-[2] text-ink/80">
                       {f.text}
                     </p>
+                    <a
+                      href={`#${FORM_ID}`}
+                      className="mt-6 inline-flex items-center gap-3 text-sm font-bold text-ink"
+                    >
+                      <span className="grid h-8 w-8 place-items-center rounded-full border border-brand-500 text-brand-500">
+                        →
+                      </span>
+                      無料で相談する
+                    </a>
                   </div>
-                  <div className="relative px-2 sm:px-8">
-                    <div
-                      aria-hidden="true"
-                      className={cn(
-                        "absolute inset-y-6 -z-10 w-[85%] rounded-2xl bg-[#F7ECEF]",
-                        i % 2 === 1 ? "left-0" : "right-0",
-                      )}
-                    />
+                  <div
+                    className={cn(
+                      "lg:-mx-6",
+                      i % 2 === 1 ? "lg:-ml-16" : "lg:-mr-16",
+                    )}
+                  >
                     <FeatureVisual kind={f.visual} />
                   </div>
                 </div>
@@ -1528,121 +1381,157 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             ))}
           </div>
 
-          {/* 毎月の支援内容 + 改善サイクル */}
-          <Reveal
-            variant="up"
-            className="mt-20 grid overflow-hidden rounded-xl ring-1 ring-[#EEDFE3] lg:grid-cols-[1.5fr_1fr]"
-          >
-            <div className="bg-white p-6 md:p-9">
-              <p className="flex flex-wrap items-baseline gap-x-3 text-xl font-bold">
-                毎月の支援内容
-                <span className="text-xs font-bold text-ink/50">
-                  （社外CISOプランの例）
+          {/* 3層の図 + 毎月の支援内容 */}
+          <div className="mt-20 grid gap-6">
+            <div className="rounded-md bg-white p-6 shadow-[0_18px_40px_-30px_rgba(0,0,0,0.45)] md:p-8">
+              <Pyramid />
+            </div>
+            <div className="overflow-hidden rounded-md bg-white shadow-[0_18px_40px_-30px_rgba(0,0,0,0.45)]">
+              <p className="flex flex-wrap items-baseline justify-between gap-2 bg-brand-500 px-6 py-4 text-white">
+                <span className="text-lg font-black">毎月の支援内容</span>
+                <span className="text-xs font-bold text-white/80">
+                  社外CISOプランの例
                 </span>
               </p>
-              <ul className="mt-6 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+              <ul className="grid gap-x-6 gap-y-3 p-6 sm:grid-cols-2">
                 {monthly.map((m) => (
-                  <li
-                    key={m}
-                    className="flex gap-2.5 text-[15px] leading-relaxed"
-                  >
+                  <li key={m} className="flex gap-2.5 text-sm leading-relaxed">
                     <Check />
                     {m}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="grid place-items-center bg-[#FBF6F7] p-8">
-              <Cycle />
-            </div>
-          </Reveal>
+          </div>
         </Container>
       </section>
 
-      {/* 6. 料金プラン */}
-      <section id="price" className="scroll-mt-28 bg-[#FBF6F7] py-20 md:py-28">
+      {/* ========== 6. 選ばれる理由(POINT) ========== */}
+      <section className="relative isolate overflow-hidden py-20 md:py-28">
+        <Watermark className="-left-4 top-4">Reason</Watermark>
         <Container>
-          <Heading en="Price" center>
-            会社の規模と課題に合わせて選べます
-          </Heading>
-          <p className="mt-4 text-center text-sm text-ink/60">
-            （税別・月額。最低契約期間は6カ月）
-          </p>
-          <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-3">
-            {plans.map((p, i) => (
-              <Reveal
-                key={p.name}
-                variant="up"
-                delay={i * 100}
-                className="h-full"
-              >
-                <article
-                  className={cn(
-                    "relative flex h-full flex-col rounded-xl bg-white",
-                    p.recommended
-                      ? "shadow-[0_30px_60px_-30px_rgba(122,30,53,0.5)] ring-2 ring-brand-500"
-                      : "ring-1 ring-[#EEDFE3]",
-                  )}
-                >
-                  {p.recommended ? (
-                    <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-full bg-brand-500 px-4 py-1 text-xs font-bold text-white">
-                      おすすめ
-                    </span>
-                  ) : null}
-                  <div className="border-b border-[#EEDFE3] px-6 pb-6 pt-8 text-center">
-                    <h3 className="text-lg font-black">{p.name}</h3>
-                    <p className="mt-4 flex items-baseline justify-center gap-1 text-brand-500">
-                      <span className="text-sm font-bold">月</span>
-                      <span className="font-display text-5xl font-black leading-none">
-                        {p.price}
-                      </span>
-                      <span className="text-lg font-bold">万円</span>
-                    </p>
-                    <p className="mt-4 text-sm font-bold leading-relaxed text-ink/80">
-                      {p.target}
-                    </p>
-                    <p className="mt-1 text-xs font-bold text-ink/50">
-                      （{p.size}）
-                    </p>
+          <SectionHead en="Reason">Bond AI が選ばれる3つの理由</SectionHead>
+          <div className="mt-12 space-y-6">
+            {[
+              {
+                lead: "AIを禁止せず、",
+                em: "安全に使えるルール",
+                text: "入力してよい情報・ダメな情報、使ってよいツール、導入時の承認の流れまで。禁止ではなく、社員が安心して使える状態をつくります。",
+                Visual: IconBanned,
+              },
+              {
+                lead: "契約後すぐに、",
+                em: "診断から始める",
+                text: "最初の1〜2カ月でAIの利用状況と弱点を見える化。年1回の脆弱性診断もプランに含め、結果は専門家が分かりやすく説明します。",
+                Visual: IconShadowAi,
+              },
+              {
+                lead: "取引先に、",
+                em: "責任者として名前を出せる",
+                text: "チェックシートの回答から社外CISOとしての名前の掲載まで。「専門家が責任者としてついています」と取引先に言える状態をつくります。",
+                Visual: IconChecksheet,
+              },
+            ].map((r, i) => (
+              <Reveal key={r.em} variant="up">
+                <article className="relative grid overflow-hidden rounded-md bg-white shadow-[0_20px_44px_-30px_rgba(0,0,0,0.45)] ring-1 ring-[#EEE5E8] md:grid-cols-[20rem_1fr]">
+                  <div className="grid place-items-center bg-[#F7EAEE] p-8">
+                    <r.Visual className="h-36 w-auto md:h-44" />
                   </div>
-                  <ul className="flex-1 space-y-2.5 p-6">
-                    {p.items.map((it) => (
-                      <li
-                        key={it}
-                        className="flex gap-2.5 text-[14px] leading-relaxed"
-                      >
-                        <Check />
-                        {it}
-                      </li>
-                    ))}
-                  </ul>
-                  <div className="px-6 pb-6">
-                    <a
-                      href={`#${FORM_ID}`}
-                      className={cn(
-                        "flex h-12 items-center justify-center rounded-full text-sm font-bold transition",
-                        p.recommended
-                          ? "bg-brand-500 text-white hover:bg-brand-600"
-                          : "border-2 border-brand-500 text-brand-600 hover:bg-brand-50",
-                      )}
-                    >
-                      このプランを相談する
-                    </a>
+                  <div className="relative p-7 md:p-10">
+                    <p className="absolute right-6 top-5 text-right font-black leading-none text-brand-500 md:right-10">
+                      <span className="block text-sm tracking-[0.12em] md:text-lg">
+                        POINT
+                      </span>
+                      <span className="block text-5xl md:text-7xl">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                    </p>
+                    <h3 className="pr-24 text-[clamp(1.3rem,2.4vw,1.75rem)] font-black leading-[1.5] md:pr-32">
+                      {r.lead}
+                      <br />
+                      <span className="text-brand-500">{r.em}</span>
+                    </h3>
+                    <p className="mt-4 text-[15px] leading-[2] text-ink/80">
+                      {r.text}
+                    </p>
                   </div>
                 </article>
               </Reveal>
             ))}
           </div>
+        </Container>
+      </section>
 
-          {/* 比較(横棒グラフ) */}
-          <Reveal
-            variant="up"
-            className="mx-auto mt-16 max-w-4xl rounded-xl bg-white p-6 ring-1 ring-[#EEDFE3] md:p-9"
-          >
-            <p className="text-center text-lg font-bold md:text-xl">
-              常勤のCISOを採用するより、<em>ずっと始めやすく</em>
+      {/* ========== 7. 料金 ========== */}
+      <section
+        id="price"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
+      >
+        <Watermark className="-right-6 top-4">Price</Watermark>
+        <Container>
+          <SectionHead en="Price">
+            会社の規模と課題に合わせて選べます
+          </SectionHead>
+          <p className="mt-4 text-sm text-ink/60">
+            （税別・月額。最低契約期間は6カ月）
+          </p>
+          <div className="mt-12 grid items-stretch gap-6 lg:grid-cols-3">
+            {plans.map((p) => (
+              <article
+                key={p.name}
+                className={cn(
+                  "relative flex flex-col overflow-hidden rounded-md bg-white",
+                  p.recommended
+                    ? "shadow-[0_30px_60px_-30px_rgba(122,30,53,0.55)] ring-2 ring-brand-500"
+                    : "shadow-[0_18px_40px_-30px_rgba(0,0,0,0.4)] ring-1 ring-[#EEE5E8]",
+                )}
+              >
+                <div
+                  className={cn(
+                    "px-6 py-5",
+                    p.recommended ? "bg-brand-500 text-white" : "bg-[#F4EEF0]",
+                  )}
+                >
+                  {p.recommended ? (
+                    <p className="text-xs font-bold text-white/85">おすすめ</p>
+                  ) : null}
+                  <h3 className="text-lg font-black">{p.name}</h3>
+                </div>
+                <div className="border-b border-[#EEE5E8] px-6 py-6">
+                  <p className="flex items-baseline gap-1">
+                    <span className="text-sm font-bold">月</span>
+                    <span className="text-5xl font-black leading-none text-brand-500">
+                      {p.price}
+                    </span>
+                    <span className="text-lg font-bold">万円</span>
+                    <span className="ml-1 text-xs text-ink/45">（税別）</span>
+                  </p>
+                  <p className="mt-3 text-sm font-bold leading-relaxed">
+                    {p.target}
+                  </p>
+                  <p className="mt-0.5 text-xs text-ink/55">（{p.size}）</p>
+                </div>
+                <ul className="flex-1 space-y-2.5 p-6">
+                  {p.items.map((it) => (
+                    <li
+                      key={it}
+                      className="flex gap-2.5 text-[14px] leading-relaxed"
+                    >
+                      <Check />
+                      {it}
+                    </li>
+                  ))}
+                </ul>
+              </article>
+            ))}
+          </div>
+
+          <div className="mx-auto mt-14 max-w-4xl rounded-md bg-white p-6 shadow-[0_18px_40px_-30px_rgba(0,0,0,0.4)] md:p-9">
+            <p className="text-center text-lg font-black md:text-xl">
+              常勤のCISOを採用するより、
+              <span className="text-brand-500">ずっと始めやすく</span>
             </p>
-            <div className="mt-8 space-y-5">
+            <div className="mt-7 space-y-5">
               <div>
                 <div className="flex flex-wrap items-baseline justify-between gap-2 text-sm font-bold">
                   <span className="text-ink/60">常勤のCISOを採用した場合</span>
@@ -1651,9 +1540,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                     <span className="ml-1 text-[11px] text-ink/45">（※5）</span>
                   </span>
                 </div>
-                <div className="mt-2 h-5 rounded-full bg-[#F1ECEE]">
-                  <div className="h-5 w-full rounded-full bg-[#CFC6C9]" />
-                </div>
+                <div className="mt-2 h-5 rounded-full bg-[#CFC6C9]" />
               </div>
               <div>
                 <div className="flex flex-wrap items-baseline justify-between gap-2 text-sm font-bold">
@@ -1661,128 +1548,117 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   <span className="text-brand-600">年360万円（月30万円）</span>
                 </div>
                 <div className="mt-2 h-5 rounded-full bg-[#F1ECEE]">
-                  <div className="h-5 w-[36%] rounded-full bg-[linear-gradient(90deg,#A83B57,#7A1E35)]" />
+                  <div className="h-5 w-[36%] rounded-full bg-brand-500" />
                 </div>
               </div>
             </div>
-            <div className="mt-8 rounded-lg bg-[#FBF6F7] p-5 text-sm leading-[1.9] text-ink/80">
+            <div className="mt-7 rounded bg-[#FBF6F7] p-5 text-sm leading-[1.9] text-ink/80">
               <p>
                 稼働時間を超えた分は1時間3万円です。次のメニューは別途ご相談ください。
               </p>
-              <ul className="mt-1">
-                <li>
-                  ・半日・1日の社員研修、なりすましメール訓練、事故対応の机上演習
-                </li>
-                <li>・ISO/IEC 42001（AIの国際認証）の取得支援</li>
-              </ul>
+              <p>
+                ・半日・1日の社員研修、なりすましメール訓練、事故対応の机上演習
+              </p>
+              <p>・ISO/IEC 42001（AIの国際認証）の取得支援</p>
             </div>
-          </Reveal>
+          </div>
         </Container>
       </section>
 
-      {/* 7. 担当する専門家 */}
-      <section className="py-20 md:py-28">
+      {/* ========== 8. 担当する専門家 ========== */}
+      <section className="relative isolate overflow-hidden py-20 md:py-28">
+        <Watermark className="-left-4 top-4">Expert</Watermark>
         <Container>
-          <Heading en="Expert">
+          <SectionHead en="Expert">
             資格と実務経験を持つ専門家が、責任者としてつきます
-          </Heading>
-          <div className="mt-12 grid gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-stretch">
-            <Reveal
-              variant="up"
-              className="relative min-h-[18rem] overflow-hidden rounded-xl"
-            >
+          </SectionHead>
+          <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1.25fr] lg:items-stretch">
+            <div className="relative min-h-[18rem] overflow-hidden rounded-md">
               <Image
                 src="/services/cards/talent.jpg"
-                alt="専門家が経営層と打ち合わせをしている様子のイメージ"
+                alt="専門家が経営層と打ち合わせをしている様子(イメージ)"
                 fill
                 sizes="(max-width:1024px) 100vw, 45vw"
                 className="object-cover"
               />
               <div
                 aria-hidden="true"
-                className="absolute inset-0 bg-[linear-gradient(180deg,transparent_40%,rgba(40,10,18,0.75)_100%)]"
+                className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(20,20,28,0.8)_100%)]"
               />
-              <p className="absolute inset-x-0 bottom-0 p-6 text-[15px] font-bold leading-[1.9] text-white md:p-7">
+              <p className="absolute inset-x-0 bottom-0 p-6 text-[15px] font-bold leading-[1.9] text-white">
                 調べる・書く・まとめる作業はAIで効率化し、専門家は「判断」と「説明」に集中します。だから、相場どおりの価格で、AIまで見る責任者を置けます。
               </p>
-            </Reveal>
-            <Reveal variant="up">
-              <dl className="h-full overflow-hidden rounded-xl bg-white ring-1 ring-[#EEDFE3]">
-                {expert.map((e, i) => (
-                  <div
-                    key={e.label}
-                    className={cn(
-                      "grid gap-3 p-6 md:grid-cols-[9rem_1fr] md:p-7",
-                      i > 0 && "border-t border-[#EEDFE3]",
+            </div>
+            <dl className="overflow-hidden rounded-md bg-white shadow-[0_18px_40px_-30px_rgba(0,0,0,0.4)] ring-1 ring-[#EEE5E8]">
+              {expert.map((e, i) => (
+                <div
+                  key={e.label}
+                  className={cn(
+                    "grid gap-3 p-6 md:grid-cols-[9rem_1fr] md:p-7",
+                    i > 0 && "border-t border-[#EEE5E8]",
+                  )}
+                >
+                  <dt className="flex items-center gap-2 text-sm font-black text-brand-600">
+                    <span aria-hidden="true" className="h-4 w-1 bg-brand-500" />
+                    {e.label}
+                  </dt>
+                  <dd className="text-[15px] leading-[1.9] text-ink/85">
+                    {"body" in e ? (
+                      e.body
+                    ) : (
+                      <ul className="flex flex-wrap gap-2">
+                        {e.chips.map((c) => (
+                          <li
+                            key={c}
+                            className="rounded bg-[#F4EEF0] px-2.5 py-1 text-[13px] font-bold text-brand-600"
+                          >
+                            {c}
+                          </li>
+                        ))}
+                      </ul>
                     )}
-                  >
-                    <dt className="flex items-center gap-2 text-sm font-bold text-brand-600">
-                      <span
-                        aria-hidden="true"
-                        className="h-4 w-[3px] bg-brand-500"
-                      />
-                      {e.label}
-                    </dt>
-                    <dd className="text-[15px] leading-[1.9] text-ink/85">
-                      {"body" in e ? (
-                        e.body
-                      ) : (
-                        <ul className="flex flex-wrap gap-2">
-                          {e.chips.map((c) => (
-                            <li
-                              key={c}
-                              className="rounded border border-brand-500/30 bg-brand-50/50 px-2.5 py-1 text-[13px] font-bold text-brand-600"
-                            >
-                              {c}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
-          <p className="mt-3 text-[11px] text-ink/45">※ 写真はイメージです</p>
         </Container>
       </section>
 
-      {/* 8. 導入の流れ */}
-      <section id="flow" className="scroll-mt-28 bg-[#FBF6F7] py-20 md:py-28">
+      {/* ========== 9. 導入の流れ ========== */}
+      <section
+        id="flow"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
+      >
+        <Watermark className="-right-6 top-4">Flow</Watermark>
         <Container>
-          <Heading en="Flow" center>
-            導入の流れ
-          </Heading>
-          <ol className="relative mx-auto mt-14 grid max-w-6xl gap-4 md:grid-cols-5">
-            <span
-              aria-hidden="true"
-              className="absolute left-[10%] right-[10%] top-5 hidden h-0.5 bg-[linear-gradient(90deg,#E7C4CD,#7A1E35)] md:block"
-            />
+          <SectionHead en="Flow">導入の流れ</SectionHead>
+          <ol className="mt-12 grid gap-4 md:grid-cols-5">
             {flow.map((f, i) => (
               <Reveal
                 key={f.title}
                 variant="up"
-                delay={i * 90}
+                delay={i * 80}
                 className="h-full"
               >
-                <li className="relative flex h-full flex-col items-center text-center">
-                  <span className="relative grid h-10 w-10 place-items-center rounded-full bg-brand-500 text-sm font-black text-white ring-4 ring-[#FBF6F7]">
-                    {i + 1}
-                  </span>
-                  <div className="mt-4 w-full flex-1 rounded-xl bg-white p-5 ring-1 ring-[#EEDFE3]">
-                    {f.when ? (
-                      <p className="text-[11px] font-bold text-brand-500">
-                        {f.when}
-                      </p>
-                    ) : null}
-                    <p className="mt-1 text-base font-bold leading-snug">
-                      {f.title}
-                    </p>
-                    <p className="mt-2 text-sm leading-relaxed text-ink/70">
-                      {f.text}
-                    </p>
-                  </div>
+                <li className="relative h-full rounded-md bg-white p-5 shadow-[0_16px_34px_-28px_rgba(0,0,0,0.45)]">
+                  <p className="text-xs font-black tracking-[0.15em] text-brand-500">
+                    STEP {i + 1}
+                  </p>
+                  <p className="mt-2 text-base font-black leading-snug">
+                    {f.title}
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink/70">
+                    {f.text}
+                  </p>
+                  {i < flow.length - 1 ? (
+                    <span
+                      aria-hidden="true"
+                      className="absolute -right-3 top-1/2 z-10 hidden h-6 w-6 -translate-y-1/2 place-items-center rounded-full bg-brand-500 text-xs text-white md:grid"
+                    >
+                      ›
+                    </span>
+                  ) : null}
                 </li>
               </Reveal>
             ))}
@@ -1790,17 +1666,19 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </Container>
       </section>
 
-      {/* 9. よくある質問 */}
-      <section id="faq" className="scroll-mt-28 py-20 md:py-28">
+      {/* ========== 10. よくある質問 ========== */}
+      <section
+        id="faq"
+        className="relative isolate scroll-mt-28 overflow-hidden py-20 md:py-28"
+      >
+        <Watermark className="-left-4 top-4">FAQ</Watermark>
         <Container>
-          <Heading en="FAQ" center>
-            よくある質問
-          </Heading>
-          <div className="mx-auto mt-10 max-w-3xl space-y-3">
+          <SectionHead en="FAQ">よくある質問</SectionHead>
+          <div className="mt-10 space-y-3">
             {faqs.map((f) => (
               <details
                 key={f.q}
-                className="group rounded-xl bg-white ring-1 ring-[#EEDFE3] open:shadow-[0_20px_40px_-32px_rgba(60,15,25,0.5)]"
+                className="group rounded-md bg-white shadow-[0_10px_24px_-20px_rgba(0,0,0,0.45)] ring-1 ring-[#EEE5E8]"
               >
                 <summary className="flex cursor-pointer list-none items-center gap-4 p-5 md:p-6 [&::-webkit-details-marker]:hidden">
                   <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-500 text-sm font-black text-white">
@@ -1816,8 +1694,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                     ＋
                   </span>
                 </summary>
-                <div className="flex gap-4 border-t border-[#EEDFE3] px-5 py-5 md:px-6">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-50 text-sm font-black text-brand-500">
+                <div className="flex gap-4 border-t border-[#EEE5E8] px-5 py-5 md:px-6">
+                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#F4EEF0] text-sm font-black text-brand-500">
                     A
                   </span>
                   <p className="pt-1.5 text-[15px] leading-[1.9] text-ink/80">
@@ -1828,72 +1706,49 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             ))}
           </div>
         </Container>
+        <div className="mt-20">
+          <SplitCta />
+        </div>
       </section>
 
-      {/* 10. 申し込み */}
+      {/* ========== 11. 申し込み ========== */}
       <section
         id={FORM_ID}
-        className="relative isolate scroll-mt-28 overflow-hidden bg-[linear-gradient(180deg,#FBF4F6,#F5E6EA)] py-20 md:py-28"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
       >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-32 -top-32 -z-10 h-96 w-96 rounded-full bg-white/70 blur-[90px]"
-        />
-        <Container className="grid gap-10 lg:grid-cols-[1fr_1.35fr] lg:gap-14">
-          <div>
-            <Heading en="Free check">
-              まずは無料の
-              <br />
-              「AI利用チェック」から
-            </Heading>
-            <Reveal variant="up">
-              <p className="mt-6 text-[15px] leading-[2] text-ink/80">
+        <Watermark className="-right-6 top-4">Contact</Watermark>
+        <Container>
+          <SectionHead en="Contact">
+            まずは無料の「AI利用チェック」から
+          </SectionHead>
+          <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
+            <div>
+              <p className="text-[15px] leading-[2] text-ink/80">
                 オンライン30分。社内のAIの使い方、取引先から求められていること、今の体制を伺い、優先して手を打つべき点を専門家がお伝えします。売り込みはしません。
               </p>
-              <ul className="mt-6 space-y-3">
-                {[
-                  { t: "オンライン30分・無料", i: "bell" },
-                  { t: "専門家が気になる点を整理", i: "chart" },
-                  { t: "売り込みはしません", i: "check" },
-                ].map((x) => (
-                  <li
-                    key={x.t}
-                    className="flex items-center gap-3 rounded-lg bg-white px-4 py-3 text-[15px] font-bold ring-1 ring-[#EEDFE3]"
-                  >
-                    <span className="grid h-8 w-8 place-items-center rounded-full bg-brand-50 text-brand-500">
-                      <Icon name={x.i as "bell"} className="h-4 w-4" />
-                    </span>
-                    {x.t}
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
+            </div>
+            <div className="rounded-md bg-white p-6 shadow-[0_30px_60px_-40px_rgba(0,0,0,0.45)] md:p-9">
+              <AiCheckForm privacyHref={localePath("/privacy", locale)} />
+            </div>
           </div>
-          <Reveal
-            variant="up"
-            delay={120}
-            className="rounded-xl bg-white p-6 shadow-[0_30px_60px_-40px_rgba(60,15,25,0.45)] md:p-9"
-          >
-            <AiCheckForm privacyHref={localePath("/privacy", locale)} />
-          </Reveal>
         </Container>
       </section>
 
-      {/* 11. フッター(LP) */}
-      <footer className="border-t border-ink/10 bg-white py-10">
+      {/* ========== 12. フッター(LP) ========== */}
+      <footer className="bg-[#1C1E2A] py-12 text-white">
         <Container>
           <div className="flex flex-wrap items-center gap-3">
             <span
-              className="grid h-8 w-8 place-items-center rounded-md bg-brand-500 text-white"
+              className="grid h-8 w-8 place-items-center rounded-lg bg-brand-500"
               aria-hidden="true"
             >
               <Icon name="shield" className="h-4 w-4" />
             </span>
             <p className="text-base font-black">Bond AI</p>
-            <p className="text-sm text-ink/60">／ 運営：{site.legalName}</p>
+            <p className="text-sm text-white/60">／ 運営：{site.legalName}</p>
           </div>
-          <div className="mt-6 border-t border-ink/10 pt-6 text-[11px] leading-[1.9] text-ink/55">
-            <p className="font-bold text-ink/70">出典</p>
+          <div className="mt-6 border-t border-white/15 pt-6 text-[11px] leading-[1.9] text-white/55">
+            <p className="font-bold text-white/70">出典</p>
             <ul>
               {sources.map((s) => (
                 <li key={s}>{s}</li>
@@ -1905,11 +1760,135 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </p>
             <p>
               ※
-              ページ内の画面はイメージです。数値は例示であり、実績を示すものではありません。
+              ページ内の画面・写真はイメージです。数値は例示であり、実績を示すものではありません。
             </p>
           </div>
         </Container>
       </footer>
     </div>
+  );
+}
+
+/* ================================================== salescore 風の部品 */
+
+/** 2段の文字 + 右端に白い四角のアイコンが付いたボタン */
+function BigButton({
+  label,
+  sub,
+  icon,
+  href = `#${FORM_ID}`,
+  tone = "wine",
+}: {
+  label: string;
+  sub: string;
+  icon: "check" | "doc";
+  href?: string;
+  tone?: "wine" | "accent" | "white";
+}) {
+  return (
+    <a
+      href={href}
+      className={cn(
+        "group relative inline-flex h-16 min-w-[15rem] items-center justify-center rounded-full pl-7 pr-16 transition hover:-translate-y-0.5",
+        tone === "wine" &&
+          "bg-[linear-gradient(100deg,#6A1830,#A83B57)] text-white shadow-[0_12px_26px_-12px_rgba(122,30,53,0.8)]",
+        tone === "accent" &&
+          "bg-[linear-gradient(100deg,#FF7A55,#E64A2E)] text-white shadow-[0_12px_26px_-12px_rgba(230,74,46,0.8)]",
+        tone === "white" &&
+          "bg-white text-brand-600 shadow-[0_12px_26px_-14px_rgba(0,0,0,0.5)]",
+      )}
+    >
+      <span className="text-center leading-tight">
+        <span className="block text-[17px] font-black tracking-[0.04em]">
+          {label}
+        </span>
+        <span
+          className={cn(
+            "mt-0.5 block text-[11px] font-bold",
+            tone === "white" ? "text-ink/55" : "text-white/85",
+          )}
+        >
+          {sub}
+        </span>
+      </span>
+      <span
+        aria-hidden="true"
+        className={cn(
+          "absolute right-2 top-1/2 grid h-11 w-11 -translate-y-1/2 place-items-center rounded-xl",
+          tone === "wine" && "bg-white text-brand-500",
+          tone === "accent" && "bg-white text-[#E64A2E]",
+          tone === "white" && "bg-brand-500 text-white",
+        )}
+      >
+        <Icon name={icon} className="h-5 w-5" />
+      </span>
+    </a>
+  );
+}
+
+/** 2分割のCTA帯 */
+function SplitCta() {
+  return (
+    <div className="grid md:grid-cols-2">
+      <div className="flex flex-col items-center gap-4 bg-[#5A1528] px-6 py-10 text-white">
+        <p className="text-sm font-bold">まずは現状を相談したい方は</p>
+        <BigButton
+          label="無料のAI利用チェック"
+          sub="オンライン30分・売り込みなし"
+          icon="check"
+          tone="accent"
+        />
+      </div>
+      <div className="flex flex-col items-center gap-4 bg-brand-500 px-6 py-10 text-white">
+        <p className="text-sm font-bold">料金とプランを確かめたい方は</p>
+        <BigButton
+          label="料金プランを見る"
+          sub="月額8万円から"
+          icon="doc"
+          href="#price"
+          tone="white"
+        />
+      </div>
+    </div>
+  );
+}
+
+/** 大きな英字 + 日本語(横並び) + 左だけ色の付いた線 */
+function SectionHead({ en, children }: { en: string; children: ReactNode }) {
+  return (
+    <Reveal variant="up">
+      <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:gap-5">
+        <p className="text-[clamp(2.4rem,5.6vw,3.8rem)] font-black uppercase leading-none tracking-[0.02em] text-brand-500">
+          {en}
+        </p>
+        <h2 className="pb-1 text-lg font-bold tracking-[0.04em] text-ink [word-break:auto-phrase] md:text-xl">
+          {children}
+        </h2>
+      </div>
+      <div className="relative mt-5 h-px bg-[#E6D9DD]">
+        <span className="absolute inset-y-0 left-0 w-56 -translate-y-px border-b-2 border-brand-500" />
+      </div>
+    </Reveal>
+  );
+}
+
+/** 背景の大きな英字の透かし */
+function Watermark({
+  children,
+  className,
+}: {
+  children: string;
+  className?: string;
+}) {
+  return (
+    <p
+      aria-hidden="true"
+      className={cn(
+        "pointer-events-none absolute -z-10 select-none whitespace-nowrap text-[clamp(5rem,14vw,12rem)] font-black uppercase leading-none tracking-tight text-brand-500/[0.05]",
+        className,
+      )}
+    >
+      {children}
+    </p>
   );
 }
