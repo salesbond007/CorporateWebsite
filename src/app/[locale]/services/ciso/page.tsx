@@ -78,25 +78,6 @@ const roles = [
   "事故の初動",
 ];
 
-const facts = [
-  {
-    text: "「AIの利用をめぐるサイバーリスク」が、組織向けの10大脅威に初めて選ばれ、3位に。",
-    note: "※1",
-  },
-  {
-    text: "取引先のセキュリティを★で評価する国の制度（SCS評価制度）の申請受付が始まる予定。",
-    note: "※2",
-  },
-  {
-    text: "発注側の大企業のうち、取引先のセキュリティを確認している割合。",
-    note: "※3",
-  },
-  {
-    text: "2025年のランサムウェア被害のうち、中小企業が占めた割合。",
-    note: "※4",
-  },
-];
-
 const features = [
   {
     title: "AIを止めずに、安全に広げる",
@@ -259,13 +240,7 @@ const faqs = [
   },
 ];
 
-const sources = [
-  "※1 IPA「情報セキュリティ10大脅威 2026」（組織編）",
-  "※2 IPA「SCS評価制度」の公表資料（2026年）。申請受付の開始は予定",
-  "※3 キヤノンITソリューションズの調査",
-  "※4 令和8年版 警察白書（2025年のランサムウェア被害226件のうち中小企業143件）",
-  "※5 アクセルパートナーズの解説記事による目安",
-];
+const sources = ["※ アクセルパートナーズの解説記事による目安"];
 
 /* ============================================================ 小さな部品 */
 
@@ -530,160 +505,6 @@ function HeroVisual() {
 
 /* ------------------------------------------------------------ 図・グラフ */
 
-/** ドーナツグラフ */
-function Donut({ value, label }: { value: number; label: string }) {
-  const r = 42;
-  const c = 2 * Math.PI * r;
-  return (
-    <svg
-      viewBox="0 0 110 110"
-      className="h-28 w-28"
-      role="img"
-      aria-label={`${label} ${value}%`}
-    >
-      <circle
-        cx="55"
-        cy="55"
-        r={r}
-        fill="none"
-        stroke={LINE}
-        strokeWidth="14"
-      />
-      <circle
-        cx="55"
-        cy="55"
-        r={r}
-        fill="none"
-        stroke={W}
-        strokeWidth="14"
-        strokeDasharray={`${(c * value) / 100} ${c}`}
-        transform="rotate(-90 55 55)"
-      />
-      <text
-        x="55"
-        y="60"
-        textAnchor="middle"
-        fontSize="18"
-        fontWeight="900"
-        fill={W}
-      >
-        {value}%
-      </text>
-    </svg>
-  );
-}
-
-/** 10大脅威の順位(3位を強調) */
-function RankChart() {
-  const bars = [100, 88, 76, 66, 58];
-  return (
-    <svg
-      viewBox="0 0 150 110"
-      className="h-28 w-auto"
-      role="img"
-      aria-label="AIの利用をめぐるサイバーリスクが10大脅威の3位"
-    >
-      {bars.map((w, i) => (
-        <g key={i}>
-          <text
-            x="0"
-            y={16 + i * 21}
-            fontSize="10"
-            fontWeight="700"
-            fill={i === 2 ? W : "#9A8E91"}
-          >
-            {i + 1}位
-          </text>
-          <rect
-            x="24"
-            y={7 + i * 21}
-            width={w * 1.2}
-            height="12"
-            rx="3"
-            fill={i === 2 ? W : LINE}
-          />
-        </g>
-      ))}
-      <text x={24 + 76 * 1.2 + 4} y="58" fontSize="9" fontWeight="800" fill={W}>
-        AI
-      </text>
-    </svg>
-  );
-}
-
-/** SCS評価制度のタイムライン */
-function TimelineChart() {
-  return (
-    <svg
-      viewBox="0 0 170 110"
-      className="h-28 w-auto"
-      role="img"
-      aria-label="2026年 制度の公表、2027年3月 申請受付開始予定"
-    >
-      <line
-        x1="10"
-        y1="60"
-        x2="160"
-        y2="60"
-        stroke={LINE}
-        strokeWidth="4"
-        strokeLinecap="round"
-      />
-      <line
-        x1="10"
-        y1="60"
-        x2="110"
-        y2="60"
-        stroke={W}
-        strokeWidth="4"
-        strokeLinecap="round"
-      />
-      <circle cx="30" cy="60" r="7" fill="#fff" stroke={W} strokeWidth="3" />
-      <circle cx="120" cy="60" r="10" fill={W} />
-      <text
-        x="30"
-        y="40"
-        textAnchor="middle"
-        fontSize="10"
-        fontWeight="700"
-        fill="#9A8E91"
-      >
-        2026年
-      </text>
-      <text
-        x="30"
-        y="84"
-        textAnchor="middle"
-        fontSize="9"
-        fontWeight="700"
-        fill="#9A8E91"
-      >
-        制度の公表
-      </text>
-      <text
-        x="120"
-        y="38"
-        textAnchor="middle"
-        fontSize="11"
-        fontWeight="900"
-        fill={W}
-      >
-        2027.3
-      </text>
-      <text
-        x="120"
-        y="86"
-        textAnchor="middle"
-        fontSize="9"
-        fontWeight="800"
-        fill={W}
-      >
-        申請受付（予定）
-      </text>
-    </svg>
-  );
-}
-
 /** 体制のピラミッド */
 function Pyramid() {
   const layers = [
@@ -861,7 +682,7 @@ function FeatureVisual({
       <div className="p-5">
         <div className="flex items-end justify-between">
           <p className="text-[11px] font-bold text-ink/55">回答の進み具合</p>
-          <p className="font-display text-2xl font-black leading-none text-brand-500">
+          <p className="text-2xl font-black leading-none text-brand-500">
             42<span className="text-sm text-ink/45"> / 45問</span>
           </p>
         </div>
@@ -901,7 +722,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
   ];
 
   return (
-    <div className="bg-white font-medium text-ink [&_em]:not-italic [&_em]:text-brand-500">
+    <div className="bg-white font-sans font-medium not-italic text-ink [&_em]:not-italic [&_em]:text-brand-500 [&_text]:[font-family:inherit]">
       <JsonLd
         data={[
           breadcrumbJsonLd([
@@ -1068,7 +889,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </span>
             </p>
             <h1 className="mt-6 text-[clamp(2.4rem,5vw,4.1rem)] font-black leading-[1.25] tracking-[0.04em]">
-              <span className="text-brand-500">AI時代</span>に必須な
+              <span className="text-brand-500">AI時代</span>に必須の
               <br />
               セキュリティ対策
             </h1>
@@ -1218,70 +1039,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
 
         {/* 2分割のCTA帯 */}
         <SplitCta />
-      </section>
-
-      {/* ========== 4. なぜ今か ========== */}
-      <section className="relative isolate overflow-hidden py-20 md:py-28">
-        <Watermark className="-left-4 top-4">Why now</Watermark>
-        <Container>
-          <SectionHead en="Why now">
-            AIの広がりに、守りと説明が追いついていません
-          </SectionHead>
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { big: "3", unit: "位", chart: <RankChart />, i: 0 },
-              { big: "2027", unit: "年3月", chart: <TimelineChart />, i: 1 },
-              {
-                big: "84.4",
-                unit: "%",
-                chart: (
-                  <Donut
-                    value={84.4}
-                    label="取引先のセキュリティを確認している大企業の割合"
-                  />
-                ),
-                i: 2,
-              },
-              {
-                big: "63.3",
-                unit: "%",
-                chart: (
-                  <Donut
-                    value={63.3}
-                    label="ランサムウェア被害のうち中小企業の割合"
-                  />
-                ),
-                i: 3,
-              },
-            ].map((f) => (
-              <Reveal
-                key={f.big}
-                variant="up"
-                delay={f.i * 80}
-                className="h-full"
-              >
-                <article className="flex h-full flex-col rounded-md bg-white p-6 shadow-[0_18px_40px_-28px_rgba(0,0,0,0.45)] ring-1 ring-[#EEE5E8]">
-                  <p className="font-black leading-none text-brand-500">
-                    <span className="text-[2.6rem]">{f.big}</span>
-                    <span className="ml-1 text-lg">{f.unit}</span>
-                  </p>
-                  <div className="my-5 grid h-28 place-items-center rounded bg-[#FBF6F7]">
-                    {f.chart}
-                  </div>
-                  <p className="text-sm leading-[1.85] text-ink/80">
-                    {facts[f.i].text}
-                    <span className="ml-1 text-[11px] text-ink/45">
-                      （{facts[f.i].note}）
-                    </span>
-                  </p>
-                </article>
-              </Reveal>
-            ))}
-          </div>
-          <p className="mt-4 text-right text-[11px] text-ink/45">
-            出典はページ下部に記載しています。
-          </p>
-        </Container>
       </section>
 
       {/* ========== 5. サービス(製品紹介風) ========== */}
@@ -1509,7 +1266,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   <span className="text-ink/60">常勤のCISOを採用した場合</span>
                   <span className="text-ink/70">
                     年収1,000万円以上
-                    <span className="ml-1 text-[11px] text-ink/45">（※5）</span>
+                    <span className="ml-1 text-[11px] text-ink/45">（※）</span>
                   </span>
                 </div>
                 <div className="mt-2 h-5 rounded-full bg-[#CFC6C9]" />
