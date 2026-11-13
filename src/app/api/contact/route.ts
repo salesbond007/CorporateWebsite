@@ -205,7 +205,7 @@ const enumLabels: Record<string, Record<string, string>> = {
     undecided: "未定",
   },
   service: serviceLeadServices,
-  request: { document: "資料請求", check: "無料のAI利用チェック" },
+  request: { document: "資料請求", check: "無料相談" },
   employees: Object.fromEntries(
     aiCheckEmployeeOptions.map((o) => [o.value, o.label]),
   ),
@@ -217,9 +217,7 @@ const enumLabels: Record<string, Record<string, string>> = {
 
 /** Bond AI LP のフォームの申し込み種別(件名用) */
 function aiCheckLabel(data: Record<string, unknown>): string {
-  return data.request === "check"
-    ? "無料のAI利用チェックのお申し込み"
-    : "資料請求";
+  return data.request === "check" ? "無料相談のお申し込み" : "資料請求";
 }
 
 /** 簡易LPのフォームで選ばれたサービス名(件名・自動返信用) */
@@ -410,7 +408,7 @@ ${addressee} 様
 お世話になっております。
 Bond AI（運営：セールスボンド株式会社）でございます。
 
-この度は${(parsed.data as { request?: string }).request === "check" ? "無料の「AI利用チェック」にお申し込みいただき" : "Bond AI の資料をご請求いただき"}、誠にありがとうございます。
+この度は${(parsed.data as { request?: string }).request === "check" ? "無料相談にお申し込みいただき" : "Bond AI の資料をご請求いただき"}、誠にありがとうございます。
 
 ${(parsed.data as { request?: string }).request === "check" ? "いただいた内容を確認のうえ、担当者より2営業日以内に日程調整のご連絡をいたします。" : "担当者より2営業日以内に、資料をメールでお送りいたします。"}今しばらくお待ちくださいますようお願いいたします。
 
@@ -487,7 +485,7 @@ HP：https://www.salesbond1962.com
           type === "web_security_diagnosis"
             ? "無料簡易診断のお申し込みありがとうございます(セールスボンド株式会社)"
             : type === "ai_check"
-              ? `${(parsed.data as { request?: string }).request === "check" ? "無料のAI利用チェックのお申し込み" : "資料のご請求"}ありがとうございます(Bond AI)`
+              ? `${(parsed.data as { request?: string }).request === "check" ? "無料相談のお申し込み" : "資料のご請求"}ありがとうございます(Bond AI)`
               : type === "service_lead"
                 ? `無料相談のお申し込みありがとうございます(${serviceLabel(parsed.data as Record<string, unknown>)})`
                 : type === "apokomi_lead"
