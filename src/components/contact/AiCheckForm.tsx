@@ -6,7 +6,7 @@ import { aiCheckEmployeeOptions } from "@/lib/contact";
 import { cn } from "@/lib/cn";
 
 const inputClass =
-  "w-full border border-[#DADFE4] bg-white px-4 py-3.5 text-base text-ink outline-none transition placeholder:text-ink/35 focus:border-brand-500 focus:ring-2 focus:ring-brand-500/15";
+  "w-full rounded-md border border-[#E6D9DD] bg-white px-4 py-3.5 text-base text-ink outline-none transition placeholder:text-ink/35 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15";
 
 function Label({ text, required }: { text: string; required?: boolean }) {
   return (
@@ -162,10 +162,10 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
             <label
               key={o.value}
               className={cn(
-                "flex cursor-pointer items-center justify-center border px-3 py-3 text-sm font-bold transition",
+                "flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-sm font-bold transition",
                 employees === o.value
                   ? "border-brand-500 bg-brand-500 text-white"
-                  : "border-[#DADFE4] bg-white text-ink hover:border-brand-500",
+                  : "border-[#E6D9DD] bg-white text-ink hover:border-brand-500",
               )}
             >
               <input
@@ -217,7 +217,7 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
       <button
         type="submit"
         disabled={sending}
-        className="group flex h-16 w-full items-center justify-center gap-2 rounded-full bg-[#C8365A] text-base font-bold text-white shadow-[0_4px_0_#8E1F3B] transition hover:translate-y-0.5 hover:shadow-[0_2px_0_#8E1F3B] disabled:opacity-60"
+        className="group flex h-16 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(100deg,#61162A,#A83B57)] text-base font-black text-white shadow-[0_16px_36px_-14px_rgba(122,30,53,0.8)] transition hover:-translate-y-0.5 disabled:opacity-60"
       >
         {sending ? "送信中..." : "無料で申し込む"}
         {sending ? null : (
