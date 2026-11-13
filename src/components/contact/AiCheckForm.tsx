@@ -24,7 +24,7 @@ function Label({ text, required }: { text: string; required?: boolean }) {
   );
 }
 
-/** Bond AI LP の「無料のAI利用チェック」申し込みフォーム(送信先: info@salesbond.jp) */
+/** Bond AI LP の無料相談・資料請求フォーム(送信先: info@salesbond.jp) */
 export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
   const [company, setCompany] = useState("");
   const [name, setName] = useState("");
@@ -125,7 +125,7 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
         <div className="grid grid-cols-2 gap-2">
           {(
             [
-              { v: "check", l: "無料相談（オンライン30分）" },
+              { v: "check", l: "まずは無料で相談する" },
               { v: "document", l: "資料請求" },
             ] as const
           ).map((o) => (
@@ -259,7 +259,7 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
         {sending
           ? "送信中..."
           : request === "check"
-            ? "無料で申し込む"
+            ? "まずは無料で相談する"
             : "資料を請求する（無料）"}
         {sending ? null : (
           <span

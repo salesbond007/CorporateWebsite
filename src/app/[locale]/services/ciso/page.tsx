@@ -982,12 +982,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                     サービスの内容・料金・導入の流れをまとめた資料を、メールでお送りします。
                   </dd>
                 </div>
-                <div>
-                  <dt className="font-black text-ink">無料のAI利用チェック</dt>
-                  <dd className="mt-1">
-                    オンライン30分。社内のAIの使い方、取引先から求められていること、今の体制を伺い、優先して手を打つべき点を専門家がお伝えします。売り込みはしません。
-                  </dd>
-                </div>
               </dl>
             </div>
             <div className="rounded-md bg-white p-6 shadow-[0_30px_60px_-40px_rgba(0,0,0,0.45)] md:p-9">
