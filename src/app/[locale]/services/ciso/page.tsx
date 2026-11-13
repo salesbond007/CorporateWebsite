@@ -126,33 +126,6 @@ const services = [
   { t: "事故の初動", d: "もしもの時の判断と対応を助言します", i: "shield" },
 ] as const;
 
-const expert = [
-  {
-    label: "実務経験",
-    body: "企業のセキュリティ管理、情報システム部門、セキュリティのコンサル・監査のいずれかで5年以上",
-  },
-  {
-    label: "資格（いずれか）",
-    chips: [
-      "情報処理安全確保支援士",
-      "公認情報セキュリティ監査人",
-      "CISSP",
-      "CISM",
-      "CISA",
-      "ISO/IEC 27001 主任審査員",
-    ],
-  },
-  {
-    label: "押さえている基準",
-    chips: [
-      "ISMS",
-      "サイバーセキュリティ経営ガイドライン",
-      "SCS評価制度",
-      "AI事業者ガイドライン",
-    ],
-  },
-];
-
 const flow = [
   {
     title: "無料のAI利用チェック",
@@ -862,63 +835,47 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </Container>
       </section>
 
-      {/* ========== 8. 担当する専門家 ========== */}
+      {/* ========== 8. 監修者 ========== */}
       <section className="relative isolate overflow-hidden py-20 md:py-28">
         <Watermark className="-left-4 top-4">Expert</Watermark>
         <Container>
-          <SectionHead en="Expert">
-            資格と実務経験を持つ専門家が、責任者としてつきます
-          </SectionHead>
-          <div className="mt-12 grid gap-8 lg:grid-cols-[1fr_1.25fr] lg:items-stretch">
-            <div className="relative min-h-[18rem] overflow-hidden rounded-md">
-              <Image
-                src="/services/cards/talent.jpg"
-                alt="専門家が経営層と打ち合わせをしている様子(イメージ)"
-                fill
-                sizes="(max-width:1024px) 100vw, 45vw"
-                className="object-cover"
-              />
-              <div
+          <SectionHead en="Expert">サービス監修</SectionHead>
+          <Reveal
+            variant="up"
+            className="mt-12 grid gap-8 overflow-hidden rounded-lg bg-white shadow-[0_20px_44px_-34px_rgba(0,0,0,0.4)] ring-1 ring-[#EEE5E8] md:grid-cols-[18rem_1fr] lg:grid-cols-[22rem_1fr]"
+          >
+            {/* 写真(後日差し替え) */}
+            <div className="flex aspect-[4/3] items-center justify-center bg-[#F1ECEE] md:aspect-auto md:min-h-[24rem]">
+              <span className="sr-only">岡崎 弘明の写真（準備中）</span>
+            </div>
+            <div className="px-6 pb-8 md:py-10 md:pr-10">
+              <p className="inline-block bg-brand-500 px-3 py-1 text-xs font-bold text-white">
+                BondAIセキュリティサービス監修
+              </p>
+              <h3 className="mt-4 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                <span className="text-[clamp(1.6rem,3vw,2.2rem)] font-black tracking-[0.06em]">
+                  岡崎 弘明
+                </span>
+                <span className="text-sm font-bold text-ink/55">
+                  おかざき ひろあき
+                </span>
+              </h3>
+              <p className="mt-2 text-[15px] font-bold text-brand-600">
+                元 株式会社帝国データバンクネットコミュニケーション 代表取締役
+              </p>
+              <span
                 aria-hidden="true"
-                className="absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(20,20,28,0.8)_100%)]"
+                className="mt-6 block h-px w-full bg-[#EEE5E8]"
               />
-              <p className="absolute inset-x-0 bottom-0 p-6 text-[15px] font-bold leading-[1.9] text-white">
-                調べる・書く・まとめる作業はAIで効率化し、専門家は「判断」と「説明」に集中します。だから、相場どおりの価格で、AIまで見る責任者を置けます。
+              <p className="mt-6 text-[15px] leading-[2] text-ink/80">
+                帝国データバンクグループで、情報セキュリティのコンサルティングを手がける会社の代表取締役を務める。同社は、ISO27001（ISMS）やプライバシーマークの取得支援、情報セキュリティの意識診断などを通じて、企業の情報管理の体制づくりを支援している。
+              </p>
+              <p className="mt-4 border-l-4 border-brand-500 bg-[#FBF6F7] px-4 py-3 text-[15px] font-bold leading-[1.9]">
+                Bond
+                AIでは、お客様を担当する専門家の面談・選定と、サービス品質の確認を担う。
               </p>
             </div>
-            <dl className="overflow-hidden rounded-md bg-white shadow-[0_18px_40px_-30px_rgba(0,0,0,0.4)] ring-1 ring-[#EEE5E8]">
-              {expert.map((e, i) => (
-                <div
-                  key={e.label}
-                  className={cn(
-                    "grid gap-3 p-6 md:grid-cols-[9rem_1fr] md:p-7",
-                    i > 0 && "border-t border-[#EEE5E8]",
-                  )}
-                >
-                  <dt className="flex items-center gap-2 text-sm font-black text-brand-600">
-                    <span aria-hidden="true" className="h-4 w-1 bg-brand-500" />
-                    {e.label}
-                  </dt>
-                  <dd className="text-[15px] leading-[1.9] text-ink/85">
-                    {"body" in e ? (
-                      e.body
-                    ) : (
-                      <ul className="flex flex-wrap gap-2">
-                        {e.chips.map((c) => (
-                          <li
-                            key={c}
-                            className="rounded bg-[#F4EEF0] px-2.5 py-1 text-[13px] font-bold text-brand-600"
-                          >
-                            {c}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
