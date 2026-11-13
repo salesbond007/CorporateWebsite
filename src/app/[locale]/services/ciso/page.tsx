@@ -513,7 +513,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         />
         <Container className="grid items-center gap-12 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div>
-            <p className="border-b-2 border-brand-500 pb-2 text-[clamp(1rem,1.8vw,1.3rem)] font-bold tracking-[0.06em] text-brand-500 sm:inline-block">
+            <p className="inline-block whitespace-nowrap bg-brand-500 px-4 py-2 text-[clamp(0.95rem,1.8vw,1.3rem)] font-bold tracking-[0.06em] text-white sm:px-5 sm:py-2.5">
               社外CISO・セキュリティ顧問サービス
             </p>
             <h1 className="mt-6 text-[clamp(2.4rem,5vw,4.1rem)] font-black leading-[1.25] tracking-[0.04em]">
