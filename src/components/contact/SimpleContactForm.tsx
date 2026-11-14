@@ -30,7 +30,7 @@ const inquiryTypeLabels: Record<InquiryType, string> = {
 };
 
 const serviceOptions = [
-  { id: "ai-security", label: "セキュリティ対策事業" },
+  { id: "ai-security", label: "AIセキュリティ対策事業" },
   { id: "new-business-development", label: "経営顧問事業" },
   { id: "web-security", label: "ホームページセキュリティ対策" },
   { id: "other-service", label: "その他" },

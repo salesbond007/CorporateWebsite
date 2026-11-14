@@ -134,7 +134,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         slug: "ai-security",
         number: "01",
-        title: "セキュリティ対策事業",
+        title: "AIセキュリティ対策事業",
         href: "/services/security",
         subtitle: "Security",
         summary:

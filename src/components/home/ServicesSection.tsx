@@ -7,6 +7,10 @@ import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import { serviceCategories } from "@/lib/site";
+import {
+  BondServicePyramid,
+  bondPyramidItems,
+} from "@/components/services/BondServicePyramid";
 import { cn } from "@/lib/cn";
 
 type Props = {
@@ -181,7 +185,7 @@ export function ServicesSection({ locale }: Props) {
                       </ul>
                     ) : null}
                     <Link
-                      href={localePath("/contact", locale)}
+                      href={localePath("/services", locale)}
                       className={cn(
                         "mt-auto inline-flex items-center gap-2 self-start border-b pb-1 pt-4 text-sm font-bold tracking-[0.08em] transition-colors",
                         dark
@@ -189,7 +193,7 @@ export function ServicesSection({ locale }: Props) {
                           : "border-ink/30 hover:border-brand-500 hover:text-brand-500",
                       )}
                     >
-                      相談する
+                      一覧を見る
                       <span
                         aria-hidden="true"
                         className="transition-transform group-hover:translate-x-1"
@@ -235,6 +239,23 @@ export function ServicesSection({ locale }: Props) {
             </p>
           </div>
         </Reveal>
+
+        {/* AIセキュリティ対策事業のサービス(ピラミッド) */}
+        <div className="mt-20 md:mt-28">
+          <Reveal variant="up">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">
+              AI Security Services
+            </p>
+            <h3 className="mt-2 text-2xl font-black tracking-[0.04em] text-ink [word-break:keep-all] md:text-3xl">
+              AIセキュリティ対策事業の<wbr />サービス
+            </h3>
+          </Reveal>
+          <div className="mt-8 md:mt-10">
+            <BondServicePyramid
+              items={bondPyramidItems((path) => localePath(path, locale))}
+            />
+          </div>
+        </div>
       </Container>
     </section>
   );

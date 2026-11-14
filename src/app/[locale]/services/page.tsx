@@ -3,6 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import {
+  BondServicePyramid,
+  bondPyramidItems,
+} from "@/components/services/BondServicePyramid";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { serviceCategories } from "@/lib/site";
@@ -148,6 +152,29 @@ export default function ServicesPage({
                 </a>
               );
             })}
+          </div>
+        </Container>
+      </section>
+
+      {/* AIセキュリティ対策事業のサービス(ピラミッド) */}
+      <section className="bg-cream py-20 md:py-28">
+        <Container>
+          <Reveal variant="up">
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">
+              AI Security Services
+            </p>
+            <h2 className="[word-break:keep-all] mt-3 text-[clamp(1.75rem,3.2vw,2.5rem)] font-black leading-tight text-ink">
+              AIセキュリティ対策事業の<wbr />サービス
+            </h2>
+            <span
+              aria-hidden="true"
+              className="mt-5 block h-1 w-12 bg-brand-500"
+            />
+          </Reveal>
+          <div className="mt-10 md:mt-12">
+            <BondServicePyramid
+              items={bondPyramidItems((path) => localePath(path, locale))}
+            />
           </div>
         </Container>
       </section>

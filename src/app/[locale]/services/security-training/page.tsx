@@ -465,7 +465,7 @@ export default function SecurityTrainingPage({
             { name: "ホーム", url: localePath("/", locale) },
             { name: "サービス一覧", url: localePath("/services", locale) },
             {
-              name: "セキュリティ対策事業",
+              name: "AIセキュリティ対策事業",
               url: localePath("/services/security", locale),
             },
             { name: "AI時代のセキュリティ研修", url: localePath(PATH, locale) },
