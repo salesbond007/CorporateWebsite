@@ -154,8 +154,19 @@ export const serviceCategories: ServiceCategory[] = [
             image: "/services/cards/ai-solutions.jpg",
           },
           {
-            slug: "web-security",
+            slug: "security-training",
             number: "01-2",
+            title: "AI時代のセキュリティ研修",
+            href: "/services/security-training",
+            subtitle: "Security Training",
+            summary:
+              "AI時代の全社員セキュリティ研修と社内CISOの育成を、3カ月でひとつに。外に任せきりにしない「守り」を、自社の中につくります。",
+            features: [],
+            image: "/services/cards/ai-solutions.jpg",
+          },
+          {
+            slug: "web-security",
+            number: "01-3",
             title: "ホームページセキュリティ対策",
             href: "/services/web-security",
             subtitle: "Website Security",

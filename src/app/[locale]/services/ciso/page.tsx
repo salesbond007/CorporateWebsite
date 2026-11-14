@@ -15,6 +15,7 @@ import {
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
 import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
 import { CisoPricing } from "@/components/services/CisoPricing";
+import { BondServicePyramid } from "@/components/services/BondServicePyramid";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { pageMeta, pageMetadata } from "@/lib/seo";
@@ -631,8 +632,44 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </p>
           </Reveal>
 
+          {/* 図: サービスの全体像(ピラミッド) */}
+          <div className="mt-12 md:mt-16">
+            <BondServicePyramid
+              items={[
+                {
+                  layer: "経営",
+                  label: "責任者を任せる",
+                  name: "社外AI/CISO（最高情報セキュリティ責任者）",
+                  text: "専門家が社外のCISOとして責任者につき、AI利用のルールづくりから取引先への説明まで、セキュリティ対策を代わりに進めます。",
+                  href: "#price",
+                },
+                {
+                  layer: "助言",
+                  label: "相談相手を持つ",
+                  name: "AIセキュリティ顧問",
+                  text: "定例ミーティングと相談窓口で、社内の担当者を助言で支えます。",
+                  href: "#price",
+                },
+                {
+                  layer: "育成",
+                  label: "責任者を育てる",
+                  name: "CISO育成研修",
+                  text: "社内のCISO候補が、セキュリティの責任者としての役割と進め方を学びます。",
+                  href: localePath("/services/security-training", locale),
+                },
+                {
+                  layer: "全社員",
+                  label: "全社員で守る",
+                  name: "社内AIセキュリティ研修",
+                  text: "全社員が、AIを使うときの基本ルールや、詐欺メール・なりすましへの備えを身につけます。",
+                  href: localePath("/services/security-training", locale),
+                },
+              ]}
+            />
+          </div>
+
           {/* 図: 月額で任せてセキュリティを強化 */}
-          <div className="mt-10">
+          <div className="mt-14 md:mt-20">
             <CisoBeforeAfter />
           </div>
         </Container>

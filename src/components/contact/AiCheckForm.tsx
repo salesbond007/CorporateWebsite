@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { aiCheckEmployeeOptions } from "@/lib/contact";
 import { cn } from "@/lib/cn";
 
@@ -25,7 +25,15 @@ function Label({ text, required }: { text: string; required?: boolean }) {
 }
 
 /** Bond AI セキュリティ LP の無料相談・資料請求フォーム(送信先: info@salesbond.jp) */
-export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
+export function AiCheckForm({
+  privacyHref,
+  product = "ciso",
+}: {
+  privacyHref: string;
+  /** どのLPのフォームか。training は研修LP(ボタンの文言が変わる) */
+  product?: "ciso" | "training";
+}) {
+  const training = product === "training";
   const [company, setCompany] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -36,6 +44,21 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  // 「資料をダウンロード」ボタン(#document)から来たときは資料請求を選んだ状態にする
+  useEffect(() => {
+    const sync = () => {
+      if (window.location.hash === "#document") setRequest("document");
+      else if (
+        window.location.hash === "#contact" ||
+        window.location.hash === "#check"
+      )
+        setRequest("check");
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -57,6 +80,7 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
           employees,
           message,
           request,
+          product,
           website,
         }),
       });
@@ -125,8 +149,14 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
         <div className="grid grid-cols-2 gap-2">
           {(
             [
-              { v: "check", l: "まずは無料で相談する" },
-              { v: "document", l: "資料請求" },
+              {
+                v: "check",
+                l: training ? "無料で相談する" : "まずは無料で相談する",
+              },
+              {
+                v: "document",
+                l: training ? "資料をダウンロード" : "資料請求",
+              },
             ] as const
           ).map((o) => (
             <label
@@ -259,8 +289,12 @@ export function AiCheckForm({ privacyHref }: { privacyHref: string }) {
         {sending
           ? "送信中..."
           : request === "check"
-            ? "まずは無料で相談する"
-            : "資料を請求する（無料）"}
+            ? training
+              ? "無料で相談する"
+              : "まずは無料で相談する"
+            : training
+              ? "資料をダウンロード（無料）"
+              : "資料を請求する（無料）"}
         {sending ? null : (
           <span
             aria-hidden="true"
