@@ -4,8 +4,7 @@ import type { ReactNode } from "react";
  * Bond AI セキュリティ LP「料金プラン」。画像は使わず HTML/CSS のみ。
  * 1. プランカード(3列。社外CISOを「おすすめ」として強調)
  * 2. 詳しい比較表(PC: 表 / スマホ: カテゴリごとの開閉式)
- * 3. オプション(別料金)
- * 4. 注記
+ * 3. 注記
  * 文言・金額は指定どおり。変更・追加しないこと。
  */
 
@@ -151,28 +150,6 @@ const categories: { title: string; rows: Row[] }[] = [
   },
 ];
 
-const options: { menu: string; note?: string; price: string }[] = [
-  {
-    menu: "ISO/IEC 42001（AIの国際認証）取得支援",
-    note: "※審査費用は別",
-    price: "200万円〜",
-  },
-  { menu: "ISO/IEC 42001 維持支援", price: "月5万円〜" },
-  { menu: "SCS評価制度 ★3の取得準備", price: "65万円〜" },
-  { menu: "AI利用ガイドライン策定（単品）", price: "70万円〜" },
-  { menu: "AI影響評価・AIシステム台帳づくり", price: "50万円〜" },
-  { menu: "AIエージェントの設計レビュー", price: "50万円〜" },
-  {
-    menu: "追加の脆弱性診断（LLMアプリ・AIエージェントなど）",
-    price: "10万円〜",
-  },
-  { menu: "社員研修（経営層・管理職・全社員・開発者向け）", price: "30万円〜" },
-  { menu: "事故対応の机上演習", price: "60万円〜" },
-  { menu: "なりすましメール訓練", price: "30万円〜" },
-  { menu: "研修の年間パッケージ", price: "100万円〜" },
-  { menu: "CISO育成プログラム（1on1）", price: "45万円〜" },
-];
-
 const notes = [
   "価格はすべて税別です。会社の規模やご相談内容に応じてお見積もりします。",
   "最低契約期間は6カ月です。",
@@ -227,17 +204,6 @@ function Cell({ v }: { v: string }) {
     );
   }
   return <>{v}</>;
-}
-
-/** 「200万円〜」「月5万円〜」の「〜」を小さく */
-function Amount({ text }: { text: string }) {
-  const body = text.replace(/〜$/, "");
-  return (
-    <>
-      {body}
-      <span className="text-[0.75em] font-bold">〜</span>
-    </>
-  );
 }
 
 /** 「詳しく見る」で開く枠 */
@@ -412,53 +378,6 @@ export function CisoPricing({ ctaHref }: { ctaHref: string }) {
             </details>
           ))}
         </div>
-      </More>
-
-      {/* ===== オプション ===== */}
-      <More title="オプション（別料金）">
-        <table className="mt-2 w-full border-collapse text-left text-sm md:text-[15px]">
-          <caption className="sr-only">オプションメニューと料金</caption>
-          <thead>
-            <tr className="border-b-2 border-[#1F1A1C]">
-              <th
-                scope="col"
-                className="py-2.5 pr-3 text-xs font-bold text-[#5C5458]"
-              >
-                メニュー
-              </th>
-              <th
-                scope="col"
-                className="py-2.5 text-right text-xs font-bold text-[#5C5458]"
-              >
-                料金
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {options.map((o) => (
-              <tr key={o.menu} className="border-b border-[#E9E1DD]">
-                <th
-                  scope="row"
-                  className="py-3.5 pr-3 font-bold leading-relaxed"
-                >
-                  {o.menu}
-                  {o.note ? (
-                    <span className="ml-2 text-xs font-medium text-[#5C5458]">
-                      {o.note}
-                    </span>
-                  ) : null}
-                </th>
-                <td className="whitespace-nowrap py-3.5 text-right text-base font-black text-[#7A1F3D] md:text-lg">
-                  <Amount text={o.price} />
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <p className="mt-5 border-l-4 border-[#7A1F3D] bg-[#F5E9ED] px-4 py-3 text-sm font-bold leading-relaxed text-[#5A142C]">
-          補足：社外CISO・経営参画プランをご契約中は、大型メニュー（ISO/IEC
-          42001取得支援、★3取得準備、ガイドライン策定など）を20%引きでご提供します。
-        </p>
       </More>
 
       {/* ===== 注記 ===== */}
