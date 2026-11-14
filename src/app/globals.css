@@ -224,3 +224,13 @@
     opacity: 0;
   }
 }
+
+/* サービスのピラミッド図: 段から一覧へのびる点線が流れる */
+.pyr-dash {
+  animation: pyrDash 1.2s linear infinite;
+}
+@keyframes pyrDash {
+  to {
+    stroke-dashoffset: -12;
+  }
+}

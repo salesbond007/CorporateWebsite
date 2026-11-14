@@ -31,7 +31,7 @@ export default function SecurityServicePage({
       locale={params.locale}
       path={PATH}
       en="Security"
-      title="セキュリティ対策事業"
+      title="AIセキュリティ対策事業"
       description={pageMeta.security.description}
       image="/services/cards/ai-solutions.jpg"
       related={[

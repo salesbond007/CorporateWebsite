@@ -186,7 +186,7 @@ const enumLabels: Record<string, Record<string, string>> = {
     estimate: "お見積り依頼",
   },
   serviceTypes: {
-    "ai-security": "セキュリティ対策事業",
+    "ai-security": "AIセキュリティ対策事業",
     "new-business-development": "経営顧問事業",
     "web-security": "ホームページセキュリティ対策",
     "other-service": "その他",
