@@ -23,6 +23,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
     },
     { path: "/services/ciso", priority: 0.9, changeFrequency: "monthly" },
+    {
+      path: "/services/security-training",
+      priority: 0.8,
+      changeFrequency: "monthly",
+    },
     { path: "/services/apokomi", priority: 0.9, changeFrequency: "monthly" },
     { path: "/services/advisory", priority: 0.9, changeFrequency: "monthly" },
     { path: "/blog", priority: 0.8, changeFrequency: "daily" },

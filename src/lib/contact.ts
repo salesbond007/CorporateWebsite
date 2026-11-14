@@ -120,6 +120,8 @@ export const generalContactSchema = z.object({
   message: z.string().trim().max(5000).optional().or(z.literal("")),
   /** document: 資料請求 / check: 無料のAI利用チェック */
   request: z.enum(["document", "check"]).default("document"),
+  /** どのLPからの申し込みか(ciso: CISO・セキュリティ顧問 / training: セキュリティ研修) */
+  product: z.enum(["ciso", "training"]).default("ciso"),
 });
 
 /** アポコミLPの選択肢(フォーム・通知メールで共用) */
@@ -191,6 +193,8 @@ export const webSecurityDiagnosisSchema = z.object({
   message: z.string().trim().max(5000).optional().or(z.literal("")),
   /** document: 資料請求 / check: 無料のAI利用チェック */
   request: z.enum(["document", "check"]).default("document"),
+  /** どのLPからの申し込みか(ciso: CISO・セキュリティ顧問 / training: セキュリティ研修) */
+  product: z.enum(["ciso", "training"]).default("ciso"),
 });
 
 /** 簡易LP(顧問・COO紹介 / CISO・セキュリティ顧問)の無料相談フォームで扱うサービス */
@@ -256,6 +260,8 @@ export const aiCheckSchema = z.object({
   message: z.string().trim().max(5000).optional().or(z.literal("")),
   /** document: 資料請求 / check: 無料のAI利用チェック */
   request: z.enum(["document", "check"]).default("document"),
+  /** どのLPからの申し込みか(ciso: CISO・セキュリティ顧問 / training: セキュリティ研修) */
+  product: z.enum(["ciso", "training"]).default("ciso"),
 });
 
 export type ProfessionalContactInput = z.infer<

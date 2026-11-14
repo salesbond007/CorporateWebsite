@@ -29,7 +29,9 @@ export function Header({ locale, dict }: Props) {
 
   // 各サービスのLPでは独自の目次ナビゲーションを使うため、サイトのヘッダーは出さない
   if (
-    /\/services\/(apokomi|web-security|ciso|advisory)\/?$/.test(pathname ?? "")
+    /\/services\/(apokomi|web-security|ciso|advisory|security-training)\/?$/.test(
+      pathname ?? "",
+    )
   )
     return null;
 
