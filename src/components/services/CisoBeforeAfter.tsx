@@ -3,7 +3,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { IconChecksheet, IconShadowAi, IconSoloIt } from "./FlatIcons";
 
 /**
- * Bond AI セキュリティ LP: 月額で CISO / セキュリティ顧問に任せると、何が変わるかを示す図。
+ * Bond AI セキュリティ LP: AIセキュリティのプロに任せると、何が変わるかを示す図(サービスの全体像を1枚に)。
  * 写真は使わず、イラスト + 流れる線 + テキストで「いまの課題」→「導入後」を1行ずつ対応させる。
  * 画面に入ると、左の課題 → 線が中央へ流れる → 右の導入後、の順に現れる。
  */
@@ -131,14 +131,30 @@ function FlowY({ delay }: { delay: number }) {
 }
 
 /** 中央: 月額で任せる専門家 */
+/** 中央で進めること(4ステップを短く) */
+const hubSteps = [
+  "弱点を見える化",
+  "AI利用のルールづくり",
+  "全社員への浸透",
+  "取引先への説明準備",
+];
+
+/** 図の下に添える、継続して支えること */
+const extras = [
+  "毎月、経営へ定期レポート",
+  "もしもの時の初動対応を支援",
+  "対策ツール・ベンダー選定の相談",
+];
+
+/** 中央: AIセキュリティのプロが進めること */
 function Hub({ compact, delay }: { compact?: boolean; delay: number }) {
   return (
     <div
       style={d(delay)}
-      className={`relative overflow-hidden bg-brand-500 text-white opacity-0 transition-all duration-700 group-data-[visible=true]/reveal:scale-100 group-data-[visible=true]/reveal:opacity-100 ${
+      className={`relative flex scale-95 flex-col overflow-hidden rounded-md bg-brand-500 text-white opacity-0 transition-all duration-700 group-data-[visible=true]/reveal:scale-100 group-data-[visible=true]/reveal:opacity-100 ${
         compact
-          ? "flex scale-95 items-center gap-4 rounded-md px-5 py-4"
-          : "flex h-full scale-95 flex-col items-center justify-center rounded-md px-5 py-8 text-center"
+          ? "px-5 py-5"
+          : "h-full items-center justify-center px-5 py-6 text-center"
       }`}
     >
       {/* うすい格子 */}
@@ -146,36 +162,45 @@ function Hub({ compact, delay }: { compact?: boolean; delay: number }) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:22px_22px]"
       />
-      <span
-        className={`relative grid shrink-0 place-items-center ${compact ? "h-12 w-12" : "h-16 w-16"}`}
+      <div
+        className={`relative flex ${compact ? "items-center gap-3" : "flex-col items-center"}`}
       >
         <span
-          aria-hidden="true"
-          className="ba-pulse absolute inset-0 rounded-full border border-white/60"
-        />
-        <span className="grid h-full w-full place-items-center rounded-full bg-white text-brand-500">
-          <Shield className={compact ? "h-6 w-6" : "h-8 w-8"} />
-        </span>
-      </span>
-      <div className={`relative ${compact ? "" : "mt-4"}`}>
-        <p className="text-[11px] font-bold tracking-[0.14em] text-white/75">
-          月額で任せる
-        </p>
-        <p
-          className={`mt-1 font-black leading-snug ${compact ? "text-base" : "text-lg"}`}
+          className={`relative grid shrink-0 place-items-center ${compact ? "h-11 w-11" : "h-14 w-14"}`}
         >
-          CISO／
+          <span
+            aria-hidden="true"
+            className="ba-pulse absolute inset-0 rounded-full border border-white/60"
+          />
+          <span className="grid h-full w-full place-items-center rounded-full bg-white text-brand-500">
+            <Shield className={compact ? "h-6 w-6" : "h-7 w-7"} />
+          </span>
+        </span>
+        <p
+          className={`font-black leading-snug ${compact ? "text-base" : "mt-3 text-[17px]"}`}
+        >
+          AIセキュリティの
           {compact ? null : <br />}
-          セキュリティ顧問
+          プロが担当
         </p>
-        {compact ? null : (
-          <p className="mt-3 border-t border-white/25 pt-3 text-xs leading-relaxed text-white/85">
-            資格を持つ専門家が
-            <br />
-            担当につきます
-          </p>
-        )}
       </div>
+      <ol
+        className={`relative mt-4 border-t border-white/25 pt-4 text-left ${
+          compact ? "grid gap-2 sm:grid-cols-2" : "w-full space-y-2"
+        }`}
+      >
+        {hubSteps.map((t, i) => (
+          <li
+            key={t}
+            className="flex items-center gap-2 text-[13px] font-bold leading-snug"
+          >
+            <span className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-white text-[11px] font-black text-brand-500">
+              {i + 1}
+            </span>
+            {t}
+          </li>
+        ))}
+      </ol>
     </div>
   );
 }
@@ -272,10 +297,10 @@ export function CisoBeforeAfter() {
     <Reveal variant="none">
       <div
         role="group"
-        aria-label="月額でCISO・セキュリティ顧問に任せると、課題がどう変わるか"
+        aria-label="AIセキュリティのプロに任せると、課題がどう変わるか"
       >
         {/* ===== PC ===== */}
-        <div className="hidden grid-cols-[1fr_3.5rem_12rem_3.5rem_1fr] gap-x-3 md:grid lg:grid-cols-[1fr_4.5rem_13rem_4.5rem_1fr]">
+        <div className="hidden grid-cols-[1fr_3rem_14rem_3rem_1fr] gap-x-3 md:grid lg:grid-cols-[1fr_4rem_15rem_4rem_1fr]">
           <div className="pb-3">
             <Label en="BEFORE" ja="いまの御社" />
           </div>
@@ -331,6 +356,23 @@ export function CisoBeforeAfter() {
             ))}
           </ul>
         </div>
+
+        {/* 継続して支えること */}
+        <ul className="mt-6 flex flex-wrap justify-center gap-2 md:mt-8 md:gap-3">
+          {extras.map((t, i) => (
+            <li
+              key={t}
+              style={d(1600 + i * 120)}
+              className="flex translate-y-2 items-center gap-2 border border-[#E6D9DD] bg-white px-4 py-2.5 text-[13px] font-bold opacity-0 transition-all duration-700 group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100 md:text-sm"
+            >
+              <span
+                aria-hidden="true"
+                className="h-1.5 w-1.5 rounded-full bg-brand-500"
+              />
+              {t}
+            </li>
+          ))}
+        </ul>
       </div>
     </Reveal>
   );
