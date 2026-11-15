@@ -234,3 +234,78 @@
     stroke-dashoffset: -12;
   }
 }
+
+/* Bond AI セキュリティ LP: ファーストビューの図の動き */
+.hv-dash {
+  animation: hvDash 1.1s linear infinite;
+}
+.hv-spin {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hvSpin 50s linear infinite;
+}
+.hv-pulse {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hvPulse 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.hv-float {
+  animation: hvFloat 4s ease-in-out infinite;
+}
+.hv-blink {
+  animation: hvBlink 2.4s ease-in-out infinite;
+}
+.hv-ring {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hvRing 3.2s ease-in-out infinite;
+}
+@keyframes hvSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes hvDash {
+  to {
+    stroke-dashoffset: -14;
+  }
+}
+@keyframes hvPulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+@keyframes hvFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+@keyframes hvBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+@keyframes hvRing {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.6;
+  }
+}
