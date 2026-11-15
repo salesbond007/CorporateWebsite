@@ -375,26 +375,17 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         />
         <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div className="text-center lg:text-left">
-            <p className="inline-block whitespace-nowrap bg-brand-500 px-4 py-2 text-[clamp(0.95rem,1.8vw,1.3rem)] font-bold tracking-[0.06em] text-white sm:px-5 sm:py-2.5">
-              AIセキュリティ顧問/社外CISOサービス
-            </p>
-            <h1 className="mt-6 text-[clamp(1.6rem,2.8vw,2.4rem)] font-black leading-[1.5] tracking-[0.02em] [word-break:auto-phrase]">
+            <h1 className="whitespace-nowrap text-[clamp(2.1rem,3.7vw,3.4rem)] font-black leading-[1.25] tracking-[0.03em]">
+              AIセキュリティ顧問
+              <br />
+              <span className="text-brand-500">/社外CISO</span>
+            </h1>
+            <p className="mt-6 text-[clamp(1.1rem,1.9vw,1.5rem)] font-bold leading-[1.75] text-ink/85">
               <span className="text-brand-500">AI時代</span>のセキュリティ対策を
               <br />
-              <span className="text-brand-500">専門家</span>が担い
+              <span className="text-brand-500">専門家</span>が担い情報漏えい・取引停止の
               <br />
-              情報漏えい・取引停止の
-              <br className="hidden sm:block" />
               リスクを<span className="text-brand-500">最小限</span>に抑える
-            </h1>
-            <p className="mt-7 text-[clamp(1.1rem,1.9vw,1.45rem)] font-black leading-[1.6]">
-              情報漏えいが起きてからでは、
-              <span className="text-brand-500">もう遅い。</span>
-            </p>
-            <p className="mx-auto mt-3 max-w-[34rem] lg:mx-0 text-[15px] font-bold leading-[2] text-ink/80 [word-break:auto-phrase] md:text-base">
-              AI時代は、社員が入力したひとつの情報が、取引停止や信用の失墜につながります。
-              <br />
-              経験豊富なセキュリティの専門家が社外から参画し、事故が起きる前に備える体制をつくります。
             </p>
             <div className="mt-10 flex justify-center lg:block">
               <BigButton
