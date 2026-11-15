@@ -13,8 +13,6 @@ import {
   IconSoloIt,
 } from "@/components/services/FlatIcons";
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
-import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
-import { CisoPricing } from "@/components/services/CisoPricing";
 import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -222,7 +220,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
 
   const nav = [
     { href: "#service", label: "サービス" },
-    { href: "#price", label: "料金" },
+    { href: "#expert", label: "サービス監修" },
     { href: "#faq", label: "よくある質問" },
   ];
 
@@ -375,7 +373,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         />
         <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div className="text-center lg:text-left">
-            <h1 className="whitespace-nowrap text-[clamp(2.1rem,3.7vw,3.4rem)] font-black leading-[1.25] tracking-[0.03em]">
+            <h1 className="whitespace-nowrap text-[clamp(1.8rem,3vw,2.75rem)] font-black leading-[1.3] tracking-[0.03em]">
               AIセキュリティ顧問
               <br />
               <span className="text-brand-500">/社外CISO</span>
@@ -383,7 +381,11 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             <p className="mt-6 text-[clamp(1.1rem,1.9vw,1.5rem)] font-bold leading-[1.75] text-ink/85">
               <span className="text-brand-500">AI時代</span>のセキュリティ対策を
               <br />
-              <span className="text-brand-500">専門家</span>が担い情報漏えい・取引停止の
+              <span className="text-brand-500">専門家</span>が担い
+              <span className="underline decoration-brand-500 decoration-[3px] underline-offset-[7px]">
+                情報漏えい・取引停止
+              </span>
+              の
               <br />
               リスクを<span className="text-brand-500">最小限</span>に抑える
             </p>
@@ -422,11 +424,23 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   i === 4 && "sm:col-span-2 lg:col-span-1",
                 )}
               >
-                <li className="flex h-full items-center gap-3 rounded-md bg-[#F7F2F4] px-3 py-2.5 text-left lg:flex-col lg:gap-0 lg:px-4 lg:pb-6 lg:pt-5 lg:text-center">
-                  <w.Icon className="h-14 w-14 shrink-0 lg:h-28 lg:w-auto" />
-                  <p className="text-[14px] font-black leading-[1.6] [word-break:auto-phrase] lg:mt-4 lg:text-[15px]">
+                <li className="relative flex h-full items-center gap-3 rounded-md bg-[#F7F2F4] px-3 py-2.5 text-left lg:min-h-[21rem] lg:flex-col lg:gap-0 lg:px-4 lg:pb-14 lg:pt-9 lg:text-center lg:shadow-[0_14px_30px_-24px_rgba(60,15,25,0.5)] lg:ring-1 lg:ring-[#EEE2E6]">
+                  <w.Icon className="h-14 w-14 shrink-0 lg:h-32 lg:w-auto" />
+                  <p className="text-[14px] font-black leading-[1.6] [word-break:auto-phrase] lg:mt-7 lg:text-[17px] lg:leading-[1.8]">
                     {w.title}
                   </p>
+                  {/* 下向きの矢印 */}
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 40 28"
+                    className="absolute bottom-4 left-1/2 hidden h-6 w-9 -translate-x-1/2 text-brand-500/30 lg:block"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M4 4l16 9 16-9M4 14l16 9 16-9" />
+                  </svg>
                 </li>
               </Reveal>
             ))}
@@ -476,26 +490,22 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <Container>
           <Reveal variant="up" className="text-center">
             <h2 className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
-              セキュリティの<span className="text-brand-500">プロ</span>が、
+              <span className="text-brand-500">AIセキュリティのプロ</span>が、
               <br className="hidden sm:block" />
-              御社のセキュリティ対策を
-              <span className="text-brand-500">代行</span>します
+              御社のセキュリティを
+              <span className="text-brand-500">ゼロから構築</span>する。
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
               専任の担当者を雇わなくても大丈夫。資格を持つ専門家が、御社のセキュリティ担当として月額でつき、必要な対策をすべて引き受けます。
             </p>
           </Reveal>
 
-          {/* 図: 月額で任せてセキュリティを強化 */}
+          {/* 図: 課題 → AIセキュリティのプロが進めること → 導入後 */}
           <div className="mt-10">
             <CisoBeforeAfter />
           </div>
         </Container>
 
-        {/* 図: サービスの全体像(4ステップ × 2プラン)。背景は横幅いっぱい */}
-        <Reveal variant="fade" className="mt-14 md:mt-20">
-          <CisoServiceDiagram />
-        </Reveal>
         <div className="mt-20 md:mt-24">
           <SplitCta />
         </div>
@@ -611,7 +621,10 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       </section>
 
       {/* ========== 8. 監修者 ========== */}
-      <section className="relative isolate overflow-hidden py-20 md:py-28">
+      <section
+        id="expert"
+        className="relative isolate scroll-mt-28 overflow-hidden py-20 md:py-28"
+      >
         <Watermark className="-left-4 top-4">Expert</Watermark>
         <Container>
           <SectionHead en="Expert">サービス監修</SectionHead>
@@ -646,25 +659,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </p>
             </div>
           </Reveal>
-        </Container>
-      </section>
-
-      {/* ========== 9. 料金プラン ========== */}
-      <section
-        id="price"
-        className="relative isolate scroll-mt-28 overflow-x-clip bg-white py-16 md:py-28"
-      >
-        <Watermark className="-left-4 top-4">Price</Watermark>
-        <Container>
-          <SectionHead en="Price">
-            会社の規模と課題に合わせて選べる3つのプラン
-          </SectionHead>
-          <p className="mt-4 text-sm font-bold text-[#5C5458] md:text-[15px]">
-            すべて税別・月額。最低契約期間は6カ月です。
-          </p>
-          <div className="mt-12 md:mt-14">
-            <CisoPricing ctaHref={`#${FORM_ID}`} />
-          </div>
         </Container>
       </section>
 
