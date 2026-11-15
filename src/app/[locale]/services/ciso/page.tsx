@@ -15,6 +15,7 @@ import {
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
 import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
 import { CisoPricing } from "@/components/services/CisoPricing";
+import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { pageMeta, pageMetadata } from "@/lib/seo";
@@ -209,149 +210,6 @@ function Check({ className }: { className?: string }) {
   );
 }
 
-/* ------------------------------------- ファーストビュー: 会社を守る盾のビジュアル */
-
-/** 御社の情報資産を盾と防御の輪で守り、外からの脅威をはね返すビジュアル */
-function HeroVisual() {
-  const assets = [
-    { k: "AI", x: 50, y: 17 },
-    { k: "顧客情報", x: 81, y: 38 },
-    { k: "メール", x: 71, y: 74 },
-    { k: "クラウド", x: 29, y: 74 },
-    { k: "社内データ", x: 19, y: 38 },
-  ];
-  const threats = [
-    { k: "情報漏えい", x: 13, y: 9 },
-    { k: "なりすまし", x: 87, y: 9 },
-    { k: "不正アクセス", x: 85, y: 91 },
-    { k: "ランサムウェア", x: 15, y: 91 },
-  ];
-  return (
-    <div className="relative mx-auto aspect-square w-[92%] max-w-[540px] sm:w-full">
-      {/* 防御の輪 */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-[9%] rounded-full bg-[radial-gradient(circle,#FFFFFF_0%,#FBEFF2_60%,#F6E1E7_100%)] shadow-[0_30px_70px_-30px_rgba(122,30,53,0.55)]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-[9%] rounded-full border-[3px] border-brand-500/80"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-[5%] animate-spin-slow rounded-full border-2 border-dashed border-brand-500/35"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute inset-[24%] rounded-full border border-brand-500/20"
-      />
-
-      {/* 中央の盾 */}
-      <svg
-        viewBox="0 0 200 230"
-        className="absolute left-1/2 top-1/2 w-[34%] -translate-x-1/2 -translate-y-1/2 drop-shadow-[0_18px_24px_rgba(122,30,53,0.45)]"
-        role="img"
-        aria-label="御社を守る盾"
-      >
-        <path
-          d="M100 6l86 32v68c0 60-38 102-86 118C52 208 14 166 14 106V38z"
-          fill="#7A1E35"
-        />
-        <path d="M100 22l70 26v58c0 50-31 85-70 99V22z" fill="#A83B57" />
-        {/* 会社のビル */}
-        <rect x="70" y="78" width="60" height="78" rx="3" fill="#fff" />
-        {[0, 1, 2].map((r) =>
-          [0, 1, 2].map((c) => (
-            <rect
-              key={`${r}-${c}`}
-              x={79 + c * 16}
-              y={88 + r * 18}
-              width="10"
-              height="10"
-              rx="1.5"
-              fill="#7A1E35"
-              opacity="0.85"
-            />
-          )),
-        )}
-        <rect x="92" y="138" width="16" height="18" fill="#7A1E35" />
-        {/* 鍵 */}
-        <circle cx="146" cy="162" r="24" fill="#fff" />
-        <rect x="134" y="160" width="24" height="18" rx="3" fill="#7A1E35" />
-        <path
-          d="M139 160v-6a7 7 0 0 1 14 0v6"
-          fill="none"
-          stroke="#7A1E35"
-          strokeWidth="4"
-        />
-        <circle cx="146" cy="169" r="2.6" fill="#fff" />
-      </svg>
-
-      {/* 守られている情報資産 */}
-      {assets.map((a) => (
-        <span
-          key={a.k}
-          className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5 whitespace-nowrap rounded-md bg-white px-2.5 py-1.5 text-[11px] font-bold text-ink shadow-[0_8px_18px_-8px_rgba(60,15,25,0.45)] ring-1 ring-[#EEDFE3] md:text-xs"
-          style={{ left: `${a.x}%`, top: `${a.y}%` }}
-        >
-          <span className="grid h-4 w-4 place-items-center rounded-full bg-[#1E8A57] text-[9px] text-white">
-            ✓
-          </span>
-          {a.k}
-        </span>
-      ))}
-
-      {/* 外からの脅威(輪ではね返される) */}
-      {threats.map((t) => (
-        <span
-          key={t.k}
-          className="absolute -translate-x-1/2 -translate-y-1/2"
-          style={{ left: `${t.x}%`, top: `${t.y}%` }}
-        >
-          <span className="flex items-center gap-1 whitespace-nowrap rounded bg-[#3A3442] px-2 py-1 text-[10px] font-bold text-white md:text-[11px]">
-            <span className="grid h-3.5 w-3.5 place-items-center rounded-full bg-[#E64A2E] text-[9px]">
-              ×
-            </span>
-            {t.k}
-          </span>
-        </span>
-      ))}
-      {threats.map((t) => {
-        const rad = Math.atan2(t.y - 50, t.x - 50);
-        const d = Math.hypot(t.x - 50, t.y - 50) * 0.82;
-        const x1 = 50 + d * Math.cos(rad);
-        const y1 = 50 + d * Math.sin(rad);
-        const x2 = 50 + 42 * Math.cos(rad);
-        const y2 = 50 + 42 * Math.sin(rad);
-        return (
-          <svg
-            key={`l-${t.k}`}
-            aria-hidden="true"
-            viewBox="0 0 100 100"
-            className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
-          >
-            <line
-              x1={x1}
-              y1={y1}
-              x2={x2}
-              y2={y2}
-              stroke="#E64A2E"
-              strokeWidth="0.8"
-              strokeDasharray="1.6 1.4"
-            />
-            <circle cx={x2} cy={y2} r="1.6" fill="#E64A2E" />
-          </svg>
-        );
-      })}
-
-      {/* ラベル */}
-      <span className="absolute bottom-[-4%] left-1/2 -translate-x-1/2 whitespace-nowrap bg-brand-500 px-4 py-2 text-xs font-bold text-white shadow-[0_10px_24px_-12px_rgba(122,30,53,0.8)] md:text-sm">
-        社外CISOが、御社の情報を守る体制をつくります
-      </span>
-    </div>
-  );
-}
-
 /* ------------------------------------------------------------ 図・グラフ */
 
 /* ================================================================ ページ */
@@ -518,19 +376,25 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div className="text-center lg:text-left">
             <p className="inline-block whitespace-nowrap bg-brand-500 px-4 py-2 text-[clamp(0.95rem,1.8vw,1.3rem)] font-bold tracking-[0.06em] text-white sm:px-5 sm:py-2.5">
-              社外CISO・セキュリティ顧問サービス
+              AIセキュリティ顧問/社外CISOサービス
             </p>
-            <h1 className="mt-6 text-[clamp(2.4rem,5vw,4.1rem)] font-black leading-[1.25] tracking-[0.04em]">
-              <span className="text-brand-500">AI時代</span>に必須の
+            <h1 className="mt-6 text-[clamp(1.6rem,2.8vw,2.4rem)] font-black leading-[1.5] tracking-[0.02em] [word-break:auto-phrase]">
+              <span className="text-brand-500">AI時代</span>のセキュリティ対策を
               <br />
-              セキュリティ対策
+              <span className="text-brand-500">専門家</span>が担い
+              <br />
+              情報漏えい・取引停止の
+              <br className="hidden sm:block" />
+              リスクを<span className="text-brand-500">最小限</span>に抑える
             </h1>
             <p className="mt-7 text-[clamp(1.1rem,1.9vw,1.45rem)] font-black leading-[1.6]">
               情報漏えいが起きてからでは、
               <span className="text-brand-500">もう遅い。</span>
             </p>
             <p className="mx-auto mt-3 max-w-[34rem] lg:mx-0 text-[15px] font-bold leading-[2] text-ink/80 [word-break:auto-phrase] md:text-base">
-              社員が入力したひとつの情報が、取引停止や信用の失墜につながる時代です。資格を持つ専門家が御社の責任者として、事故が起きる前に防ぐ体制をつくります。
+              AI時代は、社員が入力したひとつの情報が、取引停止や信用の失墜につながります。
+              <br />
+              経験豊富なセキュリティの専門家が社外から参画し、事故が起きる前に備える体制をつくります。
             </p>
             <div className="mt-10 flex justify-center lg:block">
               <BigButton
@@ -541,8 +405,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               />
             </div>
           </div>
-          <div className="order-first mx-auto w-full max-w-[420px] lg:order-none lg:-mr-10 lg:max-w-none xl:-mr-24">
-            <HeroVisual />
+          <div className="order-first mx-auto w-full max-w-[520px] lg:order-none lg:-mr-6 lg:max-w-none xl:-mr-12">
+            <CisoHeroVisual />
           </div>
         </Container>
       </section>
