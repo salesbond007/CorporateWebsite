@@ -760,6 +760,32 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </Container>
       </section>
 
+      {/* ========== 右端に浮かぶ無料相談ボタン ========== */}
+      {/* PC: 画面右端の中央に縦長のタブ */}
+      <a
+        href={`#${FORM_ID}`}
+        className="fixed right-0 top-1/2 z-50 hidden -translate-y-1/2 flex-col items-center gap-3 bg-[linear-gradient(180deg,#FF7A55,#E64A2E)] px-3.5 py-6 text-white shadow-[0_10px_28px_-10px_rgba(230,74,46,0.9)] transition-[padding] hover:pr-5 md:flex"
+      >
+        <Icon name="check" className="h-5 w-5" />
+        <span className="text-[15px] font-black tracking-[0.2em] [writing-mode:vertical-rl]">
+          無料相談
+        </span>
+        <span className="text-[10px] font-bold tracking-[0.1em] text-white/90 [writing-mode:vertical-rl]">
+          オンライン30分
+        </span>
+      </a>
+      {/* スマホ: 右下に丸いボタン */}
+      <a
+        href={`#${FORM_ID}`}
+        aria-label="無料相談"
+        className="fixed bottom-4 right-4 z-50 flex h-16 w-16 flex-col items-center justify-center rounded-full bg-[linear-gradient(135deg,#FF7A55,#E64A2E)] text-white shadow-[0_10px_24px_-8px_rgba(230,74,46,0.9)] md:hidden"
+      >
+        <Icon name="check" className="h-5 w-5" />
+        <span className="mt-0.5 text-[11px] font-black leading-none">
+          無料相談
+        </span>
+      </a>
+
       {/* ========== 12. フッター(LP) ========== */}
       <footer className="bg-[#1C1E2A] py-12 text-white">
         <Container>
