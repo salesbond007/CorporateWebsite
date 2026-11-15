@@ -13,6 +13,7 @@ import {
   IconSoloIt,
 } from "@/components/services/FlatIcons";
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
+import { CisoPlans } from "@/components/services/CisoPlans";
 import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -117,7 +118,7 @@ const faqs = [
   },
   {
     q: "最低契約期間はありますか？",
-    a: "6カ月です。迷われる場合は、月8万円のAIセキュリティ顧問から始めて、必要に応じて社外CISOに切り替えることもできます。",
+    a: "6カ月です。迷われる場合は、月8万円〜のライトプランから始めて、必要に応じてスタンダードプランに切り替えることもできます。",
   },
   {
     q: "まだAIをほとんど使っていませんが、対象になりますか？",
@@ -125,7 +126,7 @@ const faqs = [
   },
   {
     q: "社員研修も含まれますか？",
-    a: "社外CISOプランには、作ったAIルールを全社員に伝える説明会（年1回・60分）が含まれます。半日・1日の研修やなりすましメール訓練は別メニューで、人材開発支援助成金の対象になる場合があります。",
+    a: "スタンダードプランには、作ったAIルールを全社員に伝える説明会（年1回・60分）が含まれます。半日・1日の研修やなりすましメール訓練は別メニューで、人材開発支援助成金の対象になる場合があります。",
   },
   {
     q: "専門家の名前を、取引先に出してもよいですか？",
@@ -137,7 +138,7 @@ const faqs = [
   },
   {
     q: "事故が起きたときは、どこまで対応してもらえますか？",
-    a: "社外CISOプラン以上では、初動の判断と指示を助言します。経営参画プランは緊急訪問（年2回まで）にも対応します。システムの復旧作業などは提携先をご紹介します。",
+    a: "スタンダードプラン以上では、初動の判断と指示を助言します。エンタープライズプランは緊急訪問（年2回まで）にも対応します。システムの復旧作業などは提携先をご紹介します。",
   },
 ];
 
@@ -221,6 +222,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
   const nav = [
     { href: "#service", label: "サービス" },
     { href: "#expert", label: "サービス監修" },
+    { href: "#price", label: "料金" },
     { href: "#faq", label: "よくある質問" },
   ];
 
@@ -659,6 +661,20 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </p>
             </div>
           </Reveal>
+        </Container>
+      </section>
+
+      {/* ========== 9. 料金プラン ========== */}
+      <section
+        id="price"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
+      >
+        <Watermark className="-right-6 top-4">Price</Watermark>
+        <Container>
+          <SectionHead en="Price">料金プラン</SectionHead>
+          <div className="mt-10 md:mt-12">
+            <CisoPlans ctaHref={`#${FORM_ID}`} />
+          </div>
         </Container>
       </section>
 
