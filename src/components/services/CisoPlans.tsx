@@ -7,7 +7,8 @@
 type Plan = {
   name: string;
   sub: string;
-  amount: string;
+  /** null は「個別見積り」 */
+  amount: string | null;
   note?: string;
   role: string;
   items: string[];
@@ -17,7 +18,7 @@ type Plan = {
 const plans: Plan[] = [
   {
     name: "ライトプラン",
-    sub: "アドバイザー",
+    sub: "セキュリティ顧問",
     amount: "8万円",
     note: "初期費用0円",
     role: "セキュリティとAIの相談役として、意思決定を支援します。判断と作業はお客さま側で行います。",
@@ -54,8 +55,7 @@ const plans: Plan[] = [
   {
     name: "エンタープライズプラン",
     sub: "社外CISOとして就任",
-    amount: "50万円",
-    note: "個別見積り",
+    amount: null,
     role: "グループ会社・拠点・部門まで含めた全社のセキュリティを統括し、経営会議に参加して経営の視点で判断します。",
     items: [
       "スタンダードプランのすべての内容",
@@ -112,18 +112,24 @@ export function CisoPlans({ ctaHref }: { ctaHref: string }) {
                 {p.sub}
               </p>
               <h3 className="mt-1 text-xl font-black">{p.name}</h3>
-              <p className="mt-3 flex items-baseline gap-1">
-                <span className="text-sm font-bold text-[#5C5458]">月</span>
-                <span className="text-[2.5rem] font-black leading-none tracking-tight text-[#7A1F3D]">
-                  {p.amount}
-                </span>
-                <span className="text-base font-bold text-[#7A1F3D]">〜</span>
-                {p.note ? (
-                  <span className="ml-2 text-xs font-bold text-[#5C5458]">
-                    {p.note}
+              {p.amount ? (
+                <p className="mt-3 flex items-baseline gap-1">
+                  <span className="text-sm font-bold text-[#5C5458]">月</span>
+                  <span className="text-[2.5rem] font-black leading-none tracking-tight text-[#7A1F3D]">
+                    {p.amount}
                   </span>
-                ) : null}
-              </p>
+                  <span className="text-base font-bold text-[#7A1F3D]">〜</span>
+                  {p.note ? (
+                    <span className="ml-2 text-xs font-bold text-[#5C5458]">
+                      {p.note}
+                    </span>
+                  ) : null}
+                </p>
+              ) : (
+                <p className="mt-3 flex h-10 items-end text-[1.75rem] font-black leading-none text-[#7A1F3D]">
+                  個別見積り
+                </p>
+              )}
               <p className="mt-4 text-sm leading-[1.85] text-[#5C5458]">
                 {p.role}
               </p>

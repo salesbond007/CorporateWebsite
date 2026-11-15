@@ -14,6 +14,7 @@ import {
 } from "@/components/services/FlatIcons";
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
 import { CisoPlans } from "@/components/services/CisoPlans";
+import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
 import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -426,9 +427,9 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   i === 4 && "sm:col-span-2 lg:col-span-1",
                 )}
               >
-                <li className="relative flex h-full items-center gap-3 rounded-md bg-[#F7F2F4] px-3 py-2.5 text-left lg:min-h-[21rem] lg:flex-col lg:gap-0 lg:px-4 lg:pb-14 lg:pt-9 lg:text-center lg:shadow-[0_14px_30px_-24px_rgba(60,15,25,0.5)] lg:ring-1 lg:ring-[#EEE2E6]">
-                  <w.Icon className="h-14 w-14 shrink-0 lg:h-32 lg:w-auto" />
-                  <p className="text-[14px] font-black leading-[1.6] [word-break:auto-phrase] lg:mt-7 lg:text-[17px] lg:leading-[1.8]">
+                <li className="relative flex h-full items-center gap-3 rounded-md bg-[#F7F2F4] px-3 py-2.5 text-left lg:min-h-[27rem] lg:flex-col lg:gap-0 lg:px-5 lg:pb-16 lg:pt-12 lg:text-center lg:shadow-[0_14px_30px_-24px_rgba(60,15,25,0.5)] lg:ring-1 lg:ring-[#EEE2E6]">
+                  <w.Icon className="h-14 w-14 shrink-0 lg:h-40 lg:w-auto" />
+                  <p className="text-[14px] font-black leading-[1.6] [word-break:auto-phrase] lg:mt-9 lg:text-[18px] lg:leading-[1.85]">
                     {w.title}
                   </p>
                   {/* 下向きの矢印 */}
@@ -502,11 +503,16 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </p>
           </Reveal>
 
-          {/* 図: 課題 → AIセキュリティのプロが進めること → 導入後 */}
+          {/* 図: 月額で任せてセキュリティを強化 */}
           <div className="mt-10">
             <CisoBeforeAfter />
           </div>
         </Container>
+
+        {/* 図: サービスの全体像(4ステップ × 2プラン)。背景は横幅いっぱい */}
+        <Reveal variant="fade" className="mt-14 md:mt-20">
+          <CisoServiceDiagram />
+        </Reveal>
 
         <div className="mt-20 md:mt-24">
           <SplitCta />
@@ -518,7 +524,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <Watermark className="-left-4 top-4">Benefit</Watermark>
         <Container>
           <SectionHead en="Benefit">実現する3つのこと</SectionHead>
-          <div className="mt-8 space-y-5 md:mt-12 md:space-y-8">
+          <div className="mt-4 md:mt-6">
             {[
               {
                 lead: "AI利用による",
@@ -568,20 +574,25 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               },
             ].map((r, i) => (
               <Reveal key={r.em} variant="up">
-                <article className="relative grid items-center gap-5 overflow-hidden rounded-lg bg-white pb-6 pl-0 pr-5 pt-4 shadow-[0_20px_44px_-34px_rgba(0,0,0,0.4)] md:gap-8 md:py-10 md:pr-10 lg:grid-cols-[1.05fr_1fr] lg:gap-12">
-                  <div className="max-h-[200px] overflow-hidden pr-14 sm:max-h-none sm:pl-6 sm:pr-0 lg:-ml-2 lg:pl-0">
+                <article
+                  className={cn(
+                    "grid items-center gap-6 py-10 md:gap-10 md:py-14 lg:grid-cols-2 lg:gap-14",
+                    i > 0 && "border-t border-[#EADFE2]",
+                  )}
+                >
+                  <div className="rounded-xl bg-[#F5E9ED] p-5 sm:p-8 lg:p-10">
                     <FeatureVisual kind={r.visual} />
                   </div>
-                  <div className="relative pl-5 sm:pl-6 lg:pl-0">
-                    <p className="absolute -top-16 right-0 text-right font-black leading-[0.85] text-ink sm:static lg:absolute lg:-top-4 lg:right-0">
-                      <span className="block text-base tracking-[0.02em] sm:text-2xl md:text-4xl">
+                  <div>
+                    <p className="flex items-baseline gap-3 font-black text-brand-500">
+                      <span className="text-xs tracking-[0.24em] md:text-sm">
                         BENEFIT
                       </span>
-                      <span className="block text-5xl text-brand-500 sm:text-6xl md:text-[6.5rem]">
+                      <span className="text-[2.6rem] leading-none md:text-[3.4rem]">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </p>
-                    <h3 className="text-[clamp(1.2rem,2.6vw,2rem)] font-black leading-[1.5] sm:mt-4 lg:mt-24 lg:pr-4">
+                    <h3 className="mt-3 text-[clamp(1.3rem,2.4vw,1.9rem)] font-black leading-[1.5]">
                       {r.lead}
                       <br />
                       <span className="text-brand-500">{r.em}</span>
