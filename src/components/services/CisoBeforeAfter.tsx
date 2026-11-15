@@ -1,6 +1,13 @@
 import type { ComponentType, CSSProperties } from "react";
 import { Reveal } from "@/components/ui/Reveal";
-import { IconChecksheet, IconShadowAi, IconSoloIt } from "./FlatIcons";
+import {
+  IconAiRush,
+  IconBanned,
+  IconChecksheet,
+  IconListing,
+  IconShadowAi,
+  IconSoloIt,
+} from "./FlatIcons";
 
 /**
  * Bond AI セキュリティ LP: AIセキュリティのプロに任せると、何が変わるかを示す図(サービスの全体像を1枚に)。
@@ -19,14 +26,29 @@ const rows: {
     after: ["責任者が決まり、", "体制が整う"],
   },
   {
+    Icon: IconAiRush,
+    before: "社員がどのAIに何を入力しているか分からない",
+    after: ["社内のAI利用が", "見える化される"],
+  },
+  {
     Icon: IconShadowAi,
     before: "AIの使い方にルールがない",
     after: ["AIを安全に使える", "ルールが浸透"],
   },
   {
+    Icon: IconBanned,
+    before: "事故が起きたときの動き方が決まっていない",
+    after: ["事故時の連絡と", "初動の手順が決まる"],
+  },
+  {
     Icon: IconChecksheet,
     before: "取引先・審査に説明できない",
     after: ["取引先・審査に", "説明できる"],
+  },
+  {
+    Icon: IconListing,
+    before: "対策の進み具合が経営に見えていない",
+    after: ["毎月の報告で、", "進み具合とリスクが見える"],
   },
 ];
 
@@ -133,16 +155,20 @@ function FlowY({ delay }: { delay: number }) {
 /** 中央: 月額で任せる専門家 */
 /** 中央で進めること(4ステップを短く) */
 const hubSteps = [
-  "弱点を見える化",
-  "AI利用のルールづくり",
-  "全社員への浸透",
-  "取引先への説明準備",
+  "現状の調査と弱点の見える化",
+  "リスクの優先順位づけ",
+  "AI利用ルール・社内規程づくり",
+  "事故時の対応手順づくり",
+  "全社員へのルール説明会",
+  "チェックシート回答・取引先への説明",
+  "毎月の見直しと経営への報告",
 ];
 
 /** 図の下に添える、継続して支えること */
 const extras = [
-  "毎月、経営へ定期レポート",
-  "もしもの時の初動対応を支援",
+  "AIツールの導入前チェック",
+  "最新の事故事例・攻撃の手口の情報提供",
+  "もしもの時の初動判断の助言",
   "対策ツール・ベンダー選定の相談",
 ];
 
@@ -243,7 +269,9 @@ function BeforeCard({
     <li
       style={d(i * 120)}
       className={`flex items-center gap-3 rounded-md border border-[#E6DFE1] bg-white opacity-0 transition-all duration-700 ${show} ${
-        mobile ? "-translate-x-4 px-3 py-2.5" : "h-[5.5rem] -translate-x-6 px-4"
+        mobile
+          ? "-translate-x-4 px-3 py-2.5"
+          : "h-[4.75rem] -translate-x-6 px-4"
       }`}
     >
       <span className="w-5 shrink-0 text-xs font-black text-ink/30">
@@ -276,7 +304,7 @@ function AfterCard({
       className={`relative flex items-center gap-3 overflow-hidden rounded-md bg-white opacity-0 shadow-[0_10px_30px_-18px_rgba(122,31,61,0.55)] ring-1 ring-brand-500/25 transition-all duration-700 ${show} ${
         mobile
           ? "translate-x-4 py-3 pl-4 pr-3"
-          : "h-[5.5rem] translate-x-6 pl-5 pr-4"
+          : "h-[4.75rem] translate-x-6 pl-5 pr-4"
       }`}
     >
       <span
@@ -316,13 +344,23 @@ export function CisoBeforeAfter() {
               <BeforeCard key={r.before} r={r} i={i} />
             ))}
           </ul>
-          <div className="grid grid-rows-3 gap-3">
+          <div
+            className="grid gap-3"
+            style={{
+              gridTemplateRows: `repeat(${rows.length}, minmax(0, 1fr))`,
+            }}
+          >
             {rows.map((r, i) => (
               <FlowX key={r.before} delay={400 + i * 120} />
             ))}
           </div>
           <Hub delay={300} />
-          <div className="grid grid-rows-3 gap-3">
+          <div
+            className="grid gap-3"
+            style={{
+              gridTemplateRows: `repeat(${rows.length}, minmax(0, 1fr))`,
+            }}
+          >
             {rows.map((r, i) => (
               <FlowX key={r.before} delay={1000 + i * 120} />
             ))}
