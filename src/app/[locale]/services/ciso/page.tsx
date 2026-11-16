@@ -54,46 +54,11 @@ const worries: {
   {
     title: (
       <>
-        社内にセキュリティ対策の
+        取引先から
         <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
-          専門家がいない
+          チェックシート
         </mark>
-      </>
-    ),
-    Icon: IconSoloIt,
-  },
-  {
-    title: (
-      <>
-        生成AIで
-        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
-          情報が漏れないか
-        </mark>
-        不安
-      </>
-    ),
-    Icon: IconShadowAi,
-  },
-  {
-    title: (
-      <>
-        上場審査で、
-        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
-          責任者と体制
-        </mark>
-        を問われる
-      </>
-    ),
-    Icon: IconListing,
-  },
-  {
-    title: (
-      <>
-        大手企業と取引したいが、
-        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
-          審査が壁
-        </mark>
-        になる
+        が届いたが、答え方が分からない
       </>
     ),
     Icon: IconChecksheet,
@@ -101,45 +66,81 @@ const worries: {
   {
     title: (
       <>
-        AI活用を進め、
+        「セキュリティの
         <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
-          セキュリティが後回し
+          責任者は誰ですか
         </mark>
-        に
+        」と聞かれて、答えられない
+      </>
+    ),
+    Icon: IconSoloIt,
+  },
+  {
+    title: (
+      <>
+        社員がAIに
+        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
+          社外秘の情報
+        </mark>
+        を入力していないか分からない
+      </>
+    ),
+    Icon: IconShadowAi,
+  },
+  {
+    title: (
+      <>
+        社員の誤操作や
+        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
+          なりすましメール
+        </mark>
+        で、事故が起きないか不安
       </>
     ),
     Icon: IconAiRush,
+  },
+  {
+    title: (
+      <>
+        事故が起きたとき、
+        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
+          誰が何を判断するか
+        </mark>
+        決まっていない
+      </>
+    ),
+    Icon: IconListing,
   },
 ];
 
 const faqs = [
   {
     q: "ほかのセキュリティ顧問・社外CISOとの違いは何ですか？",
-    a: "AIを禁止せずに安全に使うためのルールづくり、AIツールの導入前チェック、社内で使うAIの一覧づくりまでを標準で含めています。契約後すぐに診断を行い、年1回の脆弱性診断もプランに入っています。",
+    a: "サービスの種類は社外CISO（vCISO）と同じです。違いは、大手企業との取引とAIの管理に絞り、そのための支援（チェックシートの回答、取引先に出せる「セキュリティ体制のご案内」、取引先との打ち合わせへの同席、AI利用ルールとAIシステム台帳）を標準で入れていることです。",
   },
   {
-    q: "最低契約期間はありますか？",
-    a: "6カ月です。迷われる場合は、月8万円〜のライトプランから始めて、必要に応じてスタンダードプランに切り替えることもできます。",
-  },
-  {
-    q: "まだAIをほとんど使っていませんが、対象になりますか？",
-    a: "はい。チェックシートへの回答、規程づくり、事故の初動など、一般的なセキュリティの責任者としての役割もすべて対象です。これからAIを導入する会社にもおすすめです。",
-  },
-  {
-    q: "社員研修も含まれますか？",
-    a: "スタンダードプランには、作ったAIルールを全社員に伝える説明会（年1回・60分）が含まれます。半日・1日の研修やなりすましメール訓練は別メニューで、人材開発支援助成金の対象になる場合があります。",
+    q: "アドバイザーと社外CISOは、何が違いますか？",
+    a: "アドバイザーは相談役として助言し、判断と作業はお客さまの担当者が行います。社外CISOは責任者として判断し、作業まで引き受けます。どちらも、取引先に専門家の名前を出せます。",
   },
   {
     q: "専門家の名前を、取引先に出してもよいですか？",
-    a: "はい。社外顧問・社外CISOとして掲載いただけます。掲載するのは、専門家が実際に確認した範囲に限ります。",
+    a: "はい。体制図や取引先への回答書に載せられます。載せるのは、当社が中身を確認した書類だけです。アドバイザーの場合は、平常時の助言という範囲がわかる肩書きで載せます。",
   },
   {
-    q: "助成金や補助金は使えますか？",
-    a: "月額の料金は対象外になることが多いですが、社員研修は対象になる場合があります。対象になるかは各制度の審査で決まりますので、ご相談時に制度をご案内します。申請の代行は提携の士業が行います。",
+    q: "ISMSなどの規格をまだ取っていなくても、大丈夫ですか？",
+    a: "はい。規格の取得には、準備から半年〜1年ほどかかるのが一般的です。取得の前から専門家がつき、取引先に責任者と体制を説明できるようにします。",
   },
   {
-    q: "事故が起きたときは、どこまで対応してもらえますか？",
-    a: "スタンダードプラン以上では、初動の判断と指示を助言します。エンタープライズプランは緊急訪問（年2回まで）にも対応します。システムの復旧作業などは提携先をご紹介します。",
+    q: "取引先の審査に通ることを約束してもらえますか？",
+    a: "審査の結果をお約束することはできません。取引先の質問に答え、対策を説明できる体制を整える支援を行います。",
+  },
+  {
+    q: "まだAIをほとんど使っていませんが、対象になりますか？",
+    a: "はい。チェックシートへの回答、規程づくり、事故のときの初動など、セキュリティの責任者としての役割がすべて対象です。これからAIを導入する会社にもおすすめです。",
+  },
+  {
+    q: "事故（インシデント）が起きたときは、どこまで対応してもらえますか？",
+    a: "社外CISOでは、事故が起きたときに最初に何をするかの判断を含みます。アドバイザーには、事故のときの対応は含まれません。",
   },
 ];
 
@@ -239,14 +240,14 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               url: localePath("/services/security", locale),
             },
             {
-              name: "Bond AI セキュリティ（CISO・セキュリティ顧問）",
+              name: "Bond AI セキュリティ顧問（社外CISO）",
               url: localePath(PATH, locale),
             },
           ]),
           {
             "@context": "https://schema.org",
             "@type": "Service",
-            name: "Bond AI セキュリティ（AI時代のセキュリティ顧問・社外CISO）",
+            name: "Bond AI セキュリティ顧問（大手企業と取引したい中小企業のための社外CISO）",
             alternateName: [
               "社外CISO",
               "vCISO",
@@ -292,10 +293,10 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </span>
             <span className="leading-tight">
               <span className="block whitespace-nowrap text-base font-black text-ink sm:text-lg">
-                Bond AI セキュリティ
+                Bond AI
               </span>
               <span className="hidden text-[10px] font-bold text-ink/55 sm:block">
-                AI時代のセキュリティ顧問・社外CISO
+                大手企業と取引する会社のセキュリティ顧問
               </span>
             </span>
           </a>
@@ -376,21 +377,30 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         />
         <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div className="text-center lg:text-left">
-            <h1 className="whitespace-nowrap text-[clamp(1.8rem,3vw,2.75rem)] font-black leading-[1.3] tracking-[0.03em]">
-              AIセキュリティ顧問
-              <br />
-              <span className="text-brand-500">/社外CISO</span>
-            </h1>
-            <p className="mt-6 text-[clamp(1.1rem,1.9vw,1.5rem)] font-bold leading-[1.75] text-ink/85">
-              <span className="text-brand-500">AI時代</span>のセキュリティ対策を
-              <br />
-              <span className="text-brand-500">専門家</span>が担い
+            <p className="text-[clamp(0.95rem,1.6vw,1.2rem)] font-bold text-ink/80">
               <span className="underline decoration-brand-500 decoration-[3px] underline-offset-[7px]">
-                情報漏えい・取引停止
+                大手企業と取引したい
               </span>
-              の
+              中小企業のための
+            </p>
+            <h1 className="mt-3 whitespace-nowrap text-[clamp(2.4rem,4.4vw,3.9rem)] font-black leading-[1.2] tracking-[0.04em]">
+              セキュリティ<span className="text-brand-500">顧問</span>
+            </h1>
+            <p className="mt-4 flex items-baseline justify-center gap-1 lg:justify-start">
+              <span className="text-lg font-black">月</span>
+              <span className="text-[clamp(2.4rem,4vw,3.4rem)] font-black leading-none tracking-tight text-brand-500">
+                10万円
+              </span>
+              <span className="text-xl font-black text-brand-500">〜</span>
+              <span className="ml-1 text-sm font-bold text-ink/60">
+                （税別）
+              </span>
+            </p>
+            <p className="mt-6 text-[clamp(1.05rem,1.7vw,1.35rem)] font-bold leading-[1.8] text-ink/85">
+              取引先に出せる<span className="text-brand-500">専門家の名前</span>
+              と、
               <br />
-              リスクを<span className="text-brand-500">最小限</span>に抑える
+              体制づくりの<span className="text-brand-500">助言</span>を。
             </p>
             <div className="mt-10 flex justify-center lg:block">
               <BigButton
@@ -493,13 +503,14 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <Container>
           <Reveal variant="up" className="text-center">
             <h2 className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
-              <span className="text-brand-500">AIセキュリティのプロ</span>が、
+              <span className="text-brand-500">大手企業と取引したい会社</span>
+              に、
               <br className="hidden sm:block" />
-              御社のセキュリティを
-              <span className="text-brand-500">ゼロから構築</span>する。
+              AI時代の<span className="text-brand-500">セキュリティ責任者</span>
+              を。
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
-              専任の担当者を雇わなくても大丈夫。資格を持つ専門家が、御社のセキュリティ担当として月額でつき、必要な対策をすべて引き受けます。
+              当社の専門家が社外のセキュリティ責任者として入り、取引先に「この会社なら任せて大丈夫」と説明できる体制を、責任者ごと用意します。
             </p>
           </Reveal>
 
@@ -519,6 +530,50 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </div>
       </section>
 
+      {/* ========== 5. 選ばれる理由 ========== */}
+      <section className="relative isolate overflow-hidden bg-white py-20 md:py-28">
+        <Watermark className="-right-6 top-4">Reason</Watermark>
+        <Container>
+          <SectionHead en="Reason">Bond AI が選ばれる理由</SectionHead>
+          <ol className="mt-10 grid gap-4 md:mt-12 md:grid-cols-2 md:gap-5">
+            {[
+              {
+                t: "「大手企業との取引」に絞っている",
+                d: "チェックシートの回答、取引先に出せる「セキュリティ体制のご案内」、取引先との打ち合わせへの同席など、取引の場面に合わせて支援します。",
+              },
+              {
+                t: "規格の取得前から、専門家がつく",
+                d: "ISMSなどの規格の取得には、半年〜1年ほどかかります。その間も、取引先に責任者の名前と体制を説明できます。",
+              },
+              {
+                t: "AIの管理も、標準で含む",
+                d: "社員のAI利用のルールと、社内で使うAIの台帳を、責任者の仕事として標準で含めます。",
+              },
+              {
+                t: "名前だけでなく、中身の支援とセット",
+                d: "名前を出すときは、必ず現状の確認と定例会、回答の確認を行います。取引先に深く聞かれても答えられる状態をつくります。",
+              },
+            ].map((r, i) => (
+              <Reveal key={r.t} variant="up" delay={i * 100}>
+                <li className="flex h-full gap-5 border-t-4 border-brand-500 bg-[#FBF6F7] p-6 md:p-8">
+                  <span className="text-[2.4rem] font-black leading-none text-brand-500">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h3 className="text-lg font-black leading-[1.6] md:text-xl">
+                      {r.t}
+                    </h3>
+                    <p className="mt-3 text-[15px] leading-[1.95] text-ink/75">
+                      {r.d}
+                    </p>
+                  </div>
+                </li>
+              </Reveal>
+            ))}
+          </ol>
+        </Container>
+      </section>
+
       {/* ========== 6. 実現する3つのこと(BENEFIT) ========== */}
       <section className="relative isolate overflow-hidden py-14 md:py-28">
         <Watermark className="-left-4 top-4">Benefit</Watermark>
@@ -527,50 +582,57 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           <div className="mt-4 md:mt-6">
             {[
               {
-                lead: "AI利用による",
-                em: "情報漏洩を防ぐ",
-                text: "社員がAIに入力してよい情報・いけない情報と、使ってよいツールを決め、全社員に周知します。",
+                lead: "社外の責任者が就任し、",
+                em: "責任者を確保できる",
+                text: "「誰が判断し、誰が説明するか」をはっきりさせます。",
                 items: [
-                  "顧客情報や機密情報のAIへの入力を防ぐルールができる",
-                  "新しいAIツールは、専門家の確認を通してから導入できる",
-                  "会社が把握していないAIの利用（シャドーAI）を見つけて、減らせる",
+                  "「責任者は誰ですか」と聞かれても、答えられる",
+                  "体制図や回答書に、専門家の名前を載せられる",
+                  "社員のAI利用のルールと台帳も、責任者が管理する",
                 ],
-                stat: null,
+                stat: {
+                  before: "AIの明確な責任者を決めている大手企業は",
+                  num: "26.8%",
+                  after: "",
+                  source: "KPMG「サイバーセキュリティサーベイ2026/27」速報",
+                },
                 visual: "policy" as const,
               },
               {
-                lead: "ランサムウェアなどの",
-                em: "サイバー攻撃に対策できる",
-                text: "専門家が自社の弱点を診断し、直すべき点を優先順位つきで示します。",
+                lead: "取引先の審査に備え、",
+                em: "取引を続け、広げられる",
+                text: "チェックシートや認証の要請に応え、取引先に見せられる資料をそろえます。",
                 items: [
-                  "外部から狙われやすい弱点が分かり、対策できる",
-                  "なりすましメールやAIを使った詐欺への対策ができる",
-                  "被害にあった時の連絡体制と、初動の手順が決まる",
+                  "取引先のセキュリティチェックシートに答えられる",
+                  "取引先に出せる「セキュリティ体制のご案内」がそろう",
+                  "商談が、セキュリティの確認で止まりにくくなる",
                 ],
                 stat: {
-                  before: "ランサムウェア被害の",
-                  num: "63.3%",
-                  after: "は中小企業",
-                  source: "2025年、警察白書",
-                },
-                visual: "diagnosis" as const,
-              },
-              {
-                lead: "取引先や上場審査の",
-                em: "セキュリティ確認に対応できる",
-                text: "審査で問われる「セキュリティの体制」と「責任者」を、専門家が整えます。",
-                items: [
-                  "取引先のセキュリティチェックシートに回答できる",
-                  "社外CISOとして、専門家の名前を記載できる",
-                  "取引先や監査法人に提出できる説明資料がそろう",
-                ],
-                stat: {
-                  before: "発注側の大企業の",
+                  before:
+                    "取引先のセキュリティ対策を確認している発注側の大手企業は",
                   num: "84.4%",
-                  after: "が、取引先のセキュリティを確認",
-                  source: "キヤノンITソリューションズ",
+                  after: "",
+                  source: "キヤノンITソリューションズ調査、2026年3月",
                 },
                 visual: "checksheet" as const,
+              },
+              {
+                lead: "一度の事故で失わないよう、",
+                em: "損失のリスクを抑えられる",
+                text: "リスクを洗い出して優先順位をつけ、事故が起きたときの初動も決めておきます。",
+                items: [
+                  "直すべき点が、優先順位つきで分かる",
+                  "事故のときの連絡体制と、初動の手順が決まる",
+                  "損害と取引停止が重なるリスクを、最小限に抑える",
+                ],
+                stat: {
+                  before:
+                    "事故があった中小企業のうち、取引先に影響があったのは",
+                  num: "約7割",
+                  after: "",
+                  source: "IPA「2024年度中小企業等実態調査」",
+                },
+                visual: "diagnosis" as const,
               },
             ].map((r, i) => (
               <Reveal key={r.em} variant="up">
@@ -662,13 +724,16 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 <span className="block text-xs font-bold text-ink/55">元</span>
                 <span className="block text-base font-bold text-ink md:text-lg">
                   株式会社帝国データバンクネットコミュニケーション
+                  <span className="text-sm font-medium text-ink/60">
+                    （現 帝国データバンクアクシス）
+                  </span>
                 </span>
                 <span className="block text-base font-bold text-brand-500 md:text-lg">
                   代表取締役
                 </span>
               </p>
               <p className="mt-7 border-t border-[#EEE5E8] pt-7 text-[15px] leading-[2.05] text-ink/80">
-                帝国データバンクグループで、情報セキュリティのコンサルティングを手がける会社の代表取締役を務める。同社は、ISO27001（ISMS）やプライバシーマークの取得支援、情報セキュリティの意識診断などを通じて、企業の情報管理の体制づくりを支援している。
+                サービスの監修者として、支援の品質を確認し、難しい判断の相談役を務めます。
               </p>
             </div>
           </Reveal>
@@ -796,13 +861,12 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             >
               <Icon name="shield" className="h-4 w-4" />
             </span>
-            <p className="text-base font-black">Bond AI セキュリティ</p>
+            <p className="text-base font-black">Bond AI セキュリティ顧問</p>
             <p className="text-sm text-white/60">／ 運営：{site.legalName}</p>
           </div>
           <div className="mt-6 border-t border-white/15 pt-6 text-[11px] leading-[1.9] text-white/55">
             <p>
-              注記：ISMSやISO/IEC
-              42001などの認証は審査機関が行います。当社は取得の支援を行います。
+              注記：当社が認証を出すものではありません。取引先の審査の結果をお約束するものではありません。
             </p>
             <p>
               ※

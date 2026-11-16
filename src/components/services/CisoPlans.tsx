@@ -1,5 +1,5 @@
 /**
- * Bond AI セキュリティ LP「料金プラン」(シンプル版)。
+ * Bond AI セキュリティ顧問 LP「料金プラン」(アドバイザー / 社外CISO)。金額はアドバイザーの「月10万円〜」だけ表示。
  * 各プランは「役割・主な内容・合う企業」の要点だけ。
  * 書かないこと: 稼働時間、オプション、他社(パートナー)に任せる内容。金額は必ず「〇〜」。
  */
@@ -13,69 +13,50 @@ type Plan = {
   role: string;
   items: string[];
   fit: string[];
+  caution?: string;
 };
 
 const plans: Plan[] = [
   {
-    name: "ライトプラン",
+    name: "アドバイザー",
     sub: "セキュリティ顧問",
-    amount: "8万円",
-    note: "初期費用0円",
-    role: "セキュリティとAIの相談役として、意思決定を支援します。判断と作業はお客さま側で行います。",
+    amount: "10万円",
+    role: "相談役として助言し、取引先に専門家の名前を出せます。判断と作業は、お客さまの担当者が行います。",
     items: [
-      "定例会議（月2回）とメールでの相談",
-      "AI利用ルールなどのひな形の提供",
-      "1年間のロードマップの作成",
-      "「社外顧問」として名前を掲載",
+      "現状の確認（ヒアリング・社内アンケート）とロードマップ",
+      "体制図や回答書に、専門家の名前を掲載",
+      "定例会（月2回）とメールでの相談",
+      "チェックシート回答の助言と確認",
+      "規程・AI利用ルールのひな形",
+      "社員研修（年1回・修了証つき）",
     ],
-    fit: [
-      "AIを使い始めたが、何から手をつければよいか分からない",
-      "迷ったときに相談できる専門家がほしい",
-      "まずは小さく始めたい",
-    ],
+    fit: ["社内に動ける担当者がいる", "取引先に出せる専門家の名前がほしい"],
+    caution: "事故（インシデント）のときの対応は含みません。",
   },
   {
-    name: "スタンダードプラン",
-    sub: "社外CISOとして就任",
-    amount: "30万円",
-    role: "社外の責任者として、セキュリティの体制をつくり、毎月見直して改善します。判断し、説明し、責任を持ちます。",
-    items: [
-      "現状の調査と、対策の優先順位づけ",
-      "自社用のAI利用ルール・事故時の対応手順の作成",
-      "全社員向けのAIルール説明会",
-      "チェックシートの回答と「社外CISO」としての名前の掲載",
-      "事故のときの初動の判断の助言",
-    ],
-    fit: [
-      "AIを全社に導入した",
-      "セキュリティの責任者がいない",
-      "取引先からチェックシートや認証を求められている",
-    ],
-  },
-  {
-    name: "エンタープライズプラン",
-    sub: "社外CISOとして就任",
+    name: "社外CISO（vCISO）",
+    sub: "セキュリティ責任者として就任",
     amount: null,
-    role: "グループ会社・拠点・部門まで含めた全社のセキュリティを統括し、経営会議に参加して経営の視点で判断します。",
+    role: "社外のセキュリティ責任者として就任し、判断し、取引先に説明し、作業まで引き受けます。",
     items: [
-      "スタンダードプランのすべての内容",
-      "経営会議への出席と、経営向けの四半期報告",
-      "子会社・拠点ごとのAI利用ルールの運用",
-      "ISO/IEC 42001の維持支援",
+      "社外CISOとして就任し、体制図に記載",
+      "初回アセスメントとツールによる脆弱性診断",
+      "規程・AI利用ルール・AIシステム台帳の作成",
+      "取引先に出せる「セキュリティ体制のご案内」",
+      "チェックシートの回答案の作成と、取引先との打ち合わせへの同席",
+      "事故のときの初動対応の判断",
+      "1年かけて社内の担当者を育成",
     ],
     fit: [
-      "上場を目指している",
-      "グループ会社や拠点が複数ある",
-      "AIを事業の中心に置いている",
+      "大手企業から、責任者と体制を聞かれている",
+      "社内にセキュリティの担当者がいない",
     ],
   },
 ];
 
 const conditions = [
   "金額はすべて税別",
-  "最低契約期間：6カ月",
-  "訪問の交通費：別途",
-  "主担当1名が固定でつき、サービス監修が品質を確認します",
+  "担当の専門家は原則固定し、サービス監修が品質を確認します",
 ];
 
 function CheckMark() {
@@ -100,7 +81,7 @@ function CheckMark() {
 export function CisoPlans({ ctaHref }: { ctaHref: string }) {
   return (
     <div className="text-[#1F1A1C]">
-      <ul className="grid gap-4 lg:grid-cols-3 lg:gap-5">
+      <ul className="mx-auto grid max-w-5xl gap-4 md:grid-cols-2 md:gap-6">
         {plans.map((p) => (
           <li
             key={p.name}
@@ -126,8 +107,8 @@ export function CisoPlans({ ctaHref }: { ctaHref: string }) {
                   ) : null}
                 </p>
               ) : (
-                <p className="mt-3 flex h-10 items-end text-[1.75rem] font-black leading-none text-[#7A1F3D]">
-                  個別見積り
+                <p className="mt-3 flex h-10 items-end text-[1.5rem] font-black leading-none text-[#7A1F3D]">
+                  お問い合わせください
                 </p>
               )}
               <p className="mt-4 text-sm leading-[1.85] text-[#5C5458]">
@@ -167,6 +148,11 @@ export function CisoPlans({ ctaHref }: { ctaHref: string }) {
                 </ul>
               </div>
 
+              {p.caution ? (
+                <p className="mt-3 text-xs leading-relaxed text-[#5C5458]">
+                  ※{p.caution}
+                </p>
+              ) : null}
               <div className="mt-auto pt-6">
                 <a
                   href={ctaHref}
@@ -182,7 +168,7 @@ export function CisoPlans({ ctaHref }: { ctaHref: string }) {
       </ul>
 
       {/* 全プラン共通の条件 */}
-      <div className="mt-6 border border-[#E9E1DD] bg-[#FBF8F6] px-5 py-4 md:px-6">
+      <div className="mx-auto mt-6 max-w-5xl border border-[#E9E1DD] bg-[#FBF8F6] px-5 py-4 md:px-6">
         <p className="text-xs font-black text-[#5C5458]">全プラン共通</p>
         <ul className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-[13px] leading-relaxed text-[#5C5458]">
           {conditions.map((c) => (

@@ -14,29 +14,29 @@ const steps = [
     en: "RISK ASSESSMENT",
     title: "リスクアセスメント・脆弱性診断",
     plain: "弱点を見える化し、優先順位をつける",
-    advisor: "外部からの自動診断",
-    ciso: "シャドーAIの可視化＋脆弱性診断",
+    advisor: "ヒアリングと社内アンケート",
+    ciso: "初回アセスメント＋ツールによる脆弱性診断",
   },
   {
     en: "POLICY & AI GOVERNANCE",
     title: "ポリシー策定・AIガバナンス",
     plain: "AIの使い方と社内規程を整える",
-    advisor: "規程のひな形を提供",
-    ciso: "自社用のポリシーを策定",
+    advisor: "規程・AI利用ルールのひな形",
+    ciso: "規程・AI利用ルール・AI台帳を作成",
   },
   {
     en: "SECURITY AWARENESS",
     title: "セキュリティ教育・啓発",
     plain: "決めたルールを全社員に浸透させる",
-    advisor: "説明資料のひな形を提供",
-    ciso: "全社員向け説明会を実施",
+    advisor: "社員研修（年1回・修了証つき）",
+    ciso: "社員研修＋社内担当者の育成",
   },
   {
     en: "SUPPLY CHAIN SECURITY",
     title: "サプライチェーンセキュリティ対応",
     plain: "チェックシート回答と取引先への説明、制度対応",
-    advisor: "回答方法を助言",
-    ciso: "チェックシート回答を作成",
+    advisor: "回答の助言と確認",
+    ciso: "回答案の作成・打ち合わせ同席",
   },
 ];
 
@@ -162,7 +162,7 @@ function Cycle() {
           </span>
         </p>
         <p className="mt-[5%] whitespace-nowrap text-[clamp(0.6rem,2vw,0.85rem)] font-bold tracking-[0.04em] text-white/85">
-          CISO／セキュリティ顧問
+          セキュリティ顧問
         </p>
         <p className="mt-[7%] whitespace-nowrap border border-white/70 px-[0.8em] py-[0.35em] text-[clamp(0.55rem,1.8vw,0.78rem)] font-bold tracking-[0.04em]">
           毎月、経営へ定期レポート
@@ -232,7 +232,7 @@ export function CisoServiceDiagram() {
           {/* プラン別の対応表 */}
           <table className="mt-7 w-full border-collapse lg:[word-break:auto-phrase] text-left text-[12px] leading-snug md:text-[13px]">
             <caption className="sr-only">
-              ステップごとの、セキュリティ顧問と社外CISOの対応内容
+              ステップごとの、アドバイザーと社外CISOの対応内容
             </caption>
             <thead>
               <tr>
@@ -246,7 +246,7 @@ export function CisoServiceDiagram() {
                   scope="col"
                   className="w-[31%] bg-white/10 px-2.5 py-2 align-bottom"
                 >
-                  <span className="block font-bold">セキュリティ顧問</span>
+                  <span className="block font-bold">アドバイザー</span>
                   <span className="block text-[11px] font-medium text-white/70">
                     助言で支える
                   </span>
@@ -289,18 +289,14 @@ export function CisoServiceDiagram() {
                   </span>
                 </th>
                 <td className="bg-white/[0.06] px-2.5 py-3 align-top text-white/85">
-                  初動対応の手順を助言
+                  含まない
                 </td>
                 <td className="bg-[#7A1F3D]/60 px-2.5 py-3 align-top font-bold">
-                  対応体制の構築と、発生時の対応支援
+                  初動対応の判断
                 </td>
               </tr>
             </tbody>
           </table>
-
-          <p className="mt-6 border-l-4 border-white px-4 py-1 text-[14px] font-bold leading-relaxed md:text-[15px]">
-            EDR・バックアップなど、対策ツールやベンダーの選定も相談できます
-          </p>
 
           <figcaption className="mt-5 text-[13px] leading-relaxed text-white/80">
             <span aria-hidden="true">↻ </span>
