@@ -136,7 +136,7 @@ export const serviceCategories: ServiceCategory[] = [
       {
         slug: "ai-security",
         number: "01",
-        title: "AIセキュリティ対策事業",
+        title: "情報セキュリティ対策事業",
         subtitle: "Security",
         summary:
           "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、情報セキュリティ顧問やホームページのセキュリティ対策で、企業の安全なAI活用を支援するソリューションです。",

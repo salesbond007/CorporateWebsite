@@ -240,14 +240,14 @@ export function ServicesSection({ locale }: Props) {
           </div>
         </Reveal>
 
-        {/* AIセキュリティ対策事業のサービス(ピラミッド) */}
+        {/* 情報セキュリティ対策事業のサービス(同心円の図) */}
         <div className="mt-20 md:mt-28">
           <Reveal variant="up">
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">
-              AI Security Services
+              Information Security Services
             </p>
             <h3 className="mt-2 text-2xl font-black tracking-[0.04em] text-ink [word-break:keep-all] md:text-3xl">
-              AIセキュリティ対策事業の<wbr />サービス
+              情報セキュリティ対策事業の<wbr />サービス
             </h3>
           </Reveal>
           <div className="mt-8 md:mt-10">
