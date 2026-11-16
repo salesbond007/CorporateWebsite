@@ -998,9 +998,6 @@ function BigButton({
 function SplitCta() {
   return (
     <div className="flex flex-col items-center gap-4 bg-brand-500 px-6 py-12 text-white">
-      <p className="text-sm font-bold md:text-base">
-        セキュリティの専門家が、御社の現状と優先して手を打つべき点を無料で整理します
-      </p>
       <BigButton label="無料相談" icon="check" tone="white" />
     </div>
   );

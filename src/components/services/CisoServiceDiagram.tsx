@@ -210,7 +210,7 @@ export function CisoServiceDiagram() {
         <figcaption className="mt-10 space-y-1.5 text-center text-[13px] leading-relaxed text-white/75 md:text-sm">
           <p>
             ※
-            プランにより対応範囲が異なります。くわしくは「プランと料金」をご覧ください。
+            プランにより対応範囲が異なります。
           </p>
           <p>
             <span aria-hidden="true">↻ </span>
