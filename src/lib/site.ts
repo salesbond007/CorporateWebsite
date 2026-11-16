@@ -111,6 +111,8 @@ export type Service = {
   title: string;
   subtitle?: string;
   summary: string;
+  /** summary の中で、ワインレッドの下線で強調する言葉 */
+  marks?: string[];
   features: string[];
   /** 設定時は専用LPへ、未設定時は/servicesの該当カードへのアンカーリンクになる */
   href?: string;
@@ -135,21 +137,26 @@ export const serviceCategories: ServiceCategory[] = [
         slug: "ai-security",
         number: "01",
         title: "AIセキュリティ対策事業",
-        href: "/services/security",
         subtitle: "Security",
         summary:
-          "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、AI情報セキュリティ顧問やホームページのセキュリティ対策で、企業の安全なAI活用を支援するソリューションです。",
+          "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、情報セキュリティ顧問やホームページのセキュリティ対策で、企業の安全なAI活用を支援するソリューションです。",
         features: [],
         image: "/services/cards/ai-solutions.jpg",
         children: [
           {
             slug: "ciso",
             number: "01-1",
-            title: "AI情報セキュリティ顧問",
+            title: "情報セキュリティ顧問",
             href: "/services/ciso",
-            subtitle: "AI Information Security Advisor",
+            subtitle: "Information Security Advisor",
             summary:
-              "大企業・上場企業との取引に欠かせない情報セキュリティの体制を、専門家がアドバイザーや社外CISOとして一緒に整えます。取引先のチェックシートへの回答やAI利用ルールづくりまで支援。月10万円〜（税別）。",
+              "AI時代に特化した、中小企業向けの情報セキュリティ顧問です。大企業・上場企業との取引に欠かせない情報セキュリティの体制を、専門家がアドバイザーや社外CISOとして一緒に整えます。",
+            marks: [
+              "AI時代に特化した",
+              "中小企業向け",
+              "大企業・上場企業との取引",
+              "情報セキュリティの体制",
+            ],
             features: [],
             image: "/services/cards/ai-solutions.jpg",
           },

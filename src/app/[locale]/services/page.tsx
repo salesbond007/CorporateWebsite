@@ -164,7 +164,9 @@ export default function ServicesPage({
               AI Security Services
             </p>
             <h2 className="[word-break:keep-all] mt-3 text-[clamp(1.75rem,3.2vw,2.5rem)] font-black leading-tight text-ink">
-              AIセキュリティ対策事業の<wbr />サービス
+              AIセキュリティ対策事業の
+              <wbr />
+              サービス
             </h2>
             <span
               aria-hidden="true"
@@ -174,6 +176,7 @@ export default function ServicesPage({
           <div className="mt-10 md:mt-12">
             <BondServicePyramid
               items={bondPyramidItems((path) => localePath(path, locale))}
+              hideListOnMobile
             />
           </div>
         </Container>
@@ -260,7 +263,7 @@ export default function ServicesPage({
                               {ch.title}
                             </h3>
                             <p className="mt-3 text-sm leading-[1.9] text-ink-soft md:text-[15px]">
-                              {ch.summary}
+                              <Marked text={ch.summary} marks={ch.marks} />
                             </p>
                             <span
                               className={cn(
@@ -313,6 +316,29 @@ export default function ServicesPage({
           </Link>
         </Container>
       </section>
+    </>
+  );
+}
+
+/** 文中の重要な言葉に、ワインレッドの下線を引く */
+function Marked({ text, marks }: { text: string; marks?: string[] }) {
+  if (!marks?.length) return <>{text}</>;
+  // 強調する言葉は日本語の固定文言なので、そのまま区切りに使う
+  const re = new RegExp(`(${marks.join("|")})`);
+  return (
+    <>
+      {text.split(re).map((part, i) =>
+        marks.includes(part) ? (
+          <span
+            key={i}
+            className="font-bold text-ink underline decoration-brand-500 decoration-2 underline-offset-[5px]"
+          >
+            {part}
+          </span>
+        ) : (
+          part
+        ),
+      )}
     </>
   );
 }

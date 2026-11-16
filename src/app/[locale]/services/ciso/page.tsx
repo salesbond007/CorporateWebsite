@@ -126,10 +126,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             { name: "ホーム", url: localePath("/", locale) },
             { name: "サービス一覧", url: localePath("/services", locale) },
             {
-              name: "AIセキュリティ対策事業",
-              url: localePath("/services/security", locale),
-            },
-            {
               name: "Bond AI 情報セキュリティ顧問（社外CISO）",
               url: localePath(PATH, locale),
             },
