@@ -111,13 +111,11 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
   const url = `${base}${localePath(PATH, locale)}`;
 
   const nav = [
-    { href: "#issue", label: "必須の時代" },
+    { href: "#top", label: "トップ" },
     { href: "#service", label: "サービス" },
-    { href: "#structure", label: "体制づくり" },
     { href: "#reason", label: "選ばれる理由" },
-    { href: "#price", label: "プラン" },
     { href: "#expert", label: "サービス監修" },
-    { href: `#${FORM_ID}`, label: "お申し込み" },
+    { href: `#${FORM_ID}`, label: "問い合わせ" },
   ];
 
   return (
@@ -598,20 +596,23 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       >
         <Watermark className="-right-6 top-4">Contact</Watermark>
         <Container>
-          <SectionHead en="Contact">無料相談・資料請求</SectionHead>
+          <SectionHead en="Contact">無料相談</SectionHead>
           <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_1.6fr] lg:gap-14">
             <div>
               <dl className="space-y-6 text-[15px] leading-[1.9] text-ink/80">
                 <div>
-                  <dt className="font-black text-ink">資料請求</dt>
+                  <dt className="font-black text-ink">無料相談</dt>
                   <dd className="mt-1">
-                    サービスの内容・料金・導入の流れをまとめた資料を、メールでお送りします。
+                    情報セキュリティの専門家が、御社の現状と取引先から求められていることをお聞きし、必要な対策と進め方をご案内します。
                   </dd>
                 </div>
               </dl>
             </div>
             <div className="rounded-md bg-white p-6 shadow-[0_30px_60px_-40px_rgba(0,0,0,0.45)] md:p-9">
-              <AiCheckForm privacyHref={localePath("/privacy", locale)} />
+              <AiCheckForm
+                privacyHref={localePath("/privacy", locale)}
+                consultOnly
+              />
             </div>
           </div>
         </Container>
@@ -727,7 +728,7 @@ function BigButton({
   );
 }
 
-/** 資料請求のCTA帯 */
+/** 無料相談のCTA帯 */
 function SplitCta() {
   return (
     <div className="flex flex-col items-center gap-4 bg-brand-500 px-6 py-12 text-white">
