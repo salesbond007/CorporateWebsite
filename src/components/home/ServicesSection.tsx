@@ -7,10 +7,6 @@ import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
 import { serviceCategories } from "@/lib/site";
-import {
-  BondServicePyramid,
-  bondPyramidItems,
-} from "@/components/services/BondServicePyramid";
 import { cn } from "@/lib/cn";
 
 type Props = {
@@ -240,22 +236,6 @@ export function ServicesSection({ locale }: Props) {
           </div>
         </Reveal>
 
-        {/* 情報セキュリティ対策事業のサービス(同心円の図) */}
-        <div className="mt-20 md:mt-28">
-          <Reveal variant="up">
-            <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">
-              Information Security Services
-            </p>
-            <h3 className="mt-2 text-2xl font-black tracking-[0.04em] text-ink [word-break:keep-all] md:text-3xl">
-              情報セキュリティ対策事業の<wbr />サービス
-            </h3>
-          </Reveal>
-          <div className="mt-8 md:mt-10">
-            <BondServicePyramid
-              items={bondPyramidItems((path) => localePath(path, locale))}
-            />
-          </div>
-        </div>
       </Container>
     </section>
   );

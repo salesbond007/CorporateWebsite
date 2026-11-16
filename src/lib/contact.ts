@@ -120,7 +120,7 @@ export const generalContactSchema = z.object({
   message: z.string().trim().max(5000).optional().or(z.literal("")),
   /** document: 資料請求 / check: 無料のAI利用チェック */
   request: z.enum(["document", "check"]).default("document"),
-  /** どのLPからの申し込みか(ciso: CISO・セキュリティ顧問 / training: セキュリティ研修) */
+  /** どのLPからの申し込みか(ciso: CISO・情報セキュリティ顧問 / training: 情報セキュリティ研修) */
   product: z.enum(["ciso", "training"]).default("ciso"),
 });
 
@@ -193,11 +193,11 @@ export const webSecurityDiagnosisSchema = z.object({
   message: z.string().trim().max(5000).optional().or(z.literal("")),
   /** document: 資料請求 / check: 無料のAI利用チェック */
   request: z.enum(["document", "check"]).default("document"),
-  /** どのLPからの申し込みか(ciso: CISO・セキュリティ顧問 / training: セキュリティ研修) */
+  /** どのLPからの申し込みか(ciso: CISO・情報セキュリティ顧問 / training: 情報セキュリティ研修) */
   product: z.enum(["ciso", "training"]).default("ciso"),
 });
 
-/** 簡易LP(顧問・COO紹介 / CISO・セキュリティ顧問)の無料相談フォームで扱うサービス */
+/** 簡易LP(顧問・COO紹介 / CISO・情報セキュリティ顧問)の無料相談フォームで扱うサービス */
 export const serviceLeadServices = {
   advisory: "顧問・COO紹介",
   ciso: "情報セキュリティ顧問",
@@ -233,7 +233,7 @@ export const serviceLeadSchema = z.object({
 
 export type ServiceLeadInput = z.infer<typeof serviceLeadSchema>;
 
-/** Bond AI セキュリティ(CISO・セキュリティ顧問)LP の従業員数の選択肢 */
+/** Bond AI 情報セキュリティ(CISO・情報セキュリティ顧問)LP の従業員数の選択肢 */
 export const aiCheckEmployeeOptions = [
   { value: "under-30", label: "〜30名" },
   { value: "31-100", label: "31〜100名" },
@@ -243,7 +243,7 @@ export const aiCheckEmployeeOptions = [
 ] as const;
 
 /**
- * Bond AI セキュリティ LP の「無料のAI利用チェック」申し込みフォーム。
+ * Bond AI 情報セキュリティ LP の「無料のAI利用チェック」申し込みフォーム。
  * 会社名 / お名前 / メールアドレス / 従業員数 / ご相談内容(任意)
  */
 export const aiCheckSchema = z.object({
@@ -260,7 +260,7 @@ export const aiCheckSchema = z.object({
   message: z.string().trim().max(5000).optional().or(z.literal("")),
   /** document: 資料請求 / check: 無料のAI利用チェック */
   request: z.enum(["document", "check"]).default("document"),
-  /** どのLPからの申し込みか(ciso: CISO・セキュリティ顧問 / training: セキュリティ研修) */
+  /** どのLPからの申し込みか(ciso: CISO・情報セキュリティ顧問 / training: 情報セキュリティ研修) */
   product: z.enum(["ciso", "training"]).default("ciso"),
 });
 

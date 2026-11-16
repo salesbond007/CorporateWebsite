@@ -10,6 +10,21 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
         disallow: ["/api/"],
       },
+      // AI検索・生成AIのクローラーにも、公開ページの参照を明示的に許可する(AIO)
+      {
+        userAgent: [
+          "GPTBot",
+          "OAI-SearchBot",
+          "ChatGPT-User",
+          "ClaudeBot",
+          "Claude-SearchBot",
+          "PerplexityBot",
+          "Google-Extended",
+          "Applebot-Extended",
+        ],
+        allow: "/",
+        disallow: ["/api/"],
+      },
     ],
     sitemap: `${base}/sitemap.xml`,
   };

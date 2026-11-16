@@ -7,9 +7,10 @@ import {
   BondServicePyramid,
   bondPyramidItems,
 } from "@/components/services/BondServicePyramid";
+import { AdvisoryGrowthDiagram } from "@/components/services/AdvisoryGrowthDiagram";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
-import { serviceCategories } from "@/lib/site";
+import { serviceCategories, site } from "@/lib/site";
 import { cn } from "@/lib/cn";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
@@ -74,59 +75,75 @@ export default function ServicesPage({
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
   const categories = serviceCategories.flatMap((c) => c.services);
+  const allChildren = categories.flatMap((c) => c.children ?? []);
 
   return (
     <>
       <JsonLd
-        data={breadcrumbJsonLd([
-          { name: "ホーム", url: localePath("/", locale) },
-          { name: "サービス一覧", url: localePath("/services", locale) },
-        ])}
+        data={[
+          breadcrumbJsonLd([
+            { name: "ホーム", url: localePath("/", locale) },
+            { name: "サービス一覧", url: localePath("/services", locale) },
+          ]),
+          {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "セールスボンド株式会社のサービス一覧",
+            itemListElement: allChildren.map((c, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              item: {
+                "@type": "Service",
+                name: c.title,
+                description: c.summary,
+                url: `${site.url.replace(/\/$/, "")}${localePath(c.href ?? "/services", locale)}`,
+                provider: { "@type": "Organization", name: site.legalName },
+                areaServed: { "@type": "Country", name: "日本" },
+              },
+            })),
+          },
+        ]}
       />
 
-      {/* ===== ページ見出し(明るい背景 + 動く図) ===== */}
+      {/* ===== ページ見出し ===== */}
       <section className="relative isolate overflow-hidden bg-white">
-        {/* うすい点の模様(下にいくほど消える) */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(#E6D9DD_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_85%)]"
+          className="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(#E6D9DD_1px,transparent_1px)] [background-size:22px_22px] [mask-image:linear-gradient(to_bottom,black,transparent_90%)]"
         />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-b from-transparent to-cream"
-        />
-        <Container className="grid items-center gap-10 py-12 md:py-20 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12">
-          <div>
-            <nav aria-label="パンくずリスト" className="text-xs text-ink/50">
-              <Link href={localePath("/", locale)} className="hover:text-ink">
-                ホーム
-              </Link>
-              <span className="mx-2">/</span>
-              <span className="text-ink/80">サービス一覧</span>
-            </nav>
-            <p className="mt-8 flex animate-fade-up items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-brand-500">
-              <span aria-hidden="true" className="h-px w-8 bg-brand-500" />
-              Services
-            </p>
-            <h1
-              className="mt-4 animate-fade-up text-[clamp(2rem,5vw,3.4rem)] font-black leading-[1.25] tracking-[0.02em] text-ink"
-              style={{ animationDelay: "0.1s" }}
-            >
-              サービス一覧
-            </h1>
-            <p
-              className="mt-5 max-w-xl animate-fade-up text-[15px] font-bold leading-[2] text-ink/70 md:text-base"
-              style={{ animationDelay: "0.2s" }}
-            >
-              <span className="text-brand-500">守り</span>
-              の情報セキュリティと、
-              <span className="text-[#0046C8]">攻め</span>
-              の経営顧問。2つの事業で、企業が安心して挑戦できる土台をつくります。
-            </p>
-
+        <Container className="pb-10 pt-10 md:pb-14 md:pt-16">
+          <nav aria-label="パンくずリスト" className="text-xs text-ink/50">
+            <Link href={localePath("/", locale)} className="hover:text-ink">
+              ホーム
+            </Link>
+            <span className="mx-2">/</span>
+            <span className="text-ink/80">サービス一覧</span>
+          </nav>
+          <div className="mt-8 grid items-end gap-8 lg:grid-cols-[minmax(0,1fr)_auto]">
+            <div>
+              <p className="flex animate-fade-up items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-brand-500">
+                <span aria-hidden="true" className="h-px w-8 bg-brand-500" />
+                Services
+              </p>
+              <h1
+                className="mt-4 animate-fade-up text-[clamp(2rem,5vw,3.4rem)] font-black leading-[1.25] tracking-[0.02em] text-ink"
+                style={{ animationDelay: "0.1s" }}
+              >
+                サービス一覧
+              </h1>
+              <p
+                className="mt-4 max-w-2xl animate-fade-up text-[15px] font-bold leading-[2] text-ink/70 md:text-base"
+                style={{ animationDelay: "0.2s" }}
+              >
+                <span className="text-brand-500">守り</span>
+                の情報セキュリティと、
+                <span className="text-[#0046C8]">攻め</span>
+                の経営顧問。2つの事業で、企業が安心して挑戦できる土台をつくります。
+              </p>
+            </div>
             {/* 事業へのジャンプ */}
             <div
-              className="mt-8 grid animate-fade-up gap-3 sm:grid-cols-2"
+              className="flex animate-fade-up flex-wrap gap-2"
               style={{ animationDelay: "0.3s" }}
             >
               {categories.map((s) => {
@@ -138,40 +155,19 @@ export default function ServicesPage({
                     key={s.slug}
                     href={`#${p.anchor}`}
                     className={cn(
-                      "group relative flex items-center justify-between gap-3 overflow-hidden rounded-xl border bg-white px-5 py-4 lg:px-4 shadow-[0_10px_30px_-20px_rgba(29,5,11,0.35)] transition duration-300 hover:-translate-y-0.5",
+                      "group inline-flex items-center gap-2 rounded-full border bg-white px-4 py-2.5 text-sm font-black transition hover:-translate-y-0.5",
                       blue
-                        ? "border-[#D6E2F5] hover:border-[#0046C8]"
-                        : "border-[#EEDFE3] hover:border-brand-500",
+                        ? "border-[#C9D8F2] text-[#0046C8] hover:bg-[#0046C8] hover:text-white"
+                        : "border-[#EBD3DA] text-brand-500 hover:bg-brand-500 hover:text-white",
                     )}
                   >
-                    <span
-                      aria-hidden="true"
-                      className={cn(
-                        "absolute inset-y-0 left-0 w-1",
-                        blue ? "bg-[#0046C8]" : "bg-brand-500",
-                      )}
-                    />
-                    <span>
-                      <span
-                        className={cn(
-                          "block text-[11px] font-bold tracking-[0.2em]",
-                          blue ? "text-[#0046C8]" : "text-brand-500",
-                        )}
-                      >
-                        {s.number}　{p.role} / {p.en.toUpperCase()}
-                      </span>
-                      <span className="mt-1 block whitespace-nowrap text-base font-black text-ink">
-                        {s.title}
-                      </span>
+                    <span className="text-[11px] tracking-[0.12em] opacity-70">
+                      {s.number}
                     </span>
+                    {s.title}
                     <span
                       aria-hidden="true"
-                      className={cn(
-                        "grid h-8 w-8 shrink-0 place-items-center rounded-full text-sm transition-transform group-hover:translate-y-0.5",
-                        blue
-                          ? "bg-[#EEF4FC] text-[#0046C8]"
-                          : "bg-brand-50 text-brand-500",
-                      )}
+                      className="transition-transform group-hover:translate-y-0.5"
                     >
                       ↓
                     </span>
@@ -180,41 +176,32 @@ export default function ServicesPage({
               })}
             </div>
           </div>
-
-          {/* 右: 2つの事業が成長につながる動く図 */}
-          <div
-            className="mx-auto w-full max-w-[30rem] animate-fade-up"
-            style={{ animationDelay: "0.2s" }}
-          >
-            <HeroGraphic />
-          </div>
         </Container>
+
+        {/* 流れるサービス名 */}
+        <div
+          className="overflow-hidden border-y border-ink/10 bg-white py-3"
+          aria-hidden="true"
+        >
+          <div className="flex w-max animate-marquee gap-10 whitespace-nowrap text-sm font-black tracking-[0.1em] text-ink/35">
+            {[0, 1].map((k) => (
+              <span key={k} className="flex gap-10">
+                {allChildren.map((c) => (
+                  <span
+                    key={`${k}-${c.slug}`}
+                    className="flex items-center gap-10"
+                  >
+                    {c.title}
+                    <span className="h-1.5 w-1.5 rounded-full bg-brand-500/50" />
+                  </span>
+                ))}
+              </span>
+            ))}
+          </div>
+        </div>
       </section>
 
-      {/* ===== 情報セキュリティ対策事業のサービス(図) ===== */}
-      <section className="bg-cream py-20 md:py-28">
-        <Container>
-          <Reveal variant="up">
-            <p className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-brand-500">
-              <span aria-hidden="true" className="h-px w-8 bg-brand-500" />
-              Information Security Services
-            </p>
-            <h2 className="mt-3 text-[clamp(1.75rem,3.2vw,2.5rem)] font-black leading-tight text-ink [word-break:keep-all]">
-              情報セキュリティ対策事業の
-              <wbr />
-              サービス
-            </h2>
-          </Reveal>
-          <div className="mt-10 md:mt-12">
-            <BondServicePyramid
-              items={bondPyramidItems((path) => localePath(path, locale))}
-              hideListOnMobile
-            />
-          </div>
-        </Container>
-      </section>
-
-      {/* ===== 事業ごとのサービス ===== */}
+      {/* ===== 事業ごと ===== */}
       {categories.map((s, ci) => {
         const p = pillars[s.slug];
         if (!p) return null;
@@ -225,124 +212,164 @@ export default function ServicesPage({
             key={s.slug}
             id={p.anchor}
             className={cn(
-              "relative isolate scroll-mt-20 overflow-hidden py-20 md:py-28",
-              ci % 2 === 0 ? "bg-white" : "bg-cream",
+              "relative isolate scroll-mt-20 overflow-hidden py-16 md:py-24",
+              ci === 0 ? "bg-cream" : "bg-[#F4F7FC]",
             )}
           >
-            {/* 大きな番号(背景) */}
             <span
               aria-hidden="true"
               className={cn(
-                "pointer-events-none absolute -right-4 top-6 -z-10 select-none font-display text-[clamp(8rem,22vw,16rem)] font-black leading-none",
+                "pointer-events-none absolute -right-4 top-4 -z-10 select-none font-display text-[clamp(8rem,22vw,16rem)] font-black leading-none",
                 blue ? "text-[#0046C8]/[0.05]" : "text-brand-500/[0.05]",
               )}
             >
               {s.number}
             </span>
             <Container>
-              <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
-                {/* 事業の説明 */}
-                <Reveal variant="up" className="lg:col-span-4">
-                  <div className="lg:sticky lg:top-28">
-                    <p
-                      className={cn(
-                        "flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em]",
-                        t.label,
-                      )}
-                    >
-                      <span
-                        aria-hidden="true"
-                        className={cn("h-px w-8", t.bar)}
-                      />
-                      {s.number}　{p.role} / {p.en}
-                    </p>
-                    <h2 className="mt-3 text-[clamp(1.75rem,3.2vw,2.5rem)] font-black leading-tight text-ink">
-                      {s.title}
-                    </h2>
-                    <p className="mt-5 text-[15px] leading-[2] text-ink-soft">
-                      {s.summary}
-                    </p>
-                  </div>
+              <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-14">
+                <Reveal variant="up">
+                  <p
+                    className={cn(
+                      "flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em]",
+                      t.label,
+                    )}
+                  >
+                    <span
+                      aria-hidden="true"
+                      className={cn("h-px w-8", t.bar)}
+                    />
+                    {s.number}　{p.role} / {p.en}
+                  </p>
+                  <h2 className="mt-3 text-[clamp(1.75rem,3.4vw,2.6rem)] font-black leading-tight text-ink">
+                    {s.title}
+                  </h2>
+                  <p className="mt-5 text-[15px] leading-[2] text-ink-soft">
+                    {s.summary}
+                  </p>
+                  <p
+                    className="mt-6 border-l-4 bg-white px-5 py-4 text-base font-black leading-[1.7] text-ink md:text-lg"
+                    style={{ borderColor: blue ? "#0046C8" : "#7A1F3D" }}
+                  >
+                    {blue ? (
+                      <>
+                        経営の伴走と新規開拓で、
+                        <span className="text-[#0046C8]">
+                          事業の成長を早める
+                        </span>
+                      </>
+                    ) : (
+                      <>
+                        2つのサービスで、
+                        <span className="text-brand-500">
+                          情報セキュリティ対策を完備
+                        </span>
+                      </>
+                    )}
+                  </p>
                 </Reveal>
+                <div>
+                  {blue ? (
+                    <AdvisoryGrowthDiagram />
+                  ) : (
+                    <BondServicePyramid
+                      items={bondPyramidItems((path) =>
+                        localePath(path, locale),
+                      )}
+                      diagramOnly
+                    />
+                  )}
+                </div>
+              </div>
 
-                {/* サービスのカード */}
-                <ul className="grid gap-4 lg:col-span-8">
-                  {(s.children ?? []).map((ch, i) => (
-                    <Reveal key={ch.slug} variant="up" delay={i * 120}>
-                      <li>
-                        <Link
-                          href={ch.href ? localePath(ch.href, locale) : "#"}
-                          className={cn(
-                            "group relative grid grid-cols-[1fr_auto] items-center gap-5 overflow-hidden rounded-xl border bg-white p-6 transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_24px_50px_-30px_rgba(29,5,11,0.4)] md:p-8",
-                            blue
-                              ? "border-[#E1E8F3] hover:border-[#0046C8]/50"
-                              : "border-[#EEE5E8] hover:border-brand-500/50",
-                          )}
-                        >
-                          <div className="min-w-0">
-                            <p
-                              className={cn(
-                                "font-display text-sm font-black tracking-[0.15em]",
-                                t.number,
-                              )}
-                            >
-                              {ch.number}
-                              {ch.subtitle ? (
-                                <span className="ml-3 text-[11px] font-bold tracking-[0.15em] text-ink-muted">
-                                  {ch.subtitle}
-                                </span>
-                              ) : null}
-                            </p>
-                            <h3
-                              className={cn(
-                                "mt-2 text-xl font-black text-ink transition-colors md:text-2xl",
-                                t.hover,
-                              )}
-                            >
-                              {ch.title}
-                            </h3>
-                            <p className="mt-3 text-sm leading-[1.9] text-ink-soft md:text-[15px]">
-                              <Marked text={ch.summary} marks={ch.marks} />
-                            </p>
-                          </div>
+              {/* サービスのカード */}
+              <ul
+                className={cn(
+                  "mt-12 grid gap-4 md:mt-16 md:gap-5",
+                  (s.children ?? []).length >= 3
+                    ? "md:grid-cols-3"
+                    : "md:grid-cols-2",
+                )}
+              >
+                {(s.children ?? []).map((ch, i) => (
+                  <Reveal
+                    key={ch.slug}
+                    variant="up"
+                    delay={i * 120}
+                    className="h-full"
+                  >
+                    <li className="h-full">
+                      <Link
+                        href={ch.href ? localePath(ch.href, locale) : "#"}
+                        className={cn(
+                          "group relative flex h-full flex-col overflow-hidden rounded-2xl border bg-white p-6 transition duration-300 hover:-translate-y-1 hover:shadow-[0_28px_50px_-30px_rgba(29,5,11,0.45)] md:p-7",
+                          blue
+                            ? "border-[#E1E8F3] hover:border-[#0046C8]/50"
+                            : "border-[#EEE5E8] hover:border-brand-500/50",
+                        )}
+                      >
+                        <div className="flex items-start justify-between gap-4">
                           <span
                             aria-hidden="true"
                             className={cn(
-                              "grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 transition-colors duration-300",
+                              "grid h-12 w-12 place-items-center rounded-xl transition-colors duration-300",
                               blue
-                                ? "border-[#0046C8] text-[#0046C8] group-hover:bg-[#0046C8] group-hover:text-white"
-                                : "border-brand-500 text-brand-500 group-hover:bg-brand-500 group-hover:text-white",
+                                ? "bg-[#EEF4FC] text-[#0046C8] group-hover:bg-[#0046C8] group-hover:text-white"
+                                : "bg-brand-50 text-brand-500 group-hover:bg-brand-500 group-hover:text-white",
                             )}
                           >
-                            <svg
-                              viewBox="0 0 20 20"
-                              className="h-4 w-4 transition-transform group-hover:translate-x-0.5"
-                              fill="none"
-                            >
-                              <path
-                                d="M4 10h11M11 5l5 5-5 5"
-                                stroke="currentColor"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
+                            <ServiceIcon slug={ch.slug} />
                           </span>
-                          {/* 下の線が左からのびる */}
+                          <span
+                            className={cn(
+                              "font-display text-sm font-black tracking-[0.15em]",
+                              t.number,
+                            )}
+                          >
+                            {ch.number}
+                          </span>
+                        </div>
+                        {ch.subtitle ? (
+                          <p className="mt-5 text-[11px] font-bold tracking-[0.15em] text-ink-muted">
+                            {ch.subtitle}
+                          </p>
+                        ) : null}
+                        <h3
+                          className={cn(
+                            "mt-1 text-xl font-black text-ink transition-colors",
+                            t.hover,
+                          )}
+                        >
+                          {ch.title}
+                        </h3>
+                        <p className="mt-3 flex-1 text-sm leading-[1.9] text-ink-soft">
+                          <Marked text={ch.summary} marks={ch.marks} />
+                        </p>
+                        <span
+                          className={cn(
+                            "mt-5 inline-flex items-center gap-2 text-sm font-bold",
+                            t.label,
+                          )}
+                        >
+                          詳しく見る
                           <span
                             aria-hidden="true"
-                            className={cn(
-                              "absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100",
-                              t.bar,
-                            )}
-                          />
-                          <span className="sr-only">詳しく見る</span>
-                        </Link>
-                      </li>
-                    </Reveal>
-                  ))}
-                </ul>
-              </div>
+                            className="transition-transform group-hover:translate-x-1"
+                          >
+                            →
+                          </span>
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className={cn(
+                            "absolute bottom-0 left-0 h-1 w-full origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100",
+                            t.bar,
+                          )}
+                        />
+                      </Link>
+                    </li>
+                  </Reveal>
+                ))}
+              </ul>
             </Container>
           </section>
         );
@@ -425,174 +452,48 @@ function Marked({ text, marks }: { text: string; marks?: string[] }) {
   );
 }
 
-/** ページ見出しの図: 守り(情報セキュリティ)と攻め(経営顧問)が、企業の成長を支える */
-function HeroGraphic() {
-  const nodes = [
-    {
-      x: 92,
-      y: 120,
-      c: "#7A1F3D",
-      soft: "#F5E9ED",
-      role: "守り",
-      t1: "情報セキュリティ",
-      t2: "対策事業",
-    },
-    {
-      x: 308,
-      y: 120,
-      c: "#0046C8",
-      soft: "#EEF4FC",
-      role: "攻め",
-      t1: "経営顧問",
-      t2: "事業",
-    },
-  ];
+/** サービスごとのアイコン */
+function ServiceIcon({ slug }: { slug: string }) {
+  const p = {
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.8,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
   return (
-    <svg
-      viewBox="0 0 400 360"
-      className="h-auto w-full"
-      role="img"
-      aria-label="守りの情報セキュリティ対策事業と、攻めの経営顧問事業の2つで、企業の持続的な成長を支える図"
-    >
-      {/* ゆっくり回る外周 */}
-      <g className="sv-spin">
-        <circle
-          cx="200"
-          cy="200"
-          r="150"
-          fill="none"
-          stroke="#1F1A1C"
-          strokeOpacity="0.12"
-          strokeWidth="1"
-          strokeDasharray="2 7"
-        />
-        <circle cx="350" cy="200" r="3.5" fill="#7A1F3D" />
-        <circle cx="50" cy="200" r="3.5" fill="#0046C8" />
-      </g>
-      {/* 事業 → 成長 の流れ */}
-      {nodes.map((n) => (
-        <path
-          key={n.role}
-          d={`M${n.x} ${n.y + 52} Q ${n.x} 262 200 262`}
-          fill="none"
-          stroke={n.c}
-          strokeWidth="2"
-          strokeDasharray="4 5"
-          className="rv-dash"
-        />
-      ))}
-      {/* 成長 */}
-      <g>
-        <circle
-          cx="200"
-          cy="270"
-          r="44"
-          fill="#fff"
-          stroke="#1F1A1C"
-          strokeOpacity="0.15"
-        />
-        <circle
-          cx="200"
-          cy="270"
-          r="44"
-          fill="none"
-          stroke="#1F1A1C"
-          strokeOpacity="0.25"
-          className="pf-wave"
-        />
-        <path
-          d="M182 282l12-12 8 7 16-17"
-          fill="none"
-          stroke="#1F1A1C"
-          strokeWidth="2.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path
-          d="M209 260h9v9"
-          fill="none"
-          stroke="#1F1A1C"
-          strokeWidth="2.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <text
-          x="200"
-          y="336"
-          textAnchor="middle"
-          fontSize="13"
-          fontWeight="900"
-          fill="#1F1A1C"
-        >
-          企業の持続的な成長
-        </text>
-      </g>
-      {/* 2つの事業 */}
-      {nodes.map((n, i) => (
-        <g
-          key={n.t1}
-          className="sv-float"
-          style={{ animationDelay: `${i * 1.2}s` }}
-        >
-          <circle cx={n.x} cy={n.y} r="58" fill={n.soft} />
-          <circle
-            cx={n.x}
-            cy={n.y}
-            r="58"
-            fill="none"
-            stroke={n.c}
-            strokeWidth="2"
-          />
-          <text
-            x={n.x}
-            y={n.y - 18}
-            textAnchor="middle"
-            fontSize="11"
-            fontWeight="800"
-            letterSpacing="3"
-            fill={n.c}
-          >
-            {n.role}
-          </text>
-          <text
-            x={n.x}
-            y={n.y + 4}
-            textAnchor="middle"
-            fontSize="13"
-            fontWeight="900"
-            fill="#1F1A1C"
-          >
-            {n.t1}
-          </text>
-          <text
-            x={n.x}
-            y={n.y + 22}
-            textAnchor="middle"
-            fontSize="13"
-            fontWeight="900"
-            fill="#1F1A1C"
-          >
-            {n.t2}
-          </text>
+    <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
+      {slug === "ciso" ? (
+        <g {...p}>
+          <path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z" />
+          <path d="M9 12l2 2 4-4" />
         </g>
-      ))}
-      {/* × */}
-      <g>
-        <circle
-          cx="200"
-          cy="120"
-          r="17"
-          fill="#fff"
-          stroke="#1F1A1C"
-          strokeOpacity="0.15"
-        />
-        <path
-          d="M194 114l12 12M206 114l-12 12"
-          stroke="#1F1A1C"
-          strokeWidth="2.2"
-          strokeLinecap="round"
-        />
-      </g>
+      ) : slug === "security-training" ? (
+        <g {...p}>
+          <path d="M2.5 9L12 4.5 21.5 9 12 13.5z" />
+          <path d="M6.5 11v4.5c1.5 1.5 3.5 2.2 5.5 2.2s4-.7 5.5-2.2V11" />
+        </g>
+      ) : slug === "web-security" ? (
+        <g {...p}>
+          <rect x="3" y="4" width="18" height="13" rx="2" />
+          <path d="M3 8h18M9 21h6M12 17v4" />
+          <rect x="10" y="11" width="4" height="3.5" rx="0.6" />
+          <path d="M10.8 11v-.8a1.2 1.2 0 0 1 2.4 0v.8" />
+        </g>
+      ) : slug === "advisory" ? (
+        <g {...p}>
+          <circle cx="9" cy="8" r="3" />
+          <path d="M3.5 19c.7-3.2 2.8-5 5.5-5s4.8 1.8 5.5 5" />
+          <path d="M16 6.5l2 2 3.5-3.5M17 13l4 0M19 11v4" />
+        </g>
+      ) : (
+        <g {...p}>
+          <circle cx="12" cy="12" r="8" />
+          <circle cx="12" cy="12" r="4.5" />
+          <circle cx="12" cy="12" r="1.2" fill="currentColor" />
+          <path d="M19 5l-5.5 5.5" />
+        </g>
+      )}
     </svg>
   );
 }

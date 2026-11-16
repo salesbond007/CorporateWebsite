@@ -13,8 +13,21 @@ export const site = {
     "セールスボンド",
     "セールスボンド株式会社",
     "Sales Bond",
+    "セキュリティ",
     "セキュリティ対策",
     "情報セキュリティ",
+    "情報セキュリティ対策",
+    "情報セキュリティ顧問",
+    "AI情報セキュリティ顧問",
+    "AI情報セキュリティ研修",
+    "情報セキュリティ研修",
+    "個人情報漏洩",
+    "個人情報漏洩対策",
+    "ランサムウェア対策",
+    "サイバー攻撃対策",
+    "中小企業の情報セキュリティ",
+    "顧問",
+    "AI",
     "AIセキュリティ",
     "CISO",
     "社外CISO",
@@ -118,7 +131,7 @@ export type Service = {
   href?: string;
   /** ServicesSectionでhover時に浮かび上がる背景写真 */
   image?: string;
-  /** このサービスに含まれる個別サービス(例: セキュリティ対策 > ホームページセキュリティ対策) */
+  /** このサービスに含まれる個別サービス(例: 情報セキュリティ対策 > ホームページの情報セキュリティ対策) */
   children?: Service[];
 };
 
@@ -139,7 +152,7 @@ export const serviceCategories: ServiceCategory[] = [
         title: "情報セキュリティ対策事業",
         subtitle: "Security",
         summary:
-          "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、情報セキュリティ顧問やホームページのセキュリティ対策で、企業の安全なAI活用を支援するソリューションです。",
+          "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、情報セキュリティ顧問やホームページの情報セキュリティ対策で、企業の安全なAI活用を支援するソリューションです。",
         features: [],
         image: "/services/cards/ai-solutions.jpg",
         children: [
@@ -167,14 +180,14 @@ export const serviceCategories: ServiceCategory[] = [
             href: "/services/security-training",
             subtitle: "Security Training",
             summary:
-              "AI時代の全社員セキュリティ研修と社内CISOの育成を、3カ月でひとつに。外に任せきりにしない「守り」を、自社の中につくります。",
+              "AI時代の全社員情報セキュリティ研修と社内CISOの育成を、3カ月でひとつに。外に任せきりにしない「守り」を、自社の中につくります。",
             features: [],
             image: "/services/cards/ai-solutions.jpg",
           },
           {
             slug: "web-security",
             number: "01-3",
-            title: "ホームページセキュリティ対策",
+            title: "ホームページの情報セキュリティ対策",
             href: "/services/web-security",
             subtitle: "Website Security",
             summary:

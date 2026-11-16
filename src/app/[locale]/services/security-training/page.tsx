@@ -14,7 +14,7 @@ import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
 /*
- * AI時代のセキュリティ研修（全社員研修＋社内CISO育成）LP
+ * AI時代の情報セキュリティ研修（全社員研修＋社内CISO育成）LP
  * 文面は確定版。言い回しを変えないこと。
  * - 文面にない実績・導入企業ロゴ・お客様の声・数値は追加しない
  * - 料金の金額は表示しない（「お問い合わせください」のみ）
@@ -62,7 +62,7 @@ const worries = [
     items: [
       "CISOを兼任で任されたが、何から手をつければよいかわからない",
       "AI利用のルールを作ったのに、現場で守られていない",
-      "取引先から届くセキュリティのチェックシートに、自信を持って答えられない",
+      "取引先から届く情報セキュリティのチェックシートに、自信を持って答えられない",
     ],
   },
 ];
@@ -86,7 +86,7 @@ const data = [
     num: "9",
     unit: "割超",
     prefix: "",
-    text: "CISOが兼任の企業。5割以上が、セキュリティ管理の知識不足を課題に挙げている",
+    text: "CISOが兼任の企業。5割以上が、情報セキュリティ管理の知識不足を課題に挙げている",
     source: "（IPA）",
   },
 ];
@@ -144,7 +144,7 @@ const outcomes: { label: string; icon: IconName }[] = [
   { label: "自社版の社員研修資料", icon: "slides" },
   { label: "自社に合わせたAI利用規程", icon: "rule" },
   { label: "社内で育ったCISO", icon: "person" },
-  { label: "翌年1年分のセキュリティ計画", icon: "calendar" },
+  { label: "翌年1年分の情報セキュリティ計画", icon: "calendar" },
 ];
 
 const flow = [
@@ -157,7 +157,7 @@ const flow = [
 
 const faqs = [
   {
-    q: "セキュリティの専門知識がなくても大丈夫ですか？",
+    q: "情報セキュリティの専門知識がなくても大丈夫ですか？",
     a: "はい。兼任の方を前提に設計しています。",
   },
   {
@@ -465,13 +465,13 @@ export default function SecurityTrainingPage({
           breadcrumbJsonLd([
             { name: "ホーム", url: localePath("/", locale) },
             { name: "サービス一覧", url: localePath("/services", locale) },
-            { name: "AI時代のセキュリティ研修", url: localePath(PATH, locale) },
+            { name: "AI時代の情報セキュリティ研修", url: localePath(PATH, locale) },
           ]),
           {
             "@context": "https://schema.org",
             "@type": "Service",
-            name: "AI時代のセキュリティ研修（全社員研修＋社内CISO育成）",
-            serviceType: "セキュリティ研修",
+            name: "AI時代の情報セキュリティ研修（全社員研修＋社内CISO育成）",
+            serviceType: "情報セキュリティ研修",
             description: pageMeta.securityTraining.description,
             url,
             areaServed: { "@type": "Country", name: "日本" },
@@ -508,7 +508,7 @@ export default function SecurityTrainingPage({
                 Bond AI
               </span>
               <span className="block text-[10px] font-bold text-ink/55">
-                AI時代のセキュリティ研修
+                AI時代の情報セキュリティ研修
               </span>
             </span>
           </a>
@@ -585,17 +585,17 @@ export default function SecurityTrainingPage({
         <Container className="grid items-center gap-8 pb-14 pt-8 md:pb-20 md:pt-16 lg:grid-cols-[1.15fr_1fr] lg:gap-10">
           <div className="text-center lg:text-left">
             <p className="inline-block bg-brand-500 px-4 py-2 text-sm font-bold tracking-[0.06em] text-white md:text-base">
-              AI時代のセキュリティ研修
+              AI時代の情報セキュリティ研修
             </p>
             <h1 className="mt-6 text-[clamp(2.1rem,5vw,3.9rem)] font-black leading-[1.3] tracking-[0.03em]">
-              セキュリティも、
+              情報セキュリティも、
               <br />
               <span className="text-brand-500">CISO</span>も、
               <br />
               内製化する。
             </h1>
             <p className="mx-auto mt-6 max-w-[36rem] text-[15px] font-bold leading-[2] text-ink/80 [word-break:auto-phrase] md:text-base lg:mx-0">
-              AI時代の全社員セキュリティ研修と社内CISOの育成を、3カ月でひとつに。外に任せきりにしない「守り」を、自社の中につくります。
+              AI時代の全社員情報セキュリティ研修と社内CISOの育成を、3カ月でひとつに。外に任せきりにしない「守り」を、自社の中につくります。
             </p>
             <CtaButtons className="mt-8 justify-center lg:justify-start" />
             <ul className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
@@ -621,7 +621,7 @@ export default function SecurityTrainingPage({
         <Container className="max-w-3xl text-center">
           <Reveal variant="up">
             <h2 className="text-[clamp(1.4rem,3vw,2.2rem)] font-black leading-[1.6] [word-break:auto-phrase]">
-              そのセキュリティ、
+              その情報セキュリティ、
               <br className="sm:hidden" />
               外に任せきりになっていませんか。
             </h2>
@@ -724,7 +724,7 @@ export default function SecurityTrainingPage({
           <Reveal variant="up" className="mt-10 hidden md:block">
             <table className="w-full border-collapse text-left">
               <caption className="sr-only">
-                一般的なセキュリティ研修と、Bond AIの研修の比較
+                一般的な情報セキュリティ研修と、Bond AIの研修の比較
               </caption>
               <thead>
                 <tr>
@@ -733,7 +733,7 @@ export default function SecurityTrainingPage({
                     scope="col"
                     className="w-[36%] bg-[#ECE8E9] px-6 py-4 text-center text-base font-black text-ink/75"
                   >
-                    一般的なセキュリティ研修
+                    一般的な情報セキュリティ研修
                   </th>
                   <th
                     scope="col"
@@ -774,7 +774,7 @@ export default function SecurityTrainingPage({
                 <dd className="grid grid-cols-2">
                   <p className="border-r border-[#E9E1DD] px-4 py-3 text-[13px] leading-relaxed text-ink/70">
                     <span className="block text-[10px] font-bold text-ink/50">
-                      一般的なセキュリティ研修
+                      一般的な情報セキュリティ研修
                     </span>
                     {c.general}
                   </p>
@@ -874,7 +874,7 @@ export default function SecurityTrainingPage({
       <section className="bg-brand-500 py-12 text-white md:py-14">
         <Container className="flex flex-col items-center gap-6 text-center">
           <p className="text-base font-bold md:text-lg">
-            AI時代の全社員セキュリティ研修と社内CISOの育成を、3カ月でひとつに。
+            AI時代の全社員情報セキュリティ研修と社内CISOの育成を、3カ月でひとつに。
           </p>
           <CtaButtons tone="dark" className="w-full justify-center sm:w-auto" />
         </Container>

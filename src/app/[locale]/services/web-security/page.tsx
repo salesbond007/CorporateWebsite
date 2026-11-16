@@ -23,7 +23,7 @@ const PATH = "/services/web-security";
 /** このようなお悩みはありませんか？(文言は指定どおり) */
 const worries = [
   "WordPressのPHPが、年末でサポート切れになると言われた",
-  "セキュリティ対策を何から始めればいいか分からない",
+  "情報セキュリティ対策を何から始めればいいか分からない",
   "最低限の対策だけでも、すぐにやっておきたい",
   "サイトを管理できる人が社内にいない",
   "自社のサイトが安全なのか、確かめたことがない",
@@ -419,7 +419,7 @@ function DefenseDiagram() {
     "opacity-0 transition-opacity duration-700 group-data-[visible=true]/reveal:opacity-100";
   return (
     <Reveal variant="none">
-      <figure aria-label="ホームページのセキュリティ対策の考え方。個人情報を守るホームページの外側に、診断・対策・保守の防御の層をつくり、外からの攻撃を防ぎます。">
+      <figure aria-label="ホームページの情報セキュリティ対策の考え方。個人情報を守るホームページの外側に、診断・対策・保守の防御の層をつくり、外からの攻撃を防ぎます。">
         <svg
           viewBox="0 0 440 440"
           className="mx-auto block w-full max-w-[460px]"
@@ -682,8 +682,8 @@ function webSecurityServiceJsonLd(path: string) {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${url}#service`,
-    name: "ホームページセキュリティ対策",
-    serviceType: "ホームページセキュリティ対策（診断・保守・移行）",
+    name: "ホームページの情報セキュリティ対策",
+    serviceType: "ホームページの情報セキュリティ対策（診断・保守・移行）",
     description: pageMeta.webSecurity.description,
     url,
     areaServed: { "@type": "Country", name: "日本" },
@@ -710,7 +710,7 @@ function webSecurityServiceJsonLd(path: string) {
     offers: {
       "@type": "Offer",
       name: "無料相談",
-      description: "ホームページのセキュリティ対策に関する無料相談",
+      description: "ホームページの情報セキュリティ対策に関する無料相談",
       price: "0",
       priceCurrency: "JPY",
       url: `${url}#diagnosis`,
@@ -734,7 +734,7 @@ function webSecurityServiceJsonLd(path: string) {
 function faqJsonLd() {
   const qa: { q: string; a: string }[] = [
     {
-      q: "ホームページセキュリティ対策では、どんなメニューを選べますか？",
+      q: "ホームページの情報セキュリティ対策では、どんなメニューを選べますか？",
       a: "「診断」「保守」「移行」の3つから、必要なものだけを選べます。",
     },
     ...choices.map((c) => ({
@@ -768,7 +768,7 @@ export default function WebSecurityPage({
 }) {
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
-  const title = "ホームページセキュリティ対策";
+  const title = "ホームページの情報セキュリティ対策";
 
   return (
     <>
@@ -841,7 +841,7 @@ export default function WebSecurityPage({
                     className="text-brand-600"
                     style={{ animationDelay: "0.25s" }}
                   >
-                    セキュリティ対策
+                    情報セキュリティ対策
                   </span>
                 </span>
               </h1>
@@ -855,7 +855,7 @@ export default function WebSecurityPage({
                 className="mt-6 max-w-xl lg:max-w-[30rem] text-[15px] leading-[2] text-ink-soft animate-fade-up"
                 style={{ animationDelay: "0.55s" }}
               >
-                ホームページはサイバー攻撃の標的でもあります。AI時代に求められる水準のセキュリティ対策で、情報漏洩のリスクを低減します。
+                ホームページはサイバー攻撃の標的でもあります。AI時代に求められる水準の情報セキュリティ対策で、情報漏洩のリスクを低減します。
               </p>
               <div
                 className="mt-9 grid gap-3 animate-fade-up sm:flex sm:flex-wrap"
@@ -958,7 +958,7 @@ export default function WebSecurityPage({
               </span>
               <span className="line-mask">
                 <span className="animate-none translate-y-[110%] transition-transform delay-150 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
-                  セキュリティ対策に絞って実施
+                  情報セキュリティ対策に絞って実施
                 </span>
               </span>
             </h2>

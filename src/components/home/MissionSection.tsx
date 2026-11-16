@@ -55,7 +55,7 @@ export function MissionSection() {
             <p className="mt-5 text-xl font-black leading-snug text-ink [word-break:auto-phrase] sm:text-2xl md:text-3xl lg:text-4xl">
               <span className="block overflow-hidden pb-[0.08em]">
                 <span className="block translate-y-[110%] transition-transform delay-0 duration-1000 ease-expo group-data-[visible=true]/reveal:translate-y-0">
-                  守りの「AI時代のセキュリティ構築」と
+                  守りの「AI時代の情報セキュリティ構築」と
                 </span>
               </span>
               <span className="block overflow-hidden pb-[0.08em]">
@@ -91,7 +91,7 @@ export function MissionSection() {
             </Reveal>
             <Reveal variant="blur" delay={150}>
               <p>
-                守りには、<Emphasis>AI時代のセキュリティを築くプロ</Emphasis>
+                守りには、<Emphasis>AI時代の情報セキュリティを築くプロ</Emphasis>
                 を。
                 <br />
                 攻めには、<Emphasis>事業グロースを担う経営顧問</Emphasis>を。
