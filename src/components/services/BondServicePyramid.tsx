@@ -69,9 +69,7 @@ function Pyramid({ items, lines }: { items: PyramidItem[]; lines?: boolean }) {
         const rm = at(BASE_R, (t0 + t1) / 2);
         // 左の面の帯の中心に段の名前
         const cx =
-          i === 0
-            ? (l1.x + f1.x) / 2
-            : (l0.x + l1.x + f0.x + f1.x) / 4;
+          i === 0 ? (l1.x + f1.x) / 2 : (l0.x + l1.x + f0.x + f1.x) / 4;
         const cy =
           i === 0
             ? (l1.y + f1.y) / 2 - 12

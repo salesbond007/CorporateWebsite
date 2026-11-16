@@ -221,7 +221,7 @@ const enumLabels: Record<string, Record<string, string>> = {
 function aiBrand(data: Record<string, unknown>): string {
   return data.product === "training"
     ? "Bond AI セキュリティ研修"
-    : "Bond AI セキュリティ";
+    : "Bond AI セキュリティ顧問";
 }
 
 /** Bond AI セキュリティ LP のフォームの申し込み種別(件名用) */

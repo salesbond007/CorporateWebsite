@@ -15,18 +15,18 @@ const rows: {
 }[] = [
   {
     Icon: IconSoloIt,
-    before: "セキュリティの専任者がいない",
-    after: ["責任者が決まり、", "体制が整う"],
+    before: "「責任者は誰ですか」に答えられない",
+    after: ["責任者が就任し、", "取引先に答えられる"],
   },
   {
     Icon: IconShadowAi,
-    before: "AIの使い方にルールがない",
-    after: ["AIを安全に使える", "ルールが浸透"],
+    before: "社員のAI利用を把握できていない",
+    after: ["AI利用ルールと台帳で、", "管理できる"],
   },
   {
     Icon: IconChecksheet,
-    before: "取引先・審査に説明できない",
-    after: ["取引先・審査に", "説明できる"],
+    before: "チェックシートに答えられない",
+    after: ["取引先の審査に", "備えられる"],
   },
 ];
 
@@ -159,20 +159,20 @@ function Hub({ compact, delay }: { compact?: boolean; delay: number }) {
       </span>
       <div className={`relative ${compact ? "" : "mt-4"}`}>
         <p className="text-[11px] font-bold tracking-[0.14em] text-white/75">
-          月額で任せる
+          セキュリティ顧問
         </p>
         <p
           className={`mt-1 font-black leading-snug ${compact ? "text-base" : "text-lg"}`}
         >
-          CISO／
+          社外の
           {compact ? null : <br />}
-          セキュリティ顧問
+          責任者が就任
         </p>
         {compact ? null : (
           <p className="mt-3 border-t border-white/25 pt-3 text-xs leading-relaxed text-white/85">
-            資格を持つ専門家が
+            取引先に出せる
             <br />
-            担当につきます
+            専門家の名前
           </p>
         )}
       </div>
