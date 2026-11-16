@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
@@ -1007,9 +1008,15 @@ export default function SecurityTrainingPage({
             variant="up"
             className="mt-10 grid overflow-hidden bg-white ring-1 ring-[#EEE5E8] md:grid-cols-[16rem_1fr] lg:grid-cols-[20rem_1fr]"
           >
-            {/* 写真(後日差し替え) */}
+            {/* 写真 */}
             <div className="relative aspect-[4/5] w-full bg-[#F1ECEE] md:aspect-auto md:min-h-[24rem]">
-              <span className="sr-only">岡崎 弘明の写真（準備中）</span>
+              <Image
+                src="/photos/ciso/okazaki.webp"
+                alt="岡崎 弘明"
+                fill
+                sizes="(max-width:768px) 100vw, 22rem"
+                className="object-cover object-top"
+              />
             </div>
             <div className="flex flex-col justify-center px-6 pb-9 md:py-12 md:pr-12">
               <h3>

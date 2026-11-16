@@ -17,7 +17,7 @@ const rows: {
   {
     Icon: IconSoloIt,
     before: "社内に、セキュリティの専門家がいない",
-    after: ["専門家の名前を出して、", "取引先に説明できる"],
+    after: ["ランサムウェアや個人情報漏洩の", "リスクを最小限にする"],
   },
   {
     Icon: IconChecksheet,

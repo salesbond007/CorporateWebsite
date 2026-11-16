@@ -504,197 +504,134 @@ export function ReasonAiManagement() {
   );
 }
 
-/* ========================================================= 03 規格の取得前から専門家の名前を */
+/* ========================================================= 03 必要な対策に絞る */
 
-export function ReasonExpertName() {
+export function ReasonFocus() {
   const { ref, inView } = useInView<HTMLDivElement>();
-  const steps = [
-    {
-      label: "専門家が就任",
-      icon: (
-        <svg viewBox="0 0 48 48" className="h-full w-full" aria-hidden="true">
-          <circle cx="24" cy="15" r="8" fill={W} />
-          <path d="M8 44c1.5-10 7.5-15 16-15s14.5 5 16 15z" fill={W} />
-          <path d="M21 29l3 8 3-8" fill="#fff" />
-          <path
-            d="M36 26l7 2.5v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9v-5z"
-            fill="#fff"
-            stroke={W}
-            strokeWidth="1.8"
-          />
-          <path
-            d="M33 33.5l2 2 4-4"
-            fill="none"
-            stroke={W}
-            strokeWidth="1.8"
-            strokeLinecap="round"
-          />
-        </svg>
-      ),
-    },
-    {
-      label: "体制図・回答書に記載",
-      icon: (
-        <svg viewBox="0 0 48 48" className="h-full w-full" aria-hidden="true">
-          <rect
-            x="9"
-            y="7"
-            width="30"
-            height="37"
-            rx="3"
-            fill="#fff"
-            stroke={W}
-            strokeWidth="2.5"
-          />
-          <rect x="17" y="4" width="14" height="6" rx="2" fill={W} />
-          {[0, 1, 2].map((i) => (
-            <g key={i}>
-              <rect
-                x="14"
-                y={16 + i * 9}
-                width="6"
-                height="6"
-                rx="1"
-                fill="none"
-                stroke={W}
-                strokeWidth="1.8"
-              />
-              <path
-                d={`M15 ${19 + i * 9}l1.5 1.5 3-3`}
-                fill="none"
-                stroke={W}
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                className={inView ? "rv-tick" : "opacity-0"}
-                style={{ animationDelay: `${1.2 + i * 0.35}s` }}
-              />
-              <rect
-                x="23"
-                y={17.5 + i * 9}
-                width="11"
-                height="3"
-                rx="1.5"
-                fill="#E3B9C6"
-              />
-            </g>
-          ))}
-        </svg>
-      ),
-    },
-    {
-      label: "取引先に説明",
-      icon: (
-        <svg viewBox="0 0 48 48" className="h-full w-full" aria-hidden="true">
-          <rect
-            x="6"
-            y="14"
-            width="12"
-            height="30"
-            fill="#fff"
-            stroke={W}
-            strokeWidth="2.5"
-          />
-          <rect
-            x="18"
-            y="5"
-            width="18"
-            height="39"
-            fill="#fff"
-            stroke={W}
-            strokeWidth="2.5"
-          />
-          <rect
-            x="36"
-            y="18"
-            width="7"
-            height="26"
-            fill="#F1DDE3"
-            stroke={W}
-            strokeWidth="2.5"
-          />
-          {[0, 1, 2, 3].map((r) => (
-            <g key={r}>
-              <rect x="22" y={10 + r * 7} width="4" height="4" fill={W} />
-              <rect x="29" y={10 + r * 7} width="4" height="4" fill={W} />
-            </g>
-          ))}
-          <circle
-            cx="27"
-            cy="38"
-            r="8"
-            fill="#fff"
-            stroke={W}
-            strokeWidth="2"
-          />
-          <path
-            d="M22 38l2.5-2 2 1 2-1 2.5 2-3.5 3c-.6.6-1.4.6-2 0z"
-            fill={W}
-          />
-        </svg>
-      ),
-    },
+  const all = [
+    { t: "大企業向けの規程一式", keep: false },
+    { t: "AI利用ルール", keep: true },
+    { t: "多段階の承認手続き", keep: false },
+    { t: "チェックシートの回答", keep: true },
+    { t: "全部門の個別マニュアル", keep: false },
+    { t: "事故時の初動手順", keep: true },
   ];
+  const kept = all.filter((a) => a.keep);
   return (
     <Frame inner={ref}>
       <div
         role="img"
-        aria-label="規格の取得前から、専門家が就任して体制図と回答書に名前を載せ、取引先に説明できる流れの図"
+        aria-label="大企業と同じ対策をすべて入れるのではなく、初回アセスメントで優先順位を決め、取引先に求められる必要な対策に絞る図"
+        className="grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto_1fr] sm:gap-4"
       >
-        <div className="flex items-start justify-between gap-1">
-          {steps.map((s, i) => (
-            <div key={s.label} className="contents">
-              <Pop
-                show={inView}
-                delay={i * 450}
-                className="flex w-[27%] flex-col items-center text-center"
+        {/* 左: 大企業と同じ対策を全部 */}
+        <div>
+          <p className="mb-2 text-center text-[10px] font-black text-ink/55 sm:text-[11px]">
+            大企業と同じ対策を全部
+          </p>
+          <ul className="grid grid-cols-2 gap-1.5 sm:grid-cols-1">
+            {all.map((a, i) => (
+              <li
+                key={a.t}
+                className={`rounded-md px-2 py-1.5 text-[10px] font-bold leading-tight ring-1 transition-all duration-500 sm:text-[11px] ${
+                  inView && !a.keep
+                    ? "bg-[#F4F1F2] text-ink/35 line-through ring-[#ECE6E8]"
+                    : "bg-white text-ink ring-[#EEDFE3]"
+                }`}
+                style={{ transitionDelay: `${1200 + i * 120}ms` }}
               >
-                <div className="relative grid aspect-square w-full place-items-center rounded-full bg-white p-[18%] shadow-[0_10px_24px_-16px_rgba(122,31,61,0.7)]">
-                  {s.icon}
-                  {i === 2 ? (
-                    <span
-                      aria-hidden="true"
-                      className={`absolute inset-0 rounded-full ${inView ? "rv-glow" : ""}`}
-                    />
-                  ) : null}
-                </div>
-                <p className="mt-2 text-[10px] font-black leading-snug text-ink sm:text-xs">
-                  {s.label}
-                </p>
-              </Pop>
-              {i < steps.length - 1 ? (
-                <div className="mt-[11%]">
-                  <Arrow show={inView} delay={i * 450 + 250} />
-                </div>
-              ) : null}
+                {a.t}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-2 rounded-md bg-white px-2 py-1.5 text-center ring-1 ring-[#EEDFE3]">
+            <p className="text-[9px] font-bold text-ink/55">費用・手間</p>
+            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[#EEDFE3]">
+              <div className="h-full w-full rounded-full bg-[#B9A9AF]" />
             </div>
-          ))}
+          </div>
         </div>
 
-        {/* 期間のバー */}
+        {/* 中: 初回アセスメントで絞る */}
         <Pop
           show={inView}
-          delay={1400}
-          className="mt-6 rounded-lg bg-white px-3 py-3 sm:px-4"
+          delay={400}
+          className="flex items-center justify-center gap-3 sm:flex-col sm:gap-0"
         >
-          <div className="flex items-center justify-between text-[10px] font-bold text-ink/60 sm:text-[11px]">
-            <span className="rounded-full bg-[#7A1F3D] px-2 py-0.5 text-white">
-              契約した月から
-            </span>
-            <span>規格の取得（半年〜1年）</span>
-          </div>
-          <div className="mt-2 h-2 overflow-hidden rounded-full bg-[#EEDFE3]">
-            <div
-              className="h-full rounded-full bg-[#7A1F3D] transition-[width] duration-[1600ms] ease-out"
-              style={{
-                width: inView ? "100%" : "4%",
-                transitionDelay: "1600ms",
-              }}
+          <svg
+            viewBox="0 0 48 64"
+            className="h-12 w-9 sm:h-20 sm:w-14"
+            aria-hidden="true"
+          >
+            <path d="M4 6h40L28 30v20l-8 6V30z" fill={W} />
+            <path
+              d="M10 10h28"
+              stroke="#fff"
+              strokeOpacity="0.5"
+              strokeWidth="2"
             />
-          </div>
-          <p className="mt-2 text-center text-[10px] font-bold text-[#7A1F3D] sm:text-[11px]">
-            取得を待たずに、専門家の名前で取引先に説明できる
+          </svg>
+          <p className="whitespace-nowrap rounded-full sm:mt-1 bg-[#7A1F3D] px-2 py-1 text-[9px] font-black text-white sm:text-[10px]">
+            初回アセスメント
           </p>
+          <svg
+            viewBox="0 0 40 16"
+            className="h-4 w-8 rotate-90 sm:mt-2 sm:rotate-0"
+            aria-hidden="true"
+          >
+            <path
+              d="M2 8h30"
+              stroke={W}
+              strokeWidth="3"
+              strokeDasharray="4 4"
+              className="rv-dash"
+            />
+            <path
+              d="M28 2l8 6-8 6"
+              fill="none"
+              stroke={W}
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </Pop>
+
+        {/* 右: 必要な対策だけ */}
+        <div>
+          <p className="mb-2 text-center text-[10px] font-black text-[#7A1F3D] sm:text-[11px]">
+            必要な対策に絞る
+          </p>
+          <ol className="grid gap-2">
+            {kept.map((a, i) => (
+              <Pop
+                key={a.t}
+                show={inView}
+                delay={2000 + i * 250}
+                className="flex items-center gap-1.5 rounded-md bg-white px-2 py-2 ring-2 ring-[#7A1F3D]"
+              >
+                <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-[#7A1F3D] text-[9px] font-black text-white">
+                  {i + 1}
+                </span>
+                <span className="text-[10px] font-black leading-tight text-ink sm:text-[11px]">
+                  {a.t}
+                </span>
+              </Pop>
+            ))}
+          </ol>
+          <div className="mt-2 rounded-md bg-white px-2 py-1.5 text-center ring-1 ring-[#EEDFE3]">
+            <p className="text-[9px] font-bold text-[#7A1F3D]">費用・手間</p>
+            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[#EEDFE3]">
+              <div
+                className="h-full rounded-full bg-[#7A1F3D] transition-[width] duration-[1200ms] ease-out"
+                style={{
+                  width: inView ? "38%" : "100%",
+                  transitionDelay: "2600ms",
+                }}
+              />
+            </div>
+          </div>
+        </div>
       </div>
     </Frame>
   );
