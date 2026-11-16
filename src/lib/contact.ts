@@ -200,7 +200,7 @@ export const webSecurityDiagnosisSchema = z.object({
 /** 簡易LP(顧問・COO紹介 / CISO・セキュリティ顧問)の無料相談フォームで扱うサービス */
 export const serviceLeadServices = {
   advisory: "顧問・COO紹介",
-  ciso: "CISO・セキュリティ顧問",
+  ciso: "AI情報セキュリティ顧問",
 } as const;
 
 export type ServiceLeadService = keyof typeof serviceLeadServices;

@@ -36,8 +36,8 @@ export default function SecurityServicePage({
       image="/services/cards/ai-solutions.jpg"
       related={[
         {
-          title: "CISO・セキュリティ顧問",
-          text: "AIを使う会社のための社外CISO。AI利用ガイドラインの作成、AIツールの導入前チェック、セキュリティチェックシート対応まで、AI時代のセキュリティ体制づくりを支援します。",
+          title: "AI情報セキュリティ顧問",
+          text: "大企業・上場企業との取引に欠かせない情報セキュリティの体制を、専門家がアドバイザーや社外CISOとして一緒に整えます。月10万円〜（税別）。",
           href: "/services/ciso",
         },
         {
