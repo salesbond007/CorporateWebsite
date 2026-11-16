@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { IconChecksheet, IconShadowAi, IconSoloIt } from "./FlatIcons";
 
 /**
- * Bond AI セキュリティ LP: 月額で CISO / セキュリティ顧問に任せると、何が変わるかを示す図。
+ * Bond AI 情報セキュリティ LP: 月額で CISO / 情報セキュリティ顧問に任せると、何が変わるかを示す図。
  * 写真は使わず、イラスト + 流れる線 + テキストで「いまの課題」→「導入後」を1行ずつ対応させる。
  * 画面に入ると、左の課題 → 線が中央へ流れる → 右の導入後、の順に現れる。
  */
@@ -16,7 +16,7 @@ const rows: {
 }[] = [
   {
     Icon: IconSoloIt,
-    before: "社内に、セキュリティの専門家がいない",
+    before: "社内に、情報セキュリティの専門家がいない",
     after: ["ランサムウェアや個人情報漏洩の", "リスクを最小限にする"],
   },
   {
@@ -134,7 +134,7 @@ function Hub({ compact, delay }: { compact?: boolean; delay: number }) {
         <span className="relative block h-full w-full overflow-hidden rounded-full ring-2 ring-white">
           <Image
             src="/photos/ciso/advisor.webp"
-            alt="セキュリティ顧問（イメージ）"
+            alt="情報セキュリティ顧問（イメージ）"
             fill
             sizes="96px"
             className="object-cover"
@@ -148,7 +148,7 @@ function Hub({ compact, delay }: { compact?: boolean; delay: number }) {
         <p
           className={`mt-1 font-black leading-snug ${compact ? "text-base" : "text-lg"}`}
         >
-          セキュリティ顧問
+          情報セキュリティ顧問
           {compact ? "／" : <br />}
           社外CISO
         </p>
@@ -256,7 +256,7 @@ export function CisoBeforeAfter() {
     <Reveal variant="none">
       <div
         role="group"
-        aria-label="セキュリティ顧問／社外CISOがつくと、課題がどう変わるか"
+        aria-label="情報セキュリティ顧問／社外CISOがつくと、課題がどう変わるか"
       >
         {/* ===== PC ===== */}
         <div className="hidden grid-cols-[1fr_3.5rem_12rem_3.5rem_1fr] gap-x-3 md:grid lg:grid-cols-[1fr_4.5rem_13rem_4.5rem_1fr]">
