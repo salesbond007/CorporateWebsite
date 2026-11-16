@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ComponentType, CSSProperties } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { IconChecksheet, IconShadowAi, IconSoloIt } from "./FlatIcons";
@@ -15,47 +16,24 @@ const rows: {
 }[] = [
   {
     Icon: IconSoloIt,
-    before: "「責任者は誰ですか」に答えられない",
-    after: ["責任者が就任し、", "取引先に答えられる"],
-  },
-  {
-    Icon: IconShadowAi,
-    before: "社員のAI利用を把握できていない",
-    after: ["AI利用ルールと台帳で、", "管理できる"],
+    before: "社内に、セキュリティの専門家がいない",
+    after: ["専門家の名前を出して、", "取引先に説明できる"],
   },
   {
     Icon: IconChecksheet,
-    before: "チェックシートに答えられない",
-    after: ["取引先の審査に", "備えられる"],
+    before: "対策を示せず、取引先の候補から外れることもある",
+    after: ["対策を示せる会社として、", "大手の取引先候補に残れる"],
+  },
+  {
+    Icon: IconShadowAi,
+    before: "インシデントが起きても対応できず、損害が広がる",
+    after: ["手順と連絡先を決めて、", "インシデントに備えられる"],
   },
 ];
 
 const show =
   "group-data-[visible=true]/reveal:translate-x-0 group-data-[visible=true]/reveal:opacity-100";
 const d = (ms: number): CSSProperties => ({ transitionDelay: `${ms}ms` });
-
-function Shield({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      className={className}
-      fill="none"
-      aria-hidden="true"
-    >
-      <path
-        d="M12 2.5l8 3v6c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10v-6z"
-        fill="currentColor"
-      />
-      <path
-        d="M8.2 12l2.6 2.6 5-5"
-        stroke="#fff"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 function Check({ delay }: { delay: number }) {
   return (
@@ -147,32 +125,38 @@ function Hub({ compact, delay }: { compact?: boolean; delay: number }) {
         className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:22px_22px]"
       />
       <span
-        className={`relative grid shrink-0 place-items-center ${compact ? "h-12 w-12" : "h-16 w-16"}`}
+        className={`relative grid shrink-0 place-items-center ${compact ? "h-14 w-14" : "h-20 w-20"}`}
       >
         <span
           aria-hidden="true"
           className="ba-pulse absolute inset-0 rounded-full border border-white/60"
         />
-        <span className="grid h-full w-full place-items-center rounded-full bg-white text-brand-500">
-          <Shield className={compact ? "h-6 w-6" : "h-8 w-8"} />
+        <span className="relative block h-full w-full overflow-hidden rounded-full ring-2 ring-white">
+          <Image
+            src="/photos/ciso/advisor.webp"
+            alt="セキュリティ顧問（イメージ）"
+            fill
+            sizes="96px"
+            className="object-cover"
+          />
         </span>
       </span>
       <div className={`relative ${compact ? "" : "mt-4"}`}>
         <p className="text-[11px] font-bold tracking-[0.14em] text-white/75">
-          セキュリティ顧問
+          AI時代の責任者
         </p>
         <p
           className={`mt-1 font-black leading-snug ${compact ? "text-base" : "text-lg"}`}
         >
-          社外の
-          {compact ? null : <br />}
-          責任者が就任
+          セキュリティ顧問
+          {compact ? "／" : <br />}
+          社外CISO
         </p>
         {compact ? null : (
           <p className="mt-3 border-t border-white/25 pt-3 text-xs leading-relaxed text-white/85">
-            取引先に出せる
+            専門家が社外から
             <br />
-            専門家の名前
+            就任します
           </p>
         )}
       </div>
@@ -218,7 +202,7 @@ function BeforeCard({
     <li
       style={d(i * 120)}
       className={`flex items-center gap-3 rounded-md border border-[#E6DFE1] bg-white opacity-0 transition-all duration-700 ${show} ${
-        mobile ? "-translate-x-4 px-3 py-2.5" : "h-[5.5rem] -translate-x-6 px-4"
+        mobile ? "-translate-x-4 px-3 py-2.5" : "h-[6.5rem] -translate-x-6 px-5"
       }`}
     >
       <span className="w-5 shrink-0 text-xs font-black text-ink/30">
@@ -227,7 +211,7 @@ function BeforeCard({
       <r.Icon
         className={`shrink-0 opacity-70 grayscale ${mobile ? "h-10 w-12" : "hidden h-14 w-16 lg:block"}`}
       />
-      <span className="text-[14px] font-bold leading-snug text-ink/65 [word-break:auto-phrase] md:text-[15px]">
+      <span className="text-[14px] font-bold leading-snug text-ink/70 [word-break:auto-phrase] md:text-base">
         {r.before}
       </span>
     </li>
@@ -251,7 +235,7 @@ function AfterCard({
       className={`relative flex items-center gap-3 overflow-hidden rounded-md bg-white opacity-0 shadow-[0_10px_30px_-18px_rgba(122,31,61,0.55)] ring-1 ring-brand-500/25 transition-all duration-700 ${show} ${
         mobile
           ? "translate-x-4 py-3 pl-4 pr-3"
-          : "h-[5.5rem] translate-x-6 pl-5 pr-4"
+          : "h-[6.5rem] translate-x-6 pl-6 pr-5"
       }`}
     >
       <span
@@ -259,9 +243,9 @@ function AfterCard({
         className="absolute inset-y-0 left-0 w-1 bg-brand-500"
       />
       <Check delay={base + i * 120 + 300} />
-      <span className="text-[14px] font-black leading-snug text-ink md:text-[15px]">
+      <span className="text-[14px] font-black leading-snug text-ink md:text-base">
         {r.after[0]}
-        <span className="text-brand-500">{r.after[1]}</span>
+        <span className="text-brand-500 md:block">{r.after[1]}</span>
       </span>
     </li>
   );
@@ -272,7 +256,7 @@ export function CisoBeforeAfter() {
     <Reveal variant="none">
       <div
         role="group"
-        aria-label="月額でCISO・セキュリティ顧問に任せると、課題がどう変わるか"
+        aria-label="セキュリティ顧問／社外CISOがつくと、課題がどう変わるか"
       >
         {/* ===== PC ===== */}
         <div className="hidden grid-cols-[1fr_3.5rem_12rem_3.5rem_1fr] gap-x-3 md:grid lg:grid-cols-[1fr_4.5rem_13rem_4.5rem_1fr]">
