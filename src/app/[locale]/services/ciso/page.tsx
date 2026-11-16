@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
@@ -9,7 +10,7 @@ import { CisoIssueSlider } from "@/components/services/CisoIssueSlider";
 import {
   ReasonAiManagement,
   ReasonDocs,
-  ReasonExpertName,
+  ReasonFocus,
 } from "@/components/services/CisoReasonVisuals";
 import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
 import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
@@ -313,11 +314,9 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </span>
             </p>
             <p className="mt-6 text-[clamp(1.05rem,1.7vw,1.35rem)] font-bold leading-[1.8] text-ink/85">
-              取引先に出せる<span className="text-brand-500">専門家の名前</span>
-              と、
-              <br />
-              <span className="text-brand-500">AI時代に備える</span>
-              体制づくりを。
+              <span className="text-brand-500">AI時代</span>に必須の
+              <br className="sm:hidden" />
+              セキュリティ体制を<span className="text-brand-500">構築</span>する
             </p>
             <div className="mt-10 flex justify-center lg:block">
               <BigButton label="無料相談" icon="check" href="#check" />
@@ -458,17 +457,16 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               {
                 title: (
                   <>
-                    規格の取得前から、
+                    必要な対策に絞り、
                     <span className="text-brand-500">
-                      取引先に出せる専門家の名前
+                      ムダなコストをかけない
                     </span>
-                    を
                   </>
                 ),
                 key: "f3",
-                text: "ISMSなどの規格の取得には、半年〜1年ほどかかります。その間も、体制図や回答書に専門家の名前を載せ、取引先に説明できます。名前を出すときは、現状の確認と定例会をセットで行います。",
+                text: "大企業と同じ規程や手続きをそのまま入れると、費用も手間もかさみます。当社は、取引先に求められる水準から逆算して、必要な対策に絞って整えます。初回アセスメントで優先順位を決めるので、やらなくてよいことにお金をかけずに済みます。",
                 stat: null,
-                visual: <ReasonExpertName />,
+                visual: <ReasonFocus />,
               },
             ].map((r, i) => (
               <Reveal key={r.key} variant="up">
@@ -527,9 +525,15 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             variant="up"
             className="mt-12 grid gap-8 overflow-hidden rounded-lg bg-white shadow-[0_20px_44px_-34px_rgba(0,0,0,0.4)] ring-1 ring-[#EEE5E8] md:grid-cols-[18rem_1fr] lg:grid-cols-[22rem_1fr]"
           >
-            {/* 写真(後日差し替え) */}
+            {/* 写真 */}
             <div className="relative aspect-[4/5] w-full bg-[#F1ECEE] md:aspect-auto md:min-h-[24rem]">
-              <span className="sr-only">岡崎 弘明の写真（準備中）</span>
+              <Image
+                src="/photos/ciso/okazaki.webp"
+                alt="岡崎 弘明"
+                fill
+                sizes="(max-width:768px) 100vw, 22rem"
+                className="object-cover object-top"
+              />
             </div>
             <div className="flex flex-col justify-center px-6 pb-9 md:py-12 md:pr-12">
               <h3>
