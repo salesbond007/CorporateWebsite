@@ -47,57 +47,6 @@ export function generateMetadata({
 
 const W2 = "#A83B57"; // やや明るいワインレッド
 
-const faqs = [
-  {
-    q: "情報セキュリティ顧問とは、どんなサービスですか？",
-    a: "社内に情報セキュリティの専門家がいない会社に、外部の専門家が顧問として入り、情報セキュリティの体制づくりを支えるサービスです。Bond AIでは、大手企業と取引したい中小企業向けに、取引先のチェックシートへの回答、AI利用ルールづくり、事故のときの手順づくりなどを、責任者（社外CISO）の立場で支援します。",
-  },
-  {
-    q: "料金はいくらですか？",
-    a: "ライトプラン（アドバイザー）は月10万円〜、スタンダードプラン（社外CISO）は月30万円〜（いずれも税別）です。経営会議にも参加するエンタープライズプラン（社外CISO・経営参画）は要相談です。まずは無料相談で、御社に必要な範囲をご案内します。",
-  },
-  {
-    q: "個人情報漏洩やランサムウェアへの対策もできますか？",
-    a: "はい。初回アセスメントで、個人情報の漏洩やランサムウェアなどのリスクを洗い出し、優先順位をつけて対策を決めます。社員がAIに入力してよい情報のルールや、事故が起きたときの連絡体制・初動の手順も整えます。",
-  },
-  {
-    q: "社員の生成AI（ChatGPTなど）の利用も管理できますか？",
-    a: "はい。AI利用ルール（使ってよいAIツール、入力してはいけない情報、導入の承認の流れ）と、社内で使うAIの一覧（AIシステム台帳）を、標準の支援に含めています。",
-  },
-  {
-    q: "サービスの監修者はどんな人ですか？",
-    a: "株式会社帝国データバンクネットコミュニケーション（株式会社帝国データバンクアクシスと合併）の元代表取締役、岡崎 弘明が監修しています。帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表を務めました。",
-  },
-  {
-    q: "ほかの情報セキュリティ顧問・社外CISOとの違いは何ですか？",
-    a: "サービスの種類は社外CISO（vCISO）と同じです。違いは、大手企業との取引とAIの管理に絞り、そのための支援（チェックシートの回答、取引先に出せる「情報セキュリティ体制のご案内」、取引先との打ち合わせへの同席、AI利用ルールとAIシステム台帳）を標準で入れていることです。",
-  },
-  {
-    q: "プランは、何が違いますか？",
-    a: "ライトプラン（アドバイザー）は相談役として助言し、判断と作業はお客さまの担当者が行います。スタンダードプラン（社外CISO）は責任者として判断し、作業まで引き受けます。エンタープライズプランは、さらに経営会議に参加し、グループ会社・拠点まで含めて統括します。どのプランでも、取引先に専門家の名前を出せます。",
-  },
-  {
-    q: "専門家の名前を、取引先に出してもよいですか？",
-    a: "はい。体制図や取引先への回答書に載せられます。載せるのは、当社が中身を確認した書類だけです。アドバイザーの場合は、平常時の助言という範囲がわかる肩書きで載せます。",
-  },
-  {
-    q: "ISMSなどの規格をまだ取っていなくても、大丈夫ですか？",
-    a: "はい。規格の取得には、準備から半年〜1年ほどかかるのが一般的です。取得の前から専門家がつき、取引先に責任者と体制を説明できるようにします。",
-  },
-  {
-    q: "取引先の審査に通ることを約束してもらえますか？",
-    a: "審査の結果をお約束することはできません。取引先の質問に答え、対策を説明できる体制を整える支援を行います。",
-  },
-  {
-    q: "まだAIをほとんど使っていませんが、対象になりますか？",
-    a: "はい。チェックシートへの回答、規程づくり、事故のときの初動など、情報セキュリティの責任者としての役割がすべて対象です。これからAIを導入する会社にもおすすめです。",
-  },
-  {
-    q: "事故（インシデント）が起きたときは、どこまで対応してもらえますか？",
-    a: "社外CISOでは、事故が起きたときに最初に何をするかの判断を含みます。アドバイザーには、事故のときの対応は含まれません。",
-  },
-];
-
 /* ============================================================ 小さな部品 */
 
 function Icon({
@@ -168,7 +117,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
     { href: "#reason", label: "選ばれる理由" },
     { href: "#price", label: "プラン" },
     { href: "#expert", label: "サービス監修" },
-    { href: "#faq", label: "よくある質問" },
     { href: `#${FORM_ID}`, label: "お申し込み" },
   ];
 
@@ -281,15 +229,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 "株式会社帝国データバンクネットコミュニケーション（株式会社帝国データバンクアクシスと合併）元代表取締役。帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表を務めた。",
               knowsAbout: ["情報セキュリティ", "情報セキュリティ体制の構築"],
             },
-          },
-          {
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqs.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
           },
         ]}
       />
@@ -614,7 +553,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 src="/photos/ciso/okazaki.webp"
                 alt="岡崎 弘明"
                 fill
-                sizes="(max-width:768px) 100vw, 22rem"
+                sizes="(max-width:768px) 100vw, 352px"
+                quality={95}
                 className="object-cover object-top"
               />
             </div>
@@ -648,50 +588,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </Container>
       </section>
 
-      {/* ========== 10. よくある質問 ========== */}
-      <section
-        id="faq"
-        className="relative isolate scroll-mt-28 overflow-hidden py-20 md:py-28"
-      >
-        <Watermark className="-left-4 top-4">FAQ</Watermark>
-        <Container>
-          <SectionHead en="FAQ">よくある質問</SectionHead>
-          <div className="mt-10 space-y-3">
-            {faqs.map((f) => (
-              <details
-                key={f.q}
-                className="group rounded-md bg-white shadow-[0_10px_24px_-20px_rgba(0,0,0,0.45)] ring-1 ring-[#EEE5E8]"
-              >
-                <summary className="flex cursor-pointer list-none items-center gap-4 p-5 md:p-6 [&::-webkit-details-marker]:hidden">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-500 text-sm font-black text-white">
-                    Q
-                  </span>
-                  <span className="flex-1 text-[15px] font-bold md:text-base">
-                    {f.q}
-                  </span>
-                  <span
-                    aria-hidden="true"
-                    className="text-xl text-brand-500 transition-transform group-open:rotate-45"
-                  >
-                    ＋
-                  </span>
-                </summary>
-                <div className="flex gap-4 border-t border-[#EEE5E8] px-5 py-5 md:px-6">
-                  <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-[#F4EEF0] text-sm font-black text-brand-500">
-                    A
-                  </span>
-                  <p className="pt-1.5 text-[15px] leading-[1.9] text-ink/80">
-                    {f.a}
-                  </p>
-                </div>
-              </details>
-            ))}
-          </div>
-        </Container>
-        <div className="mt-20">
-          <SplitCta />
-        </div>
-      </section>
+      {/* ========== 10. 無料相談の帯 ========== */}
+      <SplitCta />
 
       {/* ========== 11. 申し込み ========== */}
       <section

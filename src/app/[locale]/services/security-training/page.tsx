@@ -1012,6 +1012,7 @@ export default function SecurityTrainingPage({
             <div className="relative aspect-[4/5] w-full bg-[#F1ECEE] md:aspect-auto md:min-h-[24rem]">
               <Image
                 src="/photos/ciso/okazaki.webp"
+                quality={95}
                 alt="岡崎 弘明"
                 fill
                 sizes="(max-width:768px) 100vw, 22rem"
