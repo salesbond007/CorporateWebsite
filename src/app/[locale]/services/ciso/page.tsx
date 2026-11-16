@@ -8,6 +8,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
 import { CisoIssueSlider } from "@/components/services/CisoIssueSlider";
 import { LpNav } from "@/components/services/LpNav";
+import { CisoPlans } from "@/components/services/CisoPlans";
 import {
   ReasonAiManagement,
   ReasonDocs,
@@ -53,7 +54,7 @@ const faqs = [
   },
   {
     q: "料金はいくらですか？",
-    a: "アドバイザーは月10万円〜（税別）です。社外CISOは、会社の規模やご相談の内容に合わせてお見積もりします。まずは無料相談で、御社に必要な範囲をご案内します。",
+    a: "ライトプラン（アドバイザー）は月10万円〜、スタンダードプラン（社外CISO）は月30万円〜（いずれも税別）です。経営会議にも参加するエンタープライズプラン（社外CISO・経営参画）は要相談です。まずは無料相談で、御社に必要な範囲をご案内します。",
   },
   {
     q: "個人情報漏洩やランサムウェアへの対策もできますか？",
@@ -72,8 +73,8 @@ const faqs = [
     a: "サービスの種類は社外CISO（vCISO）と同じです。違いは、大手企業との取引とAIの管理に絞り、そのための支援（チェックシートの回答、取引先に出せる「情報セキュリティ体制のご案内」、取引先との打ち合わせへの同席、AI利用ルールとAIシステム台帳）を標準で入れていることです。",
   },
   {
-    q: "アドバイザーと社外CISOは、何が違いますか？",
-    a: "アドバイザーは相談役として助言し、判断と作業はお客さまの担当者が行います。社外CISOは責任者として判断し、作業まで引き受けます。どちらも、取引先に専門家の名前を出せます。",
+    q: "プランは、何が違いますか？",
+    a: "ライトプラン（アドバイザー）は相談役として助言し、判断と作業はお客さまの担当者が行います。スタンダードプラン（社外CISO）は責任者として判断し、作業まで引き受けます。エンタープライズプランは、さらに経営会議に参加し、グループ会社・拠点まで含めて統括します。どのプランでも、取引先に専門家の名前を出せます。",
   },
   {
     q: "専門家の名前を、取引先に出してもよいですか？",
@@ -165,6 +166,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
     { href: "#service", label: "サービス" },
     { href: "#structure", label: "体制づくり" },
     { href: "#reason", label: "選ばれる理由" },
+    { href: "#price", label: "プラン" },
     { href: "#expert", label: "サービス監修" },
     { href: "#faq", label: "よくある質問" },
     { href: `#${FORM_ID}`, label: "お申し込み" },
@@ -217,7 +219,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             },
             offers: {
               "@type": "Offer",
-              name: "アドバイザー",
+              name: "ライトプラン（アドバイザー）",
               priceCurrency: "JPY",
               priceSpecification: {
                 "@type": "UnitPriceSpecification",
@@ -233,17 +235,30 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               itemListElement: [
                 {
                   "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Service",
-                    name: "アドバイザー（情報セキュリティ顧問）",
+                  name: "ライトプラン（アドバイザー）",
+                  priceSpecification: {
+                    "@type": "UnitPriceSpecification",
+                    minPrice: 100000,
+                    priceCurrency: "JPY",
+                    unitText: "月",
+                    valueAddedTaxIncluded: false,
                   },
                 },
                 {
                   "@type": "Offer",
-                  itemOffered: {
-                    "@type": "Service",
-                    name: "社外CISO（vCISO）",
+                  name: "スタンダードプラン（社外CISO）",
+                  priceSpecification: {
+                    "@type": "UnitPriceSpecification",
+                    minPrice: 300000,
+                    priceCurrency: "JPY",
+                    unitText: "月",
+                    valueAddedTaxIncluded: false,
                   },
+                },
+                {
+                  "@type": "Offer",
+                  name: "エンタープライズプラン（社外CISO・経営参画）",
+                  description: "要相談",
                 },
               ],
             },
@@ -563,6 +578,20 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 </article>
               </Reveal>
             ))}
+          </div>
+        </Container>
+      </section>
+
+      {/* ========== 6. プラン ========== */}
+      <section
+        id="price"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
+      >
+        <Watermark className="-left-4 top-4">Plan</Watermark>
+        <Container>
+          <SectionHead en="Plan">プランと料金</SectionHead>
+          <div className="mt-10 md:mt-12">
+            <CisoPlans ctaHref={`#${FORM_ID}`} />
           </div>
         </Container>
       </section>
