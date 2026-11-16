@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
@@ -1007,29 +1008,41 @@ export default function SecurityTrainingPage({
             variant="up"
             className="mt-10 grid overflow-hidden bg-white ring-1 ring-[#EEE5E8] md:grid-cols-[16rem_1fr] lg:grid-cols-[20rem_1fr]"
           >
-            {/* 顔写真の枠(後日差し替え) */}
-            <div className="flex aspect-[4/3] items-center justify-center bg-[#F1ECEE] md:aspect-auto md:min-h-[18rem]">
-              <span className="sr-only">監修者の写真（準備中）</span>
+            {/* 写真 */}
+            <div className="relative aspect-[4/5] w-full bg-[#F1ECEE] md:aspect-auto md:min-h-[24rem]">
+              <Image
+                src="/photos/ciso/okazaki.webp"
+                alt="岡崎 弘明"
+                fill
+                sizes="(max-width:768px) 100vw, 22rem"
+                className="object-cover object-top"
+              />
             </div>
-            <div className="flex flex-col justify-center px-6 py-8 md:px-10 md:py-10">
-              {/* 掲載の許可をいただくまで、氏名と経歴は伏せる */}
-              <p className="inline-flex w-fit items-center bg-[#F1ECEE] px-2.5 py-1 text-[11px] font-bold tracking-[0.1em] text-ink/60">
-                氏名・経歴は近日公開
-              </p>
-              <h3 className="mt-4">
-                <span className="sr-only">監修者（近日公開）</span>
-                <span
-                  aria-hidden="true"
-                  className="block h-9 w-44 rounded bg-[#D9CFD3]"
-                />
+            <div className="flex flex-col justify-center px-6 pb-9 md:py-12 md:pr-12">
+              <h3>
+                <span className="block text-[clamp(1.75rem,3vw,2.25rem)] font-black tracking-[0.08em] text-ink">
+                  岡崎 弘明
+                </span>
+                <span className="mt-1 block text-xs font-bold tracking-[0.2em] text-ink/50">
+                  （オカザキ ヒロアキ）
+                </span>
               </h3>
-              <div
-                aria-hidden="true"
-                className="mt-6 space-y-2.5 border-l-[3px] border-brand-500 pl-4"
-              >
-                <span className="block h-4 w-full max-w-[24rem] rounded bg-[#D9CFD3]" />
-                <span className="block h-4 w-40 rounded bg-[#E3B9C6]" />
-              </div>
+              <p className="mt-6 border-l-[3px] border-brand-500 pl-4 leading-[1.7]">
+                <span className="block text-base font-bold text-brand-500 md:text-lg">
+                  元代表取締役
+                </span>
+                <span className="block text-base font-bold text-ink md:text-lg">
+                  株式会社帝国データバンクネットコミュニケーション
+                </span>
+                <span className="mt-1 block text-xs text-ink/60">
+                  ※株式会社帝国データバンクアクシスと合併
+                </span>
+              </p>
+              <p className="mt-7 border-t border-[#EEE5E8] pt-7 text-[15px] leading-[2.05] text-ink/80">
+                帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表取締役を務める。
+                <br />
+                サービスの監修者として、支援の品質を確認し、難しい判断の相談役を務めます。
+              </p>
             </div>
           </Reveal>
         </Container>
