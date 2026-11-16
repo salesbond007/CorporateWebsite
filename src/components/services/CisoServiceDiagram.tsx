@@ -1,195 +1,148 @@
 import Image from "next/image";
-import type { ReactNode } from "react";
+import { Reveal } from "@/components/ui/Reveal";
 
 /**
- * Bond AI セキュリティ LP「サービス概要」の全体像。
- * 暗いワイン色を重ねた写真の上に、左: 4ステップが継続的にまわる円の図、
- * 右: 見出しと「セキュリティ顧問／社外CISO」の対応表。
- * 4ステップの順番は両プラン共通で、違うのは「どこまで任せられるか」であることを示す。
+ * Bond AI セキュリティ顧問 LP「サービス概要」。
+ * 暗いワイン色を重ねた写真(横幅いっぱい)の上に、少し立体的なピラミッドを置き、
+ * 各段から線を引いて、右に短い解説を並べる。
+ * 下の段(土台)から順に積み上げていく流れ: 現状の把握 → ルールづくり → 社員への浸透 → 取引先への説明
  * 背景写真: Unsplash(商用利用可・クレジット不要)。
  */
 
-const steps = [
+const tiers = [
   {
-    en: "RISK ASSESSMENT",
-    title: "リスクアセスメント・脆弱性診断",
-    plain: "弱点を見える化し、優先順位をつける",
-    advisor: "ヒアリングと社内アンケート",
-    ciso: "初回アセスメント＋ツールによる脆弱性診断",
+    step: "STEP 4",
+    label: "説明",
+    title: "取引先への説明",
+    text: "チェックシートに答え、取引先に出せる「セキュリティ体制のご案内」をそろえます。",
   },
   {
-    en: "POLICY & AI GOVERNANCE",
-    title: "ポリシー策定・AIガバナンス",
-    plain: "AIの使い方と社内規程を整える",
-    advisor: "規程・AI利用ルールのひな形",
-    ciso: "規程・AI利用ルール・AI台帳を作成",
+    step: "STEP 3",
+    label: "浸透",
+    title: "社員への浸透",
+    text: "決めたルールを、研修（動画とテスト・修了証つき）で全社員に広げます。",
   },
   {
-    en: "SECURITY AWARENESS",
-    title: "セキュリティ教育・啓発",
-    plain: "決めたルールを全社員に浸透させる",
-    advisor: "社員研修（年1回・修了証つき）",
-    ciso: "社員研修＋社内担当者の育成",
+    step: "STEP 2",
+    label: "ルール",
+    title: "ルールと体制づくり",
+    text: "情報セキュリティの規程、AI利用ルール、事故のときの手順と連絡先を決めます。",
   },
   {
-    en: "SUPPLY CHAIN SECURITY",
-    title: "サプライチェーンセキュリティ対応",
-    plain: "チェックシート回答と取引先への説明、制度対応",
-    advisor: "回答の助言と確認",
-    ciso: "回答案の作成・打ち合わせ同席",
+    step: "STEP 1",
+    label: "把握",
+    title: "現状の把握",
+    text: "ヒアリングと社内アンケート、ツールによる脆弱性診断で、今の状態と弱点を確かめます。",
   },
 ];
 
-/* 白の線アイコン(各ステップ) */
-const stroke = {
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.6,
-  strokeLinecap: "round" as const,
-  strokeLinejoin: "round" as const,
-};
+/* 左の面(明るい)と右の面(暗い)。上の段ほど明るい */
+const leftFill = ["#E7C4CE", "#C7768E", "#A3445F", "#7A1F3D"];
+const rightFill = ["#C99AA9", "#A05570", "#7E2E48", "#5A142C"];
+const labelFill = ["#5A142C", "#fff", "#fff", "#fff"];
 
-const icons: ReactNode[] = [
-  // リスクアセスメント: 棒グラフ + 虫めがね
-  <svg key="0" viewBox="0 0 40 40" className="h-full w-full">
-    <path {...stroke} d="M6 33h28M10 33V22M16 33V16M22 33v-8" />
-    <circle {...stroke} cx="27" cy="13" r="6" />
-    <path {...stroke} d="M31.5 17.5L36 22" />
-  </svg>,
-  // ポリシー策定: 書類 + チェック
-  <svg key="1" viewBox="0 0 40 40" className="h-full w-full">
-    <path {...stroke} d="M10 5h14l7 7v23H10z" />
-    <path {...stroke} d="M24 5v7h7M14 18h12M14 23h12" />
-    <path {...stroke} d="M14 29l3 3 6-6" />
-  </svg>,
-  // 教育・啓発: ボードと人
-  <svg key="2" viewBox="0 0 40 40" className="h-full w-full">
-    <rect {...stroke} x="12" y="5" width="23" height="15" rx="1.5" />
-    <path {...stroke} d="M16 11h10M16 15h14" />
-    <circle {...stroke} cx="8" cy="20" r="3.5" />
-    <path {...stroke} d="M2 35c0-5 2.7-8 6-8s6 3 6 8M14 27l6-5" />
-    <circle {...stroke} cx="27" cy="29" r="2.5" />
-    <path {...stroke} d="M22.5 36c0-3 2-5 4.5-5s4.5 2 4.5 5" />
-  </svg>,
-  // サプライチェーン: つながる会社
-  <svg key="3" viewBox="0 0 40 40" className="h-full w-full">
-    <rect {...stroke} x="15" y="4" width="10" height="10" rx="1" />
-    <rect {...stroke} x="4" y="26" width="10" height="10" rx="1" />
-    <rect {...stroke} x="26" y="26" width="10" height="10" rx="1" />
-    <path {...stroke} d="M20 14v6M9 26v-6h22v6" />
-  </svg>,
-];
+const APEX = { x: 170, y: 0 };
+const BASE_L = { x: 0, y: 384 };
+const BASE_F = { x: 205, y: 432 };
+const BASE_R = { x: 340, y: 384 };
+const ROWS = 4;
+const ROW_H = 96; // PCでは右の解説の行の高さとそろえる
 
-/* 円の中のステップ名の改行位置(文言は steps.title と同じ) */
-const lines = [
-  ["リスク", "アセスメント・", "脆弱性診断"],
-  ["ポリシー策定・", "AIガバナンス"],
-  ["セキュリティ", "教育・啓発"],
-  ["サプライチェーン", "セキュリティ対応"],
-];
+type P = { x: number; y: number };
+const at = (b: P, t: number): P => ({
+  x: APEX.x + (b.x - APEX.x) * t,
+  y: APEX.y + (b.y - APEX.y) * t,
+});
+const pts = (...ps: P[]) => ps.map((p) => `${p.x},${p.y}`).join(" ");
 
-/* 円の上の4ノードの位置(上→右→下→左 = 時計回り) */
-const pos = [
-  { left: "50%", top: "12%" },
-  { left: "88%", top: "50%" },
-  { left: "50%", top: "88%" },
-  { left: "12%", top: "50%" },
-];
-
-function Cycle() {
-  const arrows = [-45, 45, 135, 225].map((deg) => {
-    const rad = (deg * Math.PI) / 180;
-    return {
-      x: 50 + 38 * Math.cos(rad),
-      y: 50 + 38 * Math.sin(rad),
-      rot: deg + 90,
-    };
-  });
+function Pyramid({ lines }: { lines?: boolean }) {
+  const width = lines ? 440 : 344;
   return (
-    <div
-      className="relative mx-auto aspect-square w-full max-w-[520px] text-white"
+    <svg
+      viewBox={`-2 -2 ${width + 4} 440`}
+      className={
+        lines ? "h-[27.5rem] w-auto" : "mx-auto h-auto w-full max-w-[18rem]"
+      }
       role="img"
-      aria-label="リスクアセスメント・脆弱性診断、ポリシー策定・AIガバナンス、セキュリティ教育・啓発、サプライチェーンセキュリティ対応の4ステップを、継続的にまわします"
+      aria-label="土台から順に、現状の把握、ルールと体制づくり、社員への浸透、取引先への説明と積み上げるピラミッド"
     >
-      <svg
-        viewBox="0 0 100 100"
-        className="absolute inset-0 h-full w-full"
-        aria-hidden="true"
-      >
-        <circle
-          cx="50"
-          cy="50"
-          r="38"
-          fill="none"
-          stroke="rgba(255,255,255,0.55)"
-          strokeWidth="0.35"
-          strokeDasharray="1.2 1.4"
-        />
-        {arrows.map((a) => (
-          <path
-            key={a.rot}
-            d="M-1.4 -1.8L1 0L-1.4 1.8"
-            fill="none"
-            stroke="#fff"
-            strokeWidth="0.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            transform={`translate(${a.x} ${a.y}) rotate(${a.rot})`}
-          />
-        ))}
-      </svg>
-
-      {/* 中央 */}
-      <div className="absolute left-1/2 top-1/2 flex w-[42%] -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center">
-        <svg viewBox="0 0 48 56" className="h-auto w-[28%]" aria-hidden="true">
-          <path
-            d="M24 3L44 10v15c0 13-8.5 23-20 28C12.5 48 4 38 4 25V10z"
-            fill="#fff"
-          />
-          <path
-            d="M15 28l6.5 6.5L33 22"
-            fill="none"
-            stroke="#5A142C"
-            strokeWidth="4.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-        <p className="mt-[6%] text-[clamp(1.1rem,4.4vw,2rem)] font-black leading-none tracking-[0.02em]">
-          Bond AI
-          <span className="mt-[0.3em] block text-[0.62em] tracking-[0.06em]">
-            セキュリティ
-          </span>
-        </p>
-        <p className="mt-[5%] whitespace-nowrap text-[clamp(0.6rem,2vw,0.85rem)] font-bold tracking-[0.04em] text-white/85">
-          セキュリティ顧問
-        </p>
-        <p className="mt-[7%] whitespace-nowrap border border-white/70 px-[0.8em] py-[0.35em] text-[clamp(0.55rem,1.8vw,0.78rem)] font-bold tracking-[0.04em]">
-          毎月、経営へ定期レポート
-        </p>
-      </div>
-
-      {/* 4ステップ */}
-      {steps.map((s, i) => (
-        <div
-          key={s.en}
-          className="absolute flex aspect-square w-[30%] -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border border-white/70 bg-[#2A0B17] px-[3%] text-center"
-          style={pos[i]}
-        >
-          <span className="block h-auto w-[30%]">{icons[i]}</span>
-          <span className="mt-[5%] block text-[clamp(0.5rem,1.7vw,0.68rem)] font-bold tracking-[0.12em] text-white/70">
-            STEP {i + 1}
-          </span>
-          <span className="mt-[2%] block text-[clamp(0.62rem,2.4vw,0.9rem)] font-bold leading-[1.35]">
-            {lines[i].map((l) => (
-              <span key={l} className="block whitespace-nowrap">
-                {l}
-              </span>
-            ))}
-          </span>
-        </div>
-      ))}
-    </div>
+      <ellipse cx="180" cy="428" rx="180" ry="10" fill="#000" opacity="0.25" />
+      {tiers.map((t, i) => {
+        const t0 = i / ROWS;
+        const t1 = (i + 1) / ROWS;
+        const l0 = at(BASE_L, t0);
+        const l1 = at(BASE_L, t1);
+        const f0 = at(BASE_F, t0);
+        const f1 = at(BASE_F, t1);
+        const r0 = at(BASE_R, t0);
+        const r1 = at(BASE_R, t1);
+        const rm = at(BASE_R, (t0 + t1) / 2);
+        const cx =
+          i === 0 ? (l1.x + f1.x) / 2 : (l0.x + l1.x + f0.x + f1.x) / 4;
+        const cy =
+          i === 0
+            ? (l1.y + f1.y) / 2 - 12
+            : (l0.y + l1.y + f0.y + f1.y) / 4 + 5;
+        return (
+          <g
+            key={t.title}
+            className="-translate-y-7 opacity-0 transition-[transform,opacity] duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100"
+            style={{ transitionDelay: `${(ROWS - 1 - i) * 180}ms` }}
+          >
+            <polygon
+              points={pts(l0, f0, f1, l1)}
+              fill={leftFill[i]}
+              stroke="#2A0B17"
+              strokeWidth="2.5"
+              strokeLinejoin="round"
+            />
+            <polygon
+              points={pts(f0, r0, r1, f1)}
+              fill={rightFill[i]}
+              stroke="#2A0B17"
+              strokeWidth="2.5"
+              strokeLinejoin="round"
+            />
+            <line
+              x1={f0.x}
+              y1={f0.y}
+              x2={f1.x}
+              y2={f1.y}
+              stroke="#fff"
+              strokeOpacity="0.3"
+              strokeWidth="1.2"
+            />
+            <text
+              x={cx}
+              y={cy}
+              textAnchor="middle"
+              fontSize={i === 0 ? 12 : 15}
+              fontWeight="700"
+              letterSpacing="2"
+              fill={labelFill[i]}
+            >
+              {t.label}
+            </text>
+            {lines ? (
+              <>
+                <line
+                  x1={rm.x + 6}
+                  y1={rm.y}
+                  x2={width - 6}
+                  y2={rm.y}
+                  stroke="#fff"
+                  strokeOpacity="0.45"
+                  strokeWidth="1.2"
+                  strokeDasharray="3 3"
+                  className="pyr-dash"
+                />
+                <circle cx={width - 6} cy={rm.y} r="4.5" fill="#fff" />
+              </>
+            ) : null}
+          </g>
+        );
+      })}
+    </svg>
   );
 }
 
@@ -208,101 +161,84 @@ export function CisoServiceDiagram() {
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 -z-10 bg-[#24070F]/[0.88]"
+        className="absolute inset-0 -z-10 bg-[#24070F]/[0.9]"
       />
 
-      <div className="container grid items-center gap-10 py-14 md:py-20 lg:grid-cols-[1fr_1.05fr] lg:gap-14 lg:py-24">
-        <Cycle />
-
-        <div className="min-w-0">
-          <p className="text-xs font-bold tracking-[0.2em] text-white/75">
+      <div className="container py-14 md:py-20 lg:py-24">
+        <div className="text-center">
+          <p className="text-xs font-bold tracking-[0.2em] text-white/70">
             SECURITY GOVERNANCE
           </p>
           <h3
             id="ciso-diagram-title"
             className="mt-3 text-[clamp(1.5rem,3vw,2.3rem)] font-black leading-[1.45] [word-break:auto-phrase]"
           >
-            セキュリティの専門家が、御社の担当につきます
+            セキュリティ顧問が、御社の担当につきます
           </h3>
-          <span
-            aria-hidden="true"
-            className="mt-5 block h-[3px] w-16 bg-white"
-          />
-
-          {/* プラン別の対応表 */}
-          <table className="mt-7 w-full border-collapse lg:[word-break:auto-phrase] text-left text-[12px] leading-snug md:text-[13px]">
-            <caption className="sr-only">
-              ステップごとの、アドバイザーと社外CISOの対応内容
-            </caption>
-            <thead>
-              <tr>
-                <th
-                  scope="col"
-                  className="w-[38%] pb-2 pr-2 align-bottom text-[11px] font-bold tracking-[0.1em] text-white/60"
-                >
-                  STEP
-                </th>
-                <th
-                  scope="col"
-                  className="w-[31%] bg-white/10 px-2.5 py-2 align-bottom"
-                >
-                  <span className="block font-bold">アドバイザー</span>
-                  <span className="block text-[11px] font-medium text-white/70">
-                    助言で支える
-                  </span>
-                </th>
-                <th
-                  scope="col"
-                  className="w-[31%] bg-[#7A1F3D] px-2.5 py-2 align-bottom"
-                >
-                  <span className="block font-bold">社外CISO</span>
-                  <span className="block text-[11px] font-bold text-white/85">
-                    代わりに進める
-                  </span>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {steps.map((s, i) => (
-                <tr key={s.en} className="border-t border-white/15">
-                  <th scope="row" className="py-3 pr-2 align-top font-normal">
-                    <span className="block text-[10px] font-bold tracking-[0.1em] text-white/60">
-                      STEP {i + 1}
-                    </span>
-                    <span className="mt-0.5 block font-bold">{s.title}</span>
-                  </th>
-                  <td className="bg-white/[0.06] px-2.5 py-3 align-top text-white/85">
-                    {s.advisor}
-                  </td>
-                  <td className="bg-[#7A1F3D]/60 px-2.5 py-3 align-top font-bold">
-                    {s.ciso}
-                  </td>
-                </tr>
-              ))}
-              <tr className="border-t-2 border-white/40">
-                <th scope="row" className="py-3 pr-2 align-top font-normal">
-                  <span className="block text-[10px] font-bold tracking-[0.1em] text-white/60">
-                    もしもの時
-                  </span>
-                  <span className="mt-0.5 block font-bold">
-                    インシデント対応体制の構築
-                  </span>
-                </th>
-                <td className="bg-white/[0.06] px-2.5 py-3 align-top text-white/85">
-                  含まない
-                </td>
-                <td className="bg-[#7A1F3D]/60 px-2.5 py-3 align-top font-bold">
-                  初動対応の判断
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <figcaption className="mt-5 text-[13px] leading-relaxed text-white/80">
-            <span aria-hidden="true">↻ </span>
-            継続的改善：毎月の定例で見直して経営へ報告し、年1回もう一度リスクアセスメントを行います
-          </figcaption>
+          <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-[1.9] text-white/75">
+            土台から順に、取引先に説明できる体制を積み上げます。
+          </p>
         </div>
+
+        <Reveal variant="none" className="mt-12 md:mt-14">
+          {/* PC: ピラミッドから線を引いて、右に解説 */}
+          <div className="hidden items-start justify-center lg:flex">
+            <div className="shrink-0">
+              <Pyramid lines />
+            </div>
+            <ol className="w-[30rem] shrink-0 xl:w-[34rem]">
+              {tiers.map((t, i) => (
+                <li
+                  key={t.title}
+                  className="flex h-24 translate-x-4 flex-col justify-center border-b border-white/15 pl-6 opacity-0 transition-all duration-700 first:border-t group-data-[visible=true]/reveal:translate-x-0 group-data-[visible=true]/reveal:opacity-100"
+                  style={{
+                    transitionDelay: `${800 + i * 120}ms`,
+                    height: ROW_H,
+                  }}
+                >
+                  <p className="flex items-baseline gap-3">
+                    <span className="text-[11px] font-bold tracking-[0.14em] text-white/55">
+                      {t.step}
+                    </span>
+                    <span className="text-lg font-black">{t.title}</span>
+                  </p>
+                  <p className="mt-1 text-[13px] leading-[1.8] text-white/75">
+                    {t.text}
+                  </p>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          {/* スマホ・タブレット */}
+          <div className="lg:hidden">
+            <Pyramid />
+            <ol className="mt-8 space-y-3">
+              {tiers.map((t, i) => (
+                <li
+                  key={t.title}
+                  className="flex gap-4 border-l-4 bg-white/[0.06] py-4 pl-4 pr-4"
+                  style={{ borderColor: leftFill[i] }}
+                >
+                  <div>
+                    <p className="text-[11px] font-bold tracking-[0.14em] text-white/55">
+                      {t.step}
+                    </p>
+                    <p className="mt-0.5 text-base font-black">{t.title}</p>
+                    <p className="mt-1 text-[13px] leading-[1.8] text-white/75">
+                      {t.text}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </Reveal>
+
+        <figcaption className="mt-10 text-center text-[13px] leading-relaxed text-white/75 md:text-sm">
+          <span aria-hidden="true">↻ </span>
+          毎月の定例で見直して経営へ報告し、年1回もう一度リスクアセスメントを行います
+        </figcaption>
       </div>
     </figure>
   );

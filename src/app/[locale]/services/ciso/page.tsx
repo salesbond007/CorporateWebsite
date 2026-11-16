@@ -5,15 +5,8 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
-import {
-  IconAiRush,
-  IconChecksheet,
-  IconListing,
-  IconShadowAi,
-  IconSoloIt,
-} from "@/components/services/FlatIcons";
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
-import { CisoPlans } from "@/components/services/CisoPlans";
+import { CisoIssueSlider } from "@/components/services/CisoIssueSlider";
 import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
 import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
@@ -46,72 +39,6 @@ export function generateMetadata({
  */
 
 const W2 = "#A83B57"; // やや明るいワインレッド
-
-const worries: {
-  title: ReactNode;
-  Icon: (p: { className?: string }) => ReactNode;
-}[] = [
-  {
-    title: (
-      <>
-        取引先から
-        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
-          チェックシート
-        </mark>
-        が届いたが、答え方が分からない
-      </>
-    ),
-    Icon: IconChecksheet,
-  },
-  {
-    title: (
-      <>
-        「セキュリティの
-        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
-          責任者は誰ですか
-        </mark>
-        」と聞かれて、答えられない
-      </>
-    ),
-    Icon: IconSoloIt,
-  },
-  {
-    title: (
-      <>
-        社員がAIに
-        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
-          社外秘の情報
-        </mark>
-        を入力していないか分からない
-      </>
-    ),
-    Icon: IconShadowAi,
-  },
-  {
-    title: (
-      <>
-        社員の誤操作や
-        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
-          なりすましメール
-        </mark>
-        で、事故が起きないか不安
-      </>
-    ),
-    Icon: IconAiRush,
-  },
-  {
-    title: (
-      <>
-        事故が起きたとき、
-        <mark className="bg-transparent bg-[linear-gradient(transparent_62%,#F6CCD7_62%)] text-brand-500">
-          誰が何を判断するか
-        </mark>
-        決まっていない
-      </>
-    ),
-    Icon: IconListing,
-  },
-];
 
 const faqs = [
   {
@@ -224,7 +151,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
   const nav = [
     { href: "#service", label: "サービス" },
     { href: "#expert", label: "サービス監修" },
-    { href: "#price", label: "料金" },
     { href: "#faq", label: "よくある質問" },
   ];
 
@@ -377,14 +303,14 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         />
         <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div className="text-center lg:text-left">
-            <p className="text-[clamp(0.95rem,1.6vw,1.2rem)] font-bold text-ink/80">
+            <p className="text-[clamp(1.15rem,2vw,1.6rem)] font-bold text-ink/85">
               <span className="underline decoration-brand-500 decoration-[3px] underline-offset-[7px]">
                 大手企業と取引したい
               </span>
               中小企業のための
             </p>
-            <h1 className="mt-3 whitespace-nowrap text-[clamp(2.4rem,4.4vw,3.9rem)] font-black leading-[1.2] tracking-[0.04em]">
-              セキュリティ<span className="text-brand-500">顧問</span>
+            <h1 className="mt-3 whitespace-nowrap text-[clamp(2.1rem,3.9vw,3.4rem)] font-black leading-[1.2] tracking-[0.03em]">
+              AIセキュリティ<span className="text-brand-500">顧問</span>
             </h1>
             <p className="mt-4 flex items-baseline justify-center gap-1 lg:justify-start">
               <span className="text-lg font-black">月</span>
@@ -400,7 +326,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               取引先に出せる<span className="text-brand-500">専門家の名前</span>
               と、
               <br />
-              体制づくりの<span className="text-brand-500">助言</span>を。
+              <span className="text-brand-500">AI時代に備える</span>
+              体制づくりを。
             </p>
             <div className="mt-10 flex justify-center lg:block">
               <BigButton
@@ -417,47 +344,19 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </Container>
       </section>
 
-      {/* ========== 3. お悩み ========== */}
-      <section className="bg-white pt-16 md:pt-24">
+      {/* ========== 3. セキュリティ対策が当たり前の時代に ========== */}
+      <section className="bg-[#F3ECEE] pt-16 md:pt-24">
         <Container>
           <Reveal variant="up" className="text-center">
             <h2 className="text-[clamp(1.5rem,3vw,2.2rem)] font-black leading-[1.5]">
-              こんな<span className="text-brand-500">お悩み</span>
-              はありませんか？
+              <span className="text-brand-500">セキュリティ対策</span>が
+              <br className="sm:hidden" />
+              当たり前の時代に
             </h2>
           </Reveal>
-          <ul className="mx-auto mt-8 grid max-w-6xl gap-2 sm:grid-cols-2 md:mt-12 md:gap-4 lg:grid-cols-5">
-            {worries.map((w, i) => (
-              <Reveal
-                key={i}
-                variant="up"
-                delay={i * 70}
-                className={cn(
-                  "h-full",
-                  i === 4 && "sm:col-span-2 lg:col-span-1",
-                )}
-              >
-                <li className="relative flex h-full items-center gap-3 rounded-md bg-[#F7F2F4] px-3 py-2.5 text-left lg:min-h-[27rem] lg:flex-col lg:gap-0 lg:px-5 lg:pb-16 lg:pt-12 lg:text-center lg:shadow-[0_14px_30px_-24px_rgba(60,15,25,0.5)] lg:ring-1 lg:ring-[#EEE2E6]">
-                  <w.Icon className="h-14 w-14 shrink-0 lg:h-40 lg:w-auto" />
-                  <p className="text-[14px] font-black leading-[1.6] [word-break:auto-phrase] lg:mt-9 lg:text-[18px] lg:leading-[1.85]">
-                    {w.title}
-                  </p>
-                  {/* 下向きの矢印 */}
-                  <svg
-                    aria-hidden="true"
-                    viewBox="0 0 40 28"
-                    className="absolute bottom-4 left-1/2 hidden h-6 w-9 -translate-x-1/2 text-brand-500/30 lg:block"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="4"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M4 4l16 9 16-9M4 14l16 9 16-9" />
-                  </svg>
-                </li>
-              </Reveal>
-            ))}
-          </ul>
+          <div className="mx-auto mt-8 max-w-6xl md:mt-12">
+            <CisoIssueSlider />
+          </div>
         </Container>
 
         {/* 下矢印: お任せください */}
@@ -467,7 +366,9 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             className="bg-brand-500 py-8 text-center text-white md:py-10"
           >
             <p className="text-[clamp(1.3rem,2.8vw,2rem)] font-black leading-[1.5]">
-              そのお悩み、お任せください
+              セキュリティの体制づくりは
+              <br className="sm:hidden" />
+              お任せください
             </p>
             <svg
               aria-hidden="true"
@@ -503,11 +404,12 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <Container>
           <Reveal variant="up" className="text-center">
             <h2 className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
-              <span className="text-brand-500">大手企業と取引したい会社</span>
+              <span className="text-brand-500">
+                大手企業と取引したい中小企業
+              </span>
               に、
               <br className="hidden sm:block" />
-              AI時代の<span className="text-brand-500">セキュリティ責任者</span>
-              を。
+              <span className="text-brand-500">セキュリティ顧問</span>を。
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
               当社の専門家が社外のセキュリティ責任者として入り、取引先に「この会社なら任せて大丈夫」と説明できる体制を、責任者ごと用意します。
@@ -737,20 +639,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </p>
             </div>
           </Reveal>
-        </Container>
-      </section>
-
-      {/* ========== 9. 料金プラン ========== */}
-      <section
-        id="price"
-        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
-      >
-        <Watermark className="-right-6 top-4">Price</Watermark>
-        <Container>
-          <SectionHead en="Price">料金プラン</SectionHead>
-          <div className="mt-10 md:mt-12">
-            <CisoPlans ctaHref={`#${FORM_ID}`} />
-          </div>
         </Container>
       </section>
 
