@@ -1009,16 +1009,27 @@ export default function SecurityTrainingPage({
           >
             {/* 顔写真の枠(後日差し替え) */}
             <div className="flex aspect-[4/3] items-center justify-center bg-[#F1ECEE] md:aspect-auto md:min-h-[18rem]">
-              <span className="sr-only">岡崎 弘明の写真（準備中）</span>
+              <span className="sr-only">監修者の写真（準備中）</span>
             </div>
             <div className="flex flex-col justify-center px-6 py-8 md:px-10 md:py-10">
-              <h3 className=" text-[clamp(1.75rem,3vw,2.25rem)] font-black tracking-[0.08em]">
-                岡崎 弘明
-              </h3>
-              <p className="mt-5 border-l-[3px] border-brand-500 pl-4 text-base font-bold leading-[1.8] md:text-lg">
-                帝国データバンクアクシス（旧
-                帝国データバンクネットコミュニケーション）元代表
+              {/* 掲載の許可をいただくまで、氏名と経歴は伏せる */}
+              <p className="inline-flex w-fit items-center bg-[#F1ECEE] px-2.5 py-1 text-[11px] font-bold tracking-[0.1em] text-ink/60">
+                氏名・経歴は近日公開
               </p>
+              <h3 className="mt-4">
+                <span className="sr-only">監修者（近日公開）</span>
+                <span
+                  aria-hidden="true"
+                  className="block h-9 w-44 rounded bg-[#D9CFD3]"
+                />
+              </h3>
+              <div
+                aria-hidden="true"
+                className="mt-6 space-y-2.5 border-l-[3px] border-brand-500 pl-4"
+              >
+                <span className="block h-4 w-full max-w-[24rem] rounded bg-[#D9CFD3]" />
+                <span className="block h-4 w-40 rounded bg-[#E3B9C6]" />
+              </div>
             </div>
           </Reveal>
         </Container>
