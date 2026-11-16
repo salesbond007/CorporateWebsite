@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
@@ -528,15 +527,9 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             variant="up"
             className="mt-12 grid gap-8 overflow-hidden rounded-lg bg-white shadow-[0_20px_44px_-34px_rgba(0,0,0,0.4)] ring-1 ring-[#EEE5E8] md:grid-cols-[18rem_1fr] lg:grid-cols-[22rem_1fr]"
           >
-            {/* 写真 */}
+            {/* 写真(後日差し替え) */}
             <div className="relative aspect-[4/5] w-full bg-[#F1ECEE] md:aspect-auto md:min-h-[24rem]">
-              <Image
-                src="/photos/ciso/okazaki.webp"
-                alt="岡崎 弘明"
-                fill
-                sizes="(max-width:768px) 100vw, 22rem"
-                className="object-cover object-top"
-              />
+              <span className="sr-only">岡崎 弘明の写真（準備中）</span>
             </div>
             <div className="flex flex-col justify-center px-6 pb-9 md:py-12 md:pr-12">
               <h3>
