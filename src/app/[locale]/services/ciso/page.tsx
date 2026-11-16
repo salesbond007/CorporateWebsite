@@ -689,11 +689,11 @@ function ReasonVisual({ kind }: { kind: "docs" | "ledger" | "timeline" }) {
     // 取引先に出せるものが、そろう
     const docs = [
       {
-        t: "セキュリティチェックシート",
+        t: "チェックシート",
         s: "回答済み",
         icon: "check" as const,
       },
-      { t: "セキュリティ体制のご案内", s: "提出用", icon: "doc" as const },
+      { t: "体制のご案内", s: "提出用", icon: "doc" as const },
       { t: "体制図", s: "責任者を記載", icon: "person" as const },
     ];
     return (
