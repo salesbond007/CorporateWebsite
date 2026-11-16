@@ -124,20 +124,6 @@ function Icon({
   );
 }
 
-function Check({ className }: { className?: string }) {
-  return (
-    <span
-      aria-hidden="true"
-      className={cn(
-        "mt-[3px] grid h-[18px] w-[18px] shrink-0 place-items-center rounded-full bg-brand-500 text-[10px] font-black text-white",
-        className,
-      )}
-    >
-      ✓
-    </span>
-  );
-}
-
 /* ------------------------------------------------------------ 図・グラフ */
 
 /* ================================================================ ページ */
@@ -427,112 +413,61 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </div>
       </section>
 
-      {/* ========== 5. 選ばれる理由 ========== */}
-      <section className="relative isolate overflow-hidden bg-white py-20 md:py-28">
-        <Watermark className="-right-6 top-4">Reason</Watermark>
+      {/* ========== 5. サービスの特徴 ========== */}
+      <section
+        id="feature"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-white py-20 md:py-28"
+      >
+        <Watermark className="-right-6 top-4">Feature</Watermark>
         <Container>
-          <SectionHead en="Reason">Bond AI が選ばれる理由</SectionHead>
-          <ol className="mt-10 grid gap-4 md:mt-12 md:grid-cols-2 md:gap-5">
-            {[
-              {
-                t: "「大手企業との取引」に絞っている",
-                d: "チェックシートの回答、取引先に出せる「セキュリティ体制のご案内」、取引先との打ち合わせへの同席など、取引の場面に合わせて支援します。",
-              },
-              {
-                t: "規格の取得前から、専門家がつく",
-                d: "ISMSなどの規格の取得には、半年〜1年ほどかかります。その間も、取引先に責任者の名前と体制を説明できます。",
-              },
-              {
-                t: "AIの管理も、標準で含む",
-                d: "社員のAI利用のルールと、社内で使うAIの台帳を、責任者の仕事として標準で含めます。",
-              },
-              {
-                t: "名前だけでなく、中身の支援とセット",
-                d: "名前を出すときは、必ず現状の確認と定例会、回答の確認を行います。取引先に深く聞かれても答えられる状態をつくります。",
-              },
-            ].map((r, i) => (
-              <Reveal key={r.t} variant="up" delay={i * 100}>
-                <li className="flex h-full gap-5 border-t-4 border-brand-500 bg-[#FBF6F7] p-6 md:p-8">
-                  <span className="text-[2.4rem] font-black leading-none text-brand-500">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <h3 className="text-lg font-black leading-[1.6] md:text-xl">
-                      {r.t}
-                    </h3>
-                    <p className="mt-3 text-[15px] leading-[1.95] text-ink/75">
-                      {r.d}
-                    </p>
-                  </div>
-                </li>
-              </Reveal>
-            ))}
-          </ol>
-        </Container>
-      </section>
-
-      {/* ========== 6. 実現する3つのこと(BENEFIT) ========== */}
-      <section className="relative isolate overflow-hidden py-14 md:py-28">
-        <Watermark className="-left-4 top-4">Benefit</Watermark>
-        <Container>
-          <SectionHead en="Benefit">実現する3つのこと</SectionHead>
+          <SectionHead en="Feature">サービスの特徴</SectionHead>
           <div className="mt-4 md:mt-6">
             {[
               {
-                lead: "社外の責任者が就任し、",
-                em: "責任者を確保できる",
-                text: "「誰が判断し、誰が説明するか」をはっきりさせます。",
-                items: [
-                  "「責任者は誰ですか」と聞かれても、答えられる",
-                  "体制図や回答書に、専門家の名前を載せられる",
-                  "社員のAI利用のルールと台帳も、責任者が管理する",
-                ],
+                title: (
+                  <>
+                    大手企業・上場企業が求める水準に合わせて、
+                    <span className="text-brand-500">体制を整える</span>
+                  </>
+                ),
+                key: "f1",
+                text: "チェックシートの回答、取引先に出せる「セキュリティ体制のご案内」など、取引の場面に合わせて支援します。",
+                stat: null,
+                visual: <FeatureVisual kind="checksheet" />,
+              },
+              {
+                title: (
+                  <>
+                    社員のAI利用の管理まで、
+                    <span className="text-brand-500">標準で含む</span>
+                  </>
+                ),
+                key: "f2",
+                text: "AI利用ルールと、社内で使うAIの一覧（AIシステム台帳）を、責任者の仕事として標準の支援に含めます。",
                 stat: {
                   before: "AIの明確な責任者を決めている大手企業は",
                   num: "26.8%",
-                  after: "",
                   source: "KPMG「サイバーセキュリティサーベイ2026/27」速報",
                 },
-                visual: "policy" as const,
+                visual: <FeatureVisual kind="policy" />,
               },
               {
-                lead: "取引先の審査に備え、",
-                em: "取引を続け、広げられる",
-                text: "チェックシートや認証の要請に応え、取引先に見せられる資料をそろえます。",
-                items: [
-                  "取引先のセキュリティチェックシートに答えられる",
-                  "取引先に出せる「セキュリティ体制のご案内」がそろう",
-                  "商談が、セキュリティの確認で止まりにくくなる",
-                ],
-                stat: {
-                  before:
-                    "取引先のセキュリティ対策を確認している発注側の大手企業は",
-                  num: "84.4%",
-                  after: "",
-                  source: "キヤノンITソリューションズ調査、2026年3月",
-                },
-                visual: "checksheet" as const,
-              },
-              {
-                lead: "一度の事故で失わないよう、",
-                em: "損失のリスクを抑えられる",
-                text: "リスクを洗い出して優先順位をつけ、事故が起きたときの初動も決めておきます。",
-                items: [
-                  "直すべき点が、優先順位つきで分かる",
-                  "事故のときの連絡体制と、初動の手順が決まる",
-                  "損害と取引停止が重なるリスクを、最小限に抑える",
-                ],
-                stat: {
-                  before:
-                    "事故があった中小企業のうち、取引先に影響があったのは",
-                  num: "約7割",
-                  after: "",
-                  source: "IPA「2024年度中小企業等実態調査」",
-                },
-                visual: "diagnosis" as const,
+                title: (
+                  <>
+                    規格の取得前から、
+                    <span className="text-brand-500">
+                      取引先に出せる専門家の名前
+                    </span>
+                    を
+                  </>
+                ),
+                key: "f3",
+                text: "ISMSなどの規格の取得には、半年〜1年ほどかかります。その間も、体制図や回答書に専門家の名前を載せ、取引先に説明できます。名前を出すときは、現状の確認と定例会をセットで行います。",
+                stat: null,
+                visual: <OrgVisual />,
               },
             ].map((r, i) => (
-              <Reveal key={r.em} variant="up">
+              <Reveal key={r.key} variant="up">
                 <article
                   className={cn(
                     "grid items-center gap-6 py-10 md:gap-10 md:py-14 lg:grid-cols-2 lg:gap-14",
@@ -540,44 +475,30 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   )}
                 >
                   <div className="rounded-xl bg-[#F5E9ED] p-5 sm:p-8 lg:p-10">
-                    <FeatureVisual kind={r.visual} />
+                    {r.visual}
                   </div>
                   <div>
                     <p className="flex items-baseline gap-3 font-black text-brand-500">
                       <span className="text-xs tracking-[0.24em] md:text-sm">
-                        BENEFIT
+                        FEATURE
                       </span>
                       <span className="text-[2.6rem] leading-none md:text-[3.4rem]">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                     </p>
-                    <h3 className="mt-3 text-[clamp(1.3rem,2.4vw,1.9rem)] font-black leading-[1.5]">
-                      {r.lead}
-                      <br />
-                      <span className="text-brand-500">{r.em}</span>
+                    <h3 className="mt-3 text-[clamp(1.3rem,2.4vw,1.9rem)] font-black leading-[1.55] [word-break:auto-phrase]">
+                      {r.title}
                     </h3>
-                    <p className="mt-3 text-[14px] leading-[1.9] text-ink/80 md:mt-4 md:text-[15px] md:leading-[2]">
+                    <p className="mt-4 border-t border-[#EADFE2] pt-4 text-[15px] leading-[2] text-ink/80 md:mt-5 md:pt-5">
                       {r.text}
                     </p>
-                    <ul className="mt-4 space-y-2 border-t border-[#EADFE2] pt-4 md:mt-5 md:space-y-2.5 md:pt-5">
-                      {r.items.map((t) => (
-                        <li
-                          key={t}
-                          className="flex gap-2.5 text-[14px] font-bold leading-relaxed text-ink md:text-[15px]"
-                        >
-                          <Check />
-                          {t}
-                        </li>
-                      ))}
-                    </ul>
                     {r.stat ? (
-                      <div className="mt-4 border-l-4 border-brand-500 bg-[#FBF6F7] px-4 py-3 md:mt-6 md:px-5 md:py-4">
+                      <div className="mt-5 border-l-4 border-brand-500 bg-[#FBF6F7] px-4 py-3 md:mt-6 md:px-5 md:py-4">
                         <p className="text-[14px] font-bold leading-relaxed text-ink md:text-[15px]">
                           {r.stat.before}
-                          <span className="mx-0.5 text-[1.6rem] md:text-[1.9rem] font-black leading-none text-brand-500">
+                          <span className="mx-0.5 text-[1.6rem] font-black leading-none text-brand-500 md:text-[1.9rem]">
                             {r.stat.num}
                           </span>
-                          {r.stat.after}
                         </p>
                         <p className="mt-1.5 text-xs text-ink/60">
                           （{r.stat.source}）
@@ -606,29 +527,32 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           >
             {/* 写真(後日差し替え) */}
             <div className="flex aspect-[4/3] items-center justify-center bg-[#F1ECEE] md:aspect-auto md:min-h-[24rem]">
-              <span className="sr-only">岡崎 弘明の写真（準備中）</span>
+              <span className="sr-only">監修者の写真（準備中）</span>
             </div>
             <div className="flex flex-col justify-center px-6 pb-9 md:py-12 md:pr-12">
-              <h3>
-                <span className="block text-xs font-bold tracking-[0.2em] text-ink/50">
-                  おかざき ひろあき
-                </span>
-                <span className="mt-1 block text-[clamp(1.75rem,3vw,2.25rem)] font-black tracking-[0.08em] text-ink">
-                  岡崎 弘明
-                </span>
-              </h3>
-              <p className="mt-5 border-l-[3px] border-brand-500 pl-4 leading-[1.7]">
-                <span className="block text-xs font-bold text-ink/55">元</span>
-                <span className="block text-base font-bold text-ink md:text-lg">
-                  株式会社帝国データバンクネットコミュニケーション
-                  <span className="text-sm font-medium text-ink/60">
-                    （現 帝国データバンクアクシス）
-                  </span>
-                </span>
-                <span className="block text-base font-bold text-brand-500 md:text-lg">
-                  代表取締役
-                </span>
+              {/* 掲載の許可をいただくまで、氏名と経歴は伏せる */}
+              <p className="inline-flex w-fit items-center bg-[#F1ECEE] px-2.5 py-1 text-[11px] font-bold tracking-[0.1em] text-ink/60">
+                氏名・経歴は近日公開
               </p>
+              <h3 className="mt-4">
+                <span className="sr-only">監修者（近日公開）</span>
+                <span
+                  aria-hidden="true"
+                  className="block h-3 w-28 rounded bg-[#E4DCDF]"
+                />
+                <span
+                  aria-hidden="true"
+                  className="mt-3 block h-9 w-44 rounded bg-[#D9CFD3]"
+                />
+              </h3>
+              <div
+                aria-hidden="true"
+                className="mt-6 space-y-2.5 border-l-[3px] border-brand-500 pl-4"
+              >
+                <span className="block h-3 w-8 rounded bg-[#E4DCDF]" />
+                <span className="block h-4 w-full max-w-[22rem] rounded bg-[#D9CFD3]" />
+                <span className="block h-4 w-24 rounded bg-[#E3B9C6]" />
+              </div>
               <p className="mt-7 border-t border-[#EEE5E8] pt-7 text-[15px] leading-[2.05] text-ink/80">
                 サービスの監修者として、支援の品質を確認し、難しい判断の相談役を務めます。
               </p>
@@ -807,6 +731,45 @@ function Pill({
     >
       {children}
     </span>
+  );
+}
+
+/** 取引先に出せる「セキュリティ体制図」のイメージ */
+function OrgVisual() {
+  const box =
+    "rounded-md bg-white px-3 py-2 text-center text-[12px] font-bold ring-1 ring-[#EEDFE3]";
+  return (
+    <Window title="セキュリティ体制図（取引先提出用）">
+      <div className="p-5 text-[12px]">
+        <div className="mx-auto w-fit">
+          <p className={box}>代表取締役</p>
+        </div>
+        <div aria-hidden="true" className="mx-auto h-4 w-px bg-[#D9C3CA]" />
+        <div className="mx-auto w-fit rounded-md bg-brand-500 px-4 py-2.5 text-center text-white">
+          <p className="text-[10px] font-bold text-white/80">
+            情報セキュリティ責任者
+          </p>
+          <p className="mt-0.5 text-[13px] font-black">
+            社外CISO（セキュリティ顧問）
+          </p>
+        </div>
+        <div aria-hidden="true" className="mx-auto h-4 w-px bg-[#D9C3CA]" />
+        <div aria-hidden="true" className="mx-auto h-px w-2/3 bg-[#D9C3CA]" />
+        <div className="mt-0 grid grid-cols-3 gap-2">
+          {["管理部門", "営業部門", "開発部門"].map((d) => (
+            <div key={d} className="flex flex-col items-center">
+              <span aria-hidden="true" className="h-3 w-px bg-[#D9C3CA]" />
+              <p className={`${box} w-full`}>{d}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-[#EEDFE3] pt-3 font-bold">
+          <Pill tone="ok">定例会 月2回</Pill>
+          <Pill tone="ok">現状の確認 済</Pill>
+          <Pill tone="wait">ISMS 取得準備中</Pill>
+        </div>
+      </div>
+    </Window>
   );
 }
 
