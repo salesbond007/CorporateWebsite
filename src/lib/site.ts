@@ -138,18 +138,18 @@ export const serviceCategories: ServiceCategory[] = [
         href: "/services/security",
         subtitle: "Security",
         summary:
-          "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、社外CISO・セキュリティ顧問やホームページのセキュリティ対策で、企業の安全なAI活用を支援するソリューションです。",
+          "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、AI情報セキュリティ顧問やホームページのセキュリティ対策で、企業の安全なAI活用を支援するソリューションです。",
         features: [],
         image: "/services/cards/ai-solutions.jpg",
         children: [
           {
             slug: "ciso",
             number: "01-1",
-            title: "CISO・セキュリティ顧問",
+            title: "AI情報セキュリティ顧問",
             href: "/services/ciso",
-            subtitle: "CISO / Security Advisor",
+            subtitle: "AI Information Security Advisor",
             summary:
-              "AIを使う会社のための社外CISO。AI利用ガイドラインの作成やAIツールの導入前チェック、セキュリティチェックシート対応まで、AI時代のセキュリティ体制づくりを月額で引き受けます。",
+              "大企業・上場企業との取引に欠かせない情報セキュリティの体制を、専門家がアドバイザーや社外CISOとして一緒に整えます。取引先のチェックシートへの回答やAI利用ルールづくりまで支援。月10万円〜（税別）。",
             features: [],
             image: "/services/cards/ai-solutions.jpg",
           },

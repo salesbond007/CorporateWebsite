@@ -28,7 +28,11 @@ const APEX = { x: 170, y: 0 };
 const BASE_L = { x: 0, y: 384 };
 const BASE_F = { x: 205, y: 432 };
 const BASE_R = { x: 340, y: 384 };
-const ROWS = 4;
+const BASE_H = 384; // ピラミッド本体の高さ(SVG座標 = px)
+
+/** 段の数に合わせて、4色のうちどれを使うか(上ほど濃い) */
+const tone = (i: number, n: number) =>
+  n <= 1 ? 0 : Math.round((i * 3) / (n - 1));
 
 type P = { x: number; y: number };
 const at = (b: P, t: number): P => ({
@@ -38,6 +42,7 @@ const at = (b: P, t: number): P => ({
 const pts = (...ps: P[]) => ps.map((p) => `${p.x},${p.y}`).join(" ");
 
 function Pyramid({ items, lines }: { items: PyramidItem[]; lines?: boolean }) {
+  const ROWS = items.length;
   const width = lines ? 470 : 344;
   return (
     <svg
@@ -83,14 +88,14 @@ function Pyramid({ items, lines }: { items: PyramidItem[]; lines?: boolean }) {
               <g className="transition-transform duration-300 hover:-translate-y-1.5">
                 <polygon
                   points={pts(l0, f0, f1, l1)}
-                  fill={leftFill[i]}
+                  fill={leftFill[tone(i, ROWS)]}
                   stroke="#fff"
                   strokeWidth="2.5"
                   strokeLinejoin="round"
                 />
                 <polygon
                   points={pts(f0, r0, r1, f1)}
-                  fill={rightFill[i]}
+                  fill={rightFill[tone(i, ROWS)]}
                   stroke="#fff"
                   strokeWidth="2.5"
                   strokeLinejoin="round"
@@ -112,7 +117,7 @@ function Pyramid({ items, lines }: { items: PyramidItem[]; lines?: boolean }) {
                   fontSize={i === 0 ? 12 : 15}
                   fontWeight="700"
                   letterSpacing="2"
-                  fill={labelFill[i]}
+                  fill={labelFill[tone(i, ROWS)]}
                 >
                   {it.layer}
                 </text>
@@ -187,8 +192,11 @@ export function BondServicePyramid({ items }: { items: PyramidItem[] }) {
           {items.map((it, i) => (
             <li
               key={it.name}
-              className="h-24 translate-x-4 opacity-0 transition-all duration-700 group-data-[visible=true]/reveal:translate-x-0 group-data-[visible=true]/reveal:opacity-100"
-              style={{ transitionDelay: `${800 + i * 120}ms` }}
+              className="translate-x-4 opacity-0 transition-all duration-700 group-data-[visible=true]/reveal:translate-x-0 group-data-[visible=true]/reveal:opacity-100"
+              style={{
+                transitionDelay: `${800 + i * 120}ms`,
+                height: BASE_H / items.length,
+              }}
             >
               <ItemLink
                 it={it}
@@ -229,7 +237,7 @@ export function BondServicePyramid({ items }: { items: PyramidItem[] }) {
                 <span
                   aria-hidden="true"
                   className="w-1.5 self-stretch"
-                  style={{ backgroundColor: rightFill[i] }}
+                  style={{ backgroundColor: rightFill[tone(i, items.length)] }}
                 />
                 <span className="min-w-0 flex-1">
                   <span className="block text-[11px] font-bold tracking-[0.12em] text-ink/50">
@@ -257,29 +265,22 @@ export function bondPyramidItems(path: (p: string) => string): PyramidItem[] {
   return [
     {
       layer: "経営",
-      label: "責任者を任せる",
-      name: "社外AI/CISO（最高情報セキュリティ責任者）",
-      text: "専門家が社外のCISOとして責任者につき、AI利用のルールづくりから取引先への説明まで、セキュリティ対策を代わりに進めます。",
-      href: path("/services/ciso"),
-    },
-    {
-      layer: "助言",
-      label: "相談相手を持つ",
-      name: "AIセキュリティ顧問",
-      text: "定例ミーティングと相談窓口で、社内の担当者を助言で支えます。",
+      label: "責任者を担う・月10万円〜",
+      name: "AI情報セキュリティ顧問",
+      text: "大企業・上場企業との取引に欠かせない情報セキュリティの体制を、専門家がアドバイザーや社外CISOとして一緒に整えます。月10万円〜（税別）。",
       href: path("/services/ciso"),
     },
     {
       layer: "育成",
       label: "責任者を育てる",
       name: "CISO育成研修",
-      text: "社内のCISO候補が、セキュリティの責任者としての役割と進め方を学びます。",
+      text: "社内のCISO候補が、情報セキュリティの責任者としての役割と進め方を学びます。",
       href: path("/services/security-training"),
     },
     {
       layer: "全社員",
       label: "全社員で守る",
-      name: "社内AIセキュリティ研修",
+      name: "社内AI情報セキュリティ研修",
       text: "全社員が、AIを使うときの基本ルールや、詐欺メール・なりすましへの備えを身につけます。",
       href: path("/services/security-training"),
     },
