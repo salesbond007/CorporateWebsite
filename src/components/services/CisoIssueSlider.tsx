@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   useCallback,
   useEffect,
@@ -10,7 +11,7 @@ import {
 
 /**
  * Bond AI セキュリティ顧問 LP「セキュリティ対策が当たり前の時代に」。
- * 3枚のカードが2秒ごとに横へ自動でスライドする。
+ * 3枚のカードが2秒ごとに横へ自動でスライドし、最後の次は1枚目へ途切れずにつながる(無限ループ)。
  * マウスを乗せている間・キーボードで操作している間は止める。動きを減らす設定の端末では自動で動かさない。
  * 数字はすべて出典を確認済みのもの。
  */
@@ -18,7 +19,8 @@ import {
 type Slide = {
   title: string;
   lead: string;
-  visual: { num: string; unit: string; label: string };
+  image: string;
+  alt: string;
   facts: ReactNode[];
   source: string;
 };
@@ -29,11 +31,8 @@ const slides: Slide[] = [
   {
     title: "大手企業が、取引先のセキュリティを確認する時代に",
     lead: "大手企業は、取引先のセキュリティ体制を確認するようになっています。答えられないと、取引のチャンスを逃しかねません。",
-    visual: {
-      num: "84.4",
-      unit: "%",
-      label: "取引先のセキュリティ対策を確認している大手企業の発注担当者",
-    },
+    image: "/photos/ciso/issue-1.webp",
+    alt: "取引先のセキュリティ対策を確認している大手企業の発注担当者は84.4%、確認していないのは15.6%を示す円グラフ",
     facts: [
       <>
         大手企業（従業員1,000人以上）で発注を担当する人の
@@ -50,11 +49,8 @@ const slides: Slide[] = [
   {
     title: "被害は最大1億円。起きてからでは遅い",
     lead: "情報漏えいやサイバー攻撃は、一度起きると、お金と取引の両方を失います。",
-    visual: {
-      num: "1",
-      unit: "億円",
-      label: "インシデントがあった中小企業の被害額（最大）",
-    },
+    image: "/photos/ciso/issue-2.webp",
+    alt: "攻撃を受けた会社から、取引先の大手企業にまで影響が広がるイメージ",
     facts: [
       <>
         インシデントがあった中小企業の平均の被害額は
@@ -75,11 +71,8 @@ const slides: Slide[] = [
   {
     title: "対策している中小企業は、まだ少ない。今動けば差がつく",
     lead: "多くの中小企業は、まだセキュリティに投資していません。先に体制を整えた会社が、取引先に選ばれやすくなります。",
-    visual: {
-      num: "62.6",
-      unit: "%",
-      label: "過去3期にセキュリティ対策へ投資していない中小企業",
-    },
+    image: "/photos/ciso/issue-3.webp",
+    alt: "セキュリティ対策に投資していない中小企業は62.6%。今、対策する企業が優位に立つイメージ",
     facts: [
       <>
         過去3期にセキュリティ対策へ投資していない中小企業は
@@ -116,76 +109,116 @@ function Arrow({ dir }: { dir: "prev" | "next" }) {
 }
 
 export function CisoIssueSlider() {
-  const [index, setIndex] = useState(0);
+  // 最後の後ろに1枚目の複製を置き、そこまで進んだら一瞬で1枚目に戻して、途切れずに一方向へ回し続ける
+  const loop = [...slides, slides[0]];
+  const [pos, setPos] = useState(0);
+  const [animate, setAnimate] = useState(true);
   const [paused, setPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const current = pos % slides.length;
 
   useEffect(() => {
     setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   }, []);
 
-  const go = useCallback(
-    (i: number) => setIndex((i + slides.length) % slides.length),
-    [],
-  );
+  const next = useCallback(() => {
+    setAnimate(true);
+    setPos((p) => (p >= slides.length ? 1 : p + 1));
+  }, []);
+
+  const prev = useCallback(() => {
+    if (pos === 0) {
+      // 複製(=1枚目)の位置へ瞬間移動してから、ひとつ前(3枚目)へ動かす
+      setAnimate(false);
+      setPos(slides.length);
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          setAnimate(true);
+          setPos(slides.length - 1);
+        }),
+      );
+      return;
+    }
+    setAnimate(true);
+    setPos(pos - 1);
+  }, [pos]);
+
+  const go = useCallback((i: number) => {
+    setAnimate(true);
+    setPos(i);
+  }, []);
+
+  // 複製まで来たら、アニメーションなしで1枚目へ戻す
+  const onEnd = useCallback(() => {
+    if (pos === slides.length) {
+      setAnimate(false);
+      setPos(0);
+    }
+  }, [pos]);
+
+  useEffect(() => {
+    if (!animate) {
+      const id = requestAnimationFrame(() =>
+        requestAnimationFrame(() => setAnimate(true)),
+      );
+      return () => cancelAnimationFrame(id);
+    }
+  }, [animate]);
 
   useEffect(() => {
     if (paused || reduced) return;
-    timer.current = setInterval(
-      () => setIndex((i) => (i + 1) % slides.length),
-      INTERVAL,
-    );
+    timer.current = setInterval(next, INTERVAL);
     return () => {
       if (timer.current) clearInterval(timer.current);
     };
-  }, [paused, reduced]);
+  }, [paused, reduced, next]);
+
+  const arrowClass =
+    "absolute top-1/2 z-10 h-12 w-12 -translate-y-1/2 place-items-center rounded-full bg-white/95 text-[#7A1F3D] shadow-[0_8px_24px_-10px_rgba(60,15,25,0.5)] ring-1 ring-[#E6D9DD] transition hover:bg-[#7A1F3D] hover:text-white hidden md:grid md:opacity-0 md:group-hover/slider:opacity-100 md:focus-visible:opacity-100";
 
   return (
     <div
-      className="relative"
+      className="group/slider relative"
       role="region"
       aria-roledescription="カルーセル"
-      aria-label="セキュリティ対策が当たり前の時代に"
+      aria-label="セキュリティ対策が必須の時代に"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
       onBlur={() => setPaused(false)}
     >
-      <div className="overflow-hidden">
+      <div className="overflow-hidden rounded-2xl">
         <ul
-          className="flex transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)]"
-          style={{ transform: `translateX(-${index * 100}%)` }}
+          className={`flex ${animate ? "transition-transform duration-700 ease-[cubic-bezier(.22,1,.36,1)]" : ""}`}
+          style={{ transform: `translateX(-${pos * 100}%)` }}
+          onTransitionEnd={onEnd}
         >
-          {slides.map((s, i) => (
+          {loop.map((s, i) => (
             <li
-              key={s.title}
+              key={`${s.title}-${i}`}
               className="w-full min-w-0 shrink-0 px-1"
-              aria-hidden={i !== index}
+              aria-hidden={i !== pos}
               aria-roledescription="スライド"
-              aria-label={`${i + 1} / ${slides.length}`}
+              aria-label={`${(i % slides.length) + 1} / ${slides.length}`}
             >
-              <article className="grid min-w-0 gap-6 rounded-2xl bg-white p-5 md:p-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12 lg:p-10">
-                {/* 左: 数字を大きく見せる */}
-                <div className="flex flex-col justify-center rounded-xl bg-[#F5E9ED] px-6 py-8 text-center md:py-12">
-                  <p className="font-black leading-none text-[#7A1F3D]">
-                    <span className="text-[4.5rem] tracking-tight md:text-[6rem]">
-                      {s.visual.num}
-                    </span>
-                    <span className="ml-1 text-2xl md:text-3xl">
-                      {s.visual.unit}
-                    </span>
-                  </p>
-                  <p className="mx-auto mt-4 max-w-[18rem] text-sm font-bold leading-relaxed text-[#5A142C]">
-                    {s.visual.label}
-                  </p>
+              <article className="grid min-w-0 items-center gap-6 rounded-2xl bg-white p-5 md:p-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-12 lg:p-10">
+                {/* 左: 画像 */}
+                <div className="relative mx-auto aspect-square w-full max-w-[22rem] overflow-hidden rounded-xl bg-[#F5E9ED] lg:max-w-none">
+                  <Image
+                    src={s.image}
+                    alt={s.alt}
+                    fill
+                    sizes="(max-width:1024px) 90vw, 420px"
+                    className="object-cover"
+                  />
                 </div>
                 {/* 右: 見出しと根拠 */}
                 <div className="flex min-w-0 flex-col justify-center [overflow-wrap:anywhere]">
                   <p className="text-xs font-black tracking-[0.2em] text-[#7A1F3D]">
-                    ISSUE {String(i + 1).padStart(2, "0")}
+                    ISSUE {String((i % slides.length) + 1).padStart(2, "0")}
                   </p>
-                  <h3 className="mt-2 text-[clamp(1.25rem,2.2vw,1.75rem)] font-black leading-[1.5] text-[#1F1A1C]">
+                  <h3 className="mt-2 text-[clamp(1.25rem,2.2vw,1.75rem)] font-black leading-[1.5] text-[#1F1A1C] lg:[word-break:auto-phrase]">
                     {s.title}
                   </h3>
                   <p className="mt-3 text-[15px] leading-[1.9] text-[#5C5458]">
@@ -215,13 +248,31 @@ export function CisoIssueSlider() {
         </ul>
       </div>
 
-      {/* 操作 */}
-      <div className="mt-6 flex items-center justify-center gap-5">
+      {/* 左右の矢印(PCはカーソルを当てると出る) */}
+      <button
+        type="button"
+        onClick={prev}
+        aria-label="前へ"
+        className={`${arrowClass} -left-2 md:left-3`}
+      >
+        <Arrow dir="prev" />
+      </button>
+      <button
+        type="button"
+        onClick={next}
+        aria-label="次へ"
+        className={`${arrowClass} -right-2 md:right-3`}
+      >
+        <Arrow dir="next" />
+      </button>
+
+      {/* 何枚目か */}
+      <div className="mt-6 flex items-center justify-center gap-4">
         <button
           type="button"
-          onClick={() => go(index - 1)}
+          onClick={prev}
           aria-label="前へ"
-          className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#7A1F3D] ring-1 ring-[#E6D9DD] transition hover:bg-[#7A1F3D] hover:text-white"
+          className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#7A1F3D] ring-1 ring-[#E6D9DD] md:hidden"
         >
           <Arrow dir="prev" />
         </button>
@@ -232,18 +283,18 @@ export function CisoIssueSlider() {
               type="button"
               onClick={() => go(i)}
               aria-label={`${i + 1}枚目を表示`}
-              aria-current={i === index}
+              aria-current={i === current}
               className={`h-2.5 rounded-full transition-all ${
-                i === index ? "w-8 bg-[#7A1F3D]" : "w-2.5 bg-[#D9C3CA]"
+                i === current ? "w-8 bg-[#7A1F3D]" : "w-2.5 bg-[#D9C3CA]"
               }`}
             />
           ))}
         </div>
         <button
           type="button"
-          onClick={() => go(index + 1)}
+          onClick={next}
           aria-label="次へ"
-          className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#7A1F3D] ring-1 ring-[#E6D9DD] transition hover:bg-[#7A1F3D] hover:text-white"
+          className="grid h-10 w-10 place-items-center rounded-full bg-white text-[#7A1F3D] ring-1 ring-[#E6D9DD] md:hidden"
         >
           <Arrow dir="next" />
         </button>

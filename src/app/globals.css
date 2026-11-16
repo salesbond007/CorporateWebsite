@@ -309,3 +309,17 @@
     opacity: 0.6;
   }
 }
+
+/* セキュリティ顧問 LP: ピラミッドに上から下へ流れる光 */
+.pyr-sweep {
+  animation: pyrSweep 3.2s ease-in-out infinite;
+}
+@keyframes pyrSweep {
+  0% {
+    transform: translateY(-60px);
+  }
+  70%,
+  100% {
+    transform: translateY(400px);
+  }
+}
