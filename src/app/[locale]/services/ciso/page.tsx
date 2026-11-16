@@ -413,14 +413,14 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </div>
       </section>
 
-      {/* ========== 5. サービスの特徴 ========== */}
+      {/* ========== 5. 選ばれる理由 ========== */}
       <section
-        id="feature"
+        id="reason"
         className="relative isolate scroll-mt-28 overflow-hidden bg-white py-20 md:py-28"
       >
-        <Watermark className="-right-6 top-4">Feature</Watermark>
+        <Watermark className="-right-6 top-4">Reason</Watermark>
         <Container>
-          <SectionHead en="Feature">サービスの特徴</SectionHead>
+          <SectionHead en="Reason">選ばれる理由</SectionHead>
           <div className="mt-4 md:mt-6">
             {[
               {
@@ -433,7 +433,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 key: "f1",
                 text: "チェックシートの回答、取引先に出せる「セキュリティ体制のご案内」など、取引の場面に合わせて支援します。",
                 stat: null,
-                visual: <FeatureVisual kind="checksheet" />,
+                visual: <ReasonVisual kind="docs" />,
               },
               {
                 title: (
@@ -449,7 +449,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   num: "26.8%",
                   source: "KPMG「サイバーセキュリティサーベイ2026/27」速報",
                 },
-                visual: <FeatureVisual kind="policy" />,
+                visual: <ReasonVisual kind="ledger" />,
               },
               {
                 title: (
@@ -464,7 +464,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 key: "f3",
                 text: "ISMSなどの規格の取得には、半年〜1年ほどかかります。その間も、体制図や回答書に専門家の名前を載せ、取引先に説明できます。名前を出すときは、現状の確認と定例会をセットで行います。",
                 stat: null,
-                visual: <OrgVisual />,
+                visual: <ReasonVisual kind="timeline" />,
               },
             ].map((r, i) => (
               <Reveal key={r.key} variant="up">
@@ -480,7 +480,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   <div>
                     <p className="flex items-baseline gap-3 font-black text-brand-500">
                       <span className="text-xs tracking-[0.24em] md:text-sm">
-                        FEATURE
+                        REASON
                       </span>
                       <span className="text-[2.6rem] leading-none md:text-[3.4rem]">
                         {String(i + 1).padStart(2, "0")}
@@ -683,218 +683,161 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
   );
 }
 
-/** ブラウザ風の枠 */
-function Window({
-  title,
-  children,
-  className,
-}: {
-  title: string;
-  children: ReactNode;
-  className?: string;
-}) {
-  return (
-    <div
-      className={cn(
-        "overflow-hidden rounded-xl bg-white shadow-[0_40px_80px_-40px_rgba(60,15,25,0.45)] ring-1 ring-[#EEDFE3]",
-        className,
-      )}
-    >
-      <div className="flex items-center gap-2 border-b border-[#EEDFE3] bg-[#FBF6F7] px-4 py-2.5">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#FF5F57]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#FEBC2E]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#28C840]" />
-        <span className="ml-3 truncate text-[11px] font-bold text-ink/50">
-          {title}
-        </span>
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function Pill({
-  tone,
-  children,
-}: {
-  tone: "ok" | "wait" | "ng";
-  children: ReactNode;
-}) {
-  return (
-    <span
-      className={cn(
-        "shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold",
-        tone === "ok" && "bg-[#E3F5EC] text-[#1E8A57]",
-        tone === "wait" && "bg-[#FFF3D6] text-[#9A6B00]",
-        tone === "ng" && "bg-[#FBEAEE] text-[#7A1E35]",
-      )}
-    >
-      {children}
-    </span>
-  );
-}
-
-/** 取引先に出せる「セキュリティ体制図」のイメージ */
-function OrgVisual() {
-  const box =
-    "rounded-md bg-white px-3 py-2 text-center text-[12px] font-bold ring-1 ring-[#EEDFE3]";
-  return (
-    <Window title="セキュリティ体制図（取引先提出用）">
-      <div className="p-5 text-[12px]">
-        <div className="mx-auto w-fit">
-          <p className={box}>代表取締役</p>
-        </div>
-        <div aria-hidden="true" className="mx-auto h-4 w-px bg-[#D9C3CA]" />
-        <div className="mx-auto w-fit rounded-md bg-brand-500 px-4 py-2.5 text-center text-white">
-          <p className="text-[10px] font-bold text-white/80">
-            情報セキュリティ責任者
-          </p>
-          <p className="mt-0.5 text-[13px] font-black">
-            社外CISO（セキュリティ顧問）
-          </p>
-        </div>
-        <div aria-hidden="true" className="mx-auto h-4 w-px bg-[#D9C3CA]" />
-        <div aria-hidden="true" className="mx-auto h-px w-2/3 bg-[#D9C3CA]" />
-        <div className="mt-0 grid grid-cols-3 gap-2">
-          {["管理部門", "営業部門", "開発部門"].map((d) => (
-            <div key={d} className="flex flex-col items-center">
-              <span aria-hidden="true" className="h-3 w-px bg-[#D9C3CA]" />
-              <p className={`${box} w-full`}>{d}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-4 flex flex-wrap items-center gap-2 border-t border-[#EEDFE3] pt-3 font-bold">
-          <Pill tone="ok">定例会 月2回</Pill>
-          <Pill tone="ok">現状の確認 済</Pill>
-          <Pill tone="wait">ISMS 取得準備中</Pill>
-        </div>
-      </div>
-    </Window>
-  );
-}
-
-/** 特長ごとの画面イメージ */
-function FeatureVisual({
-  kind,
-}: {
-  kind: "policy" | "diagnosis" | "checksheet";
-}) {
-  if (kind === "policy") {
-    return (
-      <Window title="AI利用ルール（第2版）">
-        <div className="p-5 text-[12px] font-bold">
-          <div className="grid grid-cols-2 gap-3">
-            <div className="rounded-md bg-[#E3F5EC]/70 p-3">
-              <p className="text-[#1E8A57]">○ 入力してよい</p>
-              <ul className="mt-2 space-y-1 text-ink/75">
-                <li>・公開済みの情報</li>
-                <li>・社内向けの文章の下書き</li>
-              </ul>
-            </div>
-            <div className="rounded-md bg-brand-50 p-3">
-              <p className="text-brand-600">× 入力してはダメ</p>
-              <ul className="mt-2 space-y-1 text-ink/75">
-                <li>・お客さまの個人情報</li>
-                <li>・取引先の機密情報</li>
-              </ul>
-            </div>
-          </div>
-          <p className="mt-4 text-ink/60">導入時の承認の流れ</p>
-          <div className="mt-2 flex items-center gap-1.5 text-[11px]">
-            {["社員が申請", "導入前チェック", "責任者が承認"].map((s, i) => (
-              <span key={s} className="flex items-center gap-1.5">
-                <span
-                  className={cn(
-                    "rounded-md px-2 py-1.5",
-                    i === 2
-                      ? "bg-brand-500 text-white"
-                      : "bg-[#FBF6F7] ring-1 ring-[#EEDFE3]",
-                  )}
-                >
-                  {s}
-                </span>
-                {i < 2 ? <span className="text-brand-500">›</span> : null}
-              </span>
-            ))}
-          </div>
-        </div>
-      </Window>
-    );
-  }
-  if (kind === "diagnosis") {
-    const items = [
-      { k: "シャドーAI（無断利用）", v: 82, p: "高" },
-      { k: "入力してよい情報の基準", v: 70, p: "高" },
-      { k: "AIエージェントの権限", v: 48, p: "中" },
-      { k: "外から見える脆弱性", v: 36, p: "中" },
-      { k: "なりすまし詐欺への備え", v: 24, p: "低" },
+/** 選ばれる理由の図(画面の見本ではなく、要点を示す図) */
+function ReasonVisual({ kind }: { kind: "docs" | "ledger" | "timeline" }) {
+  if (kind === "docs") {
+    // 取引先に出せるものが、そろう
+    const docs = [
+      {
+        t: "チェックシート",
+        s: "回答済み",
+        icon: "check" as const,
+      },
+      { t: "体制のご案内", s: "提出用", icon: "doc" as const },
+      { t: "体制図", s: "責任者を記載", icon: "person" as const },
     ];
     return (
-      <Window title="診断レポート ｜ 優先して直す点">
-        <div className="p-5">
-          <ul className="space-y-3">
-            {items.map((it) => (
-              <li key={it.k} className="text-[11px] font-bold">
-                <div className="flex items-center justify-between">
-                  <span>{it.k}</span>
-                  <span
-                    className={cn(
-                      "rounded px-1.5 py-0.5 text-[10px]",
-                      it.p === "高"
-                        ? "bg-brand-500 text-white"
-                        : it.p === "中"
-                          ? "bg-[#E7C4CD] text-brand-600"
-                          : "bg-[#F1ECEE] text-ink/60",
-                    )}
-                  >
-                    優先度 {it.p}
-                  </span>
-                </div>
-                <div className="mt-1.5 h-2 rounded-full bg-[#F1ECEE]">
-                  <div
-                    className="h-2 rounded-full bg-[linear-gradient(90deg,#A83B57,#7A1E35)]"
-                    style={{ width: `${it.v}%` }}
-                  />
-                </div>
-              </li>
-            ))}
-          </ul>
+      <div className="relative">
+        <p className="text-center text-xs font-black tracking-[0.18em] text-brand-500">
+          取引先に出せるものが、そろう
+        </p>
+        <div className="mt-5 flex items-stretch justify-center gap-3 sm:gap-4">
+          {docs.map((d, i) => (
+            <div
+              key={d.t}
+              className="flex w-1/3 max-w-[10rem] flex-col items-center rounded-lg bg-white px-2 pb-4 pt-5 text-center ring-1 ring-[#EEDFE3]"
+              style={{ transform: `translateY(${i === 1 ? -10 : 0}px)` }}
+            >
+              <span className="grid h-12 w-12 place-items-center rounded-full bg-brand-500 text-white">
+                <Icon name={d.icon} className="h-6 w-6" />
+              </span>
+              <p className="mt-3 text-[12px] font-black leading-snug text-ink sm:text-[13px]">
+                {d.t}
+              </p>
+              <p className="mt-1.5 rounded-full bg-[#F5E9ED] px-2 py-0.5 text-[10px] font-bold text-brand-600">
+                {d.s}
+              </p>
+            </div>
+          ))}
         </div>
-      </Window>
+        <div className="mt-5 flex items-center justify-center gap-2 text-[12px] font-bold text-ink/70">
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5 text-brand-500"
+            aria-hidden="true"
+            fill="none"
+          >
+            <path
+              d="M4 20V9l8-5 8 5v11M9 20v-6h6v6"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinejoin="round"
+            />
+          </svg>
+          大手企業・上場企業の取引先へ
+        </div>
+      </div>
     );
   }
-  const rows = [
-    { q: "AIの利用ルールを定めていますか", s: "回答済" },
-    { q: "情報セキュリティの責任者は誰ですか", s: "回答済" },
-    { q: "委託先のAI利用を管理していますか", s: "回答済" },
-    { q: "事故時の連絡体制はありますか", s: "確認中" },
-  ];
-  return (
-    <Window title="取引先チェックシート ｜ 回答状況">
-      <div className="p-5">
-        <div className="flex items-end justify-between">
-          <p className="text-[11px] font-bold text-ink/55">回答の進み具合</p>
-          <p className="font-display text-2xl font-black leading-none text-brand-500">
-            42<span className="text-sm text-ink/45"> / 45問</span>
+  if (kind === "ledger") {
+    // AIシステム台帳
+    const rows = [
+      { a: "文章作成AI", u: "営業・管理", st: "利用可", ok: true },
+      { a: "議事録AI", u: "全社", st: "利用可", ok: true },
+      { a: "画像生成AI", u: "広報", st: "確認中", ok: false },
+      { a: "個人で登録したAI", u: "―", st: "利用不可", ok: false },
+    ];
+    return (
+      <div className="rounded-lg bg-white p-4 ring-1 ring-[#EEDFE3] sm:p-5">
+        <div className="flex items-center justify-between">
+          <p className="text-[13px] font-black text-ink">AIシステム台帳</p>
+          <p className="text-[10px] font-bold text-ink/50">責任者が承認</p>
+        </div>
+        <table className="mt-3 w-full text-left text-[12px]">
+          <thead>
+            <tr className="border-b border-[#EEDFE3] text-[10px] text-ink/50">
+              <th className="py-1.5 font-bold">AIツール</th>
+              <th className="py-1.5 font-bold">使う部門</th>
+              <th className="py-1.5 text-right font-bold">判断</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.a} className="border-b border-[#F3EAED] last:border-0">
+                <td className="py-2 font-bold text-ink">{r.a}</td>
+                <td className="py-2 text-ink/70">{r.u}</td>
+                <td className="py-2 text-right">
+                  <span
+                    className={cn(
+                      "rounded-full px-2 py-0.5 text-[10px] font-bold",
+                      r.ok
+                        ? "bg-[#E3F5EC] text-[#1E7A4C]"
+                        : r.st === "確認中"
+                          ? "bg-[#FFF3D6] text-[#8A5F00]"
+                          : "bg-[#FBEAEE] text-brand-600",
+                    )}
+                  >
+                    {r.st}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <div className="mt-3 grid grid-cols-2 gap-2 text-[11px] font-bold">
+          <p className="rounded-md bg-[#E3F5EC]/70 px-2.5 py-2 text-[#1E7A4C]">
+            ○ 入力してよい情報を決める
+          </p>
+          <p className="rounded-md bg-[#FBEAEE] px-2.5 py-2 text-brand-600">
+            × 顧客情報は入力しない
           </p>
         </div>
-        <div className="mt-2 h-2 rounded-full bg-[#F1ECEE]">
-          <div className="h-2 w-[93%] rounded-full bg-brand-500" />
-        </div>
-        <ul className="mt-4 divide-y divide-[#EEDFE3] rounded-lg border border-[#EEDFE3] text-[11px] font-bold">
-          {rows.map((r) => (
-            <li key={r.q} className="flex items-center gap-2 px-3 py-2">
-              <span className="flex-1">{r.q}</span>
-              <Pill tone={r.s === "回答済" ? "ok" : "wait"}>{r.s}</Pill>
-            </li>
-          ))}
-        </ul>
-        <p className="mt-3 flex items-center gap-2 rounded-md bg-brand-50 px-3 py-2 text-[11px] font-bold text-brand-600">
-          <Icon name="person" className="h-4 w-4" />
-          社外CISOとして名前を掲載
-        </p>
       </div>
-    </Window>
+    );
+  }
+  // 規格の取得までの期間にも、専門家の名前を出せる
+  return (
+    <div className="rounded-lg bg-white p-5 ring-1 ring-[#EEDFE3]">
+      <p className="text-[13px] font-black text-ink">
+        規格の取得までの流れ（例）
+      </p>
+      <div className="relative mt-8">
+        {/* 期間の線 */}
+        <div className="relative h-2 rounded-full bg-[#EEDFE3]">
+          <span className="absolute inset-y-0 left-0 w-full rounded-full bg-brand-500" />
+        </div>
+        <div className="mt-2 flex justify-between text-[10px] font-bold text-ink/55">
+          <span>契約</span>
+          <span>半年</span>
+          <span>1年</span>
+        </div>
+        {/* 最初から名前を出せる */}
+        <div className="absolute -top-7 left-0 flex items-center gap-1.5">
+          <span className="rounded-full bg-brand-500 px-2.5 py-1 text-[10px] font-black text-white">
+            この月から専門家の名前を掲載
+          </span>
+        </div>
+        {/* 規格の取得 */}
+        <div className="absolute -top-7 right-0">
+          <span className="rounded-full border border-brand-500 bg-white px-2.5 py-1 text-[10px] font-black text-brand-500">
+            ISMSなどの取得
+          </span>
+        </div>
+      </div>
+      <ul className="mt-6 grid grid-cols-3 gap-2 text-center text-[11px] font-bold">
+        {["体制図に記載", "回答書に記載", "現状の確認・定例会"].map((t) => (
+          <li
+            key={t}
+            className="rounded-md bg-[#F5E9ED] px-1.5 py-2.5 text-brand-600"
+          >
+            {t}
+          </li>
+        ))}
+      </ul>
+      <p className="mt-3 text-center text-[11px] text-ink/60">
+        取得を待たずに、取引先へ体制を説明できます
+      </p>
+    </div>
   );
 }
 
