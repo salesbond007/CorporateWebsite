@@ -10,7 +10,7 @@ import {
 } from "react";
 
 /**
- * Bond AI セキュリティ顧問 LP「選ばれる理由」の動く図(画像の代わり)。
+ * Bond AI 情報セキュリティ顧問 LP「選ばれる理由」の動く図(画像の代わり)。
  * 画面に入ると順番に現れ、その後は点線が流れる・チェックが入る・数字が数え上がるなどの小さな動きを続ける。
  * 動きを減らす設定の端末では、最初から完成した状態で表示する。
  */
@@ -330,7 +330,7 @@ export function ReasonDocs() {
                 className={`absolute inset-0 rounded-full ${inView ? "rv-glow" : ""}`}
               />
             </div>
-            <p className="mt-2 whitespace-nowrap rounded-full bg-[#7A1F3D] px-1.5 py-1 text-[8px] font-black text-white sm:px-2 sm:text-[11px]">
+            <p className="mt-2 rounded-full bg-[#7A1F3D] px-1.5 py-1 text-center text-[8px] font-black leading-tight text-white sm:whitespace-nowrap sm:px-2 sm:text-[11px]">
               大手企業・上場企業
             </p>
           </Pop>

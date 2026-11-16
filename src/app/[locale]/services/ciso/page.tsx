@@ -7,6 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
 import { CisoIssueSlider } from "@/components/services/CisoIssueSlider";
+import { LpNav } from "@/components/services/LpNav";
 import {
   ReasonAiManagement,
   ReasonDocs,
@@ -47,8 +48,28 @@ const W2 = "#A83B57"; // やや明るいワインレッド
 
 const faqs = [
   {
-    q: "ほかのセキュリティ顧問・社外CISOとの違いは何ですか？",
-    a: "サービスの種類は社外CISO（vCISO）と同じです。違いは、大手企業との取引とAIの管理に絞り、そのための支援（チェックシートの回答、取引先に出せる「セキュリティ体制のご案内」、取引先との打ち合わせへの同席、AI利用ルールとAIシステム台帳）を標準で入れていることです。",
+    q: "情報セキュリティ顧問とは、どんなサービスですか？",
+    a: "社内に情報セキュリティの専門家がいない会社に、外部の専門家が顧問として入り、情報セキュリティの体制づくりを支えるサービスです。Bond AIでは、大手企業と取引したい中小企業向けに、取引先のチェックシートへの回答、AI利用ルールづくり、事故のときの手順づくりなどを、責任者（社外CISO）の立場で支援します。",
+  },
+  {
+    q: "料金はいくらですか？",
+    a: "アドバイザーは月10万円〜（税別）です。社外CISOは、会社の規模やご相談の内容に合わせてお見積もりします。まずは無料相談で、御社に必要な範囲をご案内します。",
+  },
+  {
+    q: "個人情報漏洩やランサムウェアへの対策もできますか？",
+    a: "はい。初回アセスメントで、個人情報の漏洩やランサムウェアなどのリスクを洗い出し、優先順位をつけて対策を決めます。社員がAIに入力してよい情報のルールや、事故が起きたときの連絡体制・初動の手順も整えます。",
+  },
+  {
+    q: "社員の生成AI（ChatGPTなど）の利用も管理できますか？",
+    a: "はい。AI利用ルール（使ってよいAIツール、入力してはいけない情報、導入の承認の流れ）と、社内で使うAIの一覧（AIシステム台帳）を、標準の支援に含めています。",
+  },
+  {
+    q: "サービスの監修者はどんな人ですか？",
+    a: "株式会社帝国データバンクネットコミュニケーション（株式会社帝国データバンクアクシスと合併）の元代表取締役、岡崎 弘明が監修しています。帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表を務めました。",
+  },
+  {
+    q: "ほかの情報セキュリティ顧問・社外CISOとの違いは何ですか？",
+    a: "サービスの種類は社外CISO（vCISO）と同じです。違いは、大手企業との取引とAIの管理に絞り、そのための支援（チェックシートの回答、取引先に出せる「情報セキュリティ体制のご案内」、取引先との打ち合わせへの同席、AI利用ルールとAIシステム台帳）を標準で入れていることです。",
   },
   {
     q: "アドバイザーと社外CISOは、何が違いますか？",
@@ -68,7 +89,7 @@ const faqs = [
   },
   {
     q: "まだAIをほとんど使っていませんが、対象になりますか？",
-    a: "はい。チェックシートへの回答、規程づくり、事故のときの初動など、セキュリティの責任者としての役割がすべて対象です。これからAIを導入する会社にもおすすめです。",
+    a: "はい。チェックシートへの回答、規程づくり、事故のときの初動など、情報セキュリティの責任者としての役割がすべて対象です。これからAIを導入する会社にもおすすめです。",
   },
   {
     q: "事故（インシデント）が起きたときは、どこまで対応してもらえますか？",
@@ -140,9 +161,13 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
   const url = `${base}${localePath(PATH, locale)}`;
 
   const nav = [
+    { href: "#issue", label: "必須の時代" },
     { href: "#service", label: "サービス" },
+    { href: "#structure", label: "体制づくり" },
+    { href: "#reason", label: "選ばれる理由" },
     { href: "#expert", label: "サービス監修" },
     { href: "#faq", label: "よくある質問" },
+    { href: `#${FORM_ID}`, label: "お申し込み" },
   ];
 
   return (
@@ -157,25 +182,30 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               url: localePath("/services/security", locale),
             },
             {
-              name: "Bond AI セキュリティ顧問（社外CISO）",
+              name: "Bond AI 情報セキュリティ顧問（社外CISO）",
               url: localePath(PATH, locale),
             },
           ]),
           {
             "@context": "https://schema.org",
             "@type": "Service",
-            name: "Bond AI セキュリティ顧問（大手企業と取引したい中小企業のための社外CISO）",
+            "@id": `${url}#service`,
+            name: "Bond AI 情報セキュリティ顧問（大手企業と取引したい中小企業のための社外CISO）",
             alternateName: [
+              "情報セキュリティ顧問",
+              "セキュリティ顧問",
               "社外CISO",
               "vCISO",
               "CISO as a Service",
-              "セキュリティ顧問",
               "AIセキュリティ顧問",
             ],
-            serviceType: "社外CISO・セキュリティ顧問",
+            serviceType: "情報セキュリティ顧問・社外CISO",
+            category: "情報セキュリティ",
             description: pageMeta.ciso.description,
+            keywords: pageMeta.ciso.keywords.join(", "),
             url,
             areaServed: { "@type": "Country", name: "日本" },
+            availableLanguage: "ja",
             provider: {
               "@type": "Organization",
               name: site.legalName,
@@ -183,7 +213,58 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             },
             audience: {
               "@type": "BusinessAudience",
-              audienceType: "中小・中堅企業",
+              audienceType: "大手企業と取引したい中小企業・中堅企業",
+            },
+            offers: {
+              "@type": "Offer",
+              name: "アドバイザー",
+              priceCurrency: "JPY",
+              priceSpecification: {
+                "@type": "UnitPriceSpecification",
+                minPrice: 100000,
+                priceCurrency: "JPY",
+                unitText: "月",
+                valueAddedTaxIncluded: false,
+              },
+            },
+            hasOfferCatalog: {
+              "@type": "OfferCatalog",
+              name: "情報セキュリティ顧問のプラン",
+              itemListElement: [
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "アドバイザー（情報セキュリティ顧問）",
+                  },
+                },
+                {
+                  "@type": "Offer",
+                  itemOffered: {
+                    "@type": "Service",
+                    name: "社外CISO（vCISO）",
+                  },
+                },
+              ],
+            },
+          },
+          {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": url,
+            url,
+            name: pageMeta.ciso.title,
+            description: pageMeta.ciso.description,
+            inLanguage: "ja",
+            about: { "@id": `${url}#service` },
+            reviewedBy: {
+              "@type": "Person",
+              name: "岡崎 弘明",
+              alternateName: "オカザキ ヒロアキ",
+              jobTitle: "サービス監修",
+              description:
+                "株式会社帝国データバンクネットコミュニケーション（株式会社帝国データバンクアクシスと合併）元代表取締役。帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表を務めた。",
+              knowsAbout: ["情報セキュリティ", "情報セキュリティ体制の構築"],
             },
           },
           {
@@ -200,8 +281,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
 
       {/* ========== 1. ヘッダー ========== */}
       <header className="sticky top-0 z-40 border-b border-[#EEE5E8] bg-white/95 backdrop-blur">
-        <Container className="flex h-16 items-center gap-6 md:h-[4.5rem]">
-          <a href="#top" className="flex items-center gap-2.5">
+        <Container className="flex h-16 items-center gap-4 md:h-[4.5rem] xl:gap-6">
+          <a href="#top" className="flex shrink-0 items-center gap-2.5">
             <span
               className="grid h-9 w-9 place-items-center rounded-lg bg-brand-500 text-white"
               aria-hidden="true"
@@ -212,52 +293,20 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               <span className="block whitespace-nowrap text-base font-black text-ink sm:text-lg">
                 Bond AI
               </span>
-              <span className="hidden text-[10px] font-bold text-ink/55 sm:block">
-                大手企業と取引する会社のセキュリティ顧問
+              <span className="hidden text-[10px] font-bold text-ink/55 sm:block lg:hidden xl:block">
+                大手企業と取引する会社の情報セキュリティ顧問
               </span>
             </span>
           </a>
-          <nav
-            aria-label="ページ内メニュー"
-            className="ml-auto hidden md:block"
-          >
-            <ul className="flex items-center gap-1">
-              {nav.map((n) => (
-                <li key={n.href}>
-                  <a
-                    href={n.href}
-                    className="px-3 py-2 text-sm font-bold text-ink/80 hover:text-brand-500 lg:px-4"
-                  >
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <LpNav items={nav} variant="desktop" />
           <a
             href={`#${FORM_ID}`}
-            className="ml-auto inline-flex h-10 items-center rounded-none bg-[linear-gradient(100deg,#FF7A55,#E64A2E)] px-5 text-sm font-bold text-white shadow-[0_8px_18px_-10px_rgba(230,74,46,0.9)] md:ml-2"
+            className="ml-auto inline-flex h-10 shrink-0 items-center rounded-none bg-[linear-gradient(100deg,#FF7A55,#E64A2E)] px-4 text-sm font-bold text-white shadow-[0_8px_18px_-10px_rgba(230,74,46,0.9)] sm:px-5 lg:ml-2"
           >
             無料相談
           </a>
         </Container>
-        <nav
-          aria-label="ページ内メニュー"
-          className="border-t border-[#EEE5E8] md:hidden"
-        >
-          <ul className="flex justify-between px-3">
-            {nav.map((n) => (
-              <li key={n.href}>
-                <a
-                  href={n.href}
-                  className="block px-2 py-2 text-xs font-bold text-ink/75"
-                >
-                  {n.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <LpNav items={nav} variant="mobile" />
       </header>
 
       {/* ========== 2. ファーストビュー ========== */}
@@ -293,15 +342,17 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           className="absolute -left-40 top-20 -z-10 h-96 w-96 rounded-full bg-white blur-[80px]"
         />
         <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
-          <div className="text-center lg:text-left">
-            <p className="text-[clamp(1.15rem,2vw,1.6rem)] font-bold text-ink/85">
-              <span className="underline decoration-brand-500 decoration-[3px] underline-offset-[7px]">
-                大手企業と取引したい
+          <div className="min-w-0 text-center lg:text-left">
+            <h1>
+              <span className="block text-[clamp(0.95rem,4.4vw,1.6rem)] font-bold text-ink/85 lg:text-[clamp(1.05rem,2vw,1.6rem)]">
+                <span className="underline decoration-brand-500 decoration-[3px] underline-offset-[7px]">
+                  大手企業と取引したい
+                </span>
+                中小企業のための
               </span>
-              中小企業のための
-            </p>
-            <h1 className="mt-3 whitespace-nowrap text-[clamp(2.1rem,3.9vw,3.4rem)] font-black leading-[1.2] tracking-[0.03em]">
-              セキュリティ<span className="text-brand-500">顧問</span>
+              <span className="mt-3 block whitespace-nowrap text-[clamp(1.6rem,8vw,3.3rem)] font-black leading-[1.2] tracking-[0.02em] lg:text-[clamp(2rem,3.6vw,3.3rem)]">
+                情報セキュリティ<span className="text-brand-500">顧問</span>
+              </span>
             </h1>
             <p className="mt-4 flex items-baseline justify-center gap-1 lg:justify-start">
               <span className="text-lg font-black">月</span>
@@ -316,24 +367,25 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             <p className="mt-6 text-[clamp(1.05rem,1.7vw,1.35rem)] font-bold leading-[1.8] text-ink/85">
               <span className="text-brand-500">AI時代</span>に必須の
               <br className="sm:hidden" />
-              セキュリティ体制を<span className="text-brand-500">構築</span>する
+              情報セキュリティ体制を<span className="text-brand-500">構築</span>
+              する
             </p>
             <div className="mt-10 flex justify-center lg:block">
               <BigButton label="無料相談" icon="check" href="#check" />
             </div>
           </div>
-          <div className="order-first mx-auto w-full max-w-[520px] lg:order-none lg:-mr-6 lg:max-w-none xl:-mr-12">
+          <div className="order-first mx-auto w-full min-w-0 max-w-[520px] lg:order-none lg:-mr-6 lg:max-w-none xl:-mr-12">
             <CisoHeroVisual />
           </div>
         </Container>
       </section>
 
-      {/* ========== 3. セキュリティ対策が当たり前の時代に ========== */}
-      <section className="bg-[#F3ECEE] pt-16 md:pt-24">
+      {/* ========== 3. 情報セキュリティ対策が必須の時代に ========== */}
+      <section id="issue" className="scroll-mt-28 bg-[#F3ECEE] pt-16 md:pt-24">
         <Container>
           <Reveal variant="up" className="text-center">
             <h2 className="text-[clamp(1.5rem,3vw,2.2rem)] font-black leading-[1.5]">
-              <span className="text-brand-500">セキュリティ対策</span>が
+              <span className="text-brand-500">情報セキュリティ対策</span>が
               <br className="sm:hidden" />
               必須の時代に
             </h2>
@@ -350,7 +402,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             className="bg-brand-500 py-8 text-center text-white md:py-10"
           >
             <p className="text-[clamp(1.3rem,2.8vw,2rem)] font-black leading-[1.5]">
-              セキュリティの体制づくりは
+              情報セキュリティの体制づくりは
               <br className="sm:hidden" />
               お任せください
             </p>
@@ -393,23 +445,25 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </span>
               に、
               <br className="hidden sm:block" />
-              <span className="text-brand-500">セキュリティ顧問</span>を。
+              <span className="text-brand-500">情報セキュリティ顧問</span>を。
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
-              当社の専門家が社外のセキュリティ責任者として入り、取引先に「この会社なら任せて大丈夫」と説明できる体制を、責任者ごと用意します。
+              当社の専門家が社外の情報セキュリティ責任者として入り、取引先に「この会社なら任せて大丈夫」と説明できる体制を、責任者ごと用意します。
             </p>
           </Reveal>
 
-          {/* 図: 月額で任せてセキュリティを強化 */}
+          {/* 図: 月額で任せて情報セキュリティを強化 */}
           <div className="mt-10">
             <CisoBeforeAfter />
           </div>
         </Container>
 
         {/* 図: サービスの全体像(4ステップ × 2プラン)。背景は横幅いっぱい */}
-        <Reveal variant="fade" className="mt-14 md:mt-20">
-          <CisoServiceDiagram />
-        </Reveal>
+        <div id="structure" className="mt-14 scroll-mt-28 md:mt-20">
+          <Reveal variant="fade">
+            <CisoServiceDiagram />
+          </Reveal>
+        </div>
 
         <div className="mt-20 md:mt-24">
           <SplitCta />
@@ -434,7 +488,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   </>
                 ),
                 key: "f1",
-                text: "チェックシートの回答、取引先に出せる「セキュリティ体制のご案内」など、取引の場面に合わせて支援します。",
+                text: "チェックシートの回答、取引先に出せる「情報セキュリティ体制のご案内」など、取引の場面に合わせて支援します。",
                 stat: null,
                 visual: <ReasonDocs />,
               },
@@ -472,7 +526,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               <Reveal key={r.key} variant="up">
                 <article
                   className={cn(
-                    "grid items-center gap-6 py-10 md:gap-10 md:py-14 lg:grid-cols-2 lg:gap-14",
+                    "grid grid-cols-[minmax(0,1fr)] items-center gap-6 py-10 md:gap-10 md:py-14 lg:grid-cols-2 lg:gap-14",
                     i > 0 && "border-t border-[#EADFE2]",
                   )}
                 >
@@ -669,7 +723,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             >
               <Icon name="shield" className="h-4 w-4" />
             </span>
-            <p className="text-base font-black">Bond AI セキュリティ顧問</p>
+            <p className="text-base font-black">Bond AI 情報セキュリティ顧問</p>
             <p className="text-sm text-white/60">／ 運営：{site.legalName}</p>
           </div>
           <div className="mt-6 border-t border-white/15 pt-6 text-[11px] leading-[1.9] text-white/55">
@@ -707,7 +761,7 @@ function BigButton({
     <a
       href={href}
       className={cn(
-        "group relative inline-flex h-16 w-full min-w-[20rem] items-center justify-center pl-8 pr-20 transition hover:-translate-y-0.5 sm:w-auto md:min-w-[24rem]",
+        "group relative inline-flex h-16 w-full items-center justify-center pl-8 pr-20 transition hover:-translate-y-0.5 sm:w-auto sm:min-w-[20rem] md:min-w-[24rem]",
         tone === "wine" &&
           "bg-[linear-gradient(100deg,#6A1830,#A83B57)] text-white shadow-[0_12px_26px_-12px_rgba(122,30,53,0.8)]",
         tone === "accent" &&

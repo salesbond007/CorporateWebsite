@@ -9,6 +9,8 @@ type PageMetaInput = {
   /** ロケール接頭辞なしのパス。トップは "/" */
   path: string;
   locale: Locale;
+  /** meta keywords(任意) */
+  keywords?: readonly string[];
 };
 
 /**
@@ -20,12 +22,14 @@ export function pageMetadata({
   description,
   path,
   locale,
+  keywords,
 }: PageMetaInput): Metadata {
   const suffix = path === "/" ? "" : path;
   const url = `/${locale}${suffix}`;
   return {
     title: { absolute: title },
     description,
+    ...(keywords?.length ? { keywords: [...keywords] } : {}),
     alternates: {
       canonical: url,
       languages: {
@@ -88,9 +92,37 @@ export const pageMeta = {
   },
   ciso: {
     title:
-      "セキュリティ顧問｜大手企業と取引したい中小企業のための社外CISO｜Bond AI",
+      "情報セキュリティ顧問｜大手企業と取引したい中小企業の社外CISO・AIセキュリティ対策｜Bond AI",
     description:
-      "大手企業と取引したい会社に、AI時代のセキュリティ責任者を。Bond AIのセキュリティ顧問は、当社の専門家が社外のセキュリティ責任者として入り、取引先のチェックシートへの回答や体制の説明、AI利用ルールづくりまで支援します。取引先に出せる専門家の名前と、体制づくりの助言を。月10万円〜（税別）。無料相談受付中。",
+      "大手企業と取引したい中小企業のための情報セキュリティ顧問。元 帝国データバンクグループ会社代表が監修し、専門家が社外の情報セキュリティ責任者（社外CISO）として就任。取引先のチェックシート回答、AI利用ルールづくり、個人情報漏洩・ランサムウェア対策まで支援します。月10万円〜（税別）。無料相談受付中。",
+    keywords: [
+      "情報セキュリティ顧問",
+      "セキュリティ顧問",
+      "情報セキュリティ",
+      "セキュリティ",
+      "社外CISO",
+      "vCISO",
+      "CISO",
+      "顧問",
+      "AI",
+      "AIセキュリティ",
+      "生成AI",
+      "AI利用ルール",
+      "AIガバナンス",
+      "個人情報漏洩",
+      "情報漏洩対策",
+      "ランサムウェア対策",
+      "サイバー攻撃",
+      "セキュリティチェックシート",
+      "委託先評価",
+      "SCS評価制度",
+      "ISMS",
+      "中小企業",
+      "大手企業との取引",
+      "帝国データバンク",
+      "Bond AI",
+      "セールスボンド",
+    ],
   },
 
   securityTraining: {
