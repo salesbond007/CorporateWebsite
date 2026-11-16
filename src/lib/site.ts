@@ -146,7 +146,7 @@ export const serviceCategories: ServiceCategory[] = [
           {
             slug: "ciso",
             number: "01-1",
-            title: "情報セキュリティ顧問",
+            title: "AI情報セキュリティ顧問",
             href: "/services/ciso",
             subtitle: "Information Security Advisor",
             summary:
@@ -163,7 +163,7 @@ export const serviceCategories: ServiceCategory[] = [
           {
             slug: "security-training",
             number: "01-2",
-            title: "AI時代のセキュリティ研修",
+            title: "AI情報セキュリティ研修",
             href: "/services/security-training",
             subtitle: "Security Training",
             summary:
