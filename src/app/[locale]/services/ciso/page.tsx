@@ -7,6 +7,11 @@ import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
 import { CisoIssueSlider } from "@/components/services/CisoIssueSlider";
+import {
+  ReasonAiManagement,
+  ReasonDocs,
+  ReasonExpertName,
+} from "@/components/services/CisoReasonVisuals";
 import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
 import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
@@ -433,12 +438,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 key: "f1",
                 text: "チェックシートの回答、取引先に出せる「セキュリティ体制のご案内」など、取引の場面に合わせて支援します。",
                 stat: null,
-                visual: (
-                  <ReasonImage
-                    n={1}
-                    alt="自社のチェックシート・体制のご案内・体制図を整え、大手企業・上場企業との取引機会につなげるイメージ"
-                  />
-                ),
+                visual: <ReasonDocs />,
               },
               {
                 title: (
@@ -454,12 +454,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   num: "26.8%",
                   source: "KPMG「サイバーセキュリティサーベイ2026/27」速報",
                 },
-                visual: (
-                  <ReasonImage
-                    n={2}
-                    alt="AI利用ルールとAIシステム台帳で社員のAI利用を管理するイメージ。AIの明確な責任者を決めている大手企業は26.8%"
-                  />
-                ),
+                visual: <ReasonAiManagement />,
               },
               {
                 title: (
@@ -474,12 +469,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 key: "f3",
                 text: "ISMSなどの規格の取得には、半年〜1年ほどかかります。その間も、体制図や回答書に専門家の名前を載せ、取引先に説明できます。名前を出すときは、現状の確認と定例会をセットで行います。",
                 stat: null,
-                visual: (
-                  <ReasonImage
-                    n={3}
-                    alt="専門家の名前を出して回答書をそろえ、取引先との取引につなげるイメージ"
-                  />
-                ),
+                visual: <ReasonExpertName />,
               },
             ].map((r, i) => (
               <Reveal key={r.key} variant="up">
@@ -489,9 +479,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                     i > 0 && "border-t border-[#EADFE2]",
                   )}
                 >
-                  <div className="overflow-hidden rounded-xl bg-[#F5E9ED]">
-                    {r.visual}
-                  </div>
+                  <div>{r.visual}</div>
                   <div>
                     <p className="flex items-baseline gap-3 font-black text-brand-500">
                       <span className="text-xs tracking-[0.24em] md:text-sm">
@@ -699,21 +687,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </Container>
       </footer>
     </div>
-  );
-}
-
-/** 選ばれる理由の画像 */
-function ReasonImage({ n, alt }: { n: 1 | 2 | 3; alt: string }) {
-  const size = n === 1 ? { w: 1200, h: 675 } : { w: 1200, h: 800 };
-  return (
-    <Image
-      src={`/photos/ciso/reason-${n}.webp`}
-      alt={alt}
-      width={size.w}
-      height={size.h}
-      sizes="(max-width:1024px) 100vw, 560px"
-      className="h-auto w-full"
-    />
   );
 }
 

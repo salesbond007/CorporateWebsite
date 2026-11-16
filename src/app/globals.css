@@ -323,3 +323,54 @@
     transform: translateY(400px);
   }
 }
+
+/* セキュリティ顧問 LP: 選ばれる理由の動く図 */
+.rv-dash {
+  animation: rvDash 1s linear infinite;
+}
+.rv-float {
+  animation: hvFloat 3s ease-in-out infinite;
+}
+.rv-glow {
+  animation: rvGlow 2.4s ease-out infinite;
+}
+.rv-shake {
+  transform-origin: center;
+  animation: rvShake 2.4s ease-in-out infinite;
+}
+.rv-tick {
+  stroke-dasharray: 10;
+  stroke-dashoffset: 10;
+  animation: rvTick 0.5s ease-out forwards;
+}
+@keyframes rvDash {
+  to {
+    stroke-dashoffset: -8;
+  }
+}
+@keyframes rvGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(122, 31, 61, 0.35);
+  }
+  100% {
+    box-shadow: 0 0 0 18px rgba(122, 31, 61, 0);
+  }
+}
+@keyframes rvShake {
+  0%,
+  70%,
+  100% {
+    transform: rotate(0);
+  }
+  78% {
+    transform: rotate(-10deg);
+  }
+  86% {
+    transform: rotate(10deg);
+  }
+}
+@keyframes rvTick {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
