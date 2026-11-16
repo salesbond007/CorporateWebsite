@@ -156,15 +156,15 @@ export default function ServicesPage({
         </Container>
       </section>
 
-      {/* AIセキュリティ対策事業のサービス(ピラミッド) */}
+      {/* 情報セキュリティ対策事業のサービス(同心円の図) */}
       <section className="bg-cream py-20 md:py-28">
         <Container>
           <Reveal variant="up">
             <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-500">
-              AI Security Services
+              Information Security Services
             </p>
             <h2 className="[word-break:keep-all] mt-3 text-[clamp(1.75rem,3.2vw,2.5rem)] font-black leading-tight text-ink">
-              AIセキュリティ対策事業の
+              情報セキュリティ対策事業の
               <wbr />
               サービス
             </h2>
