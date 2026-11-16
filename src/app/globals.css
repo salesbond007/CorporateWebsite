@@ -397,3 +397,30 @@
     opacity: 0;
   }
 }
+.pf-orbit-2 {
+  transform-box: view-box;
+  transform-origin: 230px 211px;
+  animation: hvSpin 36s linear infinite;
+}
+.pf-attack {
+  animation: pfAttack 1.1s linear infinite;
+}
+.pf-core {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: pfCore 2.4s ease-in-out infinite;
+}
+@keyframes pfAttack {
+  to {
+    stroke-dashoffset: -14;
+  }
+}
+@keyframes pfCore {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
