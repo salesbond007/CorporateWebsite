@@ -28,8 +28,11 @@ function Label({ text, required }: { text: string; required?: boolean }) {
 export function AiCheckForm({
   privacyHref,
   product = "ciso",
+  consultOnly = false,
 }: {
   privacyHref: string;
+  /** true のときは「無料相談」だけを受け付ける(資料請求の選択肢を出さない) */
+  consultOnly?: boolean;
   /** どのLPのフォームか。training は研修LP(ボタンの文言が変わる) */
   product?: "ciso" | "training";
 }) {
@@ -47,6 +50,7 @@ export function AiCheckForm({
 
   // 「資料をダウンロード」ボタン(#document)から来たときは資料請求を選んだ状態にする
   useEffect(() => {
+    if (consultOnly) return;
     const sync = () => {
       if (window.location.hash === "#document") setRequest("document");
       else if (
@@ -58,7 +62,7 @@ export function AiCheckForm({
     sync();
     window.addEventListener("hashchange", sync);
     return () => window.removeEventListener("hashchange", sync);
-  }, []);
+  }, [consultOnly]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -142,45 +146,47 @@ export function AiCheckForm({
 
   return (
     <form onSubmit={onSubmit} noValidate className="space-y-6">
-      <fieldset>
-        <legend>
-          <Label text="お申し込み内容" required />
-        </legend>
-        <div className="grid grid-cols-2 gap-2">
-          {(
-            [
-              {
-                v: "check",
-                l: training ? "無料で相談する" : "まずは無料で相談する",
-              },
-              {
-                v: "document",
-                l: training ? "資料をダウンロード" : "資料請求",
-              },
-            ] as const
-          ).map((o) => (
-            <label
-              key={o.v}
-              className={cn(
-                "flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-center text-sm font-bold transition",
-                request === o.v
-                  ? "border-brand-500 bg-brand-500 text-white"
-                  : "border-[#E6D9DD] bg-white text-ink hover:border-brand-500",
-              )}
-            >
-              <input
-                type="radio"
-                name="request"
-                value={o.v}
-                checked={request === o.v}
-                onChange={() => setRequest(o.v)}
-                className="sr-only"
-              />
-              {o.l}
-            </label>
-          ))}
-        </div>
-      </fieldset>
+      {consultOnly ? null : (
+        <fieldset>
+          <legend>
+            <Label text="お申し込み内容" required />
+          </legend>
+          <div className="grid grid-cols-2 gap-2">
+            {(
+              [
+                {
+                  v: "check",
+                  l: training ? "無料で相談する" : "まずは無料で相談する",
+                },
+                {
+                  v: "document",
+                  l: training ? "資料をダウンロード" : "資料請求",
+                },
+              ] as const
+            ).map((o) => (
+              <label
+                key={o.v}
+                className={cn(
+                  "flex cursor-pointer items-center justify-center rounded-md border px-3 py-3 text-center text-sm font-bold transition",
+                  request === o.v
+                    ? "border-brand-500 bg-brand-500 text-white"
+                    : "border-[#E6D9DD] bg-white text-ink hover:border-brand-500",
+                )}
+              >
+                <input
+                  type="radio"
+                  name="request"
+                  value={o.v}
+                  checked={request === o.v}
+                  onChange={() => setRequest(o.v)}
+                  className="sr-only"
+                />
+                {o.l}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+      )}
       <div className="grid gap-6 md:grid-cols-2">
         <label className="block md:col-span-2">
           <Label text="会社名" required />
