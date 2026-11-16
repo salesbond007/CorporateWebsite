@@ -3,7 +3,7 @@ import { Reveal } from "@/components/ui/Reveal";
 
 /**
  * Bond AI セキュリティ顧問 LP「サービス概要」。
- * 暗いワイン色を重ねた写真(横幅いっぱい)の上に、少し立体的なピラミッドを置き、
+ * 暗いワイン色を重ねた写真(横幅いっぱい)の上に、平面のピラミッドを置き(上の段から順に表示)、
  * 各段から線を引いて、右に短い解説を並べる。
  * 下の段(土台)から順に積み上げていく流れ: 現状の把握 → ルールづくり → 社員への浸透 → 取引先への説明
  * 背景写真: Unsplash(商用利用可・クレジット不要)。
@@ -36,112 +36,94 @@ const tiers = [
   },
 ];
 
-/* 左の面(明るい)と右の面(暗い)。上の段ほど明るい */
-const leftFill = ["#E7C4CE", "#C7768E", "#A3445F", "#7A1F3D"];
-const rightFill = ["#C99AA9", "#A05570", "#7E2E48", "#5A142C"];
-const labelFill = ["#5A142C", "#fff", "#fff", "#fff"];
+/* 上(説明)ほど濃い赤、下(土台)ほど明るい赤 */
+const fills = ["#5A142C", "#8A2647", "#B8435F", "#E07A8F"];
 
-const APEX = { x: 170, y: 0 };
-const BASE_L = { x: 0, y: 384 };
-const BASE_F = { x: 205, y: 432 };
-const BASE_R = { x: 340, y: 384 };
 const ROWS = 4;
 const ROW_H = 96; // PCでは右の解説の行の高さとそろえる
+const H = ROW_H * ROWS;
+const HALF = 170; // 底辺の半分の幅
+const CX = 175;
 
-type P = { x: number; y: number };
-const at = (b: P, t: number): P => ({
-  x: APEX.x + (b.x - APEX.x) * t,
-  y: APEX.y + (b.y - APEX.y) * t,
-});
-const pts = (...ps: P[]) => ps.map((p) => `${p.x},${p.y}`).join(" ");
-
+/** 平面のピラミッド。上の段から順に現れ、段から右へ線がのびる */
 function Pyramid({ lines }: { lines?: boolean }) {
-  const width = lines ? 440 : 344;
+  const width = lines ? 440 : 350;
+  const half = (y: number) => (HALF * y) / H;
   return (
     <svg
-      viewBox={`-2 -2 ${width + 4} 440`}
-      className={
-        lines ? "h-[27.5rem] w-auto" : "mx-auto h-auto w-full max-w-[18rem]"
-      }
+      viewBox={`0 0 ${width} ${H}`}
+      className={lines ? "h-96 w-auto" : "mx-auto h-auto w-full max-w-[19rem]"}
       role="img"
-      aria-label="土台から順に、現状の把握、ルールと体制づくり、社員への浸透、取引先への説明と積み上げるピラミッド"
+      aria-label="上から順に、取引先への説明、社員への浸透、ルールと体制づくり、現状の把握と積み上げるピラミッド"
     >
-      <ellipse cx="180" cy="428" rx="180" ry="10" fill="#000" opacity="0.25" />
+      <defs>
+        <linearGradient id="pyr-shine" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stopColor="#fff" stopOpacity="0" />
+          <stop offset="0.5" stopColor="#fff" stopOpacity="0.35" />
+          <stop offset="1" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+        <clipPath id="pyr-clip">
+          <polygon points={`${CX},0 ${CX + HALF},${H} ${CX - HALF},${H}`} />
+        </clipPath>
+      </defs>
       {tiers.map((t, i) => {
-        const t0 = i / ROWS;
-        const t1 = (i + 1) / ROWS;
-        const l0 = at(BASE_L, t0);
-        const l1 = at(BASE_L, t1);
-        const f0 = at(BASE_F, t0);
-        const f1 = at(BASE_F, t1);
-        const r0 = at(BASE_R, t0);
-        const r1 = at(BASE_R, t1);
-        const rm = at(BASE_R, (t0 + t1) / 2);
-        const cx =
-          i === 0 ? (l1.x + f1.x) / 2 : (l0.x + l1.x + f0.x + f1.x) / 4;
-        const cy =
-          i === 0
-            ? (l1.y + f1.y) / 2 - 12
-            : (l0.y + l1.y + f0.y + f1.y) / 4 + 5;
+        const y0 = i * ROW_H;
+        const y1 = (i + 1) * ROW_H;
+        const mid = (y0 + y1) / 2;
+        const edge = CX + half(mid);
         return (
           <g
             key={t.title}
-            className="-translate-y-7 opacity-0 transition-[transform,opacity] duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100"
-            style={{ transitionDelay: `${(ROWS - 1 - i) * 180}ms` }}
+            className="-translate-y-4 opacity-0 transition-[transform,opacity] duration-700 ease-[cubic-bezier(.22,1,.36,1)] group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100"
+            style={{ transitionDelay: `${i * 220}ms` }}
           >
             <polygon
-              points={pts(l0, f0, f1, l1)}
-              fill={leftFill[i]}
-              stroke="#2A0B17"
-              strokeWidth="2.5"
-              strokeLinejoin="round"
-            />
-            <polygon
-              points={pts(f0, r0, r1, f1)}
-              fill={rightFill[i]}
-              stroke="#2A0B17"
-              strokeWidth="2.5"
-              strokeLinejoin="round"
-            />
-            <line
-              x1={f0.x}
-              y1={f0.y}
-              x2={f1.x}
-              y2={f1.y}
-              stroke="#fff"
-              strokeOpacity="0.3"
-              strokeWidth="1.2"
+              points={`${CX - half(y0)},${y0} ${CX + half(y0)},${y0} ${CX + half(y1)},${y1} ${CX - half(y1)},${y1}`}
+              fill={fills[i]}
+              stroke="#24070F"
+              strokeWidth="3"
             />
             <text
-              x={cx}
-              y={cy}
+              x={CX}
+              y={i === 0 ? mid + 22 : mid + 6}
               textAnchor="middle"
-              fontSize={i === 0 ? 12 : 15}
+              fontSize={i === 0 ? 14 : 16}
               fontWeight="700"
-              letterSpacing="2"
-              fill={labelFill[i]}
+              letterSpacing="3"
+              fill="#fff"
             >
               {t.label}
             </text>
             {lines ? (
               <>
                 <line
-                  x1={rm.x + 6}
-                  y1={rm.y}
+                  x1={edge + 8}
+                  y1={mid}
                   x2={width - 6}
-                  y2={rm.y}
+                  y2={mid}
                   stroke="#fff"
                   strokeOpacity="0.45"
                   strokeWidth="1.2"
-                  strokeDasharray="3 3"
-                  className="pyr-dash"
+                  className="origin-left scale-x-0 transition-transform duration-700 group-data-[visible=true]/reveal:scale-x-100 [transform-box:fill-box]"
+                  style={{ transitionDelay: `${300 + i * 220}ms` }}
                 />
-                <circle cx={width - 6} cy={rm.y} r="4.5" fill="#fff" />
+                <circle cx={width - 6} cy={mid} r="5" fill="#fff" />
               </>
             ) : null}
           </g>
         );
       })}
+      {/* 光が上から下へ流れる */}
+      <g clipPath="url(#pyr-clip)">
+        <rect
+          x={CX - HALF}
+          y="0"
+          width={HALF * 2}
+          height="60"
+          fill="url(#pyr-shine)"
+          className="pyr-sweep"
+        />
+      </g>
     </svg>
   );
 }
@@ -176,7 +158,7 @@ export function CisoServiceDiagram() {
             セキュリティ顧問が、御社の担当につきます
           </h3>
           <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-[1.9] text-white/75">
-            土台から順に、取引先に説明できる体制を積み上げます。
+            現状の把握を土台に、取引先に説明できる体制まで積み上げます。
           </p>
         </div>
 
@@ -218,7 +200,9 @@ export function CisoServiceDiagram() {
                 <li
                   key={t.title}
                   className="flex gap-4 border-l-4 bg-white/[0.06] py-4 pl-4 pr-4"
-                  style={{ borderColor: leftFill[i] }}
+                  style={{
+                    borderColor: fills[i] === "#5A142C" ? "#B8435F" : fills[i],
+                  }}
                 >
                   <div>
                     <p className="text-[11px] font-bold tracking-[0.14em] text-white/55">

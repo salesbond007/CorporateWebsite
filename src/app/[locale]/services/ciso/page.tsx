@@ -310,7 +310,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               中小企業のための
             </p>
             <h1 className="mt-3 whitespace-nowrap text-[clamp(2.1rem,3.9vw,3.4rem)] font-black leading-[1.2] tracking-[0.03em]">
-              AIセキュリティ<span className="text-brand-500">顧問</span>
+              セキュリティ<span className="text-brand-500">顧問</span>
             </h1>
             <p className="mt-4 flex items-baseline justify-center gap-1 lg:justify-start">
               <span className="text-lg font-black">月</span>
@@ -330,12 +330,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               体制づくりを。
             </p>
             <div className="mt-10 flex justify-center lg:block">
-              <BigButton
-                label="無料相談"
-                sub="オンライン30分・売り込みなし"
-                icon="check"
-                href="#check"
-              />
+              <BigButton label="無料相談" icon="check" href="#check" />
             </div>
           </div>
           <div className="order-first mx-auto w-full max-w-[520px] lg:order-none lg:-mr-6 lg:max-w-none xl:-mr-12">
@@ -351,7 +346,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             <h2 className="text-[clamp(1.5rem,3vw,2.2rem)] font-black leading-[1.5]">
               <span className="text-brand-500">セキュリティ対策</span>が
               <br className="sm:hidden" />
-              当たり前の時代に
+              必須の時代に
             </h2>
           </Reveal>
           <div className="mx-auto mt-8 max-w-6xl md:mt-12">
@@ -954,7 +949,7 @@ function BigButton({
   tone = "wine",
 }: {
   label: string;
-  sub: string;
+  sub?: string;
   icon: "check" | "doc";
   href?: string;
   tone?: "wine" | "accent" | "white";
@@ -976,14 +971,16 @@ function BigButton({
         <span className="block text-[17px] font-black tracking-[0.04em]">
           {label}
         </span>
-        <span
-          className={cn(
-            "mt-0.5 block text-[11px] font-bold",
-            tone === "white" ? "text-ink/55" : "text-white/85",
-          )}
-        >
-          {sub}
-        </span>
+        {sub ? (
+          <span
+            className={cn(
+              "mt-0.5 block text-[11px] font-bold",
+              tone === "white" ? "text-ink/55" : "text-white/85",
+            )}
+          >
+            {sub}
+          </span>
+        ) : null}
       </span>
       <span
         aria-hidden="true"
