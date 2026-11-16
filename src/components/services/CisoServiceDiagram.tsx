@@ -14,25 +14,29 @@ const tiers = [
     step: "STEP 4",
     label: "説明",
     title: "取引先への説明",
-    text: "チェックシートに答え、取引先に出せる「セキュリティ体制のご案内」をそろえます。",
+    text: "チェックシートに回答し、体制を説明します。",
+    term: "委託先評価への対応",
   },
   {
     step: "STEP 3",
     label: "浸透",
     title: "社員への浸透",
-    text: "決めたルールを、研修（動画とテスト・修了証つき）で全社員に広げます。",
+    text: "研修とテストで、ルールを全社に広げます。",
+    term: "セキュリティ教育・修了証",
   },
   {
     step: "STEP 2",
     label: "ルール",
     title: "ルールと体制づくり",
-    text: "情報セキュリティの規程、AI利用ルール、事故のときの手順と連絡先を決めます。",
+    text: "規程、AI利用ルール、インシデント対応手順を整えます。",
+    term: "ポリシー策定・AIガバナンス",
   },
   {
     step: "STEP 1",
     label: "把握",
     title: "現状の把握",
-    text: "ヒアリングと社内アンケート、ツールによる脆弱性診断で、今の状態と弱点を確かめます。",
+    text: "ヒアリングと社内アンケートで、目指す体制との差を洗い出します。",
+    term: "初回アセスメント・ギャップ分析",
   },
 ];
 
@@ -56,16 +60,6 @@ function Pyramid({ lines }: { lines?: boolean }) {
       role="img"
       aria-label="上から順に、取引先への説明、社員への浸透、ルールと体制づくり、現状の把握と積み上げるピラミッド"
     >
-      <defs>
-        <linearGradient id="pyr-shine" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stopColor="#fff" stopOpacity="0" />
-          <stop offset="0.5" stopColor="#fff" stopOpacity="0.35" />
-          <stop offset="1" stopColor="#fff" stopOpacity="0" />
-        </linearGradient>
-        <clipPath id="pyr-clip">
-          <polygon points={`${CX},0 ${CX + HALF},${H} ${CX - HALF},${H}`} />
-        </clipPath>
-      </defs>
       {tiers.map((t, i) => {
         const y0 = i * ROW_H;
         const y1 = (i + 1) * ROW_H;
@@ -78,10 +72,9 @@ function Pyramid({ lines }: { lines?: boolean }) {
             style={{ transitionDelay: `${i * 220}ms` }}
           >
             <polygon
-              points={`${CX - half(y0)},${y0} ${CX + half(y0)},${y0} ${CX + half(y1)},${y1} ${CX - half(y1)},${y1}`}
+              points={`${CX - half(y0 + 2)},${y0 + 2} ${CX + half(y0 + 2)},${y0 + 2} ${CX + half(y1 - 2)},${y1 - 2} ${CX - half(y1 - 2)},${y1 - 2}`}
               fill={fills[i]}
-              stroke="#24070F"
-              strokeWidth="3"
+              stroke="none"
             />
             <text
               x={CX}
@@ -113,17 +106,6 @@ function Pyramid({ lines }: { lines?: boolean }) {
           </g>
         );
       })}
-      {/* 光が上から下へ流れる */}
-      <g clipPath="url(#pyr-clip)">
-        <rect
-          x={CX - HALF}
-          y="0"
-          width={HALF * 2}
-          height="60"
-          fill="url(#pyr-shine)"
-          className="pyr-sweep"
-        />
-      </g>
     </svg>
   );
 }
@@ -155,7 +137,7 @@ export function CisoServiceDiagram() {
             id="ciso-diagram-title"
             className="mt-3 text-[clamp(1.5rem,3vw,2.3rem)] font-black leading-[1.45] [word-break:auto-phrase]"
           >
-            セキュリティ顧問が、御社の担当につきます
+            御社に合った体制を構築
           </h3>
           <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-[1.9] text-white/75">
             現状の把握を土台に、取引先に説明できる体制まで積み上げます。
@@ -184,8 +166,11 @@ export function CisoServiceDiagram() {
                     </span>
                     <span className="text-lg font-black">{t.title}</span>
                   </p>
-                  <p className="mt-1 text-[13px] leading-[1.8] text-white/75">
+                  <p className="mt-1 text-[13px] leading-[1.7] text-white/85">
                     {t.text}
+                  </p>
+                  <p className="text-[11px] leading-[1.6] text-white/45">
+                    {t.term}
                   </p>
                 </li>
               ))}
@@ -209,8 +194,11 @@ export function CisoServiceDiagram() {
                       {t.step}
                     </p>
                     <p className="mt-0.5 text-base font-black">{t.title}</p>
-                    <p className="mt-1 text-[13px] leading-[1.8] text-white/75">
+                    <p className="mt-1 text-[13px] leading-[1.7] text-white/85">
                       {t.text}
+                    </p>
+                    <p className="mt-0.5 text-[11px] leading-[1.6] text-white/45">
+                      {t.term}
                     </p>
                   </div>
                 </li>
@@ -219,9 +207,15 @@ export function CisoServiceDiagram() {
           </div>
         </Reveal>
 
-        <figcaption className="mt-10 text-center text-[13px] leading-relaxed text-white/75 md:text-sm">
-          <span aria-hidden="true">↻ </span>
-          毎月の定例で見直して経営へ報告し、年1回もう一度リスクアセスメントを行います
+        <figcaption className="mt-10 space-y-1.5 text-center text-[13px] leading-relaxed text-white/75 md:text-sm">
+          <p>
+            ※
+            プランにより対応範囲が異なります。くわしくは「プランと料金」をご覧ください。
+          </p>
+          <p>
+            <span aria-hidden="true">↻ </span>
+            毎月の定例で見直して経営へ報告し、年1回もう一度リスクアセスメントを行います。
+          </p>
         </figcaption>
       </div>
     </figure>

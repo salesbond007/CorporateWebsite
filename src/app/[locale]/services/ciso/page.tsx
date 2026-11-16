@@ -718,9 +718,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <span className="text-[15px] font-black tracking-[0.2em] [writing-mode:vertical-rl]">
           無料相談
         </span>
-        <span className="text-[10px] font-bold tracking-[0.1em] text-white/90 [writing-mode:vertical-rl]">
-          オンライン30分
-        </span>
       </a>
       {/* スマホ: 右下に丸いボタン */}
       <a
@@ -1004,12 +1001,7 @@ function SplitCta() {
       <p className="text-sm font-bold md:text-base">
         セキュリティの専門家が、御社の現状と優先して手を打つべき点を無料で整理します
       </p>
-      <BigButton
-        label="無料相談"
-        sub="オンライン30分・売り込みなし"
-        icon="check"
-        tone="white"
-      />
+      <BigButton label="無料相談" icon="check" tone="white" />
     </div>
   );
 }
