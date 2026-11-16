@@ -1,6 +1,6 @@
 /**
  * 塗りつぶしのフラットなアイコンイラスト(輪郭線なし・はっきりした色面)。
- * Bond AI セキュリティ(CISO・セキュリティ顧問)LP のお悩みで使う。
+ * Bond AI 情報セキュリティ(CISO・情報セキュリティ顧問)LP のお悩みで使う。
  */
 const WINE = "#7A1E35";
 const ROSE = "#B4475F";
@@ -342,7 +342,7 @@ export function IconListing({ className }: Props) {
   );
 }
 
-/** AI活用を進め、セキュリティが後回しに */
+/** AI活用を進め、情報セキュリティが後回しに */
 export function IconAiRush({ className }: Props) {
   return (
     <svg viewBox="0 0 200 160" className={className} aria-hidden="true">

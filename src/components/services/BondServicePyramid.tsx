@@ -176,7 +176,7 @@ function Diagram({ items }: { items: PyramidItem[] }) {
                     fontWeight="900"
                     fill="#fff"
                   >
-                    セキュリティ
+                    情報セキュリティ
                   </text>
                   <text
                     x={i === 0 ? x - 34 : x + 34}
@@ -287,61 +287,68 @@ function Chevron() {
 export function BondServicePyramid({
   items,
   hideListOnMobile = false,
+  diagramOnly = false,
 }: {
   items: PyramidItem[];
   /** スマホでは図の下の一覧を出さない(すぐ下に同じサービスの一覧があるページ用) */
   hideListOnMobile?: boolean;
+  /** 図だけを表示する(説明と一覧は呼び出し側で出す) */
+  diagramOnly?: boolean;
 }) {
   return (
     <Reveal variant="none">
-      <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
+      {diagramOnly ? (
         <Diagram items={items} />
+      ) : (
+        <div className="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
+          <Diagram items={items} />
 
-        <div className={hideListOnMobile ? "hidden lg:block" : ""}>
-          <p className="text-xl font-black leading-[1.6] text-ink md:text-2xl">
-            <span className="text-brand-500">2つのサービス</span>で、
-            <br />
-            情報セキュリティ対策を<span className="text-brand-500">完備</span>
-          </p>
-          <p className="mt-2 text-[15px] font-bold text-ink/70">
-            情報漏洩やサイバー攻撃から、御社を守ります。
-          </p>
-          <ol className="mt-6">
-            {items.map((it, i) => (
-              <li
-                key={it.name}
-                className="translate-x-4 border-b border-[#E9E1DD] opacity-0 transition-all duration-700 first:border-t group-data-[visible=true]/reveal:translate-x-0 group-data-[visible=true]/reveal:opacity-100"
-                style={{ transitionDelay: `${700 + i * 160}ms` }}
-              >
-                <Link
-                  href={it.href}
-                  className="group flex items-center gap-4 py-5 pr-1 transition-colors hover:bg-white/60 sm:gap-5"
+          <div className={hideListOnMobile ? "hidden lg:block" : ""}>
+            <p className="text-xl font-black leading-[1.6] text-ink md:text-2xl">
+              <span className="text-brand-500">2つのサービス</span>で、
+              <br />
+              情報セキュリティ対策を<span className="text-brand-500">完備</span>
+            </p>
+            <p className="mt-2 text-[15px] font-bold text-ink/70">
+              情報漏洩やサイバー攻撃から、御社を守ります。
+            </p>
+            <ol className="mt-6">
+              {items.map((it, i) => (
+                <li
+                  key={it.name}
+                  className="translate-x-4 border-b border-[#E9E1DD] opacity-0 transition-all duration-700 first:border-t group-data-[visible=true]/reveal:translate-x-0 group-data-[visible=true]/reveal:opacity-100"
+                  style={{ transitionDelay: `${700 + i * 160}ms` }}
                 >
-                  <span
-                    aria-hidden="true"
-                    className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-sm font-black text-white"
-                    style={{ backgroundColor: fills[i] }}
+                  <Link
+                    href={it.href}
+                    className="group flex items-center gap-4 py-5 pr-1 transition-colors hover:bg-white/60 sm:gap-5"
                   >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <span className="min-w-0 flex-1">
-                    <span className="text-[11px] font-bold tracking-[0.12em] text-ink/50">
-                      {it.layer}｜{it.label}
+                    <span
+                      aria-hidden="true"
+                      className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-sm font-black text-white"
+                      style={{ backgroundColor: fills[i] }}
+                    >
+                      {String(i + 1).padStart(2, "0")}
                     </span>
-                    <span className="mt-1 block text-lg font-black leading-snug text-ink transition-colors group-hover:text-brand-500 md:text-xl">
-                      {it.name}
+                    <span className="min-w-0 flex-1">
+                      <span className="text-[11px] font-bold tracking-[0.12em] text-ink/50">
+                        {it.layer}｜{it.label}
+                      </span>
+                      <span className="mt-1 block text-lg font-black leading-snug text-ink transition-colors group-hover:text-brand-500 md:text-xl">
+                        {it.name}
+                      </span>
+                      <span className="mt-1.5 block text-[13px] leading-[1.85] text-ink/70">
+                        {it.text}
+                      </span>
                     </span>
-                    <span className="mt-1.5 block text-[13px] leading-[1.85] text-ink/70">
-                      {it.text}
-                    </span>
-                  </span>
-                  <Chevron />
-                </Link>
-              </li>
-            ))}
-          </ol>
+                    <Chevron />
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          </div>
         </div>
-      </div>
+      )}
     </Reveal>
   );
 }

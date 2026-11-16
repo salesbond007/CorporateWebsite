@@ -14,8 +14,8 @@ import type { Locale } from "@/i18n/config";
 type Props = {
   locale: Locale;
   /**
-   * "consult": ホームページセキュリティ対策LPの無料相談フォーム。
-   * お問い合わせ種別を出さず、種別「サービスについて / ホームページセキュリティ対策」として送信する。
+   * "consult": ホームページの情報セキュリティ対策LPの無料相談フォーム。
+   * お問い合わせ種別を出さず、種別「サービスについて / ホームページの情報セキュリティ対策」として送信する。
    */
   variant?: "default" | "consult";
 };
@@ -32,14 +32,14 @@ const inquiryTypeLabels: Record<InquiryType, string> = {
 const serviceOptions = [
   { id: "ai-security", label: "情報セキュリティ対策事業" },
   { id: "new-business-development", label: "経営顧問事業" },
-  { id: "web-security", label: "ホームページセキュリティ対策" },
+  { id: "web-security", label: "ホームページの情報セキュリティ対策" },
   { id: "other-service", label: "その他" },
 ] as const;
 
 type ServiceId = (typeof serviceOptions)[number]["id"];
 
 const partnerOptions = [
-  { id: "security-partner", label: "セキュリティ対策事業のパートナー" },
+  { id: "security-partner", label: "情報セキュリティ対策事業のパートナー" },
   { id: "new-business-partner", label: "経営顧問事業のパートナー" },
 ] as const;
 

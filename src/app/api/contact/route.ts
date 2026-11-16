@@ -188,7 +188,7 @@ const enumLabels: Record<string, Record<string, string>> = {
   serviceTypes: {
     "ai-security": "情報セキュリティ対策事業",
     "new-business-development": "経営顧問事業",
-    "web-security": "ホームページセキュリティ対策",
+    "web-security": "ホームページの情報セキュリティ対策",
     "other-service": "その他",
   },
   channels: {
@@ -207,24 +207,24 @@ const enumLabels: Record<string, Record<string, string>> = {
   },
   service: serviceLeadServices,
   request: { document: "資料請求", check: "無料相談" },
-  product: { ciso: "情報セキュリティ顧問LP", training: "セキュリティ研修LP" },
+  product: { ciso: "情報セキュリティ顧問LP", training: "情報セキュリティ研修LP" },
   employees: Object.fromEntries(
     aiCheckEmployeeOptions.map((o) => [o.value, o.label]),
   ),
   partnerTypes: {
-    "security-partner": "セキュリティ対策事業のパートナー",
+    "security-partner": "情報セキュリティ対策事業のパートナー",
     "new-business-partner": "経営顧問事業のパートナー",
   },
 };
 
-/** Bond AI セキュリティ LP の名前(研修LPからの申し込みは「研修」を付ける) */
+/** Bond AI 情報セキュリティ LP の名前(研修LPからの申し込みは「研修」を付ける) */
 function aiBrand(data: Record<string, unknown>): string {
   return data.product === "training"
-    ? "Bond AI セキュリティ研修"
-    : "Bond AI セキュリティ顧問";
+    ? "Bond AI 情報セキュリティ研修"
+    : "Bond AI 情報セキュリティ顧問";
 }
 
-/** Bond AI セキュリティ LP のフォームの申し込み種別(件名用) */
+/** Bond AI 情報セキュリティ LP のフォームの申し込み種別(件名用) */
 function aiCheckLabel(data: Record<string, unknown>): string {
   return data.request === "check" ? "無料相談のお申し込み" : "資料請求";
 }
@@ -272,7 +272,7 @@ function renderHtml(type: ContactFormType, data: Record<string, unknown>) {
           : type === "ai_check"
             ? `【${aiBrand(data)}】${aiCheckLabel(data)}`
             : type === "web_security_diagnosis"
-              ? "ホームページセキュリティ 無料簡易診断のお申し込み"
+              ? "ホームページの情報セキュリティ 無料簡易診断のお申し込み"
               : "お問い合わせ(企業)";
 
   return `<!doctype html>
@@ -347,7 +347,7 @@ export async function POST(req: Request) {
         : type === "ai_check"
           ? `【${aiBrand(parsed.data as Record<string, unknown>)}】${aiCheckLabel(parsed.data as Record<string, unknown>)}`
           : type === "web_security_diagnosis"
-            ? "【無料簡易診断】ホームページセキュリティ対策のお申し込み"
+            ? "【無料簡易診断】ホームページの情報セキュリティ対策のお申し込み"
             : "ホームページからの問い合わせ";
 
   if (!transporter) {
@@ -397,7 +397,7 @@ ${addressee} 様
 お世話になっております。
 セールスボンド株式会社でございます。
 
-この度はホームページセキュリティ対策の無料簡易診断にお申し込みいただき、誠にありがとうございます。
+この度はホームページの情報セキュリティ対策の無料簡易診断にお申し込みいただき、誠にありがとうございます。
 
 いただいたURLをもとに簡易診断を行い、担当者より結果と今後のご提案についてご連絡いたします。今しばらくお待ちくださいますようお願いいたします。
 

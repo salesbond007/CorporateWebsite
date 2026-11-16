@@ -21,7 +21,12 @@ export const companyRows: Row[] = [
     value: (
       <span className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
         <span>柴田 泰成</span>
-        <a href="https://sora-seed.jp/" target="_blank" rel="noopener noreferrer" className={linkClass}>
+        <a
+          href="https://sora-seed.jp/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={linkClass}
+        >
           ソラシードスタートアップスタジオ/ソラシード3
           <span aria-hidden="true">↗</span>
           <span className="sr-only">(新しいタブで開く)</span>
@@ -40,24 +45,6 @@ export const companyRows: Row[] = [
       </>
     ),
   },
-  {
-    label: "メールアドレス",
-    value: (
-      <a href="mailto:info@salesbond.jp" className={linkClass}>
-        info@salesbond.jp
-      </a>
-    ),
-  },
-  {
-    label: "事業内容",
-    value: (
-      <>
-        情報セキュリティ対策事業（情報セキュリティ顧問、ホームページセキュリティ対策）
-        <br />
-        経営顧問事業（顧問・COO紹介、インサイドセールス代行「アポコミ」）
-      </>
-    ),
-  },
   { label: "取引銀行", value: "三井住友銀行 ／ 東京スター銀行" },
 ];
 
@@ -70,7 +57,11 @@ export function CompanySection() {
             <SectionTitle en="Company" ja="会社概要" size="sm" />
 
             {/* ロゴマーク(PCのみ)。四隅のブランドカラーの飾り + ゆっくり浮遊 */}
-            <Reveal variant="scale" delay={200} className="mt-12 hidden lg:block">
+            <Reveal
+              variant="scale"
+              delay={200}
+              className="mt-12 hidden lg:block"
+            >
               <div className="relative aspect-square w-full max-w-[18rem] bg-white">
                 {[
                   "left-0 top-0 border-l-2 border-t-2",
@@ -106,7 +97,9 @@ export function CompanySection() {
                     style={{ transitionDelay: `${i * 50}ms` }}
                     className="grid translate-y-3 grid-cols-1 gap-1 border-b border-ink-line py-2.5 opacity-0 transition-all duration-700 ease-expo group-data-[visible=true]/reveal:translate-y-0 group-data-[visible=true]/reveal:opacity-100 sm:grid-cols-[10rem_1fr] sm:gap-6 sm:py-3"
                   >
-                    <dt className="text-sm font-bold tracking-[0.05em] text-ink">{row.label}</dt>
+                    <dt className="text-sm font-bold tracking-[0.05em] text-ink">
+                      {row.label}
+                    </dt>
                     <dd className="text-sm leading-relaxed tracking-[0.03em] text-ink-soft">
                       {row.value}
                     </dd>

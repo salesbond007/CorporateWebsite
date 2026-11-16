@@ -81,7 +81,7 @@ function Label({
   );
 }
 
-/** 簡易LP(顧問・COO紹介 / CISO・セキュリティ顧問)の無料相談フォーム(送信先: info@salesbond.jp) */
+/** 簡易LP(顧問・COO紹介 / CISO・情報セキュリティ顧問)の無料相談フォーム(送信先: info@salesbond.jp) */
 export function ServiceLeadForm({
   service,
   accent,
