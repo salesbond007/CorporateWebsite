@@ -207,7 +207,7 @@ const enumLabels: Record<string, Record<string, string>> = {
   },
   service: serviceLeadServices,
   request: { document: "資料請求", check: "無料相談" },
-  product: { ciso: "AI情報セキュリティ顧問LP", training: "セキュリティ研修LP" },
+  product: { ciso: "情報セキュリティ顧問LP", training: "セキュリティ研修LP" },
   employees: Object.fromEntries(
     aiCheckEmployeeOptions.map((o) => [o.value, o.label]),
   ),

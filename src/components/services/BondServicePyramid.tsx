@@ -180,7 +180,14 @@ function ItemLink({
   );
 }
 
-export function BondServicePyramid({ items }: { items: PyramidItem[] }) {
+export function BondServicePyramid({
+  items,
+  hideListOnMobile = false,
+}: {
+  items: PyramidItem[];
+  /** スマホでは図の下の一覧を出さない(すぐ下に同じサービスの一覧があるページ用) */
+  hideListOnMobile?: boolean;
+}) {
   return (
     <Reveal variant="none">
       {/* PC: 行の高さ(96px)をピラミッドの段にそろえる */}
@@ -223,7 +230,7 @@ export function BondServicePyramid({ items }: { items: PyramidItem[] }) {
       {/* スマホ・タブレット */}
       <div className="lg:hidden">
         <Pyramid items={items} />
-        <ul className="mt-6 space-y-2.5">
+        <ul className={hideListOnMobile ? "hidden" : "mt-6 space-y-2.5"}>
           {items.map((it, i) => (
             <li
               key={it.name}
@@ -265,9 +272,9 @@ export function bondPyramidItems(path: (p: string) => string): PyramidItem[] {
   return [
     {
       layer: "経営",
-      label: "責任者を担う・月10万円〜",
-      name: "AI情報セキュリティ顧問",
-      text: "大企業・上場企業との取引に欠かせない情報セキュリティの体制を、専門家がアドバイザーや社外CISOとして一緒に整えます。月10万円〜（税別）。",
+      label: "責任者を担う",
+      name: "情報セキュリティ顧問",
+      text: "AI時代に特化した、中小企業向けの情報セキュリティ顧問。大企業・上場企業との取引に欠かせない体制を、専門家がアドバイザーや社外CISOとして一緒に整えます。",
       href: path("/services/ciso"),
     },
     {
