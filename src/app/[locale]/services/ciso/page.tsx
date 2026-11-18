@@ -220,7 +220,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               alternateName: "オカザキ ヒロアキ",
               jobTitle: "サービス監修",
               description:
-                "株式会社帝国データバンクネットコミュニケーション（株式会社帝国データバンクアクシスと合併）元代表取締役。帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表を務めた。",
+                "株式会社帝国データバンクネットコミュニケーション 元代表取締役 社長。帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表取締役 社長を25年間にわたり務めた。",
               knowsAbout: ["情報セキュリティ", "情報セキュリティ体制の構築"],
             },
           },
@@ -563,19 +563,17 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </h3>
               <p className="mt-6 border-l-[3px] border-brand-500 pl-4 leading-[1.7]">
                 <span className="block text-base font-bold text-brand-500 md:text-lg">
-                  元代表取締役
+                  元代表取締役 社長
                 </span>
                 <span className="block text-base font-bold text-ink md:text-lg">
                   株式会社帝国データバンクネットコミュニケーション
                 </span>
-                <span className="mt-1 block text-xs text-ink/60">
-                  ※株式会社帝国データバンクアクシスと合併
-                </span>
               </p>
               <p className="mt-7 border-t border-[#EEE5E8] pt-7 text-[15px] leading-[2.05] text-ink/80">
-                帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表取締役を務める。
+                帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表取締役
+                社長を25年間にわたり務める。
                 <br />
-                サービスの監修者として、支援の品質を確認し、難しい判断の相談役を務めます。
+                当サービスの監修者として、支援の品質を確認し、難しい判断の相談役を務めます。
               </p>
             </div>
           </Reveal>
