@@ -14,7 +14,6 @@ import {
 } from "@/components/services/CisoReasonVisuals";
 import { CisoIssueMap } from "@/components/services/CisoIssueMap";
 import { CisoHeroWorries } from "@/components/services/CisoHeroWorries";
-import { CisoAboutBlock } from "@/components/services/CisoAboutBlock";
 import { SecuproMark } from "@/components/services/SecuproMark";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -257,50 +256,24 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         id="top"
         className="relative isolate overflow-hidden border-b border-[#E9D3DA] bg-[linear-gradient(180deg,#FBF2F4_0%,#F1DCE3_100%)]"
       >
-        {/* 背景: 大きな面を重ねた幾何学模様 */}
-        <svg
+        {/* 背景: ぼかしたオフィスと人の写真 + 淡いワインレッドの重ね */}
+        <Image
+          src="/photos/ciso/hero-office-blur.webp"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          quality={60}
+          className="-z-20 object-cover"
+        />
+        <div
           aria-hidden="true"
-          viewBox="0 0 1440 760"
-          preserveAspectRatio="xMidYMid slice"
-          className="absolute inset-0 -z-10 h-full w-full"
-        >
-          <path
-            d="M760 0H1440V420L1080 760H640L980 360z"
-            fill="#FFFFFF"
-            fillOpacity="0.55"
-          />
-          <path
-            d="M1040 0H1440V260L1250 470z"
-            fill="#FFFFFF"
-            fillOpacity="0.7"
-          />
-          <path
-            d="M0 520L300 300L520 760H0z"
-            fill="#FFFFFF"
-            fillOpacity="0.45"
-          />
-          <path
-            d="M-40 120L180 0H420L60 330z"
-            fill="#FFFFFF"
-            fillOpacity="0.4"
-          />
-          <path
-            d="M980 360L1440 420"
-            stroke="#7A1F3D"
-            strokeOpacity="0.18"
-            strokeWidth="1.5"
-          />
-          <path
-            d="M300 300L60 330"
-            stroke="#7A1F3D"
-            strokeOpacity="0.12"
-            strokeWidth="1.5"
-          />
-        </svg>
-        <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
-          <div className="min-w-0 text-center lg:text-left">
+          className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(251,242,244,0.95)_0%,rgba(251,242,244,0.88)_45%,rgba(241,220,227,0.8)_100%)]"
+        />
+        <Container className="grid items-center gap-6 pb-14 pt-6 md:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] md:gap-8 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
+          <div className="min-w-0 text-center md:text-left">
             <h1>
-              <span className="block text-[clamp(1.6rem,7.4vw,2.8rem)] font-black leading-[1.4] tracking-[0.02em] lg:text-[clamp(1.7rem,2.3vw,2.3rem)]">
+              <span className="block text-[clamp(1.6rem,7.4vw,2.8rem)] font-black leading-[1.4] tracking-[0.02em] md:text-[clamp(1.2rem,2.3vw,2.3rem)] lg:text-[clamp(1.7rem,2.3vw,2.3rem)]">
                 情報セキュリティの
                 <br className="sm:hidden" />
                 <span className="text-brand-500">プロ人材</span>を、
@@ -308,7 +281,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 雇わずに<span className="text-brand-500">活用</span>
               </span>
             </h1>
-            <p className="mt-6 text-[clamp(1.05rem,1.7vw,1.3rem)] font-bold leading-[1.8] text-ink/85">
+            <p className="mt-6 text-[clamp(1.05rem,1.7vw,1.3rem)] font-bold leading-[1.8] text-ink/85 [word-break:auto-phrase]">
               情報セキュリティの
               <span className="text-brand-500">顧問ひとり</span>から、
               <br />
@@ -318,8 +291,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               <br className="sm:hidden" />
               必要なプロが対応します。
             </p>
-            <div className="mt-10 flex justify-center lg:block">
-              <BigButton label="無料相談" icon="check" href="#check" />
+            <div className="mt-10 flex justify-center md:block">
+              <BigButton label="無料相談" icon="check" href="#check" fluid />
             </div>
           </div>
           <div className="mx-auto w-full min-w-0 max-w-[24rem]">
@@ -333,15 +306,14 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         id="service"
         className="relative isolate scroll-mt-28 overflow-hidden bg-white"
       >
-        {/* セキュプロとは(濃い背景のブロック) */}
-        <CisoAboutBlock />
-
         <Container className="pt-20 md:pt-28">
           <Reveal variant="up" className="text-center">
             <h2 className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
-              課題に合わせて、
+              セキュプロは
+              <br />
+              情報セキュリティに特化した
               <br className="sm:hidden" />
-              必要な<span className="text-brand-500">プロ</span>が対応
+              <span className="text-brand-500">プロ人材</span>サービスです
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80 [word-break:auto-phrase]">
               まずは顧問ひとりが現状を整理し、対策が広がれば、認証や診断のプロが加わります。体制は課題やフェーズに合わせて組み替え、窓口と契約はセキュプロひとつです。
@@ -582,7 +554,10 @@ function BigButton({
   icon,
   href = `#${FORM_ID}`,
   tone = "wine",
+  fluid = false,
 }: {
+  /** 幅を親に合わせる(最大24rem)。2列のレイアウトで使う */
+  fluid?: boolean;
   label: string;
   sub?: string;
   icon: "check" | "doc";
@@ -593,7 +568,8 @@ function BigButton({
     <a
       href={href}
       className={cn(
-        "group relative inline-flex h-16 w-full items-center justify-center pl-8 pr-20 transition hover:-translate-y-0.5 sm:w-auto sm:min-w-[20rem] md:min-w-[24rem]",
+        "group relative inline-flex h-16 w-full items-center justify-center pl-8 pr-20 transition hover:-translate-y-0.5",
+        fluid ? "max-w-[24rem]" : "sm:w-auto sm:min-w-[20rem] md:min-w-[24rem]",
         tone === "wine" &&
           "bg-[linear-gradient(100deg,#6A1830,#A83B57)] text-white shadow-[0_12px_26px_-12px_rgba(122,30,53,0.8)]",
         tone === "accent" &&
