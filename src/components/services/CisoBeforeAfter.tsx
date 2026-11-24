@@ -4,7 +4,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { IconChecksheet, IconShadowAi, IconSoloIt } from "./FlatIcons";
 
 /**
- * Bond AI 情報セキュリティ LP: 月額で CISO / 情報セキュリティ顧問に任せると、何が変わるかを示す図。
+ * セキュプロ 情報セキュリティ LP: 月額で CISO / 情報セキュリティ顧問に任せると、何が変わるかを示す図。
  * 写真は使わず、イラスト + 流れる線 + テキストで「いまの課題」→「導入後」を1行ずつ対応させる。
  * 画面に入ると、左の課題 → 線が中央へ流れる → 右の導入後、の順に現れる。
  */

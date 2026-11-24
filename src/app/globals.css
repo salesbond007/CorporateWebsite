@@ -188,7 +188,7 @@
   }
 }
 
-/* Bond AI セキュリティ LP: 導入前後の図の流れる線と、中央マークの波紋 */
+/* セキュプロ セキュリティ LP: 導入前後の図の流れる線と、中央マークの波紋 */
 .ba-flow-x {
   background-image: linear-gradient(90deg, #7a1f3d 55%, transparent 0);
   background-size: 10px 2px;
@@ -235,7 +235,7 @@
   }
 }
 
-/* Bond AI セキュリティ LP: ファーストビューの図の動き */
+/* セキュプロ セキュリティ LP: ファーストビューの図の動き */
 .hv-dash {
   animation: hvDash 1.1s linear infinite;
 }

@@ -206,6 +206,29 @@ function Diagram({ items }: { items: PyramidItem[] }) {
         );
       })}
 
+      {/* サービス名 */}
+      <g className={appear} style={delay(300)}>
+        <rect
+          x={CX - 54}
+          y={CY - RING + 18}
+          width="108"
+          height="28"
+          rx="14"
+          fill={W}
+        />
+        <text
+          x={CX}
+          y={CY - RING + 37}
+          textAnchor="middle"
+          fontSize="14"
+          fontWeight="900"
+          letterSpacing="2"
+          fill="#fff"
+        >
+          セキュプロ
+        </text>
+      </g>
+
       {/* 重なり: 情報セキュリティ対策を完備 */}
       <g
         className={`${appear} origin-center scale-50 [transform-box:fill-box] group-data-[visible=true]/reveal:scale-100`}
@@ -305,7 +328,8 @@ export function BondServicePyramid({
 
           <div className={hideListOnMobile ? "hidden lg:block" : ""}>
             <p className="text-xl font-black leading-[1.6] text-ink md:text-2xl">
-              <span className="text-brand-500">2つのサービス</span>で、
+              <span className="text-brand-500">セキュプロ</span>
+              の2つのサービスで、
               <br />
               情報セキュリティ対策を<span className="text-brand-500">完備</span>
             </p>

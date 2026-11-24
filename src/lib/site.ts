@@ -18,6 +18,7 @@ export const site = {
     "情報セキュリティ",
     "情報セキュリティ対策",
     "情報セキュリティ顧問",
+    "セキュプロ",
     "AI情報セキュリティ顧問",
     "AI情報セキュリティ研修",
     "情報セキュリティ研修",
@@ -159,7 +160,7 @@ export const serviceCategories: ServiceCategory[] = [
           {
             slug: "ciso",
             number: "01-1",
-            title: "AI情報セキュリティ顧問",
+            title: "セキュプロ AI情報セキュリティ顧問",
             href: "/services/ciso",
             subtitle: "Information Security Advisor",
             summary:
@@ -176,7 +177,7 @@ export const serviceCategories: ServiceCategory[] = [
           {
             slug: "security-training",
             number: "01-2",
-            title: "AI情報セキュリティ研修",
+            title: "セキュプロ AI情報セキュリティ研修",
             href: "/services/security-training",
             subtitle: "Security Training",
             summary:

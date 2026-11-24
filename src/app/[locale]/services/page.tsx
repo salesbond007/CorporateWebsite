@@ -259,7 +259,7 @@ export default function ServicesPage({
                       </>
                     ) : (
                       <>
-                        2つのサービスで、
+                        セキュプロの2つのサービスで、
                         <span className="text-brand-500">
                           情報セキュリティ対策を完備
                         </span>
