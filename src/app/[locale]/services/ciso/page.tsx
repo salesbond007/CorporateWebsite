@@ -8,9 +8,9 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
 import { LpNav } from "@/components/services/LpNav";
 import {
-  ReasonOneWindow,
-  ReasonPhase,
-  ReasonPriority,
+  ReasonCost,
+  ReasonProsOnly,
+  ReasonStart,
 } from "@/components/services/CisoReasonVisuals";
 import { CisoIssueMap } from "@/components/services/CisoIssueMap";
 import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
@@ -372,13 +372,15 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               {
                 title: (
                   <>
-                    <span className="text-brand-500">着手すべき対策</span>
-                    の特定から
+                    扱うのは、
+                    <span className="text-brand-500">
+                      情報セキュリティのプロだけ
+                    </span>
                   </>
                 ),
                 key: "f1",
-                text: "何から取り組むべきか定まっていない段階でも、ご相談いただけます。現状とリスクを整理し、優先順位をつけたうえで、課題に適したプロ人材をご提案します。",
-                visual: <ReasonPriority />,
+                text: "責任者から認証、診断、研修まで、情報セキュリティに特化したプロ人材だけをそろえ、監修者が支援の品質を確認します。複数のプロが関わっても、窓口と契約はセキュプロひとつ。社内の管理負担を増やしません。",
+                visual: <ReasonProsOnly />,
               },
               {
                 title: (
@@ -389,25 +391,25 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 ),
                 key: "f2",
                 text: "特定した優先度の高い対策に絞り込み、その実行に必要なプロ人材が、必要な稼働量だけ対応します。フェーズが進めばプロを入れ替えるため、不要な費用は発生しません。合わない場合の交代も無料です。",
-                visual: <ReasonPhase />,
+                visual: <ReasonCost />,
               },
               {
                 title: (
                   <>
-                    情報セキュリティ特化。
-                    <span className="text-brand-500">窓口と契約はひとつ</span>
+                    <span className="text-brand-500">「何から始めるか」</span>
+                    から相談できる
                   </>
                 ),
                 key: "f3",
-                text: "情報セキュリティに特化したプロ人材だけを扱い、監修者が支援の品質を確認します。複数のプロが関わっても、窓口と契約はセキュプロひとつ。社内の管理負担を増やしません。",
-                visual: <ReasonOneWindow />,
+                text: "対策の方針が決まっていなくても問題ありません。まずはセキュリティ顧問が参画し、現状とリスクを整理して優先順位を決めます。そのうえで、必要な対策に応じて各領域のプロ人材が加わります。",
+                visual: <ReasonStart />,
               },
             ].map((r, i) => (
               <Reveal key={r.key} variant="up">
                 <article
                   className={cn(
-                    "grid grid-cols-[minmax(0,1fr)] items-center gap-6 py-10 md:gap-10 md:py-14 lg:grid-cols-2 lg:gap-14",
-                    i > 0 && "border-t border-[#EADFE2]",
+                    "grid grid-cols-[minmax(0,1fr)] items-center gap-6 border-2 border-ink bg-white p-5 sm:p-7 md:gap-10 md:p-10 lg:grid-cols-2 lg:gap-12",
+                    "mt-8 md:mt-10",
                   )}
                 >
                   <div>{r.visual}</div>

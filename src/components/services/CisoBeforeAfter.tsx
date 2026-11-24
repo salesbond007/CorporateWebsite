@@ -1,6 +1,6 @@
 import type { ComponentType, CSSProperties } from "react";
 import { Reveal } from "@/components/ui/Reveal";
-import { IconChecksheet, IconShadowAi, IconSoloIt } from "./FlatIcons";
+import { IconChecksheet, IconListing, IconSoloIt } from "./FlatIcons";
 import { CisoTeamHub } from "./CisoTeamHub";
 
 /**
@@ -16,18 +16,21 @@ const rows: {
 }[] = [
   {
     Icon: IconSoloIt,
-    before: "専任のセキュリティ人材を採用・確保するコストが見合わない",
-    after: ["採用せずに、", "必要なときだけプロ人材を活用できる"],
+    before: "商談で「セキュリティ責任者は？」と聞かれ、検討が止まった",
+    after: ["責任者を置いた体制を整え、", "商談を前に進められた"],
   },
   {
     Icon: IconChecksheet,
-    before: "対策の優先順位が定まらず、着手できていない",
-    after: ["現状とリスクを整理し、", "優先順位をつけて着手できる"],
+    before: "取引先からSCS対応とチェックシートの提出を求められた",
+    after: ["不足する対策を洗い出して回答し、", "取引を継続できた"],
   },
   {
-    Icon: IconShadowAi,
-    before: "外部に頼みたいが、委託先と依頼範囲を判断できない",
-    after: ["課題に合ったプロに、", "窓口ひとつで任せられる"],
+    Icon: IconListing,
+    before: "子会社を含めたセキュリティ管理の責任範囲が曖昧",
+    after: [
+      "グループ全体の責任体制と報告の流れを設計し、",
+      "管理を一本化できた",
+    ],
   },
 ];
 
@@ -158,7 +161,7 @@ function BeforeCard({
     <li
       style={d(i * 120)}
       className={`flex items-center gap-3 border-l-4 border-[#BDB3B7] bg-[#F3F0F1] opacity-0 transition-all duration-700 ${show} ${
-        mobile ? "-translate-x-4 px-3 py-2.5" : "h-[6.5rem] -translate-x-6 px-5"
+        mobile ? "-translate-x-4 px-3 py-2.5" : "h-[7.5rem] -translate-x-6 px-5"
       }`}
     >
       <span className="w-5 shrink-0 text-xs font-black text-ink/30">
@@ -191,7 +194,7 @@ function AfterCard({
       className={`relative flex items-center gap-3 overflow-hidden bg-white opacity-0 shadow-[0_10px_30px_-18px_rgba(122,31,61,0.55)] ring-1 ring-brand-500/30 transition-all duration-700 ${show} ${
         mobile
           ? "translate-x-4 py-3 pl-4 pr-3"
-          : "h-[6.5rem] translate-x-6 pl-6 pr-5"
+          : "h-[7.5rem] translate-x-6 pl-6 pr-5"
       }`}
     >
       <span
@@ -199,7 +202,7 @@ function AfterCard({
         className="absolute inset-y-0 left-0 w-1 bg-brand-500"
       />
       <Check delay={base + i * 120 + 300} />
-      <span className="text-[14px] font-black leading-snug text-ink md:text-base">
+      <span className="text-[14px] font-black leading-snug text-ink [word-break:auto-phrase] md:text-base">
         {r.after[0]}
         <span className="text-brand-500 md:block">{r.after[1]}</span>
       </span>
@@ -215,15 +218,15 @@ export function CisoBeforeAfter() {
         aria-label="セキュプロの情報セキュリティのプロ人材が対応すると、課題がどう変わるか"
       >
         {/* ===== PC ===== */}
-        <div className="hidden grid-cols-[1fr_2.5rem_13.5rem_2.5rem_1fr] gap-x-3 md:grid lg:grid-cols-[1fr_3.5rem_16rem_3.5rem_1fr]">
+        <div className="hidden grid-cols-[1fr_2rem_15rem_2rem_1fr] gap-x-3 md:grid lg:grid-cols-[1fr_3rem_19rem_3rem_1fr]">
           <div className="pb-3">
-            <Label en="BEFORE" ja="いまの御社" />
+            <Label en="BEFORE" ja="いまの御社(例)" />
           </div>
           <span />
           <span />
           <span />
           <div className="pb-3">
-            <Label en="AFTER" ja="導入後の御社" accent />
+            <Label en="AFTER" ja="導入後の御社(例)" accent />
           </div>
 
           <ul className="space-y-3">
@@ -251,7 +254,7 @@ export function CisoBeforeAfter() {
 
         {/* ===== スマホ ===== */}
         <div className="md:hidden">
-          <Label en="BEFORE" ja="いまの御社" />
+          <Label en="BEFORE" ja="いまの御社(例)" />
           <ul className="mt-2 space-y-2">
             {rows.map((r, i) => (
               <BeforeCard key={r.before} r={r} i={i} mobile />
@@ -264,7 +267,7 @@ export function CisoBeforeAfter() {
           <div className="py-2">
             <FlowY delay={900} />
           </div>
-          <Label en="AFTER" ja="導入後の御社" accent />
+          <Label en="AFTER" ja="導入後の御社(例)" accent />
           <ul className="mt-2 space-y-2">
             {rows.map((r, i) => (
               <AfterCard key={r.before} r={r} i={i} base={1100} mobile />

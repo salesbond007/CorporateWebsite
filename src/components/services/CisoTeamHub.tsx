@@ -39,7 +39,7 @@ export function CisoTeamHub({ compact }: { compact?: boolean }) {
     >
       {/* セキュプロ */}
       <div className="flex items-center justify-center gap-2 bg-brand-500 px-4 py-3 text-white">
-        <svg viewBox="0 0 40 44" className="h-5 w-5" aria-hidden="true">
+        <svg viewBox="0 0 40 44" className="h-6 w-6" aria-hidden="true">
           <path
             d="M20 2l16 6v12c0 11-7 18.5-16 22C11 38.5 4 31 4 20V8z"
             fill="#fff"
@@ -53,7 +53,7 @@ export function CisoTeamHub({ compact }: { compact?: boolean }) {
             strokeLinejoin="round"
           />
         </svg>
-        <span className="text-base font-black tracking-[0.12em]">
+        <span className="text-lg font-black tracking-[0.12em] lg:text-xl">
           セキュプロ
         </span>
       </div>
@@ -61,7 +61,7 @@ export function CisoTeamHub({ compact }: { compact?: boolean }) {
       <div
         className={`flex flex-1 flex-col justify-center ${compact ? "px-4 py-5" : "px-4 py-6"}`}
       >
-        <p className="text-[15px] font-black leading-snug text-ink">
+        <p className="text-lg font-black leading-snug text-ink lg:text-xl">
           情報セキュリティの
           <span className="text-brand-500">プロ</span>
         </p>
@@ -83,7 +83,7 @@ export function CisoTeamHub({ compact }: { compact?: boolean }) {
                     on
                       ? "border-brand-500 opacity-100 grayscale-0"
                       : "border-[#E6DFE1] opacity-45 grayscale"
-                  } ${compact ? "h-14 w-14" : "h-[3.6rem] w-[3.6rem] lg:h-16 lg:w-16"}`}
+                  } ${compact ? "h-16 w-16" : "h-[4.2rem] w-[4.2rem] lg:h-20 lg:w-20"}`}
                 >
                   <Image
                     src={p.src}
@@ -95,7 +95,7 @@ export function CisoTeamHub({ compact }: { compact?: boolean }) {
                 </span>
                 <span
                   aria-hidden="true"
-                  className={`absolute -bottom-1 left-1/2 grid h-5 w-5 -translate-x-1/2 place-items-center rounded-full bg-brand-500 text-white transition-all duration-500 ${on ? "scale-100" : "scale-0"}`}
+                  className={`absolute -bottom-1 left-1/2 grid h-6 w-6 -translate-x-1/2 place-items-center rounded-full bg-brand-500 text-white transition-all duration-500 ${on ? "scale-100" : "scale-0"}`}
                 >
                   <svg viewBox="0 0 16 16" className="h-3 w-3" fill="none">
                     <path
@@ -113,11 +113,11 @@ export function CisoTeamHub({ compact }: { compact?: boolean }) {
         </ul>
 
         {/* 編成の切り替え */}
-        <ul className="mt-5 grid grid-cols-3 whitespace-nowrap border border-[#E6DFE1] text-[10px] font-bold lg:text-[11px]">
+        <ul className="mt-5 grid grid-cols-3 whitespace-nowrap border border-[#E6DFE1] text-[11px] font-bold lg:text-[13px]">
           {formations.map((x, i) => (
             <li
               key={x.label}
-              className={`px-1 py-1.5 leading-tight transition-colors duration-500 ${
+              className={`px-1 py-2 leading-tight transition-colors duration-500 ${
                 i === f ? "bg-brand-500 text-white" : "text-ink/45"
               } ${i > 0 ? "border-l border-[#E6DFE1]" : ""}`}
             >
@@ -126,7 +126,7 @@ export function CisoTeamHub({ compact }: { compact?: boolean }) {
           ))}
         </ul>
 
-        <p className="mt-4 text-xs font-bold leading-relaxed text-ink/70">
+        <p className="mt-4 text-[13px] font-bold leading-relaxed text-ink/75 lg:text-sm">
           課題やフェーズに合わせて、
           <br />
           プロを編成します
