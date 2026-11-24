@@ -40,7 +40,7 @@ const worries: { text: string; icon: ReactNode }[] = [
     ),
   },
   {
-    text: "任せられる責任者がいない",
+    text: "任せられる責任者（CISO）がいない",
     icon: (
       <g {...sw}>
         <circle cx="12" cy="7.5" r="3.4" />
