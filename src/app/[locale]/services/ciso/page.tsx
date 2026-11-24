@@ -14,6 +14,7 @@ import {
 } from "@/components/services/CisoReasonVisuals";
 import { CisoIssueMap } from "@/components/services/CisoIssueMap";
 import { CisoHeroMock } from "@/components/services/CisoHeroMock";
+import { SecuproMark } from "@/components/services/SecuproMark";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { pageMeta, pageMetadata } from "@/lib/seo";
@@ -229,12 +230,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       <header className="sticky top-0 z-40 border-b border-[#EEE5E8] bg-white/95 backdrop-blur">
         <Container className="flex h-16 items-center gap-4 md:h-[4.5rem] xl:gap-6">
           <a href="#top" className="flex shrink-0 items-center gap-2.5">
-            <span
-              className="grid h-9 w-9 place-items-center rounded-lg bg-brand-500 text-white"
-              aria-hidden="true"
-            >
-              <Icon name="shield" className="h-5 w-5" />
-            </span>
+            <SecuproMark className="h-10 w-10" />
             <span className="leading-tight">
               <span className="block whitespace-nowrap text-base font-black text-ink sm:text-lg">
                 セキュプロ
@@ -258,7 +254,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       {/* ========== 2. ファーストビュー ========== */}
       <section
         id="top"
-        className="relative isolate overflow-hidden border-b border-[#DDE0E7] bg-[linear-gradient(180deg,#F5F6F9_0%,#E9ECF2_100%)]"
+        className="relative isolate overflow-hidden border-b border-[#E9D3DA] bg-[linear-gradient(180deg,#FBF2F4_0%,#F1DCE3_100%)]"
       >
         {/* 背景: 大きな面を重ねた幾何学模様 */}
         <svg
@@ -338,7 +334,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       {/* ========== 4. サービス概要 ========== */}
       <section
         id="service"
-        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] pt-20 md:pt-28"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-white pt-20 md:pt-28"
       >
         <Container>
           <Reveal variant="up" className="text-center">
@@ -346,7 +342,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               専任者を雇わずに、
               <br className="hidden sm:block" />
               情報セキュリティの
-              <span className="text-brand-500">プロ人材</span>を。
+              <span className="text-brand-500">プロ人材</span>を活用
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
               課題やフェーズに合わせて、必要なプロ人材がひとりでも、チームでも対応します。窓口と契約はセキュプロひとつです。
@@ -389,7 +385,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   </>
                 ),
                 key: "f1",
-                text: "責任者から認証、診断、研修まで、情報セキュリティに特化したプロ人材だけをそろえ、監修者が支援の品質を確認します。複数のプロが関わっても、窓口と契約はセキュプロひとつ。社内の管理負担を増やしません。",
+                text: "責任者から認証、診断、研修まで、情報セキュリティに特化したプロ人材だけをそろえています。複数のプロが関わっても、窓口と契約はセキュプロひとつ。社内の管理負担を増やしません。",
                 visual: <ReasonProsOnly />,
               },
               {

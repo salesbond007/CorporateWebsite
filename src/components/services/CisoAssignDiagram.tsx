@@ -1,5 +1,6 @@
 "use client";
 
+import { SecuproMark } from "./SecuproMark";
 import Image from "next/image";
 import { useEffect, useState, type ReactNode } from "react";
 import { Reveal } from "@/components/ui/Reveal";
@@ -51,9 +52,9 @@ function Face({
 function Building() {
   return (
     <svg viewBox="0 0 120 70" className="h-16 w-auto" aria-hidden="true">
-      <rect x="4" y="30" width="30" height="40" fill="#3A4A6B" />
-      <rect x="40" y="8" width="38" height="62" fill="#24304A" />
-      <rect x="84" y="22" width="32" height="48" fill="#3A4A6B" />
+      <rect x="4" y="30" width="30" height="40" fill="#B98A99" />
+      <rect x="40" y="8" width="38" height="62" fill="#7A1F3D" />
+      <rect x="84" y="22" width="32" height="48" fill="#B98A99" />
       {[0, 1, 2, 3, 4].map((r) =>
         [0, 1, 2].map((c) => (
           <rect
@@ -62,16 +63,16 @@ function Building() {
             y={15 + r * 10}
             width="6"
             height="6"
-            fill="#9AA6BF"
+            fill="#F3E3E8"
           />
         )),
       )}
       {[0, 1, 2].map((r) => (
         <g key={r}>
-          <rect x="10" y={37 + r * 10} width="6" height="5" fill="#9AA6BF" />
-          <rect x="22" y={37 + r * 10} width="6" height="5" fill="#9AA6BF" />
-          <rect x="90" y={29 + r * 12} width="6" height="6" fill="#9AA6BF" />
-          <rect x="102" y={29 + r * 12} width="6" height="6" fill="#9AA6BF" />
+          <rect x="10" y={37 + r * 10} width="6" height="5" fill="#F3E3E8" />
+          <rect x="22" y={37 + r * 10} width="6" height="5" fill="#F3E3E8" />
+          <rect x="90" y={29 + r * 12} width="6" height="6" fill="#F3E3E8" />
+          <rect x="102" y={29 + r * 12} width="6" height="6" fill="#F3E3E8" />
         </g>
       ))}
     </svg>
@@ -79,22 +80,7 @@ function Building() {
 }
 
 function Logo({ className = "h-8 w-8" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 40 44" className={className} aria-hidden="true">
-      <path
-        d="M20 2l16 6v12c0 11-7 18.5-16 22C11 38.5 4 31 4 20V8z"
-        fill="#fff"
-      />
-      <path
-        d="M13 21.5l5 5 9.5-10"
-        fill="none"
-        stroke="#7A1F3D"
-        strokeWidth="3.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
+  return <SecuproMark ring className={className} />;
 }
 
 /** 横の矢印(点線が流れる) */
@@ -167,7 +153,7 @@ function Panel({
   return (
     <div className="flex h-full flex-col border border-[#D9D3D6] bg-white">
       <p
-        className={`px-4 py-2.5 text-center text-[15px] font-black text-white ${tone === "navy" ? "bg-[#24304A]" : "bg-[#3A2A30]"}`}
+        className={`px-4 py-2.5 text-center text-[15px] font-black text-white ${tone === "navy" ? "bg-[#5A142C]" : "bg-[#3A2A30]"}`}
       >
         {title}
       </p>
@@ -275,15 +261,12 @@ export function CisoAssignDiagram() {
   /* セキュプロ */
   const hub = (
     <div className="flex h-full flex-col items-center justify-center bg-brand-500 px-4 py-6 text-center text-white">
-      <Logo className="h-10 w-10" />
+      <Logo className="h-14 w-14" />
       <p className="mt-2 text-xl font-black tracking-[0.12em]">セキュプロ</p>
       <p className="mt-3 border-t border-white/30 pt-3 text-[12px] font-bold leading-relaxed text-white/90">
         課題とフェーズに合う
         <br />
         プロを選んでアサイン
-      </p>
-      <p className="mt-3 bg-white px-3 py-1 text-[12px] font-black text-brand-500">
-        窓口・契約はひとつ
       </p>
     </div>
   );
