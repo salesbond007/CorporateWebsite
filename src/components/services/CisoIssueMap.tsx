@@ -503,7 +503,7 @@ export function CisoIssueMap() {
             <figcaption>
               <p className="text-lg font-black md:text-xl">セキュプロは、</p>
               <p className="mt-2 text-[clamp(1.5rem,3vw,2.3rem)] font-black leading-[1.5] [word-break:auto-phrase]">
-                情報セキュリティのプロ人材を、雇わずに活用できるサービスです
+                情報セキュリティに特化したプロ人材サービスです
               </p>
               <span
                 aria-hidden="true"

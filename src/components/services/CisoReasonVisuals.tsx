@@ -511,6 +511,9 @@ export function ReasonStart() {
           </p>
         </Pop>
       </div>
+      <p className="mt-2 text-right text-[10px] text-ink/45">
+        ※画像はイメージです
+      </p>
     </Frame>
   );
 }

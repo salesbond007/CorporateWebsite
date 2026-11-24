@@ -309,7 +309,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </h1>
             <p className="mt-6 text-[clamp(1.05rem,1.7vw,1.3rem)] font-bold leading-[1.8] text-ink/85">
               情報セキュリティの
-              <span className="text-brand-500">相談役ひとり</span>から、
+              <span className="text-brand-500">顧問ひとり</span>から、
               <br />
               <span className="text-brand-500">専門家チーム</span>まで。
               <br />
@@ -335,13 +335,12 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <Container>
           <Reveal variant="up" className="text-center">
             <h2 className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
-              専任者を雇わずに、
-              <br className="hidden sm:block" />
-              情報セキュリティの
-              <span className="text-brand-500">プロ人材</span>を活用
+              課題に合わせて、
+              <br className="sm:hidden" />
+              必要な<span className="text-brand-500">プロ</span>が対応
             </h2>
-            <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
-              情報セキュリティの相談役ひとりから、専門家チームまで。課題やフェーズに合わせて、必要なプロが対応します。窓口と契約はセキュプロひとつです。
+            <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80 [word-break:auto-phrase]">
+              まずは顧問ひとりが現状を整理し、対策が広がれば、認証や診断のプロが加わります。体制は課題やフェーズに合わせて組み替え、窓口と契約はセキュプロひとつです。
             </p>
           </Reveal>
 
@@ -374,15 +373,13 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               {
                 title: (
                   <>
-                    扱うのは、
-                    <span className="text-brand-500">
-                      情報セキュリティのプロだけ
-                    </span>
+                    <span className="text-brand-500">「何から始めるか」</span>
+                    から相談できる
                   </>
                 ),
-                key: "f1",
-                text: "責任者、認証、診断、研修をはじめ、情報セキュリティに関わる幅広い領域のプロ人材をそろえています。扱うのは、情報セキュリティに特化したプロだけです。複数のプロが関わっても、窓口と契約はセキュプロひとつ。社内の管理負担を増やしません。",
-                visual: <ReasonProsOnly />,
+                key: "f3",
+                text: "対策の方針が決まっていなくても問題ありません。まずはセキュリティ顧問が参画し、現状とリスクを整理して優先順位を決めます。そのうえで、必要な対策に応じて各領域のプロ人材が加わります。",
+                visual: <ReasonStart />,
               },
               {
                 title: (
@@ -398,13 +395,15 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               {
                 title: (
                   <>
-                    <span className="text-brand-500">「何から始めるか」</span>
-                    から相談できる
+                    扱うのは、
+                    <span className="text-brand-500">
+                      情報セキュリティのプロだけ
+                    </span>
                   </>
                 ),
-                key: "f3",
-                text: "対策の方針が決まっていなくても問題ありません。まずはセキュリティ顧問が参画し、現状とリスクを整理して優先順位を決めます。そのうえで、必要な対策に応じて各領域のプロ人材が加わります。",
-                visual: <ReasonStart />,
+                key: "f1",
+                text: "責任者、認証、診断、研修をはじめ、情報セキュリティに関わる幅広い領域のプロ人材をそろえています。扱うのは、情報セキュリティに特化したプロだけです。複数のプロが関わっても、窓口と契約はセキュプロひとつ。社内の管理負担を増やしません。",
+                visual: <ReasonProsOnly />,
               },
             ].map((r, i) => (
               <Reveal key={r.key} variant="up">
@@ -505,7 +504,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表取締役
                 社長を25年間にわたり務める。
                 <br />
-                当サービスの監修者として、支援の品質を確認し、難しい判断の相談役を務めます。
+                当サービスの監修者として、支援の品質を確認し、難しい判断の顧問を務めます。
               </p>
             </div>
           </Reveal>
