@@ -6,13 +6,11 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
-import { CisoIssueSlider } from "@/components/services/CisoIssueSlider";
 import { LpNav } from "@/components/services/LpNav";
-import { CisoPlans } from "@/components/services/CisoPlans";
 import {
-  ReasonAiManagement,
-  ReasonDocs,
-  ReasonFocus,
+  ReasonOneWindow,
+  ReasonPhase,
+  ReasonPriority,
 } from "@/components/services/CisoReasonVisuals";
 import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
 import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
@@ -112,7 +110,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
 
   const nav = [
     { href: "#top", label: "トップ" },
-    { href: "#service", label: "サービス" },
+    { href: "#service", label: "サービス概要" },
     { href: "#reason", label: "選ばれる理由" },
     { href: "#expert", label: "サービス監修" },
     { href: `#${FORM_ID}`, label: "問い合わせ" },
@@ -242,7 +240,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 セキュプロ
               </span>
               <span className="hidden text-[10px] font-bold text-ink/55 sm:block lg:hidden xl:block">
-                大手企業と取引する会社の情報セキュリティ顧問
+                情報セキュリティのプロ人材活用サービス
               </span>
             </span>
           </a>
@@ -306,17 +304,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                 雇わずに<span className="text-brand-500">活用</span>
               </span>
             </h1>
-            {/* 対応できる分野 */}
-            <ul className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
-              {["社外CISO", "認証・SCS", "診断・実務"].map((t) => (
-                <li
-                  key={t}
-                  className="border border-brand-500 bg-white px-3.5 py-1.5 text-sm font-black text-brand-500 md:text-[15px]"
-                >
-                  {t}
-                </li>
-              ))}
-            </ul>
             <p className="mt-6 text-[clamp(1.05rem,1.7vw,1.3rem)] font-bold leading-[1.8] text-ink/85">
               課題やフェーズに合わせて、
               <br className="sm:hidden" />
@@ -335,58 +322,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </Container>
       </section>
 
-      {/* ========== 3. 情報セキュリティ対策が必須の時代に ========== */}
-      <section id="issue" className="scroll-mt-28 bg-[#F3ECEE] pt-16 md:pt-24">
-        <Container>
-          <Reveal variant="up" className="text-center">
-            <h2 className="text-[clamp(1.5rem,3vw,2.2rem)] font-black leading-[1.5]">
-              <span className="text-brand-500">情報セキュリティ対策</span>が
-              <br className="sm:hidden" />
-              必須の時代に
-            </h2>
-          </Reveal>
-          <div className="mx-auto mt-8 max-w-6xl md:mt-12">
-            <CisoIssueSlider />
-          </div>
-        </Container>
-
-        {/* 下矢印: お任せください */}
-        <div className="relative mt-14 bg-[#FBF6F7]">
-          <Reveal
-            variant="up"
-            className="bg-brand-500 py-8 text-center text-white md:py-10"
-          >
-            <p className="text-[clamp(1.3rem,2.8vw,2rem)] font-black leading-[1.5]">
-              情報セキュリティの体制づくりは
-              <br className="sm:hidden" />
-              お任せください
-            </p>
-            <svg
-              aria-hidden="true"
-              viewBox="0 0 40 24"
-              className="mx-auto mt-3 h-6 w-10 animate-bounce text-white"
-            >
-              <path
-                d="M4 4l16 16L36 4"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Reveal>
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 1440 90"
-            preserveAspectRatio="none"
-            className="block h-14 w-full md:h-20"
-          >
-            <path d="M0 0H1440L720 90Z" fill="#7A1E35" />
-          </svg>
-        </div>
-      </section>
-
       {/* ========== 4. サービス概要 ========== */}
       <section
         id="service"
@@ -394,20 +329,21 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       >
         <Container>
           <Reveal variant="up" className="text-center">
-            <h2 className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
-              <span className="text-brand-500">
-                大手企業と取引したい中小企業
-              </span>
-              に、
+            <p className="mx-auto w-fit border border-brand-500 px-4 py-1.5 text-sm font-black tracking-[0.14em] text-brand-500">
+              セキュプロとは
+            </p>
+            <h2 className="mt-5 text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
+              専任者を雇わずに、
               <br className="hidden sm:block" />
-              <span className="text-brand-500">情報セキュリティ顧問</span>を。
+              情報セキュリティの
+              <span className="text-brand-500">プロ人材</span>を。
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
-              当社の専門家が社外の情報セキュリティ責任者として入り、取引先に「この会社なら任せて大丈夫」と説明できる体制を、責任者ごと用意します。
+              課題やフェーズに合わせて、必要なプロ人材がひとりでも、チームでも対応します。窓口と契約はセキュプロひとつです。
             </p>
           </Reveal>
 
-          {/* 図: 月額で任せて情報セキュリティを強化 */}
+          {/* 図: いまの御社 → セキュプロのプロ人材 → 導入後 */}
           <div className="mt-10">
             <CisoBeforeAfter />
           </div>
@@ -432,50 +368,41 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       >
         <Watermark className="-right-6 top-4">Reason</Watermark>
         <Container>
-          <SectionHead en="Reason">選ばれる理由</SectionHead>
+          <SectionHead en="Reason">セキュプロが選ばれる理由</SectionHead>
           <div className="mt-4 md:mt-6">
             {[
               {
                 title: (
                   <>
-                    大手企業・上場企業が求める水準に合わせて、
-                    <span className="text-brand-500">体制を整える</span>
+                    <span className="text-brand-500">着手すべき対策</span>
+                    の特定から
                   </>
                 ),
                 key: "f1",
-                text: "チェックシートの回答、取引先に出せる「情報セキュリティ体制のご案内」など、取引の場面に合わせて支援します。",
-                stat: null,
-                visual: <ReasonDocs />,
-              },
-              {
-                title: (
-                  <>
-                    社員のAI利用の管理まで、
-                    <span className="text-brand-500">標準で含む</span>
-                  </>
-                ),
-                key: "f2",
-                text: "AI利用ルールと、社内で使うAIの一覧（AIシステム台帳）を、責任者の仕事として標準の支援に含めます。",
-                stat: {
-                  before: "AIの明確な責任者を決めている大手企業は",
-                  num: "26.8%",
-                  source: "KPMG「サイバーセキュリティサーベイ2026/27」速報",
-                },
-                visual: <ReasonAiManagement />,
+                text: "何から取り組むべきか定まっていない段階でも、ご相談いただけます。現状とリスクを整理し、優先順位をつけたうえで、課題に適したプロ人材をご提案します。",
+                visual: <ReasonPriority />,
               },
               {
                 title: (
                   <>
                     必要な対策に絞り、
-                    <span className="text-brand-500">
-                      ムダなコストをかけない
-                    </span>
+                    <span className="text-brand-500">最小限のコスト</span>に
+                  </>
+                ),
+                key: "f2",
+                text: "特定した優先度の高い対策に絞り込み、その実行に必要なプロ人材が、必要な稼働量だけ対応します。フェーズが進めばプロを入れ替えるため、不要な費用は発生しません。合わない場合の交代も無料です。",
+                visual: <ReasonPhase />,
+              },
+              {
+                title: (
+                  <>
+                    情報セキュリティ特化。
+                    <span className="text-brand-500">窓口と契約はひとつ</span>
                   </>
                 ),
                 key: "f3",
-                text: "大企業と同じ規程や手続きをそのまま入れると、費用も手間もかさみます。当社は、取引先に求められる水準から逆算して、必要な対策に絞って整えます。初回アセスメントで優先順位を決めるので、やらなくてよいことにお金をかけずに済みます。",
-                stat: null,
-                visual: <ReasonFocus />,
+                text: "情報セキュリティに特化したプロ人材だけを扱い、監修者が支援の品質を確認します。複数のプロが関わっても、窓口と契約はセキュプロひとつ。社内の管理負担を増やしません。",
+                visual: <ReasonOneWindow />,
               },
             ].map((r, i) => (
               <Reveal key={r.key} variant="up">
@@ -501,37 +428,10 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                     <p className="mt-4 border-t border-[#EADFE2] pt-4 text-[15px] leading-[2] text-ink/80 md:mt-5 md:pt-5">
                       {r.text}
                     </p>
-                    {r.stat ? (
-                      <div className="mt-5 border-l-4 border-brand-500 bg-[#FBF6F7] px-4 py-3 md:mt-6 md:px-5 md:py-4">
-                        <p className="text-[14px] font-bold leading-relaxed text-ink md:text-[15px]">
-                          {r.stat.before}
-                          <span className="mx-0.5 text-[1.6rem] font-black leading-none text-brand-500 md:text-[1.9rem]">
-                            {r.stat.num}
-                          </span>
-                        </p>
-                        <p className="mt-1.5 text-xs text-ink/60">
-                          （{r.stat.source}）
-                        </p>
-                      </div>
-                    ) : null}
                   </div>
                 </article>
               </Reveal>
             ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* ========== 6. プラン ========== */}
-      <section
-        id="price"
-        className="relative isolate scroll-mt-28 overflow-hidden bg-[#FBF6F7] py-20 md:py-28"
-      >
-        <Watermark className="-left-4 top-4">Plan</Watermark>
-        <Container>
-          <SectionHead en="Plan">プランと料金</SectionHead>
-          <div className="mt-10 md:mt-12">
-            <CisoPlans ctaHref={`#${FORM_ID}`} />
           </div>
         </Container>
       </section>
@@ -546,37 +446,60 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           <SectionHead en="Expert">サービス監修</SectionHead>
           <Reveal
             variant="up"
-            className="mt-12 grid gap-8 overflow-hidden rounded-lg bg-white shadow-[0_20px_44px_-34px_rgba(0,0,0,0.4)] ring-1 ring-[#EEE5E8] md:grid-cols-[18rem_1fr] lg:grid-cols-[22rem_1fr]"
+            className="mt-12 grid items-center gap-10 md:grid-cols-[17rem_1fr] md:gap-12 lg:grid-cols-[21rem_1fr] lg:gap-16"
           >
-            {/* 写真 */}
-            <div className="relative aspect-[4/5] w-full bg-[#F1ECEE] md:aspect-auto md:min-h-[24rem]">
-              <Image
-                src="/photos/ciso/okazaki.webp"
-                alt="岡崎 弘明"
-                fill
-                sizes="(max-width:768px) 100vw, 352px"
-                quality={95}
-                className="object-cover object-top"
+            {/* 写真(後ろにずらしたワインレッドの四角) */}
+            <div className="relative mx-auto w-full max-w-[21rem] pb-4 pr-4">
+              <span
+                aria-hidden="true"
+                className="absolute bottom-0 right-0 h-[calc(100%-1rem)] w-[calc(100%-1rem)] bg-brand-500"
               />
+              <div className="relative aspect-[4/5] w-full bg-[#F1ECEE]">
+                <Image
+                  src="/photos/ciso/okazaki.webp"
+                  alt="岡崎 弘明"
+                  fill
+                  sizes="(max-width:768px) 100vw, 336px"
+                  quality={95}
+                  className="object-cover object-top"
+                />
+              </div>
+              <span className="absolute left-0 top-5 bg-white px-3 py-1.5 text-[11px] font-black tracking-[0.2em] text-brand-500">
+                SUPERVISOR
+              </span>
             </div>
-            <div className="flex flex-col justify-center px-6 pb-9 md:py-12 md:pr-12">
-              <h3>
-                <span className="block text-[clamp(1.75rem,3vw,2.25rem)] font-black tracking-[0.08em] text-ink">
+
+            <div>
+              <p className="text-xs font-black tracking-[0.2em] text-brand-500">
+                サービス監修
+              </p>
+              <h3 className="mt-2 flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                <span className="text-[clamp(1.9rem,3.4vw,2.6rem)] font-black tracking-[0.08em] text-ink">
                   岡崎 弘明
                 </span>
-                <span className="mt-1 block text-xs font-bold tracking-[0.2em] text-ink/50">
-                  （オカザキ ヒロアキ）
+                <span className="text-xs font-bold tracking-[0.2em] text-ink/50">
+                  オカザキ ヒロアキ
                 </span>
               </h3>
-              <p className="mt-6 border-l-[3px] border-brand-500 pl-4 leading-[1.7]">
-                <span className="block text-base font-bold text-brand-500 md:text-lg">
-                  元代表取締役 社長
-                </span>
-                <span className="block text-base font-bold text-ink md:text-lg">
-                  株式会社帝国データバンクネットコミュニケーション
-                </span>
-              </p>
-              <p className="mt-7 border-t border-[#EEE5E8] pt-7 text-[15px] leading-[2.05] text-ink/80">
+              <dl className="mt-6 border-y-2 border-ink text-[15px]">
+                <div className="grid grid-cols-[5.5rem_1fr] gap-4 border-b border-[#E9E1DD] py-3.5">
+                  <dt className="font-bold text-ink/55">役職</dt>
+                  <dd className="font-black text-brand-500">
+                    元代表取締役 社長
+                  </dd>
+                </div>
+                <div className="grid grid-cols-[5.5rem_1fr] gap-4 py-3.5">
+                  <dt className="font-bold text-ink/55">経歴</dt>
+                  <dd className="font-bold text-ink">
+                    株式会社帝国データバンクネットコミュニケーション
+                  </dd>
+                </div>
+              </dl>
+              <p className="relative mt-6 bg-[#F7F2F4] px-6 py-5 text-[15px] leading-[2] text-ink/80">
+                <span
+                  aria-hidden="true"
+                  className="absolute left-0 top-0 h-full w-1 bg-brand-500"
+                />
                 帝国データバンクグループで、情報セキュリティ関連の事業を手がける会社の代表取締役
                 社長を25年間にわたり務める。
                 <br />

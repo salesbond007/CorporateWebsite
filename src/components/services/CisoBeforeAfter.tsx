@@ -1,10 +1,9 @@
-import Image from "next/image";
-import type { ComponentType, CSSProperties } from "react";
+import type { ComponentType, CSSProperties, ReactNode } from "react";
 import { Reveal } from "@/components/ui/Reveal";
 import { IconChecksheet, IconShadowAi, IconSoloIt } from "./FlatIcons";
 
 /**
- * セキュプロ 情報セキュリティ LP: 月額で CISO / 情報セキュリティ顧問に任せると、何が変わるかを示す図。
+ * セキュプロ LP「セキュプロとは」: 情報セキュリティのプロ人材が対応すると、何が変わるかを示す図。
  * 写真は使わず、イラスト + 流れる線 + テキストで「いまの課題」→「導入後」を1行ずつ対応させる。
  * 画面に入ると、左の課題 → 線が中央へ流れる → 右の導入後、の順に現れる。
  */
@@ -16,18 +15,18 @@ const rows: {
 }[] = [
   {
     Icon: IconSoloIt,
-    before: "社内に、情報セキュリティの専門家がいない",
-    after: ["ランサムウェアや個人情報漏洩の", "リスクを最小限にする"],
+    before: "専任のセキュリティ人材を採用・確保するコストが見合わない",
+    after: ["採用せずに、", "必要なときだけプロ人材を活用できる"],
   },
   {
     Icon: IconChecksheet,
-    before: "対策を示せず、取引先の候補から外れることもある",
-    after: ["対策を示せる会社として、", "大手の取引先候補に残れる"],
+    before: "対策の優先順位が定まらず、着手できていない",
+    after: ["現状とリスクを整理し、", "優先順位をつけて着手できる"],
   },
   {
     Icon: IconShadowAi,
-    before: "インシデントが起きても対応できず、損害が広がる",
-    after: ["手順と連絡先を決めて、", "インシデントに備えられる"],
+    before: "外部に頼みたいが、委託先と依頼範囲を判断できない",
+    after: ["課題に合ったプロに、", "窓口ひとつで任せられる"],
   },
 ];
 
@@ -109,14 +108,65 @@ function FlowY({ delay }: { delay: number }) {
 }
 
 /** 中央: 月額で任せる専門家 */
+/** 中央: セキュプロ(情報セキュリティのプロ人材) */
+const proKinds: { label: string; icon: ReactNode }[] = [
+  {
+    label: "社外CISO",
+    icon: (
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="7.5" r="3.2" />
+        <path d="M5.5 20c.8-3.6 3.3-5.6 6.5-5.6s5.7 2 6.5 5.6" />
+        <path d="M12 14.4l-1.2 2.6L12 19l1.2-2z" />
+      </g>
+    ),
+  },
+  {
+    label: "認証・SCSの専門家",
+    icon: (
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="9" r="5" />
+        <path d="M9.6 9l1.6 1.6 3.2-3.2" />
+        <path d="M8.5 13.2L7 21l5-2.5 5 2.5-1.5-7.8" />
+      </g>
+    ),
+  },
+  {
+    label: "診断エンジニア",
+    icon: (
+      <g
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <rect x="3" y="4" width="18" height="12" />
+        <path d="M8 20h8M12 16v4" />
+        <circle cx="11" cy="10" r="2.6" />
+        <path d="M13 12l2.2 2.2" />
+      </g>
+    ),
+  },
+];
+
 function Hub({ compact, delay }: { compact?: boolean; delay: number }) {
   return (
     <div
       style={d(delay)}
-      className={`relative overflow-hidden bg-brand-500 text-white opacity-0 transition-all duration-700 group-data-[visible=true]/reveal:scale-100 group-data-[visible=true]/reveal:opacity-100 ${
-        compact
-          ? "flex scale-95 items-center gap-4 rounded-md px-5 py-4"
-          : "flex h-full scale-95 flex-col items-center justify-center rounded-md px-5 py-8 text-center"
+      className={`relative flex scale-95 flex-col overflow-hidden bg-brand-500 text-white opacity-0 transition-all duration-700 group-data-[visible=true]/reveal:scale-100 group-data-[visible=true]/reveal:opacity-100 ${
+        compact ? "px-5 py-5" : "h-full justify-center px-5 py-7 text-center"
       }`}
     >
       {/* うすい格子 */}
@@ -124,42 +174,43 @@ function Hub({ compact, delay }: { compact?: boolean; delay: number }) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 opacity-[0.08] [background-image:linear-gradient(#fff_1px,transparent_1px),linear-gradient(90deg,#fff_1px,transparent_1px)] [background-size:22px_22px]"
       />
-      <span
-        className={`relative grid shrink-0 place-items-center ${compact ? "h-14 w-14" : "h-20 w-20"}`}
+      <p className="relative mx-auto w-fit border border-white/70 px-3 py-1 text-xs font-black tracking-[0.16em]">
+        セキュプロ
+      </p>
+      <p
+        className={`relative mt-3 font-black leading-snug ${compact ? "text-center text-lg" : "text-lg"}`}
       >
-        <span
-          aria-hidden="true"
-          className="ba-pulse absolute inset-0 rounded-full border border-white/60"
-        />
-        <span className="relative block h-full w-full overflow-hidden rounded-full ring-2 ring-white">
-          <Image
-            src="/photos/ciso/advisor.webp"
-            alt="情報セキュリティ顧問（イメージ）"
-            fill
-            sizes="96px"
-            className="object-cover"
-          />
-        </span>
-      </span>
-      <div className={`relative ${compact ? "" : "mt-4"}`}>
-        <p className="text-[11px] font-bold tracking-[0.14em] text-white/75">
-          AI時代の責任者
-        </p>
-        <p
-          className={`mt-1 font-black leading-snug ${compact ? "text-base" : "text-lg"}`}
-        >
-          情報セキュリティ顧問
-          {compact ? "／" : <br />}
-          社外CISO
-        </p>
-        {compact ? null : (
-          <p className="mt-3 border-t border-white/25 pt-3 text-xs leading-relaxed text-white/85">
-            専門家が社外から
-            <br />
-            就任します
-          </p>
-        )}
-      </div>
+        情報セキュリティの
+        <br />
+        プロ人材
+      </p>
+      <ul
+        className={`relative mt-4 grid gap-2 ${compact ? "grid-cols-3" : ""}`}
+      >
+        {proKinds.map((k, i) => (
+          <li
+            key={k.label}
+            className={`flex items-center gap-2 bg-white/10 px-2.5 py-2 text-left text-[12px] font-bold leading-tight ${
+              compact ? "flex-col text-center" : ""
+            }`}
+          >
+            <span
+              className="hv-cycle-bg grid h-8 w-8 shrink-0 place-items-center bg-white text-brand-500"
+              style={{ animationDelay: `${i * 1.6}s` }}
+            >
+              <svg viewBox="0 0 24 24" className="h-5 w-5" aria-hidden="true">
+                {k.icon}
+              </svg>
+            </span>
+            {k.label}
+          </li>
+        ))}
+      </ul>
+      <p className="relative mt-4 border-t border-white/25 pt-3 text-xs leading-relaxed text-white/90">
+        課題に合わせて、
+        {compact ? null : <br />}
+        必要なプロが対応します
+      </p>
     </div>
   );
 }
@@ -256,7 +307,7 @@ export function CisoBeforeAfter() {
     <Reveal variant="none">
       <div
         role="group"
-        aria-label="情報セキュリティ顧問／社外CISOがつくと、課題がどう変わるか"
+        aria-label="セキュプロの情報セキュリティのプロ人材が対応すると、課題がどう変わるか"
       >
         {/* ===== PC ===== */}
         <div className="hidden grid-cols-[1fr_3.5rem_12rem_3.5rem_1fr] gap-x-3 md:grid lg:grid-cols-[1fr_4.5rem_13rem_4.5rem_1fr]">
