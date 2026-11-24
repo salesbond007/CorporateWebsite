@@ -263,11 +263,11 @@ export function ReasonProsOnly() {
     <Frame inner={ref}>
       <div
         role="img"
-        aria-label="責任者・認証・診断・研修の情報セキュリティのプロだけをそろえ、窓口と契約はセキュプロひとつで御社とつながる図"
+        aria-label="責任者・認証・診断・研修をはじめ、幅広い領域の情報セキュリティのプロをそろえ、窓口と契約はセキュプロひとつで御社とつながる図"
       >
         <Pop show={inView} delay={0}>
           <p className="text-center text-[12px] font-black text-[#7A1F3D] sm:text-[13px]">
-            情報セキュリティに特化したプロ人材
+            情報セキュリティに特化したプロ人材（例）
           </p>
         </Pop>
         <ul className="mt-3 grid grid-cols-4 gap-2 sm:gap-3">
@@ -300,7 +300,13 @@ export function ReasonProsOnly() {
           ))}
         </ul>
 
-        <div className="mt-4 flex justify-center">
+        <Pop show={inView} delay={800}>
+          <p className="mt-3 text-center text-[11px] font-bold text-ink/65 sm:text-[12px]">
+            このほかの領域も、幅広く対応します
+          </p>
+        </Pop>
+
+        <div className="mt-3 flex justify-center">
           <span className="rotate-90">
             <Arrow show={inView} delay={2100} />
           </span>
