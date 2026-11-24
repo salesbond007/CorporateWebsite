@@ -20,7 +20,7 @@ const sw = {
 
 const worries: { text: string; icon: ReactNode }[] = [
   {
-    text: "何から始めればいいか分からない",
+    text: "何から対策すれば良いか分からない",
     icon: (
       <g {...sw}>
         <circle cx="12" cy="12" r="8.5" />
