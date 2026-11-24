@@ -12,7 +12,7 @@ import { Reveal } from "@/components/ui/Reveal";
  */
 
 const pros = [
-  { src: "/photos/ciso/advisor.webp", role: "責任者", sub: "体制づくり・方針" },
+  { src: "/photos/ciso/advisor.webp", role: "顧問", sub: "体制づくり・方針" },
   { src: "/photos/ciso/pro-1.webp", role: "認証・SCS", sub: "取得準備・回答" },
   {
     src: "/photos/ciso/pro-2.webp",
@@ -22,7 +22,7 @@ const pros = [
 ];
 
 const formations = [
-  { label: "ひとりで対応", note: "まずは責任者がひとりで", members: [0] },
+  { label: "ひとりで対応", note: "まずは顧問がひとりで", members: [0] },
   { label: "2名で対応", note: "認証の準備が始まったら", members: [0, 1] },
   { label: "チーム体制", note: "診断・実務まで広がったら", members: [0, 1, 2] },
 ];

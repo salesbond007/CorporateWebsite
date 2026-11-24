@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 const rows = [
   {
     src: "/photos/ciso/advisor.webp",
-    role: "責任者",
+    role: "顧問",
     task: "方針と優先順位の決定",
     w: 100,
     state: "完了",
@@ -45,7 +45,7 @@ export function CisoHeroMock() {
     <div
       className="relative mx-auto w-full max-w-[640px]"
       role="img"
-      aria-label="御社の支援体制の画面イメージ。責任者、認証・SCS、診断・Web対策のプロが、それぞれの対応内容と進み具合とともに並んでいる"
+      aria-label="御社の支援体制の画面イメージ。顧問、認証・SCS、診断・Web対策のプロが、それぞれの対応内容と進み具合とともに並んでいる"
     >
       <div className="overflow-hidden border border-[#E8D9DE] bg-white shadow-[0_30px_60px_-30px_rgba(122,31,61,0.4)]">
         {/* 窓の上部 */}

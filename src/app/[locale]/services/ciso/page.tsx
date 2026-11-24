@@ -14,6 +14,7 @@ import {
 } from "@/components/services/CisoReasonVisuals";
 import { CisoIssueMap } from "@/components/services/CisoIssueMap";
 import { CisoHeroMock } from "@/components/services/CisoHeroMock";
+import { CisoAboutBlock } from "@/components/services/CisoAboutBlock";
 import { SecuproMark } from "@/components/services/SecuproMark";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -330,9 +331,12 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       {/* ========== 4. サービス概要 ========== */}
       <section
         id="service"
-        className="relative isolate scroll-mt-28 overflow-hidden bg-white pt-20 md:pt-28"
+        className="relative isolate scroll-mt-28 overflow-hidden bg-white"
       >
-        <Container>
+        {/* セキュプロとは(濃い背景のブロック) */}
+        <CisoAboutBlock />
+
+        <Container className="pt-20 md:pt-28">
           <Reveal variant="up" className="text-center">
             <h2 className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
               課題に合わせて、
@@ -402,7 +406,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
                   </>
                 ),
                 key: "f1",
-                text: "責任者、認証、診断、研修をはじめ、情報セキュリティに関わる幅広い領域のプロ人材をそろえています。扱うのは、情報セキュリティに特化したプロだけです。複数のプロが関わっても、窓口と契約はセキュプロひとつ。社内の管理負担を増やしません。",
+                text: "責任者、認証、診断、研修をはじめ、情報セキュリティに関わる幅広い領域のプロ人材をそろえています。複数のプロが関わっても、窓口と契約はセキュプロひとつ。社内の管理負担を増やしません。",
                 visual: <ReasonProsOnly />,
               },
             ].map((r, i) => (
