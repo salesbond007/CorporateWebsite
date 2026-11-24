@@ -268,7 +268,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(251,242,244,0.95)_0%,rgba(251,242,244,0.88)_45%,rgba(241,220,227,0.8)_100%)]"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(251,242,244,0.9)_0%,rgba(251,242,244,0.78)_42%,rgba(241,220,227,0.5)_100%)]"
         />
         <Container className="grid items-center gap-6 pb-14 pt-6 md:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] md:gap-8 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
           <div className="min-w-0 text-center md:text-left">
