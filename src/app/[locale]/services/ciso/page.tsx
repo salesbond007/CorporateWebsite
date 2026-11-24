@@ -294,29 +294,36 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             <h1>
               <span className="block text-[clamp(0.95rem,4.4vw,1.6rem)] font-bold text-ink/85 lg:text-[clamp(1.05rem,2vw,1.6rem)]">
                 <span className="underline decoration-brand-500 decoration-[3px] underline-offset-[7px]">
-                  大手企業と取引したい
+                  専任者がいない
                 </span>
-                中小企業のための
+                企業のための
               </span>
-              <span className="mt-3 block whitespace-nowrap text-[clamp(1.6rem,8vw,3.3rem)] font-black leading-[1.2] tracking-[0.02em] lg:text-[clamp(2rem,3.6vw,3.3rem)]">
-                情報セキュリティ<span className="text-brand-500">顧問</span>
+              <span className="mt-3 block text-[clamp(1.5rem,7vw,2.6rem)] font-black leading-[1.35] tracking-[0.02em] lg:text-[clamp(1.7rem,2.4vw,2.3rem)]">
+                情報セキュリティの
+                <br className="sm:hidden" />
+                <span className="text-brand-500">プロ人材</span>を、
+                <br className="hidden sm:block" />
+                雇わずに<span className="text-brand-500">活用</span>
               </span>
             </h1>
-            <p className="mt-4 flex items-baseline justify-center gap-1 lg:justify-start">
-              <span className="text-lg font-black">月</span>
-              <span className="text-[clamp(2.4rem,4vw,3.4rem)] font-black leading-none tracking-tight text-brand-500">
-                10万円
-              </span>
-              <span className="text-xl font-black text-brand-500">〜</span>
-              <span className="ml-1 text-sm font-bold text-ink/60">
-                （税別）
-              </span>
-            </p>
-            <p className="mt-6 text-[clamp(1.05rem,1.7vw,1.35rem)] font-bold leading-[1.8] text-ink/85">
-              <span className="text-brand-500">AI時代</span>に必須の
+            {/* 対応できる分野 */}
+            <ul className="mt-6 flex flex-wrap justify-center gap-2 lg:justify-start">
+              {["社外CISO", "認証・SCS", "診断・実務"].map((t) => (
+                <li
+                  key={t}
+                  className="border border-brand-500 bg-white px-3.5 py-1.5 text-sm font-black text-brand-500 md:text-[15px]"
+                >
+                  {t}
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-[clamp(1.05rem,1.7vw,1.3rem)] font-bold leading-[1.8] text-ink/85">
+              課題やフェーズに合わせて、
               <br className="sm:hidden" />
-              情報セキュリティ体制を<span className="text-brand-500">構築</span>
-              する
+              必要な<span className="text-brand-500">プロ</span>が、
+              <br />
+              ひとりでも<span className="text-brand-500">チーム</span>
+              でも対応します
             </p>
             <div className="mt-10 flex justify-center lg:block">
               <BigButton label="無料相談" icon="check" href="#check" />
