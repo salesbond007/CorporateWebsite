@@ -8,6 +8,7 @@ import {
   type ReactNode,
   type Ref,
 } from "react";
+import Image from "next/image";
 
 /**
  * セキュプロ 情報セキュリティ顧問 LP「選ばれる理由」の動く図(画像の代わり)。
@@ -164,128 +165,176 @@ function PersonIcon({ className = "h-4 w-4" }: { className?: string }) {
   );
 }
 
-/* ========================================================= 01 着手すべき対策の特定から */
+/* ---------------- 写真の丸 ---------------- */
 
-export function ReasonPriority() {
+function Face({
+  src,
+  className = "h-12 w-12",
+  ring = true,
+}: {
+  src: string;
+  className?: string;
+  ring?: boolean;
+}) {
+  return (
+    <span
+      className={`block shrink-0 overflow-hidden rounded-full bg-[#EEE7E9] ${ring ? "border-[3px] border-white shadow-[0_0_0_1.5px_#7A1F3D]" : ""} ${className}`}
+    >
+      <Image
+        src={src}
+        alt=""
+        width={128}
+        height={128}
+        className="h-full w-full object-cover"
+      />
+    </span>
+  );
+}
+
+function CheckBadge({ className = "h-5 w-5" }: { className?: string }) {
+  return (
+    <span
+      className={`grid place-items-center rounded-full bg-[#7A1F3D] text-white ${className}`}
+    >
+      <svg viewBox="0 0 16 16" className="h-[60%] w-[60%]" fill="none">
+        <path
+          d="M3 8.5l3 3 7-7"
+          stroke="currentColor"
+          strokeWidth="2.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </span>
+  );
+}
+
+/* ========================================================= 01 扱うのは、情報セキュリティのプロだけ */
+
+const domains: { label: string; icon: ReactNode }[] = [
+  {
+    label: "責任者",
+    icon: (
+      <g {...stroke}>
+        <circle cx="12" cy="7.5" r="3.4" />
+        <path d="M5 21c.8-4 3.5-6.2 7-6.2s6.2 2.2 7 6.2" />
+        <path d="M12 14.8l-1.3 2.8L12 20l1.3-2.4z" />
+      </g>
+    ),
+  },
+  {
+    label: "認証",
+    icon: (
+      <g {...stroke}>
+        <circle cx="12" cy="9" r="5.2" />
+        <path d="M9.6 9l1.7 1.7 3.2-3.3" />
+        <path d="M8.6 13.2L7.3 21l4.7-2.4 4.7 2.4-1.3-7.8" />
+      </g>
+    ),
+  },
+  {
+    label: "診断",
+    icon: (
+      <g {...stroke}>
+        <rect x="3" y="4" width="18" height="12.5" />
+        <path d="M8.5 20.5h7M12 16.5v4" />
+        <circle cx="11" cy="10" r="2.8" />
+        <path d="M13 12l2.3 2.3" />
+      </g>
+    ),
+  },
+  {
+    label: "研修",
+    icon: (
+      <g {...stroke}>
+        <rect x="3" y="3.5" width="18" height="10" />
+        <path d="M7 10l3-3 2.5 2.5L17 6" />
+        <circle cx="7" cy="18" r="2" />
+        <circle cx="17" cy="18" r="2" />
+      </g>
+    ),
+  },
+];
+
+export function ReasonProsOnly() {
   const { ref, inView } = useInView<HTMLDivElement>();
-  const mess = [
-    { t: "AIの利用ルール", x: "4%", y: "6%" },
-    { t: "取引先のチェックシート", x: "34%", y: "22%" },
-    { t: "パスワード管理", x: "2%", y: "40%" },
-    { t: "ホームページの弱点", x: "30%", y: "58%" },
-    { t: "事故時の手順", x: "6%", y: "76%" },
-  ];
-  const ranked = [
-    { t: "取引先のチェックシート", lv: "高", w: "92%" },
-    { t: "AIの利用ルール", lv: "高", w: "80%" },
-    { t: "事故時の手順", lv: "中", w: "58%" },
-  ];
   return (
     <Frame inner={ref}>
       <div
         role="img"
-        aria-label="何から取り組むべきか決まっていない状態から、現状とリスクを整理して優先順位をつけ、課題に適したプロ人材を提案する図"
+        aria-label="責任者・認証・診断・研修の情報セキュリティのプロだけをそろえ、監修者が品質を確認し、窓口と契約はセキュプロひとつで御社とつながる図"
       >
-        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-3">
-          {/* 左: 決まっていない */}
-          <div>
-            <p className="mb-2 text-center text-[10px] font-black text-ink/50 sm:text-[11px]">
-              何から始める？
-            </p>
-            <div className="relative h-40 bg-white/60 ring-1 ring-[#EEDFE3] sm:h-44">
-              {mess.map((m, i) => (
-                <span
-                  key={m.t}
-                  className="sv-float absolute"
-                  style={{ left: m.x, top: m.y, animationDelay: `${i * 0.6}s` }}
-                >
-                  <Chip tone="gray">{m.t}</Chip>
-                </span>
-              ))}
-            </div>
-          </div>
-
-          {/* 中: 整理 */}
-          <Pop
-            show={inView}
-            delay={300}
-            className="flex flex-col items-center gap-1.5"
-          >
-            <span className="grid h-10 w-10 place-items-center bg-[#7A1F3D] text-white sm:h-11 sm:w-11">
-              <svg
-                viewBox="0 0 24 24"
-                className="h-5 w-5"
-                fill="none"
-                aria-hidden="true"
+        <Pop show={inView} delay={0}>
+          <p className="text-center text-[12px] font-black text-[#7A1F3D] sm:text-[13px]">
+            情報セキュリティに特化したプロ人材
+          </p>
+        </Pop>
+        <ul className="mt-3 grid grid-cols-4 gap-2 sm:gap-3">
+          {domains.map((d, i) => (
+            <li key={d.label}>
+              <Pop
+                show={inView}
+                delay={150 + i * 140}
+                className="relative flex flex-col items-center bg-white px-1 pb-2.5 pt-3 ring-1 ring-[#EEDFE3]"
               >
-                <circle
-                  cx="10.5"
-                  cy="10.5"
-                  r="6"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                />
-                <path
-                  d="M15 15l5 5"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </span>
-            <span className="text-center text-[9px] font-black leading-tight text-[#7A1F3D] sm:text-[10px]">
-              現状と
-              <br />
-              リスクを整理
-            </span>
-            <Arrow show={inView} delay={500} />
-          </Pop>
-
-          {/* 右: 優先順位 */}
-          <div>
-            <p className="mb-2 text-center text-[10px] font-black text-[#7A1F3D] sm:text-[11px]">
-              優先順位
-            </p>
-            <ol className="space-y-2">
-              {ranked.map((r, i) => (
-                <Pop
-                  key={r.t}
-                  show={inView}
-                  delay={800 + i * 260}
-                  className="bg-white px-2.5 py-2 ring-1 ring-[#EEDFE3]"
+                <svg
+                  viewBox="0 0 24 24"
+                  className="h-7 w-7 text-[#7A1F3D] sm:h-9 sm:w-9"
+                  aria-hidden="true"
                 >
-                  <p className="flex items-center gap-1.5 text-[10px] font-black leading-tight text-ink sm:text-[11px]">
-                    <span className="grid h-4 w-4 shrink-0 place-items-center bg-[#7A1F3D] text-[9px] text-white">
-                      {i + 1}
-                    </span>
-                    {r.t}
-                  </p>
-                  <div className="mt-1.5 flex items-center gap-1.5">
-                    <div className="h-1.5 flex-1 overflow-hidden bg-[#EEDFE3]">
-                      <div
-                        className="h-full bg-[#7A1F3D] transition-[width] duration-1000 ease-out"
-                        style={{
-                          width: inView ? r.w : "0%",
-                          transitionDelay: `${1000 + i * 260}ms`,
-                        }}
-                      />
-                    </div>
-                    <span className="text-[9px] font-bold text-ink/55">
-                      優先度 {r.lv}
-                    </span>
-                  </div>
-                </Pop>
-              ))}
-            </ol>
-          </div>
+                  {d.icon}
+                </svg>
+                <span className="mt-1.5 text-[11px] font-black text-ink sm:text-[13px]">
+                  {d.label}
+                </span>
+                {/* 監修者の確認(順にチェックが付く) */}
+                <span
+                  className={`absolute -right-1.5 -top-1.5 transition-all duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] ${inView ? "scale-100 opacity-100" : "scale-0 opacity-0"}`}
+                  style={{ transitionDelay: `${1300 + i * 220}ms` }}
+                >
+                  <CheckBadge />
+                </span>
+              </Pop>
+            </li>
+          ))}
+        </ul>
+
+        <Pop
+          show={inView}
+          delay={900}
+          className="mt-4 flex items-center justify-center gap-3"
+        >
+          <Face src="/photos/ciso/okazaki.webp" className="h-11 w-11" />
+          <span className="text-left text-[12px] font-black leading-snug text-ink sm:text-[13px]">
+            監修者が
+            <br />
+            支援の品質を確認
+          </span>
+        </Pop>
+
+        <div className="mt-3 flex justify-center">
+          <span className="rotate-90">
+            <Arrow show={inView} delay={2100} />
+          </span>
         </div>
 
-        {/* 提案 */}
-        <Pop show={inView} delay={1900} className="mt-5 flex justify-center">
-          <p className="flex items-center gap-2 bg-[#7A1F3D] px-4 py-2 text-xs font-black text-white sm:text-sm">
-            <PersonIcon />
-            課題に適したプロ人材をご提案
-          </p>
+        <Pop
+          show={inView}
+          delay={2300}
+          className="mt-3 flex items-stretch justify-center"
+        >
+          <span className="flex items-center gap-2 bg-[#7A1F3D] px-4 py-2.5 text-[12px] font-black text-white sm:text-sm">
+            <svg viewBox="0 0 40 44" className="h-4 w-4" aria-hidden="true">
+              <path
+                d="M20 2l16 6v12c0 11-7 18.5-16 22C11 38.5 4 31 4 20V8z"
+                fill="#fff"
+              />
+            </svg>
+            窓口・契約はセキュプロひとつ
+          </span>
+          <span className="flex items-center gap-1.5 bg-white px-3 text-[12px] font-black text-ink ring-1 ring-[#EEDFE3] sm:text-sm">
+            御社
+          </span>
         </Pop>
       </div>
     </Frame>
@@ -294,157 +343,193 @@ export function ReasonPriority() {
 
 /* ========================================================= 02 必要な対策に絞り、最小限のコストに */
 
-export function ReasonPhase() {
+const phases = [
+  { name: "フェーズ1", pro: "責任者", w: 55 },
+  { name: "フェーズ2", pro: "認証の専門家", w: 80 },
+  { name: "フェーズ3", pro: "研修の講師", w: 35 },
+];
+
+export function ReasonCost() {
   const { ref, inView } = useInView<HTMLDivElement>();
-  const phases = [
-    { p: "フェーズ1", t: "体制づくり", pro: "社外CISO", h: "70%" },
-    { p: "フェーズ2", t: "認証の取得準備", pro: "認証・SCSの専門家", h: "92%" },
-    { p: "フェーズ3", t: "診断と運用", pro: "診断エンジニア", h: "45%" },
+  return (
+    <Frame inner={ref}>
+      <div
+        role="img"
+        aria-label="専任者を雇うと費用がずっと同じだけかかるのに対し、セキュプロはフェーズごとに必要なプロが必要な稼働量だけ対応する図"
+      >
+        <div className="grid grid-cols-[3.6rem_repeat(3,minmax(0,1fr))] gap-x-2 gap-y-2 sm:grid-cols-[6rem_repeat(3,minmax(0,1fr))] sm:gap-x-3">
+          <span />
+          {phases.map((p, i) => (
+            <Pop key={p.name} show={inView} delay={i * 120}>
+              <p className="text-center text-[10px] font-black tracking-wider text-ink/50 sm:text-[11px]">
+                {p.name}
+              </p>
+            </Pop>
+          ))}
+
+          {/* 専任者を雇う場合 */}
+          <Pop show={inView} delay={300} className="flex items-center">
+            <p className="text-[11px] font-black leading-tight text-ink/55 sm:text-[12px]">
+              専任者を
+              <br />
+              雇う場合
+            </p>
+          </Pop>
+          <div className="col-span-3 flex h-12 items-center bg-white px-2 ring-1 ring-[#EEDFE3] sm:h-14">
+            <span
+              className={`flex h-7 items-center justify-center bg-[#BDB3B7] text-[10px] font-black text-white transition-[width] duration-1000 ease-out sm:h-8 sm:text-[11px] ${inView ? "w-full" : "w-0"}`}
+              style={{ transitionDelay: "500ms" }}
+            >
+              <span className="whitespace-nowrap">同じ費用がずっとかかる</span>
+            </span>
+          </div>
+
+          {/* セキュプロ */}
+          <Pop show={inView} delay={900} className="flex items-center">
+            <p className="text-[11px] font-black leading-tight text-[#7A1F3D] sm:text-[12px]">
+              セキュプロ
+            </p>
+          </Pop>
+          {phases.map((p, i) => (
+            <div
+              key={p.name}
+              className="flex min-h-16 flex-col justify-center bg-white px-1.5 py-2 ring-1 ring-[#EEDFE3] sm:min-h-[4.5rem] sm:px-2"
+            >
+              <span
+                className={`block h-7 bg-[#7A1F3D] transition-[width] duration-700 ease-out sm:h-8 ${inView ? "" : "!w-0"}`}
+                style={{
+                  width: `${p.w}%`,
+                  transitionDelay: `${1100 + i * 300}ms`,
+                }}
+              />
+              <span
+                className={`mt-1 flex items-start gap-1 text-[9.5px] font-black leading-tight text-ink transition-opacity duration-500 sm:text-[11px] ${inView ? "opacity-100" : "opacity-0"}`}
+                style={{ transitionDelay: `${1400 + i * 300}ms` }}
+              >
+                <PersonIcon className="hidden h-3 w-3 shrink-0 text-[#7A1F3D] sm:block" />
+                <span>{p.pro}</span>
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-5 flex flex-wrap justify-center gap-2">
+          {[
+            "必要な稼働量だけ",
+            "フェーズに合わせてプロを入れ替え",
+            "合わない場合の交代は無料",
+          ].map((t, i) => (
+            <Pop key={t} show={inView} delay={2200 + i * 150}>
+              <Chip tone={i === 0 ? "wine" : "light"}>{t}</Chip>
+            </Pop>
+          ))}
+        </div>
+      </div>
+    </Frame>
+  );
+}
+
+/* ========================================================= 03 「何から始めるか」から相談できる */
+
+export function ReasonStart() {
+  const { ref, inView } = useInView<HTMLDivElement>();
+  const steps = [
+    { n: "1", t: "セキュリティ顧問が参画" },
+    { n: "2", t: "現状とリスクを整理し、優先順位を決める" },
+    { n: "3", t: "必要な領域のプロが加わる" },
   ];
   return (
     <Frame inner={ref}>
       <div
         role="img"
-        aria-label="フェーズごとに必要なプロ人材が、必要な稼働量だけ対応し、フェーズが進めばプロを入れ替える図。合わない場合の交代は無料"
+        aria-label="まずセキュリティ顧問が参画し、現状とリスクを整理して優先順位を決め、そのうえで必要な領域のプロ人材が加わる流れ"
+        className="grid grid-cols-1 items-stretch gap-2 sm:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)_auto_minmax(0,1fr)]"
       >
-        <p className="text-[10px] font-black tracking-[0.12em] text-ink/50 sm:text-[11px]">
-          稼働量（イメージ）
-        </p>
-        <div className="mt-2 grid grid-cols-3 gap-2 sm:gap-3">
-          {phases.map((ph, i) => (
-            <div key={ph.p} className="flex flex-col items-center">
-              {/* 稼働のバー */}
-              <div className="relative flex h-28 w-full items-end justify-center border-b-2 border-ink/20 sm:h-32">
-                <div
-                  className="w-3/5 origin-bottom bg-[#7A1F3D] transition-transform duration-700 ease-out"
-                  style={{
-                    height: ph.h,
-                    transform: inView ? "scaleY(1)" : "scaleY(0)",
-                    transitionDelay: `${300 + i * 350}ms`,
-                    opacity: 0.55 + i * 0.15,
-                  }}
-                />
-                {/* 担当するプロ(順番に光る) */}
-                <span
-                  aria-hidden="true"
-                  className="hv-cycle absolute inset-x-1 -bottom-[2px] top-0 ring-2 ring-[#7A1F3D]"
-                  style={{ animationDelay: `${i * 1.6}s` }}
-                />
-              </div>
-              <p className="mt-2 text-[9px] font-bold text-[#7A1F3D] sm:text-[10px]">
-                {ph.p}
-              </p>
-              <p className="text-center text-[10px] font-black leading-tight text-ink sm:text-[11px]">
-                {ph.t}
-              </p>
-              <Pop show={inView} delay={600 + i * 350} className="mt-2 w-full">
-                <span className="flex w-full flex-col items-center gap-1 bg-white px-1 py-2 text-center text-[9px] font-black leading-tight text-ink ring-1 ring-[#EEDFE3] sm:text-[10px]">
-                  <PersonIcon className="h-4 w-4 text-[#7A1F3D]" />
-                  {ph.pro}
-                </span>
-              </Pop>
-            </div>
-          ))}
-        </div>
+        {/* 1 顧問が参画 */}
         <Pop
           show={inView}
-          delay={1700}
-          className="mt-4 flex flex-wrap justify-center gap-2"
+          delay={0}
+          className="flex flex-col items-center bg-white px-3 py-4 text-center ring-1 ring-[#EEDFE3]"
         >
-          <Chip tone="wine">必要な稼働量だけ</Chip>
-          <Chip>フェーズに合わせてプロを入れ替え</Chip>
-          <Chip>合わない場合の交代は無料</Chip>
+          <StepNo n={steps[0].n} />
+          <Face src="/photos/ciso/advisor.webp" className="mt-2 h-16 w-16" />
+          <p className="mt-2 text-[12px] font-black leading-snug text-ink [word-break:auto-phrase]">
+            {steps[0].t}
+          </p>
+        </Pop>
+        <div className="flex justify-center rotate-90 sm:rotate-0">
+          <Arrow show={inView} delay={600} />
+        </div>
+
+        {/* 2 優先順位 */}
+        <Pop
+          show={inView}
+          delay={800}
+          className="flex flex-col items-center bg-white px-3 py-4 text-center ring-1 ring-[#EEDFE3]"
+        >
+          <StepNo n={steps[1].n} />
+          <ol className="mt-2 w-full space-y-1.5">
+            {[90, 65, 40].map((w, i) => (
+              <li key={w} className="flex items-center gap-1.5">
+                <span className="grid h-4 w-4 shrink-0 place-items-center bg-[#7A1F3D] text-[9px] font-black text-white">
+                  {i + 1}
+                </span>
+                <span className="h-2 flex-1 bg-[#F2E6EA]">
+                  <span
+                    className={`block h-full bg-[#7A1F3D] transition-[width] duration-700 ease-out ${inView ? "" : "!w-0"}`}
+                    style={{
+                      width: `${w}%`,
+                      transitionDelay: `${1100 + i * 200}ms`,
+                    }}
+                  />
+                </span>
+              </li>
+            ))}
+          </ol>
+          <p className="mt-2.5 text-[12px] font-black leading-snug text-ink [word-break:auto-phrase]">
+            現状とリスクを整理し、
+            <br className="hidden sm:block" />
+            優先順位を決める
+          </p>
+        </Pop>
+        <div className="flex justify-center rotate-90 sm:rotate-0">
+          <Arrow show={inView} delay={1800} />
+        </div>
+
+        {/* 3 プロが加わる */}
+        <Pop
+          show={inView}
+          delay={2000}
+          className="flex flex-col items-center bg-white px-3 py-4 text-center ring-1 ring-[#EEDFE3]"
+        >
+          <StepNo n={steps[2].n} />
+          <div className="mt-2 flex items-center">
+            <Face src="/photos/ciso/advisor.webp" className="h-12 w-12" />
+            {["/photos/ciso/pro-1.webp", "/photos/ciso/pro-2.webp"].map(
+              (src, i) => (
+                <span
+                  key={src}
+                  className={`-ml-3 transition-all duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] ${inView ? "translate-x-0 opacity-100" : "translate-x-4 opacity-0"}`}
+                  style={{ transitionDelay: `${2400 + i * 250}ms` }}
+                >
+                  <Face src={src} className="h-12 w-12" />
+                </span>
+              ),
+            )}
+          </div>
+          <p className="mt-2 text-[12px] font-black leading-snug text-ink [word-break:auto-phrase]">
+            {steps[2].t}
+          </p>
         </Pop>
       </div>
     </Frame>
   );
 }
 
-/* ========================================================= 03 情報セキュリティ特化。窓口と契約はひとつ */
-
-export function ReasonOneWindow() {
-  const { ref, inView } = useInView<HTMLDivElement>();
-  const pros = ["社外CISO", "認証・SCSの専門家", "診断エンジニア"];
+function StepNo({ n }: { n: string }) {
   return (
-    <Frame inner={ref}>
-      <div
-        role="img"
-        aria-label="複数の情報セキュリティのプロ人材が関わっても、窓口と契約はセキュプロひとつで、監修者が品質を確認する図"
-        className="grid grid-cols-1 items-center gap-2 sm:grid-cols-[1fr_auto_1fr_auto_0.8fr]"
-      >
-        {/* プロ人材 */}
-        <div className="grid grid-cols-3 gap-1.5 sm:block sm:space-y-2">
-          {pros.map((p, i) => (
-            <Pop key={p} show={inView} delay={i * 180}>
-              <span className="flex items-center gap-1.5 bg-white px-2 py-2 text-[9px] font-black leading-tight text-ink ring-1 ring-[#EEDFE3] sm:text-[11px]">
-                <PersonIcon className="h-4 w-4 shrink-0 text-[#7A1F3D]" />
-                {p}
-              </span>
-            </Pop>
-          ))}
-        </div>
-        <div className="flex justify-center rotate-90 sm:rotate-0">
-          <Arrow show={inView} delay={600} />
-        </div>
-
-        {/* セキュプロ */}
-        <Pop
-          show={inView}
-          delay={800}
-          className="relative mx-auto w-full max-w-[14rem] sm:max-w-none"
-        >
-          <div className="bg-[#7A1F3D] px-2 py-4 text-center text-white">
-            <p className="whitespace-nowrap text-base font-black tracking-[0.06em]">
-              セキュプロ
-            </p>
-            <p className="mt-1.5 border-t border-white/30 pt-1.5 text-[9px] font-bold leading-snug sm:text-[11px]">
-              窓口・契約は
-              <br />
-              ひとつ
-            </p>
-          </div>
-          {/* 監修者の確認 */}
-          <span className="absolute -right-2 -top-3 flex items-center gap-1 bg-white px-1.5 py-1 text-[8px] font-black text-[#7A1F3D] ring-1 ring-[#7A1F3D] sm:text-[9px]">
-            <span className="grid h-3.5 w-3.5 place-items-center rounded-full bg-[#1E8A57] text-[8px] text-white">
-              ✓
-            </span>
-            監修者が品質確認
-          </span>
-        </Pop>
-        <div className="flex justify-center rotate-90 sm:rotate-0">
-          <Arrow show={inView} delay={1100} />
-        </div>
-
-        {/* 御社 */}
-        <Pop
-          show={inView}
-          delay={1300}
-          className="flex flex-col items-center text-center"
-        >
-          <span className="grid h-12 w-12 place-items-center bg-white ring-1 ring-[#EEDFE3] sm:h-14 sm:w-14">
-            <svg
-              viewBox="0 0 24 24"
-              className="h-7 w-7 text-ink/70"
-              aria-hidden="true"
-            >
-              <path
-                d="M4 21V5h10v16M14 9h6v12M7 8h2M7 12h2M7 16h2M17 13h1M17 17h1"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.6"
-              />
-            </svg>
-          </span>
-          <p className="mt-1.5 text-[10px] font-black text-ink sm:text-[11px]">
-            御社
-          </p>
-          <p className="text-[8px] font-bold leading-tight text-ink/55 sm:text-[9px]">
-            管理の負担を
-            <br />
-            増やさない
-          </p>
-        </Pop>
-      </div>
-    </Frame>
+    <span className="bg-[#7A1F3D] px-2 py-0.5 text-[10px] font-black tracking-[0.14em] text-white">
+      STEP {n}
+    </span>
   );
 }

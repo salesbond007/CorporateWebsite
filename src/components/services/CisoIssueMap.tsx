@@ -374,33 +374,44 @@ export function CisoIssueMap() {
         </Reveal>
       </Container>
 
-      <div className="relative z-10 mt-8 -mb-24 md:mt-10">
+      <div className="relative z-10 mt-10 -mb-36 md:mt-12">
         <div className="mx-auto max-w-[78rem] px-4 sm:px-6">
-          <ol className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 pt-5 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-4 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
+          <ol className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 pt-10 [scrollbar-width:none] sm:-mx-6 sm:px-6 lg:mx-0 lg:grid lg:grid-cols-5 lg:gap-4 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden">
             {issues.map((it, i) => {
               const on = i === active;
               return (
                 <li
                   key={i}
-                  className="w-[11.5rem] shrink-0 snap-center lg:w-auto"
+                  className="w-[12.5rem] shrink-0 snap-center lg:w-auto"
                   onMouseEnter={() => setHold(i)}
                   onMouseLeave={() => setHold(null)}
                 >
                   <div
-                    className={`relative flex h-full flex-col items-center border bg-white px-3 pb-4 pt-8 text-center transition-all duration-500 ${
+                    className={`relative flex h-full min-h-[20rem] flex-col items-center border bg-white px-3 pb-12 pt-12 text-center transition-all duration-500 lg:min-h-[21rem] ${
                       on
                         ? "-translate-y-1 border-brand-500 shadow-[0_18px_36px_-20px_rgba(122,31,61,0.75)]"
                         : "border-[#E6DFE1] shadow-[0_10px_24px_-20px_rgba(31,26,28,0.6)]"
                     }`}
                   >
+                    {/* 番号の吹き出し */}
                     <span
-                      className={`absolute -top-5 left-1/2 grid h-12 w-12 -translate-x-1/2 place-items-center rounded-full text-white transition-colors duration-500 ${
-                        on ? "bg-brand-500" : "bg-[#3A2A30]"
-                      }`}
+                      className={`absolute -top-8 left-1/2 -translate-x-1/2 transition-transform duration-500 ${on ? "scale-110" : ""}`}
                     >
-                      <span className="text-center leading-none">
-                        <span className="block text-[9px] font-bold">課題</span>
-                        <span className="block text-lg font-black">{i + 1}</span>
+                      <span
+                        className={`relative grid h-[4.25rem] w-[4.25rem] place-items-center rounded-full border-[3px] border-white bg-brand-500 text-white shadow-[0_6px_16px_-8px_rgba(122,31,61,0.9)] ${on ? "ring-4 ring-brand-500/25" : ""}`}
+                      >
+                        <span className="text-center leading-none">
+                          <span className="block text-[11px] font-black tracking-wider">
+                            課題
+                          </span>
+                          <span className="mt-0.5 block text-[1.75rem] font-black">
+                            {i + 1}
+                          </span>
+                        </span>
+                        <span
+                          aria-hidden="true"
+                          className="absolute -bottom-[9px] left-1/2 h-0 w-0 -translate-x-1/2 border-x-[8px] border-t-[9px] border-x-transparent border-t-brand-500"
+                        />
                       </span>
                     </span>
                     <Image
@@ -408,11 +419,25 @@ export function CisoIssueMap() {
                       alt=""
                       width={200}
                       height={200}
-                      className="h-24 w-auto object-contain md:h-28"
+                      className="h-32 w-auto object-contain md:h-36"
                     />
-                    <p className="mt-3 text-[13.5px] font-bold leading-[1.65] text-ink [word-break:auto-phrase] md:text-[14.5px] [&_b]:font-black [&_b]:text-brand-500">
-                      {it.text}
+                    <p className="mt-4 flex flex-1 items-center justify-center text-[13.5px] font-bold leading-[1.65] text-ink [word-break:auto-phrase] md:text-[14.5px] [&_b]:font-black [&_b]:text-brand-500">
+                      <span>{it.text}</span>
                     </p>
+                    <svg
+                      viewBox="0 0 24 22"
+                      aria-hidden="true"
+                      className={`absolute bottom-3 left-1/2 h-5 w-7 -translate-x-1/2 transition-colors duration-500 ${on ? "text-brand-500" : "text-[#D9CDD1]"}`}
+                    >
+                      <path
+                        d="M4 3l8 6 8-6M4 12l8 6 8-6"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </div>
                 </li>
               );
@@ -435,7 +460,7 @@ export function CisoIssueMap() {
           className="absolute inset-0 -z-10 bg-[#24070F]/[0.9]"
         />
 
-        <div className="mx-auto max-w-[78rem] px-4 pb-16 pt-28 sm:px-6 md:pb-20 lg:pb-24">
+        <div className="mx-auto max-w-[78rem] px-4 pb-16 pt-40 sm:px-6 md:pb-20 lg:pb-24">
           {/* 課題 → 領域(矢印と領域名) */}
           <ol
             className="hidden grid-cols-5 gap-4 lg:grid"
