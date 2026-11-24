@@ -299,13 +299,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div className="min-w-0 text-center lg:text-left">
             <h1>
-              <span className="block text-[clamp(0.95rem,4.4vw,1.6rem)] font-bold text-ink/85 lg:text-[clamp(1.05rem,2vw,1.6rem)]">
-                <span className="underline decoration-brand-500 decoration-[3px] underline-offset-[7px]">
-                  専任者がいない
-                </span>
-                企業のための
-              </span>
-              <span className="mt-3 block text-[clamp(1.5rem,7vw,2.6rem)] font-black leading-[1.35] tracking-[0.02em] lg:text-[clamp(1.7rem,2.4vw,2.3rem)]">
+              <span className="block text-[clamp(1.6rem,7.4vw,2.8rem)] font-black leading-[1.4] tracking-[0.02em] lg:text-[clamp(1.7rem,2.3vw,2.3rem)]">
                 情報セキュリティの
                 <br className="sm:hidden" />
                 <span className="text-brand-500">プロ人材</span>を、
