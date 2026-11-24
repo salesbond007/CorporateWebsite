@@ -14,6 +14,7 @@ import {
 } from "@/components/services/CisoReasonVisuals";
 import { CisoIssueMap } from "@/components/services/CisoIssueMap";
 import { CisoHeroWorries } from "@/components/services/CisoHeroWorries";
+import { CisoHeroBg } from "@/components/services/CisoHeroBg";
 import { SecuproMark } from "@/components/services/SecuproMark";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -256,19 +257,12 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         id="top"
         className="relative isolate overflow-hidden border-b border-[#E9D3DA] bg-[linear-gradient(180deg,#FBF2F4_0%,#F1DCE3_100%)]"
       >
-        {/* 背景: ぼかしたオフィスと人の写真 + 淡いワインレッドの重ね */}
-        <Image
-          src="/photos/ciso/hero-office-blur.webp"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          quality={60}
-          className="-z-20 object-cover"
-        />
+        {/* 背景: 立体のイラスト(オリジナル) */}
+        <CisoHeroBg />
+        {/* スマホでは文字を読みやすくするため、白を薄く重ねる */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 -z-10 bg-[linear-gradient(100deg,rgba(251,242,244,0.9)_0%,rgba(251,242,244,0.78)_42%,rgba(241,220,227,0.5)_100%)]"
+          className="absolute inset-0 -z-10 bg-white/55 md:hidden"
         />
         <Container className="grid items-center gap-6 pb-14 pt-6 md:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] md:gap-8 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr] lg:gap-12">
           <div className="min-w-0 text-center md:text-left">
@@ -316,7 +310,9 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               <span className="text-brand-500">プロ人材</span>サービスです
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80 [word-break:auto-phrase]">
-              まずは顧問ひとりが現状を整理し、対策が広がれば、認証や診断のプロが加わります。体制は課題やフェーズに合わせて組み替え、窓口と契約はセキュプロひとつです。
+              情報セキュリティ対策は、取引先の要請や生成AIの普及で、中小企業にも欠かせないものになりました。一方で、専任者を雇うのは簡単ではありません。
+              <br />
+              課題やフェーズに合わせて必要な領域のプロ人材が対応するので、専任者を雇わずに対策を前に進められます。
             </p>
           </Reveal>
 
