@@ -153,41 +153,24 @@ export const serviceCategories: ServiceCategory[] = [
         title: "情報セキュリティ対策事業",
         subtitle: "Security",
         summary:
-          "AIの活用に伴う情報漏えいや不正利用などのリスクに備え、情報セキュリティ顧問やホームページの情報セキュリティ対策で、企業の安全なAI活用を支援するソリューションです。",
+          "情報漏えいやサイバー攻撃などのリスクに備え、情報セキュリティのプロ人材とホームページの対策で、企業の情報と信頼を守るソリューションです。",
         features: [],
         image: "/services/cards/ai-solutions.jpg",
         children: [
           {
             slug: "ciso",
             number: "01-1",
-            title: "セキュプロ AI情報セキュリティ顧問",
+            title: "セキュプロ",
             href: "/services/ciso",
-            subtitle: "Information Security Advisor",
+            subtitle: "情報セキュリティのプロ人材活用サービス",
             summary:
-              "AI時代に特化した、中小企業向けの情報セキュリティ顧問です。大企業・上場企業との取引に欠かせない情報セキュリティの体制を、専門家がアドバイザーや社外CISOとして一緒に整えます。",
-            marks: [
-              "AI時代に特化した",
-              "中小企業向け",
-              "大企業・上場企業との取引",
-              "情報セキュリティの体制",
-            ],
-            features: [],
-            image: "/services/cards/ai-solutions.jpg",
-          },
-          {
-            slug: "security-training",
-            number: "01-2",
-            title: "セキュプロ AI情報セキュリティ研修",
-            href: "/services/security-training",
-            subtitle: "Security Training",
-            summary:
-              "AI時代の全社員情報セキュリティ研修と社内CISOの育成を、3カ月でひとつに。外に任せきりにしない「守り」を、自社の中につくります。",
+              "専任者を雇わずに、情報セキュリティのプロ人材を活用できるサービスです。課題やフェーズに合わせて、必要なプロがひとりでもチームでも対応します。",
             features: [],
             image: "/services/cards/ai-solutions.jpg",
           },
           {
             slug: "web-security",
-            number: "01-3",
+            number: "01-2",
             title: "ホームページの情報セキュリティ対策",
             href: "/services/web-security",
             subtitle: "Website Security",
