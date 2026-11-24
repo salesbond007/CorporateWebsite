@@ -126,7 +126,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             { name: "ホーム", url: localePath("/", locale) },
             { name: "サービス一覧", url: localePath("/services", locale) },
             {
-              name: "Bond AI 情報セキュリティ顧問（社外CISO）",
+              name: "セキュプロ 情報セキュリティ顧問（社外CISO）",
               url: localePath(PATH, locale),
             },
           ]),
@@ -134,7 +134,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             "@context": "https://schema.org",
             "@type": "Service",
             "@id": `${url}#service`,
-            name: "Bond AI 情報セキュリティ顧問（大手企業と取引したい中小企業のための社外CISO）",
+            name: "セキュプロ 情報セキュリティ顧問（大手企業と取引したい中小企業のための社外CISO）",
             alternateName: [
               "情報セキュリティ顧問",
               "セキュリティ顧問",
@@ -239,7 +239,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </span>
             <span className="leading-tight">
               <span className="block whitespace-nowrap text-base font-black text-ink sm:text-lg">
-                Bond AI
+                セキュプロ
               </span>
               <span className="hidden text-[10px] font-bold text-ink/55 sm:block lg:hidden xl:block">
                 大手企業と取引する会社の情報セキュリティ顧問
@@ -652,7 +652,9 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             >
               <Icon name="shield" className="h-4 w-4" />
             </span>
-            <p className="text-base font-black">Bond AI 情報セキュリティ顧問</p>
+            <p className="text-base font-black">
+              セキュプロ 情報セキュリティ顧問
+            </p>
             <p className="text-sm text-white/60">／ 運営：{site.legalName}</p>
           </div>
           <div className="mt-6 border-t border-white/15 pt-6 text-[11px] leading-[1.9] text-white/55">

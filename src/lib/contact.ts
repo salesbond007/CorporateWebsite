@@ -233,7 +233,7 @@ export const serviceLeadSchema = z.object({
 
 export type ServiceLeadInput = z.infer<typeof serviceLeadSchema>;
 
-/** Bond AI 情報セキュリティ(CISO・情報セキュリティ顧問)LP の従業員数の選択肢 */
+/** セキュプロ 情報セキュリティ(CISO・情報セキュリティ顧問)LP の従業員数の選択肢 */
 export const aiCheckEmployeeOptions = [
   { value: "under-30", label: "〜30名" },
   { value: "31-100", label: "31〜100名" },
@@ -243,7 +243,7 @@ export const aiCheckEmployeeOptions = [
 ] as const;
 
 /**
- * Bond AI 情報セキュリティ LP の「無料のAI利用チェック」申し込みフォーム。
+ * セキュプロ 情報セキュリティ LP の「無料のAI利用チェック」申し込みフォーム。
  * 会社名 / お名前 / メールアドレス / 従業員数 / ご相談内容(任意)
  */
 export const aiCheckSchema = z.object({

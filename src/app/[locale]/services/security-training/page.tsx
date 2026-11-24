@@ -508,7 +508,7 @@ export default function SecurityTrainingPage({
             </span>
             <span className="leading-tight">
               <span className="block whitespace-nowrap text-base font-black text-ink sm:text-lg">
-                Bond AI
+                セキュプロ
               </span>
               <span className="block text-[10px] font-bold text-ink/55">
                 AI時代の情報セキュリティ研修
@@ -727,7 +727,7 @@ export default function SecurityTrainingPage({
           <Reveal variant="up" className="mt-10 hidden md:block">
             <table className="w-full border-collapse text-left">
               <caption className="sr-only">
-                一般的な情報セキュリティ研修と、Bond AIの研修の比較
+                一般的な情報セキュリティ研修と、セキュプロの研修の比較
               </caption>
               <thead>
                 <tr>
@@ -742,7 +742,7 @@ export default function SecurityTrainingPage({
                     scope="col"
                     className="w-[44%] bg-brand-500 px-6 py-4 text-center text-lg font-black text-white"
                   >
-                    Bond AIの研修
+                    セキュプロの研修
                   </th>
                 </tr>
               </thead>
@@ -783,7 +783,7 @@ export default function SecurityTrainingPage({
                   </p>
                   <p className="bg-[#F5E9ED] px-4 py-3 text-[13px] font-black leading-relaxed text-[#5A142C]">
                     <span className="block text-[10px] font-bold text-brand-500">
-                      Bond AIの研修
+                      セキュプロの研修
                     </span>
                     {c.ours}
                   </p>
@@ -1194,7 +1194,7 @@ export default function SecurityTrainingPage({
               <Icon name="shield" className="h-4 w-4" />
             </span>
             <p className="text-base font-black">
-              Bond AI（セールスボンド株式会社）
+              セキュプロ（セールスボンド株式会社）
             </p>
           </div>
           <address className="mt-4 text-sm not-italic leading-[1.9] text-white/70">

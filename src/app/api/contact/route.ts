@@ -217,14 +217,14 @@ const enumLabels: Record<string, Record<string, string>> = {
   },
 };
 
-/** Bond AI 情報セキュリティ LP の名前(研修LPからの申し込みは「研修」を付ける) */
+/** セキュプロ 情報セキュリティ LP の名前(研修LPからの申し込みは「研修」を付ける) */
 function aiBrand(data: Record<string, unknown>): string {
   return data.product === "training"
-    ? "Bond AI 情報セキュリティ研修"
-    : "Bond AI 情報セキュリティ顧問";
+    ? "セキュプロ 情報セキュリティ研修"
+    : "セキュプロ 情報セキュリティ顧問";
 }
 
-/** Bond AI 情報セキュリティ LP のフォームの申し込み種別(件名用) */
+/** セキュプロ 情報セキュリティ LP のフォームの申し込み種別(件名用) */
 function aiCheckLabel(data: Record<string, unknown>): string {
   return data.request === "check" ? "無料相談のお申し込み" : "資料請求";
 }
