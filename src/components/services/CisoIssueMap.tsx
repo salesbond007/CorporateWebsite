@@ -1,5 +1,6 @@
 "use client";
 
+import { SecuproMark } from "./SecuproMark";
 import Image from "next/image";
 import { useEffect, useState, type ReactNode } from "react";
 import { Reveal } from "@/components/ui/Reveal";
@@ -233,24 +234,10 @@ function Chevrons({ on }: { on: boolean }) {
 function Logo({ small }: { small?: boolean }) {
   return (
     <div className="flex flex-col items-center text-white">
-      <svg
-        viewBox="0 0 40 44"
-        className={small ? "h-9 w-9" : "h-[22%] w-[22%] min-h-10 min-w-10"}
-        aria-hidden="true"
-      >
-        <path
-          d="M20 2l16 6v12c0 11-7 18.5-16 22C11 38.5 4 31 4 20V8z"
-          fill="#fff"
-        />
-        <path
-          d="M13 21.5l5 5 9.5-10"
-          fill="none"
-          stroke="#7A1F3D"
-          strokeWidth="3.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      <SecuproMark
+        ring
+        className={small ? "h-11 w-11" : "h-[30%] w-[30%] min-h-12 min-w-12"}
+      />
       <p
         className={`mt-2 font-black tracking-[0.12em] ${small ? "text-lg" : "text-[clamp(1.1rem,2.2vw,1.6rem)]"}`}
       >

@@ -1,5 +1,6 @@
 "use client";
 
+import { SecuproMark } from "./SecuproMark";
 import {
   useEffect,
   useRef,
@@ -262,7 +263,7 @@ export function ReasonProsOnly() {
     <Frame inner={ref}>
       <div
         role="img"
-        aria-label="責任者・認証・診断・研修の情報セキュリティのプロだけをそろえ、監修者が品質を確認し、窓口と契約はセキュプロひとつで御社とつながる図"
+        aria-label="責任者・認証・診断・研修の情報セキュリティのプロだけをそろえ、窓口と契約はセキュプロひとつで御社とつながる図"
       >
         <Pop show={inView} delay={0}>
           <p className="text-center text-[12px] font-black text-[#7A1F3D] sm:text-[13px]">
@@ -287,7 +288,7 @@ export function ReasonProsOnly() {
                 <span className="mt-1.5 text-[11px] font-black text-ink sm:text-[13px]">
                   {d.label}
                 </span>
-                {/* 監修者の確認(順にチェックが付く) */}
+                {/* 情報セキュリティのプロ(順にチェックが付く) */}
                 <span
                   className={`absolute -right-1.5 -top-1.5 transition-all duration-500 ease-[cubic-bezier(.34,1.56,.64,1)] ${inView ? "scale-100 opacity-100" : "scale-0 opacity-0"}`}
                   style={{ transitionDelay: `${1300 + i * 220}ms` }}
@@ -299,20 +300,7 @@ export function ReasonProsOnly() {
           ))}
         </ul>
 
-        <Pop
-          show={inView}
-          delay={900}
-          className="mt-4 flex items-center justify-center gap-3"
-        >
-          <Face src="/photos/ciso/okazaki.webp" className="h-11 w-11" />
-          <span className="text-left text-[12px] font-black leading-snug text-ink sm:text-[13px]">
-            監修者が
-            <br />
-            支援の品質を確認
-          </span>
-        </Pop>
-
-        <div className="mt-3 flex justify-center">
+        <div className="mt-4 flex justify-center">
           <span className="rotate-90">
             <Arrow show={inView} delay={2100} />
           </span>
@@ -324,12 +312,7 @@ export function ReasonProsOnly() {
           className="mt-3 flex items-stretch justify-center"
         >
           <span className="flex items-center gap-2 bg-[#7A1F3D] px-4 py-2.5 text-[12px] font-black text-white sm:text-sm">
-            <svg viewBox="0 0 40 44" className="h-4 w-4" aria-hidden="true">
-              <path
-                d="M20 2l16 6v12c0 11-7 18.5-16 22C11 38.5 4 31 4 20V8z"
-                fill="#fff"
-              />
-            </svg>
+            <SecuproMark className="h-6 w-6" />
             窓口・契約はセキュプロひとつ
           </span>
           <span className="flex items-center gap-1.5 bg-white px-3 text-[12px] font-black text-ink ring-1 ring-[#EEDFE3] sm:text-sm">
