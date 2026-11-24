@@ -209,12 +209,6 @@ export function CisoServiceDiagram() {
 
         <figcaption className="mt-10 space-y-1.5 text-center text-[13px] leading-relaxed text-white/75 md:text-sm">
           <p>
-            ※{" "}
-            <span className="underline decoration-[#E07A8F] decoration-2 underline-offset-[6px]">
-              プランにより対応範囲が異なります。
-            </span>
-          </p>
-          <p>
             <span aria-hidden="true">↻ </span>
             毎月の定例で見直して経営へ報告し、年1回もう一度リスクアセスメントを行います。
           </p>

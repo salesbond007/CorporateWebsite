@@ -81,7 +81,7 @@ function Frame({
   return (
     <div
       ref={inner}
-      className="relative overflow-hidden rounded-xl bg-[linear-gradient(160deg,#FBF3F5,#F3E3E8)] p-5 sm:p-7"
+      className="relative overflow-hidden bg-[linear-gradient(160deg,#FBF3F5,#F3E3E8)] p-4 sm:p-7"
     >
       {children}
     </div>
@@ -97,82 +97,6 @@ const stroke = {
   strokeLinecap: "round" as const,
   strokeLinejoin: "round" as const,
 };
-
-function Building({ big }: { big?: boolean }) {
-  return big ? (
-    <svg viewBox="0 0 80 72" className="h-full w-full" aria-hidden="true">
-      <rect
-        x="4"
-        y="22"
-        width="18"
-        height="46"
-        fill="#F1DDE3"
-        stroke={W}
-        strokeWidth="2.5"
-      />
-      <rect
-        x="58"
-        y="22"
-        width="18"
-        height="46"
-        fill="#F1DDE3"
-        stroke={W}
-        strokeWidth="2.5"
-      />
-      <rect
-        x="20"
-        y="8"
-        width="40"
-        height="60"
-        fill="#fff"
-        stroke={W}
-        strokeWidth="2.5"
-      />
-      <rect x="26" y="3" width="28" height="6" fill={W} />
-      {[0, 1, 2, 3].map((r) =>
-        [0, 1, 2].map((c) => (
-          <rect
-            key={`${r}${c}`}
-            x={26 + c * 10}
-            y={15 + r * 10}
-            width="6"
-            height="5"
-            fill="#D7A3B3"
-          />
-        )),
-      )}
-      <rect x="35" y="55" width="10" height="13" fill={W} />
-    </svg>
-  ) : (
-    <svg viewBox="0 0 60 60" className="h-full w-full" aria-hidden="true">
-      <rect
-        x="12"
-        y="10"
-        width="36"
-        height="46"
-        fill="#fff"
-        stroke={W}
-        strokeWidth="2.5"
-      />
-      {[0, 1].map((r) =>
-        [0, 1, 2].map((c) => (
-          <rect
-            key={`${r}${c}`}
-            x={17 + c * 10}
-            y={16 + r * 9}
-            width="6"
-            height="5"
-            fill="#D7A3B3"
-          />
-        )),
-      )}
-      <rect x="20" y="36" width="20" height="5" fill={W} />
-      <rect x="24" y="41" width="12" height="15" fill="#E9C9D3" />
-      <circle cx="7" cy="44" r="5" fill={W} />
-      <rect x="6" y="46" width="2" height="10" fill={W} />
-    </svg>
-  );
-}
 
 function Arrow({ show, delay }: { show: boolean; delay: number }) {
   return (
@@ -202,436 +126,324 @@ function Arrow({ show, delay }: { show: boolean; delay: number }) {
   );
 }
 
-/* ========================================================= 01 取引先に出せるものがそろう */
+/* ---------------- 共通 ---------------- */
 
-export function ReasonDocs() {
+function Chip({
+  children,
+  tone = "light",
+  className = "",
+}: {
+  children: ReactNode;
+  tone?: "light" | "wine" | "gray";
+  className?: string;
+}) {
+  return (
+    <span
+      className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 text-[10px] font-black leading-tight sm:text-[11px] ${
+        tone === "wine"
+          ? "bg-[#7A1F3D] text-white"
+          : tone === "gray"
+            ? "bg-[#ECE7E9] text-ink/55"
+            : "bg-white text-ink ring-1 ring-[#EEDFE3]"
+      } ${className}`}
+    >
+      {children}
+    </span>
+  );
+}
+
+function PersonIcon({ className = "h-4 w-4" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
+      <circle cx="12" cy="8" r="3.6" fill="currentColor" />
+      <path
+        d="M4.5 20.5c.9-4 3.8-6.3 7.5-6.3s6.6 2.3 7.5 6.3z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
+/* ========================================================= 01 着手すべき対策の特定から */
+
+export function ReasonPriority() {
   const { ref, inView } = useInView<HTMLDivElement>();
-  const docs = [
-    {
-      t: "チェック\nシート",
-      icon: (
-        <g {...stroke}>
-          <rect x="4" y="4" width="16" height="16" rx="2" />
-          <path d="M8 12l3 3 6-6" />
-        </g>
-      ),
-    },
-    {
-      t: "体制の\nご案内",
-      icon: (
-        <g {...stroke}>
-          <path d="M6 3h8l4 4v14H6z" />
-          <path d="M14 3v4h4M9 12h6M9 16h6" />
-        </g>
-      ),
-    },
-    {
-      t: "体制図",
-      icon: (
-        <g {...stroke}>
-          <circle cx="12" cy="5" r="2.5" />
-          <circle cx="5" cy="19" r="2.5" />
-          <circle cx="19" cy="19" r="2.5" />
-          <path d="M12 7.5v5M5 16.5V13h14v3.5" />
-        </g>
-      ),
-    },
+  const mess = [
+    { t: "AIの利用ルール", x: "4%", y: "6%" },
+    { t: "取引先のチェックシート", x: "34%", y: "22%" },
+    { t: "パスワード管理", x: "2%", y: "40%" },
+    { t: "ホームページの弱点", x: "30%", y: "58%" },
+    { t: "事故時の手順", x: "6%", y: "76%" },
+  ];
+  const ranked = [
+    { t: "取引先のチェックシート", lv: "高", w: "92%" },
+    { t: "AIの利用ルール", lv: "高", w: "80%" },
+    { t: "事故時の手順", lv: "中", w: "58%" },
   ];
   return (
     <Frame inner={ref}>
       <div
         role="img"
-        aria-label="自社のチェックシート・体制のご案内・体制図を整え、大手企業・上場企業との取引機会につなげる図"
+        aria-label="何から取り組むべきか決まっていない状態から、現状とリスクを整理して優先順位をつけ、課題に適したプロ人材を提案する図"
       >
-        <div className="flex items-end justify-between gap-1 sm:gap-2">
-          {/* 自社 */}
-          <Pop
-            show={inView}
-            delay={0}
-            className="flex w-[14%] flex-col items-center sm:w-[18%]"
-          >
-            <div className="aspect-square w-full">
-              <Building />
-            </div>
-            <p className="mt-2 whitespace-nowrap rounded-full bg-white px-2 py-1 text-[10px] font-black text-ink sm:text-xs">
-              自社
+        <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-3">
+          {/* 左: 決まっていない */}
+          <div>
+            <p className="mb-2 text-center text-[10px] font-black text-ink/50 sm:text-[11px]">
+              何から始める？
             </p>
-          </Pop>
-
-          <Arrow show={inView} delay={300} />
-
-          {/* 整える資料 */}
-          <div className="relative flex w-[52%] flex-col items-center sm:w-[46%]">
-            <Pop
-              show={inView}
-              delay={1300}
-              className="absolute -top-7 left-1/2 z-10 -translate-x-1/2"
-            >
-              <svg viewBox="0 0 24 28" className="h-8 w-7" aria-hidden="true">
-                <path
-                  d="M12 1l10 4v8c0 7-4.5 11.5-10 14C6.5 24.5 2 20 2 13V5z"
-                  fill={W}
-                />
-                <path
-                  d="M7.5 13.5l3 3 6-6"
-                  fill="none"
-                  stroke="#fff"
-                  strokeWidth="2.6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Pop>
-            <div className="grid w-full grid-cols-3 gap-1 rounded-xl bg-white/70 p-1.5 sm:gap-2 sm:p-2.5">
-              {docs.map((d, i) => (
-                <Pop
-                  key={d.t}
-                  show={inView}
-                  delay={500 + i * 220}
-                  className="relative flex flex-col items-center rounded-lg bg-white px-0.5 pb-2 pt-3 text-center ring-1 ring-[#EEDFE3]"
+            <div className="relative h-40 bg-white/60 ring-1 ring-[#EEDFE3] sm:h-44">
+              {mess.map((m, i) => (
+                <span
+                  key={m.t}
+                  className="sv-float absolute"
+                  style={{ left: m.x, top: m.y, animationDelay: `${i * 0.6}s` }}
                 >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="h-6 w-6 text-[#7A1F3D] sm:h-7 sm:w-7"
-                    aria-hidden="true"
-                  >
-                    {d.icon}
-                  </svg>
-                  <p className="mt-1.5 whitespace-pre text-[8.5px] font-black leading-tight text-ink sm:text-[11px]">
-                    {d.t}
-                  </p>
-                  <span
-                    aria-hidden="true"
-                    className={`absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-[#1E8A57] text-[9px] text-white transition-transform duration-500 ${inView ? "scale-100" : "scale-0"}`}
-                    style={{ transitionDelay: `${900 + i * 220}ms` }}
-                  >
-                    ✓
-                  </span>
-                </Pop>
+                  <Chip tone="gray">{m.t}</Chip>
+                </span>
               ))}
             </div>
-            <p className="mt-2 whitespace-nowrap rounded-full bg-white px-2 py-1 text-center text-[8.5px] font-black text-ink sm:text-[11px]">
-              資料・体制を整備
-            </p>
           </div>
 
-          <Arrow show={inView} delay={1500} />
-
-          {/* 大手企業 */}
+          {/* 中: 整理 */}
           <Pop
             show={inView}
-            delay={1700}
-            className="flex w-[20%] flex-col items-center sm:w-[22%]"
+            delay={300}
+            className="flex flex-col items-center gap-1.5"
           >
-            <div className="relative aspect-square w-full">
-              <Building big />
-              <span
+            <span className="grid h-10 w-10 place-items-center bg-[#7A1F3D] text-white sm:h-11 sm:w-11">
+              <svg
+                viewBox="0 0 24 24"
+                className="h-5 w-5"
+                fill="none"
                 aria-hidden="true"
-                className={`absolute inset-0 rounded-full ${inView ? "rv-glow" : ""}`}
-              />
-            </div>
-            <p className="mt-2 rounded-full bg-[#7A1F3D] px-1.5 py-1 text-center text-[8px] font-black leading-tight text-white sm:whitespace-nowrap sm:px-2 sm:text-[11px]">
-              大手企業・上場企業
-            </p>
+              >
+                <circle
+                  cx="10.5"
+                  cy="10.5"
+                  r="6"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M15 15l5 5"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </span>
+            <span className="text-center text-[9px] font-black leading-tight text-[#7A1F3D] sm:text-[10px]">
+              現状と
+              <br />
+              リスクを整理
+            </span>
+            <Arrow show={inView} delay={500} />
           </Pop>
+
+          {/* 右: 優先順位 */}
+          <div>
+            <p className="mb-2 text-center text-[10px] font-black text-[#7A1F3D] sm:text-[11px]">
+              優先順位
+            </p>
+            <ol className="space-y-2">
+              {ranked.map((r, i) => (
+                <Pop
+                  key={r.t}
+                  show={inView}
+                  delay={800 + i * 260}
+                  className="bg-white px-2.5 py-2 ring-1 ring-[#EEDFE3]"
+                >
+                  <p className="flex items-center gap-1.5 text-[10px] font-black leading-tight text-ink sm:text-[11px]">
+                    <span className="grid h-4 w-4 shrink-0 place-items-center bg-[#7A1F3D] text-[9px] text-white">
+                      {i + 1}
+                    </span>
+                    {r.t}
+                  </p>
+                  <div className="mt-1.5 flex items-center gap-1.5">
+                    <div className="h-1.5 flex-1 overflow-hidden bg-[#EEDFE3]">
+                      <div
+                        className="h-full bg-[#7A1F3D] transition-[width] duration-1000 ease-out"
+                        style={{
+                          width: inView ? r.w : "0%",
+                          transitionDelay: `${1000 + i * 260}ms`,
+                        }}
+                      />
+                    </div>
+                    <span className="text-[9px] font-bold text-ink/55">
+                      優先度 {r.lv}
+                    </span>
+                  </div>
+                </Pop>
+              ))}
+            </ol>
+          </div>
         </div>
 
-        {/* 取引機会につなげる */}
-        <Pop show={inView} delay={2100} className="mt-5 flex justify-center">
-          <p className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-black text-[#7A1F3D] shadow-[0_6px_16px_-10px_rgba(122,31,61,0.6)] sm:text-sm">
+        {/* 提案 */}
+        <Pop show={inView} delay={1900} className="mt-5 flex justify-center">
+          <p className="flex items-center gap-2 bg-[#7A1F3D] px-4 py-2 text-xs font-black text-white sm:text-sm">
+            <PersonIcon />
+            課題に適したプロ人材をご提案
+          </p>
+        </Pop>
+      </div>
+    </Frame>
+  );
+}
+
+/* ========================================================= 02 必要な対策に絞り、最小限のコストに */
+
+export function ReasonPhase() {
+  const { ref, inView } = useInView<HTMLDivElement>();
+  const phases = [
+    { p: "フェーズ1", t: "体制づくり", pro: "社外CISO", h: "70%" },
+    { p: "フェーズ2", t: "認証の取得準備", pro: "認証・SCSの専門家", h: "92%" },
+    { p: "フェーズ3", t: "診断と運用", pro: "診断エンジニア", h: "45%" },
+  ];
+  return (
+    <Frame inner={ref}>
+      <div
+        role="img"
+        aria-label="フェーズごとに必要なプロ人材が、必要な稼働量だけ対応し、フェーズが進めばプロを入れ替える図。合わない場合の交代は無料"
+      >
+        <p className="text-[10px] font-black tracking-[0.12em] text-ink/50 sm:text-[11px]">
+          稼働量（イメージ）
+        </p>
+        <div className="mt-2 grid grid-cols-3 gap-2 sm:gap-3">
+          {phases.map((ph, i) => (
+            <div key={ph.p} className="flex flex-col items-center">
+              {/* 稼働のバー */}
+              <div className="relative flex h-28 w-full items-end justify-center border-b-2 border-ink/20 sm:h-32">
+                <div
+                  className="w-3/5 origin-bottom bg-[#7A1F3D] transition-transform duration-700 ease-out"
+                  style={{
+                    height: ph.h,
+                    transform: inView ? "scaleY(1)" : "scaleY(0)",
+                    transitionDelay: `${300 + i * 350}ms`,
+                    opacity: 0.55 + i * 0.15,
+                  }}
+                />
+                {/* 担当するプロ(順番に光る) */}
+                <span
+                  aria-hidden="true"
+                  className="hv-cycle absolute inset-x-1 -bottom-[2px] top-0 ring-2 ring-[#7A1F3D]"
+                  style={{ animationDelay: `${i * 1.6}s` }}
+                />
+              </div>
+              <p className="mt-2 text-[9px] font-bold text-[#7A1F3D] sm:text-[10px]">
+                {ph.p}
+              </p>
+              <p className="text-center text-[10px] font-black leading-tight text-ink sm:text-[11px]">
+                {ph.t}
+              </p>
+              <Pop show={inView} delay={600 + i * 350} className="mt-2 w-full">
+                <span className="flex w-full flex-col items-center gap-1 bg-white px-1 py-2 text-center text-[9px] font-black leading-tight text-ink ring-1 ring-[#EEDFE3] sm:text-[10px]">
+                  <PersonIcon className="h-4 w-4 text-[#7A1F3D]" />
+                  {ph.pro}
+                </span>
+              </Pop>
+            </div>
+          ))}
+        </div>
+        <Pop
+          show={inView}
+          delay={1700}
+          className="mt-4 flex flex-wrap justify-center gap-2"
+        >
+          <Chip tone="wine">必要な稼働量だけ</Chip>
+          <Chip>フェーズに合わせてプロを入れ替え</Chip>
+          <Chip>合わない場合の交代は無料</Chip>
+        </Pop>
+      </div>
+    </Frame>
+  );
+}
+
+/* ========================================================= 03 情報セキュリティ特化。窓口と契約はひとつ */
+
+export function ReasonOneWindow() {
+  const { ref, inView } = useInView<HTMLDivElement>();
+  const pros = ["社外CISO", "認証・SCSの専門家", "診断エンジニア"];
+  return (
+    <Frame inner={ref}>
+      <div
+        role="img"
+        aria-label="複数の情報セキュリティのプロ人材が関わっても、窓口と契約はセキュプロひとつで、監修者が品質を確認する図"
+        className="grid grid-cols-1 items-center gap-2 sm:grid-cols-[1fr_auto_1fr_auto_0.8fr]"
+      >
+        {/* プロ人材 */}
+        <div className="grid grid-cols-3 gap-1.5 sm:block sm:space-y-2">
+          {pros.map((p, i) => (
+            <Pop key={p} show={inView} delay={i * 180}>
+              <span className="flex items-center gap-1.5 bg-white px-2 py-2 text-[9px] font-black leading-tight text-ink ring-1 ring-[#EEDFE3] sm:text-[11px]">
+                <PersonIcon className="h-4 w-4 shrink-0 text-[#7A1F3D]" />
+                {p}
+              </span>
+            </Pop>
+          ))}
+        </div>
+        <div className="flex justify-center rotate-90 sm:rotate-0">
+          <Arrow show={inView} delay={600} />
+        </div>
+
+        {/* セキュプロ */}
+        <Pop
+          show={inView}
+          delay={800}
+          className="relative mx-auto w-full max-w-[14rem] sm:max-w-none"
+        >
+          <div className="bg-[#7A1F3D] px-2 py-4 text-center text-white">
+            <p className="whitespace-nowrap text-base font-black tracking-[0.06em]">
+              セキュプロ
+            </p>
+            <p className="mt-1.5 border-t border-white/30 pt-1.5 text-[9px] font-bold leading-snug sm:text-[11px]">
+              窓口・契約は
+              <br />
+              ひとつ
+            </p>
+          </div>
+          {/* 監修者の確認 */}
+          <span className="absolute -right-2 -top-3 flex items-center gap-1 bg-white px-1.5 py-1 text-[8px] font-black text-[#7A1F3D] ring-1 ring-[#7A1F3D] sm:text-[9px]">
+            <span className="grid h-3.5 w-3.5 place-items-center rounded-full bg-[#1E8A57] text-[8px] text-white">
+              ✓
+            </span>
+            監修者が品質確認
+          </span>
+        </Pop>
+        <div className="flex justify-center rotate-90 sm:rotate-0">
+          <Arrow show={inView} delay={1100} />
+        </div>
+
+        {/* 御社 */}
+        <Pop
+          show={inView}
+          delay={1300}
+          className="flex flex-col items-center text-center"
+        >
+          <span className="grid h-12 w-12 place-items-center bg-white ring-1 ring-[#EEDFE3] sm:h-14 sm:w-14">
             <svg
               viewBox="0 0 24 24"
-              className="rv-shake h-5 w-5"
+              className="h-7 w-7 text-ink/70"
               aria-hidden="true"
             >
               <path
-                d="M2 12l4-4 4 2 3-2 3 1 4-1 2 3-6 6c-1 1-2 1-3 0l-1-1-1 1c-1 1-2 1-3 0z"
+                d="M4 21V5h10v16M14 9h6v12M7 8h2M7 12h2M7 16h2M17 13h1M17 17h1"
                 fill="none"
-                stroke={W}
-                strokeWidth="1.8"
-                strokeLinejoin="round"
+                stroke="currentColor"
+                strokeWidth="1.6"
               />
             </svg>
-            取引機会につなげる
+          </span>
+          <p className="mt-1.5 text-[10px] font-black text-ink sm:text-[11px]">
+            御社
           </p>
-        </Pop>
-      </div>
-    </Frame>
-  );
-}
-
-/* ========================================================= 02 社員のAI利用の管理 */
-
-function CountUp({
-  to,
-  run,
-  decimals = 1,
-}: {
-  to: number;
-  run: boolean;
-  decimals?: number;
-}) {
-  const [v, setV] = useState(0);
-  useEffect(() => {
-    if (!run) return;
-    let raf = 0;
-    const start = performance.now();
-    const dur = 1400;
-    const tick = (t: number) => {
-      const p = Math.min(1, (t - start) / dur);
-      setV(to * (1 - Math.pow(1 - p, 3)));
-      if (p < 1) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [run, to]);
-  return <>{v.toFixed(decimals)}</>;
-}
-
-export function ReasonAiManagement() {
-  const { ref, inView } = useInView<HTMLDivElement>();
-  const rows = ["文章作成AI", "議事録AI", "画像生成AI"];
-  return (
-    <Frame inner={ref}>
-      <div
-        role="img"
-        aria-label="AI利用ルールとAIシステム台帳で、社内で使うAIを一つずつ確認して管理する図。AIの明確な責任者を決めている大手企業は26.8%"
-        className="grid grid-cols-[1fr_1.15fr] items-center gap-3 sm:gap-5"
-      >
-        {/* 左: ルールと台帳 → AIを確認 */}
-        <div className="relative">
-          <Pop show={inView} delay={0} className="relative z-10 mx-auto w-fit">
-            <div className="rv-float grid h-14 w-14 place-items-center rounded-2xl bg-[#7A1F3D] text-lg font-black text-white shadow-[0_10px_20px_-10px_rgba(122,31,61,0.8)] sm:h-16 sm:w-16 sm:text-xl">
-              AI
-            </div>
-          </Pop>
-          <svg
-            viewBox="0 0 100 30"
-            className="mx-auto -mt-1 h-6 w-3/4"
-            aria-hidden="true"
-          >
-            <path
-              d="M50 0V14M20 30V14h60v16"
-              fill="none"
-              stroke={W}
-              strokeWidth="2"
-              strokeDasharray="3 3"
-              className="rv-dash"
-            />
-          </svg>
-          <div className="grid grid-cols-2 gap-2">
-            {[
-              { t: "AI利用\nルール", d: 300 },
-              { t: "AIシステム\n台帳", d: 450 },
-            ].map((b) => (
-              <Pop
-                key={b.t}
-                show={inView}
-                delay={b.d}
-                className="rounded-lg border-2 border-[#7A1F3D] bg-white px-1 py-3 text-center"
-              >
-                <p className="whitespace-pre-line text-[10px] font-black leading-tight text-[#7A1F3D] sm:text-xs">
-                  {b.t}
-                </p>
-              </Pop>
-            ))}
-          </div>
-          {/* 台帳のチェック */}
-          <Pop
-            show={inView}
-            delay={600}
-            className="mt-3 rounded-lg bg-white p-2.5 ring-1 ring-[#EEDFE3]"
-          >
-            <ul className="space-y-1.5">
-              {rows.map((r, i) => (
-                <li
-                  key={r}
-                  className="flex items-center gap-2 text-[10px] font-bold text-ink sm:text-[11px]"
-                >
-                  <span
-                    className={`grid h-4 w-4 shrink-0 place-items-center rounded border-2 border-[#7A1F3D] text-[9px] font-black text-white transition-colors duration-300 ${
-                      inView ? "bg-[#7A1F3D]" : "bg-white"
-                    }`}
-                    style={{ transitionDelay: `${1000 + i * 350}ms` }}
-                    aria-hidden="true"
-                  >
-                    ✓
-                  </span>
-                  {r}
-                </li>
-              ))}
-            </ul>
-          </Pop>
-        </div>
-
-        {/* 右: 数字 */}
-        <Pop
-          show={inView}
-          delay={900}
-          className="relative rounded-2xl border-2 border-[#7A1F3D] bg-white px-3 py-4 text-center sm:px-4 sm:py-5"
-        >
-          <p className="text-[10px] font-black leading-snug text-ink sm:text-xs">
-            AIの明確な責任者を
+          <p className="text-[8px] font-bold leading-tight text-ink/55 sm:text-[9px]">
+            管理の負担を
             <br />
-            決めている大手企業は
+            増やさない
           </p>
-          <p className="mt-1 font-black leading-none text-[#7A1F3D]">
-            <span className="text-[2.4rem] tracking-tight sm:text-[3rem]">
-              <CountUp to={26.8} run={inView} />
-            </span>
-            <span className="text-lg sm:text-xl">%</span>
-          </p>
-          {/* 割合バー */}
-          <div className="mx-auto mt-3 h-2 w-full overflow-hidden rounded-full bg-[#EEDFE3]">
-            <div
-              className="h-full rounded-full bg-[#7A1F3D] transition-[width] duration-[1400ms] ease-out"
-              style={{
-                width: inView ? "26.8%" : "0%",
-                transitionDelay: "900ms",
-              }}
-            />
-          </div>
-          <p className="mt-2 text-[9px] text-ink/55">
-            残りの約7割は、責任者が決まっていない
-          </p>
-          <span
-            aria-hidden="true"
-            className="absolute -bottom-2 left-6 h-4 w-4 rotate-45 border-b-2 border-r-2 border-[#7A1F3D] bg-white"
-          />
         </Pop>
-      </div>
-    </Frame>
-  );
-}
-
-/* ========================================================= 03 必要な対策に絞る */
-
-export function ReasonFocus() {
-  const { ref, inView } = useInView<HTMLDivElement>();
-  const all = [
-    { t: "大企業向けの規程一式", keep: false },
-    { t: "AI利用ルール", keep: true },
-    { t: "多段階の承認手続き", keep: false },
-    { t: "チェックシートの回答", keep: true },
-    { t: "全部門の個別マニュアル", keep: false },
-    { t: "事故時の初動手順", keep: true },
-  ];
-  const kept = all.filter((a) => a.keep);
-  return (
-    <Frame inner={ref}>
-      <div
-        role="img"
-        aria-label="大企業と同じ対策をすべて入れるのではなく、初回アセスメントで優先順位を決め、取引先に求められる必要な対策に絞る図"
-        className="grid grid-cols-1 items-center gap-3 sm:grid-cols-[1fr_auto_1fr] sm:gap-4"
-      >
-        {/* 左: 大企業と同じ対策を全部 */}
-        <div>
-          <p className="mb-2 text-center text-[10px] font-black text-ink/55 sm:text-[11px]">
-            大企業と同じ対策を全部
-          </p>
-          <ul className="grid grid-cols-2 gap-1.5 sm:grid-cols-1">
-            {all.map((a, i) => (
-              <li
-                key={a.t}
-                className={`rounded-md px-2 py-1.5 text-[10px] font-bold leading-tight ring-1 transition-all duration-500 sm:text-[11px] ${
-                  inView && !a.keep
-                    ? "bg-[#F4F1F2] text-ink/35 line-through ring-[#ECE6E8]"
-                    : "bg-white text-ink ring-[#EEDFE3]"
-                }`}
-                style={{ transitionDelay: `${1200 + i * 120}ms` }}
-              >
-                {a.t}
-              </li>
-            ))}
-          </ul>
-          <div className="mt-2 rounded-md bg-white px-2 py-1.5 text-center ring-1 ring-[#EEDFE3]">
-            <p className="text-[9px] font-bold text-ink/55">費用・手間</p>
-            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[#EEDFE3]">
-              <div className="h-full w-full rounded-full bg-[#B9A9AF]" />
-            </div>
-          </div>
-        </div>
-
-        {/* 中: 初回アセスメントで絞る */}
-        <Pop
-          show={inView}
-          delay={400}
-          className="flex items-center justify-center gap-3 sm:flex-col sm:gap-0"
-        >
-          <svg
-            viewBox="0 0 48 64"
-            className="h-12 w-9 sm:h-20 sm:w-14"
-            aria-hidden="true"
-          >
-            <path d="M4 6h40L28 30v20l-8 6V30z" fill={W} />
-            <path
-              d="M10 10h28"
-              stroke="#fff"
-              strokeOpacity="0.5"
-              strokeWidth="2"
-            />
-          </svg>
-          <p className="whitespace-nowrap rounded-full sm:mt-1 bg-[#7A1F3D] px-2 py-1 text-[9px] font-black text-white sm:text-[10px]">
-            初回アセスメント
-          </p>
-          <svg
-            viewBox="0 0 40 16"
-            className="h-4 w-8 rotate-90 sm:mt-2 sm:rotate-0"
-            aria-hidden="true"
-          >
-            <path
-              d="M2 8h30"
-              stroke={W}
-              strokeWidth="3"
-              strokeDasharray="4 4"
-              className="rv-dash"
-            />
-            <path
-              d="M28 2l8 6-8 6"
-              fill="none"
-              stroke={W}
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </Pop>
-
-        {/* 右: 必要な対策だけ */}
-        <div>
-          <p className="mb-2 text-center text-[10px] font-black text-[#7A1F3D] sm:text-[11px]">
-            必要な対策に絞る
-          </p>
-          <ol className="grid gap-2">
-            {kept.map((a, i) => (
-              <Pop
-                key={a.t}
-                show={inView}
-                delay={2000 + i * 250}
-                className="flex items-center gap-1.5 rounded-md bg-white px-2 py-2 ring-2 ring-[#7A1F3D]"
-              >
-                <span className="grid h-4 w-4 shrink-0 place-items-center rounded-full bg-[#7A1F3D] text-[9px] font-black text-white">
-                  {i + 1}
-                </span>
-                <span className="text-[10px] font-black leading-tight text-ink sm:text-[11px]">
-                  {a.t}
-                </span>
-              </Pop>
-            ))}
-          </ol>
-          <div className="mt-2 rounded-md bg-white px-2 py-1.5 text-center ring-1 ring-[#EEDFE3]">
-            <p className="text-[9px] font-bold text-[#7A1F3D]">費用・手間</p>
-            <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-[#EEDFE3]">
-              <div
-                className="h-full rounded-full bg-[#7A1F3D] transition-[width] duration-[1200ms] ease-out"
-                style={{
-                  width: inView ? "38%" : "100%",
-                  transitionDelay: "2600ms",
-                }}
-              />
-            </div>
-          </div>
-        </div>
       </div>
     </Frame>
   );

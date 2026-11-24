@@ -33,12 +33,39 @@ export function AdvisoryGrowthDiagram() {
           ))}
         </g>
         {/* 軸 */}
-        <path d="M40 30V300H466" fill="none" stroke="#1F1A1C" strokeOpacity="0.35" strokeWidth="1.5" />
-        <path d="M462 296l6 4-6 4" fill="none" stroke="#1F1A1C" strokeOpacity="0.35" strokeWidth="1.5" />
-        <text x="44" y="24" fontSize="10.5" fontWeight="700" fill="#1F1A1C" fillOpacity="0.5">
+        <path
+          d="M40 30V300H466"
+          fill="none"
+          stroke="#1F1A1C"
+          strokeOpacity="0.35"
+          strokeWidth="1.5"
+        />
+        <path
+          d="M462 296l6 4-6 4"
+          fill="none"
+          stroke="#1F1A1C"
+          strokeOpacity="0.35"
+          strokeWidth="1.5"
+        />
+        <text
+          x="44"
+          y="24"
+          fontSize="10.5"
+          fontWeight="700"
+          fill="#1F1A1C"
+          fillOpacity="0.5"
+        >
           事業の成長
         </text>
-        <text x="466" y="320" textAnchor="end" fontSize="10.5" fontWeight="700" fill="#1F1A1C" fillOpacity="0.5">
+        <text
+          x="466"
+          y="320"
+          textAnchor="end"
+          fontSize="10.5"
+          fontWeight="700"
+          fill="#1F1A1C"
+          fillOpacity="0.5"
+        >
           時間
         </text>
         {/* 時間の目盛り */}
@@ -47,8 +74,23 @@ export function AdvisoryGrowthDiagram() {
           { x: 440, t: "3年" },
         ].map((m) => (
           <g key={m.t}>
-            <line x1={m.x} x2={m.x} y1="300" y2="306" stroke="#1F1A1C" strokeOpacity="0.35" />
-            <text x={m.x} y="320" textAnchor="middle" fontSize="10.5" fontWeight="700" fill="#1F1A1C" fillOpacity="0.55">
+            <line
+              x1={m.x}
+              x2={m.x}
+              y1="300"
+              y2="306"
+              stroke="#1F1A1C"
+              strokeOpacity="0.35"
+            />
+            <text
+              x={m.x}
+              y="320"
+              textAnchor="middle"
+              fontSize="10.5"
+              fontWeight="700"
+              fill="#1F1A1C"
+              fillOpacity="0.55"
+            >
               {m.t}
             </text>
           </g>
@@ -62,7 +104,14 @@ export function AdvisoryGrowthDiagram() {
           strokeWidth="2"
           strokeDasharray="5 6"
         />
-        <text x="430" y="132" textAnchor="end" fontSize="10.5" fontWeight="700" fill="#9A9396">
+        <text
+          x="430"
+          y="132"
+          textAnchor="end"
+          fontSize="10.5"
+          fontWeight="700"
+          fill="#9A9396"
+        >
           ひとりで進めた場合
         </text>
 
@@ -79,25 +128,82 @@ export function AdvisoryGrowthDiagram() {
         />
         {/* 1年で到達する点 */}
         <g className={show} style={{ transitionDelay: "1500ms" }}>
-          <line x1="200" x2="200" y1="90" y2="300" stroke={B} strokeOpacity="0.3" strokeDasharray="3 4" />
-          <circle cx="200" cy="90" r="16" fill={B} fillOpacity="0.12" className="pf-wave" />
+          <line
+            x1="200"
+            x2="200"
+            y1="90"
+            y2="300"
+            stroke={B}
+            strokeOpacity="0.3"
+            strokeDasharray="3 4"
+          />
+          <circle
+            cx="200"
+            cy="90"
+            r="16"
+            fill={B}
+            fillOpacity="0.12"
+            className="pf-wave"
+          />
           <circle cx="200" cy="90" r="7" fill={B} />
           <rect x="214" y="58" width="120" height="28" rx="14" fill={B} />
-          <text x="274" y="77" textAnchor="middle" fontSize="12" fontWeight="900" fill="#fff">
+          <text
+            x="274"
+            y="77"
+            textAnchor="middle"
+            fontSize="12"
+            fontWeight="900"
+            fill="#fff"
+          >
             3年の成長を1年で
           </text>
         </g>
 
         {/* 2つのサービス(線を押し上げる) */}
         {[
-          { x: 92, y: 250, t1: "顧問・COO紹介", t2: "経営に伴走・つながり", d: 600 },
-          { x: 150, y: 176, t1: "アポコミ", t2: "新規アポイントを創出", d: 950 },
+          {
+            x: 92,
+            y: 250,
+            t1: "顧問・COO紹介",
+            t2: "経営に伴走・つながり",
+            d: 600,
+          },
+          {
+            x: 150,
+            y: 176,
+            t1: "アポコミ",
+            t2: "新規アポイントを創出",
+            d: 950,
+          },
         ].map((n) => (
-          <g key={n.t1} className={show} style={{ transitionDelay: `${n.d}ms` }}>
-            <path d={`M${n.x} ${n.y + 46}V${n.y + 8}`} stroke={B} strokeWidth="2" markerEnd="" />
-            <path d={`M${n.x - 5} ${n.y + 14}l5 -7 5 7`} fill="none" stroke={B} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <g
+            key={n.t1}
+            className={show}
+            style={{ transitionDelay: `${n.d}ms` }}
+          >
+            <path
+              d={`M${n.x} ${n.y + 46}V${n.y + 8}`}
+              stroke={B}
+              strokeWidth="2"
+              markerEnd=""
+            />
+            <path
+              d={`M${n.x - 5} ${n.y + 14}l5 -7 5 7`}
+              fill="none"
+              stroke={B}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
             <g transform={`translate(${n.x + 10} ${n.y + 20})`}>
-              <rect width="132" height="42" rx="8" fill="#fff" stroke={B} strokeOpacity="0.35" />
+              <rect
+                width="132"
+                height="42"
+                rx="8"
+                fill="#fff"
+                stroke={B}
+                strokeOpacity="0.35"
+              />
               <rect width="4" height="42" rx="2" fill={B} />
               <text x="12" y="18" fontSize="12" fontWeight="900" fill="#1F1A1C">
                 {n.t1}
@@ -111,8 +217,22 @@ export function AdvisoryGrowthDiagram() {
 
         {/* 先端の光 */}
         <g className={show} style={{ transitionDelay: "1800ms" }}>
-          <circle cx="440" cy="44" r="10" fill={BL} stroke={B} strokeWidth="2" />
-          <circle cx="440" cy="44" r="10" fill="none" stroke={B} className="pf-wave" />
+          <circle
+            cx="440"
+            cy="44"
+            r="10"
+            fill={BL}
+            stroke={B}
+            strokeWidth="2"
+          />
+          <circle
+            cx="440"
+            cy="44"
+            r="10"
+            fill="none"
+            stroke={B}
+            className="pf-wave"
+          />
         </g>
       </svg>
     </Reveal>
