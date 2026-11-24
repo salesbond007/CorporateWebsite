@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { CisoBeforeAfter } from "@/components/services/CisoBeforeAfter";
+import { CisoAssignDiagram } from "@/components/services/CisoAssignDiagram";
 import { LpNav } from "@/components/services/LpNav";
 import {
   ReasonCost,
@@ -13,7 +13,7 @@ import {
   ReasonStart,
 } from "@/components/services/CisoReasonVisuals";
 import { CisoIssueMap } from "@/components/services/CisoIssueMap";
-import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
+import { CisoHeroMock } from "@/components/services/CisoHeroMock";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
 import { pageMeta, pageMetadata } from "@/lib/seo";
@@ -258,35 +258,48 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       {/* ========== 2. ファーストビュー ========== */}
       <section
         id="top"
-        className="relative isolate overflow-hidden bg-[linear-gradient(180deg,#FFFFFF_0%,#FBF4F6_100%)]"
+        className="relative isolate overflow-hidden border-b border-[#DDE0E7] bg-[linear-gradient(180deg,#F5F6F9_0%,#E9ECF2_100%)]"
       >
-        {/* 六角形の模様 */}
+        {/* 背景: 大きな面を重ねた幾何学模様 */}
         <svg
           aria-hidden="true"
-          className="absolute inset-0 -z-10 h-full w-full opacity-[0.35]"
+          viewBox="0 0 1440 760"
+          preserveAspectRatio="xMidYMid slice"
+          className="absolute inset-0 -z-10 h-full w-full"
         >
-          <defs>
-            <pattern
-              id="hex"
-              width="56"
-              height="97"
-              patternUnits="userSpaceOnUse"
-              patternTransform="scale(1.4)"
-            >
-              <path
-                d="M28 0l28 16v32L28 64 0 48V16zM28 64l28 16v17M28 64L0 80v17"
-                fill="none"
-                stroke="#EBDCE1"
-                strokeWidth="1"
-              />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#hex)" />
+          <path
+            d="M760 0H1440V420L1080 760H640L980 360z"
+            fill="#FFFFFF"
+            fillOpacity="0.55"
+          />
+          <path
+            d="M1040 0H1440V260L1250 470z"
+            fill="#FFFFFF"
+            fillOpacity="0.7"
+          />
+          <path
+            d="M0 520L300 300L520 760H0z"
+            fill="#FFFFFF"
+            fillOpacity="0.45"
+          />
+          <path
+            d="M-40 120L180 0H420L60 330z"
+            fill="#FFFFFF"
+            fillOpacity="0.4"
+          />
+          <path
+            d="M980 360L1440 420"
+            stroke="#7A1F3D"
+            strokeOpacity="0.18"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M300 300L60 330"
+            stroke="#7A1F3D"
+            strokeOpacity="0.12"
+            strokeWidth="1.5"
+          />
         </svg>
-        <div
-          aria-hidden="true"
-          className="absolute -left-40 top-20 -z-10 h-96 w-96 rounded-full bg-white blur-[80px]"
-        />
         <Container className="grid items-center gap-6 pb-14 pt-6 md:gap-12 md:pb-20 md:pt-16 lg:grid-cols-[1fr_1.1fr]">
           <div className="min-w-0 text-center lg:text-left">
             <h1>
@@ -316,8 +329,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               <BigButton label="無料相談" icon="check" href="#check" />
             </div>
           </div>
-          <div className="order-first mx-auto w-full min-w-0 max-w-[520px] lg:order-none lg:-mr-6 lg:max-w-none xl:-mr-12">
-            <CisoHeroVisual />
+          <div className="mx-auto w-full min-w-0 max-w-[520px] lg:-mr-6 lg:max-w-none xl:-mr-12">
+            <CisoHeroMock />
           </div>
         </Container>
       </section>
@@ -329,10 +342,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
       >
         <Container>
           <Reveal variant="up" className="text-center">
-            <p className="mx-auto w-fit border border-brand-500 px-4 py-1.5 text-sm font-black tracking-[0.14em] text-brand-500">
-              セキュプロとは
-            </p>
-            <h2 className="mt-5 text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
+            <h2 className="text-[clamp(1.5rem,3.2vw,2.4rem)] font-black leading-[1.5] [word-break:auto-phrase]">
               専任者を雇わずに、
               <br className="hidden sm:block" />
               情報セキュリティの
@@ -343,9 +353,9 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
             </p>
           </Reveal>
 
-          {/* 図: いまの御社 → セキュプロのプロ人材 → 導入後 */}
+          {/* 図: 企業 ⇄ セキュプロ ⇄ プロ人材(ひとりからチームまでアサイン) */}
           <div className="mt-10">
-            <CisoBeforeAfter />
+            <CisoAssignDiagram />
           </div>
         </Container>
 
@@ -564,7 +574,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           無料相談
         </span>
       </a>
-
     </div>
   );
 }

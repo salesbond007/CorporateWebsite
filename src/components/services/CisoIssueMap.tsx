@@ -3,11 +3,18 @@
 import Image from "next/image";
 import { useEffect, useState, type ReactNode } from "react";
 import { Reveal } from "@/components/ui/Reveal";
+import {
+  IllAiRule,
+  IllChecksheet,
+  IllHireCost,
+  IllPriority,
+  IllScs,
+} from "./IssueIllustrations";
 
 /**
  * セキュプロ LP「サービス概要」: 課題カード5枚 → 円形の図(8つの対応領域) + 解決の一文。
  * 課題カードと円の領域を順番に光らせ、「この課題 → この領域のプロが対応」とつながって見えるようにする。
- * イラスト: Loose Drawing(商用利用可)をワイン色にしたもの。
+ * イラスト: オリジナルのフラットな絵柄(IssueIllustrations)。
  */
 
 type Area = { label: ReactNode; text: string; icon: ReactNode };
@@ -140,9 +147,13 @@ const areas: Area[] = [
 ];
 
 /** 課題カード(強調する語は太字・ワイン色)。area は対応する円の領域の番号 */
-const issues: { img: string; text: ReactNode; area: number }[] = [
+const issues: {
+  Ill: () => JSX.Element;
+  text: ReactNode;
+  area: number;
+}[] = [
   {
-    img: "/illustrations/ld-1531-wine.webp",
+    Ill: IllPriority,
     text: (
       <>
         対策の<b>優先順位</b>が定まらず、着手できていない
@@ -151,7 +162,7 @@ const issues: { img: string; text: ReactNode; area: number }[] = [
     area: 0,
   },
   {
-    img: "/illustrations/ld-1528-wine.webp",
+    Ill: IllHireCost,
     text: (
       <>
         専任人材の<b>採用コスト</b>が見合わない
@@ -160,7 +171,7 @@ const issues: { img: string; text: ReactNode; area: number }[] = [
     area: 3,
   },
   {
-    img: "/illustrations/ld-1523-wine.webp",
+    Ill: IllChecksheet,
     text: (
       <>
         取引先から<b>チェックシート</b>への回答を求められている
@@ -169,7 +180,7 @@ const issues: { img: string; text: ReactNode; area: number }[] = [
     area: 2,
   },
   {
-    img: "/illustrations/ld-1538-wine.webp",
+    Ill: IllScs,
     text: (
       <>
         <b>SCS評価制度</b>への対応が必要になっている
@@ -178,7 +189,7 @@ const issues: { img: string; text: ReactNode; area: number }[] = [
     area: 1,
   },
   {
-    img: "/illustrations/ld-1817-wine.webp",
+    Ill: IllAiRule,
     text: (
       <>
         <b>生成AIの利用ルール</b>が整っていない
@@ -414,13 +425,9 @@ export function CisoIssueMap() {
                         />
                       </span>
                     </span>
-                    <Image
-                      src={it.img}
-                      alt=""
-                      width={200}
-                      height={200}
-                      className="h-32 w-auto object-contain md:h-36"
-                    />
+                    <div className="h-32 md:h-36">
+                      <it.Ill />
+                    </div>
                     <p className="mt-4 flex flex-1 items-center justify-center text-[13.5px] font-bold leading-[1.65] text-ink [word-break:auto-phrase] md:text-[14.5px] [&_b]:font-black [&_b]:text-brand-500">
                       <span>{it.text}</span>
                     </p>
