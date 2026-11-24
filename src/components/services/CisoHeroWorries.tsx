@@ -195,7 +195,7 @@ export function CisoHeroWorries() {
                   </svg>
                 </span>
               </span>
-              <span className="whitespace-nowrap text-[clamp(10px,3.15vw,15px)] font-bold leading-snug sm:text-[14px] lg:text-[15px]">
+              <span className="whitespace-nowrap text-[clamp(10px,3.15vw,15px)] font-bold leading-snug sm:text-[14px] md:text-[12px] lg:text-[15px]">
                 {w.text}
               </span>
             </li>
