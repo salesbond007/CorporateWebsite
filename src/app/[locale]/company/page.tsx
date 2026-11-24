@@ -10,7 +10,11 @@ import { site } from "@/lib/site";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 import { pageMeta, pageMetadata } from "@/lib/seo";
-import { cn } from "@/lib/cn";
+import {
+  IllAccess,
+  IllCompany,
+  IllProfile,
+} from "@/components/illustrations/LineIllustrations";
 
 export function generateMetadata({
   params,
@@ -65,70 +69,59 @@ export default function CompanyPage({
       />
 
       {/* ページ見出し */}
-      <section className="relative isolate overflow-hidden bg-brand-900 text-white">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 opacity-[0.08] [background-image:linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)] [background-size:72px_72px]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-24 -top-24 -z-10 h-96 w-96 animate-blob rounded-full bg-brand-500/50 blur-[110px]"
-        />
-        <Container className="py-16 md:py-24">
-          <nav aria-label="パンくずリスト" className="text-xs text-white/60">
-            <Link href={localePath("/", locale)} className="hover:text-white">
-              ホーム
-            </Link>
-            <span className="mx-2">/</span>
-            <span className="text-white/90">会社概要</span>
-          </nav>
-          <p
-            aria-hidden="true"
-            className="mt-8 animate-fade-up font-display text-[clamp(3rem,10vw,7rem)] font-black leading-none tracking-tight text-white/95"
-          >
-            Company
-          </p>
-          <h1
-            className="mt-4 animate-fade-up text-xl font-bold tracking-[0.2em] text-brand-200 md:text-2xl"
-            style={{ animationDelay: "0.15s" }}
-          >
-            会社概要
-          </h1>
+      <section className="bg-[#F7F3EE]">
+        <Container className="grid items-center gap-8 py-12 md:grid-cols-[minmax(0,1fr)_auto] md:py-16">
+          <div>
+            <nav aria-label="パンくずリスト" className="text-xs text-ink/50">
+              <Link href={localePath("/", locale)} className="hover:text-ink">
+                ホーム
+              </Link>
+              <span className="mx-2">/</span>
+              <span className="text-ink/80">会社概要</span>
+            </nav>
+            <p className="mt-10 text-xs font-bold tracking-[0.3em] text-brand-500">
+              COMPANY
+            </p>
+            <h1 className="mt-3 text-[clamp(1.9rem,4.4vw,3rem)] font-black leading-[1.3] tracking-[0.04em] text-ink">
+              会社概要
+            </h1>
+            <p className="mt-5 max-w-xl text-[15px] leading-[2] text-ink/75">
+              守りの情報セキュリティと、攻めの経営顧問で、企業が安心して挑戦できる土台をつくる会社です。
+            </p>
+          </div>
+          <div className="mx-auto grid h-56 w-56 place-items-center rounded-full bg-white md:h-72 md:w-72">
+            <IllCompany className="h-44 w-44 md:h-56 md:w-56" />
+          </div>
         </Container>
       </section>
 
       {/* 会社情報 */}
-      <section className="bg-cream py-20 md:py-28">
-        <Container>
-          <Reveal variant="up" className="text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.35em] text-brand-500">
-              Profile
-            </p>
-            <h2 className="mt-3 text-2xl font-black text-ink md:text-3xl">
-              会社情報
-            </h2>
+      <section className="bg-white py-16 md:py-24">
+        <Container className="grid gap-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-16">
+          <Reveal variant="up">
+            <div className="lg:sticky lg:top-28">
+              <p className="text-xs font-bold tracking-[0.3em] text-brand-500">
+                PROFILE
+              </p>
+              <h2 className="mt-2 text-2xl font-black text-ink md:text-[1.7rem]">
+                会社情報
+              </h2>
+              <div className="mt-8 hidden h-48 w-48 place-items-center rounded-full bg-[#F1EEEA] lg:grid">
+                <IllProfile className="h-32 w-32" />
+              </div>
+            </div>
           </Reveal>
-          <Reveal
-            variant="up"
-            className="mx-auto mt-10 max-w-4xl overflow-hidden bg-white shadow-[0_30px_60px_-40px_rgba(29,5,11,0.35)]"
-          >
-            <dl>
-              {companyRows.map((row, i) => (
+          <Reveal variant="up">
+            <dl className="border-t border-ink">
+              {companyRows.map((row) => (
                 <div
                   key={row.label}
-                  className={cn(
-                    "grid gap-1 px-6 py-4 sm:grid-cols-[11rem_1fr] sm:gap-8 sm:px-10 sm:py-5",
-                    i !== 0 && "border-t border-ink-line",
-                  )}
+                  className="grid gap-1.5 border-b border-ink/15 py-5 sm:grid-cols-[9rem_1fr] sm:gap-8 sm:py-6"
                 >
-                  <dt className="flex items-center gap-2 text-sm font-bold tracking-[0.05em] text-ink">
-                    <span
-                      aria-hidden="true"
-                      className="h-3 w-[3px] bg-brand-500"
-                    />
+                  <dt className="text-[13px] font-bold tracking-[0.1em] text-ink/55">
                     {row.label}
                   </dt>
-                  <dd className="text-sm leading-relaxed tracking-[0.03em] text-ink-soft md:text-[15px]">
+                  <dd className="text-[15px] leading-relaxed tracking-[0.03em] text-ink">
                     {row.value}
                   </dd>
                 </div>
@@ -139,21 +132,24 @@ export default function CompanyPage({
       </section>
 
       {/* アクセス(地図) */}
-      <section id="access" className="scroll-mt-20 bg-cream py-20 md:py-28">
-        <Container>
-          <Reveal variant="up" className="text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.35em] text-brand-500">
-              Access
+      <section id="access" className="scroll-mt-20 bg-[#F7F3EE] py-16 md:py-24">
+        <Container className="grid gap-10 lg:grid-cols-[17rem_minmax(0,1fr)] lg:gap-16">
+          <Reveal variant="up">
+            <p className="text-xs font-bold tracking-[0.3em] text-brand-500">
+              ACCESS
             </p>
-            <h2 className="mt-3 text-2xl font-black text-ink md:text-3xl">
+            <h2 className="mt-2 text-2xl font-black text-ink md:text-[1.7rem]">
               アクセス
             </h2>
+            <div className="mt-8 hidden h-48 w-48 place-items-center rounded-full bg-white lg:grid">
+              <IllAccess className="h-32 w-32" />
+            </div>
           </Reveal>
           <Reveal
             variant="up"
-            className="mx-auto mt-10 grid max-w-5xl overflow-hidden bg-white shadow-[0_30px_60px_-40px_rgba(29,5,11,0.35)] lg:grid-cols-[1.6fr_1fr]"
+            className="grid bg-white md:grid-cols-[1.5fr_1fr]"
           >
-            <div className="relative aspect-[4/3] w-full lg:aspect-auto lg:min-h-[380px]">
+            <div className="relative aspect-[4/3] w-full md:aspect-auto md:min-h-[340px]">
               <iframe
                 src={mapEmbed}
                 title="セールスボンド株式会社の所在地(Google マップ)"
@@ -163,12 +159,12 @@ export default function CompanyPage({
                 allowFullScreen
               />
             </div>
-            <div className="flex flex-col justify-center gap-5 p-7 md:p-10">
+            <div className="flex flex-col justify-center gap-5 p-7 md:p-9">
               <div>
-                <p className="text-xs font-bold tracking-[0.2em] text-brand-500">
-                  ADDRESS
+                <p className="text-[13px] font-bold tracking-[0.1em] text-ink/55">
+                  所在地
                 </p>
-                <p className="mt-2 text-base font-bold leading-relaxed text-ink">
+                <p className="mt-2 text-[15px] font-bold leading-relaxed text-ink">
                   〒{site.address.postalCode}
                   <br />
                   {site.address.addressJa}
@@ -178,7 +174,7 @@ export default function CompanyPage({
                 href={mapLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex h-12 items-center justify-center gap-2 bg-brand-500 px-6 text-sm font-bold text-white transition hover:bg-brand-600"
+                className="inline-flex w-fit items-center gap-2 border-b border-ink pb-0.5 text-sm font-bold text-ink transition-colors hover:border-brand-500 hover:text-brand-500"
               >
                 Google マップで開く
                 <span aria-hidden="true">↗</span>
@@ -190,11 +186,11 @@ export default function CompanyPage({
       </section>
 
       {/* 対面での打ち合わせ場所 */}
-      <section id="meeting" className="scroll-mt-20 bg-white py-20 md:py-28">
+      <section id="meeting" className="scroll-mt-20 bg-white py-16 md:py-24">
         <Container>
           <Reveal variant="up" className="text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.35em] text-brand-500">
-              Meeting Place
+            <p className="text-xs font-bold tracking-[0.3em] text-brand-500">
+              MEETING PLACE
             </p>
             <h2 className="mt-3 text-2xl font-black text-ink md:text-3xl">
               対面での打ち合わせ場所
@@ -211,7 +207,7 @@ export default function CompanyPage({
                 delay={i * 120}
                 className="h-full"
               >
-                <article className="flex h-full flex-col overflow-hidden border border-ink/10 bg-white shadow-[0_30px_60px_-40px_rgba(29,5,11,0.35)]">
+                <article className="flex h-full flex-col overflow-hidden bg-[#F7F3EE]">
                   <div className="relative aspect-[4/3] w-full">
                     <iframe
                       src={`https://www.google.com/maps?q=${encodeURIComponent(m.query)}&hl=ja&z=17&output=embed`}
@@ -232,12 +228,12 @@ export default function CompanyPage({
                       <br />
                       {m.address}
                     </p>
-                    <div className="mt-auto flex flex-wrap gap-3 pt-2">
+                    <div className="mt-auto flex flex-wrap gap-6 pt-2">
                       <a
                         href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(m.query)}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex h-11 items-center gap-2 bg-brand-500 px-5 text-sm font-bold text-white transition hover:bg-brand-600"
+                        className="inline-flex items-center gap-2 border-b border-ink pb-0.5 text-sm font-bold text-ink transition-colors hover:border-brand-500 hover:text-brand-500"
                       >
                         Google マップで開く
                         <span aria-hidden="true">↗</span>
@@ -248,7 +244,7 @@ export default function CompanyPage({
                           href={m.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex h-11 items-center gap-2 border border-ink/20 px-5 text-sm font-bold text-ink transition hover:border-brand-500 hover:text-brand-600"
+                          className="inline-flex items-center gap-2 border-b border-ink pb-0.5 text-sm font-bold text-ink transition-colors hover:border-brand-500 hover:text-brand-500"
                         >
                           施設のサイト
                           <span aria-hidden="true">↗</span>
