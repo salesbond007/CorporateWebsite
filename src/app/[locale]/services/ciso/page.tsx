@@ -308,12 +308,14 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               </span>
             </h1>
             <p className="mt-6 text-[clamp(1.05rem,1.7vw,1.3rem)] font-bold leading-[1.8] text-ink/85">
+              情報セキュリティの
+              <span className="text-brand-500">相談役ひとり</span>から、
+              <br />
+              <span className="text-brand-500">専門家チーム</span>まで。
+              <br />
               課題やフェーズに合わせて、
               <br className="sm:hidden" />
-              必要な<span className="text-brand-500">プロ</span>が、
-              <br />
-              ひとりでも<span className="text-brand-500">チーム</span>
-              でも対応します
+              必要なプロが対応します。
             </p>
             <div className="mt-10 flex justify-center lg:block">
               <BigButton label="無料相談" icon="check" href="#check" />
@@ -339,7 +341,7 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               <span className="text-brand-500">プロ人材</span>を活用
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-[15px] font-medium leading-[2] text-ink/80">
-              課題やフェーズに合わせて、必要なプロ人材がひとりでも、チームでも対応します。窓口と契約はセキュプロひとつです。
+              情報セキュリティの相談役ひとりから、専門家チームまで。課題やフェーズに合わせて、必要なプロが対応します。窓口と契約はセキュプロひとつです。
             </p>
           </Reveal>
 

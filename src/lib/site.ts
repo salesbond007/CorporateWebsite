@@ -164,7 +164,7 @@ export const serviceCategories: ServiceCategory[] = [
             href: "/services/ciso",
             subtitle: "情報セキュリティのプロ人材活用サービス",
             summary:
-              "専任者を雇わずに、情報セキュリティのプロ人材を活用できるサービスです。課題やフェーズに合わせて、必要なプロがひとりでもチームでも対応します。",
+              "専任者を雇わずに、情報セキュリティのプロ人材を活用できるサービスです。情報セキュリティの相談役ひとりから、専門家チームまで。課題やフェーズに合わせて、必要なプロが対応します。",
             features: [],
             image: "/services/cards/ai-solutions.jpg",
           },
