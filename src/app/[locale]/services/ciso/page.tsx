@@ -13,7 +13,7 @@ import {
   ReasonStart,
 } from "@/components/services/CisoReasonVisuals";
 import { CisoIssueMap } from "@/components/services/CisoIssueMap";
-import { CisoHeroMock } from "@/components/services/CisoHeroMock";
+import { CisoHeroWorries } from "@/components/services/CisoHeroWorries";
 import { CisoAboutBlock } from "@/components/services/CisoAboutBlock";
 import { SecuproMark } from "@/components/services/SecuproMark";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
@@ -322,8 +322,8 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
               <BigButton label="無料相談" icon="check" href="#check" />
             </div>
           </div>
-          <div className="mx-auto w-full min-w-0 max-w-[520px] lg:-mr-6 lg:max-w-none xl:-mr-12">
-            <CisoHeroMock />
+          <div className="mx-auto w-full min-w-0 max-w-[24rem]">
+            <CisoHeroWorries />
           </div>
         </Container>
       </section>
