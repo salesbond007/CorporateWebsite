@@ -484,21 +484,26 @@ export function CisoIssueMap() {
 
           <div className="mt-10 grid items-center gap-10 lg:mt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
             <div>
+              <p className="mb-4 text-center text-[13px] font-black tracking-[0.1em] text-white/80">
+                ご依頼の例
+              </p>
               <div className="hidden sm:block">
                 <Wheel activeArea={activeArea} />
               </div>
               <div className="sm:hidden">
                 <AreaGrid activeArea={activeArea} />
               </div>
+              <p className="mt-5 border border-white/30 px-4 py-3 text-center text-[13px] font-bold leading-relaxed text-white/90 [word-break:auto-phrase] md:text-sm">
+                このほかにも、情報セキュリティに関わることは
+                <br className="hidden sm:block" />
+                幅広くご相談いただけます
+              </p>
             </div>
 
             <figcaption>
               <p className="text-lg font-black md:text-xl">セキュプロは、</p>
               <p className="mt-2 text-[clamp(1.5rem,3vw,2.3rem)] font-black leading-[1.5] [word-break:auto-phrase]">
-                情報セキュリティのプロ人材を、雇わずに活用できる
-              </p>
-              <p className="mt-2 text-lg font-black md:text-xl">
-                から、課題を解決できます
+                情報セキュリティのプロ人材を、雇わずに活用できるサービスです
               </p>
               <span
                 aria-hidden="true"
@@ -507,7 +512,7 @@ export function CisoIssueMap() {
               <p className="mt-6 text-[14.5px] leading-[2] text-white/85 md:text-[15px]">
                 情報セキュリティ対策は、取引先の要請や生成AIの普及で、中小企業にも欠かせないものになりました。一方で、専任者を雇うのは簡単ではありません。
                 <br />
-                セキュプロは、課題やフェーズに合わせて必要な領域のプロ人材が対応し、雇わずに対策を前に進められるようにするサービスです。
+                課題やフェーズに合わせて必要な領域のプロ人材が対応するので、専任者を雇わずに対策を前に進められます。
               </p>
             </figcaption>
           </div>
