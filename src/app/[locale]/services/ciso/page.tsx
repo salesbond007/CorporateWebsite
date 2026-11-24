@@ -12,7 +12,7 @@ import {
   ReasonPhase,
   ReasonPriority,
 } from "@/components/services/CisoReasonVisuals";
-import { CisoServiceDiagram } from "@/components/services/CisoServiceDiagram";
+import { CisoIssueMap } from "@/components/services/CisoIssueMap";
 import { CisoHeroVisual } from "@/components/services/CisoHeroVisual";
 import { AiCheckForm } from "@/components/contact/AiCheckForm";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
@@ -349,11 +349,9 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
           </div>
         </Container>
 
-        {/* 図: サービスの全体像(4ステップ × 2プラン)。背景は横幅いっぱい */}
-        <div id="structure" className="mt-14 scroll-mt-28 md:mt-20">
-          <Reveal variant="fade">
-            <CisoServiceDiagram />
-          </Reveal>
+        {/* 課題カード → 円形の図(対応する領域) + 解決の一文。背景は横幅いっぱい */}
+        <div id="structure" className="mt-16 scroll-mt-28 md:mt-24">
+          <CisoIssueMap />
         </div>
 
         <div className="mt-20 md:mt-24">
@@ -565,32 +563,6 @@ export default function CisoPage({ params }: { params: { locale: string } }) {
         </span>
       </a>
 
-      {/* ========== 12. フッター(LP) ========== */}
-      <footer className="bg-[#1C1E2A] py-12 text-white">
-        <Container>
-          <div className="flex flex-wrap items-center gap-3">
-            <span
-              className="grid h-8 w-8 place-items-center rounded-lg bg-brand-500"
-              aria-hidden="true"
-            >
-              <Icon name="shield" className="h-4 w-4" />
-            </span>
-            <p className="text-base font-black">
-              セキュプロ 情報セキュリティ顧問
-            </p>
-            <p className="text-sm text-white/60">／ 運営：{site.legalName}</p>
-          </div>
-          <div className="mt-6 border-t border-white/15 pt-6 text-[11px] leading-[1.9] text-white/55">
-            <p>
-              注記：当社が認証を出すものではありません。取引先の審査の結果をお約束するものではありません。
-            </p>
-            <p>
-              ※
-              ページ内の画面・写真はイメージです。数値は例示であり、実績を示すものではありません。
-            </p>
-          </div>
-        </Container>
-      </footer>
     </div>
   );
 }
