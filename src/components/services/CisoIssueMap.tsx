@@ -440,7 +440,7 @@ export function CisoIssueMap() {
         </div>
       </div>
 
-      {/* 下段: 円形の図 + 解決の一文 */}
+      {/* 下段: 円形の図(ご依頼の例) */}
       <figure className="relative isolate overflow-hidden text-white">
         <Image
           src="/photos/ciso/governance.webp"
@@ -478,11 +478,11 @@ export function CisoIssueMap() {
           <p className="text-center text-[13px] font-bold text-white/80 lg:hidden">
             <Chevrons on />
             <span className="mt-1 block">
-              課題{active + 1}は「{areas[activeArea].text}」のプロが対応
+              「{areas[activeArea].text}」のご依頼には、その分野のプロが対応
             </span>
           </p>
 
-          <div className="mt-10 grid items-center gap-10 lg:mt-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-14">
+          <div className="mx-auto mt-10 max-w-[34rem] lg:mt-12">
             <div>
               <p className="mb-4 text-center text-[13px] font-black tracking-[0.1em] text-white/80">
                 ご依頼の例
@@ -499,22 +499,6 @@ export function CisoIssueMap() {
                 幅広くご相談いただけます
               </p>
             </div>
-
-            <figcaption>
-              <p className="text-lg font-black md:text-xl">セキュプロは、</p>
-              <p className="mt-2 text-[clamp(1.5rem,3vw,2.3rem)] font-black leading-[1.5] [word-break:auto-phrase]">
-                情報セキュリティに特化したプロ人材サービスです
-              </p>
-              <span
-                aria-hidden="true"
-                className="mt-6 block h-[2px] w-14 bg-white"
-              />
-              <p className="mt-6 text-[14.5px] leading-[2] text-white/85 md:text-[15px]">
-                情報セキュリティ対策は、取引先の要請や生成AIの普及で、中小企業にも欠かせないものになりました。一方で、専任者を雇うのは簡単ではありません。
-                <br />
-                課題やフェーズに合わせて必要な領域のプロ人材が対応するので、専任者を雇わずに対策を前に進められます。
-              </p>
-            </figcaption>
           </div>
         </div>
       </figure>
