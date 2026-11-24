@@ -149,7 +149,7 @@ export function CisoHeroMock() {
       </div>
 
       <p className="mt-2 text-right text-[10px] text-ink/45">
-        ※画面はイメージです
+        ※画面はイメージです　※画像はイメージです
       </p>
     </div>
   );

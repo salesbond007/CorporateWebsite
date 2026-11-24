@@ -331,6 +331,9 @@ export function CisoAssignDiagram() {
           <VArrow label="合うプロを選んでアサイン" />
           {talent}
         </div>
+        <p className="mt-2 text-right text-[11px] text-ink/45">
+          ※画像はイメージです
+        </p>
       </div>
     </Reveal>
   );
