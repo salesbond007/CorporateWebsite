@@ -6,7 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { ComingSoon } from "@/components/ui/ComingSoon";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { breadcrumbJsonLd } from "@/lib/jsonld";
-import { news } from "@/lib/news";
+import { getNews } from "@/lib/news";
 import { localePath } from "@/i18n/path";
 import { isLocale } from "@/i18n/config";
 
@@ -15,13 +15,17 @@ export const metadata: Metadata = {
   description: "セールスボンド株式会社からのお知らせ一覧。",
 };
 
-export default function NewsPage({
+// microCMS で記事を公開したら、60秒以内にページへ反映する
+export const revalidate = 60;
+
+export default async function NewsPage({
   params,
 }: {
   params: { locale: string };
 }) {
   if (!isLocale(params.locale)) notFound();
   const locale = params.locale;
+  const news = await getNews();
 
   return (
     <>

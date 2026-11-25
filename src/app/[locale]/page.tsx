@@ -19,6 +19,9 @@ export function generateMetadata({
   return pageMetadata({ ...pageMeta.home, path: "/", locale: params.locale });
 }
 
+// ニュース(microCMS)の更新を60秒以内に反映する
+export const revalidate = 60;
+
 export default function HomePage({
   params,
 }: {

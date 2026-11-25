@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { NewsCarousel } from "@/components/home/NewsCarousel";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionTitle } from "@/components/ui/SectionTitle";
-import { news } from "@/lib/news";
+import { getNews } from "@/lib/news";
 import { localePath } from "@/i18n/path";
 import type { Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionary";
@@ -13,10 +13,9 @@ type Props = {
   dict: Dictionary;
 };
 
-/** microCMS連携後、特定タグの記事から最新10件を取得する想定 */
-const latestNews = news.slice(0, 10);
-
-export function NewsSection({ locale, dict }: Props) {
+/** microCMS のカテゴリ「社内ニュース」から最新10件を表示する */
+export async function NewsSection({ locale, dict }: Props) {
+  const latestNews = await getNews(10);
   return (
     <section
       id="news"
